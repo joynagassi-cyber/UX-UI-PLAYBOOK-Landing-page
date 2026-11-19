@@ -70,7 +70,7 @@ export function HeroBookStack({
         }
         aria-label={spreadAlt}
       >
-        <img src={spreadSrc} width={960} height={1357} alt={spreadAlt} fetchPriority="high" />
+        <img src={spreadSrc} width={960} height={1357} alt={spreadAlt} loading="lazy" />
         <span className="page-caption">
           <span>{spreadCaption}</span>
           <ZoomIn size={14} aria-hidden="true" />
