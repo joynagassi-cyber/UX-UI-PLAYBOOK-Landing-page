@@ -1,37 +1,45 @@
 import type { MetadataRoute } from 'next';
 import { ARTICLES, ARTICLE_SLUGS } from '@/i18n/articles';
-import { CONTENT } from '@/i18n/content';
-
-const BASE = CONTENT.en.siteUrl;
+import { SITE_URL } from '@/lib/site-config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const coreEntries: MetadataRoute.Sitemap = [
     {
-      url: `${BASE}/fr`,
+      url: `${SITE_URL}/fr`,
       changeFrequency: 'weekly',
       priority: 1.0,
-      alternates: { languages: { fr: `${BASE}/fr`, en: `${BASE}/en` } },
-    },
-    {
-      url: `${BASE}/en`,
-      changeFrequency: 'weekly',
-      priority: 1.0,
-      alternates: { languages: { fr: `${BASE}/fr`, en: `${BASE}/en` } },
-    },
-    {
-      url: `${BASE}/fr/articles`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
       alternates: {
-        languages: { fr: `${BASE}/fr/articles`, en: `${BASE}/en/articles` },
+        languages: { fr: `${SITE_URL}/fr`, en: `${SITE_URL}/en` },
       },
     },
     {
-      url: `${BASE}/en/articles`,
+      url: `${SITE_URL}/en`,
+      changeFrequency: 'weekly',
+      priority: 1.0,
+      alternates: {
+        languages: { fr: `${SITE_URL}/fr`, en: `${SITE_URL}/en` },
+      },
+    },
+    {
+      url: `${SITE_URL}/fr/articles`,
       changeFrequency: 'weekly',
       priority: 0.9,
       alternates: {
-        languages: { fr: `${BASE}/fr/articles`, en: `${BASE}/en/articles` },
+        languages: {
+          fr: `${SITE_URL}/fr/articles`,
+          en: `${SITE_URL}/en/articles`,
+        },
+      },
+    },
+    {
+      url: `${SITE_URL}/en/articles`,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+      alternates: {
+        languages: {
+          fr: `${SITE_URL}/fr/articles`,
+          en: `${SITE_URL}/en/articles`,
+        },
       },
     },
   ];
@@ -42,26 +50,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     return [
       {
-        url: `${BASE}/fr/articles/${slug}`,
+        url: `${SITE_URL}/fr/articles/${slug}`,
         ...(frArticle?.updatedAt
           ? { lastModified: new Date(`${frArticle.updatedAt}T00:00:00.000Z`) }
           : {}),
         alternates: {
           languages: {
-            fr: `${BASE}/fr/articles/${slug}`,
-            en: `${BASE}/en/articles/${slug}`,
+            fr: `${SITE_URL}/fr/articles/${slug}`,
+            en: `${SITE_URL}/en/articles/${slug}`,
           },
         },
       },
       {
-        url: `${BASE}/en/articles/${slug}`,
+        url: `${SITE_URL}/en/articles/${slug}`,
         ...(enArticle?.updatedAt
           ? { lastModified: new Date(`${enArticle.updatedAt}T00:00:00.000Z`) }
           : {}),
         alternates: {
           languages: {
-            fr: `${BASE}/fr/articles/${slug}`,
-            en: `${BASE}/en/articles/${slug}`,
+            fr: `${SITE_URL}/fr/articles/${slug}`,
+            en: `${SITE_URL}/en/articles/${slug}`,
           },
         },
       },

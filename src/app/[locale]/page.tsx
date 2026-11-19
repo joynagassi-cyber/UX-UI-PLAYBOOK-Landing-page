@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ArrowRight, ArrowUpRight, BookOpen, Compass, MessageCircle, Palette, Settings } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, BookOpen, Compass, Palette, Settings } from 'lucide-react';
 import { CONTENT, type Locale } from '@/i18n/content';
 import { ARTICLES, ARTICLES_UI } from '@/i18n/articles';
 import { GumroadButton } from '@/components/GumroadButton';
@@ -13,13 +13,7 @@ import {
   HeroSampleTrigger,
 } from '@/components/BookGalleryLightbox';
 import { ContentsExplorer } from '@/components/ContentsExplorer';
-
-const ARTICLE_ICONS = {
-  compass: Compass,
-  'message-circle': MessageCircle,
-  palette: Palette,
-  settings: Settings,
-} as const;
+import { authorJsonLd, serializeJsonLd } from '@/lib/structured-data';
 
 export async function generateMetadata({
   params,
@@ -98,6 +92,7 @@ export default async function LandingPage({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
+      authorJsonLd(locale),
       {
         '@type': 'WebSite',
         '@id': `${c.siteUrl}/#website`,
@@ -118,13 +113,7 @@ export default async function LandingPage({
           width: 512,
           height: 512,
         },
-        founder: {
-          '@type': 'Person',
-          '@id': `${c.siteUrl}/#person`,
-          name: 'Joy N.',
-          image: `${c.siteUrl}/images/author-joy.webp`,
-          url: `${c.siteUrl}/${locale}`,
-        },
+        founder: { '@id': `${c.siteUrl}/#joy-n` },
       },
       {
         '@type': 'Product',
@@ -153,19 +142,12 @@ export default async function LandingPage({
         '@type': 'Book',
         '@id': `${c.siteUrl}/${locale}#book`,
         name: 'UX/UI Playbook',
-        author: {
-          '@type': 'Person',
-          '@id': `${c.siteUrl}/#person`,
-          name: 'Joy N.',
-          image: `${c.siteUrl}/images/author-joy.webp`,
-          url: `${c.siteUrl}/${locale}`,
-        },
+        author: { '@id': `${c.siteUrl}/#joy-n` },
         bookEdition: locale === 'fr' ? 'Édition française 2026' : '2026 English Edition',
         bookFormat: 'https://schema.org/EBook',
         isRelatedTo: { '@id': `${c.siteUrl}/${locale}#product` },
         numberOfPages: locale === 'fr' ? 148 : 139,
         inLanguage: locale,
-        datePublished: '2026-11-01',
         publisher: { '@id': `${c.siteUrl}/#organization` },
       },
       {
@@ -201,7 +183,7 @@ export default async function LandingPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
 
       <a className="sr-skip" href="#content">
@@ -395,7 +377,8 @@ export default async function LandingPage({
             <div className="guides-grid">
               {ARTICLES[locale].map((art) => {
                 const thumb = ARTICLE_THUMBS[art.slug][locale];
-                const ArticleIcon = ARTICLE_ICONS[art.icon];
+                const ArticleIcon =
+                  art.icon === 'compass' ? Compass : art.icon === 'palette' ? Palette : Settings;
                 return (
                   <a
                     key={art.slug}
@@ -445,7 +428,7 @@ export default async function LandingPage({
             <h2>{c.comparison.heading}</h2>
             <p className="sec-lede">{c.comparison.lede}</p>
 
-            <div className="comp-wrap">
+            <div className="comp-wrap" tabIndex={0} role="region" aria-label={c.comparison.heading}>
               <table className="comp-table">
                 <thead>
                   <tr>
@@ -515,6 +498,10 @@ export default async function LandingPage({
                 <p>{c.author.p1}</p>
                 <p style={{ marginTop: '12px' }}>{c.author.p2}</p>
                 <div className="author-sig">{c.author.signature}</div>
+                <div className="author-links">
+                  <a href="https://github.com/joynagassi-cyber">GitHub · Joy N.</a>
+                  <a href="https://joyccelight.gumroad.com">Gumroad · Joyccelight</a>
+                </div>
               </div>
             </div>
           </div>

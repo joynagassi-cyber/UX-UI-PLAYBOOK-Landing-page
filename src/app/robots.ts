@@ -1,7 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { CONTENT } from '@/i18n/content';
-
-const SITE_URL = CONTENT.en.siteUrl;
+import { SITE_URL } from '@/lib/site-config';
 
 export default function robots(): MetadataRoute.Robots {
   return {
