@@ -73,7 +73,7 @@ export interface ArticleData {
   subtitle: string;
   aeoSummaryTitle: string;
   aeoSummary: string;
-  keyStats: Array<{ value: string; label: string; source: string }>;
+  keyStats: Array<{ value: string; label: string; source: string; urls?: string[] }>;
   sections: ArticleSection[];
   faqs: Array<{ q: string; a: string }>;
   ctaTitle: string;
