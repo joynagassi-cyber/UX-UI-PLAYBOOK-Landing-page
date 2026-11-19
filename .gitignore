@@ -32,3 +32,7 @@ next-env.d.ts
 /playwright-report/
 __pycache__/
 *.pyc
+
+# local Cloudflare development state (never deploy credentials)
+/.wrangler/
+.dev.vars*

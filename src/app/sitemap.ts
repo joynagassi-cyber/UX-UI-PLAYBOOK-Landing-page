@@ -2,6 +2,8 @@ import type { MetadataRoute } from 'next';
 import { ARTICLES, ARTICLE_SLUGS } from '@/i18n/articles';
 import { SITE_URL } from '@/lib/site-config';
 
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const coreEntries: MetadataRoute.Sitemap = [
     {

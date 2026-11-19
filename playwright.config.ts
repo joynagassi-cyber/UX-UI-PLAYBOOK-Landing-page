@@ -4,6 +4,7 @@ const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? 'http://127.0.0.1:3100';
 
 export default defineConfig({
   testDir: './tests',
+  testMatch: '**/*.spec.ts',
   fullyParallel: false,
   workers: 1,
   timeout: 90_000,
@@ -23,7 +24,8 @@ export default defineConfig({
     } : {},
   },
   webServer: process.env.PLAYWRIGHT_BASE_URL ? undefined : {
-    command: 'npx next start --hostname 0.0.0.0 --port 3100',
+    command: 'npm run preview:pages',
+    env: { WRANGLER_SEND_METRICS: 'false' },
     url: `${baseURL}/fr`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

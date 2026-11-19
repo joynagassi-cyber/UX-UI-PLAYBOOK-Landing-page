@@ -12,19 +12,21 @@ import argparse
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 import json
+import os
 from pathlib import Path
 import re
 from statistics import median
 import sys
 import time
 from urllib.error import HTTPError, URLError
-from urllib.parse import urljoin, urlparse
+from urllib.parse import parse_qs, urljoin, urlparse
 from urllib.request import Request, build_opener, HTTPRedirectHandler
 import xml.etree.ElementTree as ET
 
-SITE = "https://joyccelight-playbook.vercel.app"
+DEFAULT_SITE = "https://joyccelight-playbook.pages.dev"
 ROOT = Path(__file__).resolve().parents[1]
-SLUGS = ("ux-design-guide", "ui-design-system-tokens", "product-design-ai-agents")
+CATALOG = json.loads((ROOT / "src/i18n/article-catalog.json").read_text())
+SLUGS = tuple(CATALOG)
 STORES = {
     "fr": "https://joyccelight.gumroad.com/l/uiuxplaybookfr",
     "en": "https://joyccelight.gumroad.com/l/uxuiplaybook",
@@ -84,11 +86,16 @@ class NoRedirect(HTTPRedirectHandler):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--base-url", default="http://127.0.0.1:3000")
+    parser.add_argument("--base-url", default="http://127.0.0.1:3100", help="Local HTTP target; independent of the expected public canonical origin")
+    parser.add_argument("--expected-origin", "--site-url", default=os.environ.get("NEXT_PUBLIC_SITE_URL") or DEFAULT_SITE, help="Expected public canonical origin (NEXT_PUBLIC_SITE_URL or the Pages default)")
     parser.add_argument("--output", default="reports/site-check.json")
     parser.add_argument("--wait", type=int, default=0, help="Startup grace period in seconds")
     args = parser.parse_args()
     base = args.base_url.rstrip("/")
+    site = args.expected_origin.rstrip("/")
+    parsed_site = urlparse(site)
+    if parsed_site.scheme not in {"http", "https"} or not parsed_site.netloc or parsed_site.username or parsed_site.password or parsed_site.path or parsed_site.query or parsed_site.fragment:
+        parser.error("--expected-origin must be an absolute HTTP(S) origin without credentials, path, query or fragment")
     checks = []
     cache = {}
     opener = build_opener(NoRedirect)
@@ -140,7 +147,9 @@ def main():
             record("HTTP01", route, status == 200, f"GET {route}: HTTP {status}")
             if status != 200:
                 continue
-            doc = Document(raw.decode("utf-8")).root
+            html = raw.decode("utf-8")
+            record("ORIGIN01", route, not re.search(r"vercel\.app|x-vercel-ip-country|VERCEL_URL", html, re.I), "No previous host in rendered HTML")
+            doc = Document(html).root
             metas = {element.attrs.get("name", element.attrs.get("property", "")): element.attrs.get("content", "") for element in doc.all("meta")}
             links = doc.all("link")
             titles = doc.all("title")
@@ -149,14 +158,15 @@ def main():
             record("SEO01", route, len(titles) == 1 and 0 < len(title) <= 60 and 135 <= len(description) <= 155,
                    f"title={len(title)} chars; description={len(description)} chars")
             record("SEO02", route, "keywords" not in metas, "No meta[name=keywords]")
-            record("SEO03", route, any(link.attrs.get("rel") == "canonical" and link.attrs.get("href") == SITE + route for link in links), "Canonical must match the localized production URL")
+            record("SEO03", route, any(link.attrs.get("rel") == "canonical" and link.attrs.get("href") == site + route for link in links), "Canonical must match the localized production URL")
             alternates = {link.attrs.get("hreflang"): link.attrs.get("href") for link in links if link.attrs.get("rel") == "alternate"}
             suffix = route[3:]
-            record("I18N01", route, all(alternates.get(code) == SITE + f"/{code}" + suffix for code in STORES), f"hreflang={alternates}")
+            record("I18N01", route, all(alternates.get(code) == site + f"/{code}" + suffix for code in STORES), f"hreflang={alternates}")
             html_nodes = doc.all("html")
             record("I18N02", route, len(html_nodes) == 1 and html_nodes[0].attrs.get("lang") == lang and html_nodes[0].attrs.get("data-theme") == "dark", "Localized html[lang], dark server-rendered default")
             record("A01", route, len(doc.all("h1")) == 1, f"H1 count={len(doc.all('h1'))}")
-            icons = doc.all("svg")
+            vectors = [svg for svg in doc.all("svg") if "data-vector-illustration" in svg.attrs]
+            icons = [svg for svg in doc.all("svg") if "data-vector-illustration" not in svg.attrs]
             invalid_icons = [icon.attrs for icon in icons if
                              "site-icon" not in icon.attrs.get("class", "").split()
                              or not icon.attrs.get("data-icon")
@@ -167,6 +177,8 @@ def main():
                              or icon.attrs.get("focusable") != "false"]
             record("ICON01", route, bool(icons) and not invalid_icons,
                    f"{len(icons)} Lucide SVG icons, 20–40px, stroke 3, decorative semantics; invalid={invalid_icons}")
+            invalid_vectors = [svg.attrs for svg in vectors if "design-vector" not in svg.attrs.get("class", "").split() or svg.attrs.get("data-vector-illustration") not in {"discipline-map", "decision-loop", "bicycle"} or not svg.attrs.get("viewbox") or svg.attrs.get("stroke-width") != "3" or svg.attrs.get("aria-hidden") != "true" or svg.attrs.get("focusable") != "false"]
+            record("VECTOR01", route, not invalid_vectors, f"{len(vectors)} original scalable vector illustrations with adjacent HTML equivalents; invalid={invalid_vectors}")
             pills = doc.all(cls="guide-cat-pill")
             record("ICON02", route, bool(pills) and all(
                 len(pill.all("svg")) == 1 and pill.all("svg")[0].attrs.get("data-icon") in {"compass", "palette", "settings"}
@@ -218,7 +230,7 @@ def main():
                 figures = doc.all("figure", "notion-figure")
                 record("CONTENT01", route, len(figures) == 2 and all("data-summary-diagram" in figure.attrs and figure.all("figcaption") and figure.all("button") for figure in figures), f"Two compact native summary diagrams, each with a caption and enlarge control: {len(figures)}")
                 explanations = doc.all(cls="notion-explainer")
-                expected = {"ux-design-guide": 19, "ui-design-system-tokens": 14, "product-design-ai-agents": 13}[route.split("/")[-1]]
+                expected = CATALOG[route.split("/")[-1]]["explanations"]
                 record("CONTENT04", route, len(explanations) == expected and all(len(explanation.all("figure", "article-visual")) == 1 and explanation.all("p", "notion-p") and explanation.all("figcaption") for explanation in explanations), f"{len(explanations)}/{expected} prose explanations each paired with a labelled native visual")
                 record("CONTENT05", route, not images, "No book-page scans or raster illustrations inside articles")
                 headings = doc.all(cls="notion-refs-head")
@@ -243,27 +255,70 @@ def main():
         except (URLError, TimeoutError, OSError, UnicodeError, ValueError) as error:
             record("HTTP01", route, False, str(error))
 
-    for headers, locale in [({"Accept-Language": "fr-BJ,fr;q=0.9,en;q=0.5"}, "fr"), ({"Accept-Language": "en-US,en;q=0.9,fr;q=0.1"}, "en"), ({"Accept-Language": "en", "Cookie": "NEXT_LOCALE=fr"}, "fr"), ({"x-vercel-ip-country": "BJ"}, "fr")]:
-        try:
-            status, response_headers, _ = get("/?utm_source=dogfood", headers)
+    routing_cases = [
+        ({"Accept-Language": "fr-BJ,fr;q=0.9,en;q=0.5"}, "fr"),
+        ({"Accept-Language": "en-US,en;q=0.9,fr;q=0.1"}, "en"),
+        ({"Accept-Language": "en", "Cookie": "NEXT_LOCALE=fr", "CF-IPCountry": "US"}, "fr"),
+        ({"Accept-Language": "fr", "Cookie": "NEXT_LOCALE=en", "CF-IPCountry": "BJ"}, "en"),
+        ({"CF-IPCountry": "BJ"}, "fr"),
+        ({"Accept-Language": "fr;q=0.2,en-GB;q=0.9", "CF-IPCountry": "BJ"}, "en"),
+        ({"Accept-Language": "fr;q=0,en;q=0.5", "CF-IPCountry": "BJ"}, "en"),
+        ({"Accept-Language": "fr;q=0", "CF-IPCountry": "BJ"}, "en"),
+        ({"Accept-Language": "fr;q=2,en;q=0.3"}, "en"),
+        ({"Cookie": "NEXT_LOCALE=de", "Accept-Language": "fr-CA;q=0.8,en;q=0.4", "CF-IPCountry": "US"}, "fr"),
+        ({"Accept-Language": "de", "CF-IPCountry": "ZZ"}, "en"),
+        ({}, "en"),
+    ]
+    unlocalized = ["/", "/articles", "/articles/", *(f"/articles/{slug}" for slug in SLUGS), "/articles/does-not-exist"]
+    for headers, locale in routing_cases:
+        for route in unlocalized:
+            try:
+                status, response_headers, _ = get(route + "?utm_source=dogfood&a=1&a=2&term=a%20b", headers)
+                location = urlparse(response_headers.get("Location", ""))
+                expected_path = f"/{locale}" + ("" if route == "/" else route.rstrip("/"))
+                vary = {value.strip().lower() for value in response_headers.get("Vary", "").split(",")}
+                record("I18N04", route, status == 307 and location.path == expected_path and location.netloc == urlparse(base).netloc and parse_qs(location.query) == {"utm_source": ["dogfood"], "a": ["1", "2"], "term": ["a b"]}, f"{headers} -> {status} {location.geturl()}")
+                record("I18N05", route, "private" in response_headers.get("Cache-Control", "") and "no-store" in response_headers.get("Cache-Control", "") and {"cookie", "accept-language", "cf-ipcountry"} <= vary, f"Cache-Control={response_headers.get('Cache-Control')}; Vary={response_headers.get('Vary')}")
+            except (URLError, TimeoutError, OSError) as error:
+                record("I18N04", route, False, str(error))
+
+    for route in routes:
+        locale = route.split("/")[1]
+        contrary = "en" if locale == "fr" else "fr"
+        status, response_headers, _ = get(route, {"Cookie": "NEXT_LOCALE=" + contrary, "Accept-Language": contrary, "CF-IPCountry": "US" if locale == "fr" else "BJ"})
+        record("I18N06", route, status == 200 and not response_headers.get("Location"), f"Explicit locale is not negotiated: HTTP {status}")
+    for locale in STORES:
+        status, response_headers, _ = get(f"/{locale}.html")
+        record("REDIRECT01", f"/{locale}.html", status == 301 and urlparse(response_headers.get("Location", "")).path == f"/{locale}", f"Legacy HTML URL -> {status} {response_headers.get('Location')}")
+        for suffix in ("/", "/articles/", *(f"/articles/{slug}/" for slug in SLUGS)):
+            path = f"/{locale}" + suffix
+            status, response_headers, _ = get(path)
             location = urlparse(response_headers.get("Location", ""))
-            record("I18N04", "/", status == 307 and location.path == f"/{locale}" and location.query == "utm_source=dogfood", f"{headers} -> {status} {location.path}?{location.query}")
-        except (URLError, TimeoutError, OSError) as error:
-            record("I18N04", "/", False, str(error))
+            # Pages canonicalises trailing slashes; no Function should change the explicit locale.
+            ok = status == 200 or (status in {301, 308} and location.path == path.rstrip("/") and get(location.path)[0] == 200)
+            record("REDIRECT02", path, ok, f"Trailing slash: {status} {response_headers.get('Location')}")
+    for path in ("/does-not-exist", "/fr/articles/does-not-exist", "/en/articles/does-not-exist"):
+        status, _, _ = get(path)
+        record("HTTP404", path, status == 404, f"Unknown static route returns HTTP {status}; no SPA fallback")
 
     for endpoint in ("/robots.txt", "/sitemap.xml", "/llms.txt", "/llms-full.txt"):
         try:
-            status, _, body = get(endpoint)
+            status, response_headers, body = get(endpoint)
             record("MACHINE01", endpoint, status == 200 and len(body) > 100, f"HTTP {status}, {len(body)} bytes")
+            record("ORIGIN01", endpoint, not re.search(rb"vercel\.app|x-vercel-ip-country|VERCEL_URL", body, re.I), "No previous host in discovery/SEO endpoints")
+            if endpoint.startswith("/llms"):
+                record("MACHINE06", endpoint, response_headers.get("Content-Type", "").lower().startswith("text/plain"), response_headers.get("Content-Type"))
+            if endpoint == "/robots.txt":
+                record("MACHINE07", endpoint, f"Sitemap: {site}/sitemap.xml" in body.decode("utf-8") and f"Host: {site}" in body.decode("utf-8"), "robots.txt uses the configured public origin")
             if endpoint == "/sitemap.xml" and status == 200:
                 sitemap = ET.fromstring(body)
                 namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
                 found = {node.text for node in sitemap.findall("s:url/s:loc", namespace)}
-                record("MACHINE02", endpoint, {SITE + route for route in routes} == found, f"{len(found)} localized sitemap URLs")
+                record("MACHINE02", endpoint, {site + route for route in routes} == found, f"{len(found)} localized sitemap URLs")
             if endpoint == "/llms-full.txt":
                 text = body.decode("utf-8")
                 record("MACHINE03", endpoint, all(url in text for url in source_urls) and all(store in text for store in STORES.values()), "Full text includes every visible reference and both localized inline purchase CTAs")
-                normalised = text.replace("`", "")
+                normalised = re.sub(r"(?<=[^\s])\s+(\[\d+\])", r" \1", text.replace("`", ""))
                 missing = [paragraph[:90] for paragraph in prose_paragraphs if paragraph not in normalised]
                 record("MACHINE04", endpoint, not missing and all(title in text for title in visual_titles) and not rejected_copy.search(text) and not removed_slogans.search(text), f"All developed paragraphs and visual titles exported; removed source ratings and selected slogans absent; missing={missing}")
             if endpoint == "/llms.txt":
@@ -326,6 +381,7 @@ def main():
         "scope": "UX/UI Playbook website-specific checks; not the 77-rule product scanner or a conformance certificate",
         "generatedAt": datetime.now(timezone.utc).isoformat(),
         "baseUrl": base,
+        "expectedOrigin": site,
         "summary": {status: sum(check["status"] == status for check in checks) for status in ("automated", "to verify", "not applicable")},
         "automatedBlockingFailures": len(failed),
         "checks": checks,

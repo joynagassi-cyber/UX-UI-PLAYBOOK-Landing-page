@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
 import { ARTICLES, type ArticleData } from '@/i18n/articles';
+import { designLabTranscript } from '@/i18n/design-lab';
 import { CONTENT } from '@/i18n/content';
 import { SITE_URL as SITE } from '@/lib/structured-data';
 
@@ -78,6 +78,8 @@ function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
         lines.push(block.visual.labels.join(' → '));
         lines.push(block.visual.caption);
         lines.push('');
+      } else if (block.type === 'mobileLab') {
+        lines.push(`#### ${block.title}`, block.caption, '', designLabTranscript(lang), '');
       } else if (block.type === 'table') {
         lines.push(`| ${block.headers.map(tableCell).join(' | ')} |`);
         lines.push(`| ${block.headers.map(() => '---').join(' | ')} |`);
@@ -106,6 +108,8 @@ function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
   return lines.join('\n');
 }
 
+export const dynamic = 'force-static';
+
 export async function GET() {
   const chunks: string[] = [
     '# UX/UI Playbook — Bilingual article collection (llms-full.txt)',
@@ -131,7 +135,7 @@ export async function GET() {
     chunks.push('');
   }
 
-  return new NextResponse(chunks.join('\n'), {
+  return new Response(chunks.join('\n'), {
     status: 200,
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',

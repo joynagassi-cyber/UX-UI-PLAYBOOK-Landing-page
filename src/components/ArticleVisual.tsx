@@ -1,8 +1,10 @@
 import { Icon, type IconName } from '@/components/Icon';
+import { DesignVector } from './DesignVector';
 import { TabularText } from '@/components/TabularText';
 import type { ArticleVisual as ArticleVisualData, ArticleVisualKind } from '@/i18n/articles/visual-types';
 
 const visualIcons: Record<ArticleVisualKind, IconName> = {
+  'discipline-map': 'layers', 'decision-loop': 'compass',
   hierarchy: 'layers', compare: 'layers', choices: 'list-tree', memory: 'layers',
   target: 'maximize', journey: 'compass', states: 'layers', empty: 'inbox',
   checkout: 'credit-card', checklist: 'check-circle', type: 'file-text', colour: 'palette',
@@ -16,6 +18,12 @@ const visualIcons: Record<ArticleVisualKind, IconName> = {
 export function ArticleVisualScene({ visual }: { visual: ArticleVisualData }) {
   const { kind, labels } = visual;
   const text = (index: number) => <TabularText>{labels[index] ?? ''}</TabularText>;
+
+  if (kind === 'discipline-map' || kind === 'decision-loop') {
+    return <div className="visual-vector-scene"><DesignVector kind={kind} /><ol className="visual-vector-labels">
+      {labels.map((label, index) => <li key={index}><span className="visual-node" aria-hidden="true">{index + 1}</span><span>{label}</span></li>)}
+    </ol></div>;
+  }
 
   if (['journey', 'pipeline', 'roles', 'research', 'handoff'].includes(kind)) {
     return (

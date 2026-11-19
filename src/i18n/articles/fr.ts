@@ -1,4 +1,5 @@
 import type { ArticleData } from './types';
+import { COMPARISON_FR } from './comparison-fr';
 
 export const ARTICLES_FR: ArticleData[] = [
   {
@@ -1865,4 +1866,5 @@ SORTIES : review.md avec constat, preuve et correctif ; handoff.md avec états e
       },
     ],
   },
+  COMPARISON_FR,
 ];

@@ -1,0 +1,45 @@
+name: Cloudflare static export check
+
+on:
+  push:
+    branches: [main, cloudflare-migration-v2, 'arena/**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: static-export-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NEXT_PUBLIC_SITE_URL: https://joyccelight-playbook.pages.dev
+  NEXT_TELEMETRY_DISABLED: '1'
+  WRANGLER_SEND_METRICS: 'false'
+
+jobs:
+  build-static-site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install the locked dependencies
+        run: npm ci
+      - name: TypeScript and shared Pages Functions unit tests
+        run: npm run typecheck && npm run test:routing
+      - name: Build the complete static site
+        run: npm run build
+      - name: Check every catalogue slug, asset, routing file and production origin
+        run: npm run check:export
+      - name: Keep export verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-export-evidence-${{ github.sha }}
+          path: reports/
+          retention-days: 14

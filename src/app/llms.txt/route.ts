@@ -1,6 +1,7 @@
-import { NextResponse } from 'next/server';
 import { ARTICLES } from '@/i18n/articles';
 import { SITE_URL } from '@/lib/structured-data';
+
+export const dynamic = 'force-static';
 
 export async function GET() {
   const articles = (locale: 'fr' | 'en') => ARTICLES[locale]
@@ -43,7 +44,7 @@ ${articles('fr')}
 ${references.map((reference) => `- [${reference.title}](${reference.url}) — ${reference.publisher}, ${reference.date}. ${reference.note}`).join('\n')}
 `;
 
-  return new NextResponse(body, {
+  return new Response(body, {
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
       'Cache-Control': 'public, max-age=3600, s-maxage=86400',

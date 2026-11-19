@@ -10,6 +10,8 @@ import { GumroadButton } from '@/components/GumroadButton';
 import { ThemeAndLangControls } from '@/components/ThemeAndLangControls';
 import { authorJsonLd, serializeJsonLd } from '@/lib/structured-data';
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return [{ locale: 'fr' }, { locale: 'en' }];
 }

@@ -17,6 +17,8 @@ import {
 import { ContentsExplorer } from '@/components/ContentsExplorer';
 import { authorJsonLd, serializeJsonLd } from '@/lib/structured-data';
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {
@@ -349,9 +351,7 @@ export default async function LandingPage({
               <div>
                 <div className="mono sec-kicker">{ui.kicker}</div>
                 <h2>
-                  {locale === 'fr'
-                    ? 'Trois articles sur l’UX, l’UI et le Product Design.'
-                    : 'Three articles on UX, UI and Product Design.'}
+                  Article
                 </h2>
                 <p className="sec-lede">{ui.lede}</p>
               </div>

@@ -9,10 +9,13 @@ import type { Locale } from '@/i18n/content';
 import type { ArticleBlock, ArticleData } from '@/i18n/articles';
 import { ARTICLES_UI } from '@/i18n/articles';
 import { GumroadButton } from '@/components/GumroadButton';
+import { DesignRolesLab } from './DesignRolesLab';
 import { useModalFocus } from '@/components/useModalFocus';
 
-function InlineArticleText({ text }: { text: string }) {
-  return <>{text.split(/(`[^`]+`)/g).map((part, index) =>
+function InlineArticleText({ text, locale }: { text: string; locale: Locale }) {
+  return <>{text.split(/(`[^`]+`|\[\d+\])/g).map((part, index) =>
+    /^\[\d+\]$/.test(part)
+      ? <a className="notion-citation" href={`#reference-${part.slice(1, -1)}`} aria-label={`${locale === 'fr' ? 'Source' : 'Reference'} ${part.slice(1, -1)}`} key={index}>{part}</a> :
     part.startsWith('`') && part.endsWith('`')
       ? <code className="notion-inline-code" key={index}>{part.slice(1, -1)}</code>
       : <React.Fragment key={index}>{part}</React.Fragment>
@@ -113,7 +116,7 @@ export function NotionArticleReader({
       ? 'Questions fréquentes'
       : 'Frequently Asked Questions';
   const faqNavTitle = locale === 'fr' ? 'Questions fréquentes' : 'FAQ';
-  const articlesLabel = 'Articles';
+  const articlesLabel = 'Article';
   const updatedWord = locale === 'fr' ? 'Mis à jour le' : 'Updated';
 
   // Reading progress bar
@@ -213,7 +216,7 @@ export function NotionArticleReader({
       case 'p':
         return (
           <p key={idx} className="notion-p">
-            <InlineArticleText text={block.text} />
+            <InlineArticleText text={block.text} locale={locale} />
           </p>
         );
       case 'explanation':
@@ -221,7 +224,7 @@ export function NotionArticleReader({
           <div className="notion-explainer" key={idx}>
             <div className="notion-explainer-copy">
               {block.paragraphs.map((paragraph, paragraphIndex) => (
-                <p className="notion-p" key={paragraphIndex}><InlineArticleText text={paragraph} /></p>
+                <p className="notion-p" key={paragraphIndex}><InlineArticleText text={paragraph} locale={locale} /></p>
               ))}
             </div>
             <ArticleVisual visual={block.visual} />
@@ -355,6 +358,8 @@ export function NotionArticleReader({
             <figcaption className="notion-figure-cap">{block.visual.caption}</figcaption>
           </figure>
         );
+      case 'mobileLab':
+        return <DesignRolesLab key={idx} locale={locale} title={block.title} caption={block.caption} />;
       case 'table':
         return (
           <div
@@ -619,8 +624,8 @@ export function NotionArticleReader({
               <h2 id="article-sources-heading">{sourcesHeading}</h2>
             </div>
             <ol className="notion-refs-list">
-              {article.references.map((reference) => (
-                <li key={reference.url} className="notion-refs-item">
+              {article.references.map((reference, referenceIndex) => (
+                <li key={reference.url} id={`reference-${referenceIndex + 1}`} className="notion-refs-item">
                   <div className="notion-refs-main">
                     <a href={reference.url}>{reference.title}</a>
                     <div className="notion-refs-sub">{reference.publisher} · {reference.date}</div>
