@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { ARTICLES, type ArticleData } from '@/i18n/articles';
+import { CONTENT } from '@/i18n/content';
 
-const SITE = 'https://joyccelight-playbook.vercel.app';
+const SITE = CONTENT.en.siteUrl;
 
 function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
   const lines: string[] = [];
@@ -13,7 +14,8 @@ function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
   lines.push('');
   lines.push('### Key Dated Metrics');
   for (const st of art.keyStats) {
-    lines.push(`- **${st.value}** — ${st.label} (*${st.source}*)`);
+    const source = st.urls?.length ? `[${st.source}](${st.urls[0]})` : st.source;
+    lines.push(`- **${st.value}** — ${st.label} (*${source}*)`);
   }
   lines.push('');
 
