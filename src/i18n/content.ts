@@ -252,10 +252,10 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     meta: {
       title: 'UX/UI Playbook — Édition française 2026 + Kit bonus & Skill IA',
       description:
-        '148 pages A4, 97 sections, 36 écrans annotés, 77 règles mesurables par script Python et 21 fichiers prêts à livrer. Le système UX, UI et Product Design conçu pour les développeurs, builders IA et freelances.',
+        'Un système pratique d’UX, UI et Product Design : 148 pages A4, 77 règles vérifiables, 12 fiches et 21 fichiers prêts à livrer.',
       ogTitle: 'UX/UI Playbook — Édition française 2026 + Kit bonus',
       ogDescription:
-        'Vous avez codé l’application. Puis quelqu’un l’a ouverte. 148 pages, 77 règles vérifiables par un agent IA, 12 fiches A4 et 21 fichiers de travail.',
+        'Un manuel pratique de design d’interface : 148 pages, 77 règles vérifiables, 12 fiches et 21 fichiers de travail.',
       ogImage: `${SITE_URL}/og-fr.jpg`,
       ogLocale: 'fr_FR',
       productName: 'UX/UI Playbook 2026 + Kit bonus (Édition française)',
@@ -877,10 +877,10 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     meta: {
       title: 'UX/UI Playbook — 2026 English Edition + Bonus Kit & AI Skill',
       description:
-        '139 A4 pages, 97 sections, 36 annotated screens, 77 rules a Python script can check, and 21 working files. The practical UX, UI & Product Design system for developers and builders.',
+        'A practical UX, UI and Product Design system: 139 pages, 77 verifiable rules, 12 printable sheets and 21 ready-to-use files.',
       ogTitle: 'UX/UI Playbook — 2026 English Edition + Bonus Kit',
       ogDescription:
-        'You wrote the app. Then somebody opened it. 139 pages, 77 rules an AI agent can check, 12 printable A4 sheets and 21 working files.',
+        'A practical interface-design manual: 139 pages, 77 verifiable rules, 12 printable sheets and 21 working files.',
       ogImage: `${SITE_URL}/og-en.jpg`,
       ogLocale: 'en_US',
       productName: 'UX/UI Playbook 2026 + Bonus Kit (English Edition)',
