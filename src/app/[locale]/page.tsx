@@ -26,28 +26,6 @@ export async function generateMetadata({
   return {
     title: c.meta.title,
     description: c.meta.description,
-    keywords:
-      locale === 'fr'
-        ? [
-            'UX/UI Playbook',
-            'UX design développeur',
-            'UI design system tokens',
-            'Product design agent IA',
-            'checklist UX 77 règles',
-            'Claude Code UI skill',
-            'Cursor règles UI',
-            'audit accessibilité WCAG 2.2',
-          ]
-        : [
-            'UX/UI Playbook',
-            'UX design for developers',
-            'UI design tokens system',
-            'Product design AI coding agents',
-            '77 UI rules checklist',
-            'Claude Code UI skill',
-            'Cursor UI rules',
-            'WCAG 2.2 accessibility checklist',
-          ],
     alternates: {
       canonical: `/${locale}`,
       languages: {
@@ -127,9 +105,18 @@ export default async function LandingPage({
         name: 'UX/UI Playbook',
         url: c.siteUrl,
         email: 'joynagassi@gmail.com',
+        logo: {
+          '@type': 'ImageObject',
+          url: `${c.siteUrl}/icon.svg`,
+          width: 512,
+          height: 512,
+        },
         founder: {
           '@type': 'Person',
+          '@id': `${c.siteUrl}/#person`,
           name: 'Joy N.',
+          image: `${c.siteUrl}/images/author-joy.webp`,
+          url: `${c.siteUrl}/${locale}`,
         },
       },
       {
@@ -161,10 +148,14 @@ export default async function LandingPage({
         name: 'UX/UI Playbook',
         author: {
           '@type': 'Person',
+          '@id': `${c.siteUrl}/#person`,
           name: 'Joy N.',
+          image: `${c.siteUrl}/images/author-joy.webp`,
+          url: `${c.siteUrl}/${locale}`,
         },
         bookEdition: locale === 'fr' ? 'Édition française 2026' : '2026 English Edition',
         bookFormat: 'https://schema.org/EBook',
+        isRelatedTo: { '@id': `${c.siteUrl}/${locale}#product` },
         numberOfPages: locale === 'fr' ? 148 : 139,
         inLanguage: locale,
         datePublished: '2026-11-01',
