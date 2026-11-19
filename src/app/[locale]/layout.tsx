@@ -40,9 +40,6 @@ export async function generateMetadata({
         'max-video-preview': -1,
       },
     },
-    icons: {
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23FF5A2B'/%3E%3Ctext x='16' y='21.5' font-family='Helvetica,Arial,sans-serif' font-size='13.5' font-weight='900' fill='%23000' text-anchor='middle'%3EUP%3C/text%3E%3C/svg%3E",
-    },
   };
 }
 
@@ -50,12 +47,14 @@ const THEME_INIT_SCRIPT = `
 (function() {
   try {
     var saved = localStorage.getItem('playbook-theme');
-    var theme = saved === 'light' ? 'light' : 'dark';
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var theme = saved === 'light' || saved === 'dark' ? saved : (prefersDark ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', theme);
     var m = document.querySelector('meta[name="theme-color"]');
     if (m) m.setAttribute('content', theme === 'light' ? '#FAF8F4' : '#000000');
   } catch (e) {
-    document.documentElement.setAttribute('data-theme', 'dark');
+    var fallbackTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', fallbackTheme);
   }
 })();
 `;
