@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { ARTICLES } from '@/i18n/articles';
+import { CONTENT } from '@/i18n/content';
 
-const SITE = 'https://joyccelight-playbook.vercel.app';
+const SITE = CONTENT.en.siteUrl;
 
 export async function GET() {
   const frGuides = ARTICLES.fr
