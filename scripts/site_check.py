@@ -14,6 +14,7 @@ from html.parser import HTMLParser
 import json
 from pathlib import Path
 import re
+from statistics import median
 import sys
 import time
 from urllib.error import HTTPError, URLError
@@ -120,6 +121,17 @@ def main():
 
     routes = [f"/{lang}{suffix}" for lang in STORES for suffix in ("", "/articles", *(f"/articles/{slug}" for slug in SLUGS))]
     source_urls = set()
+    prose_paragraphs = set()
+    visual_titles = set()
+    rejected_copy = re.compile(r"niveaux? de preuve|sources and evidence|annexe a5|appendix a5|dossiers? de terrain|field courses|\b(?:établi|established|probable)\b", re.I)
+    # Targeted regressions for phrases removed in editorial review, not an AI detector
+    # or an exhaustive judgement of prose quality. See docs/EDITORIAL.md.
+    removed_slogans = re.compile(
+        r"plus qu[’']un ebook|more than an ebook|execution system|tenir debout|tient debout|"
+        r"make it hold|high.leverage checkout|règle d[’']or de l[’']ingénierie|"
+        r"core law of agentic|attention tax|taxe d[’']attention|calm rigour|"
+        r"cheapest anxiety reducer|réduction d[’']anxiété la moins chère|"
+        r"scope.survival|phrases de survie|the 5 exact moments|5 moments exacts", re.I)
     for route in routes:
         lang = route.split("/")[1]
         is_article = any(route.endswith("/" + slug) for slug in SLUGS)
@@ -144,16 +156,39 @@ def main():
             html_nodes = doc.all("html")
             record("I18N02", route, len(html_nodes) == 1 and html_nodes[0].attrs.get("lang") == lang and html_nodes[0].attrs.get("data-theme") == "dark", "Localized html[lang], dark server-rendered default")
             record("A01", route, len(doc.all("h1")) == 1, f"H1 count={len(doc.all('h1'))}")
+            icons = doc.all("svg")
+            invalid_icons = [icon.attrs for icon in icons if
+                             "site-icon" not in icon.attrs.get("class", "").split()
+                             or not icon.attrs.get("data-icon")
+                             or icon.attrs.get("width") not in {"20", "24", "28", "40"}
+                             or icon.attrs.get("width") != icon.attrs.get("height")
+                             or icon.attrs.get("stroke-width") != "3"
+                             or icon.attrs.get("aria-hidden") != "true"
+                             or icon.attrs.get("focusable") != "false"]
+            record("ICON01", route, bool(icons) and not invalid_icons,
+                   f"{len(icons)} Lucide SVG icons, 20–40px, stroke 3, decorative semantics; invalid={invalid_icons}")
+            pills = doc.all(cls="guide-cat-pill")
+            record("ICON02", route, bool(pills) and all(
+                len(pill.all("svg")) == 1 and pill.all("svg")[0].attrs.get("data-icon") in {"compass", "palette", "settings"}
+                and pill.text().strip() not in {"compass", "palette", "settings"}
+                for pill in pills), "Guide categories render real icons, never raw icon keys")
             store_links = [element.attrs.get("href", "") for element in doc.all("a") if "gumroad.com/l/" in element.attrs.get("href", "")]
             record("I18N03", route, bool(store_links) and all(url.split("?")[0] == STORES[lang] for url in store_links), f"{len(store_links)} localized purchase links")
             record("CONTACT01", route, any(element.attrs.get("href") == "mailto:joynagassi@gmail.com" for element in doc.all("a")), "Public contact mailto link")
+            record("COPY01", route, not rejected_copy.search(doc.text()), "No source-rating badges or book-authority promotional labels")
+            record("COPY03", route, not removed_slogans.search(doc.text()), "Selected removed promotional phrases have not returned; this is not an AI or style detector")
+            footers = doc.all("footer")
+            footer_text = " ".join(footer.text() for footer in footers)
+            record("COPY02", route, bool(footers) and not re.search(r"usage commercial|commercial use|revente|resale|redistribution|TVA|VAT|seller of record|revendeur officiel|rejouables|reproducible site checks|automated measurements|mesures automatiques", footer_text, re.I)
+                   and not doc.all(cls="footer-lic") and not doc.all(cls="footer-rule-badge"), "Footer contains copyright and useful links only")
             ids = [element.attrs["id"] for element in doc.all() if "id" in element.attrs]
             record("HTML01", route, len(ids) == len(set(ids)), "HTML IDs are unique")
             broken_anchors = [element.attrs["href"] for element in doc.all("a") if element.attrs.get("href", "").startswith("#") and element.attrs["href"][1:] not in ids]
             record("HTML02", route, not broken_anchors, f"Missing same-page anchors: {broken_anchors}")
             images = doc.all("img")
             invalid_images = [image.attrs.get("src") for image in images if not image.attrs.get("alt") or not image.attrs.get("width", "").isdigit() or not image.attrs.get("height", "").isdigit()]
-            record("IMG01", route, bool(images) and not invalid_images, f"{len(images)} images with nonempty alt and intrinsic dimensions; invalid={invalid_images}")
+            native_visuals = doc.all(cls="article-visual") + doc.all(cls="article-card-art")
+            record("IMG01", route, bool(images or native_visuals) and not invalid_images, f"{len(images)} valid images and {len(native_visuals)} native text/CSS visuals; invalid={invalid_images}")
             for image in images:
                 src = image.attrs.get("src", "")
                 if src.startswith("/"):
@@ -181,7 +216,22 @@ def main():
                 record("GEO01", route, len(citations) >= 3 and all(isinstance(citation, dict) and citation.get("@type") == "CreativeWork" and citation.get("url", "").startswith("https://") and citation.get("url") in urls for citation in citations), f"{len(citations)} JSON-LD citations matched to visible bibliography links")
                 record("GEO02", route, len(urls) == len(citations) and all(url.startswith("https://") for url in urls), f"{len(urls)} distinct outbound HTTPS primary references")
                 figures = doc.all("figure", "notion-figure")
-                record("CONTENT01", route, len(figures) == 2, f"Exactly two compact diagram figures: {len(figures)}")
+                record("CONTENT01", route, len(figures) == 2 and all("data-summary-diagram" in figure.attrs and figure.all("figcaption") and figure.all("button") for figure in figures), f"Two compact native summary diagrams, each with a caption and enlarge control: {len(figures)}")
+                explanations = doc.all(cls="notion-explainer")
+                expected = {"ux-design-guide": 19, "ui-design-system-tokens": 14, "product-design-ai-agents": 13}[route.split("/")[-1]]
+                record("CONTENT04", route, len(explanations) == expected and all(len(explanation.all("figure", "article-visual")) == 1 and explanation.all("p", "notion-p") and explanation.all("figcaption") for explanation in explanations), f"{len(explanations)}/{expected} prose explanations each paired with a labelled native visual")
+                record("CONTENT05", route, not images, "No book-page scans or raster illustrations inside articles")
+                headings = doc.all(cls="notion-refs-head")
+                source_heading = "Sources et références" if lang == "fr" else "Sources and references"
+                record("CONTENT06", route, len(headings) == 1 and headings[0].text().strip() == source_heading and not doc.all(cls="notion-refs-badge") and not doc.all(cls="notion-verified-pill"), "Plain Sources and references heading, with no source-rating badges")
+                paragraphs = [paragraph.text() for explanation in explanations for paragraph in explanation.all("p", "notion-p")]
+                prose_paragraphs.update(paragraphs)
+                visual_titles.update(title.text() for title in doc.all(cls="article-visual-title"))
+                lengths = [len(paragraph.split()) for paragraph in paragraphs]
+                word_count = sum(lengths)
+                developed = all(any(len(paragraph.text().split()) >= 100 for paragraph in explanation.all("p", "notion-p")) for explanation in explanations)
+                record("CONTENT07", route, len(paragraphs) >= expected and developed and word_count >= expected * 125,
+                       f"{len(paragraphs)} developed paragraphs, {word_count} prose words; min/median/max={min(lengths, default=0)}/{median(lengths) if lengths else 0}/{max(lengths, default=0)}. Length is not a comprehension measure.")
                 ctas = doc.all(cls="notion-inline-cta")
                 record("CONTENT02", route, len(ctas) == 1 and bool(ctas[0].all("a")), "One contextual mid-article purchase CTA")
                 if articles:
@@ -213,11 +263,16 @@ def main():
             if endpoint == "/llms-full.txt":
                 text = body.decode("utf-8")
                 record("MACHINE03", endpoint, all(url in text for url in source_urls) and all(store in text for store in STORES.values()), "Full text includes every visible reference and both localized inline purchase CTAs")
+                normalised = text.replace("`", "")
+                missing = [paragraph[:90] for paragraph in prose_paragraphs if paragraph not in normalised]
+                record("MACHINE04", endpoint, not missing and all(title in text for title in visual_titles) and not rejected_copy.search(text) and not removed_slogans.search(text), f"All developed paragraphs and visual titles exported; removed source ratings and selected slogans absent; missing={missing}")
+            if endpoint == "/llms.txt":
+                record("MACHINE05", endpoint, not rejected_copy.search(body.decode("utf-8")) and "English articles" in body.decode("utf-8"), "Article terminology and plain source list in the discovery endpoint")
         except (URLError, TimeoutError, OSError, ET.ParseError) as error:
             record("MACHINE01", endpoint, False, str(error))
 
     css = (ROOT / "src/app/globals.css").read_text()
-    defined = set(re.findall(r"(--[\w-]+)\s*:", css)) | {"--font-display", "--font-sans", "--font-mono"}
+    defined = set(re.findall(r"(--[\w-]+)\s*:", css)) | {"--font-domine"}
     used = set(re.findall(r"var\((--[\w-]+)", css))
     record("TOKENS01", "src/app/globals.css", not used - defined, f"Undefined CSS variables: {sorted(used - defined)}")
     def contrast(foreground, background):
@@ -250,7 +305,12 @@ def main():
             record("CONTRAST01", theme, False, f"Missing color token: {error}")
     font_files = list((ROOT / "src/fonts").glob("*.woff2"))
     licenses = list((ROOT / "src/fonts").glob("OFL-*.txt"))
-    record("FONTS01", "src/fonts", len(font_files) == 6 and len(licenses) == 3 and all("SIL OPEN FONT LICENSE" in license_file.read_text() for license_file in licenses), f"{len(font_files)} local WOFF2 files; {len(licenses)} complete OFL notices")
+    expected_fonts = {"domine-latin.woff2", "domine-latin-ext.woff2"}
+    record("FONTS01", "src/fonts", {font.name for font in font_files} == expected_fonts
+           and len(licenses) == 1 and licenses[0].name == "OFL-Domine.txt"
+           and "SIL OPEN FONT LICENSE" in licenses[0].read_text()
+           and "Domine Project Authors" in licenses[0].read_text(),
+           f"{len(font_files)} local Domine WOFF2 files; {len(licenses)} complete OFL notice")
 
     for rule, evidence in [
         ("HUMAN01", "Non vérifié: VoiceOver/NVDA reading order, announcements and real assistive-technology navigation. Verify with a documented walkthrough."),

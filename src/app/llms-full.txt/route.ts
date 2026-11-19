@@ -15,10 +15,10 @@ function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
   lines.push('');
   lines.push(`> **${art.aeoSummaryTitle}**: ${art.aeoSummary}`);
   lines.push('');
-  lines.push(lang === 'fr' ? '### Sources et repères de méthode' : '### Evidence and method guidelines');
+  lines.push(lang === 'fr' ? '### Repères' : '### At a glance');
   for (const st of art.keyStats) {
     const source = st.url ? `[${st.source}](${st.url})` : st.source;
-    lines.push(`- **${st.value}** — ${st.label} (${source}; evidence: ${st.evidence})`);
+    lines.push(`- **${st.value}** — ${st.label} (${source})`);
   }
   lines.push('');
 
@@ -31,15 +31,21 @@ function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
       } else if (block.type === 'p') {
         lines.push(block.text);
         lines.push('');
+      } else if (block.type === 'explanation') {
+        lines.push(...block.paragraphs.flatMap((paragraph) => [paragraph, '']));
+        lines.push(`**${block.visual.title}**`);
+        lines.push(block.visual.labels.join(' → '));
+        lines.push(block.visual.caption);
+        lines.push('');
       } else if (block.type === 'quote') {
         lines.push(`> **${block.tag}**: "${block.text}"`);
         lines.push('');
       } else if (block.type === 'doDont') {
         lines.push(`**${block.doTitle}**`);
-        for (const d of block.doItems) lines.push(`- ✓ ${d}`);
+        for (const d of block.doItems) lines.push(`- ${d}`);
         lines.push('');
         lines.push(`**${block.dontTitle}**`);
-        for (const d of block.dontItems) lines.push(`- ✕ ${d}`);
+        for (const d of block.dontItems) lines.push(`- ${d}`);
         lines.push('');
       } else if (block.type === 'steps') {
         lines.push(`**${block.title}**`);
@@ -67,8 +73,10 @@ function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
         lines.push(`**${block.title}** ${block.text}`);
         lines.push(`[${block.buttonLabel}](${CONTENT[lang].gumroadUrl})`);
         lines.push('');
-      } else if (block.type === 'figure') {
-        lines.push(`[${block.alt}](${SITE}${block.src}) — ${block.caption} (${block.sourceRef})`);
+      } else if (block.type === 'diagram') {
+        lines.push(`**${block.visual.title}**`);
+        lines.push(block.visual.labels.join(' → '));
+        lines.push(block.visual.caption);
         lines.push('');
       } else if (block.type === 'table') {
         lines.push(`| ${block.headers.map(tableCell).join(' | ')} |`);
@@ -89,9 +97,9 @@ function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
     lines.push('');
   }
 
-  lines.push(lang === 'fr' ? '### Sources et niveaux de preuve' : '### Sources and evidence levels');
+  lines.push(lang === 'fr' ? '### Sources et références' : '### Sources and references');
   for (const reference of art.references) {
-    lines.push(`- [${reference.title}](${reference.url}) — ${reference.publisher}, ${reference.date}. Evidence: ${reference.evidence}. ${reference.note}`);
+    lines.push(`- [${reference.title}](${reference.url}) — ${reference.publisher}, ${reference.date}. ${reference.note}`);
   }
   lines.push('');
 
@@ -100,7 +108,7 @@ function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
 
 export async function GET() {
   const chunks: string[] = [
-    '# UX/UI Playbook — Complete Bilingual Field Guide Corpus (llms-full.txt)',
+    '# UX/UI Playbook — Bilingual article collection (llms-full.txt)',
     '',
     `Canonical site: ${SITE}`,
     'Author: Joy N. | Contact: joynagassi@gmail.com',

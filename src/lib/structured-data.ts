@@ -19,8 +19,8 @@ export function authorJsonLd(locale: Locale) {
     sameAs: AUTHOR_SAME_AS,
     image: `${SITE_URL}/images/author-joy.webp`,
     description: locale === 'fr'
-      ? 'Auteur du UX/UI Playbook, entrepreneur et créateur de solutions numériques et de workflows agentiques.'
-      : 'Author of UX/UI Playbook, entrepreneur and builder of digital products and agentic workflows.',
+      ? 'Auteur du UX/UI Playbook, manuel consacré à l’UX, à l’UI et au Product Design.'
+      : 'Author of UX/UI Playbook, a manual on UX, UI and Product Design.',
     knowsAbout: ['UX Design', 'UI Design', 'Product Design', 'Design tokens', 'AI-assisted development'],
   };
 }

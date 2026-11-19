@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, FileText, FolderGit2, Layers } from 'lucide-react';
+import { Icon } from '@/components/Icon';
 import type { PlaybookContent } from '@/i18n/content';
 
 interface ContentsExplorerProps {
@@ -62,7 +62,7 @@ export function ContentsExplorer({ data }: ContentsExplorerProps) {
             className={`filter-pill ${tab === 'book' ? 'active' : ''}`}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
           >
-            <Layers size={15} aria-hidden="true" />
+            <Icon name="layers" size="sm" />
             {data.tabBook}
           </button>
           <button
@@ -76,7 +76,7 @@ export function ContentsExplorer({ data }: ContentsExplorerProps) {
             className={`filter-pill ${tab === 'kit' ? 'active' : ''}`}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
           >
-            <FileText size={15} aria-hidden="true" />
+            <Icon name="file-text" size="sm" />
             {data.tabKit}
           </button>
           <button
@@ -90,7 +90,7 @@ export function ContentsExplorer({ data }: ContentsExplorerProps) {
             className={`filter-pill ${tab === 'archive' ? 'active' : ''}`}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
           >
-            <FolderGit2 size={15} aria-hidden="true" />
+            <Icon name="folder-git" size="sm" />
             {data.tabArchive}
           </button>
         </div>
@@ -116,9 +116,9 @@ export function ContentsExplorer({ data }: ContentsExplorerProps) {
                       <span>{part.title}</span>
                       <span className="toc-page">{part.page}</span>
                       {isOpen ? (
-                        <ChevronUp size={17} aria-hidden="true" />
+                        <Icon name="chevron-up" size="md" />
                       ) : (
-                        <ChevronDown size={17} aria-hidden="true" />
+                        <Icon name="chevron-down" size="md" />
                       )}
                     </button>
                     {isOpen && (

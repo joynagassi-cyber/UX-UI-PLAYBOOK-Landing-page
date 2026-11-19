@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { Moon, Sun } from 'lucide-react';
+import { Icon } from '@/components/Icon';
 import type { Locale } from '@/i18n/content';
 
 interface ControlsProps {
@@ -96,12 +96,12 @@ export function ThemeAndLangControls({
       >
         {theme === 'dark' ? (
           <>
-            <Sun size={15} aria-hidden="true" />
+            <Icon name="sun" size="sm" />
             <span className="theme-btn-label">LIGHT</span>
           </>
         ) : (
           <>
-            <Moon size={15} aria-hidden="true" />
+            <Icon name="moon" size="sm" />
             <span className="theme-btn-label">OLED</span>
           </>
         )}

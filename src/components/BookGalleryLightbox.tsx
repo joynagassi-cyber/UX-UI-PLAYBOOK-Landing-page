@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { BookOpen, ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
+import { Icon } from '@/components/Icon';
 import type { PlaybookContent, PreviewPageItem } from '@/i18n/content';
 import { GumroadButton } from './GumroadButton';
 import { useModalFocus } from './useModalFocus';
@@ -25,7 +25,7 @@ export function HeroSampleTrigger({
         );
       }}
     >
-      <BookOpen size={17} aria-hidden="true" />
+      <Icon name="book-open" size="md" />
       {label}
     </button>
   );
@@ -59,7 +59,7 @@ export function HeroBookStack({
         <img src={coverSrc} width={960} height={1357} alt={coverAlt} fetchPriority="high" />
         <span className="page-caption">
           <span>{coverCaption}</span>
-          <ZoomIn size={14} aria-hidden="true" />
+          <Icon name="zoom-in" size="sm" />
         </span>
       </button>
 
@@ -74,7 +74,7 @@ export function HeroBookStack({
         <img src={spreadSrc} width={960} height={1357} alt={spreadAlt} loading="lazy" />
         <span className="page-caption">
           <span>{spreadCaption}</span>
-          <ZoomIn size={14} aria-hidden="true" />
+          <Icon name="zoom-in" size="sm" />
         </span>
       </button>
     </div>
@@ -184,7 +184,7 @@ export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
             className="btn ghost small"
             onClick={() => setActiveIndex(0)}
           >
-            <BookOpen size={15} aria-hidden="true" />
+            <Icon name="book-open" size="sm" />
             {data.openReaderBtn}
           </button>
         </div>
@@ -254,7 +254,7 @@ export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
                 data-modal-close
                 aria-label={data.readerClose}
               >
-                <X size={16} aria-hidden="true" />
+                <Icon name="x" size="md" />
                 {data.readerClose}
               </button>
             </div>
@@ -281,7 +281,7 @@ export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
 
           <div className="lightbox-foot">
             <button type="button" onClick={prevPage} className="lb-btn">
-              <ChevronLeft size={16} aria-hidden="true" />
+              <Icon name="chevron-left" size="md" />
               {data.readerPrev}
             </button>
             <span style={{ textAlign: 'center', fontSize: '13.5px' }}>
@@ -289,7 +289,7 @@ export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
             </span>
             <button type="button" onClick={nextPage} className="lb-btn">
               {data.readerNext}
-              <ChevronRight size={16} aria-hidden="true" />
+              <Icon name="chevron-right" size="md" />
             </button>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ArrowUpRight } from 'lucide-react';
+import { Icon } from '@/components/Icon';
 import { CONTENT, type Locale } from '@/i18n/content';
 import {
   ARTICLES,
@@ -114,7 +114,6 @@ export default async function ArticleDetailPage({
         dateModified: `${art.updatedAt}T08:00:00.000Z`,
         articleSection: art.category,
         keywords: art.keywords.join(', '),
-        proficiencyLevel: 'Beginner to Expert',
         author: { '@id': `${c.siteUrl}/#joy-n` },
         publisher: {
           '@type': 'Organization',
@@ -203,7 +202,7 @@ export default async function ArticleDetailPage({
           </div>
           <GumroadButton href={c.gumroadUrl} className="mono topbar-cta">
             {c.topBar.cta}
-            <ArrowUpRight size={14} aria-hidden="true" />
+            <Icon name="arrow-up-right" size="sm" />
           </GumroadButton>
         </div>
       </div>
@@ -259,8 +258,6 @@ export default async function ArticleDetailPage({
         <div className="wrap footer-grid">
           <div>
             <strong style={{ color: 'var(--fg)' }}>{c.footer.copyright}</strong>
-            <div className="footer-lic">{c.footer.license}</div>
-            <div className="footer-rule-badge">✓ {c.footer.builtWithRule}</div>
           </div>
 
           <div className="footer-links">

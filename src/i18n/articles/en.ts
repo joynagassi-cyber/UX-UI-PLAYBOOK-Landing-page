@@ -1,438 +1,555 @@
 import type { ArticleData } from './types';
 
 export const ARTICLES_EN: ArticleData[] = [
-  /* ============================================================================
-   * COURSE 1 (EN) — OPERATIONAL UX DESIGN
-   * ========================================================================== */
   {
-    slug: 'ux-design-guide',
-    category: 'UX Design',
-    icon: 'compass',
-    readTime: '18 min read',
-    publishedAt: '2026-11-18',
-    updatedAt: '2026-11-18',
-    ogImage: '/og-article-ux-en.jpg',
-    metaTitle:
-      "UX Design: User Journeys and Audits | UX/UI Playbook",
-    metaDescription:
-      "Design clearer user journeys with 10 UX laws and principles, 5 screen states, accessible checkout patterns and a copy-ready 40-point audit checklist.",
+    slug: "ux-design-guide",
+    category: "UX Design",
+    icon: "compass",
+    readTime: "About 30 min read",
+    publishedAt: "2026-11-18",
+    updatedAt: "2026-11-18",
+    ogImage: "/og-article-ux-en.jpg",
+    metaTitle: "UX Design: User Journeys and Audits | UX/UI Playbook",
+    metaDescription: "Design clearer user journeys with 10 UX laws and principles, 5 screen states, accessible checkout patterns and a copy-ready 40-point audit checklist.",
     keywords: [
-      'operational UX design',
-      'cognitive load Cowan 4 chunks',
-      'Fitts law Hick-Hyman law UI',
-      '5 states of every screen',
-      'checkout optimization Baymard 2026',
-      'WCAG 2.2 AA European Accessibility Act 2026',
-      '40 point UX audit checklist',
+      "operational UX design",
+      "cognitive load Cowan 4 chunks",
+      "Fitts law Hick-Hyman law UI",
+      "5 states of every screen",
+      "checkout optimization Baymard 2026",
+      "WCAG 2.2 AA European Accessibility Act 2026",
+      "40 point UX audit checklist",
     ],
-    title:
-      "UX Design: Build Clear User Journeys and Audit Your Screens",
-    subtitle:
-      "Turn a vague brief into testable screens: user goals, cognitive principles, edge states and a pre-ship audit. Playbook targets are starting points to validate in your own context.",
-    aeoSummaryTitle: 'Executive Takeaway — What Actually Governs Usability',
-    aeoSummary:
-      "Start with a user goal and one primary action. Design the guide’s 5 screen states: empty, loading, ideal, partial/overflow and error, with confirmation after a successful action. Cowan’s 4 ± 1 chunks inform working-memory design; grouping interface elements is a heuristic to test. Measure WCAG 2.2 AA contrast (4.5:1 for body text) and aim for 44 × 44 px targets under the Playbook; the web AA minimum is 24 × 24 px with exceptions. A few observed usability tests uncover problems, but prove neither completeness nor conversion uplift.",
+    title: "UX Design: Build Clear User Journeys and Audit Your Screens",
+    subtitle: "How to describe a task, preserve context between steps and prepare for errors. Cognitive principles, checkout, accessibility and a 40-point audit checklist.",
+    aeoSummaryTitle: "At a glance",
+    aeoSummary: "Start with a user goal and one primary action. Design the article’s 5 screen states: empty, loading, ideal, partial/overflow and error, with confirmation after a successful action. Cowan’s 4 ± 1 chunks inform working-memory design; grouping interface elements is a heuristic to test. Measure WCAG 2.2 AA contrast (4.5:1 for body text) and aim for 44 × 44 px targets under the Playbook; the web AA minimum is 24 × 24 px with exceptions. A few observed usability tests uncover problems, but prove neither completeness nor conversion uplift.",
     keyStats: [
       {
-        value: '4 ± 1 chunks',
+        value: "4 ± 1 chunks",
         label: "Working-memory estimate in the studied conditions, not a universal button limit",
         source: "Nelson Cowan · Behavioral and Brain Sciences (2001)",
-        evidence: "established",
         url: "https://doi.org/10.1017/S0140525X01003922",
       },
       {
-        value: '70.22%',
+        value: "70.22%",
         label: "Mean cart abandonment: an unweighted average of 50 studies, not your checkout’s rate",
         source: "Baymard Institute · 28 October 2026",
-        evidence: "established",
         url: "https://baymard.com/blog/cart-abandonment-rate",
       },
       {
-        value: '95.9%',
+        value: "95.9%",
         label: "Sampled home pages with automatically detectable WCAG failures",
         source: "WebAIM Million · February 2026",
-        evidence: "established",
         url: "https://webaim.org/projects/million/",
       },
     ],
     sections: [
       {
-        id: 'ux-is-not-decoration',
-        num: '01',
-        tocLabel: 'Kill vague briefs: 4 questions & the 5-second test',
-        heading: 'Why UX Is Not Decoration (and How to Disarm Vague Client Briefs)',
+        id: "ux-is-not-decoration",
+        num: "01",
+        tocLabel: "Task and context",
+        heading: "Describe the task and its conditions of use",
         blocks: [
           {
-            type: 'p',
-            text: 'Three adjectives appear in almost every software brief: "modern", "clean", and "intuitive". None of the three is an engineering requirement. You cannot write an automated test for "clean", and an "intuitive" interface does not exist in a vacuum — a screen is only intuitive for a specific person, in a specific frame of mind, trying to complete a specific verb.',
+            type: "explanation",
+            paragraphs: [
+              "A brief asking for a modern interface leaves several decisions unresolved: who will use the screen, what information they have and what they need to accomplish. For an invoice export, the difficulty might be selecting the right period, identifying the downloaded file or resuming an interrupted operation. Changing the typeface will not settle those questions. Describe the task and the conditions in which it happens before choosing a layout. An accountant preparing a month-end report on a computer needs persistent filters and keyboard access; someone finding a receipt on a phone needs to identify the right transaction from limited details. These situations provide design criteria and test scenarios. The word intuitive, used alone in a brief, gives the team no way to choose between the behaviours. A written scenario also lets a reviewer question an assumption before it appears throughout the implementation. The downloaded file provides a checkable output too: its period, columns and name should match the request. Reviewing only the export button can miss a problem in that result. Prepare a known set of invoices and compare the downloaded document with the selected records.",
+            ],
+            visual: {
+              kind: "hierarchy",
+              title: "One task, one action",
+              caption: "The heading and action describe the same outcome.",
+              labels: ["My invoices", "Export October", "Download PDF"],
+            },
           },
           {
-            type: 'quote',
-            tag: 'Golden Rule · Part 00 & Section 01',
-            text: 'A screen is neither "pretty" nor "ugly". It is legible, predictable, consistent, and fast. Everything else is styling — and styling can be swapped in twenty minutes.',
+            type: "quote",
+            tag: "A starting point",
+            text: "Before judging the style, check whether someone understands the screen, finds their action and can recover from an error.",
           },
           {
-            type: 'p',
-            text: "To see the sharp boundary between visual styling (UI) and user experience (UX), picture two pixel-identical screens: clean typography, centred card, bold crimson primary button in the bottom-right corner. On a final payment screen (\"Pay $132.90\"), that prominence builds confidence and closes the sale. On an account settings page where that exact button reads \"Permanently delete workspace\", the identical aesthetic becomes a risk of unintended deletion. The pixels did not change; the user’s intent inverted the outcome.",
+            type: "explanation",
+            paragraphs: [
+              "The prominence given to an action needs to account for its consequences. A conspicuous payment button can be appropriate once the amount, recipient and timing of the charge have been explained. Giving the same prominence to account deletion requires other safeguards: name what will be removed, separate the command from ordinary settings and request confirmation appropriate to the possible loss. Consider a shared workspace containing documents owned by several colleagues. A button labelled Delete does not explain whether it removes one document, a project or the entire workspace. Review the wording alongside permissions and any available recovery mechanism. Two screens built from the same cards and buttons can therefore require different interactions. The visual design provides landmarks; the specification records what clicking does and how someone can recover from a mistake. Those details must also remain understandable when an operation fails partway through.",
+            ],
+            visual: {
+              kind: "compare",
+              title: "Context changes the risk",
+              caption: "An irreversible action needs an appropriate safeguard.",
+              labels: ["Delete immediately", "Confirm the project to delete"],
+            },
           },
           {
-            type: 'h3',
-            text: 'The four pre-drawing questions that lock down any screen',
+            type: "h3",
+            text: "Four questions before drawing",
           },
           {
-            type: 'p',
-            text: 'The most expensive mistake a developer or solo founder makes is drawing rectangles before writing down the logic of the flow. Before you open Figma or prompt a coding agent, every screen must answer four questions in plain prose:',
+            type: "explanation",
+            paragraphs: [
+              "Before drawing a screen, write its scenario in terms that a developer and reviewer can interpret consistently. Record who arrives on the page, which step they came from and what information is already known. Then describe the intended result, such as downloading October invoices, changing a delivery address or confirming an appointment. Examine requests containing several operations separately, because they may involve different data or access rights. Include the exit conditions and foreseeable interruptions, particularly an expired session or a rejected save. This can live in an issue rather than a separate specification; what matters is whether the decisions can be found and reviewed. The four questions below help identify omissions before layout discussions begin. They should also expose where the team needs an answer from the product owner instead of leaving that answer to whoever implements the screen.",
+            ],
+            visual: {
+              kind: "research",
+              title: "Before drawing",
+              caption: "Write a short answer for each point.",
+              labels: ["Person and context", "Intended action", "Path and recovery"],
+            },
           },
           {
-            type: 'steps',
-            title: 'Pre-Design Screen Protocol (Section 01)',
+            type: "steps",
+            title: "Screen-framing questions",
             steps: [
               {
-                bold: 'Who opens this screen, and in what state of mind?',
-                text: 'An accountant reconciling 80 invoices on Friday afternoon (rushed, keyboard-first, expert) needs a completely different layout from a commuter buying a ticket one-handed on shaky cellular data, or a user staring at a declined card.',
+                bold: "Who uses the screen, and under which conditions?",
+                text: "Describe the task, knowledge required and device constraints. Keyboard-based invoice reconciliation and finding a receipt on a phone require different test scenarios.",
               },
               {
-                bold: 'What single verb must they accomplish here?',
-                text: 'Write the goal in one sentence around one action verb: "compare three plans", "confirm a delivery slot", "export October receipts". If your sentence needs the word "and", you are cramming two screens into one.',
+                bold: "What result must be obtained?",
+                text: "Write the observable result: export October invoices or confirm an appointment. If a request contains several operations, examine their dependencies before grouping them on one screen.",
               },
               {
-                bold: 'What is the shortest physical and cognitive path to that verb?',
-                text: 'Count every field to scan, every dropdown to open, every secondary decision. Anything that does not move the user closer to that verb levies an attention tax.',
+                bold: "Which information and steps are necessary?",
+                text: "List data to read or enter, intermediate decisions and details that need to remain visible for verification. Explain why any additional information is requested.",
               },
               {
-                bold: 'What happens when the happy path breaks?',
-                text: 'Zero records on day one, a six-second API stall, a 42-character surname, an expired card: how your interface behaves under failure is what separates shipped software from a weekend demo.',
+                bold: "How can someone resume after interruption?",
+                text: "Prepare an account without data, a slow request, a long name and a declined payment. For each case, record what is preserved and which action is offered.",
               },
             ],
           },
           {
-            type: 'h3',
-            text: "The quick, no-cost diagnostic: the 5-second test",
+            type: "h3",
+            text: "An initial five-second check",
           },
           {
-            type: 'p',
-            text: 'Want to know right now whether your landing page or SaaS home works? Show the screen to someone outside the project for exactly five seconds, close the laptop, and ask two questions: "What does this product do?" and "Where would you click first?". If they hesitate, repeat a vague tagline, or missed your primary CTA, stop tweaking gradients and shadows — your hierarchy is structurally broken.',
+            type: "explanation",
+            paragraphs: [
+              "A five-second test examines what someone retains from an initial glimpse. Prepare a screen with realistic wording, show it briefly to a person unfamiliar with the project and hide it before asking questions. Ask what the product lets them do and which action they noticed. Record the actual answer: I can send an invoice is more informative than a general claim that the page is clear. If they describe a secondary feature, review the heading, content grouping and placement of controls. Avoid explaining the intention during the test, since that assistance changes what you are trying to observe. A second exposure can help review revised wording, although memory of the first screen will influence the answer. Follow this check with a complete task. Noticing the account-creation button does not show whether someone can complete registration, submit a document or make a payment.",
+            ],
+            visual: {
+              kind: "hierarchy",
+              title: "A comprehension check",
+              caption: "After five seconds, ask what the person understood.",
+              labels: ["Preview · 5 seconds", "What is this product for?", "Where would you start?"],
+            },
           },
         ],
       },
-
       {
-        id: 'true-cognitive-laws',
-        num: '02',
-        tocLabel: 'What cognitive laws actually say (Cowan, Hick, Fitts)',
-        heading: 'Cognitive Laws as Primary Research Actually Formulates Them (and How to Use Them in Reviews)',
+        id: "true-cognitive-laws",
+        num: "02",
+        tocLabel: "Cognitive principles",
+        heading: "Connect cognitive principles to an interface decision",
         blocks: [
           {
-            type: 'p',
-            text: 'Most design blogs repeat watered-down slogans that lead to bad engineering decisions — like burying daily power tools inside three nested menus because of a misread Hick’s Law, or cramming seven pricing tiers onto one row because of Miller’s 1956 essay. Here is what the primary literature actually proves and how to translate each mechanism into code.',
+            type: "explanation",
+            paragraphs: [
+              "Research on memory and pointing describes particular tasks carried out by defined participants. A design team needs to explain how a finding relates to the screen being reviewed. Removing menu entries, for example, reduces the options on display while potentially adding a step for people who use those commands every day. Keeping every feature at the same level may make a first visit harder. Compare observable journeys: finding a known command, understanding a category or resuming an abandoned operation. The principles below help frame those questions. For each proposed change, record the observed problem, your interpretation and the test that could examine the result. This makes a decision open to revision without relying on a researcher's name as authority. It also gives the next reviewer enough context to distinguish an experimental finding from the team's proposed application of it.",
+            ],
+            visual: {
+              kind: "compare",
+              title: "Observe before concluding",
+              caption: "A design guideline is not a measurement of use.",
+              labels: ["“There are too many buttons”", "“The intended action was not found”"],
+            },
           },
           {
-            type: 'h3',
+            type: "h3",
             text: "1. Cowan (2001): about 4 chunks in working memory",
           },
           {
-            type: 'p',
-            text: "Miller (1956) and Cowan (2001) do not measure a layout rule. Cowan reviews findings suggesting about 4 ± 1 chunks when rehearsal and grouping strategies are controlled. This supports limiting what a person must retain during a task, not a universal five-element cap for screens. The Playbook uses groups of 3 to 5 as a starting hierarchy; test comprehension with the intended users.",
-          },
-          {
-            type: 'h3',
-            text: '2. Hick-Hyman (1952–1953): the muscle-memory exception most designers miss',
-          },
-          {
-            type: 'p',
-            text: "Hick-Hyman describes the relationship between choice time and information in an experimental task. Option count alone does not predict a real journey: labels, choice probabilities, grouping and learning also matter. Make the primary action recognisable for a first-time user and preserve learned shortcuts for regular users. These are design decisions to observe, not proof that daily menus escape all cognitive constraints.",
-          },
-          {
-            type: 'h3',
-            text: '3. Fitts (1954): the icon glyph is never the hit target',
-          },
-          {
-            type: 'p',
-            text: "Pointing time depends on distance divided by effective target width — measured across actual click/tap scatter, not the visual stroke of an icon. A 16 × 16 px close icon whose clickable box is also 16 × 16 px increases the risk of missed taps. Always decouple the visual glyph (16–20 px) from its padded hit container (`min-width: 44px; min-height: 44px` on the web, `44 × 44 pt` on iOS, `48 × 48 dp` on Android).",
-          },
-          {
-            type: 'table',
-            caption: "All 10 laws and principles from Section 03: research findings and design heuristics are not interchangeable.",
-            headers: ['Law / Principle', 'True Cognitive Mechanism', 'Immediate Implementation Rule'],
-            rows: [
-                    [
-                      "Jakob",
-                      "Habits learned in other products influence expectations.",
-                      "Keep familiar conventions, then validate them with your audience."
-                    ],
-                    [
-                      "Fitts (1954)",
-                      "Pointing time depends in part on distance and target width.",
-                      "Separate the glyph from its hit area; aim for 44 × 44 px on this web project."
-                    ],
-                    [
-                      "Hick-Hyman (1952–1953)",
-                      "Choice time varies with information; context and learning also matter.",
-                      "Name and group choices. Preserve learned shortcuts."
-                    ],
-                    [
-                      "Cowan (2001)",
-                      "About 4 ± 1 working-memory chunks in the studied conditions.",
-                      "Reduce forced recall; start with groups of 3 to 5, then test."
-                    ],
-                    [
-                      "Proximity (Gestalt)",
-                      "Nearby elements are perceived as related.",
-                      "Example rhythm: 8 px within a group, 24–32 px between groups."
-                    ],
-                    [
-                      "Similarity",
-                      "Visually similar elements suggest a shared function.",
-                      "Keep equivalent actions consistent; distinguish passive status from controls."
-                    ],
-                    [
-                      "Von Restorff effect",
-                      "A distinctive item can be better remembered in context.",
-                      "Reserve the strongest visual emphasis for the primary action."
-                    ],
-                    [
-                      "Pareto — heuristic",
-                      "Some features may concentrate usage; no fixed ratio is guaranteed.",
-                      "Measure frequent tasks and optimise them before secondary features."
-                    ],
-                    [
-                      "Doherty threshold — guideline",
-                      "Waiting without feedback can interrupt task continuity.",
-                      "Acknowledge input promptly; use 400 ms as a design guideline, not a universal limit."
-                    ],
-                    [
-                      "Aesthetic-usability effect",
-                      "Appearance can influence perceived usability without proving actual effectiveness.",
-                      "Polish the first screen and measure task success, errors and time separately."
-                    ]
-                  ],
-          },
-          {
-            type: 'callout',
-            icon: 'message-circle',
-            tone: 'accent',
-            title: 'Turning subjective stakeholder pushback into objective engineering',
-            text: 'Never say "I don’t like having four buttons here." Say: "Right now four actions share identical visual weight, cancelling the Von Restorff effect and raising Hick-Hyman entropy on the primary conversion verb. Let’s keep the main action solid and demote the other three to outline/ghost." You move the room from personal taste to mechanics.',
-          },
-        ],
-      },
-
-      {
-        id: 'cognitive-budget-user-journey',
-        num: '03',
-        tocLabel: 'Screen budgets & the Day-7 habit loop',
-        heading: 'Cognitive Load & Full Journey Architecture: From First Intent to Unprompted Day-7 Return',
-        blocks: [
-          {
-            type: 'p',
-            text: 'Every screen burns a resource you cannot manufacture: user attention. In production audits, cognitive overload nearly always leaks from the same three places: interface-explaining copy ("Click the button below to submit your request" simply proves your button label failed), duplicate verbs ("Save", "Apply", and "Confirm" scattered across the same app), and decorative noise (badges, gauges, and counters that trigger zero decisions).',
-          },
-          {
-            type: 'h3',
-            text: 'The bank-counter test and density ceilings by screen family',
-          },
-          {
-            type: 'p',
-            text: 'Run the bank-counter test (Section 04): read your screen’s labels aloud as if speaking to a customer standing across a counter. If you feel compelled to add a spoken disclaimer ("oh, make sure you pick the currency before typing the amount"), your layout is broken. Fix the sequence or the label on screen so the spoken patch becomes unnecessary.',
-          },
-          {
-            type: 'doDont',
-            doTitle: '✓ Protects user attention',
-            dontTitle: '✕ Drains cognitive budget',
-            doItems: [
-              'One unmistakable primary action per view; secondary actions demoted to outline or quiet links.',
-              'Outcome-driven action verbs: "Create workspace" or "Download PDF receipt" instead of "Next".',
-              "Smart defaults pre-selected for the most common use case (currency, billing cycle, recommended tier).",
-              'Progressive disclosure: ask for a datum only at the exact moment it unlocks value.',
+            type: "explanation",
+            paragraphs: [
+              "Cowan (2001) reviews findings suggesting a working-memory capacity of about 4 ± 1 chunks when rehearsal and grouping strategies are controlled. A chunk is a unit retained under the experimental conditions; it does not automatically correspond to a button or card. A page containing ten fields can remain usable if the necessary information stays visible and people can process it in sequence. The burden increases when someone must remember an amount on one page, find a recipient on another and compare both without a summary. Keeping the recipient and amount visible during transfer confirmation reduces that demand. Review which information disappears at each step, which values must be re-entered and what the mobile keyboard covers. Counting elements on the page will not capture those constraints. The scenario should include returning to an earlier step, since that is often when missing context becomes apparent. Distinguish recognition from recall in the notes. With the recipient still displayed, someone can recognise the name and account just selected. If a code is requested after closing the summary, it must be remembered or found elsewhere. The burden can therefore change without adding a single field. Record which values remain available and which can be edited, then try an edit followed by a return to confirmation.",
             ],
-            dontItems: [
-              'Three solid buttons side by side ("Cancel", "Save draft", "Publish") competing at equal weight.',
-              'A 12-field registration wall before the user has experienced a single second of product value.',
-              'Sprinkling `(?)` tooltips everywhere to excuse cryptic internal column names.',
-              'Displaying every edge-case toggle upfront "just in case a power user wants it".',
+            visual: {
+              kind: "memory",
+              title: "Reduce forced recall",
+              caption: "Keep useful information visible throughout the task.",
+              labels: ["Amount", "Currency", "Recipient", "Date", "Keep a visible summary"],
+            },
+          },
+          {
+            type: "h3",
+            text: "2. Hick-Hyman: choice, grouping and learning",
+          },
+          {
+            type: "explanation",
+            paragraphs: [
+              "Hick-Hyman relates choice time to the amount of information in an experimental task. In an interface, visible option count operates alongside the likelihood of each choice, the labels used and familiarity with their positions. An export menu containing PDF, CSV and several industry-specific formats needs to help people recognise the right output; replacing the labels with three icons does not guarantee an improvement. Regular users may also rely on a shortcut or stable location. To review this menu, describe frequent tasks, distinguish formats with different uses and examine their labels using actual files. During testing, record submenu openings, backtracking and corrected choices. Those observations help explain the cost of a grouping decision. Define the intended improvement for a particular task rather than judging the journey only by the number of options left on screen. Check that a gain for new users has not removed a necessary route for experienced users. For an accounting export, try a description such as CSV — open in a spreadsheet beside the format name, provided it matches the generated file. If several formats have unfamiliar names, ask what document the person needs before showing the menu. Their wording can inform grouping. Retain technical names needed for exchanges with other software, since removing them would discard information used by people who already know the destination.",
             ],
+            visual: {
+              kind: "choices",
+              title: "Name the choices",
+              caption: "A primary action, then recognisable alternatives.",
+              labels: ["Publish", "Save draft", "Cancel"],
+            },
           },
           {
-            type: 'figure',
-            src: '/images/articles/en/ux-cognitive.webp',
-            alt: 'Cognitive load budget sheet from the UX/UI Playbook English Edition showing visible element caps across landing pages, forms, dashboards, and detail views',
-            caption:
-              'Density ceilings by screen type: home page (1 promise, 1 action, 3 proofs), form step (5–7 fields max), SaaS dashboard (3 KPIs, 1 chart, 1 actionable list).',
-            sourceRef: 'UX/UI Playbook EN · Part 01, Section 04 (p. 13)',
-            width: 1080,
-            height: 1527,
+            type: "h3",
+            text: "3. Fitts (1954): distance and pointing area",
           },
           {
-            type: 'h3',
-            text: 'Screens do not live in isolation: the A → E loop and the 5 drop-off cliffs',
-          },
-          {
-            type: 'p',
-            text: 'Judging a static PNG outside its sequence is a studio illusion. Every durable product guides people through five stages: A. Trigger (a concrete reason to open) → B. Comprehension (grasping what it does in 5 seconds) → C. Action (completing the verb without friction) → D. Proof (immediate confirmation that it worked) → E. Return (coming back effortlessly with prior state intact).',
-          },
-          {
-            type: 'steps',
-            title: 'The 5 exact moments where products lose people (Section 05)',
-            steps: [
-              {
-                bold: "Cliff 1 — The unclear arrival",
-                text: 'The hero headline talks about company philosophy instead of stating the problem solved in five seconds.',
-              },
-              {
-                bold: 'Cliff 2 — The premature sign-up tollbooth',
-                text: 'Demanding phone number, company size, role, and credit card before delivering any preview of value.',
-              },
-              {
-                bold: 'Cliff 3 — The silent first win',
-                text: 'The user clicks "Save"; nothing visibly changes, so they hit Back to double-check whether their work survived.',
-              },
-              {
-                bold: 'Cliff 4 — Amnesia on return',
-                text: 'When they log back in tomorrow, their filters, draft text, or scroll context have been wiped clean.',
-              },
-              {
-                bold: 'Cliff 5 — Blaming, dead-end error messages',
-                text: 'A red banner barking "Invalid payload (422)" blames the human without naming the broken field or how to fix it.',
-              },
+            type: "explanation",
+            paragraphs: [
+              "Fitts's law describes pointing time in relation to factors including distance and the usable width of a target. Review the area receiving the click or touch separately from the icon drawing. In this web project, a `20 px` close icon sits within a target of at least `44 × 44 px`. That project choice exceeds the WCAG 2.2 AA minimum of `24 × 24 CSS px`, which includes exceptions. Other platforms use different units: points on iOS and dp on Android. Inspect the button's actual box in the browser and check that pressing near its edge activates the intended command. Review spacing from neighbouring controls, the focus outline and any fixed element covering the area. Increasing a target in a stylesheet is insufficient if another layer intercepts the interaction. Include both pointer and keyboard use in the scenario, since a larger hit area does not establish a visible focus state.",
             ],
+            visual: {
+              kind: "target",
+              title: "Glyph and target",
+              caption: "Schematic illustration, not drawn to scale.",
+              labels: ["Target · 44 × 44 px", "Icon · 20 × 20 px"],
+            },
           },
           {
-            type: 'quote',
-            tag: 'The Ultimate UX Metric · Section 05',
-            text: 'The single most honest UX indicator is unprompted Day-7 retention — users returning without a reminder email or push notification. A product remembered on its own merits has won.',
-          },
-        ],
-      },
-
-      {
-        id: 'five-states-empty-checkout',
-        num: '04',
-        tocLabel: 'The 5 states, Empty States & Checkout',
-        heading: 'Dissecting Revenue-Critical Screens: The 5 Mandatory States, Onboarding Empty States & Checkout',
-        blocks: [
-          {
-            type: 'p',
-            text: "Why do so many rapidly shipped apps — hand-coded or AI-generated — feel brittle within sixty seconds of real use? Because only the \"postcard state\" was designed: six tidy database rows, 12-letter names, and a 40 ms local API. In production interface engineering, that ideal state is only part of the job.",
-          },
-          {
-            type: 'figure',
-            src: '/images/articles/en/ux-states.webp',
-            alt: 'The 5 mandatory states of every screen from the UX/UI Playbook English Edition: empty, loading, ideal, partial/overflow, and error',
-            caption:
-              'No screen is ready for production until all five states — empty, CLS-safe skeleton loading, ideal, partial/long-text overflow, and recoverable error — exist.',
-            sourceRef: 'UX/UI Playbook EN · Part 01, Section 07 (p. 16)',
-            width: 1080,
-            height: 1189,
-          },
-          {
-            type: 'h3',
-            text: 'Worked territory #1: Empty states and the 60-second activation rule',
-          },
-          {
-            type: 'p',
-            text: "The most important screen in your SaaS is the one new users see before creating their own data: the empty state (Section 17). Most apps greet new users with a bleak \"No records found\" or a giant decorative illustration that shoves the primary CTA below the mobile fold. A high-converting empty state obeys six rules: 1) state the fact plainly without snark (\"No boards yet\"), 2) explain in one line what value appears once populated, 3) provide a single solid button that creates the first item immediately, 4) offer a low-friction escape hatch (\"Or import CSV / start from a template\"), 5) never let artwork push the button off mobile viewports, and 6) hide disabled gray toolbars until data exists. Aim for a visible first result within 60 seconds, then test that goal on your own journey: it is a Playbook target, not a universal retention threshold.",
-          },
-          {
-            type: 'h3',
-            text: 'Worked territory #2: Checkout — where every extra input burns revenue',
-          },
-          {
-            type: 'p',
-            text: "Baymard’s compilation of 50 e-commerce studies, updated 28 October 2026, reports unweighted mean cart abandonment of 70.22% (range 55–84%). Its checkout research counts 23.48 form elements on average, versus 12–14 in the simplified flows studied. These are elements, not fields, and not a universal target for every store. Remove unnecessary requests and test whether the final charge is understood (Section 14):",
-          },
-          {
-            type: 'list',
-            heading: '6 high-leverage Checkout rules (Section 14)',
-            items: [
-              {
-                bold: 'Guest checkout first — never force account creation before payment',
-                text: 'Offer one-click password creation on the confirmation screen after the money is captured.',
-              },
-              {
-                bold: 'Zero surprise fees on the final step',
-                text: 'Keep an always-visible order summary (sticky right rail on desktop, collapsible top summary on mobile) showing subtotal, shipping, and tax upfront.',
-              },
-              {
-                bold: 'One semantic concept per row',
-                text: 'First and last name side by side on desktop, street address full-width, phone number only if delivery requires it (with a 5-word reason underneath).',
-              },
-              {
-                bold: 'Cap payment methods at 3 clear tiles',
-                text: 'Pre-select the dominant method for the user’s region (Card / Apple Pay, PayPal, or local instant payment).',
-              },
-              {
-                bold: 'Put the exact total inside the primary button label',
-                text: 'Write "Pay $132.90" — never "Continue" or "Submit". Naming the exact charge removes the fear of hidden steps; it is the cheapest anxiety reducer on the web.',
-              },
-              {
-                bold: 'Validate on blur, never on the first keystroke',
-                text: 'Never yell "Invalid email address" in red while the customer is still typing the third letter of their name.',
-              },
-            ],
-          },
-          {
-            "type": "inlineCta",
-            "title": "Turn these rules into your next audit.",
-            "text": "The English Playbook includes 36 annotated screens, a 40-point audit checklist and 12 A4 sheets for your next review.",
-            "buttonLabel": "Get the EN Playbook · $29"
-          },
-        ],
-      },
-
-      {
-        id: 'accessibility-2026-law',
-        num: '05',
-        tocLabel: 'Sellable Accessibility & real 2026 legal rules',
-        heading: 'Sellable Accessibility & What Is Actually Mandatory in 2026: Stop Confusing "Published" with "Law"',
-        blocks: [
-          {
-            type: 'p',
-            text: "The February 2026 WebAIM Million detects WCAG 2 Level A or AA errors on 95.9% of the one million home pages analysed, averaging 56.1 detected errors per page. It examines an automatable subset: contrast, text alternatives, accessible names and labels are among the checks. These findings describe neither every site nor all accessibility; a clean scan is not conformance. Add keyboard, screen-reader and real-task evaluation.",
-          },
-          {
-            type: 'h3',
-            text: 'The 2026 regulatory landscape (and the scoping clause that protects your contracts)',
-          },
-          {
-            type: 'p',
-            text: "A W3C Recommendation, a published ETSI standard and a reference cited in the EU Official Journal do not have the same legal role (Section 52). This table separates their status as of 18 November 2026; then check your client’s sector, role and national law. It is not legal advice.",
-          },
-          {
-            type: 'table',
-            caption: '2026 Accessibility & AI Transparency Rules Unpacked (Section 52 · p. 89)',
-            headers: ['Framework / Regulation', 'Effective Date', 'What It Actually Means for Your Work'],
+            type: "table",
+            caption: "Ten laws and principles: connect each idea to a design decision and a test.",
+            headers: ["Law or principle", "Finding or mechanism described", "Question to examine on screen"],
             rows: [
               [
-                'European Accessibility Act — Directive (EU) 2019/882',
+                "Jakob",
+                "Habits learned in other products influence expectations.",
+                "Keep familiar conventions, then validate them with your audience.",
+              ],
+              [
+                "Fitts (1954)",
+                "Pointing time depends in part on distance and target width.",
+                "Separate the glyph from its hit area; aim for 44 × 44 px on this web project.",
+              ],
+              [
+                "Hick-Hyman (1952–1953)",
+                "Choice time varies with information; context and learning also matter.",
+                "Name and group choices. Preserve learned shortcuts.",
+              ],
+              [
+                "Cowan (2001)",
+                "About 4 ± 1 working-memory chunks in the studied conditions.",
+                "Keep comparison data visible; test groupings and transitions between steps.",
+              ],
+              [
+                "Proximity (Gestalt)",
+                "Nearby elements are perceived as related.",
+                "Example rhythm: 8 px within a group, 24–32 px between groups.",
+              ],
+              [
+                "Similarity",
+                "Visually similar elements suggest a shared function.",
+                "Keep equivalent actions consistent; distinguish passive status from controls.",
+              ],
+              [
+                "Von Restorff effect",
+                "A distinctive item can be better remembered in context.",
+                "Reserve the strongest visual emphasis for the primary action.",
+              ],
+              [
+                "Pareto — heuristic",
+                "Some features may concentrate usage; no fixed ratio is guaranteed.",
+                "Measure frequent tasks and optimise them before secondary features.",
+              ],
+              [
+                "Doherty threshold — guideline",
+                "Waiting without feedback can interrupt task continuity.",
+                "Acknowledge input promptly; use 400 ms as a design guideline, not a universal limit.",
+              ],
+              [
+                "Aesthetic-usability effect",
+                "Appearance can influence perceived usability without proving actual effectiveness.",
+                "Polish the first screen and measure task success, errors and time separately.",
+              ],
+            ],
+          },
+          {
+            type: "callout",
+            icon: "message-circle",
+            tone: "accent",
+            title: "State an observation you can test",
+            text: "These four actions have the same visual weight; let us emphasise Publish and observe whether people find it more easily. This proposal names a change and an expected observation. The report then needs to state what happened during testing, including cases where the change did not help.",
+          },
+        ],
+      },
+      {
+        id: "cognitive-budget-user-journey",
+        num: "03",
+        tocLabel: "Attention and journey",
+        heading: "Reduce cognitive load across the journey",
+        blocks: [
+          {
+            type: "explanation",
+            paragraphs: [
+              "Each displayed item should relate to a decision or operation in the journey. On an invoice page, an overdue balance helps someone choose which accounts to handle; a count of visits to the account serves a different purpose. Begin with the information that must be read before acting. Buttons labelled Save, Apply and Confirm may represent different behaviours, but the distinction needs to be explained by context and remain consistent across pages. Less frequent options can move to a secondary level if people can still recognise where to find them. Keep verification details such as the selected period and total available. A visually quieter interface can require more memory when it hides them. Compare the steps people actually perform, including menu openings and returns to a previous page. This is especially important for repeated work, where a small detour may occur many times in the same session.",
+            ],
+            visual: {
+              kind: "choices",
+              title: "Set a reading order",
+              caption: "Secondary options do not compete with the intended action.",
+              labels: ["Create a project", "Import data", "View templates"],
+            },
+          },
+          {
+            type: "h3",
+            text: "Read the labels aloud",
+          },
+          {
+            type: "explanation",
+            paragraphs: [
+              "Reading labels aloud can expose instructions missing from the screen. Try describing a transfer using only the displayed wording, without adding that the currency must be chosen before entering an amount. If that explanation is necessary, review the field order or the dependency between the controls. Help text remains useful when it explains a rule that will not fit in a label, such as an international transfer delay or the format of an identifier. Put it where that rule becomes relevant and keep it available after typing begins. Examine completion messages as well: Request received does not establish whether an invoice was sent to the customer or merely saved as a draft. Reviewing terminology with someone familiar with the work helps identify inaccurate labels, but should be followed by observing the task in the interface. A vocabulary review cannot establish whether the placement and timing of the message are effective.",
+            ],
+            visual: {
+              kind: "compare",
+              title: "Say what will happen",
+              caption: "The button names the operation; help explains its conditions.",
+              labels: ["Confirm", "Send the invoice to the client"],
+            },
+          },
+          {
+            type: "doDont",
+            doTitle: "Decisions to try",
+            dontTitle: "Situations to examine",
+            doItems: [
+              "Give the expected action visual priority in the context of the page.",
+              "Name the result of clicking: Download PDF receipt or Send invoice.",
+              "Prefill a known, editable value when it avoids repeated entry.",
+              "Request information when it becomes necessary and explain its use.",
+            ],
+            dontItems: [
+              "Cancel, Save draft and Publish presented as commands of equal importance.",
+              "Registration that requests data without explaining why it is needed.",
+              "Column headings understandable only after opening a tooltip.",
+              "Rare options placed before those needed for the current task.",
+            ],
+          },
+          {
+            type: "diagram",
+            visual: {
+              kind: "journey",
+              title: "Read the journey end to end",
+              caption: "At each stage, look for the information needed, the available action and a way to recover.",
+              labels: ["Trigger", "Understanding", "Action", "Confirmation", "Return"],
+            },
+          },
+          {
+            type: "h3",
+            text: "Connect arrival, action and return",
+          },
+          {
+            type: "explanation",
+            paragraphs: [
+              "The journey includes what happens before and after the screen under review. Someone opens the product for a reason, identifies an available operation, acts, checks the result and may return with context to recover. For an invoice, confirmation needs to distinguish a saved document from a completed send. If delivery is deferred, its status should remain available after the tab is closed. Interruptions provide useful review scenarios: a connection lost during entry, a return after session expiry or a move from phone to computer. Record which data is preserved and what someone must do to resume. The team can then decide whether to save a draft, retain filters or explain the need to authenticate again. Return frequency depends on the service. A weekly task and an annual declaration should not be judged by the same retention measure, and neither can be assessed from a screenshot alone. Preserving context also requires an explicit scope. A period filter and payment details have different storage and privacy requirements. Identify what remains only during the session, what is saved to the account and what must not be retained. Recovery wording needs to match those decisions; it cannot announce a saved draft if only some values were preserved.",
+            ],
+            visual: {
+              kind: "journey",
+              title: "After the click",
+              caption: "Confirmation and returning are part of the journey.",
+              labels: ["Open", "Understand", "Act", "Check the result", "Return later"],
+            },
+          },
+          {
+            type: "steps",
+            title: "Five points to examine in the journey",
+            steps: [
+              {
+                bold: "Arrival",
+                text: "Check whether the heading and content identify the service and a starting point. Record terms the person does not understand.",
+              },
+              {
+                bold: "Registration",
+                text: "Examine why each item of data is requested and whether someone can preview the service before creating an account. Explain security constraints.",
+              },
+              {
+                bold: "First completed action",
+                text: "After Save or Send, show what changed and where the result can be found. Confirmation also needs to reach assistive technologies.",
+              },
+              {
+                bold: "Return after interruption",
+                text: "Restore filters and drafts where preservation is intended. If the session expired, explain authentication and which data can be recovered.",
+              },
+              {
+                bold: "Error and correction",
+                text: "Replace a bare 422 code with an explanation tied to the field or operation. Keep useful values and offer recovery that does not duplicate the action.",
+              },
+            ],
+          },
+          {
+            type: "quote",
+            tag: "Observe return visits",
+            text: "Day-7 return can be useful for a product used weekly. Choose a measure that fits the frequency and value of the actual task.",
+          },
+        ],
+      },
+      {
+        id: "five-states-empty-checkout",
+        num: "04",
+        tocLabel: "States and checkout",
+        heading: "Prepare empty states, errors and checkout",
+        blocks: [
+          {
+            type: "explanation",
+            paragraphs: [
+              "A screen specification needs to describe situations where expected data is absent or arrives differently. An empty state might represent an account without projects; loading means that the requested result is not yet known. The ideal state presents the expected data, while a partial result may come from a filter or an unavailable service. An error needs to explain the recovery available. For each of these five states, record its trigger, displayed content and available commands, then review the transitions between them. Retrying should not erase an entry or submit an operation twice after it has already been received. If the browser cannot tell whether a payment completed, offer a way to check its status before sending another payment request. Successful actions also need explicit confirmation, even when a data list updates automatically. That confirmation should identify what changed and remain available long enough to be found during review. A transition table helps expose omissions: for each event, record the starting state, the known service response and the next displayed state. A browser timeout and an explicit server rejection do not provide the same information. Duplicate-operation protection needs server support; disabling a button covers only part of the scenario. Ask how an already received operation is identified when a request is repeated, then incorporate that answer into recovery.",
+            ],
+            visual: {
+              kind: "states",
+              title: "States to prepare",
+              caption: "Every state keeps the next step understandable.",
+              labels: ["Empty · create", "Loading · wait", "Ideal · review", "Partial · complete", "Error · retry"],
+            },
+          },
+          {
+            type: "diagram",
+            visual: {
+              kind: "states",
+              title: "One screen, five situations",
+              caption: "Preserve context during waits or failures, and confirm successful actions separately.",
+              labels: [
+                "Empty · offer creation",
+                "Loading · explain the wait",
+                "Ideal · enable the task",
+                "Partial · explain what is missing",
+                "Error · offer recovery",
+              ],
+            },
+          },
+          {
+            type: "h3",
+            text: "An empty state with a starting point",
+          },
+          {
+            type: "explanation",
+            paragraphs: [
+              "An empty state provides the first instructions for an unfamiliar workspace. No projects yet describes the situation; an additional sentence can explain that a project groups tasks and documents. The creation action must lead to a step where someone can actually prepare the first object. Importing a file or using a template can be an alternative when those routes fit the product's work. A large illustration and a disabled toolbar may push the explanation away from its action, particularly on a phone. Distinguish a lack of data from an empty search result, which usually calls for changing a filter rather than creating another object. You can set a first-result target and measure the time required for a defined journey. The sixty seconds sometimes suggested is a working target to adapt, without a universal relationship to retention. A complex setup may legitimately require more time and a clear account of its progress.",
+            ],
+            visual: {
+              kind: "empty",
+              title: "A useful first screen",
+              caption: "Keep creation and import visible without an oversized illustration.",
+              labels: ["No projects yet", "Keep your tasks together here.", "Create a project", "Or import a file"],
+            },
+          },
+          {
+            type: "h3",
+            text: "Checkout without hidden totals or steps",
+          },
+          {
+            type: "explanation",
+            paragraphs: [
+              "Baymard's compilation of fifty e-commerce studies, updated on 28 October 2026, reports an unweighted mean cart-abandonment rate of 70.22%, ranging from 55 to 84%. Its form research counts an average of 23.48 elements, compared with twelve to fourteen in the simplified journeys studied. An element includes more than an input field, so these figures do not prescribe an ideal form for every shop. They prompt a review of which data is requested and when. During a test, ask someone to explain the total and the timing of the charge before the final action. Ambiguity about fees, account creation or the address being used can be addressed through wording and sequence. Following a card decline, preserve the cart and useful entry data. Recovery should explain what failed and which payment methods remain available. Any comparison after a change needs the shop's own measurements and a clear description of the journey being compared.",
+            ],
+            visual: {
+              kind: "checkout",
+              title: "Before committing",
+              caption: "Example summary; actual amounts depend on the order.",
+              labels: ["Your order", "Items · $29", "Fees · shown here", "Pay the displayed total"],
+            },
+          },
+          {
+            type: "list",
+            heading: "Six checkout decisions to review",
+            items: [
+              {
+                bold: "Access without an account",
+                text: "Offer guest checkout where compatible with the service. If an account is required, explain why before asking someone to create it.",
+              },
+              {
+                bold: "Total before commitment",
+                text: "Show the available subtotal, shipping and taxes. If an amount depends on the address, explain this before entry and update the total.",
+              },
+              {
+                bold: "Field grouping",
+                text: "Keep labels visible and group related details. Request a phone number only when its purpose is justified and explained.",
+              },
+              {
+                bold: "Available payment methods",
+                text: "Present methods actually supported for the order and country. Do not infer a person’s preference from their region alone.",
+              },
+              {
+                bold: "Effect of the final button",
+                text: "Pay $132.90 identifies the operation and amount. If the click opens bank verification, explain that step nearby.",
+              },
+              {
+                bold: "Validation timing",
+                text: "Avoid premature errors while entry is incomplete. Try validation after leaving a field and on submission; retain values and associate each message with its field.",
+              },
+            ],
+          },
+          {
+            type: "inlineCta",
+            title: "The book and audit worksheets",
+            text: "The English Playbook includes 36 annotated screens, a 40-point audit checklist and 12 A4 sheets for your next review.",
+            buttonLabel: "Get the EN Playbook · $29",
+          },
+        ],
+      },
+      {
+        id: "accessibility-2026-law",
+        num: "05",
+        tocLabel: "Accessibility and scope",
+        heading: "Define accessibility checks and their scope",
+        blocks: [
+          {
+            type: "explanation",
+            paragraphs: [
+              "The February 2026 WebAIM Million detects WCAG 2 A or AA errors on 95.9% of the million home pages analysed, averaging 56.1 detected errors per page. The report concerns defects the tool can identify within that sample. For your project, automated reports can help locate insufficient contrast or fields without accessible names, but the journey also needs keyboard and screen-reader testing. Prepare a scenario that includes valid entry, a deliberately triggered error and its correction. Record the focus order, the error announcement and controls potentially obscured by fixed elements. Continue to the operation's confirmation, because a single page does not establish continuity between steps. An error-free scan cannot establish conformance for the whole service. Keep the tested pages, tool versions and remaining manual checks with the results so that another reviewer can understand what was covered and reproduce a reported failure. When a message appears without a page change, check that it is announced without moving focus unpredictably. For an input error, someone needs to identify the affected field and keep the instruction available while correcting it. After closing a modal, check that focus returns to a control still present. If the action removes that control, define another sensible destination in the updated list. Retain these scenarios with the component review so other pages using it receive the same checks.",
+            ],
+            visual: {
+              kind: "checklist",
+              title: "Beyond the scan",
+              caption: "Real tasks complement automated checks.",
+              labels: ["Contrast and labels", "Keyboard journey", "Reading and announcements", "Task completion"],
+            },
+          },
+          {
+            type: "h3",
+            text: "Separate technical guidance from legal obligations",
+          },
+          {
+            type: "explanation",
+            paragraphs: [
+              "Choosing a technical reference and determining legal duties require different information. A team may agree to assess a set of journeys against WCAG 2.2 AA, while a directive's applicability depends on the service, the organisation and national implementation. A W3C Recommendation, a published ETSI standard and a reference cited in the Official Journal of the European Union have scopes that need separate examination. The table below distinguishes their status as of 18 November 2026 and links to the relevant texts. In a proposal, name the pages and tasks being assessed, the reference version and the planned methods. The delivery report should repeat that scope, date the checks and record outstanding defects. The supplied clause is a drafting aid whose suitability for a contract and sector needs competent advice. It should be revised if the assessment changes, rather than being copied unchanged into a broader claim about the product.",
+            ],
+            visual: {
+              kind: "research",
+              title: "From a text to a project",
+              caption: "Check the applicable scope and version before concluding.",
+              labels: ["Identify the text", "Check the sector", "Define the scope", "Document the checks"],
+            },
+          },
+          {
+            type: "table",
+            caption: "European legislation and references: status and scope on 18 November 2026",
+            headers: ["Text or reference", "Date or status", "Scope and considerations"],
+            rows: [
+              [
+                "European Accessibility Act — Directive (EU) 2019/882",
                 "National measures apply from 28 June 2025",
                 "Covers the products and services listed in Article 2, not every website. Article 4(5) exempts service micro-enterprises: fewer than 10 people and annual turnover or balance sheet ≤ €2M. That exemption does not cover product obligations. Check national transposition and transitions (Arts. 31–32).",
               ],
               [
-                'WCAG 2.2 (W3C Recommendation)',
-                'October 2023',
-                'The global technical baseline targeted at Level AA (4.5:1 text contrast, 2.4.11 Focus Not Obscured, target size, drag alternatives).',
+                "WCAG 2.2 (W3C Recommendation)",
+                "October 2023",
+                "The global technical baseline targeted at Level AA (4.5:1 text contrast, 2.4.11 Focus Not Obscured, target size, drag alternatives).",
               ],
               [
-                'EN 301 549 v4.1.1',
+                "EN 301 549 v4.1.1",
                 "Version published September 2026",
                 "ETSI has published EN 301 549 v4.1.1, incorporating WCAG 2.2 for the web. Publication alone is not enough: check the Official Journal citation for the directive and requirements concerned before claiming presumption of conformity.",
               ],
               [
-                'WCAG 3.0 (W3C Working Draft)',
-                '10 September 2026 draft',
+                "WCAG 3.0 (W3C Working Draft)",
+                "10 September 2026 draft",
                 "A changeable working draft, not a W3C Recommendation. W3C says it should only be cited as work in progress; do not present it as replacing WCAG 2.2.",
               ],
               [
-                'EU AI Act — Regulation (EU) 2024/1689 Art. 50',
+                "EU AI Act — Regulation (EU) 2024/1689 Art. 50",
                 "Check timeline: Arts. 50, 111(4) and 113",
                 "Article 50 sets interaction notices and marking/disclosure duties by role, content and exceptions. General application: 2 August 2026; the 27 July 2026 consolidated text gives systems already on the market before 2 August until 2 December 2026 for Article 50(2). Not all AI outputs carry the same duty.",
               ],
             ],
           },
           {
-            type: 'copyable',
-            label: 'Protective Accessibility Scoping Clause for Client Proposals (Section 52)',
-            langTag: 'text',
+            type: "copyable",
+            label: "Example scope clause for an accessibility evaluation",
+            langTag: "text",
             code: `Accessibility Evaluation Scope:
 "Delivery includes an engineering evaluation report covering the user flows listed
 in Appendix 1, tested against W3C WCAG 2.2 Level AA as of [YYYY-MM-DD] (automated
@@ -440,453 +557,526 @@ static/DOM scan plus manual keyboard and screen-reader walkthrough). Exact scope
 test methodology, and sampling limits are documented in the attached report. This
 deliverable is a technical verification report and constitutes neither an official
 certification nor legal advice."`,
-            note: 'Never sign an open-ended "100% compliant forever" warranty without naming the exact flows, standard version, and test date.',
+            note: "Adapt this clause to the journeys and methods actually included. Have contractual commitments and sector obligations examined by qualified counsel.",
           },
         ],
       },
-
       {
-        id: 'audit-20-min-40-point-checklist',
-        num: '06',
-        tocLabel: '5-user testing truth & 40-Point Audit Checklist',
-        heading: 'Usability Testing Without Statistical Lies, the 20-Minute Audit & the Full 40-Point Checklist',
+        id: "audit-20-min-40-point-checklist",
+        num: "06",
+        tocLabel: "Testing and auditing",
+        heading: "Observe use and organise an audit",
         blocks: [
           {
-            type: 'p',
-            text: "Nielsen and Landauer’s model (CHI 1993) estimates cumulative discovery as 1 − (1 − L)^n. With L ≈ 31%, five participants give about 84%, often rounded to 85%. This is conditional, not a guarantee of finding every issue. Faulkner (2003), in a study with 60 users, observed five-person subsamples finding 55%–99% of that study’s issues (evidence level: Probable when generalised to your product).",
+            type: "explanation",
+            paragraphs: [
+              "The Nielsen and Landauer model (CHI 1993) expresses cumulative problem discovery as `1 − (1 − L)^n`. With a discovery rate `L` of about 31%, five participants give a result near 84%, often rounded to 85%. This depends on the model's assumptions and the rate associated with the problems; it cannot guarantee that five people will find a fixed share of your product's defects. In Faulkner's 2003 study with sixty users, five-person subsets revealed between 55 and 99% of the problems in that study. These variations matter when planning sessions. An initial group can expose obstacles to correct, and a later group can examine the revised journey. Account for the variety of tasks, relevant populations and consequences of errors as well. A medical operation or consequential payment needs an evaluation strategy appropriate to the risk, including expertise and participants that a convenient small sample may not provide.",
+            ],
+            visual: {
+              kind: "research",
+              title: "Test, then improve",
+              caption: "A small sample reveals issues, not a guarantee.",
+              labels: ["Observe a task", "Record obstacles", "Make changes", "Test again"],
+            },
           },
           {
-            type: 'p',
-            text: "Start with a small round of observed sessions on a defined task and audience. Fix recurring blockers, then test again. To compare completion or conversion rates, calculate sample size from the baseline rate, minimum detectable effect, error tolerance and desired power: no single count fits every A/B test. AI personas can help formulate hypotheses, but are not observations of real users.",
+            type: "explanation",
+            paragraphs: [
+              "An observation session starts with a task that does not reveal the expected route. For an export, ask someone to prepare a period's invoices for accounting instead of telling them to click Export. Let them choose their steps and record where they hesitate, backtrack or ask for help. Separate what was observed from the explanation you propose. If several people miss the period filter, try a different location and examine it in another session. Comparing success or conversion rates requires a sample-size calculation based on the initial rate, the difference being sought and the accepted risk of error. A short qualitative series does not replace that calculation. AI-generated personas can help prepare research questions, but supply no observations of actual product use. They should not appear in a research report as participants or as evidence that a customer segment understands the revised flow.",
+            ],
+            visual: {
+              kind: "compare",
+              title: "Concrete observations",
+              caption: "Record the action, hesitation and what helps the person recover.",
+              labels: ["“People prefer A”", "“3 participants missed the Back link”"],
+            },
           },
           {
-            type: 'h3',
-            text: "Run a 20-minute audit before coding a fix",
+            type: "h3",
+            text: "Organise an initial twenty-minute audit pass",
           },
           {
-            type: 'p',
-            text: "For a developer, this audit first helps prioritise fixes before opening a ticket. Score 10 axes (/50): 5-second clarity, hierarchy, primary action, consistency, 5 states, feedback, accessibility, microcopy, price/fee clarity and mobile use. Return 3 priorities as Observation → User risk → Annotated fix. Twenty minutes means a diagnostic pass, not an accessibility certification. If you sell it as a service, the manual’s illustrative $150–$400 range is neither a market average nor an earnings promise: price the scope, analysis and report.",
+            type: "explanation",
+            paragraphs: [
+              "An initial audit pass prepares corrections and further investigation. It can examine page comprehension, hierarchy, the primary action, component consistency, screen states, system responses, accessibility, wording, price and mobile use. For each selected problem, keep a screenshot or reproduction scenario, describe the effect on the task and propose a change that can be reviewed. The total disappears when the keyboard opens provides a more specific starting point than a readability score. A twenty-minute timebox suits a limited pass reported as such; it cannot cover user research or a full accessibility assessment. If the work is charged, the proposal should include preparation, the journeys examined and the report. The checklist below helps organise the topics, but every answer must remain attached to a check actually performed. Leave unexamined items open, with a reason and a next step, rather than marking them complete to finish the sheet.",
+            ],
+            visual: {
+              kind: "report",
+              title: "An actionable finding",
+              caption: "Connect each issue to a fix and a follow-up check.",
+              labels: ["Finding", "Risk", "Fix", "Price hidden", "Unclear total", "Visible summary"],
+            },
           },
           {
-            type: 'copyable',
-            label: 'Appendix A1 Complete — The 40-Point Pre-Ship UX/UI Audit Checklist',
-            langTag: 'markdown',
-            code: `# 40-POINT UX/UI AUDIT CHECKLIST (UX/UI Playbook · Appendix A1)
+            type: "copyable",
+            label: "40-point UX/UI review checklist",
+            langTag: "markdown",
+            code: `# UX/UI REVIEW — 40 POINTS
+Journey: [name] · Date: [date] · Reviewer: [name]
+For each item: outcome, observation and a link to the test or screenshot.
 
-## 1. Structure & Flow (10 points)
-- [ ] Screen purpose is understood in under 5 seconds (verified on a fresh pair of eyes)
-- [ ] Exactly one visually dominant primary action on the view
-- [ ] Every screen has an explicit entry point and exit path
-- [ ] Navigation indicates current location by more than colour alone
-- [ ] Browser/app Back never wipes user-entered form data
-- [ ] Familiar conventions are respected (logo = home, cart, search, back)
-- [ ] The highest-frequency daily task takes the fewest clicks
-- [ ] No secondary feature visually competes with the core verb
-- [ ] Text links and action buttons never share the same visual styling
-- [ ] First-time users reach a visible result in under 60 seconds
+## 1. Structure and journey (10 points)
+- [ ] Initial screen comprehension observed with someone outside the project
+- [ ] Intended action identifiable within the page hierarchy
+- [ ] Entry, exit and return defined for each step
+- [ ] Current location indicated by more than colour alone
+- [ ] Back navigation tried without unexpected loss of entered data
+- [ ] Navigation conventions examined with the relevant audience
+- [ ] Detours in frequent tasks recorded and justified
+- [ ] Secondary features reachable without obscuring the current action
+- [ ] Navigation links and commands distinguishable in context
+- [ ] First-result time measured for a defined task, without a universal threshold
 
-## 2. Content & Microcopy (10 points)
-- [ ] Zero "Lorem ipsum" or unrealistic placeholder strings
-- [ ] Every button starts with a specific action verb (never "Submit / OK")
-- [ ] Every error message states what happened and the exact step to recover
-- [ ] Full price, taxes, and fees appear before commitment
-- [ ] Secondary helper copy maintains ≥ 4.5:1 contrast
-- [ ] Dates, currencies, and numbers obey the active locale
-- [ ] Edge lengths tested (40-character names, 3-line titles, 0 results)
-- [ ] Empty states explain value, offer 1-click creation, and provide an import/template path
-- [ ] No multi-word sentences set in ALL CAPS
-- [ ] Single consistent language and typographic punctuation throughout
+## 2. Content and messages (10 points)
+- [ ] Production text or identified examples used, without fabricated testimonials
+- [ ] Command labels describe the operation in its context
+- [ ] Errors explain the known situation and an available recovery
+- [ ] Total price and conditions understood before commitment
+- [ ] Help-text contrast measured on its actual background
+- [ ] Dates, currencies and numbers adapted to language and region
+- [ ] Long text, multiline headings and empty results tried
+- [ ] Empty state explains the situation and available actions
+- [ ] Capitals reserved for short text where they remain readable
+- [ ] Translations and terminology consistent between steps
 
-## 3. Visual System (10 points)
-- [ ] Maximum two font families (plus monospace for code/IDs)
-- [ ] Every font size comes strictly from the locked type scale
-- [ ] Every spacing value is a multiple of 4 px (8 px for layout structure)
-- [ ] Single accent colour reserved for primary actions
-- [ ] Identical components look and behave identically everywhere
-- [ ] Border radii and elevation steps stay consistent
-- [ ] Reading order survives the 3-step squint test
-- [ ] Body copy line length stays between 60 and 75 characters
-- [ ] Imagery and icon stroke weights share a unified style
-- [ ] Tokens and components are cleanly named with zero detached overrides
+## 3. Visual system (10 points)
+- [ ] Loaded family and weights match the project system
+- [ ] Text sizes use tokens, with exceptions documented
+- [ ] Internal and structural spacing follow the selected scale
+- [ ] Action colour distinguishable from status and alerts
+- [ ] Recurring components consistent across pages
+- [ ] Radii, borders and surface levels defined
+- [ ] Hierarchy reviewed with real text and amounts
+- [ ] Reading width and line height tried on complete paragraphs
+- [ ] Visuals and icons readable in both themes
+- [ ] Tokens and components named; local styles justified
 
-## 4. States, Accessibility & Engineering (10 points)
-- [ ] All 5 screen states exist: empty, loading, ideal, partial/overflow, error
-- [ ] All 6 button states exist (idle, hover, pressed, keyboard focus, loading, disabled)
-- [ ] Every form input has a visible linked <label> (never placeholder-only)
-- [ ] Text contrast ≥ 4.5:1 and essential borders/icons ≥ 3:1 verified on actual surfaces
-- [ ] Mobile touch targets ≥ 44 × 44 CSS px (48 × 48 dp on Android)
-- [ ] Complete keyboard Tab / Shift+Tab / Escape flow with visible focus ring
-- [ ] Zero critical states communicated by colour alone
-- [ ] Decorative images use alt="", informative visuals carry concise alt text
-- [ ] Slow-network (> 400 ms) and offline failure states are handled gracefully
-- [ ] One-page handoff spec written (layout, tokens, states, edge cases)`,
-            note: 'Drop this checklist into .github/PULL_REQUEST_TEMPLATE.md — once internalised, a full screen review takes 15 minutes.',
+## 4. States, accessibility and engineering (10 points)
+- [ ] Five states prepared: empty, loading, ideal, partial/overflow, error
+- [ ] Idle, hover, press, focus, loading and disabled controls examined
+- [ ] Fields have linked visible labels and help available after entry
+- [ ] WCAG contrast measured: body text 4.5:1; meaningful non-text elements 3:1
+- [ ] Web targets aim for project choice of 44 × 44 CSS px; native units distinguished
+- [ ] Full keyboard journey, visible focus, closing and focus return tried
+- [ ] Important information understandable without relying only on colour
+- [ ] Informative images have appropriate alternatives; decoration is ignored
+- [ ] Slow network, interruption and recovery tried without duplicate operations
+- [ ] Delivery specification updated with edge cases and remaining checks`,
+            note: "Place this file in docs/audit-40.md or the pull-request template. Record the journey, date and results; leave unexamined items open. Time required depends on scope.",
           },
         ],
       },
     ],
     faqs: [
       {
-        q: 'Why does the Playbook enforce 4 ± 1 chunks (Cowan) instead of Miller’s 7 ± 2?',
-        a: "Cowan (2001) describes about 4 ± 1 chunks when rehearsal and grouping are controlled. This is not a universal limit on visible interface elements. Use legible groups, reduce forced recall and test comprehension.",
+        q: "What does Cowan’s estimate of 4 ± 1 chunks describe?",
+        a: "It concerns working memory under the studied conditions, with rehearsal and grouping controlled. A chunk is not a predefined interface element. For a form, examine what must be remembered between steps and keep comparison data visible. Proposed groupings then need testing on the actual task.",
       },
       {
-        q: 'Does the European Accessibility Act (Directive 2019/882) apply to every business in 2026?',
-        a: "The directive covers specified products and services from 28 June 2025, not every website. Articles 3(23) and 4(5) exempt micro-enterprises providing services (fewer than 10 people and annual turnover or balance sheet ≤ €2M). Check sector, national transposition, contracts and other duties with qualified counsel.",
+        q: "Does the European Accessibility Act cover every website?",
+        a: "Directive 2019/882 covers products and services within its defined scope from 28 June 2025. Articles 3(23) and 4(5) exempt micro-enterprises providing services: fewer than ten people and annual turnover or balance sheet of at most €2M. This exemption does not cover product obligations. Examine the sector, national implementation, transitions and other duties with qualified counsel.",
       },
       {
-        q: 'What is the highest-ROI fix on an underperforming checkout page?',
-        a: 'Three non-cosmetic changes: 1) enable guest checkout by default instead of forcing account creation upfront, 2) trim form elements from the 23.48 industry average down to the 12–14 essentials (Baymard, Oct 2026), and 3) put the exact charge inside the final button ("Pay $132.90") alongside a persistent fee breakdown.',
+        q: "Where should a checkout review begin?",
+        a: "Ask someone to complete a defined purchase and examine whether they understand the total before commitment. Record data requests, account requirements and recovery after a decline. Baymard findings supply questions to investigate without prescribing an ideal field count. After a change, repeat the journey and keep the observations; conversion effects require the shop’s own measurements.",
       },
       {
-        q: 'Can synthetic AI user personas replace human usability tests in 2026?',
-        a: "No. An agent can check deterministic rules and help prepare hypotheses; it does not show how a real person understands your offer or recovers from an error. Observe real users on a defined task, then iterate.",
+        q: "Can an AI agent replace testing with users?",
+        a: "An agent can analyse code, run available checks and help prepare scenarios. Its answers do not show how a person understands product terminology or recovers after an error. Simulated personas should remain preparation hypotheses. To observe those behaviours, recruit relevant people and give them a task without revealing the intended route.",
       },
     ],
-    ctaTitle: 'Go from this field course to 36 annotated screens, 12 A4 working sheets & the Python scanner.',
-    ctaText:
-      'Download the complete 139-page English edition of the UX/UI Playbook 2026 alongside the 26-page printable Bonus Kit (audit, client brief, handoff) and the 21-file working archive featuring agent_check.py.',
+    ctaTitle: "Prepare your next audit",
+    ctaText: "The English edition of UX/UI Playbook includes the 139-page book, a 26-page printable kit and an archive of 21 working files.",
     ctaBullets: [
-      "139-page A4 Playbook PDF in English (97 sections, 36 annotated screens, 13 before/after prototypes + 11 platform spreads)",
-      '12 printable A4 working sheets + copy-ready Markdown templates for client & product work',
-      'Runnable 77-rule Python scanner + AI Agent Skill for Claude Code, Cursor & Codex ($29 one-time)',
+      "English book with annotated screen examples",
+      "12 A4 worksheets for briefing, auditing and handoff",
+      "Tokens, templates, rules and a Python scanner in the archive",
     ],
     entityDefinition: "User experience design organises journeys, content and interactions so a person can reach a goal. It differs from UI design, which defines visual presentation, and Product Design, which also addresses value and scope.",
     references: [
-                  {
-                    "title": "The magical number 4 in short-term memory",
-                    "url": "https://doi.org/10.1017/S0140525X01003922",
-                    "publisher": "Nelson Cowan · Behavioral and Brain Sciences",
-                    "date": "2001",
-                    "evidence": "established",
-                    "note": "About 4 chunks under specific experimental conditions. Groups of 3 to 5 in a UI are a design interpretation."
-                  },
-                  {
-                    "title": "Cart Abandonment Rate: 50 Statistics",
-                    "url": "https://baymard.com/blog/cart-abandonment-rate",
-                    "publisher": "Baymard Institute",
-                    "date": "2026-10-28",
-                    "evidence": "established",
-                    "note": "70.22%: unweighted mean of 50 studies (2006–2025). Form elements: 23.48 observed versus 12–14 in a simplified flow."
-                  },
-                  {
-                    "title": "The WebAIM Million — 2026 report",
-                    "url": "https://webaim.org/projects/million/",
-                    "publisher": "WebAIM",
-                    "date": "2026-02",
-                    "evidence": "established",
-                    "note": "1 million home pages, 95.9% with detected errors, 56.1 errors per page. An error-free scan does not prove conformance."
-                  },
-                  {
-                    "title": "Web Content Accessibility Guidelines 2.2",
-                    "url": "https://www.w3.org/TR/WCAG22/",
-                    "publisher": "W3C",
-                    "date": "2024-12-12",
-                    "evidence": "established",
-                    "note": "Normative text: distinguish body text, large text and non-text components."
-                  },
-                  {
-                    "title": "Understanding SC 2.5.8: Target Size (Minimum)",
-                    "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
-                    "publisher": "W3C WAI",
-                    "date": "WCAG 2.2",
-                    "evidence": "established",
-                    "note": "AA: 24 × 24 CSS px with exceptions. 44 × 44 px is this guide’s recommendation, not the AA minimum."
-                  },
-                  {
-                    "title": "A mathematical model of the finding of usability problems",
-                    "url": "https://doi.org/10.1145/169059.169166",
-                    "publisher": "Jakob Nielsen & Thomas K. Landauer · CHI",
-                    "date": "1993",
-                    "evidence": "established",
-                    "note": "The model depends on problem-discovery probability; 5 people do not guarantee a fixed percentage."
-                  },
-                  {
-                    "title": "Beyond the five-user assumption",
-                    "url": "https://doi.org/10.3758/BF03195514",
-                    "publisher": "Laura Faulkner · Behavior Research Methods",
-                    "date": "2003",
-                    "evidence": "probable",
-                    "note": "Original study with 60 people; 5-person subsamples found 55–99% of that study’s issues. Generalisation to your product requires testing."
-                  },
-                  {
-                    "title": "Directive (EU) 2019/882 — European Accessibility Act",
-                    "url": "https://eur-lex.europa.eu/eli/dir/2019/882/oj",
-                    "publisher": "EUR-Lex · European Union",
-                    "date": "2019",
-                    "evidence": "established",
-                    "note": "Articles 2, 3(23), 4(5) and 31: scope, micro-enterprises and application. Check national transposition and your sector."
-                  },
-                  {
-                    "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
-                    "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/2026-07-27/eng",
-                    "publisher": "EUR-Lex · European Union",
-                    "date": "2026-07-27",
-                    "evidence": "established",
-                    "note": "Consolidated text: Art. 50 (duties and exceptions), 111(4) (2 December 2026 transition for certain existing systems) and 113 (application). Check the role and use concerned."
-                  },
-                  {
-                    "title": "W3C Accessibility Guidelines (WCAG) 3.0 — Working Draft",
-                    "url": "https://www.w3.org/TR/2026/WD-wcag-3.0-20260910/",
-                    "publisher": "W3C",
-                    "date": "2026-09-10",
-                    "evidence": "established",
-                    "note": "Working-draft status only: does not replace WCAG 2.2 and may change."
-                  },
-                  {
-                    "title": "EN 301 549 V4.1.1 — Accessibility requirements for ICT products and services",
-                    "url": "https://www.etsi.org/deliver/etsi_en/301500_301599/301549/04.01.01_60/en_301549v040101p.pdf",
-                    "publisher": "ETSI · CEN · CENELEC",
-                    "date": "2026-09",
-                    "evidence": "established",
-                    "note": "Published standard. EU Official Journal citation and its scope must be checked separately."
-                  }
-                ],
-  },
-
-  /* ============================================================================
-   * COURSE 2 (EN) — UI DESIGN & DESIGN TOKENS
-   * ========================================================================== */
-  {
-    slug: 'ui-design-system-tokens',
-    category: 'UI Design',
-    icon: 'palette',
-    readTime: '19 min read',
-    publishedAt: '2026-11-18',
-    updatedAt: '2026-11-18',
-    ogImage: '/og-article-ui-en.jpg',
-    metaTitle:
-      "UI Design: CSS Tokens and Dark Mode | UX/UI Playbook",
-    metaDescription:
-      "Build a consistent UI system with 6 type roles, 8 size tokens, 4/8-point spacing, accessible colour, copy-ready light/dark CSS and a developer handoff.",
-    keywords: [
-      'UI design system CSS tokens',
-      'W3C design tokens 2025.10',
-      '1.25 typography scale UI',
-      '8 point grid spacing system',
-      'dark mode tokens halation',
-      'UI microcopy rules',
-      'CSS logical properties RTL',
-      'developer handoff specification',
+      {
+        title: "The magical number 4 in short-term memory",
+        url: "https://doi.org/10.1017/S0140525X01003922",
+        publisher: "Nelson Cowan · Behavioral and Brain Sciences",
+        date: "2001",
+        note: "About 4 chunks under specific experimental conditions. Groups of 3 to 5 in a UI are a design interpretation.",
+      },
+      {
+        title: "Cart Abandonment Rate: 50 Statistics",
+        url: "https://baymard.com/blog/cart-abandonment-rate",
+        publisher: "Baymard Institute",
+        date: "2026-10-28",
+        note: "70.22%: unweighted mean of 50 studies (2006–2025). Form elements: 23.48 observed versus 12–14 in a simplified flow.",
+      },
+      {
+        title: "The WebAIM Million — 2026 report",
+        url: "https://webaim.org/projects/million/",
+        publisher: "WebAIM",
+        date: "2026-02",
+        note: "1 million home pages, 95.9% with detected errors, 56.1 errors per page. An error-free scan does not prove conformance.",
+      },
+      {
+        title: "Web Content Accessibility Guidelines 2.2",
+        url: "https://www.w3.org/TR/WCAG22/",
+        publisher: "W3C",
+        date: "2024-12-12",
+        note: "Normative text: distinguish body text, large text and non-text components.",
+      },
+      {
+        title: "Understanding SC 2.5.8: Target Size (Minimum)",
+        url: "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+        publisher: "W3C WAI",
+        date: "WCAG 2.2",
+        note: "AA: 24 × 24 CSS px with exceptions. 44 × 44 px is this article’s recommendation, not the AA minimum.",
+      },
+      {
+        title: "A mathematical model of the finding of usability problems",
+        url: "https://doi.org/10.1145/169059.169166",
+        publisher: "Jakob Nielsen & Thomas K. Landauer · CHI",
+        date: "1993",
+        note: "The model depends on problem-discovery probability; 5 people do not guarantee a fixed percentage.",
+      },
+      {
+        title: "Beyond the five-user assumption",
+        url: "https://doi.org/10.3758/BF03195514",
+        publisher: "Laura Faulkner · Behavior Research Methods",
+        date: "2003",
+        note: "Original study with 60 people; 5-person subsamples found 55–99% of that study’s issues. Generalisation to your product requires testing.",
+      },
+      {
+        title: "Directive (EU) 2019/882 — European Accessibility Act",
+        url: "https://eur-lex.europa.eu/eli/dir/2019/882/oj",
+        publisher: "EUR-Lex · European Union",
+        date: "2019",
+        note: "Articles 2, 3(23), 4(5) and 31: scope, micro-enterprises and application. Check national transposition and your sector.",
+      },
+      {
+        title: "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+        url: "https://eur-lex.europa.eu/eli/reg/2024/1689/2026-07-27/eng",
+        publisher: "EUR-Lex · European Union",
+        date: "2026-07-27",
+        note: "Consolidated text: Art. 50 (duties and exceptions), 111(4) (2 December 2026 transition for certain existing systems) and 113 (application). Check the role and use concerned.",
+      },
+      {
+        title: "W3C Accessibility Guidelines (WCAG) 3.0 — Working Draft",
+        url: "https://www.w3.org/TR/2026/WD-wcag-3.0-20260910/",
+        publisher: "W3C",
+        date: "2026-09-10",
+        note: "Working-draft status only: does not replace WCAG 2.2 and may change.",
+      },
+      {
+        title: "EN 301 549 V4.1.1 — Accessibility requirements for ICT products and services",
+        url: "https://www.etsi.org/deliver/etsi_en/301500_301599/301549/04.01.01_60/en_301549v040101p.pdf",
+        publisher: "ETSI · CEN · CENELEC",
+        date: "2026-09",
+        note: "Published standard. EU Official Journal citation and its scope must be checked separately.",
+      },
     ],
-    title:
-      "UI Design: Build CSS Tokens and a Readable Dark Mode",
-    subtitle:
-      "A reusable foundation for your interfaces: hierarchy, typography, spacing and semantic colour, with a copy-ready tokens.css file and developer handoff.",
-    aeoSummaryTitle: 'Executive Takeaway — The Numbers Behind Clean UI Systems',
-    aeoSummary:
-      "A coherent UI system maps 6 semantic roles to 8 size tokens: 12, 14, 16, 20, 24, 32, 40 and 64 px. A 1.25 ratio informs the progression, rather than defining an exact rounding formula. Separate internal, structural and macro spacing on a 4/8-point base. The 60/30/10 guideline organises colour roles; it is not a scientific finding. For OLED dark mode, keep a #000000 base, lift surfaces and soften text. Measure contrast on each actual background and offer light mode too: reading comfort requires reader feedback.",
+  },
+  {
+    slug: "ui-design-system-tokens",
+    category: "UI Design",
+    icon: "palette",
+    readTime: "About 21 min read",
+    publishedAt: "2026-11-18",
+    updatedAt: "2026-11-18",
+    ogImage: "/og-article-ui-en.jpg",
+    metaTitle: "UI Design: CSS Tokens and Dark Mode | UX/UI Playbook",
+    metaDescription: "Build a consistent UI system with 6 type roles, 8 size tokens, 4/8-point spacing, accessible colour, copy-ready light/dark CSS and a developer handoff.",
+    keywords: [
+      "UI design system CSS tokens",
+      "W3C design tokens 2025.10",
+      "1.25 typography scale UI",
+      "8 point grid spacing system",
+      "dark mode tokens halation",
+      "UI microcopy rules",
+      "CSS logical properties RTL",
+      "developer handoff specification",
+    ],
+    title: "UI Design: Build CSS Tokens and a Readable Dark Mode",
+    subtitle: "From typography to component states: organise colour, spacing and themes. CSS examples, Domine number alignment and a developer handoff template.",
+    aeoSummaryTitle: "At a glance",
+    aeoSummary: "A coherent UI system maps 6 semantic roles to 8 size tokens: 12, 14, 16, 20, 24, 32, 40 and 64 px. A 1.25 ratio informs the progression, rather than defining an exact rounding formula. Separate internal, structural and macro spacing on a 4/8-point base. The 60/30/10 guideline organises colour roles; it is not a scientific finding. For OLED dark mode, keep a #000000 base, lift surfaces and soften text. Measure contrast on each actual background and offer light mode too: reading comfort requires reader feedback.",
     keyStats: [
       {
         value: "6 roles · 8 tokens",
-        label: "CSS sizes 12, 14, 16, 20, 24, 32, 40 and 64 px: the scale chosen in this guide",
-        source: "UX/UI Playbook · Sections 21 & 25 · Design guideline",
-        evidence: "probable",
+        label: "CSS sizes 12, 14, 16, 20, 24, 32, 40 and 64 px: the scale used in this article",
+        source: "Example type system",
       },
       {
-        value: '≥ 4.5 : 1',
+        value: "≥ 4.5 : 1",
         label: "AA body-text contrast; large text and meaningful controls: 3:1 under their respective criteria",
         source: "W3C WCAG 2.2 · 1.4.3 & 1.4.11",
-        evidence: "established",
         url: "https://www.w3.org/TR/WCAG22/",
       },
       {
-        value: '2025.10',
+        value: "2025.10",
         label: "Stable final report from the Design Tokens Community Group; not a W3C Recommendation",
         source: "Design Tokens Community Group · 2025-10-28",
-        evidence: "established",
         url: "https://www.designtokens.org/tr/2025.10/format/",
       },
     ],
     sections: [
       {
-        id: 'four-hierarchy-levers',
-        num: '01',
-        tocLabel: 'The 4 hierarchy levers & squint test',
-        heading: 'Visual Hierarchy in 4 Levers: Use Them in the Exact Order the Human Eye Processes Them',
+        id: "four-hierarchy-levers",
+        num: "01",
+        tocLabel: "Visual hierarchy",
+        heading: "Build a visual hierarchy",
         blocks: [
           {
-            type: 'p',
-            text: 'When a developer wants an element to stand out, the reflexive move is to paint it bright orange, wrap it in a box, or slap a badge on top. Do that three times and the screen turns into a cockpit alarm panel: when everything shouts, nothing is heard. You do not create hierarchy with paint; you create it with deliberate deltas across four levers, applied strictly in this sequence (Section 06):',
+            type: "explanation",
+            paragraphs: [
+              "Visual hierarchy organises the order in which information can be noticed. On an invoice page, the amount needing attention, selected period and available action do not require identical treatment. Begin by comparing sizes, weights and distances between groups, then use colour where it adds a useful cue. A highly saturated button still needs wording and placement that connect it to the right object. Review the screen with actual text and amounts, including a heading that wraps over several lines. A layout that works with Project A may become difficult to scan with a long customer name. The four levers below describe adjustments available to the team. Their combination depends on content density, available space and the tasks performed on the page. Check the result at normal reading size as well as in an overview, since a prominent heading does not establish that the details below it remain readable. For a comparison, keep content unchanged between versions and adjust the setting under discussion. You can then ask where reading begins and which command was noticed without mixing a rewrite, new grid and palette change. Notes should describe noticed information and expressed choices rather than infer task success from a tidier appearance.",
+            ],
+            visual: {
+              kind: "hierarchy",
+              title: "Build a visual priority",
+              caption: "Size, weight and space work before colour.",
+              labels: ["Invoices to review", "3 pending payments", "Review invoices"],
+            },
           },
           {
-            type: 'steps',
-            title: 'Strict Priority Order of the 4 Visual Levers (Section 06)',
+            type: "steps",
+            title: "Four hierarchy adjustments to compare",
             steps: [
               {
-                bold: 'Lever 1 — Size (the strongest lever, most timidly used)',
-                text: 'An 18 px heading above a 16 px paragraph is not a heading — it is a hesitation. Aim for at least a ×2 ratio between your view’s primary heading (32–40 px) and body copy (15–16 px).',
+                bold: "Size",
+                text: "On a page with 16 px body text, try a 32 or 40 px main heading according to the content. Compare wrapping and the space left for useful data.",
               },
               {
-                bold: 'Lever 2 — Weight (bold against regular)',
-                text: 'Ideal where size must stay compact: a `600 SemiBold` field label at 14 px cleanly anchors a `400 Regular` input value at 15 px.',
+                bold: "Weight",
+                text: "A 14 px label in 600 can be distinguished from a value in 400 without changing field structure. Check that the loaded files contain those weights.",
               },
               {
-                bold: 'Lever 3 — Whitespace (free, silent, almost always forgotten)',
-                text: 'Surrounding a key metric or primary call-to-action with 48 px of breathing room elevates it more cleanly than any heavy border.',
+                bold: "Distances",
+                text: "Separate independent groups and keep a heading close to the content it introduces. Repeat the review with a long heading to examine the relationship.",
               },
               {
-                bold: 'Lever 4 — Colour (the loudest lever, applied last)',
-                text: 'Only introduce your accent colour once the entire layout already reads effortlessly in grayscale. Reserve it for the single primary action and active state.',
+                bold: "Colour",
+                text: "Assign roles to accent and status colours. Measure contrast, then check that commands remain understandable without relying on those colours alone.",
               },
             ],
           },
           {
-            type: 'quote',
-            tag: 'Instant Check · The 3-Step Squint Test (Section 06)',
-            text: 'Step three paces back from your monitor and squint until the words blur. You should still spot immediately: 1) what the screen is about, and 2) where to click. If everything flattens into an even gray mush, you have three font sizes — not a hierarchy.',
+            type: "quote",
+            tag: "A quick hierarchy check",
+            text: "Look at the screen from a distance or squint to locate the heading and primary action. Then return to real text to check readability and comprehension.",
           },
         ],
       },
-
       {
-        id: 'typography-without-guesswork',
-        num: '02',
-        tocLabel: "Typography: 6 roles, 8 sizes",
-        heading: "Typography: Two Reading Families, One Monospace and Eight Sizes",
+        id: "typography-without-guesswork",
+        num: "02",
+        tocLabel: "Typography",
+        heading: "Typography: one family, six roles and eight sizes",
         blocks: [
           {
-            type: 'p',
-            text: "Typography carries much of an interface’s legibility. Set the choices once in the repository: Sora for display, Inter for prose and controls, JetBrains Mono for code and identifiers. This guide separates 6 semantic roles — Display/H1, H2, H3, Body, Small and Micro — mapped to 8 CSS size tokens from 12 to 64 px (Sections 21 & 25). These are different layers, not competing counts.",
+            type: "explanation",
+            paragraphs: [
+              "A type system can use one family while retaining distinct roles. This site uses Domine for headings, paragraphs, controls and code examples. Semantic roles describe the function of the text: Display/H1 for the page heading, H2 and H3 for sections, Body for sustained reading, Small for help and Micro for short annotations. Size tokens supply the values those roles consume. Keeping these concepts separate lets an H1 adapt to a phone without creating a new heading category, while retaining the same role in HTML. Weights should come from the files actually loaded; a missing weight may be simulated by the browser with a different result. Review the system on a populated page containing paragraphs, a form and a table. A specimen of isolated headings will not expose reading strain or density conflicts, and it rarely includes the long labels that appear after translation. The style-role name should not determine HTML heading level by itself. A card may reuse an H3 appearance while needing another level according to its position on the page. Document style and structure separately, then inspect the heading outline in the browser. This allows component reuse in an article or dashboard without skipping a navigation level for screen-reader users.",
+            ],
+            visual: {
+              kind: "type",
+              title: "One family, several roles",
+              caption: "Domine stays the same; size, weight and rhythm change.",
+              labels: ["Heading · 24 px", "Body · 16 px", "Caption · 12 px", "1,024.00 · 999.00"],
+            },
           },
           {
-            type: 'h3',
-            text: 'Deriving the scale in 30 seconds and tuning optical line-height',
+            type: "h3",
+            text: "Choose a scale and tune reading rhythm",
           },
           {
-            type: 'p',
-            text: "A 16 px base and an indicative 1.25 ratio provide a useful progression, but the final values are a system choice, not mechanical rounding of every step. Use exactly 8 tokens here: 12 · 14 · 16 · 20 · 24 · 32 · 40 · 64 px. A role can use two tokens at different viewports; a fluid size between documented bounds is also possible. Document exceptions instead of silently adding a ninth size.",
+            type: "explanation",
+            paragraphs: [
+              "The scale used here contains eight sizes: `12`, `14`, `16`, `20`, `24`, `32`, `40` and `64 px`. A 16 px base and an indicative ratio of 1.25 can guide an initial choice, but these values do not come from repeatedly rounding one formula. Their value lies in being named and reused. A heading component can range from 40 to 64 px as space permits; a caption keeps its role even when its content changes length. Set line height and reading width with the chosen family. A 16 px paragraph may need more line spacing when it contains technical terms and links. Try the values on a filled page, then examine wrapping and the gaps between sections. Any exception added to the system should address an identified need and be documented in the relevant component, so it can be reconsidered when the surrounding layout changes.",
+            ],
+            visual: {
+              kind: "spacing",
+              title: "A deliberate scale",
+              caption: "Roles use named sizes, not eight different fonts.",
+              labels: ["Body · 16 px", "Subheading · 24 px", "Heading · 40–64 px"],
+            },
           },
           {
-            type: 'p',
-            text: "Tune line-height to the chosen size and family: start around `1.55–1.65` for 16 px body text across `60–75 characters` (`max-width: 68ch`) and `1.05–1.15` for a 64 px heading, testing `-0.02em` to `-0.03em` tracking. These are starting values, not perceptual constants. Use `font-variant-numeric: tabular-nums` to align prices, counters, dates and numeric columns.",
+            type: "explanation",
+            paragraphs: [
+              "Number alignment requires checking the font as well as the stylesheet. `font-variant-numeric: tabular-nums` selects equal-width digits when the family provides that OpenType feature. Domine lacks it in the files used here, so the property alone leaves amounts shifting according to the digits displayed. The site's `TabularText` component places each digit in a `0.7em` cell while retaining Domine glyphs and the copied string. Compare `1,111.00` and `8,888.00` in the same column to inspect the result. Decimal separators, negative signs and currency symbols also need a consistent convention. Right-aligning a numeric column helps compare amounts, but the currency and period still need to be explained. Finally, review zoomed text and copy the values into a spreadsheet to check that the visual adaptation has preserved the data. An alignment solution that changes what is copied would introduce a more consequential problem than the one it was intended to solve.",
+            ],
+            visual: {
+              kind: "type",
+              title: "Check the digits",
+              caption: "Equal-width cells align Domine’s proportional digits.",
+              labels: ["Amounts", "1,111.00", "8,888.00", "Equal width per digit"],
+            },
           },
           {
-            type: 'table',
-            caption: "6 semantic roles mapped to 8 tokens: the sizes below are this guide’s documented choices.",
-            headers: ['Semantic Role', 'CSS Size', 'Line-Height & Tracking', 'Strict Usage & Guardrails'],
+            type: "table",
+            caption: "6 semantic roles mapped to 8 tokens: the sizes below are this article’s documented choices.",
+            headers: ["Semantic role", "CSS size", "Line height and tracking", "Selected use"],
             rows: [
-              ["Display / H1", "40 or 64 px", '1.05–1.10 · -0.03em', "One H1 per page; fluid sizing possible between these bounds"],
-              ["H2", "32 px", '1.15–1.22 · -0.02em', "Major sections"],
-              ["H3", "20 or 24 px", '1.30 · -0.015em', "Subsections and card headings"],
-              ['Body', "16 px", '1.55–1.65 · normal', "Running prose; test reading measure"],
-              ["Small", "14 px", '1.45 · normal', "Labels, help and table cells"],
-              ["Micro", '12 px (floor)', '1.40 · +0.04em', "Short badges and timestamps"],
+              [
+                "Display / H1",
+                "40 or 64 px",
+                "1.05–1.10 · -0.03em",
+                "One H1 per page; fluid sizing possible between these bounds",
+              ],
+              ["H2", "32 px", "1.15–1.22 · -0.02em", "Major sections"],
+              ["H3", "20 or 24 px", "1.30 · -0.015em", "Subsections and card headings"],
+              ["Body", "16 px", "1.55–1.65 · normal", "Running prose; test reading measure"],
+              ["Small", "14 px", "1.45 · normal", "Labels, help and table cells"],
+              ["Micro", "12 px (floor)", "1.40 · +0.04em", "Short badges and timestamps"],
             ],
           },
         ],
       },
-
       {
-        id: 'colour-60-30-10-8pt-grid',
-        num: '03',
-        tocLabel: '60/30/10 Colour, 8-pt Tiers & Mobile-First',
-        heading: 'Semantic Colour (60 / 30 / 10), 3-Tier 8-Point Spacing & Mobile-First Layout',
+        id: "colour-60-30-10-8pt-grid",
+        num: "03",
+        tocLabel: "Colour and spacing",
+        heading: "Give colours and spacing a purpose",
         blocks: [
           {
-            type: 'p',
-            text: "Give colours functional roles first: surfaces, text, action and statuses. The manual’s 60 / 30 / 10 rule is a composition guideline (Section 22), not a pixel-area requirement or evidence of effectiveness: keep surfaces quiet, structure legible and competing action accents limited. Then test colour pairs and status recognition, including without colour.",
+            type: "explanation",
+            paragraphs: [
+              "A palette should name the use of colours before assigning values. The page background, card surface, secondary text and primary button have different functions even when two share a hue. The 60/30/10 reference can help discuss the space occupied by large surfaces and an accent; it does not define a pixel-by-pixel quota or establish usability. To review the system, list the pairs actually displayed: text on a card, help below a field, button text and an error on its surface. Measure contrast after transparency and overlays are applied, since a colour readable on the page background can fail on a lighter card. The roles also need values in both themes and in hover or focus states. Keeping this list makes a palette change reviewable component by component, including components that would otherwise be easy to miss because they appear only after an error.",
+            ],
+            visual: {
+              kind: "colour",
+              title: "Assign colour roles",
+              caption: "A palette starts with the purpose of each colour.",
+              labels: ["Surface", "Text", "Action", "Confirmation"],
+            },
           },
           {
-            type: 'h3',
-            text: 'Keep semantic channels separate and run the grayscale filter test',
+            type: "h3",
+            text: "Distinguish status from commands without colour alone",
           },
           {
-            type: 'p',
-            text: 'Never cross-wire semantic channels: if your clickable primary buttons are emerald green, users cannot tell an interactive CTA from a passive "Paid ✓" status badge. Keep action (e.g. vermilion or indigo), success (teal + `✓` icon), error/destructive (deep red + `!` icon), info (blue distinct from underlined text links), and disabled states (solid muted neutral — never `opacity: 0.4`, which wrecks contrast over tinted backgrounds) cleanly separated. Toggle your OS grayscale filter for ten seconds: if two statuses merge into the same gray pill, add an icon or explicit word.',
+            type: "explanation",
+            paragraphs: [
+              "A status treatment needs to communicate its meaning and remain distinguishable from a command. A green Paid badge and a green button of the same shape can make it unclear which is interactive. Wording, shape and icons provide other cues: a failed payment can show an alert symbol and explanation while the recovery action remains an identified button. Status must not depend solely on red and green. A grayscale review can expose some ambiguities, but also examine accessible names and messages sent to assistive technologies. Measure contrast on the surface used by the component, including a tinted background. Disabled states require a separate decision about whether a control should remain present and how its unavailability is explained. Applying opacity without reviewing the result can make information needed for the next action difficult to read, especially in help text placed alongside the unavailable control.",
+            ],
+            visual: {
+              kind: "feedback",
+              title: "Meaning beyond colour",
+              caption: "Icon and text make each status recognisable.",
+              labels: ["Payment declined", "Use another card", "Payment confirmed"],
+            },
           },
           {
-            type: 'h3',
-            text: 'The three 8-point spacing scales you must never mix (Section 23)',
+            type: "h3",
+            text: "Three levels of spacing",
           },
           {
-            type: 'p',
-            text: 'Spacing is the least taught and most visible craft in UI. Random `7px`, `13px`, `19px`, and `27px` gaps make an app look messy even with great fonts. Yet even teams using `4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 px` fail when they confuse the three tiers:',
+            type: "explanation",
+            paragraphs: [
+              "Spacing describes relationships between elements. A card heading should remain close to the content it introduces, while a larger gap may separate the card from page-level actions. A scale such as `4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 px` provides shared values, but does not choose those relationships for you. Distinguish internal component gaps, gutters between groups and margins between major sections. On a customer record, keep the address near the customer's name and allow more space before the button group. Then try removing a border: grouping should remain understandable through distance and headings. Optical adjustments may require a half-step; explain them within the component rather than creating isolated values that nobody knows how to reuse. Repeat the review with wrapped headings and missing optional data, since both can change the apparent relationship between neighbouring groups.",
+            ],
+            visual: {
+              kind: "spacing",
+              title: "Three distances, three relationships",
+              caption: "Related elements stay closer together.",
+              labels: ["8 px · icon and text", "24 px · card padding", "64 px · sections"],
+            },
           },
           {
-            type: 'list',
-            heading: 'The 3 Non-Interchangeable Spacing Tiers (Section 23)',
+            type: "list",
+            heading: "Spacing examples by relationship",
             items: [
               {
-                bold: 'Internal tier (4 · 8 · 12 px)',
-                text: 'Inside an atomic component: icon-to-label gap inside a button (8 px), `<label>` to `<input>` gap (6–8 px), badge padding.',
+                bold: "Internal: 4, 8 or 12 px",
+                text: "The gap between a button icon and text, or a label and its field. Select a shared value for components serving the same function.",
               },
               {
-                bold: 'Structural tier (16 · 24 · 32 px)',
-                text: 'Uniform card padding (16 px mobile, 24 px desktop) and gutters between sibling cards or form fieldsets.',
+                bold: "Structure: 16, 24 or 32 px",
+                text: "Card padding or gutters between field groups. A card might use 16 px on mobile and 24 px as available width increases.",
               },
               {
-                bold: 'Macro tier (48 · 64 · 96 px)',
-                text: "Clean separation between major page sections — often making redundant `<hr>` dividers unnecessary.",
+                bold: "Sections: 48, 64 or 96 px",
+                text: "Distance between independent groups on a page. Review actual headings and paragraphs before removing a divider.",
               },
             ],
           },
           {
-            type: 'figure',
-            src: '/images/articles/en/ui-spacing.webp',
-            alt: '8-point spacing scale diagram from the UX/UI Playbook English Edition showing 4, 8, 12, 16, 24, 32, 48, 64 px steps and asymmetric grouping',
-            caption:
-              'Asymmetric proximity: a heading must sit noticeably closer to the paragraph it introduces (8–12 px) than to the preceding paragraph (32 px).',
-            sourceRef: 'UX/UI Playbook EN · Part 03, Section 23 (p. 45)',
-            width: 1080,
-            height: 1527,
+            type: "diagram",
+            visual: {
+              kind: "spacing",
+              title: "Spacing that shows relationships",
+              caption: "Keep a heading close to the content it introduces; separate independent groups more clearly. Illustrated distances are not drawn to scale.",
+              labels: ["Internal · 4 / 8 / 12 px", "Structure · 16 / 24 / 32 px", "Sections · 48 / 64 / 96 px"],
+            },
           },
           {
-            type: 'h3',
-            text: 'Responsive architecture: design at 375 px first and stress-test at 320 px',
+            type: "h3",
+            text: "Check the layout at 375 and 320 px",
           },
           {
-            type: 'p',
-            text: 'Responsive design is not "shrinking a 1440 px desktop layout until it barely fits on a phone" (Section 24). Start at `375 px`, single column, zero hover dependencies: you are forced to rank content by real priority. Sidebars become 4–5 item bottom tab bars, and multi-column admin tables never shrink into 9 px type — each row stacks into a clean summary card (identity on the left, amount/status on the right). Before shipping, narrow your browser to `320 px`: that is where side-by-side buttons and German/French labels break.',
+            type: "explanation",
+            paragraphs: [
+              "Responsive design reorganises content around the available space and the tasks that must remain possible. Starting with one column at `375 px` forces decisions about reading order and access without hover. Reviewing at `320 px` then exposes wrapping problems in buttons, dates and field groups. A sidebar can become a menu if the destinations remain understandable. A table can scroll within a named, keyboard-accessible region; converting it to cards is appropriate only when the comparisons between rows remain possible. Also test zoom, translated labels and the mobile keyboard. The active field, its error and the next action need to remain reachable without forced lateral movement. Choose breakpoints when the content needs them, then inspect intermediate widths. A layout can work at both ends and fail between them, particularly where a long label leaves a narrow column beside a fixed-width control.",
+            ],
+            visual: {
+              kind: "responsive",
+              title: "Adapt columns to the available space",
+              caption: "Reading priority stays the same as columns change.",
+              labels: ["Wide", "Narrow"],
+            },
           },
         ],
       },
-
       {
-        id: 'css-tokens-true-dark-mode',
-        num: '04',
-        tocLabel: "CSS Tokens & OLED Dark Mode",
-        heading: "CSS Tokens and OLED Dark Mode: Separate Roles Instead of Inverting Colours",
+        id: "css-tokens-true-dark-mode",
+        num: "04",
+        tocLabel: "Tokens and themes",
+        heading: "Create tokens for light and dark themes",
         blocks: [
           {
-            type: 'p',
-            text: "Tokens make decisions easier to reuse across projects (Section 25), without guaranteeing a lifespan or profit margin. Separate primitive values (`--blue-500`) from semantic roles (`--color-surface`, `--color-text`, `--color-accent`, `--space-6`). Design Tokens 2025.10 is a final Design Tokens Community Group report, not a W3C Recommendation; the CSS below illustrates roles, not a DTCG JSON file. A theme change still needs component, image and state checks.",
+            type: "explanation",
+            paragraphs: [
+              "Tokens give a reusable name to a presentation decision. A primitive such as `--orange-600` describes a hue; a role such as `--color-accent` identifies its use in the interface. Components should consume the role so a theme can change its value without rewriting every button. Design Tokens 2025.10 is a final report of the Design Tokens Community Group, distinct from a W3C Recommendation; the CSS example below illustrates the organisation and is not a DTCG JSON file. Begin with a reference card containing a heading, help, a field and a button. Review its states in light and dark themes before extending the method to other components. Examine surfaces, illustrations and focus indicators alongside text. Inverting colours does not automatically preserve their meaning or contrast. Reading comfort also needs observation with people and the option to choose another theme, particularly for pages intended for sustained reading. A token change also needs a review of its consumers. Adjusting --color-muted to fix form help can affect timestamps, tables and chart captions. Find the consuming components and keep a reference page bringing those uses together. Naming should also support retiring a value that is no longer needed: if every screen retains its own alias after a correction, a palette can remain technically centralised while becoming hard to understand. Code review should examine added names and their references alongside the final screenshot.",
+            ],
+            visual: {
+              kind: "tokens",
+              title: "A value, a role, a use",
+              caption: "The component uses the role; the theme changes its value.",
+              labels: ["#c2320a", "--color-accent", "Primary button"],
+            },
           },
           {
-            type: 'h3',
+            type: "h3",
             text: "Four dark-mode settings to test with your readers",
           },
           {
-            type: 'doDont',
-            doTitle: '✓ Token-Engineered Dark Mode',
-            dontTitle: '✕ Naive Colour Inversion',
+            type: "doDont",
+            doTitle: "Choices to try in the tokens",
+            dontTitle: "Cases to inspect in the rendering",
             doItems: [
-              "Keep an OLED #000000 base and distinguish cards and modals with progressively lighter surfaces. Measure every level.",
-              "Try softened text (#ECEEF4, for example), then gather reading feedback. No colour guarantees glare-free reading for everyone.",
-              'Desaturate and lift your primary accent by one tone so it does not optically vibrate against dark surfaces.',
-              'Re-verify secondary text contrast against your lightest elevated card surface, where ratios drop fastest.',
+              "Keep #000000 as the OLED base and assign separate surface values to cards and modals.",
+              "Try softened text, for example #ECEEF4, and gather feedback on a complete passage.",
+              "Choose each theme’s accent with its background and button-text colour in view.",
+              "Measure secondary text on every surface level, including layered cards.",
             ],
             dontItems: [
-              "Force pure-white-on-black text on every reader without a reading trial or an alternative light mode.",
-              'Relying on black `box-shadow` on dark cards with no subtle `1px solid rgba(255,255,255,0.10)` hairline.',
-              'Reusing the exact saturated light-mode brand red or blue, which often fails 3:1 contrast on `#121212`.',
-              'Applying CSS `filter: invert(1)`, corrupting photos, user avatars, and semantic status colours.',
+              "Text that passes contrast but is uncomfortable for some readers: provide a theme choice.",
+              "A black shadow invisible on a dark card: examine the need for a border or another surface.",
+              "An accent copied from the light theme without measuring its new contrast pairs.",
+              "Global CSS inversion that also changes photos, logos and status colours.",
             ],
           },
           {
-            type: 'figure',
-            src: '/images/articles/en/ui-sbs-dark.webp',
-            alt: 'Side-by-side Dark Mode prototype comparison from the UX/UI Playbook English Edition contrasting naive inversion with semantic token elevation',
-            caption:
-              "Side-by-side prototype (Section 61): inverted colours on the left, semantic surfaces and accents on the right. Reading comfort also requires real use.",
-            sourceRef: 'UX/UI Playbook EN · Part 07, Section 61 (p. 102)',
-            width: 1080,
-            height: 755,
+            type: "diagram",
+            visual: {
+              kind: "themes",
+              title: "Two themes, the same roles",
+              caption: "Background, card, text and action change values, not functions. Measure contrast and try reading in both themes.",
+              labels: ["Light", "OLED"],
+            },
           },
           {
-            type: 'copyable',
-            label: 'tokens.css — Production Foundation (Light + True Dark Mode + Type + 8-pt + Motion)',
-            langTag: 'css',
+            type: "copyable",
+            label: "tokens.css — colour, typography, spacing and themes",
+            langTag: "css",
             code: `/* UX/UI Playbook 2026 — tokens.css (starting foundation for a web or SaaS product) */
 :root {
   /* 1. Light Mode Surfaces & Ink (measure pairs on the surfaces you use) */
@@ -899,7 +1089,7 @@ certification nor legal advice."`,
   --color-line:           #DFDBD0; /* decorative */
   --color-control-line:   #737987; /* meaningful controls */
 
-  /* 2. Single Action Accent & Distinct Semantic Channels */
+  /* 2. Action accent and status colours */
   --color-accent:         #C2320A;
   --color-accent-hover:   #A62806;
   --color-on-accent:      #FFFFFF;
@@ -915,13 +1105,13 @@ certification nor legal advice."`,
 
   /* 4. Radii, 6 Semantic Roles, 8 Size Tokens */
   --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-full: 999px;
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --font-display: "Sora", var(--font-sans);
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-body: "Domine", Georgia, serif;
+  --font-display: var(--font-body);
+  --font-mono: var(--font-body);
   --text-xs: 12px;  --text-sm: 14px;  --text-base: 16px; --text-lg: 20px;
   --text-xl: 24px;  --text-2xl: 32px; --text-3xl: 40px;  --text-4xl: 64px;
 
-  /* 5. Motion Tokens (Section 57) */
+  /* 5. Motion Tokens */
   --dur-fast: 120ms;
   --dur-base: 250ms;
   --dur-slow: 400ms;
@@ -949,7 +1139,7 @@ certification nor legal advice."`,
   --color-info:           #6EA0FF;
 }
 
-/* Mandatory user veto on interface motion */
+/* System preference for reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -958,592 +1148,713 @@ certification nor legal advice."`,
     scroll-behavior: auto !important;
   }
 }`,
-            note: 'Drop this into your root stylesheet and forbid raw hex values inside feature components.',
+            note: "Load Domine from your local font files, then adapt these tokens. Measure each colour pair on the surfaces actually used.",
           },
           {
-            "type": "inlineCta",
-            "title": "Keep the tokens and handoff in your repository.",
-            "text": "The Playbook archive includes tokens.css, tokens.json and editable templates, with 13 before/after prototypes and 11 platform spreads in the manual.",
-            "buttonLabel": "Get the EN files · $29"
+            type: "inlineCta",
+            title: "Token files and templates in the archive",
+            text: "The Playbook archive includes tokens.css, tokens.json and editable templates, with 13 before/after prototypes and 11 platform spreads in the manual.",
+            buttonLabel: "Get the EN files · $29",
           },
         ],
       },
-
       {
-        id: 'microcopy-motion-rtl',
-        num: '05',
-        tocLabel: 'Microcopy, Motion & Logical CSS (RTL)',
-        heading: 'Microcopy, Purposeful Motion & Logical RTL CSS: Three Details That Separate Seniors from Juniors',
+        id: "microcopy-motion-rtl",
+        num: "05",
+        tocLabel: "Words, motion and RTL",
+        heading: "Write messages and prepare motion and translation",
         blocks: [
           {
-            type: 'p',
-            text: 'Half of UI craft never happens in a vector tool: it is written in words and felt in transitions. A vague button forces an explanatory paragraph; sluggish easing makes a fast backend feel laggy; hardcoded `margin-left` breaks your layout the day a customer needs Arabic, Hebrew, or German.',
+            type: "explanation",
+            paragraphs: [
+              "Components contain language and behaviour decisions that a static mockup only partly reveals. A send button needs to identify the expected result, an error needs to explain whether input was preserved and a modal needs a focus destination when it opens. Translation and motion affect these decisions too. A short English label may wrap onto two lines in French; an animated close can unnecessarily delay returning to a form if the implementation waits for a transition to finish. Prepare these variants within components reused across screens. A reviewer can then try long wording, reduced animation and another reading direction before these constraints become late changes to the project. The three topics below need distinct checks, because correcting layout does not establish that a message is useful or keyboard interaction works. Keep the behaviour described with the component so the same issue does not have to be rediscovered on every page.",
+            ],
+            visual: {
+              kind: "feedback",
+              title: "Words are part of the UI",
+              caption: "Explain the situation and offer a way forward.",
+              labels: ["Sending interrupted", "Your text is saved", "Try sending again"],
+            },
           },
           {
-            type: 'h3',
-            text: '1. Microcopy: design that gets written (Section 27)',
+            type: "h3",
+            text: "1. Microcopy: name the outcome",
           },
           {
-            type: 'p',
-            text: 'Run the deletion test on every helper sentence: hide it, and see if the screen still makes complete sense. If yes, delete the helper permanently; if no, rewrite the fuzzy heading or button it was propping up. Follow four rules: 1) start every button with an explicit verb ("Create workspace", never "Submission" or "Continue"), 2) put the human first ("Your payment didn’t go through", not "Transaction failure 502"), 3) zero jokes in error states when money or user work is at stake, and 4) translate technical jargon into user outcomes.',
+            type: "explanation",
+            paragraphs: [
+              "Microcopy needs to provide enough information to choose an action and understand its consequences. Save changes explains the button's operation; Confirm may work only when the object being confirmed is obvious from the context. Help text is useful when it supplies a format, delay or consequence that will not fit in the label. It adds little when it merely repeats an instruction to click. In a form, keep the label visible during entry and put an error explanation near the affected field. This email is already in use needs an appropriate route forward, such as signing in or choosing another address. The wording must also explain what happened to the data: knowing that an unsent message has been preserved changes the next decision. The table's examples support discussion of these behaviours; each proposed label must correspond to actions and information actually available in the product.",
+            ],
+            visual: {
+              kind: "compare",
+              title: "Name the outcome",
+              caption: "The label explains what changes after the click.",
+              labels: ["Submit", "Save changes"],
+            },
           },
           {
-            type: 'table',
-            caption: 'Rewriting Weak Labels and Engineering Jargon (Section 27 · p. 51)',
-            headers: ['UI Context', 'Weak / Server-Centric Copy', 'Clear User-Centric Rewrite'],
+            type: "table",
+            caption: "Example labels to adapt to the available operations",
+            headers: ["Context", "Text needing clarification", "Example wording"],
             rows: [
-              ['Primary CTA', 'Submit / OK / Next', 'Create my account · Save changes'],
-              ['Destructive action', 'Delete', 'Permanently delete project and its 42 files'],
-              ['Validation error', 'Error 422: entity conflict', 'That email is already registered. Sign in instead →'],
-              ['Long loading state', 'Please wait…', 'Fetching your 128 invoices… (~4 s)'],
-              ['Feature pitch', 'Bi-directional AES-256 sync', 'Your edits appear everywhere and stay private'],
+              ["Save button", "Confirm", "Save changes"],
+              ["Destructive confirmation", "Delete", "Delete this project and its 42 files — if that count is accurate"],
+              ["Existing address", "Error 422", "This email is already in use. Sign in or choose another address."],
+              ["Data loading", "Please wait…", "Loading invoices… Add a time estimate only if it is known."],
+              ["Synchronisation", "Bidirectional sync", "Edits sync across your devices. Explain actual delays and limits."],
             ],
           },
           {
-            type: 'h3',
-            text: '2. Motion: spatial explanation with an unconditional user veto (Section 57)',
+            type: "h3",
+            text: "2. Motion: explain a change",
           },
           {
-            type: 'p',
-            text: 'Motion is an explanation, not fireworks: it shows where a drawer came from and where a deleted row went. Stick to three duration bands: `50–200 ms` (`ease-out`) for button presses and hovers, `250–400 ms` for modals and drawers (`ease-out` entering, crisper `ease-in` exiting), and `450–600 ms` max for full route transitions. Animate `transform` and `opacity` exclusively (never `width`, `height`, or `top`), avoid `linear` curves outside progress bars, and always honour `@media (prefers-reduced-motion: reduce)`.',
+            type: "explanation",
+            paragraphs: [
+              "Motion can indicate where a panel came from or help someone follow a moved object, but its duration and usefulness need testing in the component concerned. Values such as `120 ms` for press feedback and `250 ms` for a panel are starting examples, without the status of universal thresholds. Prefer `transform` and `opacity` where they meet the need, to avoid unnecessary layout work. Opening and closing must continue to function when animation is reduced. A modal should receive focus, announce its title and return focus to the opener independently of an animation-end event. With `prefers-reduced-motion: reduce`, remove non-essential travel while retaining state changes and their messages. Review repeated actions too: an effect that seems acceptable once may slow work involving dozens of openings of the same panel. Include interruption during the transition so a rapid second action cannot leave a hidden control focused or an overlay stuck on screen.",
+            ],
+            visual: {
+              kind: "motion",
+              title: "Prepare for reduced movement",
+              caption: "Example timings; this diagram is deliberately static.",
+              labels: ["Press · 120 ms", "Panel · 250 ms", "Reduced · no movement"],
+            },
           },
           {
-            type: 'h3',
-            text: '3. Internationalisation & RTL: write logical CSS from day one (Section 58)',
+            type: "h3",
+            text: "3. Internationalisation: prepare reading direction",
           },
           {
-            type: 'p',
-            text: "Translating concise English labels into French or German can substantially expand them; supporting Arabic or Hebrew (`dir=\"rtl\"` on `<html>`) mirrors the horizontal flow. Replace physical directions (`margin-left`, `padding-right`, `left: 0`, `text-align: left`) with CSS logical properties (`margin-inline-start`, `padding-inline-end`, `inset-inline-start: 0`, `text-align: start`) from your very first commit. Know what mirrors (back/forward arrows, breadcrumbs, table column order) and what never mirrors (brand logos, clock faces, media play/pause transport icons, and digits inside numbers).",
+            type: "explanation",
+            paragraphs: [
+              "Internationalisation requires preparing for content length and reading direction. Logical properties such as `margin-inline-start`, `padding-inline-end` and `text-align: start` adapt spacing to direction without duplicating every style rule. They do not settle directional icons, mixed-script content or number formatting. A logo and a video-play symbol should not be mirrored simply because the page becomes RTL; examine a navigation arrow according to its meaning. Prepare examples with a long name, an email address, a date and an amount. Check wrapping, selection and copying for each item. Buttons need room to grow or wrap without concealing a neighbouring command. These tests provide more reliable information than a width allowance assumed to cover every language. A translated label may also change the apparent grouping, so include whole forms and navigation areas rather than inspecting words in isolation. Sometimes the constraint comes from data rather than translation. An order reference without spaces may need different wrapping from the paragraph beside it. Character order in an address or identifier matters for copying and verification. Keep the full content available and choose behaviour within the relevant component. Global truncation applied to hide overflow can conceal the very part distinguishing two records.",
+            ],
+            visual: {
+              kind: "direction",
+              title: "Think in start and end",
+              caption: "Logical properties follow the reading direction.",
+              labels: ["LTR · start on the left", "RTL · start on the right", "padding-inline-start"],
+            },
           },
         ],
       },
-
       {
-        id: 'one-page-dev-handoff',
-        num: '06',
-        tocLabel: '12 Core Components & 1-Page Handoff Spec',
-        heading: 'Delivering So It Actually Gets Built: The 12 Core Components & the One-Page Handoff Spec',
+        id: "one-page-dev-handoff",
+        num: "06",
+        tocLabel: "Components and handoff",
+        heading: "Prepare components and their handoff",
         blocks: [
           {
-            type: 'p',
-            text: "A design that falls apart during implementation is rarely the developer’s fault — it is the predictable result of a silent handoff (Section 28). Before inventing custom widgets, lock down the 12 foundational components reused across many products (Button × 6 states, Input × 5 states + label, Checkbox/Radio with full-label hit area, Switch, Select, Card, focus-trapped Modal with Escape, Toast/Banner, Tabs, Data Table + empty state, Status Badge, Skeleton loader). Pair every complex screen with a single-file Markdown handoff spec.",
+            type: "explanation",
+            paragraphs: [
+              "A handoff records the decisions implementation needs. For recurring components, document visible states, keyboard order and responses to missing or long content. A starting set can include a button, labelled field, checkbox, radio, switch, select, card, modal, alert, tabs, table and loading skeleton. Phrase important behaviour so it can be observed. Escape closes the modal and returns focus to its opener gives someone a scenario to test; accessible modal does not supply that scenario. The template below links a screen's structure to the tokens it uses and the incidents it must handle. Add links to components and review decisions, then identify questions that remain unresolved. The developer can request a decision rather than silently choosing behaviour missing from the mockup. Keep the handoff updated when an implementation constraint changes the agreed interaction, so the document and the delivered screen continue to describe the same operation.",
+            ],
+            visual: {
+              kind: "handoff",
+              title: "Hand over decisions",
+              caption: "Connect the component to the cases that need implementing.",
+              labels: ["Structure and order", "Tokens in use", "States and interactions", "Tests and edge cases"],
+            },
           },
           {
-            type: 'copyable',
-            label: 'Copy-Ready Developer Handoff Template (Section 28 & Appendix A3)',
-            langTag: 'markdown',
-            code: `# HANDOFF — Screen "Checkout / Step 2: Payment"
+            type: "copyable",
+            label: "Example handoff for a payment screen",
+            langTag: "markdown",
+            code: `# HANDOFF — Payment screen example
 
-## 1. Layout & Responsive Behaviour
-- Centered container max-width: 1200px, inline padding var(--space-8) desktop / var(--space-4) mobile
-- Desktop (≥ 1024px): 2 columns — Form 62% · Summary 38% (position: sticky; top: 24px)
-- Mobile (< 1024px): 1 column — Collapsible order summary at top + primary pay button unobstructed by keyboard
+## 1. Structure and responsive behaviour
+- Container: max-width 1200px; padding var(--space-8) desktop, var(--space-4) mobile.
+- From 1024px: minmax(0, 1.6fr) minmax(0, 1fr) columns, with a token-based gutter.
+- Below 1024px: one column; collapsible summary before the form.
+- Try the final button and active field with the mobile keyboard open.
 
-## 2. Consumed Tokens (zero raw hex values)
-- Primary CTA: var(--color-accent) · hover var(--color-accent-hover) · text var(--color-on-accent)
-- Idle border: 1px solid var(--color-control-line) · Keyboard focus: 2px solid var(--color-accent), offset 2px
-- Allowed spacing tokens: var(--space-2), var(--space-4), var(--space-6), var(--space-8) only
+## 2. Tokens used
+- Action: --color-accent; hover: --color-accent-hover; text: --color-on-accent.
+- Fields: --color-control-line; focus visible and unobscured in both themes.
+- Spacing: project scale; document any necessary exceptions.
 
-## 3. All 6 Required States
-1. Idle (dominant regional payment method pre-selected)
-2. Visible keyboard focus ring across all inputs and payment tiles
-3. Field validation error on blur (var(--color-danger) border + recovery copy linked via aria-describedby)
-4. Submitting (button locked against double-charge + label "Authorising payment…")
-5. Card declined (inline banner above CTA preserving all user inputs + "Try another card" focus)
-6. Success (redirect to /confirmation + optional 1-click account save)
+## 3. Payment states
+1. Idle: supported methods displayed; initial selection justified.
+2. Focus: logical order and access to every field and payment method.
+3. Input error: message linked to its field with aria-describedby; correction available.
+4. Sending: announced state; duplicate operations prevented in the UI and server.
+5. Decline: preserve permitted data; identify available recovery options.
+6. Success: persistent confirmation with an accessible amount and reference.
 
-## 4. Accessibility & Localization (blocking gates)
-- Strict Tab order: First name → Last name → Street → City → Postal code → Payment tile → "Pay [Amount]"
-- Auto-focus first invalid field on submit attempt
-- Order summary wrapped in <aside aria-labelledby="summary-heading">
-- Labels tolerate +35% i18n text expansion with zero clipping at 320px viewport width`,
-            note: 'Paste this into Linear/GitHub issues or handoff.md so engineers and coding agents never have to guess edge states.',
+## 4. Review scenarios
+- Use the keyboard: contact details → method → final action, according to required fields.
+- On invalid submission, announce errors and guide correction.
+- Name the summary with <aside aria-labelledby="summary-heading">.
+- Try translations and long labels at 320px, without an assumed expansion allowance.
+- Recover after network loss without resending a payment whose status is unknown.
+- Record executed commands, results and checks still needed.`,
+            note: "Add links to components, mockups and test results. Values in this template are example choices to adapt to the product.",
           },
         ],
       },
     ],
     faqs: [
       {
-        q: "How can I make OLED dark mode more comfortable to read?",
-        a: "Keep #000000 as the base if OLED is the goal, lift surfaces to show hierarchy and try softened ink instead of pure white. Check every contrast pair and test a real paragraph: comfort varies with the person, screen and lighting. Offer light mode instead of promising zero halation.",
+        q: "How should OLED dark-mode reading comfort be examined?",
+        a: "Keep #000000 if it is the product’s chosen base, distinguish surfaces and measure contrast pairs. Then have someone read a complete passage with links and form help under the expected conditions. Softened text can be tried without promising halo-free reading for everyone. Keep a light-mode choice available.",
       },
       {
-        q: 'Do input placeholders really need 4.5:1 WCAG contrast?',
-        a: 'Whenever placeholder text communicates useful formatting or context, WCAG 2.2 AA requires 4.5:1 — making pale gray placeholders one of the top failures on the web. Better yet, never rely on placeholders as labels because they vanish on the first keystroke; use a persistent <label> above and helper text below.',
+        q: "Can a placeholder replace a field label?",
+        a: "A placeholder disappears during entry and cannot replace a linked visible label. Necessary instructions should remain available, for example below the control and associated through aria-describedby. Useful text remains subject to the applicable contrast requirements; 4.5:1 is the body-text threshold. Check the actual background and field states.",
       },
       {
-        q: 'When should I use 4 px vs 8 px spacing steps?',
-        a: 'Treat 8 px (8, 16, 24, 32, 48, 64 px) as your structural rhythm for card padding, grid gutters, and section margins, and reserve half-steps (4 px, 12 px) strictly for tight internal optical alignment like icon-to-text gaps and compact badges.',
+        q: "How can a 4 and 8 px spacing scale be used?",
+        a: "In this article’s example, 4, 8 and 12 px support internal gaps, while 16, 24 and 32 px organise cards and groups. This supplies shared vocabulary and can be adapted. Relationships matter as much as values: a heading needs to remain associated with its content when that content changes length.",
       },
       {
-        q: 'Which CSS rules break right-to-left (RTL) localization?',
-        a: 'Hardcoded physical properties (margin-left, padding-right, left, right, border-left, text-align: left). Replace them with CSS logical equivalents (margin-inline-start, padding-inline-end, inset-inline-start, border-inline-start, text-align: start) so LTR and RTL layouts flip automatically.',
+        q: "Are logical properties enough for an RTL interface?",
+        a: "They adapt text-related directions through properties such as margin-inline-start and text-align: start. Directional icons, numbers and mixed-script data still need review. Try an email address, date and long names within complete components. A fixed allowance for extra width cannot guarantee readable translations.",
       },
     ],
-    ctaTitle: "Get the production tokens.css, tokens.json, 13 Before/After prototypes + 11 platform spreads & 12 A4 sheets.",
-    ctaText:
-      "Reuse a documented starting point on your next project: the 139-page English UX/UI Playbook includes light/dark tokens, handoff templates and the Python scanner. Then verify the colours and components in your actual rendered interface.",
+    ctaTitle: "Reusable tokens and templates",
+    ctaText: "The English edition of UX/UI Playbook includes the 139-page book, a 26-page printable kit and an archive of 21 working files.",
     ctaBullets: [
-      'Ready-to-drop tokens.css, W3C tokens.json & 4 Markdown client/handoff templates',
-      "13 before/after prototypes + 11 platform spreads: 24 spreads in total",
-      'Unlimited commercial license for your own SaaS and paid client work ($29 one-time)',
+      "English book with annotated screen examples",
+      "12 A4 worksheets for briefing, auditing and handoff",
+      "Tokens, templates, rules and a Python scanner in the archive",
     ],
     entityDefinition: "User interface design defines a product’s visual hierarchy and interactive components: typography, colour, spacing and states. A design system stores these decisions in reusable tokens and components.",
     references: [
       {
-        "title": "Web Content Accessibility Guidelines 2.2",
-        "url": "https://www.w3.org/TR/WCAG22/",
-        "publisher": "W3C",
-        "date": "2024-12-12",
-        "evidence": "established",
-        "note": "1.4.3: body text 4.5:1, large text 3:1. 1.4.11: meaningful controls and graphical information 3:1."
+        title: "Web Content Accessibility Guidelines 2.2",
+        url: "https://www.w3.org/TR/WCAG22/",
+        publisher: "W3C",
+        date: "2024-12-12",
+        note: "1.4.3: body text 4.5:1, large text 3:1. 1.4.11: meaningful controls and graphical information 3:1.",
       },
       {
-        "title": "Understanding SC 2.5.8: Target Size (Minimum)",
-        "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
-        "publisher": "W3C WAI",
-        "date": "WCAG 2.2",
-        "evidence": "established",
-        "note": "The web AA minimum is 24 × 24 CSS px with exceptions; the Playbook recommends 44 × 44 px here."
+        title: "Understanding SC 2.5.8: Target Size (Minimum)",
+        url: "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+        publisher: "W3C WAI",
+        date: "WCAG 2.2",
+        note: "The web AA minimum is 24 × 24 CSS px with exceptions; the Playbook recommends 44 × 44 px here.",
       },
       {
-        "title": "Design Tokens Format Module 2025.10",
-        "url": "https://www.designtokens.org/tr/2025.10/format/",
-        "publisher": "Design Tokens Community Group",
-        "date": "2025-10-28",
-        "evidence": "established",
-        "note": "Stable final community report for exchanging tokens; do not describe it as a W3C Standard."
+        title: "Design Tokens Format Module 2025.10",
+        url: "https://www.designtokens.org/tr/2025.10/format/",
+        publisher: "Design Tokens Community Group",
+        date: "2025-10-28",
+        note: "Stable final community report for exchanging tokens; do not describe it as a W3C Standard.",
       },
       {
-        "title": "The WebAIM Million — 2026 report",
-        "url": "https://webaim.org/projects/million/",
-        "publisher": "WebAIM",
-        "date": "2026-02",
-        "evidence": "established",
-        "note": "Low contrast is among the most common automatically detected errors in this sample."
-      }
+        title: "The WebAIM Million — 2026 report",
+        url: "https://webaim.org/projects/million/",
+        publisher: "WebAIM",
+        date: "2026-02",
+        note: "Low contrast is among the most common automatically detected errors in this sample.",
+      },
     ],
   },
-
-  /* ============================================================================
-   * COURSE 3 (EN) — PRODUCT DESIGN, REVENUE & AI AGENTS
-   * ========================================================================== */
   {
-    slug: 'product-design-ai-agents',
-    category: 'Product Design',
-    icon: 'settings',
-    readTime: '20 min read',
-    publishedAt: '2026-11-18',
-    updatedAt: '2026-11-18',
-    ogImage: '/og-article-product-en.jpg',
-    metaTitle:
-      "Product Design and AI Agents | UX/UI Playbook",
-    metaDescription:
-      "Scope your product before coding: a 5-file AI pipeline, AGENTS.md, 3 copy-ready prompts, inspectable agent UX and honest 3-status verification reports.",
+    slug: "product-design-ai-agents",
+    category: "Product Design",
+    icon: "settings",
+    readTime: "About 20 min read",
+    publishedAt: "2026-11-18",
+    updatedAt: "2026-11-18",
+    ogImage: "/og-article-product-en.jpg",
+    metaTitle: "Product Design and AI Agents | UX/UI Playbook",
+    metaDescription: "Scope your product before coding: a 5-file AI pipeline, AGENTS.md, 3 prompts, agent permissions and reports separating check method, severity and outcome.",
     keywords: [
-      'Product Design for developers',
-      'AGENTS.md Claude Code Cursor UI',
-      'deterministic AI UI pipeline',
-      'agentic interface UX patterns',
-      'SaaS dashboard pricing page design',
-      'freelance design pricing formula',
-      'one page client proposal',
+      "Product Design for developers",
+      "AGENTS.md Claude Code Cursor UI",
+      "deterministic AI UI pipeline",
+      "agentic interface UX patterns",
+      "SaaS dashboard pricing page design",
+      "freelance design pricing formula",
+      "one page client proposal",
     ],
-    title:
-      "Product Design: Scope Your Product and Guide AI Agents",
-    subtitle:
-      "Write decisions before delegating code: a brief, grayscale wireframes, interface rules and an evidence report. Then protect delivery scope and your team’s time.",
-    aeoSummaryTitle: 'Executive Takeaway — Governing Scope, Coding Agents & Margin',
-    aeoSummary:
-      "An AI-assisted Product Design workflow stores decisions in 5 files: brief.md → screens.md → wireframe.html → review.md → handoff.md. AGENTS.md and tokens.css govern shared constraints. The 3 prompts separate specification, structure and checking. Short research produces hypotheses to verify, not market validation. Reports distinguish Automated / To verify / Not applicable statuses; Blocking / Major severity belongs in a separate column. Approve structure before styling and adjust scope rather than promising earnings or compliance from a scan alone.",
+    title: "Product Design: Scope Your Product and Guide AI Agents",
+    subtitle: "Define scope, record decisions and prepare reviews of generated code. A five-file pipeline, three prompts, and examples of permissions and project proposals.",
+    aeoSummaryTitle: "At a glance",
+    aeoSummary: "This workflow records decisions in five files: brief.md, screens.md, wireframe.html, review.md and handoff.md. AGENTS.md and tokens.css provide shared constraints. Three prompts separate specification, construction and review; the team remains responsible for unresolved scope questions. Reports distinguish check method, severity and outcome, using Automated / To verify / Not applicable statuses. Research, permission and proposal examples need adapting to risk, the people concerned and available data.",
     keyStats: [
       {
         value: "3 statuses",
         label: "Automated / To verify / Not applicable; severity and outcome stay separate",
-        source: "UX/UI Playbook · Section 84 · Reporting protocol",
-        evidence: "probable",
+        source: "Example check report",
       },
       {
-        value: '2 hours',
+        value: "2 hours",
         label: "Example research timebox: 45-minute brief then 75-minute field check, adapted to risk",
-        source: "UX/UI Playbook · Section 29 · Method guideline",
-        evidence: "probable",
+        source: "Example short research plan",
       },
       {
         value: "6 patterns",
-        label: "Playbook synthesis: clarification, plan, scope, permissions, log and summary",
-        source: "Microsoft HAX + Google PAIR · UX/UI Playbook §54",
-        evidence: "probable",
+        label: "Clarification, plan, scope, permissions, log and summary",
+        source: "Microsoft HAX · Google PAIR",
         url: "https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/",
       },
     ],
     sections: [
       {
-        id: 'who-decides-what-sequence',
-        num: '01',
-        tocLabel: 'UX, UI, Product: the order that prevents rewrites',
-        heading: 'UX, UI, Product: Who Decides What (and Why Opening Figma or a Prompt First Ruins Sprints)',
+        id: "who-decides-what-sequence",
+        num: "01",
+        tocLabel: "Product, UX and UI",
+        heading: "Separate product, UX and UI decisions",
         blocks: [
           {
-            type: 'p',
-            text: 'Solo builders and technical freelancers wear all three hats at once. The danger is never wearing all three — it is answering a UI question before the Product question has been settled (Section 02). Product decides "Should we build this, for whom, in what order, and at what price?". UX decides "What is the shortest path, and how does failure recover?". UI decides "How do we make this screen legible, coherent, and accessible?".',
+            type: "explanation",
+            paragraphs: [
+              "A feature request contains several kinds of decisions, even when one person handles the whole project. For an invoice export, product work identifies the people concerned, the exported data and the reason for building the feature now. UX work describes period selection, information to verify and recovery after failure. UI work makes those operations readable and defines the states of the controls. These decisions can inform one another: trying a journey may reveal an access right missing from the initial scope. Distinguishing them helps establish which question is being discussed and who can resolve it. A request for another button should not be treated only as a graphic adjustment if it introduces an operation, permission or support responsibility. The brief needs to retain those changes and their approval so that later reviews can distinguish the agreed feature from an implementation assumption.",
+            ],
+            visual: {
+              kind: "roles",
+              title: "Three different questions",
+              caption: "Scope, journey and presentation decisions inform one another during review.",
+              labels: ["Product · what and why?", "UX · which journey?", "UI · which presentation?"],
+            },
           },
           {
-            type: 'p',
-            text: 'Watch the classic sequence trap unfold: a client or co-founder asks for "a quick mockup by tomorrow so we can visualise it". You fire up Figma or v0 / Claude Code and produce a polished, colourful screen in two hours. They show their partner, who questions the target audience, adds team roles, and changes the billing model. Three weeks later you are on unpaid revision #7 because early visual polish creates emotional attachment and derails structural thinking.',
+            type: "explanation",
+            paragraphs: [
+              "An initial mockup provides material for discussion, but its detail should match the decisions already made. If the audience, roles and billing model are uncertain, a highly polished page can redirect attention to details that will later be reworked. Start with a diagram or wireframe showing the proposed content and commands. Ask the team to identify accepted decisions and open questions: who can invite a colleague, when a card is charged or how an archived project is found. Record agreement on those behaviours in a document the team can access. When a request follows that agreement, its effect on screens and the schedule can be examined. The structure can still change; the change becomes an explicit decision with an estimate and date instead of being absorbed as an unexplained graphic correction. This also makes it easier to identify which earlier approvals need to be revisited.",
+            ],
+            visual: {
+              kind: "scope",
+              title: "Agree before polishing",
+              caption: "Agree on a specific decision, not an overall impression.",
+              labels: ["Brief agreed", "Structure reviewed", "Style applied"],
+            },
           },
           {
-            type: 'quote',
-            tag: "The One-Line Clause That Limits Out-of-Scope Rewrites · Sections 02 & 37",
-            text: '"Structure signed off before style, in writing." Until functional scope (brief.md) and grayscale wireframes are approved, zero brand colours or visual polish enter the room.',
+            type: "quote",
+            tag: "Example approval milestone",
+            text: "Scope and journeys are reviewed before visual presentation. The written agreement records accepted decisions and open questions; a later request receives an estimate of its effect on deliverables and schedule.",
           },
         ],
       },
-
       {
-        id: 'two-hour-brief-saas-pricing',
-        num: '02',
-        tocLabel: '2-Hour Research, SaaS Dashboards & Pricing Pages',
-        heading: 'Scoping Right in 2 Hours & Designing the Two Screens Where SaaS Revenue Lives',
+        id: "two-hour-brief-saas-pricing",
+        num: "02",
+        tocLabel: "Research and SaaS screens",
+        heading: "Frame the need, dashboard and pricing",
         blocks: [
           {
-            type: 'p',
-            text: "A two-hour research timebox helps move beyond internal assumptions, without replacing research proportionate to high risks. The Playbook protocol (Section 29) proposes 45 minutes of briefing and 75 minutes of field checks; extend it if the right people or evidence are not available.",
+            type: "explanation",
+            paragraphs: [
+              "A short research session is useful when it addresses a limited question and the necessary people or records are available. The two-hour example here allocates forty-five minutes to framing and seventy-five to interviews or document review. Recruitment and access arrangements may take additional time outside that session. In the brief, identify the task, the relevant population and the decision the team wants to make. Interviews should concern an actual episode: how an invoice was last corrected, which documents were used and when another person became involved. Support tickets and comparable products add context, but cannot replace those accounts. Finish with a note separating observations, decisions and unanswered questions. Higher risk, incomplete access to users or conflicting findings justify extending the investigation. Keep that limitation visible in the recommendation so a short preparatory exercise is not later presented as market validation. The report can be organised by question rather than participant to support a decision, provided the original note remains traceable. If a ticket mentions data loss while an interview describes difficulty finding a document, do not merge them into one certain cause. The next step might be technical reproduction or a more focused session. This avoids commissioning a redesign for a defect whose mechanism has not yet been identified.",
+            ],
+            visual: {
+              kind: "research",
+              title: "A short research example",
+              caption: "Adapt the timebox to the risk and access to participants.",
+              labels: ["45 min · briefing", "45 min · interviews", "30 min · tickets and context"],
+            },
           },
           {
-            type: 'steps',
-            title: 'The 120-Minute Express Research Protocol (Section 29)',
+            type: "steps",
+            title: "Example allocation for a research session",
             steps: [
               {
-                bold: 'Minutes 0–45 — The red-flag brief',
-                text: 'Demand a numeric 30-day business metric ("look modern" is a red flag), a concrete user segment with two named examples ("everyone" is a red flag), one primary conversion verb, and a single final decision-maker.',
+                bold: "0–45 minutes: framing",
+                text: "Name the task, relevant population, available records and intended decision. Identify the decision owner and assumptions not yet supported by observations.",
               },
               {
-                bold: 'Minutes 45–90 — Three 15-minute past-behaviour interviews',
-                text: 'Never ask "Would you use feature X?" — people politely invent future habits. Ask one past-tense prompt: "Walk me through the last time you had to accomplish [task] — what did you open, and where did it get painful?"',
+                bold: "45–90 minutes: prepared interviews",
+                text: "With participants already recruited, three fifteen-minute conversations can document recent episodes. Ask about steps and difficulties, retaining notes without generalising to all users.",
               },
               {
-                bold: 'Minutes 90–120 — Three competitors + the last 5 support tickets',
-                text: 'Screenshot three direct competitors to spot market conventions (not to copy their gradients), then read the five latest customer support complaints — they usually hand you your priority roadmap verbatim.',
+                bold: "90–120 minutes: context and synthesis",
+                text: "Consult comparable products and available support tickets. Record agreements and contradictions, then decide which questions need further research.",
               },
             ],
           },
           {
-            type: 'h3',
-            text: 'Applying Product logic to SaaS Dashboards (Section 12) and Pricing Pages (Section 15)',
+            type: "h3",
+            text: "Dashboards and pricing pages",
           },
           {
-            type: 'p',
-            text: "Two B2B screens concentrate more product mistakes than all others combined. First, the SaaS Dashboard: its main pitfall is decorative density — cramming 14 counters, radial gauges, and pie charts onto the canvas just because whitespace felt empty. A dashboard exists to trigger decisions, not to prove your database has rows. Organise it in three strict bands: 1) at most 3 top KPIs, each displaying Value + Delta + Time Period (because \"$48.2k\" without \"▲ +12.4% vs Sept\" is a meaningless number), 2) one time-series chart (line or bar — retire pie charts past 3 slices), and 3) one actionable table where clicking a row opens the underlying object.",
+            type: "explanation",
+            paragraphs: [
+              "Dashboard content should follow the decisions its users make. A manager reviewing outstanding invoices needs the relevant amount, period and records they can open to act. In the illustrative example €48.2k · +12.4% versus September, the comparison gives context to the value; it needs a defined period and a consistent calculation base. A chart is useful when a trend answers a question, while an actionable list helps find the invoices explaining the value. Three indicators can be a starting point for an initial mockup, but the number depends on the work. Check units, active filters and the last update time. If a data source is missing, the dashboard must identify what is incomplete without presenting zero as a real measurement. Access to the underlying records lets someone examine and handle the displayed results. Review this route as part of the dashboard rather than leaving it out of the initial specification.",
+            ],
+            visual: {
+              kind: "dashboard",
+              title: "A number that supports a decision",
+              caption: "Illustrative data: value, change, period and a route to detail.",
+              labels: ["€48.2k", "+12.4% · vs September", "View invoices"],
+            },
           },
           {
-            type: 'p',
-            text: 'Second, the Pricing Page: visitors on `/pricing` rarely hunt for the cheapest number — they hunt for reassurance that they are picking the right tier. Cap options at three plans (Starter, Pro, Team), state the unit explicitly under the big number ("per seat / month"), highlight the recommended middle tier calmly (border + "Popular" badge + the sole solid CTA button on the row), list 3–5 outcome-oriented bullets in the exact same row order across tiers so eyes can scan horizontally, and use an honest `-20%` annual toggle instead of fake countdown timers.',
+            type: "explanation",
+            paragraphs: [
+              "A pricing page should let someone calculate the charge and choose a plan for a particular use. Put the unit beside the amount: per user, month, volume or operation. If a displayed price depends on annual payment, explain the total and charging frequency before commitment. When comparing Starter, Pro and Team, retain the same order of features and explain limits that change actual use, such as collaborator count or export access. Three columns are an example to adapt to the offers available. A highlighted plan needs a reason to choose it; a Popular badge requires supporting data. Test the page with a concrete scenario and ask what the relevant team would pay. Hesitation can expose missing units, conditions or distinctions. Include plan changes and cancellation in the specification as well, since an understandable purchase price leaves those later consequences unresolved.",
+            ],
+            visual: {
+              kind: "pricing",
+              title: "Make plans comparable",
+              caption: "Keep benefits in the same order and use a consistent billing unit.",
+              labels: ["Starter", "Pro", "Team", "Price per seat, per month"],
+            },
           },
         ],
       },
-
       {
-        id: 'five-file-agent-pipeline',
-        num: '03',
-        tocLabel: '5-File AI Pipeline, AGENTS.md & 3 Prompts',
-        heading: "Delegating UI to Claude Code or Cursor with a 5-File Pipeline",
+        id: "five-file-agent-pipeline",
+        num: "03",
+        tocLabel: "Files and prompts",
+        heading: "Guide an agent with files and review gates",
         blocks: [
           {
-            type: 'p',
-            text: "A prompt such as \"Build my SaaS dashboard and checkout\" leaves the agent to guess hierarchy, labels, permissions and error states. The result can compile while still being unsuitable for the task. Reduce ambiguity by documenting product decisions and checking the output; do not assume fast generation replaces review.",
+            type: "explanation",
+            paragraphs: [
+              "To delegate interface implementation, an agent needs to find the team's decisions and the questions still open. This pipeline distributes that information across five files: `brief.md` describes the need and scope, `screens.md` details journeys and states, `wireframe.html` makes the structure testable, `review.md` records defects and `handoff.md` prepares delivery. Shared rules in `AGENTS.md` and values in `tokens.css` apply across the stages without introducing new product decisions. For a payment screen, the inputs need to specify the amount, accepted methods, permissions and recovery after a decline. When information is missing, the expected output is a question to the team. Identify features added by assumption before visual review, because they may change scope and data handling. The reviewer should be able to trace an implemented control to its requirement and ask for an explanation when that link is absent.",
+            ],
+            visual: {
+              kind: "pipeline",
+              title: "Turn decisions into files",
+              caption: "The next pass starts from written decisions, not a memory of the chat.",
+              labels: ["brief.md", "screens.md", "wireframe.html"],
+            },
           },
           {
-            type: 'figure',
-            src: '/images/articles/en/prod-pipeline.webp',
-            alt: 'Deterministic 5-step AI UI pipeline from the UX/UI Playbook English Edition: brief.md, screens.md, wireframe.html, review, and handoff.md',
-            caption:
-              'Paper is for diverging (5 quick sketches in 10 minutes); the 5-file chain is for converging deterministically across coding-agent sessions.',
-            sourceRef: 'UX/UI Playbook EN · Part 06, Section 43 (p. 74)',
-            width: 1080,
-            height: 1527,
+            type: "diagram",
+            visual: {
+              kind: "pipeline",
+              title: "The five-file pipeline",
+              caption: "Each file records a reviewed decision. AGENTS.md and tokens.css provide constraints shared across the five stages.",
+              labels: [
+                "brief.md · goal",
+                "screens.md · journey",
+                "wireframe.html · structure",
+                "review.md · changes",
+                "handoff.md · delivery",
+              ],
+            },
           },
           {
-            type: 'p',
-            text: 'The core law of agentic UI engineering (Sections 43, 46 & 55) is simple: chat threads drift and vanish; repository files persist and govern. Whenever an agent makes a structural mistake, fix `AGENTS.md` or `tokens.css` before fixing the screen — otherwise you will pay for the exact same mistake on the very next prompt.',
+            type: "explanation",
+            paragraphs: [
+              "Corrections affecting several screens should reach the file or component that governs them. If an agent uses several colours for the same action, correct the role in the tokens, explain its use in the instructions and search existing output for other occurrences. A change made only in the latest screenshot leaves other screens and future runs without a shared rule. The context file should point to project documents, define permitted actions and specify expected checks. Its length depends on the useful decisions it contains; a line limit cannot guarantee that a model follows instructions. After the correction, add a test or an example of the expected result, then request that check's outcome in the next review. Versioned files make the change reviewable and show when a rule was introduced, provided the review also examines the code actually delivered. An instruction file alone cannot enforce the behaviour it describes. When a changed rule affects behaviour, record affected screens and tests to rerun in the review file. A new deletion-confirmation requirement, for example, needs to reach the component, keyboard order and recovery scenario. Existing branch changes should be preserved and examined before generation. This reduces corrections that unintentionally replace another decision already approved by the team.",
+            ],
+            visual: {
+              kind: "tokens",
+              title: "Fix the shared rule",
+              caption: "Put a recurring correction in the file that governs it.",
+              labels: ["Recurring issue", "AGENTS.md / tokens.css", "Run the check again"],
+            },
           },
           {
-            type: 'copyable',
-            label: 'AGENTS.md (~40 lines) — Root Context File for Claude Code, Cursor & Codex (Section 55)',
-            langTag: 'markdown',
-            code: `# AGENTS.md — Non-Negotiable Interface Engineering Rules
+            type: "copyable",
+            label: "Example AGENTS.md for an interface project",
+            langTag: "markdown",
+            code: `# AGENTS.md — Project interface instructions
 
-## Sources of Truth (never reinvent)
-- @tokens.css: semantic colours, 4/8pt spacing tiers, radii, locked type scale, motion tokens.
-- @screens.md: single user verb per screen, entry/exit, 5 states, edge cases, real copy.
-- Any style value missing from tokens.css must be flagged at the end — never hardcoded.
+## Documents to read
+- tokens.css: selected colours, spacing, radii, sizes and durations.
+- screens.md: task, entry, exit, states, edge cases and copy for each screen.
+- Flag a missing decision before adding a feature or shared value.
 
-## Automatic Failure Conditions
-- Zero "Lorem ipsum", zero invented testimonials, zero fabricated metrics.
-- Zero useful text < 12px; body prose ≥ 15px; line measure ≤ 70ch.
-- Zero verb-less button labels; maximum one accent-coloured primary button per view.
-- Zero happy-path-only screens: all 5 states (empty, loading, ideal, partial/overflow, error) are required.
-- Zero physical left/right CSS properties where logical properties (inline-start/end) apply.
+## Rules for this project
+- Use supplied content; identify examples and fabricate no testimonials.
+- Useful text ≥ 12px, body ≥ 15px; review complete passages for readability.
+- Labels describe actions; visual priority fits the task.
+- Prepare empty, loading, ideal, partial/overflow and error states; confirm success.
+- Use logical properties where spacing follows reading direction.
 
-## Accessibility Gates (blocking WCAG 2.2 AA)
-- Every <input>/<select>/<textarea> has a visible linked <label> (never placeholder-only).
-- Every icon button carries an explicit accessible name; mobile hit targets ≥ 44x44px.
-- Text contrast ≥ 4.5:1 and essential borders/controls ≥ 3:1 verified in both Light & Dark modes.
-- Full keyboard operability (Tab, Shift+Tab, Escape) + visible focus ring + prefers-reduced-motion.
+## Accessibility and checks
+- Visible labels linked to fields; accessible names for icon buttons.
+- Web target aim: 44 × 44 CSS px, a project choice above the AA minimum with exceptions.
+- Contrast: body text ≥ 4.5:1; meaningful non-text elements ≥ 3:1 on actual backgrounds.
+- Test keyboard access, focus, modal closing and reduced motion.
+- Record commands actually available here: [typecheck], [build], [tests].
 
-## Mandatory Output Format
-1. Complete implementation consuming @tokens.css exclusively.
-2. Three-line verification summary: Verified (with evidence) / Estimated (assumptions) / Not done.
-   For each rule: Automated / To verify / Not applicable status; severity and outcome separate.
-3. Numbered open product questions (never silently guessed).`,
-            note: 'Works directly as AGENTS.md, CLAUDE.md, or .cursor/rules in any frontend repository.',
+## Run report
+- List changed files, executed commands, results and open questions.
+- Distinguish observations, assumptions and remaining work, with evidence links.
+- For the checklist: Automated / To verify / Not applicable; severity and outcome separate.
+- Do not report a check as passed if it was unavailable or not executed.`,
+            note: "Adapt paths, rules and commands to the repository. Check the instruction format your tool recognises: AGENTS.md, CLAUDE.md and Cursor rules are not interchangeable without review.",
           },
           {
-            type: 'h3',
-            text: 'The 3 phase-gated prompts that replace one-shot "build the whole app" prompting',
+            type: "h3",
+            text: "Three prompts for three stages",
           },
           {
-            type: 'p',
-            text: 'Never ask an agent to invent product scope, layout hierarchy, and visual styling in one shot. Gate execution into three separate turns (Section 44) — enforcing `<body class="wire">` (grayscale, system fonts, muted placeholders) in Gate 2 so stakeholders sign off on structure and real copy first:',
+            type: "explanation",
+            paragraphs: [
+              "Separating specification, construction and review makes it possible to examine decisions while they remain relatively inexpensive to change. The first prompt produces a screen list from the brief and flags functional questions. The second turns that list into testable HTML with the intended content and states. A grayscale presentation focuses this review on order and interaction, even when spacing tokens are already used. The third prompt prepares a report linking each defect to a rule, reproduction scenario and proposed correction. None of these stages should automatically approve the next: the team can reject an incomplete screen or reopen a brief question. Test commands and results need to accompany the review so an executed check is distinguishable from a suggestion. The three templates below describe expected inputs and outputs; adapt them to the repository and its verification facilities rather than assuming the named tools are already configured.",
+            ],
+            visual: {
+              kind: "research",
+              title: "Three review gates",
+              caption: "Review each stage before moving to the next.",
+              labels: ["Specify the screens", "Build in grayscale", "Review and hand over"],
+            },
           },
           {
-            type: 'copyable',
-            label: 'The 3 Phase-Gated Prompts Ready to Copy (Section 44 · p. 75)',
-            langTag: 'text',
+            type: "copyable",
+            label: "Three prompt templates for specification, construction and review",
+            langTag: "text",
             code: `=== PROMPT 1: brief.md → screens.md ===
-ROLE        : Senior Product Designer writing unambiguous screen specs.
-INPUTS      : @brief.md
-CONSTRAINTS : 1 screen = 1 user verb; specify all 5 states (empty, loading, ideal,
-              partial/overflow, error); real copy only, zero lorem ipsum; do not invent features
-              outside brief.md.
-DELIVERABLE : screens.md with exact fields per screen: verb, entry, exit, trigger + copy
-              for all 5 states, edge cases (40-char names, 0 rows), real labels.
-FORBIDDEN   : Suggesting colours, typefaces, or visual styling. End with open questions.
+INPUT: brief.md.
+Describe screens and tasks, entry/exit, data and supplied copy.
+For each: empty, loading, ideal, partial/overflow, error and confirmation of actions.
+Flag unspecified roles, permissions or features; do not invent them.
+OUTPUT: screens.md and questions requiring decisions before construction.
 
-=== PROMPT 2: screens.md → grayscale wireframe.html ===
-ROLE        : Frontend Accessibility Engineer building structural review wireframes.
-INPUTS      : @screens.md, @tokens.css, @AGENTS.md
-CONSTRAINTS : <body class="wire"> strict grayscale, semantic HTML5 landmarks, spacing from
-              @tokens.css only, every state in screens.md reachable via ?state= query param.
-DELIVERABLE : wireframe-<screen>.html ready for 390px / 768px / 1280px screenshots + zero axe errors.
-FORBIDDEN   : Adding any element or copy absent from screens.md.
+=== PROMPT 2: screens.md → wireframe.html ===
+INPUTS: screens.md, tokens.css, AGENTS.md.
+Build semantic HTML with the agreed content and states.
+Use project spacing; the wire class applies grayscale presentation.
+Make states testable, for example through ?state=, without presenting sample data as real.
+Try keyboard access and 390, 768 and 1280px widths; run available checks.
+OUTPUT: wireframe-<screen>.html, commands and results, limits and remaining questions.
 
-=== PROMPT 3: Screen → WCAG 2.2 AA Audit + Developer Handoff ===
-ROLE        : WCAG 2.2 AA Accessibility Auditor & Technical Spec Writer.
-INPUTS      : @wireframe-<screen>.html, @tokens.css
-CONSTRAINTS : Cite only verifiable source findings with line numbers and exact WCAG criteria
-              (e.g. 1.4.3, 1.4.11, 2.4.7, 2.5.8). Zero subjective aesthetic opinions.
-DELIVERABLE : review.md (rule, status, severity, outcome, evidence, fix) + complete handoff.md.`,
-            note: 'Model benchmark tip (Section 44): run Prompt 2 across two different models and score them on token fidelity, zero axe violations, 390/1280 responsiveness, and fidelity to screens.md.',
+=== PROMPT 3: review and handoff ===
+INPUTS: wireframe-<screen>.html, screens.md, tokens.css and available results.
+Link each defect to code or a browser scenario that was reproduced.
+Cite relevant WCAG criteria without inferring actual contrast or size from a token name alone.
+Separate method, severity and outcome; leave unavailable checks marked To verify.
+OUTPUTS: review.md with finding, evidence and fix; handoff.md with states and remaining tests.`,
+            note: "Replace paths and commands for the project. Compare output with screens.md and retain test results; a prompt cannot establish that its requested checks ran.",
           },
           {
-            "type": "inlineCta",
-            "title": "Reuse the protocol on your next agent run.",
-            "text": "The archive includes the AI Skill, agent_check.py scanner and 77 rules, alongside brief, review and handoff templates.",
-            "buttonLabel": "Equip my repository · $29"
+            type: "inlineCta",
+            title: "Instructions and scanner in the archive",
+            text: "The archive includes the AI Skill, agent_check.py scanner and 77 rules, alongside brief, review and handoff templates.",
+            buttonLabel: "View the English edition · $29",
           },
         ],
       },
-
       {
-        id: 'agentic-interface-patterns',
-        num: '04',
-        tocLabel: '6 UX Patterns for AI & Agentic Products',
-        heading: 'Designing Trustworthy Agentic Interfaces: An Agent Is Not a Chat Box with a Spinner',
+        id: "agentic-interface-patterns",
+        num: "04",
+        tocLabel: "Agent controls",
+        heading: "Keep control of agent actions",
         blocks: [
           {
-            type: 'p',
-            text: 'If you are building AI features into your own product, synthesising Microsoft’s 18 HAX Guidelines and Google’s People + AI Guide (Section 54) points to one core truth: user trust does not come from raw model IQ — it comes from what the human can predict, inspect, and halt at any second.',
+            type: "explanation",
+            paragraphs: [
+              "Microsoft HAX and Google PAIR discuss understanding capabilities, recovering from errors and maintaining user control. The six patterns below are a design synthesis to adapt to the product's permissions and consequences. Before execution, show the resources the agent can access and the planned actions. Reading a draft, editing a document and sending an email may require different approvals. During execution, an understandable log identifies completed, pending and failed operations; it needs to describe actual activity rather than invented progress. A stop control should remain accessible and explain its limits. If an email has already been sent, stopping the next task does not recall it. The final report therefore needs to show what executed, which changes can be reversed and which operations still require a decision, with access to the affected results. Review those recovery paths when designing the permission model, since a confirmation screen cannot undo an operation the underlying system treats as final. A useful test interrupts a sequence after its first write. The log should identify the changed document and show whether later steps began. If undo is offered, describe its scope: restoring an earlier version may overwrite edits made meanwhile by a colleague. Present those consequences before restoration and retain a checkable result afterward. This scenario requires technical input to distinguish what the system can reverse from what the interface can only explain.",
+            ],
+            visual: {
+              kind: "permissions",
+              title: "Match consent to risk",
+              caption: "Keep scope visible and stopping available.",
+              labels: ["Read · defined scope", "Write · explicit consent", "Delete · specific confirmation"],
+            },
           },
           {
-            type: 'table',
-            caption: 'The 6 Agentic UI Patterns That Replace Opaque Chat Spinners (Section 54 · p. 93)',
-            headers: ['Agentic UI Pattern', 'Trust Failure It Solves', 'Concrete Implementation Rule'],
+            type: "table",
+            caption: "Six design patterns adapted from HAX and PAIR guidance",
+            headers: ["Pattern", "Situation to address", "Behaviour to specify"],
             rows: [
               [
-                '1. Bounded Clarification',
-                'A one-line prompt hides ten unstated constraints.',
-                'Ask at most 3 concise questions before acting, with a sensible pre-filled default on the third.',
+                "Clarification",
+                "The request leaves a functional decision unresolved.",
+                "Ask questions needed for safe execution and explain proposed assumptions.",
               ],
               [
-                '2. Editable Plan',
-                'The agent sprints ten minutes in the wrong direction.',
-                'Render the proposed step list upfront and let the user uncheck or reorder steps before execution.',
+                "Reviewable plan",
+                "Someone needs to inspect actions before starting.",
+                "Show steps and dependencies; allow changes where supported.",
               ],
               [
-                '3. Visible Scope Chips',
-                'Users cannot tell which folders, tables, or budgets are exposed.',
-                'Display active permissions as removable scope chips right above the composer.',
+                "Visible access",
+                "Authorised resources are unclear.",
+                "Name files, services and access limits; allow permission removal and explain its effect.",
               ],
               [
-                '4. Three-Tier Permissions',
-                'Asking "Approve?" 18 times breeds blind confirmation fatigue.',
-                'Read: automatic · Reversible write: ask once per session · Destructive/external: always require explicit confirmation.',
+                "Risk-based permissions",
+                "Actions differ in consequence and reversibility.",
+                "Define consent for reading, writing and external or destructive actions; confirm consequential operations as the product requires.",
               ],
               [
-                '5. Inspectable Step Log',
-                '"AI is thinking…" spinners communicate zero progress.',
-                'One line per step with live state (queued, running, done, skipped, failed) + a persistent Stop button.',
+                "Log and stop",
+                "A long operation needs to remain observable and controllable.",
+                "Show actual actions with state and outcome; keep stopping accessible and explain what can no longer be undone.",
               ],
               [
-                '6. Honest 3-Line Epilogue',
-                'Models state guesses in the same confident tone as verified facts.',
-                'End every run with three explicit lines: Verified / Estimated / Not done.',
+                "Consultable result",
+                "Output combines completed operations, assumptions and failures.",
+                "Link the report to changed items; identify performed checks, uncertainty and remaining work.",
               ],
             ],
           },
         ],
       },
-
       {
-        id: 'verifying-ai-three-statuses',
-        num: '05',
-        tocLabel: 'Verifying AI UI: 3 statuses, never a 4th',
-        heading: "Check an AI Output: Separate Method, Severity and Outcome",
+        id: "verifying-ai-three-statuses",
+        num: "05",
+        tocLabel: "Checking the output",
+        heading: "Separate check method, severity and outcome",
         blocks: [
           {
-            type: 'p',
-            text: "Honest automation never claims to replace human judgment — it clears away mechanical failures so your human review focuses on meaning, flow, and real-device feel (Sections 53, 83 & 84).",
+            type: "explanation",
+            paragraphs: [
+              "Verification of a generated interface needs to identify the data examined and the defects each method can detect. Code analysis can find a missing label, while browser checks measure composited colours and an element's actual position. Keyboard testing exposes other problems, such as focus trapped behind a modal or a button covered by a fixed bar. Prepare these checks for the screen's states, both themes and varying content lengths. For each failure, keep the command or scenario used and the location where the defect appeared. After correcting it, rerun the case and examine components sharing the changed rule. Understanding an offer and recovering from an error also need observation with people. The final report should identify those remaining checks without borrowing the result of a technical scan. A build that compiles establishes a narrower fact than a journey someone can complete, so retain both results under their own methods.",
+            ],
+            visual: {
+              kind: "checklist",
+              title: "Check the actual rendering",
+              caption: "A successful build does not replace a test journey.",
+              labels: ["Read the code", "Open both themes", "Use the keyboard", "Try an error state"],
+            },
           },
           {
-            type: 'figure',
-            src: '/images/articles/en/prod-verify-ai.webp',
-            alt: 'Verifying an AI-generated screen sheet from the UX/UI Playbook English Edition showing the 8 mandatory exit checks',
-            caption:
-              "Static checks flag some label, size and markup defects. Composite backgrounds, reading order, gestures and offer clarity also require rendered checks.",
-            sourceRef: 'UX/UI Playbook EN · Part 07, Section 53 (p. 91)',
-            width: 1080,
-            height: 1222,
+            type: "diagram",
+            visual: {
+              kind: "checklist",
+              title: "From code to a complete task",
+              caption: "A report records scope, method, failures and remaining checks; it does not claim the outcome of tests that have not been run.",
+              labels: [
+                "Structure and accessible names",
+                "Contrast on actual backgrounds",
+                "Keyboard, focus and closing",
+                "Empty, long and error states",
+                "Comprehension with real people",
+              ],
+            },
           },
           {
-            type: 'p',
-            text: "The checklist defines 3 verification statuses, not 3 exclusive report columns: Automated (a rule decided on the files read, with evidence and outcome), To verify (rendered measurement or judgment required) and Not applicable (outside the platform or scope, with a reason). Severity — Blocking, Major or Minor — and outcome — pass or fail — are separate from status. An automated check can fail and block CI. An agent’s \"Verified / Estimated / Not done\" epilogue answers a different question: it summarises a run, not checklist status.",
+            type: "explanation",
+            paragraphs: [
+              "The report separates verification method, defect severity and observed outcome. The checklist used here has the statuses Automated, To verify and Not applicable. The first describes a rule decided by an executed check; the second flags a rendered measurement or judgement still required; the last needs a reason related to scope or platform. An automated contrast check can therefore have Blocking severity and a Failed outcome. It should stop delivery if that is the policy selected for the project. A non-applicable check is not a success, and an item awaiting review must not disappear because the build compiles. An agent's run summary can also distinguish verified work, assumptions and unfinished tasks, but should refer to the relevant commands and scenarios. These fields let another person resume the work without confusing the state of a check with the quality of the interface it examines.",
+            ],
+            visual: {
+              kind: "report",
+              title: "Three separate columns",
+              caption: "An automated check can fail and block a release.",
+              labels: ["Method", "Severity", "Outcome", "Automated", "Blocking", "Failed"],
+            },
           },
         ],
       },
-
       {
-        id: 'design-as-revenue-pricing-scope',
-        num: '06',
-        tocLabel: 'Selling, Floor-Rate Math & Surviving Feedback',
-        heading: 'Design as Revenue: Defending Decisions Without Jargon, Floor-Rate Math & Surviving Client Feedback',
+        id: "design-as-revenue-pricing-scope",
+        num: "06",
+        tocLabel: "Decisions and budget",
+        heading: "Explain decisions and price the scope",
         blocks: [
           {
-            type: 'p',
-            text: "Defending a decision means making the reasoning inspectable, not guaranteeing conversion uplift or higher rates. Present the observation, choice and expected effect: \"On mobile, the pay button sits under the keyboard → we make it reachable without hiding the field → we aim to reduce friction.\" Separate that hypothesis from a result measured after shipping (Sections 34–38).",
+            type: "explanation",
+            paragraphs: [
+              "Present a design decision with the observed problem, proposed change and a way to examine its effect. On a phone, a screenshot may show the keyboard covering the payment button. The proposal can describe a placement that keeps the active field and action reachable, followed by a review scenario with the keyboard open. The commercial effect remains to be measured after delivery for a defined period and population. If prices, acquisition or the form changed at the same time, the entire conversion-rate movement cannot be attributed to the button's placement. In a meeting, state the decision needed and the constraints still requiring agreement, particularly timing and technical dependencies. The written record should explain why the option was selected. A disagreement can retain the risks discussed and the decision owner without turning the note into a judgement about their competence or predicting how they will behave in future work.",
+            ],
+            visual: {
+              kind: "journey",
+              title: "Explain a decision",
+              caption: "Keep an expected effect separate from a measured result.",
+              labels: ["Screen observation", "Proposed change", "Expected effect", "Post-release measure"],
+            },
           },
           {
-            type: 'h3',
-            text: 'The floor-price formula and the iron rule on discounts (Section 36)',
+            type: "h3",
+            text: "Calculate a price with your own assumptions",
           },
           {
-            type: 'p',
-            text: "Start a floor rate from your costs and actual billable capacity. The manual’s 12 billable days per month, 30% margin and 20% risk allowance are modelling assumptions, not market constants. Replace them with your own records, then calculate Price = (Estimated days × Day rate) + Risk allowance + Tooling. Track rejected proposals and stated reasons too; no rejection ratio proves that a price is right.",
+            type: "explanation",
+            paragraphs: [
+              "A project's price depends on available time, costs and the work actually included. Begin with billed days over several months, separating production from prospecting, administration and periods without a contract. The twelve billable days per month, 30% margin and 20% contingency sometimes used in a simulation are assumptions to replace with your records. For a project, `Price = Estimated days × Day rate + Risk reserve + Tools` makes the included work explicit. Add dependencies such as client-supplied content, environment access and approval dates. A request for another screen can move the schedule even when the drawing looks simple. If the budget falls, discuss which deliverables can be deferred and the effect on the journey before changing the price. The proposal should then record the agreed scope, exclusions and process for additional requests. Update the estimate when those assumptions change rather than treating the first calculation as a permanent commitment. The risk reserve should relate to named uncertainties, such as an undocumented integration or external approval. If those risks occur, project tracking lets you compare planned and actual time and improve the next estimate. Separate the internal calculation from the proposed price: the offer primarily needs to explain deliverables, conditions and the agreed payment stages.",
+            ],
+            visual: {
+              kind: "scope",
+              title: "Price a defined scope",
+              caption: "Make time, risk and tools explicit before agreeing.",
+              labels: ["Estimated days × rate", "Risk allowance", "Tools and deliverables", "Total and exclusions"],
+            },
           },
           {
-            type: 'doDont',
-            doTitle: '✓ When a client’s budget is tight',
-            dontTitle: '✕ Habits that destroy your margin',
+            type: "doDont",
+            doTitle: "Points to negotiate if the budget falls",
+            dontTitle: "Commitments needing further review",
             doItems: [
-              'Keep your day rate intact and trim scope instead: ship the 4 revenue-critical screens now and defer Dark Mode or secondary admin views to Phase 2.',
-              'Bill in three protective milestones: 40% upfront, 30% on written wireframe sign-off, 30% on final handoff.',
-              'Name a single client decision-maker and cap fixed-fee work at 2 consolidated written feedback rounds.',
+              "Identify journeys that must remain complete and features that can be deferred.",
+              "Define approval milestones and a payment schedule suited to the contract.",
+              "Agree on a decision contact and a process for consolidated feedback.",
             ],
             dontItems: [
-              'Cutting your price by 35% for the exact same deliverable list "to build the relationship" — you lock in a low anchor forever.',
-              'Sending a 14-page pitch deck with zero explicit "Out of Scope" section.',
-              'Reacting to 40 scattered Slack/WhatsApp pings from three stakeholders who disagree with each other.',
+              "Reduce the price without recalculating time, costs and included deliverables.",
+              "Accept a fixed fee without exclusions or a process for additional requests.",
+              "Implement conflicting instructions received through several channels without a decision.",
             ],
           },
           {
-            type: 'copyable',
-            label: 'One-Page Proposal Skeleton + 5 Scope-Survival Client Scripts (Sections 37 & 38)',
-            langTag: 'markdown',
-            code: `# ONE-PAGE CLIENT PROPOSAL (the 7 lines that get signed)
-1. PROBLEM UNDERSTOOD (3 lines using the client's own words):
-   "During [period], [measured rate] of mobile shoppers leave at Shipping (source: [report])."
-2. EXACT DELIVERABLES:
-   4 screens (Cart, Shipping, Payment, Confirmation) × 5 states + tokens.css + handoff.md + WCAG 2.2 AA report.
-3. OUT OF SCOPE (protects your margin):
-   Backend payment gateway logic, legal copywriting, custom photography, more than 2 consolidated feedback rounds.
-4. TIMELINE & GATES:
-   Wk 1 Brief & Grayscale Wireframes (written sign-off gate) · Wk 2 High-Fidelity UI & States · Wk 3 Handoff.
-5. INVESTMENT: $[Single firm number — no hesitant range]
-6. PAYMENT SCHEDULE: 40% kickoff · 30% wireframe sign-off · 30% final delivery.
-7. NEXT STEP: Reply "Approved" before [Date, valid 14 days] to lock the [Date] production slot.
+            type: "copyable",
+            label: "Example proposal and responses to change requests",
+            langTag: "markdown",
+            code: `# PROPOSAL — Example one-page structure
+1. NEED: task, audience, observed problem and source of the observation.
+2. DELIVERABLES: named screens and states, files, methods and assessment scope.
+3. EXCLUSIONS: features, content and work not included; change-request process.
+4. SCHEDULE: stages, dependencies and approvals expected from each party.
+5. PRICE: amount, currency, assumptions and offer validity.
+6. PAYMENT: agreed schedule; 40/30/30 is an example to negotiate.
+7. AGREEMENT: required decision, contact and next date.
 
----
-# 5 READY-TO-SEND SCRIPTS THAT SAVE PROJECTS MID-FLIGHT
-- Scattered feedback: "I'll consolidate everyone's notes into a single document before Wednesday so we resolve any conflicting requests once."
-- Scope creep: "Great addition — since structure was signed off on [Date], I'll spin up a 2-day add-on for that new screen. Want it now or in Phase 2?"
-- Client silence: "To hit our [Date] launch, I need written sign-off by Friday; past that, delivery shifts by the same number of business days."
-- Opinion deadlock: "Rather than debating between our two preferences, let's put both labels in front of 5 target users tomorrow morning for 15 minutes."
-- Vague pushback ("I don't like it"): "What worries you most on this screen? If the primary action stands out twice as clearly, does that solve the concern?"`,
-            note: 'The printable 26-page Bonus Kit includes full A4 sheets for client briefs, one-page proposals, and dev handoffs.',
+# EXAMPLE RESPONSES TO ADAPT
+- Scattered feedback: I am consolidating requests in one document; can you resolve the conflicting points by [date]?
+- New screen: This adds [work] to the agreed scope. I will estimate its cost and timing before including it.
+- Missing approval: The next stage depends on your decision on [item]. Without a response by [date], we will need to revise the schedule.
+- Uncertain choice: We can observe comprehension of both labels on [task]. Comparing rates would require another protocol.
+- Unclear feedback: Which information is missing, or which action is difficult to find on this screen?`,
+            note: "Adapt deliverables, amounts, dates and conditions to the contract. The A4 kit includes brief, proposal and handoff worksheets to fill in.",
           },
         ],
       },
     ],
     faqs: [
       {
-        q: 'How long should an AGENTS.md or CLAUDE.md context file be for UI engineering?',
-        a: 'Roughly 40 to 60 high-signal, testable lines. Bloated 400-line prompts full of vague advice ("make it sleek and modern") dilute model attention. Point to @tokens.css and @screens.md, list automatic failure conditions (no Lorem ipsum, 5 states, 12 px floor), and mandate the 3-line verification footer.',
+        q: "How long should an AGENTS.md file be?",
+        a: "Useful length depends on project decisions and how the tool loads its instructions. A line limit cannot guarantee that rules are followed. Identify reference files, observable rules, permitted actions and check commands. Remove duplication and contradictions, then examine behaviour on an actual task.",
       },
       {
-        q: 'Why enforce a grayscale HTML wireframe gate when AI can generate full colour immediately?',
-        a: "Because fast generation does not fix human psychology: the second stakeholders see brand colours, review time can drift into debating shades of blue instead of verifying whether the value proposition, form fields, and error states hold up.",
+        q: "When is a grayscale HTML wireframe useful?",
+        a: "It helps when the team still needs to examine content order, fields and states. A browser already supports trying keyboard access, long text and breakpoints. The milestone cannot establish structural quality by itself: record decisions reviewed and questions left open. If the visual system is already settled, adapt the presentation to the project.",
       },
       {
-        q: "How should I choose billable days when calculating my floor rate?",
-        a: "Use actual billed days over several months and allow for sales, administration, learning and gaps between contracts. The example’s 12 days are not a requirement: recalculate using your own activity and costs.",
+        q: "How should billable days be chosen for a rate calculation?",
+        a: "Use actual billed days over several months. Distinguish production from prospecting, administration and gaps between contracts, then include costs and tools. Twelve days per month is an example assumption to replace. Recalculate when scope, dependencies or schedule change.",
       },
       {
-        q: 'How do you handle a client insisting on a UI change you know will hurt conversion?',
-        a: 'Use documented disagreement (Section 38): first offer a quick 5-user test; if they still insist for internal reasons, log calmly in writing: "Decision [Date]: proceed with Option B per client request; noted risk on mobile CTA visibility." Clients respect calm rigour and return for future work.',
+        q: "How should a disagreement about a client’s screen be handled?",
+        a: "Describe the observed problem separately from the commercial effect you anticipate. Suggest an appropriate check: task observation for comprehension, a quantitative protocol to compare rates. If another option is selected, record the decision, risks discussed and decision owner. This helps track the project without guaranteeing either the outcome or the business relationship.",
       },
     ],
-    ctaTitle: 'Equip your repo with the full AI Agent Skill, 77-rule Python scanner & Pro Delivery Kit.',
-    ctaText:
-      'Get instant access to all three layers of the UX/UI Playbook 2026 English Edition: the 139-page visual manual, the 26-page printable A4 Bonus Kit, and the 21-file working ZIP archive.',
+    ctaTitle: "A kit for your next project",
+    ctaText: "The English edition of UX/UI Playbook includes the 139-page book, a 26-page printable kit and an archive of 21 working files.",
     ctaBullets: [
-      'Drop-in AI Skill (SKILL.md + AGENTS.md) for Claude Code, Cursor, Windsurf & OpenAI Codex',
-      'Runnable agent_check.py scanner + 77-rule multi-platform JSON dataset for local & CI checks',
-      'All 4 client & handoff templates + 7-day straightforward refund guarantee ($29)',
+      "English book with annotated screen examples",
+      "12 A4 worksheets for briefing, auditing and handoff",
+      "Tokens, templates, rules and a Python scanner in the archive",
     ],
     entityDefinition: "Product design connects user needs, business goals and technical constraints to decide what to build and in which order. UX organises the journey; UI makes the interactions tangible. An AI agent works within that scope without replacing product judgment.",
     references: [
       {
-        "title": "Guidelines for Human-AI Interaction",
-        "url": "https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/",
-        "publisher": "Microsoft Research · Amershi et al.",
-        "date": "2019",
-        "evidence": "established",
-        "note": "18 guidelines validated through the CHI 2019 paper’s process; they do not prescribe the Playbook’s 6 patterns verbatim."
+        title: "Guidelines for Human-AI Interaction",
+        url: "https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/",
+        publisher: "Microsoft Research · Amershi et al.",
+        date: "2019",
+        note: "18 guidelines validated through the CHI 2019 paper’s process; they do not prescribe the Playbook’s 6 patterns verbatim.",
       },
       {
-        "title": "People + AI Guidebook",
-        "url": "https://pair.withgoogle.com/guidebook/",
-        "publisher": "Google PAIR",
-        "date": "2024",
-        "evidence": "established",
-        "note": "Living guide on needs, mental models, control and failure recovery; the patterns above are a practical synthesis."
+        title: "People + AI Guidebook",
+        url: "https://pair.withgoogle.com/guidebook/",
+        publisher: "Google PAIR",
+        date: "2024",
+        note: "Living guide on needs, mental models, control and failure recovery; the patterns above are a practical synthesis.",
       },
       {
-        "title": "Web Content Accessibility Guidelines 2.2",
-        "url": "https://www.w3.org/TR/WCAG22/",
-        "publisher": "W3C",
-        "date": "2024-12-12",
-        "evidence": "established",
-        "note": "Normative criteria to test; an axe-core pass is not enough to establish conformance."
+        title: "Web Content Accessibility Guidelines 2.2",
+        url: "https://www.w3.org/TR/WCAG22/",
+        publisher: "W3C",
+        date: "2024-12-12",
+        note: "Normative criteria to test; an axe-core pass is not enough to establish conformance.",
       },
       {
-        "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
-        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/2026-07-27/eng",
-        "publisher": "EUR-Lex · European Union",
-        "date": "2026-07-27",
-        "evidence": "established",
-        "note": "Consolidated text: Art. 50 (duties and exceptions), 111(4) (2 December 2026 transition for certain existing systems) and 113 (application). Check the role and use concerned."
-      }
+        title: "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+        url: "https://eur-lex.europa.eu/eli/reg/2024/1689/2026-07-27/eng",
+        publisher: "EUR-Lex · European Union",
+        date: "2026-07-27",
+        note: "Consolidated text: Art. 50 (duties and exceptions), 111(4) (2 December 2026 transition for certain existing systems) and 113 (application). Check the role and use concerned.",
+      },
     ],
   },
 ];

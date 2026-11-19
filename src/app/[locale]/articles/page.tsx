@@ -1,7 +1,9 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { Icon } from '@/components/Icon';
+import { ArticleCardVisual } from '@/components/ArticleCardVisual';
+import { TabularText } from '@/components/TabularText';
 import { CONTENT, type Locale } from '@/i18n/content';
 import { ARTICLES, ARTICLES_UI } from '@/i18n/articles';
 import { GumroadButton } from '@/components/GumroadButton';
@@ -58,21 +60,6 @@ export async function generateMetadata({
     },
   };
 }
-
-const HUB_THUMBS: Record<string, Record<Locale, string>> = {
-  'ux-design-guide': {
-    fr: '/images/articles/fr/ux-states.webp',
-    en: '/images/articles/en/ux-states.webp',
-  },
-  'ui-design-system-tokens': {
-    fr: '/images/articles/fr/ui-sbs-dark.webp',
-    en: '/images/articles/en/ui-sbs-dark.webp',
-  },
-  'product-design-ai-agents': {
-    fr: '/images/articles/fr/prod-pipeline.webp',
-    en: '/images/articles/en/prod-pipeline.webp',
-  },
-};
 
 export default async function ArticlesHubPage({
   params,
@@ -154,7 +141,7 @@ export default async function ArticlesHubPage({
           </div>
           <GumroadButton href={c.gumroadUrl} className="mono topbar-cta">
             {c.topBar.cta}
-            <ArrowUpRight size={14} aria-hidden="true" />
+            <Icon name="arrow-up-right" size="sm" />
           </GumroadButton>
         </div>
       </div>
@@ -211,7 +198,7 @@ export default async function ArticlesHubPage({
               textDecoration: 'none',
             }}
           >
-            <ArrowLeft size={15} aria-hidden="true" />
+            <Icon name="arrow-left" size="sm" />
             <span>{ui.backHome}</span>
           </a>
         </div>
@@ -220,10 +207,6 @@ export default async function ArticlesHubPage({
           <div className="notion-header-meta">
             <span className="mono sec-kicker" style={{ marginBottom: 0 }}>
               {ui.kicker}
-            </span>
-            <span className="notion-verified-pill">
-              <CheckCircle2 size={13} aria-hidden="true" />
-              <span>{ui.sourcesBadge}</span>
             </span>
           </div>
           <h1 className="notion-title" style={{ marginTop: 12 }}>
@@ -234,10 +217,9 @@ export default async function ArticlesHubPage({
           </p>
         </header>
 
-        {/* 3 Pillar Guides Grid */}
+        {/* Article grid */}
         <div className="guides-grid" style={{ marginTop: 0 }}>
           {ARTICLES[locale].map((art) => {
-            const thumb = HUB_THUMBS[art.slug][locale];
             return (
               <a
                 key={art.slug}
@@ -247,20 +229,12 @@ export default async function ArticlesHubPage({
                 <div>
                   <div className="guide-card-top">
                     <span className="guide-cat-pill">
-                      <span>{art.icon}</span>
+                      <Icon name={art.icon} size="sm" />
                       <span>{art.category}</span>
                     </span>
                     <span className="guide-read-meta">{art.readTime}</span>
                   </div>
-                  <div className="guide-card-thumb">
-                    <img
-                      src={thumb}
-                      alt={art.title}
-                      width={540}
-                      height={320}
-                      loading="eager"
-                    />
-                  </div>
+                  <ArticleCardVisual article={art} locale={locale} />
                   <h3>{art.title}</h3>
                   <p>{art.subtitle}</p>
 
@@ -286,7 +260,7 @@ export default async function ArticlesHubPage({
                           color: 'var(--fg-2)',
                         }}
                       >
-                        <strong style={{ color: 'var(--fg)' }}>{st.value}</strong> ·{' '}
+                        <strong style={{ color: 'var(--fg)' }}><TabularText>{st.value}</TabularText></strong> ·{' '}
                         {st.source.split('(')[0].trim()}
                       </span>
                     ))}
@@ -295,11 +269,11 @@ export default async function ArticlesHubPage({
 
                 <div className="guide-card-foot">
                   <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-2)' }}>
-                    {art.sections.length} {locale === 'fr' ? 'chapitres + gabarits' : 'chapters + templates'}
+                    {art.sections.length} {locale === 'fr' ? 'parties et exemples' : 'sections and examples'}
                   </span>
                   <span className="guide-card-arrow">
                     <span>{ui.readBtn}</span>
-                    <ArrowRight size={15} aria-hidden="true" />
+                    <Icon name="arrow-right" size="sm" />
                   </span>
                 </div>
               </a>
@@ -318,7 +292,7 @@ export default async function ArticlesHubPage({
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontSize: 'clamp(22px, 3vw, 30px)',
-                  fontWeight: 800,
+                  fontWeight: 700,
                   lineHeight: 1.2,
                   marginBottom: 10,
                 }}
@@ -334,12 +308,12 @@ export default async function ArticlesHubPage({
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontSize: 42,
-                  fontWeight: 800,
+                  fontWeight: 700,
                   lineHeight: 1,
                   marginBottom: 8,
                 }}
               >
-                {c.offer.priceDisplay}
+                <TabularText>{c.offer.priceDisplay}</TabularText>
               </div>
               <p style={{ fontSize: 12.5, color: 'var(--fg-2)', marginBottom: 16 }}>
                 {c.offer.priceSub}
@@ -350,7 +324,7 @@ export default async function ArticlesHubPage({
                 style={{ width: '100%', justifyContent: 'center' }}
               >
                 <span>{c.offer.buyBtn}</span>
-                <ArrowUpRight size={16} aria-hidden="true" />
+                <Icon name="arrow-up-right" size="md" />
               </GumroadButton>
             </div>
           </div>
@@ -362,8 +336,6 @@ export default async function ArticlesHubPage({
         <div className="wrap footer-grid">
           <div>
             <strong style={{ color: 'var(--fg)' }}>{c.footer.copyright}</strong>
-            <div className="footer-lic">{c.footer.license}</div>
-            <div className="footer-rule-badge">✓ {c.footer.builtWithRule}</div>
           </div>
 
           <div className="footer-links">

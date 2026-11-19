@@ -1,28 +1,23 @@
 'use client';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import {
-  ArrowRight,
-  BookOpen,
-  Check,
-  CheckCircle2,
-  ChevronDown,
-  ChevronRight,
-  Copy,
-  Compass,
-  MessageCircle,
-  Palette,
-  Settings,
-  ListTree,
-  Maximize2,
-  Sparkles,
-  X,
-} from 'lucide-react';
+import { Icon } from '@/components/Icon';
+import { ArticleVisual, ArticleVisualScene } from '@/components/ArticleVisual';
+import type { ArticleVisual as ArticleVisualData } from '@/i18n/articles/visual-types';
+import { TabularText } from '@/components/TabularText';
 import type { Locale } from '@/i18n/content';
 import type { ArticleBlock, ArticleData } from '@/i18n/articles';
 import { ARTICLES_UI } from '@/i18n/articles';
 import { GumroadButton } from '@/components/GumroadButton';
 import { useModalFocus } from '@/components/useModalFocus';
+
+function InlineArticleText({ text }: { text: string }) {
+  return <>{text.split(/(`[^`]+`)/g).map((part, index) =>
+    part.startsWith('`') && part.endsWith('`')
+      ? <code className="notion-inline-code" key={index}>{part.slice(1, -1)}</code>
+      : <React.Fragment key={index}>{part}</React.Fragment>
+  )}</>;
+}
 
 interface NotionArticleReaderProps {
   locale: Locale;
@@ -80,12 +75,12 @@ function CopyableNotionBlock({
         >
           {copied ? (
             <>
-              <Check size={14} aria-hidden="true" />
+              <Icon name="check" size="sm" />
               <span>{copiedText}</span>
             </>
           ) : (
             <>
-              <Copy size={14} aria-hidden="true" />
+              <Icon name="copy" size="sm" />
               <span>{copyText}</span>
             </>
           )}
@@ -109,25 +104,16 @@ export function NotionArticleReader({
   const [activeId, setActiveId] = useState<string>(article.sections[0]?.id ?? '');
   const [progress, setProgress] = useState<number>(0);
   const [mobileTocOpen, setMobileTocOpen] = useState<boolean>(false);
-  const [lightboxImg, setLightboxImg] = useState<{
-    src: string;
-    alt: string;
-    caption: string;
-    sourceRef: string;
-  } | null>(null);
-
+  const [expandedDiagram, setExpandedDiagram] = useState<ArticleVisualData | null>(null);
   const lightboxRef = useRef<HTMLDivElement>(null);
-  const sourcesHeading = locale === 'fr' ? 'Sources et niveaux de preuve' : 'Sources and evidence levels';
-  const evidenceLabels = locale === 'fr'
-    ? { established: 'Établi', probable: 'Probable' }
-    : { established: 'Established', probable: 'Probable' };
+  const sourcesHeading = ui.sourcesTitle;
   const zoomLabel = locale === 'fr' ? 'Agrandir le schéma' : 'Zoom diagram';
   const faqHeading =
     locale === 'fr'
-      ? 'Questions fréquentes (synthèse opérationnelle)'
+      ? 'Questions fréquentes'
       : 'Frequently Asked Questions';
   const faqNavTitle = locale === 'fr' ? 'Questions fréquentes' : 'FAQ';
-  const guidesLabel = locale === 'fr' ? 'Guides' : 'Guides';
+  const articlesLabel = 'Articles';
   const updatedWord = locale === 'fr' ? 'Mis à jour le' : 'Updated';
 
   // Reading progress bar
@@ -199,8 +185,8 @@ export function NotionArticleReader({
     };
   }, [article.sections]);
 
-  const closeLightbox = useCallback(() => setLightboxImg(null), []);
-  useModalFocus(Boolean(lightboxImg), lightboxRef, closeLightbox);
+  const closeLightbox = useCallback(() => setExpandedDiagram(null), []);
+  useModalFocus(Boolean(expandedDiagram), lightboxRef, closeLightbox);
 
   const handleTocClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -227,8 +213,19 @@ export function NotionArticleReader({
       case 'p':
         return (
           <p key={idx} className="notion-p">
-            {block.text}
+            <InlineArticleText text={block.text} />
           </p>
+        );
+      case 'explanation':
+        return (
+          <div className="notion-explainer" key={idx}>
+            <div className="notion-explainer-copy">
+              {block.paragraphs.map((paragraph, paragraphIndex) => (
+                <p className="notion-p" key={paragraphIndex}><InlineArticleText text={paragraph} /></p>
+              ))}
+            </div>
+            <ArticleVisual visual={block.visual} />
+          </div>
         );
       case 'quote':
         return (
@@ -241,18 +238,18 @@ export function NotionArticleReader({
         return (
           <div key={idx} className="notion-dodont">
             <div className="notion-do-col">
-              <div className="notion-dodont-head">{block.doTitle}</div>
+              <div className="notion-dodont-head"><Icon name="check-circle" /><span>{block.doTitle}</span></div>
               <ul>
                 {block.doItems.map((it, i) => (
-                  <li key={i}>{it}</li>
+                  <li key={i}><Icon name="check" size="sm" /><span>{it}</span></li>
                 ))}
               </ul>
             </div>
             <div className="notion-dont-col">
-              <div className="notion-dodont-head">{block.dontTitle}</div>
+              <div className="notion-dodont-head"><Icon name="x" /><span>{block.dontTitle}</span></div>
               <ul>
                 {block.dontItems.map((it, i) => (
-                  <li key={i}>{it}</li>
+                  <li key={i}><Icon name="x" size="sm" /><span>{it}</span></li>
                 ))}
               </ul>
             </div>
@@ -281,13 +278,10 @@ export function NotionArticleReader({
             <ul>
               {block.items.map((it, i) => (
                 <li key={i}>
-                  {it.bold ? (
-                    <>
-                      <strong>{it.bold}</strong> — {it.text}
-                    </>
-                  ) : (
-                    it.text
-                  )}
+                  <Icon name="arrow-right" size="sm" />
+                  <span>
+                    {it.bold ? <><strong>{it.bold}</strong> — {it.text}</> : it.text}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -305,7 +299,7 @@ export function NotionArticleReader({
         return (
           <aside key={idx} className={`notion-callout ${toneClass}`}>
             <span className="notion-callout-icon" aria-hidden="true">
-              {block.icon === 'message-circle' ? <MessageCircle size={17} aria-hidden="true" /> : <Sparkles size={17} aria-hidden="true" />}
+              <Icon name={block.icon} size="lg" />
             </span>
             <div>
               <div className="notion-callout-title">{block.title}</div>
@@ -326,7 +320,7 @@ export function NotionArticleReader({
             </div>
             <GumroadButton href={gumroadUrl} className="btn primary small">
               <span>{block.buttonLabel}</span>
-              <ArrowRight size={16} aria-hidden="true" />
+              <Icon name="arrow-right" size="md" />
             </GumroadButton>
           </aside>
         );
@@ -342,32 +336,23 @@ export function NotionArticleReader({
             copiedText={ui.copiedBtn}
           />
         );
-      case 'figure':
+      case 'diagram':
         return (
-          <figure key={idx} className="notion-figure">
-            <button
-              type="button"
-              className="notion-figure-btn"
-              onClick={() =>
-                setLightboxImg({
-                  src: block.src,
-                  alt: block.alt,
-                  caption: block.caption,
-                  sourceRef: block.sourceRef,
-                })
-              }
-              aria-label={`${zoomLabel}: ${block.alt}`}
-            >
-              <img src={block.src} alt={block.alt} width={block.width} height={block.height} loading="lazy" />
-              <span className="notion-figure-zoom-pill">
-                <Maximize2 size={13} aria-hidden="true" />
-                <span>{zoomLabel}</span>
-              </span>
-            </button>
-            <figcaption className="notion-figure-cap">
-              <span className="notion-figure-badge">{block.sourceRef}</span>
-              <span className="notion-figure-text">{block.caption}</span>
-            </figcaption>
+          <figure key={idx} className="notion-figure" data-summary-diagram data-visual-kind={block.visual.kind}>
+            <div className="notion-figure-head">
+              <span className="notion-figure-title">{block.visual.title}</span>
+              <button
+                type="button"
+                className="notion-figure-btn"
+                onClick={() => setExpandedDiagram(block.visual)}
+                aria-label={`${zoomLabel} : ${block.visual.title}`}
+              >
+                <Icon name="maximize" size="sm" />
+                <span>{locale === 'fr' ? 'Agrandir' : 'Enlarge'}</span>
+              </button>
+            </div>
+            <div className="article-summary-scene"><ArticleVisualScene visual={block.visual} /></div>
+            <figcaption className="notion-figure-cap">{block.visual.caption}</figcaption>
           </figure>
         );
       case 'table':
@@ -394,7 +379,7 @@ export function NotionArticleReader({
                 {block.rows.map((row, rIdx) => (
                   <tr key={rIdx}>
                     {row.map((cell, cIdx) => (
-                      <td key={cIdx}>{cell}</td>
+                      <td key={cIdx}><TabularText>{cell}</TabularText></td>
                     ))}
                   </tr>
                 ))}
@@ -408,7 +393,7 @@ export function NotionArticleReader({
   };
 
   return (
-    <div className="notion-page-wrap">
+    <div className="notion-page-wrap notion-reader">
       {/* Top Reading Progress Bar */}
       <div className="notion-progress-track" aria-hidden="true">
         <div className="notion-progress-fill" style={{ width: `${progress}%` }} />
@@ -417,9 +402,9 @@ export function NotionArticleReader({
       {/* Breadcrumbs */}
       <nav className="notion-breadcrumbs" aria-label={locale === 'fr' ? 'Fil d’Ariane' : 'Breadcrumb'}>
         <a href={`/${locale}`}>UX/UI Playbook</a>
-        <ChevronRight size={14} aria-hidden="true" />
-        <a href={`/${locale}/articles`}>{guidesLabel}</a>
-        <ChevronRight size={14} aria-hidden="true" />
+        <Icon name="chevron-right" size="sm" />
+        <a href={`/${locale}/articles`}>{articlesLabel}</a>
+        <Icon name="chevron-right" size="sm" />
         <span style={{ color: 'var(--fg)', fontWeight: 600 }}>{article.category}</span>
       </nav>
 
@@ -433,16 +418,14 @@ export function NotionArticleReader({
           aria-controls="mobile-article-toc"
         >
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-            <ListTree size={16} style={{ color: 'var(--accent-ink)' }} aria-hidden="true" />
+            <Icon name="list-tree" size="md" style={{ color: 'var(--accent-ink)' }} />
             <span>{ui.tocTitle}</span>
           </span>
-          <ChevronDown
-            size={17}
+          <Icon name="chevron-down" size="md"
             style={{
               transform: mobileTocOpen ? 'rotate(180deg)' : 'rotate(0deg)',
               transition: 'transform 0.2s ease',
             }}
-            aria-hidden="true"
           />
         </button>
         {mobileTocOpen && (
@@ -476,7 +459,7 @@ export function NotionArticleReader({
                 <a href="#article-sources" onClick={(e) => handleTocClick(e, 'article-sources')}
                   className={`notion-toc-link ${activeId === 'article-sources' ? 'active' : ''}`}
                   aria-current={activeId === 'article-sources' ? 'location' : undefined}>
-                  <span className="notion-toc-num">↗</span><span>{sourcesHeading}</span>
+                  <Icon name="arrow-up-right" size="sm" className="notion-toc-source-icon" /><span>{sourcesHeading}</span>
                 </a>
               </li>
             </ul>
@@ -490,7 +473,7 @@ export function NotionArticleReader({
         <aside className="notion-toc-rail" aria-label={ui.tocTitle}>
           <div className="notion-toc-card">
             <div className="notion-toc-label">
-              <ListTree size={14} style={{ color: 'var(--accent-ink)' }} aria-hidden="true" />
+              <Icon name="list-tree" size="sm" style={{ color: 'var(--accent-ink)' }} />
               <span>{ui.tocTitle}</span>
             </div>
             <ul className="notion-toc-list">
@@ -522,7 +505,7 @@ export function NotionArticleReader({
                 <a href="#article-sources" onClick={(e) => handleTocClick(e, 'article-sources')}
                   className={`notion-toc-link ${activeId === 'article-sources' ? 'active' : ''}`}
                   aria-current={activeId === 'article-sources' ? 'location' : undefined}>
-                  <span className="notion-toc-num">↗</span><span>{sourcesHeading}</span>
+                  <Icon name="arrow-up-right" size="sm" className="notion-toc-source-icon" /><span>{sourcesHeading}</span>
                 </a>
               </li>
             </ul>
@@ -538,6 +521,7 @@ export function NotionArticleReader({
               style={{ width: '100%', justifyContent: 'center' }}
             >
               <span>{ui.miniCtaBtn}</span>
+              <Icon name="arrow-right" size="sm" />
             </GumroadButton>
           </div>
         </aside>
@@ -547,24 +531,17 @@ export function NotionArticleReader({
           <header>
             <div className="notion-header-meta">
               <span className="guide-cat-pill">
-                <BookOpen size={13} aria-hidden="true" />
+                <Icon name={article.icon} size="sm" />
                 <span>{article.category}</span>
               </span>
-              <span className="notion-verified-pill">
-                <CheckCircle2 size={13} aria-hidden="true" />
-                <span>{ui.sourcesBadge}</span>
-              </span>
+              <a className="notion-sources-link" href="#article-sources" onClick={(e) => handleTocClick(e, 'article-sources')}>
+                {sourcesHeading}<Icon name="arrow-up-right" size="sm" />
+              </a>
               <span className="guide-read-meta">{article.readTime}</span>
             </div>
 
             <div className="notion-icon-badge" aria-hidden="true">
-              {article.icon === 'compass' ? (
-                <Compass size={28} aria-hidden="true" />
-              ) : article.icon === 'palette' ? (
-                <Palette size={28} aria-hidden="true" />
-              ) : (
-                <Settings size={28} aria-hidden="true" />
-              )}
+<Icon name={article.icon} size="xl" />
             </div>
 
             <h1 className="notion-title">{article.title}</h1>
@@ -579,31 +556,28 @@ export function NotionArticleReader({
               </span>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12 }}>
                 {updatedWord}{' '}
-                <time dateTime={article.updatedAt}>{article.updatedAt}</time>
+                <time dateTime={article.updatedAt}><TabularText>{article.updatedAt}</TabularText></time>
               </span>
             </div>
 
             {/* AEO Direct Answer Box (Featured Snippet & AI Overview target) */}
             <div className="notion-aeo-box">
               <div className="notion-aeo-title">
-                <Sparkles size={14} aria-hidden="true" />
+                <Icon name="sparkles" size="sm" />
                 <span>{article.aeoSummaryTitle}</span>
               </div>
               <p>{article.aeoSummary}</p>
             </div>
 
-            {/* Dated Primary Evidence Cards (GEO Differentiator) */}
+            {/* Context for the article, with links to the original publications. */}
             <div className="notion-stats-row">
               {article.keyStats.map((st, idx) => (
                 <div key={idx} className="notion-stat-card">
-                  <div className="notion-stat-val">{st.value}</div>
+                  <div className="notion-stat-val"><TabularText>{st.value}</TabularText></div>
                   <div className="notion-stat-label">{st.label}</div>
                   <div className="notion-stat-src">
                     {st.url ? <a href={st.url}>{st.source}</a> : st.source}
                   </div>
-                  <span className={`notion-refs-badge ${st.evidence}`}>
-                    {evidenceLabels[st.evidence]}
-                  </span>
                 </div>
               ))}
             </div>
@@ -633,7 +607,7 @@ export function NotionArticleReader({
             <div className="faq-list" style={{ marginTop: 18 }}>
               {article.faqs.map((f, idx) => (
                 <details key={idx} open={idx === 0}>
-                  <summary>{f.q}</summary>
+                  <summary><span>{f.q}</span><Icon name="chevron-down" className="faq-chevron" /></summary>
                   <div className="faq-answer">{f.a}</div>
                 </details>
               ))}
@@ -643,13 +617,7 @@ export function NotionArticleReader({
           <section id="article-sources" className="notion-refs" aria-labelledby="article-sources-heading">
             <div className="notion-refs-head">
               <h2 id="article-sources-heading">{sourcesHeading}</h2>
-              <span className="notion-refs-sub">UX/UI Playbook · A5</span>
             </div>
-            <p className="notion-p" style={{ fontSize: 14, marginBottom: 18 }}>
-              {locale === 'fr'
-                ? 'Établi : source primaire identifiée pour le constat cité. Probable : transposition ou résultat à confirmer dans votre contexte. Les repères de méthode du Playbook ne sont pas des garanties de performance.'
-                : 'Established: a primary source is identified for the cited finding. Probable: an interpretation or result requiring validation in your context. Playbook guidelines are not performance guarantees.'}
-            </p>
             <ol className="notion-refs-list">
               {article.references.map((reference) => (
                 <li key={reference.url} className="notion-refs-item">
@@ -658,9 +626,6 @@ export function NotionArticleReader({
                     <div className="notion-refs-sub">{reference.publisher} · {reference.date}</div>
                     <p>{reference.note}</p>
                   </div>
-                  <span className={`notion-refs-badge ${reference.evidence}`}>
-                    {evidenceLabels[reference.evidence]}
-                  </span>
                 </li>
               ))}
             </ol>
@@ -672,14 +637,14 @@ export function NotionArticleReader({
               <div>
                 <div className="mono sec-kicker" style={{ marginBottom: 10 }}>
                   {locale === 'fr'
-                    ? 'PASSEZ DU GUIDE AU SYSTÈME COMPLET'
-                    : 'GO FROM FIELD GUIDE TO COMPLETE SYSTEM'}
+                    ? 'LE LIVRE ET LES FICHIERS'
+                    : 'THE BOOK AND FILES'}
                 </div>
                 <h2
                   style={{
                     fontFamily: 'var(--font-display)',
                     fontSize: 'clamp(22px, 3vw, 28px)',
-                    fontWeight: 800,
+                    fontWeight: 700,
                     lineHeight: 1.2,
                     letterSpacing: '-0.02em',
                     marginBottom: 10,
@@ -693,10 +658,8 @@ export function NotionArticleReader({
                 <ul className="notion-cta-bullets">
                   {article.ctaBullets.map((b, i) => (
                     <li key={i}>
-                      <Check
-                        size={16}
+                      <Icon name="check" size="md"
                         style={{ color: 'var(--ok)', flexShrink: 0, marginTop: 3 }}
-                        aria-hidden="true"
                       />
                       <span>{b}</span>
                     </li>
@@ -720,12 +683,12 @@ export function NotionArticleReader({
                   style={{
                     fontFamily: 'var(--font-display)',
                     fontSize: 44,
-                    fontWeight: 800,
+                    fontWeight: 700,
                     lineHeight: 1,
                     marginBottom: 8,
                   }}
                 >
-                  {locale === 'fr' ? '29 $' : '$29'}
+                  <TabularText>{locale === 'fr' ? '29 $' : '$29'}</TabularText>
                 </div>
                 <p style={{ fontSize: 12.5, color: 'var(--fg-2)', marginBottom: 16 }}>
                   {locale === 'fr'
@@ -742,7 +705,7 @@ export function NotionArticleReader({
                       ? 'Obtenir l’édition française · 29 $'
                       : 'Get the English edition · $29'}
                   </span>
-                  <ArrowRight size={16} aria-hidden="true" />
+                  <Icon name="arrow-right" size="md" />
                 </GumroadButton>
                 <p style={{ fontSize: 12, color: 'var(--fg-2)', marginTop: 10 }}>
                   {locale === 'fr'
@@ -753,14 +716,14 @@ export function NotionArticleReader({
             </div>
           </section>
 
-          {/* Related Field Guides */}
+          {/* Related articles */}
           {relatedArticles.length > 0 && (
             <section style={{ marginTop: 56 }}>
               <h2
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontSize: 22,
-                  fontWeight: 800,
+                  fontWeight: 700,
                   marginBottom: 18,
                 }}
               >
@@ -782,7 +745,7 @@ export function NotionArticleReader({
                     <div>
                       <div className="guide-card-top">
                         <span className="guide-cat-pill">
-                          <span>{rel.icon}</span>
+                          <Icon name={rel.icon} size="sm" />
                           <span>{rel.category}</span>
                         </span>
                         <span className="guide-read-meta">{rel.readTime}</span>
@@ -793,7 +756,7 @@ export function NotionArticleReader({
                     <div className="guide-card-foot">
                       <span className="guide-card-arrow">
                         <span>{ui.readBtn}</span>
-                        <ArrowRight size={15} aria-hidden="true" />
+                        <Icon name="arrow-right" size="sm" />
                       </span>
                     </div>
                   </a>
@@ -804,52 +767,36 @@ export function NotionArticleReader({
         </article>
       </div>
 
-      {/* Figure Zoom Lightbox */}
-      {lightboxImg && (
+      {/* The diagram stays selectable, theme-aware and responsive when enlarged. */}
+      {expandedDiagram && (
         <div
-          className="lightbox-backdrop"
+          className="article-diagram-backdrop"
           ref={lightboxRef}
           role="dialog"
           aria-modal="true"
-          aria-label={lightboxImg.alt}
+          aria-labelledby="article-diagram-title"
+          aria-describedby="article-diagram-caption"
           onClick={(e) => {
-            if (e.target === e.currentTarget) setLightboxImg(null);
+            if (e.target === e.currentTarget) setExpandedDiagram(null);
           }}
         >
-          <div className="lightbox-top">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-              <span className="mono" style={{ color: '#ff7a52', fontSize: 12 }}>
-                {lightboxImg.sourceRef}
-              </span>
-              <span style={{ fontSize: 13.5, color: '#e9ecf2' }}>{lightboxImg.caption}</span>
+          <div className="article-diagram-dialog">
+            <div className="article-diagram-top">
+              <h2 id="article-diagram-title">{expandedDiagram.title}</h2>
+              <button
+                type="button"
+                className="article-diagram-close"
+                data-modal-close
+                onClick={closeLightbox}
+                aria-label={locale === 'fr' ? 'Fermer le schéma agrandi' : 'Close enlarged diagram'}
+              >
+                <Icon name="x" size="md" />
+              </button>
             </div>
-            <button
-              type="button"
-              className="lb-btn"
-              data-modal-close
-              onClick={() => setLightboxImg(null)}
-              aria-label={locale === 'fr' ? 'Fermer le schéma agrandi' : 'Close enlarged diagram'}
-            >
-              <X size={16} aria-hidden="true" />
-            </button>
-          </div>
-          <div tabIndex={0} role="region" aria-label={zoomLabel}
-            style={{
-              maxWidth: 1060,
-              maxHeight: 'calc(100dvh - 120px)',
-              overflowY: 'auto',
-              width: '100%',
-              margin: '20px auto',
-              background: '#ffffff',
-              padding: 16,
-              borderRadius: 12,
-            }}
-          >
-            <img
-              src={lightboxImg.src}
-              alt={lightboxImg.alt}
-              style={{ display: 'block', width: '100%', height: 'auto', borderRadius: 6 }}
-            />
+            <div className="article-summary-scene article-diagram-content" tabIndex={0} role="region" aria-label={zoomLabel}>
+              <ArticleVisualScene visual={expandedDiagram} />
+            </div>
+            <p id="article-diagram-caption">{expandedDiagram.caption}</p>
           </div>
         </div>
       )}

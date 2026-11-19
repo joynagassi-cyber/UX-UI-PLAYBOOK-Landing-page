@@ -8,7 +8,6 @@ export type {
   ArticleSection,
   ArticleData,
   ArticleReference,
-  EvidenceLevel,
   ArticlesIndexCopy,
 } from './articles/types';
 export { ARTICLES_UI } from './articles/types';

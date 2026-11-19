@@ -1,8 +1,11 @@
 import type { Locale } from '../content';
+import type { ArticleVisual } from './visual-types';
 
 export type ArticleBlock =
   | { type: 'h3'; text: string }
   | { type: 'p'; text: string }
+  | { type: 'explanation'; paragraphs: string[]; visual: ArticleVisual }
+  | { type: 'diagram'; visual: ArticleVisual }
   | { type: 'quote'; tag: string; text: string }
   | {
       type: 'doDont';
@@ -18,7 +21,7 @@ export type ArticleBlock =
     }
   | {
       type: 'callout';
-      icon: string;
+      icon: 'message-circle' | 'sparkles';
       title: string;
       text: string;
       tone?: 'neutral' | 'accent' | 'lime' | 'warn';
@@ -34,15 +37,6 @@ export type ArticleBlock =
       caption?: string;
       headers: string[];
       rows: string[][];
-    }
-  | {
-      type: 'figure';
-      src: string;
-      width: number;
-      height: number;
-      alt: string;
-      caption: string;
-      sourceRef: string;
     }
   | {
       type: 'copyable';
@@ -66,14 +60,11 @@ export interface ArticleSection {
   blocks: ArticleBlock[];
 }
 
-export type EvidenceLevel = 'established' | 'probable';
-
 export interface ArticleReference {
   title: string;
   url: `https://${string}`;
   publisher: string;
   date: string;
-  evidence: EvidenceLevel;
   note: string;
 }
 
@@ -97,7 +88,6 @@ export interface ArticleData {
     value: string;
     label: string;
     source: string;
-    evidence: EvidenceLevel;
     url?: `https://${string}`;
   }>;
   references: ArticleReference[];
@@ -119,7 +109,7 @@ export interface ArticlesIndexCopy {
   tocTitle: string;
   copyBtn: string;
   copiedBtn: string;
-  sourcesBadge: string;
+  sourcesTitle: string;
   relatedHeading: string;
   miniCtaTag: string;
   miniCtaTitle: string;
@@ -128,41 +118,41 @@ export interface ArticlesIndexCopy {
 
 export const ARTICLES_UI: Record<Locale, ArticlesIndexCopy> = {
   fr: {
-    metaTitle: "Guides UX, UI et Product Design | UX/UI Playbook",
+    metaTitle: 'Articles UX, UI et Product Design | UX/UI Playbook',
     metaDescription:
-      "Trois guides pratiques pour vos interfaces : audit UX de 40 points, tokens CSS clair/sombre et workflow Product Design avec agents IA. Exemples FR.",
-    kicker: 'DOSSIERS DE TERRAIN · MÉTHODE INTÉGRALE EXTRAITE DU MANUEL',
-    heading: 'Ce qui fait réellement tenir un écran : trois cours complets, zéro jargon.',
+      'Trois articles pour concevoir vos interfaces : audit UX de 40 points, tokens CSS clair/sombre et workflow Product Design avec agents IA. Exemples FR.',
+    kicker: 'ARTICLES · UX, UI ET PRODUCT DESIGN',
+    heading: 'Parcours UX, composants UI et travail avec les agents IA.',
     lede:
-      'Chaque dossier condense plusieurs chapitres clés du UX/UI Playbook 2026 en protocoles directement applicables : tests de diagnostic en 5 secondes, seuils chiffrés, comparatifs À faire / À éviter, clauses contractuelles et fichiers prêts à copier.',
-    readBtn: 'Lire le cours complet',
+      'L’article UX examine les informations à conserver pendant une tâche, les erreurs et les méthodes d’observation. L’article UI décrit les rôles typographiques, les couleurs et les espacements, puis leur traduction en tokens CSS. L’article Product Design suit le cadrage et la revue du travail confié à un agent. Vous y trouverez les explications, les exemples et les modèles à copier pour préparer chaque étape ; les sources sont regroupées à la fin de chaque article.',
+    readBtn: 'Lire l’article',
     backHome: 'Retour à UX/UI Playbook',
-    tocTitle: 'Sommaire du cours',
+    tocTitle: 'Dans cet article',
     copyBtn: 'Copier',
     copiedBtn: 'Copié !',
-    sourcesBadge: "Sources et niveaux de preuve (Annexe A5)",
-    relatedHeading: 'Poursuivre avec les deux autres volets du système',
-    miniCtaTag: 'MANUEL COMPLET · 29 $',
-    miniCtaTitle: '148 pages A4, 12 fiches imprimables & le scanner Python des 77 règles.',
-    miniCtaBtn: 'Obtenir le Playbook FR →',
+    sourcesTitle: 'Sources et références',
+    relatedHeading: 'À lire aussi',
+    miniCtaTag: 'LE LIVRE · 29 $',
+    miniCtaTitle: 'Le Playbook en français, les fiches A4 et les fichiers de travail.',
+    miniCtaBtn: 'Voir le livre',
   },
   en: {
-    metaTitle: "UX, UI and Product Design Guides | UX/UI Playbook",
+    metaTitle: 'UX, UI and Product Design Articles | UX/UI Playbook',
     metaDescription:
-      "Three practical interface guides: a 40-point UX audit, light/dark CSS design tokens and a Product Design workflow for AI agents. Copy-ready examples.",
-    kicker: 'FIELD COURSES · EXTRACTED FROM THE PLAYBOOK',
-    heading: 'What actually makes a screen hold up: three complete field courses, zero fluff.',
+      'Three articles for designing interfaces: a 40-point UX audit, light/dark CSS tokens and a Product Design workflow for AI agents. Practical examples.',
+    kicker: 'ARTICLES · UX, UI AND PRODUCT DESIGN',
+    heading: 'UX journeys, UI components and work with AI agents.',
     lede:
-      'Each course distills core chapters of the UX/UI Playbook 2026 into operational craft: 5-second diagnostic tests, measured thresholds, Do / Don’t breakdowns, protective client clauses, and copy-ready repository files.',
-    readBtn: 'Read full course',
+      'The UX article examines information needed throughout a task, errors and observation methods. The UI article describes type roles, colour and spacing, then translates them into CSS tokens. The Product Design article follows the scoping and review of work delegated to an agent. Explanations, examples and templates support preparation for each stage; references are collected at the end of each article.',
+    readBtn: 'Read the article',
     backHome: 'Back to UX/UI Playbook',
-    tocTitle: 'Course contents',
+    tocTitle: 'In this article',
     copyBtn: 'Copy',
     copiedBtn: 'Copied!',
-    sourcesBadge: "Sources and evidence levels (Appendix A5)",
-    relatedHeading: 'Continue with the other two Playbook courses',
-    miniCtaTag: 'COMPLETE SYSTEM · $29',
-    miniCtaTitle: '139 A4 pages, 12 printable sheets & the 77-rule Python scanner.',
-    miniCtaBtn: 'Get the EN Playbook →',
+    sourcesTitle: 'Sources and references',
+    relatedHeading: 'Read next',
+    miniCtaTag: 'THE BOOK · $29',
+    miniCtaTitle: 'The English Playbook, A4 worksheets and working files.',
+    miniCtaBtn: 'View the book',
   },
 };
