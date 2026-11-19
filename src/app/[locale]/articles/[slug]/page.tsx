@@ -37,7 +37,6 @@ export async function generateMetadata({
   return {
     title: art.metaTitle,
     description: art.metaDescription,
-    keywords: art.keywords,
     authors: [{ name: 'Joy N.', url: `${c.siteUrl}/${locale}` }],
     alternates: {
       canonical: `/${locale}/articles/${art.slug}`,
@@ -59,7 +58,6 @@ export async function generateMetadata({
       modifiedTime: `${art.updatedAt}T08:00:00.000Z`,
       authors: ['Joy N.'],
       section: art.category,
-      tags: art.keywords,
       images: [
         {
           url: art.ogImage,
@@ -112,12 +110,13 @@ export default async function ArticleDetailPage({
         datePublished: `${art.publishedAt}T08:00:00.000Z`,
         dateModified: `${art.updatedAt}T08:00:00.000Z`,
         articleSection: art.category,
-        keywords: art.keywords.join(', '),
         proficiencyLevel: 'Beginner to Expert',
         author: {
           '@type': 'Person',
+          '@id': `${c.siteUrl}/#person`,
           name: 'Joy N.',
           url: `${c.siteUrl}/${locale}`,
+          image: `${c.siteUrl}/images/author-joy.webp`,
         },
         publisher: {
           '@type': 'Organization',
@@ -128,10 +127,18 @@ export default async function ArticleDetailPage({
         },
         isPartOf: {
           '@type': 'Book',
+          '@id': `${c.siteUrl}/${locale}#book`,
           name: 'UX/UI Playbook',
           url: `${c.siteUrl}/${locale}`,
         },
-        citation: art.keyStats.map((st) => `${st.value} — ${st.label} (${st.source})`),
+        citation: art.keyStats.map((st) => ({
+          '@type': 'CreativeWork',
+          name: st.source,
+          description: `${st.value} — ${st.label}`,
+          ...(st.urls?.length
+            ? { url: st.urls[0], sameAs: st.urls.slice(1) }
+            : {}),
+        })),
       },
       {
         '@type': 'FAQPage',
