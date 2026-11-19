@@ -5,10 +5,11 @@ import React, { useEffect, useState } from 'react';
 interface GumroadButtonProps {
   href: string;
   className?: string;
+  style?: React.CSSProperties;
   children: React.ReactNode;
 }
 
-export function GumroadButton({ href, className, children }: GumroadButtonProps) {
+export function GumroadButton({ href, className, style, children }: GumroadButtonProps) {
   const [finalHref, setFinalHref] = useState(href);
 
   useEffect(() => {
@@ -34,6 +35,7 @@ export function GumroadButton({ href, className, children }: GumroadButtonProps)
       target="_blank"
       rel="noopener noreferrer"
       className={className}
+      style={style}
     >
       {children}
     </a>

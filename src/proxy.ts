@@ -4,13 +4,11 @@ const SUPPORTED_LOCALES = ['fr', 'en'] as const;
 type Locale = (typeof SUPPORTED_LOCALES)[number];
 
 function detectPreferredLocale(request: NextRequest): Locale {
-  // 1. Respect explicit user preference saved in cookie
   const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value?.toLowerCase();
   if (cookieLocale === 'fr' || cookieLocale === 'en') {
     return cookieLocale;
   }
 
-  // 2. Parse Accept-Language header with quality weights (RFC 9110)
   const acceptLang = request.headers.get('accept-language');
   if (acceptLang) {
     const parsed = acceptLang
@@ -36,7 +34,6 @@ function detectPreferredLocale(request: NextRequest): Locale {
     }
   }
 
-  // 3. Fallback to Geo hint if provided by Vercel edge headers (francophone countries)
   const country = request.headers.get('x-vercel-ip-country')?.toUpperCase();
   const francophoneCountries = new Set([
     'FR', 'BE', 'CH', 'LU', 'MC', 'BJ', 'SN', 'CI', 'CM', 'TG', 'BF', 'ML', 'NE', 'GA', 'CD', 'CG', 'MG', 'MA', 'TN', 'DZ', 'HT', 'RE', 'GP', 'MQ', 'GF',
@@ -51,26 +48,17 @@ function detectPreferredLocale(request: NextRequest): Locale {
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
-  // Skip static assets, Next internals, and metadata files
+  // Let static assets, Next internals, and SEO/GEO machine endpoints pass directly
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/images') ||
     pathname.startsWith('/fonts') ||
+    pathname === '/llms.txt' ||
+    pathname === '/llms-full.txt' ||
     pathname.includes('.')
   ) {
     return NextResponse.next();
-  }
-
-  // Root path `/` -> route automatically to `/fr` or `/en` preserving UTM params
-  if (pathname === '/') {
-    const locale = detectPreferredLocale(request);
-    const url = request.nextUrl.clone();
-    url.pathname = `/${locale}`;
-    url.search = search;
-    const response = NextResponse.redirect(url, 307);
-    response.headers.set('Vary', 'Accept-Language, Cookie, x-vercel-ip-country');
-    return response;
   }
 
   // Check if path already starts with /fr or /en
@@ -81,13 +69,19 @@ export function proxy(request: NextRequest) {
     return response;
   }
 
-  // Any unknown top-level route redirects cleanly to preferred locale
+  // Root `/` or unlocalized routes like `/articles` or `/articles/ux-design-guide`
+  // automatically redirect to the visitor's language (`/fr/...` or `/en/...`)
   const locale = detectPreferredLocale(request);
   const url = request.nextUrl.clone();
-  url.pathname = `/${locale}`;
-  return NextResponse.redirect(url, 307);
+  url.pathname = pathname === '/' ? `/${locale}` : `/${locale}${pathname}`;
+  url.search = search;
+  const response = NextResponse.redirect(url, 307);
+  response.headers.set('Vary', 'Accept-Language, Cookie, x-vercel-ip-country');
+  return response;
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|images|fonts|og-en.jpg|og-fr.jpg|robots.txt|sitemap.xml).*)'],
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|images|fonts|og-.*\\.jpg|robots\\.txt|sitemap\\.xml|llms\\.txt|llms-full\\.txt).*)',
+  ],
 };

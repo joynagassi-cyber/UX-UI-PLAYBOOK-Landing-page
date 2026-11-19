@@ -1,7 +1,9 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, BookOpen } from 'lucide-react';
 import { CONTENT, type Locale } from '@/i18n/content';
+import { ARTICLES, ARTICLES_UI } from '@/i18n/articles';
 import { GumroadButton } from '@/components/GumroadButton';
 import { ThemeAndLangControls } from '@/components/ThemeAndLangControls';
 import { LiveAgentDemo } from '@/components/LiveAgentDemo';
@@ -11,6 +13,89 @@ import {
   HeroSampleTrigger,
 } from '@/components/BookGalleryLightbox';
 import { ContentsExplorer } from '@/components/ContentsExplorer';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = rawLocale === 'fr' ? 'fr' : 'en';
+  const c = CONTENT[locale];
+
+  return {
+    title: c.meta.title,
+    description: c.meta.description,
+    keywords:
+      locale === 'fr'
+        ? [
+            'UX/UI Playbook',
+            'UX design développeur',
+            'UI design system tokens',
+            'Product design agent IA',
+            'checklist UX 77 règles',
+            'Claude Code UI skill',
+            'Cursor règles UI',
+            'audit accessibilité WCAG 2.2',
+          ]
+        : [
+            'UX/UI Playbook',
+            'UX design for developers',
+            'UI design tokens system',
+            'Product design AI coding agents',
+            '77 UI rules checklist',
+            'Claude Code UI skill',
+            'Cursor UI rules',
+            'WCAG 2.2 accessibility checklist',
+          ],
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        fr: '/fr',
+        en: '/en',
+        'x-default': '/en',
+      },
+    },
+    openGraph: {
+      type: 'website',
+      siteName: 'UX/UI Playbook',
+      locale: c.meta.ogLocale,
+      alternateLocale: locale === 'fr' ? ['en_US'] : ['fr_FR'],
+      title: c.meta.ogTitle,
+      description: c.meta.ogDescription,
+      url: `${c.siteUrl}/${locale}`,
+      images: [
+        {
+          url: locale === 'fr' ? '/og-fr.jpg' : '/og-en.jpg',
+          width: 1200,
+          height: 630,
+          alt: c.meta.productName,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: c.meta.ogTitle,
+      description: c.meta.ogDescription,
+      images: [locale === 'fr' ? '/og-fr.jpg' : '/og-en.jpg'],
+    },
+  };
+}
+
+const ARTICLE_THUMBS: Record<string, Record<Locale, string>> = {
+  'ux-design-guide': {
+    fr: '/images/articles/fr/ux-states.webp',
+    en: '/images/articles/en/ux-states.webp',
+  },
+  'ui-design-system-tokens': {
+    fr: '/images/articles/fr/ui-sbs-dark.webp',
+    en: '/images/articles/en/ui-sbs-dark.webp',
+  },
+  'product-design-ai-agents': {
+    fr: '/images/articles/fr/prod-pipeline.webp',
+    en: '/images/articles/en/prod-pipeline.webp',
+  },
+};
 
 export default async function LandingPage({
   params,
@@ -23,30 +108,95 @@ export default async function LandingPage({
   }
   const locale: Locale = rawLocale;
   const c = CONTENT[locale];
+  const ui = ARTICLES_UI[locale];
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: c.meta.productName,
-    description: c.meta.description,
-    brand: {
-      '@type': 'Person',
-      name: 'Joy N.',
-    },
-    inLanguage: locale,
-    category: 'Software & Interface Design Playbook',
-    image: c.meta.ogImage,
-    offers: {
-      '@type': 'Offer',
-      price: '29.00',
-      priceCurrency: 'USD',
-      url: c.gumroadUrl,
-      availability: 'https://schema.org/InStock',
-      seller: {
-        '@type': 'Person',
-        name: 'Joy N.',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${c.siteUrl}/#website`,
+        url: c.siteUrl,
+        name: 'UX/UI Playbook',
+        inLanguage: ['fr', 'en'],
+        publisher: { '@id': `${c.siteUrl}/#organization` },
       },
-    },
+      {
+        '@type': 'Organization',
+        '@id': `${c.siteUrl}/#organization`,
+        name: 'UX/UI Playbook',
+        url: c.siteUrl,
+        email: 'joynagassi@gmail.com',
+        founder: {
+          '@type': 'Person',
+          name: 'Joy N.',
+        },
+      },
+      {
+        '@type': 'Product',
+        '@id': `${c.siteUrl}/${locale}#product`,
+        name: c.meta.productName,
+        description: c.meta.description,
+        brand: {
+          '@type': 'Brand',
+          name: 'UX/UI Playbook',
+        },
+        inLanguage: locale,
+        category: 'Software & Interface Design Playbook',
+        image: c.meta.ogImage,
+        offers: {
+          '@type': 'Offer',
+          price: '29.00',
+          priceCurrency: 'USD',
+          url: c.gumroadUrl,
+          availability: 'https://schema.org/InStock',
+          seller: {
+            '@id': `${c.siteUrl}/#organization`,
+          },
+        },
+      },
+      {
+        '@type': 'Book',
+        '@id': `${c.siteUrl}/${locale}#book`,
+        name: 'UX/UI Playbook',
+        author: {
+          '@type': 'Person',
+          name: 'Joy N.',
+        },
+        bookEdition: locale === 'fr' ? 'Édition française 2026' : '2026 English Edition',
+        bookFormat: 'https://schema.org/EBook',
+        numberOfPages: locale === 'fr' ? 148 : 139,
+        inLanguage: locale,
+        datePublished: '2026-11-01',
+        publisher: { '@id': `${c.siteUrl}/#organization` },
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${c.siteUrl}/${locale}#faq`,
+        mainEntity: c.faq.items.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.a,
+          },
+        })),
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${c.siteUrl}/${locale}#guides`,
+        name:
+          locale === 'fr'
+            ? 'Guides de terrain UX/UI Playbook'
+            : 'UX/UI Playbook Field Guides',
+        itemListElement: ARTICLES[locale].map((art, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: art.title,
+          url: `${c.siteUrl}/${locale}/articles/${art.slug}`,
+        })),
+      },
+    ],
   };
 
   return (
@@ -82,8 +232,8 @@ export default async function LandingPage({
       >
         <div className="wrap nav-inner">
           <a className="brand" href="#top">
-            <span className="brand-mark">JN</span>
-            <span>Joy N.</span>
+            <span className="brand-mark">UP</span>
+            <span>UX/UI Playbook</span>
           </a>
 
           <div className="nav-links">
@@ -91,6 +241,7 @@ export default async function LandingPage({
             <a href="#tool">{c.nav.demo}</a>
             <a href="#inside">{c.nav.inside}</a>
             <a href="#contents">{c.nav.contents}</a>
+            <a href={`/${locale}/articles`}>{c.nav.guides}</a>
             <a href="#faq">{c.nav.faq}</a>
           </div>
 
@@ -215,6 +366,78 @@ export default async function LandingPage({
 
         {/* Complete Table of Contents + 12-Sheet Bonus Kit + 21-File Archive */}
         <ContentsExplorer data={c.contentsSection} />
+
+        {/* 3 Free Notion-Style Field Guides (UX Design, UI Design, Product Design) */}
+        <section id="guides">
+          <div className="wrap">
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'flex-end',
+                justifyContent: 'space-between',
+                gap: 18,
+              }}
+            >
+              <div>
+                <div className="mono sec-kicker">{ui.kicker}</div>
+                <h2>
+                  {locale === 'fr'
+                    ? 'Lisez gratuitement nos 3 dossiers piliers (UX, UI & Produit).'
+                    : 'Read our 3 free pillar field guides (UX, UI & Product).'}
+                </h2>
+                <p className="sec-lede">{ui.lede}</p>
+              </div>
+              <a className="btn ghost small" href={`/${locale}/articles`}>
+                <BookOpen size={15} aria-hidden="true" />
+                <span>{c.nav.guides}</span>
+              </a>
+            </div>
+
+            <div className="guides-grid">
+              {ARTICLES[locale].map((art) => {
+                const thumb = ARTICLE_THUMBS[art.slug][locale];
+                return (
+                  <a
+                    key={art.slug}
+                    href={`/${locale}/articles/${art.slug}`}
+                    className="guide-card"
+                  >
+                    <div>
+                      <div className="guide-card-top">
+                        <span className="guide-cat-pill">
+                          <span>{art.icon}</span>
+                          <span>{art.category}</span>
+                        </span>
+                        <span className="guide-read-meta">{art.readTime}</span>
+                      </div>
+                      <div className="guide-card-thumb">
+                        <img
+                          src={thumb}
+                          alt={art.title}
+                          width={540}
+                          height={320}
+                          loading="lazy"
+                        />
+                      </div>
+                      <h3>{art.title}</h3>
+                      <p>{art.subtitle}</p>
+                    </div>
+                    <div className="guide-card-foot">
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-2)' }}>
+                        {locale === 'fr' ? 'Format Notion + Sommaire' : 'Notion UI + Sticky TOC'}
+                      </span>
+                      <span className="guide-card-arrow">
+                        <span>{ui.readBtn}</span>
+                        <ArrowRight size={15} aria-hidden="true" />
+                      </span>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        </section>
 
         {/* Market Positioning & Comparison */}
         <section id="comparison">
@@ -405,10 +628,11 @@ export default async function LandingPage({
           </div>
 
           <div className="footer-links">
+            <a href={`/${locale}/articles`}>{c.nav.guides}</a>
             <GumroadButton href={c.gumroadUrl}>
               {c.footer.gumroadLinkLabel}
             </GumroadButton>
-            <a href="mailto:hello@joyccelight.com">hello@joyccelight.com</a>
+            <a href="mailto:joynagassi@gmail.com">joynagassi@gmail.com</a>
             <a
               href={`/${c.otherLocale}`}
               hrefLang={c.otherLocale}

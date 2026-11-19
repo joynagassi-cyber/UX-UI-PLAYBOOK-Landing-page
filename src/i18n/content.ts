@@ -55,6 +55,7 @@ export interface PlaybookContent {
     demo: string;
     inside: string;
     contents: string;
+    guides: string;
     faq: string;
     buy: string;
     themeDarkLabel: string;
@@ -247,10 +248,10 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     otherGumroadUrl: 'https://joyccelight.gumroad.com/l/uxuiplaybook',
     siteUrl: 'https://joyccelight-playbook.vercel.app',
     meta: {
-      title: 'UX/UI Playbook 2026 + Kit bonus — Édition française · Joy N.',
+      title: 'UX/UI Playbook — Édition française 2026 + Kit bonus & Skill IA',
       description:
-        '148 pages A4, 97 sections, 36 écrans annotés, 77 règles mesurables par script Python et 21 fichiers prêts à livrer. Le manuel d’interface conçu pour les développeurs, builders IA et freelances.',
-      ogTitle: 'UX/UI Playbook 2026 + Kit bonus (Édition française)',
+        '148 pages A4, 97 sections, 36 écrans annotés, 77 règles mesurables par script Python et 21 fichiers prêts à livrer. Le système UX, UI et Product Design conçu pour les développeurs, builders IA et freelances.',
+      ogTitle: 'UX/UI Playbook — Édition française 2026 + Kit bonus',
       ogDescription:
         'Vous avez codé l’application. Puis quelqu’un l’a ouverte. 148 pages, 77 règles vérifiables par un agent IA, 12 fiches A4 et 21 fichiers de travail.',
       ogImage: 'https://joyccelight-playbook.vercel.app/og-fr.jpg',
@@ -268,6 +269,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       demo: 'Checklist IA',
       inside: 'Pages réelles',
       contents: 'Sommaire',
+      guides: 'Guides gratuits',
       faq: 'FAQ',
       buy: 'Acheter — 29 $',
       themeDarkLabel: 'Passer en mode clair',
@@ -825,7 +827,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         },
         {
           q: 'Et si le playbook ne correspond pas à mon besoin ?',
-          a: 'Vous disposez d’une garantie de remboursement simple sous 7 jours après l’achat. Un simple message à hello@joyccelight.com suffit.',
+          a: 'Vous disposez d’une garantie de remboursement simple sous 7 jours après l’achat. Un simple message à joynagassi@gmail.com suffit.',
         },
       ],
     },
@@ -855,12 +857,12 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       crosslinkBtn: 'Voir l’édition anglaise (EN)',
     },
     footer: {
-      copyright: '© 2026 Joy N. · UX/UI Playbook, édition 2026.',
+      copyright: '© 2026 UX/UI Playbook · Édition 2026 par Joy N.',
       license:
         'Usage commercial autorisé sur vos propres projets et ceux de vos clients. La revente ou redistribution des fichiers est interdite. La TVA éventuelle est gérée par Gumroad en tant que revendeur officiel.',
       gumroadLinkLabel: 'Boutique française (Gumroad)',
       otherEditionLabel: 'English edition',
-      builtWithRule: 'Cette page respecte les règles du Playbook : contraste ≥ 4,5:1 (OLED & Clair), corps ≥ 12 px, cibles ≥ 44 px.',
+      builtWithRule: 'UX/UI Playbook respecte ses propres règles : contraste ≥ 4,5:1 (OLED & Clair), corps ≥ 12 px, cibles ≥ 44 px.',
     },
   },
 
@@ -871,10 +873,10 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     otherGumroadUrl: 'https://joyccelight.gumroad.com/l/uiuxplaybookfr',
     siteUrl: 'https://joyccelight-playbook.vercel.app',
     meta: {
-      title: 'UX/UI Playbook 2026 + Bonus Kit — For Developers & Builders · Joy N.',
+      title: 'UX/UI Playbook — 2026 English Edition + Bonus Kit & AI Skill',
       description:
-        '139 A4 pages, 97 sections, 36 annotated screens, 77 rules a Python script can check, and 21 working files. The practical interface system for people who ship software without being designers.',
-      ogTitle: 'UX/UI Playbook 2026 — For Developers, AI Builders & Non-Designers',
+        '139 A4 pages, 97 sections, 36 annotated screens, 77 rules a Python script can check, and 21 working files. The practical UX, UI & Product Design system for developers and builders.',
+      ogTitle: 'UX/UI Playbook — 2026 English Edition + Bonus Kit',
       ogDescription:
         'You wrote the app. Then somebody opened it. 139 pages, 77 rules an AI agent can check, 12 printable A4 sheets and 21 working files.',
       ogImage: 'https://joyccelight-playbook.vercel.app/og-en.jpg',
@@ -892,6 +894,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       demo: 'Live Checklist',
       inside: 'Inside Pages',
       contents: 'Contents',
+      guides: 'Free Guides',
       faq: 'FAQ',
       buy: 'Buy — $29',
       themeDarkLabel: 'Switch to light mode',
@@ -1449,7 +1452,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         },
         {
           q: 'What is the refund policy?',
-          a: 'If the playbook does not earn its keep on your very first screen review, email hello@joyccelight.com within 7 days of purchase for a straightforward refund.',
+          a: 'If the playbook does not earn its keep on your very first screen review, email joynagassi@gmail.com within 7 days of purchase for a straightforward refund.',
         },
       ],
     },
@@ -1479,12 +1482,12 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       crosslinkBtn: 'See the French edition (FR)',
     },
     footer: {
-      copyright: '© 2026 Joy N. · UX/UI Playbook, 2026 edition.',
+      copyright: '© 2026 UX/UI Playbook · 2026 edition by Joy N.',
       license:
         'Commercial use permitted on your own projects and your clients’. Resale or redistribution of the files is not permitted. Applicable VAT is handled by Gumroad as seller of record.',
       gumroadLinkLabel: 'English store (Gumroad)',
       otherEditionLabel: 'Édition française',
-      builtWithRule: 'This page obeys the Playbook’s own rules: contrast ≥ 4.5:1 (OLED & Light), type ≥ 12 px, targets ≥ 44 px.',
+      builtWithRule: 'UX/UI Playbook obeys its own rules: contrast ≥ 4.5:1 (OLED & Light), type ≥ 12 px, targets ≥ 44 px.',
     },
   },
 };

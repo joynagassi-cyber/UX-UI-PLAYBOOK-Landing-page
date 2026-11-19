@@ -25,41 +25,23 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(c.siteUrl),
-    title: c.meta.title,
-    description: c.meta.description,
-    alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        fr: '/fr',
-        en: '/en',
-        'x-default': '/en',
+    applicationName: 'UX/UI Playbook',
+    authors: [{ name: 'Joy N.', url: `${c.siteUrl}/${locale}` }],
+    creator: 'Joy N.',
+    publisher: 'UX/UI Playbook',
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+        'max-video-preview': -1,
       },
     },
-    openGraph: {
-      type: 'website',
-      siteName: 'Joy N. · UX/UI Playbook',
-      locale: c.meta.ogLocale,
-      alternateLocale: locale === 'fr' ? ['en_US'] : ['fr_FR'],
-      title: c.meta.ogTitle,
-      description: c.meta.ogDescription,
-      url: `${c.siteUrl}/${locale}`,
-      images: [
-        {
-          url: locale === 'fr' ? '/og-fr.jpg' : '/og-en.jpg',
-          width: 1200,
-          height: 630,
-          alt: c.meta.productName,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: c.meta.ogTitle,
-      description: c.meta.ogDescription,
-      images: [locale === 'fr' ? '/og-fr.jpg' : '/og-en.jpg'],
-    },
     icons: {
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23FF5A2B'/%3E%3Ctext x='16' y='21.5' font-family='Helvetica,Arial,sans-serif' font-size='14' font-weight='900' fill='%23000' text-anchor='middle'%3EJN%3C/text%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23FF5A2B'/%3E%3Ctext x='16' y='21.5' font-family='Helvetica,Arial,sans-serif' font-size='13.5' font-weight='900' fill='%23000' text-anchor='middle'%3EUP%3C/text%3E%3C/svg%3E",
     },
   };
 }
@@ -107,6 +89,7 @@ export default async function LocaleLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="UX/UI Playbook LLM Index" />
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
       <body>{children}</body>
