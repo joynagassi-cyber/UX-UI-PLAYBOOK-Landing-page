@@ -336,7 +336,7 @@ export function NotionArticleReader({
               }
               aria-label={`${zoomLabel}: ${block.alt}`}
             >
-              <img src={block.src} alt={block.alt} loading="lazy" />
+              <img src={block.src} alt={block.alt} width={1080} height={1527} loading="lazy" />
               <span className="notion-figure-zoom-pill">
                 <Maximize2 size={13} aria-hidden="true" />
                 <span>{zoomLabel}</span>
@@ -541,7 +541,17 @@ export function NotionArticleReader({
                 <div key={idx} className="notion-stat-card">
                   <div className="notion-stat-val">{st.value}</div>
                   <div className="notion-stat-label">{st.label}</div>
-                  <div className="notion-stat-src">{st.source}</div>
+                  <div className="notion-stat-src">
+                  {st.urls?.length ? (
+                    st.urls.map((url) => (
+                      <a key={url} href={url} target="_blank" rel="noopener noreferrer">
+                        {st.source}
+                      </a>
+                    ))
+                  ) : (
+                    st.source
+                  )}
+                </div>
                 </div>
               ))}
             </div>
@@ -756,6 +766,8 @@ export function NotionArticleReader({
             <img
               src={lightboxImg.src}
               alt={lightboxImg.alt}
+              width={1080}
+              height={1527}
               style={{ display: 'block', width: '100%', height: 'auto', borderRadius: 6 }}
             />
           </div>
