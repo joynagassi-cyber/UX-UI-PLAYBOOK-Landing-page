@@ -6,7 +6,7 @@ const FRANCOPHONE_COUNTRIES = new Set([
 
 function preferredLocale(request) {
   const cookie = request.headers.get('Cookie') || '';
-  const cookieMatch = cookie.match(/(?:^|;\\s*)NEXT_LOCALE=(fr|en)(?:;|$)/i);
+  const cookieMatch = cookie.match(/(?:^|;\s*)NEXT_LOCALE=(fr|en)(?:;|$)/i);
   if (cookieMatch) return cookieMatch[1].toLowerCase();
 
   const accepted = (request.headers.get('Accept-Language') || '')
