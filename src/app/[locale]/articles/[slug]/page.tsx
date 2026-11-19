@@ -12,6 +12,8 @@ import { GumroadButton } from '@/components/GumroadButton';
 import { ThemeAndLangControls } from '@/components/ThemeAndLangControls';
 import { NotionArticleReader } from '@/components/NotionArticleReader';
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   const locales: Locale[] = ['fr', 'en'];
   return locales.flatMap((locale) =>
