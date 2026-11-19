@@ -13,9 +13,9 @@ export const ARTICLES_EN: ArticleData[] = [
     updatedAt: '2026-11-18',
     ogImage: '/og-article-ux-en.jpg',
     metaTitle:
-      'Operational UX Design: Cognitive Budgets, Day-7 Retention, 5 Screen States & 40-Point Audit | UX/UI Playbook',
+      'UX Design: Cognitive Laws, Screen States & Audit | UX/UI Playbook',
     metaDescription:
-      'Complete UX Design field course from the UX/UI Playbook 2026: kill vague briefs, apply real cognitive laws (Cowan 4±1, Fitts, Hick-Hyman), design all 5 screen states, fix checkout drop-offs, and run a 20-minute UX audit.',
+      'A practical UX design guide to cognitive laws, five screen states, checkout usability and a 20-minute interface audit.',
     keywords: [
       'operational UX design',
       'cognitive load Cowan 4 chunks',
@@ -527,9 +527,9 @@ certification nor legal advice."`,
     updatedAt: '2026-11-18',
     ogImage: '/og-article-ui-en.jpg',
     metaTitle:
-      'UI Design & Design Tokens: 4 Hierarchy Levers, Type Scale, 8-pt Grid, True Dark Mode & Handoff | UX/UI Playbook',
+      'UI Design Tokens, Type, Spacing & Dark Mode | UX/UI Playbook',
     metaDescription:
-      'Complete UI Design engineering course: the 4 hierarchy levers, 1.25 type scale, 60/30/10 semantic colour tokens, 3-tier 8-pt spacing, halation-free Dark Mode, microcopy, logical RTL CSS, and 1-page dev handoff.',
+      'Build consistent UI systems with design tokens, accessible contrast, typography, spacing, dark mode and developer handoff.',
     keywords: [
       'UI design system CSS tokens',
       'W3C design tokens 2025.10',
@@ -956,9 +956,9 @@ certification nor legal advice."`,
     updatedAt: '2026-11-18',
     ogImage: '/og-article-product-en.jpg',
     metaTitle:
-      'Product Design, Revenue & AI Agents: Deterministic Pipelines, Agent UX & Pricing | UX/UI Playbook',
+      'Product Design, AI Agents & SaaS Pricing | UX/UI Playbook',
     metaDescription:
-      'Complete Product Design & AI engineering course: 2-hour express research, SaaS dashboards & pricing pages, the 5-file pipeline for Claude Code / Cursor, 6 agentic UX patterns, 3-status verification, and scope-proof pricing.',
+      'A practical product design guide to research, SaaS pricing, AI agent workflows, verification and delivery.',
     keywords: [
       'Product Design for developers',
       'AGENTS.md Claude Code Cursor UI',
