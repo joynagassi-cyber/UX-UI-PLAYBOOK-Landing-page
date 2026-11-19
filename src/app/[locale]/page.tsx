@@ -1,7 +1,9 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ArrowRight, ArrowUpRight, BookOpen, Compass, Palette, Settings } from 'lucide-react';
+import { Icon } from '@/components/Icon';
+import { ArticleCardVisual } from '@/components/ArticleCardVisual';
+import { TabularText } from '@/components/TabularText';
 import { CONTENT, type Locale } from '@/i18n/content';
 import { ARTICLES, ARTICLES_UI } from '@/i18n/articles';
 import { GumroadButton } from '@/components/GumroadButton';
@@ -60,21 +62,6 @@ export async function generateMetadata({
     },
   };
 }
-
-const ARTICLE_THUMBS: Record<string, Record<Locale, string>> = {
-  'ux-design-guide': {
-    fr: '/images/articles/fr/ux-states.webp',
-    en: '/images/articles/en/ux-states.webp',
-  },
-  'ui-design-system-tokens': {
-    fr: '/images/articles/fr/ui-sbs-dark.webp',
-    en: '/images/articles/en/ui-sbs-dark.webp',
-  },
-  'product-design-ai-agents': {
-    fr: '/images/articles/fr/prod-pipeline.webp',
-    en: '/images/articles/en/prod-pipeline.webp',
-  },
-};
 
 export default async function LandingPage({
   params,
@@ -167,8 +154,8 @@ export default async function LandingPage({
         '@id': `${c.siteUrl}/${locale}#guides`,
         name:
           locale === 'fr'
-            ? 'Guides de terrain UX/UI Playbook'
-            : 'UX/UI Playbook Field Guides',
+            ? 'Articles UX/UI Playbook'
+            : 'UX/UI Playbook articles',
         itemListElement: ARTICLES[locale].map((art, index) => ({
           '@type': 'ListItem',
           position: index + 1,
@@ -200,7 +187,7 @@ export default async function LandingPage({
           </div>
           <GumroadButton href={c.gumroadUrl} className="mono topbar-cta">
             {c.topBar.cta}
-            <ArrowUpRight size={14} aria-hidden="true" />
+            <Icon name="arrow-up-right" size="sm" />
           </GumroadButton>
         </div>
       </div>
@@ -254,7 +241,7 @@ export default async function LandingPage({
             <div className="hero-ctas">
               <GumroadButton href={c.gumroadUrl} className="btn primary">
                 {c.hero.primaryCta}
-                <ArrowUpRight size={17} aria-hidden="true" />
+                <Icon name="arrow-up-right" size="md" />
               </GumroadButton>
               <HeroSampleTrigger label={c.hero.secondaryCta} pageIndex={0} />
             </div>
@@ -284,7 +271,7 @@ export default async function LandingPage({
         <div className="wrap strip-grid">
           {c.strip.map((item, idx) => (
             <div className="strip-cell" key={idx}>
-              <div className="strip-num">{item.num}</div>
+              <div className="strip-num"><TabularText>{item.num}</TabularText></div>
               <div className="strip-label">{item.label}</div>
             </div>
           ))}
@@ -302,12 +289,12 @@ export default async function LandingPage({
             <div className="pillars-grid">
               {c.pillars.cards.map((card, idx) => (
                 <article className="pillar-card" key={idx}>
-                  <div className="mono pillar-tag">{card.tag}</div>
+                  <div className="mono pillar-tag"><Icon name={idx === 0 ? 'book-open' : idx === 1 ? 'layers' : 'terminal'} size="lg" /><span>{card.tag}</span></div>
                   <h3>{card.title}</h3>
                   <div className="pillar-sub">{card.subtitle}</div>
                   <ul className="ticks">
                     {card.points.map((pt, pIdx) => (
-                      <li key={pIdx}>{pt}</li>
+                      <li key={pIdx}><Icon name="check" size="sm" /><span>{pt}</span></li>
                     ))}
                   </ul>
                 </article>
@@ -332,7 +319,7 @@ export default async function LandingPage({
                   className={`state-card ${st.hot ? 'hot' : ''}`}
                   key={idx}
                 >
-                  <div className="mono">{st.tag}</div>
+                  <div className="mono state-tag"><Icon name={idx === 0 ? 'inbox' : idx === 1 ? 'loader-circle' : 'credit-card'} size="lg" /><span>{st.tag}</span></div>
                   <h3>{st.title}</h3>
                   <p>{st.desc}</p>
                 </article>
@@ -347,7 +334,7 @@ export default async function LandingPage({
         {/* Complete Table of Contents + 12-Sheet Bonus Kit + 21-File Archive */}
         <ContentsExplorer data={c.contentsSection} />
 
-        {/* 3 Free Notion-Style Field Guides (UX Design, UI Design, Product Design) */}
+        {/* Three free articles (UX Design, UI Design, Product Design) */}
         <section id="guides">
           <div className="wrap">
             <div
@@ -363,22 +350,19 @@ export default async function LandingPage({
                 <div className="mono sec-kicker">{ui.kicker}</div>
                 <h2>
                   {locale === 'fr'
-                    ? 'Lisez gratuitement nos 3 dossiers piliers (UX, UI & Produit).'
-                    : 'Read our 3 free pillar field guides (UX, UI & Product).'}
+                    ? 'Trois articles sur l’UX, l’UI et le Product Design.'
+                    : 'Three articles on UX, UI and Product Design.'}
                 </h2>
                 <p className="sec-lede">{ui.lede}</p>
               </div>
               <a className="btn ghost small" href={`/${locale}/articles`}>
-                <BookOpen size={15} aria-hidden="true" />
+                <Icon name="book-open" size="sm" />
                 <span>{c.nav.guides}</span>
               </a>
             </div>
 
             <div className="guides-grid">
               {ARTICLES[locale].map((art) => {
-                const thumb = ARTICLE_THUMBS[art.slug][locale];
-                const ArticleIcon =
-                  art.icon === 'compass' ? Compass : art.icon === 'palette' ? Palette : Settings;
                 return (
                   <a
                     key={art.slug}
@@ -388,30 +372,22 @@ export default async function LandingPage({
                     <div>
                       <div className="guide-card-top">
                         <span className="guide-cat-pill">
-                          <span><ArticleIcon size={14} aria-hidden="true" /></span>
+                          <Icon name={art.icon} size="sm" />
                           <span>{art.category}</span>
                         </span>
                         <span className="guide-read-meta">{art.readTime}</span>
                       </div>
-                      <div className="guide-card-thumb">
-                        <img
-                          src={thumb}
-                          alt={art.title}
-                          width={540}
-                          height={320}
-                          loading="lazy"
-                        />
-                      </div>
+                      <ArticleCardVisual article={art} locale={locale} />
                       <h3>{art.title}</h3>
                       <p>{art.subtitle}</p>
                     </div>
                     <div className="guide-card-foot">
                       <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-2)' }}>
-                        {locale === 'fr' ? 'Format Notion + Sommaire' : 'Notion UI + Sticky TOC'}
+                        {locale === 'fr' ? 'Exemples et schémas' : 'Examples and diagrams'}
                       </span>
                       <span className="guide-card-arrow">
                         <span>{ui.readBtn}</span>
-                        <ArrowRight size={15} aria-hidden="true" />
+                        <Icon name="arrow-right" size="sm" />
                       </span>
                     </div>
                   </a>
@@ -440,9 +416,9 @@ export default async function LandingPage({
                 <tbody>
                   {c.comparison.rows.map((row, idx) => (
                     <tr key={idx}>
-                      <td>{row.feature}</td>
-                      <td className="tabular">{row.others}</td>
-                      <td className="tabular">{row.playbook}</td>
+                      <td><TabularText>{row.feature}</TabularText></td>
+                      <td className="tabular"><TabularText>{row.others}</TabularText></td>
+                      <td className="tabular"><TabularText>{row.playbook}</TabularText></td>
                     </tr>
                   ))}
                 </tbody>
@@ -462,7 +438,7 @@ export default async function LandingPage({
                 <h3>{c.honesty.yesTitle}</h3>
                 <ul>
                   {c.honesty.yesItems.map((it, idx) => (
-                    <li key={idx}>{it}</li>
+                    <li key={idx}><Icon name="check" size="sm" /><span>{it}</span></li>
                   ))}
                 </ul>
               </div>
@@ -470,7 +446,7 @@ export default async function LandingPage({
                 <h3>{c.honesty.noTitle}</h3>
                 <ul>
                   {c.honesty.noItems.map((it, idx) => (
-                    <li key={idx}>{it}</li>
+                    <li key={idx}><Icon name="x" size="sm" /><span>{it}</span></li>
                   ))}
                 </ul>
               </div>
@@ -516,7 +492,7 @@ export default async function LandingPage({
             <div className="faq-list">
               {c.faq.items.map((item, idx) => (
                 <details key={idx} open={idx === 0}>
-                  <summary>{item.q}</summary>
+                  <summary><span>{item.q}</span><Icon name="chevron-down" className="faq-chevron" /></summary>
                   <div className="faq-answer">{item.a}</div>
                 </details>
               ))}
@@ -545,13 +521,13 @@ export default async function LandingPage({
                 </p>
                 <ul className="ticks">
                   {c.offer.includedList.map((inc, idx) => (
-                    <li key={idx}>{inc}</li>
+                    <li key={idx}><Icon name="check" size="sm" /><span>{inc}</span></li>
                   ))}
                 </ul>
               </div>
 
               <div className="offer-price-panel">
-                <div className="offer-amount">{c.offer.priceDisplay}</div>
+                <div className="offer-amount"><TabularText>{c.offer.priceDisplay}</TabularText></div>
                 <div className="offer-sub">{c.offer.priceSub}</div>
 
                 <div style={{ marginTop: '22px' }}>
@@ -567,14 +543,14 @@ export default async function LandingPage({
                       }}
                     >
                       {c.offer.buyBtn}
-                      <ArrowUpRight size={17} aria-hidden="true" />
+                      <Icon name="arrow-up-right" size="md" />
                     </span>
                   </GumroadButton>
                 </div>
 
                 <div className="offer-guarantees">
                   {c.offer.guarantees.map((g, idx) => (
-                    <span key={idx}>{g}</span>
+                    <span key={idx}><Icon name="check" size="sm" /><span>{g}</span></span>
                   ))}
                 </div>
 
@@ -609,8 +585,6 @@ export default async function LandingPage({
         <div className="wrap footer-grid">
           <div>
             <strong style={{ color: 'var(--fg)' }}>{c.footer.copyright}</strong>
-            <div className="footer-lic">{c.footer.license}</div>
-            <div className="footer-rule-badge">✓ {c.footer.builtWithRule}</div>
           </div>
 
           <div className="footer-links">

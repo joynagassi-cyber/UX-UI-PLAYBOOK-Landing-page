@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { AlertTriangle, CheckCircle2, Copy, Check, Sparkles } from 'lucide-react';
+import { Icon } from '@/components/Icon';
+import { TabularText } from '@/components/TabularText';
 import type { PlaybookContent } from '@/i18n/content';
 
 interface LiveAgentDemoProps {
@@ -38,7 +39,8 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
           <ul className="ticks">
             {data.bullets.map((b, i) => (
               <li key={i}>
-                <strong>{b.bold}</strong> {b.rest}
+                <Icon name="check" size="sm" />
+                <span><strong>{b.bold}</strong> {b.rest}</span>
               </li>
             ))}
           </ul>
@@ -52,7 +54,7 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
               onClick={() => setMode('bad')}
               className={`seg-tab ${isBad ? 'active-bad' : ''}`}
             >
-              <AlertTriangle size={15} aria-hidden="true" />
+              <Icon name="alert-triangle" size="sm" />
               {data.tabBad}
             </button>
             <button
@@ -61,7 +63,7 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
               onClick={() => setMode('clean')}
               className={`seg-tab ${!isBad ? 'active-clean' : ''}`}
             >
-              <CheckCircle2 size={15} aria-hidden="true" />
+              <Icon name="check-circle" size="sm" />
               {data.tabClean}
             </button>
           </div>
@@ -72,12 +74,13 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
               onClick={() => setMode('clean')}
               className="btn primary small"
             >
-              <Sparkles size={15} aria-hidden="true" />
-              {data.fixAction}
+              <Icon name="sparkles" size="sm" />
+              <span>{data.fixAction}</span>
+              <Icon name="arrow-right" size="sm" />
             </button>
           ) : (
-            <span className="mono" style={{ color: 'var(--lime)', padding: '0 8px' }}>
-              ✓ {data.fixedBadge}
+            <span className="mono demo-fixed-badge">
+              <Icon name="check-circle" /><span>{data.fixedBadge}</span>
             </span>
           )}
         </div>
@@ -94,14 +97,20 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
               <div className="mock-ui">
                 <div className="mock-ui-head">
                   <span>{data.screenMock.brand}</span>
-                  <span style={{ color: 'var(--fg-3)', fontWeight: 500 }}>
-                    {data.screenMock.stepLabel}
-                  </span>
+                  <ol className="mock-checkout-steps" aria-label={data.screenMock.stepLabel}>
+                    {data.screenMock.steps.map((step, idx) => (
+                      <li key={step} aria-current={idx === 2 ? 'step' : undefined}>
+                        {idx === 0 && <Icon name="check" size="sm" />}
+                        <span>{step}</span>
+                        {idx < 2 && <Icon name="chevron-right" size="sm" />}
+                      </li>
+                    ))}
+                  </ol>
                 </div>
 
                 {!isBad && (
                   <div className="mock-summary-pill tabular">
-                    {data.screenMock.summaryClean}
+                    <TabularText>{data.screenMock.summaryClean}</TabularText>
                   </div>
                 )}
 
@@ -159,7 +168,7 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
                       <div className="mock-pay-clean">{data.screenMock.payPrimary}</div>
                     </div>
                     <div className="mock-fineprint-clean tabular">
-                      {data.screenMock.clearFeeClean}
+                      <TabularText>{data.screenMock.clearFeeClean}</TabularText>
                     </div>
                   </>
                 )}
@@ -190,12 +199,12 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
               <button type="button" onClick={handleCopy} className="term-copy-btn">
                 {copied ? (
                   <>
-                    <Check size={13} aria-hidden="true" />
+                    <Icon name="check" size="sm" />
                     {data.copiedCmd}
                   </>
                 ) : (
                   <>
-                    <Copy size={13} aria-hidden="true" />
+                    <Icon name="copy" size="sm" />
                     {data.copyCmd}
                   </>
                 )}
@@ -218,15 +227,15 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
             </p>
             <div className="term-scorebar">
               <div className="term-score-cell">
-                <span className="term-score-val" style={{ color: 'var(--term-green)' }}>9</span>
+                <span className="term-score-val" style={{ color: 'var(--term-green)' }}><TabularText>9</TabularText></span>
                 <span className="term-score-lbl">{data.terminal.statusAutomated}</span>
               </div>
               <div className="term-score-cell">
-                <span className="term-score-val" style={{ color: 'var(--term-warn)' }}>6</span>
+                <span className="term-score-val" style={{ color: 'var(--term-warn)' }}><TabularText>6</TabularText></span>
                 <span className="term-score-lbl">{data.terminal.statusToVerify}</span>
               </div>
               <div className="term-score-cell">
-                <span className="term-score-val" style={{ color: 'var(--term-dim)' }}>62</span>
+                <span className="term-score-val" style={{ color: 'var(--term-dim)' }}><TabularText>62</TabularText></span>
                 <span className="term-score-lbl">{data.terminal.statusNotApplicable}</span>
               </div>
             </div>

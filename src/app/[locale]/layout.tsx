@@ -4,35 +4,15 @@ import { notFound } from 'next/navigation';
 import '../globals.css';
 import { CONTENT, type Locale } from '@/i18n/content';
 
-const soraDisplay = localFont({
+const domine = localFont({
   src: [
-    { path: '../../fonts/sora-latin.woff2', weight: '400 800', style: 'normal' },
-    { path: '../../fonts/sora-latin-ext.woff2', weight: '400 800', style: 'normal' },
+    { path: '../../fonts/domine-latin.woff2', weight: '400 700', style: 'normal' },
+    { path: '../../fonts/domine-latin-ext.woff2', weight: '400 700', style: 'normal' },
   ],
-  variable: '--font-display',
+  variable: '--font-domine',
   display: 'swap',
-  adjustFontFallback: 'Arial',
-});
-
-const interSans = localFont({
-  src: [
-    { path: '../../fonts/inter-latin.woff2', weight: '400 900', style: 'normal' },
-    { path: '../../fonts/inter-latin-ext.woff2', weight: '400 900', style: 'normal' },
-  ],
-  variable: '--font-sans',
-  display: 'swap',
-  adjustFontFallback: 'Arial',
-});
-
-const jbMono = localFont({
-  src: [
-    { path: '../../fonts/jbmono-latin.woff2', weight: '400 800', style: 'normal' },
-    { path: '../../fonts/jbmono-latin-ext.woff2', weight: '400 800', style: 'normal' },
-  ],
-  variable: '--font-mono',
-  display: 'swap',
-  adjustFontFallback: 'Arial',
-  fallback: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+  adjustFontFallback: 'Times New Roman',
+  fallback: ['Georgia', 'Times New Roman', 'serif'],
 });
 
 export function generateStaticParams() {
@@ -107,7 +87,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       data-theme="dark"
-      className={`${soraDisplay.variable} ${interSans.variable} ${jbMono.variable}`}
+      className={domine.variable}
       suppressHydrationWarning
     >
       <head>
