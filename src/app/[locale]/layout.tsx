@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import '../globals.css';
 import { CONTENT, type Locale } from '@/i18n/content';
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return [{ locale: 'fr' }, { locale: 'en' }];
 }
