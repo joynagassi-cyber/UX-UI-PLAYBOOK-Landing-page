@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export const dynamic = 'force-static';
 import { ARTICLES } from '@/i18n/articles';
 
-const SITE = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joyccelight-playbook.pages.dev').replace(/\\/+$/, '');
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://joyccelight-playbook.pages.dev';
 
 export async function GET() {
   const frGuides = ARTICLES.fr
