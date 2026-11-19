@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://joyccelight-playbook.vercel.app';
+  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joyccelight-playbook.pages.dev').replace(/\/+$/, '');
   const lastModified = new Date('2026-11-18');
 
   return [
