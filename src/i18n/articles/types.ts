@@ -18,7 +18,7 @@ export type ArticleBlock =
     }
   | {
       type: 'callout';
-      icon: string;
+      icon: 'compass' | 'message-circle' | 'palette' | 'settings';
       title: string;
       text: string;
       tone?: 'neutral' | 'accent' | 'lime' | 'warn';
