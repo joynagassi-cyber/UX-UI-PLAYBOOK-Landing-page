@@ -1,88 +1,80 @@
 import type { MetadataRoute } from 'next';
-import { ARTICLE_SLUGS } from '@/i18n/articles';
-
-const BASE = 'https://joyccelight-playbook.vercel.app';
+import { ARTICLES, ARTICLE_SLUGS } from '@/i18n/articles';
+import { SITE_URL } from '@/lib/site-config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date('2026-11-18T08:00:00.000Z');
-
   const coreEntries: MetadataRoute.Sitemap = [
     {
-      url: `${BASE}/fr`,
-      lastModified: now,
+      url: `${SITE_URL}/fr`,
       changeFrequency: 'weekly',
       priority: 1.0,
       alternates: {
-        languages: {
-          fr: `${BASE}/fr`,
-          en: `${BASE}/en`,
-        },
+        languages: { fr: `${SITE_URL}/fr`, en: `${SITE_URL}/en` },
       },
     },
     {
-      url: `${BASE}/en`,
-      lastModified: now,
+      url: `${SITE_URL}/en`,
       changeFrequency: 'weekly',
       priority: 1.0,
       alternates: {
-        languages: {
-          fr: `${BASE}/fr`,
-          en: `${BASE}/en`,
-        },
+        languages: { fr: `${SITE_URL}/fr`, en: `${SITE_URL}/en` },
       },
     },
     {
-      url: `${BASE}/fr/articles`,
-      lastModified: now,
+      url: `${SITE_URL}/fr/articles`,
       changeFrequency: 'weekly',
       priority: 0.9,
       alternates: {
         languages: {
-          fr: `${BASE}/fr/articles`,
-          en: `${BASE}/en/articles`,
+          fr: `${SITE_URL}/fr/articles`,
+          en: `${SITE_URL}/en/articles`,
         },
       },
     },
     {
-      url: `${BASE}/en/articles`,
-      lastModified: now,
+      url: `${SITE_URL}/en/articles`,
       changeFrequency: 'weekly',
       priority: 0.9,
       alternates: {
         languages: {
-          fr: `${BASE}/fr/articles`,
-          en: `${BASE}/en/articles`,
+          fr: `${SITE_URL}/fr/articles`,
+          en: `${SITE_URL}/en/articles`,
         },
       },
     },
   ];
 
-  const articleEntries: MetadataRoute.Sitemap = ARTICLE_SLUGS.flatMap((slug) => [
-    {
-      url: `${BASE}/fr/articles/${slug}`,
-      lastModified: now,
-      changeFrequency: 'monthly' as const,
-      priority: 0.85,
-      alternates: {
-        languages: {
-          fr: `${BASE}/fr/articles/${slug}`,
-          en: `${BASE}/en/articles/${slug}`,
+  const articleEntries: MetadataRoute.Sitemap = ARTICLE_SLUGS.flatMap((slug) => {
+    const frArticle = ARTICLES.fr.find((article) => article.slug === slug);
+    const enArticle = ARTICLES.en.find((article) => article.slug === slug);
+
+    return [
+      {
+        url: `${SITE_URL}/fr/articles/${slug}`,
+        ...(frArticle?.updatedAt
+          ? { lastModified: new Date(`${frArticle.updatedAt}T00:00:00.000Z`) }
+          : {}),
+        alternates: {
+          languages: {
+            fr: `${SITE_URL}/fr/articles/${slug}`,
+            en: `${SITE_URL}/en/articles/${slug}`,
+          },
         },
       },
-    },
-    {
-      url: `${BASE}/en/articles/${slug}`,
-      lastModified: now,
-      changeFrequency: 'monthly' as const,
-      priority: 0.85,
-      alternates: {
-        languages: {
-          fr: `${BASE}/fr/articles/${slug}`,
-          en: `${BASE}/en/articles/${slug}`,
+      {
+        url: `${SITE_URL}/en/articles/${slug}`,
+        ...(enArticle?.updatedAt
+          ? { lastModified: new Date(`${enArticle.updatedAt}T00:00:00.000Z`) }
+          : {}),
+        alternates: {
+          languages: {
+            fr: `${SITE_URL}/fr/articles/${slug}`,
+            en: `${SITE_URL}/en/articles/${slug}`,
+          },
         },
       },
-    },
-  ]);
+    ];
+  });
 
   return [...coreEntries, ...articleEntries];
 }

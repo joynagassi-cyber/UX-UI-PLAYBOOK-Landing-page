@@ -1,6 +1,7 @@
 import type { Locale } from '@/i18n/content';
+import { SITE_URL } from '@/lib/site-config';
 
-export const SITE_URL = 'https://joyccelight-playbook.vercel.app';
+export { SITE_URL } from '@/lib/site-config';
 
 // Only identities linked to the supplied store and this repository owner.
 // Do not invent social profiles or professional qualifications.
@@ -16,6 +17,7 @@ export function authorJsonLd(locale: Locale) {
     name: 'Joy N.',
     url: `${SITE_URL}/${locale}#author`,
     sameAs: AUTHOR_SAME_AS,
+    image: `${SITE_URL}/images/author-joy.webp`,
     description: locale === 'fr'
       ? 'Auteur du UX/UI Playbook, entrepreneur et créateur de solutions numériques et de workflows agentiques.'
       : 'Author of UX/UI Playbook, entrepreneur and builder of digital products and agentic workflows.',

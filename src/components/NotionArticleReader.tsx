@@ -9,6 +9,10 @@ import {
   ChevronDown,
   ChevronRight,
   Copy,
+  Compass,
+  MessageCircle,
+  Palette,
+  Settings,
   ListTree,
   Maximize2,
   Sparkles,
@@ -301,7 +305,7 @@ export function NotionArticleReader({
         return (
           <aside key={idx} className={`notion-callout ${toneClass}`}>
             <span className="notion-callout-icon" aria-hidden="true">
-              {block.icon}
+              {block.icon === 'message-circle' ? <MessageCircle size={17} aria-hidden="true" /> : <Sparkles size={17} aria-hidden="true" />}
             </span>
             <div>
               <div className="notion-callout-title">{block.title}</div>
@@ -554,7 +558,13 @@ export function NotionArticleReader({
             </div>
 
             <div className="notion-icon-badge" aria-hidden="true">
-              {article.icon}
+              {article.icon === 'compass' ? (
+                <Compass size={28} aria-hidden="true" />
+              ) : article.icon === 'palette' ? (
+                <Palette size={28} aria-hidden="true" />
+              ) : (
+                <Settings size={28} aria-hidden="true" />
+              )}
             </div>
 
             <h1 className="notion-title">{article.title}</h1>

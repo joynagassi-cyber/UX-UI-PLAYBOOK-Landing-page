@@ -122,6 +122,12 @@ export default async function ArticleDetailPage({
           name: 'UX/UI Playbook',
           url: c.siteUrl,
           email: 'joynagassi@gmail.com',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${c.siteUrl}/icon.svg`,
+            width: 512,
+            height: 512,
+          },
         },
         isPartOf: {
           '@type': 'Book',

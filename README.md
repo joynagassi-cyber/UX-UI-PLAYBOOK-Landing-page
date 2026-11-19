@@ -61,3 +61,14 @@ Un résultat axe sans violation détectée n’est pas une certification d’acc
 Les trois guides ont été publiés ensemble : leurs dates de première publication ne sont pas artificiellement décalées pour satisfaire un signal SEO. `publishedAt` et `updatedAt` sont des champs distincts ; une date différente nécessite un événement éditorial réel.
 
 Réconciliation éditoriale : **13 prototypes avant/après + 11 planches de plateformes = 24 planches** ; **6 rôles typographiques sur 8 tokens** (`12, 14, 16, 20, 24, 32, 40, 64px`). Les proportions, timeboxes et prix de prestation sont des repères de méthode, pas des résultats garantis. Les obligations juridiques sont accompagnées des sources primaires et de leurs limites, dont la transition de l’AI Act dans le texte consolidé du 27 juillet 2026.
+
+
+## Canonical domain
+
+Set `NEXT_PUBLIC_SITE_URL` to the one public origin used for canonical URLs, Open Graph assets, robots.txt, the sitemap and LLM text endpoints. Include the scheme and omit the trailing slash. The Vercel URL remains the fallback until a production domain is configured.
+
+```env
+NEXT_PUBLIC_SITE_URL=https://your-canonical-domain.example
+```
+
+Configure alternate hostnames at the hosting layer to redirect to this canonical origin. Do not set different canonical origins for the French and English editions.

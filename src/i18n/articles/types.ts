@@ -80,7 +80,7 @@ export interface ArticleReference {
 export interface ArticleData {
   slug: 'ux-design-guide' | 'ui-design-system-tokens' | 'product-design-ai-agents';
   category: 'UX Design' | 'UI Design' | 'Product Design';
-  icon: string;
+  icon: 'compass' | 'palette' | 'settings';
   readTime: string;
   publishedAt: string;
   updatedAt: string;

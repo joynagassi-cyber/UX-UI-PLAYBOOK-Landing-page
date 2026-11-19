@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ArrowRight, ArrowUpRight, BookOpen } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, BookOpen, Compass, Palette, Settings } from 'lucide-react';
 import { CONTENT, type Locale } from '@/i18n/content';
 import { ARTICLES, ARTICLES_UI } from '@/i18n/articles';
 import { GumroadButton } from '@/components/GumroadButton';
@@ -107,6 +107,12 @@ export default async function LandingPage({
         name: 'UX/UI Playbook',
         url: c.siteUrl,
         email: 'joynagassi@gmail.com',
+        logo: {
+          '@type': 'ImageObject',
+          url: `${c.siteUrl}/icon.svg`,
+          width: 512,
+          height: 512,
+        },
         founder: { '@id': `${c.siteUrl}/#joy-n` },
       },
       {
@@ -139,6 +145,7 @@ export default async function LandingPage({
         author: { '@id': `${c.siteUrl}/#joy-n` },
         bookEdition: locale === 'fr' ? 'Édition française 2026' : '2026 English Edition',
         bookFormat: 'https://schema.org/EBook',
+        isRelatedTo: { '@id': `${c.siteUrl}/${locale}#product` },
         numberOfPages: locale === 'fr' ? 148 : 139,
         inLanguage: locale,
         publisher: { '@id': `${c.siteUrl}/#organization` },
@@ -370,6 +377,8 @@ export default async function LandingPage({
             <div className="guides-grid">
               {ARTICLES[locale].map((art) => {
                 const thumb = ARTICLE_THUMBS[art.slug][locale];
+                const ArticleIcon =
+                  art.icon === 'compass' ? Compass : art.icon === 'palette' ? Palette : Settings;
                 return (
                   <a
                     key={art.slug}
@@ -379,7 +388,7 @@ export default async function LandingPage({
                     <div>
                       <div className="guide-card-top">
                         <span className="guide-cat-pill">
-                          <span>{art.icon}</span>
+                          <span><ArticleIcon size={14} aria-hidden="true" /></span>
                           <span>{art.category}</span>
                         </span>
                         <span className="guide-read-meta">{art.readTime}</span>
