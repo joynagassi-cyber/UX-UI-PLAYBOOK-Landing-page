@@ -40,6 +40,8 @@ jobs:
           test -f out/fr/articles/ux-design-guide.html
           test -f out/en/articles/ux-design-guide.html
           test -f out/robots.txt
+          test -f out/llms.txt
+          test -f out/llms-full.txt
           test -f out/sitemap.xml
           test -f out/og-fr.jpg
           test -f out/og-en.jpg
@@ -47,5 +49,5 @@ jobs:
           test -f out/images/en/cover.webp
           test -f out/_redirects
           test -f out/_routes.json
-          ! grep -R "joyccelight-playbook.vercel.app" out/fr.html out/en.html out/sitemap.xml out/robots.txt
+          ! grep -R "joyccelight-playbook.vercel.app" out/fr.html out/en.html out/sitemap.xml out/robots.txt out/llms.txt out/llms-full.txt
           echo "Static export smoke checks passed."
