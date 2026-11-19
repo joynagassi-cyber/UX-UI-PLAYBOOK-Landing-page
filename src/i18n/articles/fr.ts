@@ -7,7 +7,7 @@ export const ARTICLES_FR: ArticleData[] = [
   {
     slug: 'ux-design-guide',
     category: 'UX Design',
-    icon: '🧭',
+    icon: 'compass',
     readTime: '18 min de lecture',
     publishedAt: '2026-11-18',
     updatedAt: '2026-11-18',
@@ -181,7 +181,7 @@ export const ARTICLES_FR: ArticleData[] = [
           },
           {
             type: 'callout',
-            icon: '🗣️',
+            icon: 'message-circle',
             tone: 'accent',
             title: 'Comment transformer une critique subjective en arbitrage objectif',
             text: 'En revue client ou produit, ne répondez jamais « je trouve ça plus lisible ». Dites : « Sur cet écran, nous avons six boutons de même poids visuel ; l’effet Von Restorff est annulé et l’entropie de Hick-Hyman ralentit le premier clic. On garde le verbe principal en plein et on passe les cinq autres en secondaire. » Vous déplacez instantanément la discussion du goût personnel vers la mécanique.',
@@ -521,7 +521,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
   {
     slug: 'ui-design-system-tokens',
     category: 'UI Design',
-    icon: '🎨',
+    icon: 'palette',
     readTime: '19 min de lecture',
     publishedAt: '2026-11-18',
     updatedAt: '2026-11-18',
@@ -950,7 +950,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
   {
     slug: 'product-design-ai-agents',
     category: 'Product Design',
-    icon: '⚙️',
+    icon: 'settings',
     readTime: '20 min de lecture',
     publishedAt: '2026-11-18',
     updatedAt: '2026-11-18',
