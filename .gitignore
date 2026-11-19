@@ -25,3 +25,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated verification evidence (uploaded by CI)
+/reports/
+/test-results/
+/playwright-report/
+__pycache__/
+*.pyc

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ArrowRight,
   BookOpen,
@@ -18,6 +18,7 @@ import type { Locale } from '@/i18n/content';
 import type { ArticleBlock, ArticleData } from '@/i18n/articles';
 import { ARTICLES_UI } from '@/i18n/articles';
 import { GumroadButton } from '@/components/GumroadButton';
+import { useModalFocus } from '@/components/useModalFocus';
 
 interface NotionArticleReaderProps {
   locale: Locale;
@@ -86,7 +87,7 @@ function CopyableNotionBlock({
           )}
         </button>
       </div>
-      <pre>
+      <pre tabIndex={0} role="region" aria-label={label}>
         <code>{code}</code>
       </pre>
       {note && <div className="notion-copybox-note">{note}</div>}
@@ -111,6 +112,11 @@ export function NotionArticleReader({
     sourceRef: string;
   } | null>(null);
 
+  const lightboxRef = useRef<HTMLDivElement>(null);
+  const sourcesHeading = locale === 'fr' ? 'Sources et niveaux de preuve' : 'Sources and evidence levels';
+  const evidenceLabels = locale === 'fr'
+    ? { established: 'Établi', probable: 'Probable' }
+    : { established: 'Established', probable: 'Probable' };
   const zoomLabel = locale === 'fr' ? 'Agrandir le schéma' : 'Zoom diagram';
   const faqHeading =
     locale === 'fr'
@@ -143,7 +149,7 @@ export function NotionArticleReader({
 
   // Scroll-spy for Notion sticky left TOC + smooth reveal motion
   useEffect(() => {
-    const sectionIds = [...article.sections.map((s) => s.id), 'article-faq'];
+    const sectionIds = [...article.sections.map((s) => s.id), 'article-faq', 'article-sources'];
     const sectionEls = sectionIds
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el));
@@ -189,15 +195,8 @@ export function NotionArticleReader({
     };
   }, [article.sections]);
 
-  // Escape closes figure lightbox
-  useEffect(() => {
-    if (!lightboxImg) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setLightboxImg(null);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [lightboxImg]);
+  const closeLightbox = useCallback(() => setLightboxImg(null), []);
+  useModalFocus(Boolean(lightboxImg), lightboxRef, closeLightbox);
 
   const handleTocClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -205,7 +204,10 @@ export function NotionArticleReader({
     setMobileTocOpen(false);
     const target = document.getElementById(id);
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block: 'start',
+      });
       window.history.replaceState(null, '', `#${id}`);
     }
   };
@@ -308,6 +310,22 @@ export function NotionArticleReader({
           </aside>
         );
       }
+      case 'inlineCta':
+        return (
+          <aside key={idx} className="notion-inline-cta" aria-label={block.title}>
+            <div className="notion-inline-cta-copy">
+              <div className="notion-inline-cta-kicker">
+                {locale === 'fr' ? 'POUR VOTRE PROCHAIN ÉCRAN' : 'FOR YOUR NEXT SCREEN'}
+              </div>
+              <h3 className="notion-inline-cta-title">{block.title}</h3>
+              <p className="notion-inline-cta-body">{block.text}</p>
+            </div>
+            <GumroadButton href={gumroadUrl} className="btn primary small">
+              <span>{block.buttonLabel}</span>
+              <ArrowRight size={16} aria-hidden="true" />
+            </GumroadButton>
+          </aside>
+        );
       case 'copyable':
         return (
           <CopyableNotionBlock
@@ -336,7 +354,7 @@ export function NotionArticleReader({
               }
               aria-label={`${zoomLabel}: ${block.alt}`}
             >
-              <img src={block.src} alt={block.alt} loading="lazy" />
+              <img src={block.src} alt={block.alt} width={block.width} height={block.height} loading="lazy" />
               <span className="notion-figure-zoom-pill">
                 <Maximize2 size={13} aria-hidden="true" />
                 <span>{zoomLabel}</span>
@@ -350,8 +368,15 @@ export function NotionArticleReader({
         );
       case 'table':
         return (
-          <div key={idx} className="notion-table-wrap">
+          <div
+            key={idx}
+            className="notion-table-wrap"
+            role="region"
+            aria-label={block.caption || (locale === 'fr' ? 'Tableau comparatif' : 'Comparison table')}
+            tabIndex={0}
+          >
             <table className="notion-table">
+              {block.caption && <caption className="notion-table-caption">{block.caption}</caption>}
               <thead>
                 <tr>
                   {block.headers.map((h, hIdx) => (
@@ -371,7 +396,6 @@ export function NotionArticleReader({
                 ))}
               </tbody>
             </table>
-            {block.caption && <div className="notion-table-caption">{block.caption}</div>}
           </div>
         );
       default:
@@ -387,7 +411,7 @@ export function NotionArticleReader({
       </div>
 
       {/* Breadcrumbs */}
-      <nav className="notion-breadcrumbs" aria-label="Breadcrumb">
+      <nav className="notion-breadcrumbs" aria-label={locale === 'fr' ? 'Fil d’Ariane' : 'Breadcrumb'}>
         <a href={`/${locale}`}>UX/UI Playbook</a>
         <ChevronRight size={14} aria-hidden="true" />
         <a href={`/${locale}/articles`}>{guidesLabel}</a>
@@ -402,6 +426,7 @@ export function NotionArticleReader({
           className="notion-mobile-toc-btn"
           onClick={() => setMobileTocOpen((v) => !v)}
           aria-expanded={mobileTocOpen}
+          aria-controls="mobile-article-toc"
         >
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
             <ListTree size={16} style={{ color: 'var(--accent-ink)' }} aria-hidden="true" />
@@ -417,7 +442,7 @@ export function NotionArticleReader({
           />
         </button>
         {mobileTocOpen && (
-          <div className="notion-mobile-toc-panel">
+          <div id="mobile-article-toc" className="notion-mobile-toc-panel">
             <ul className="notion-toc-list">
               {article.sections.map((sec) => (
                 <li key={sec.id}>
@@ -425,6 +450,7 @@ export function NotionArticleReader({
                     href={`#${sec.id}`}
                     onClick={(e) => handleTocClick(e, sec.id)}
                     className={`notion-toc-link ${activeId === sec.id ? 'active' : ''}`}
+                    aria-current={activeId === sec.id ? 'location' : undefined}
                   >
                     <span className="notion-toc-num">{sec.num}</span>
                     <span>{sec.tocLabel || sec.heading}</span>
@@ -436,9 +462,17 @@ export function NotionArticleReader({
                   href="#article-faq"
                   onClick={(e) => handleTocClick(e, 'article-faq')}
                   className={`notion-toc-link ${activeId === 'article-faq' ? 'active' : ''}`}
+                  aria-current={activeId === 'article-faq' ? 'location' : undefined}
                 >
                   <span className="notion-toc-num">FAQ</span>
                   <span>{faqNavTitle}</span>
+                </a>
+              </li>
+              <li>
+                <a href="#article-sources" onClick={(e) => handleTocClick(e, 'article-sources')}
+                  className={`notion-toc-link ${activeId === 'article-sources' ? 'active' : ''}`}
+                  aria-current={activeId === 'article-sources' ? 'location' : undefined}>
+                  <span className="notion-toc-num">↗</span><span>{sourcesHeading}</span>
                 </a>
               </li>
             </ul>
@@ -462,6 +496,7 @@ export function NotionArticleReader({
                     href={`#${sec.id}`}
                     onClick={(e) => handleTocClick(e, sec.id)}
                     className={`notion-toc-link ${activeId === sec.id ? 'active' : ''}`}
+                    aria-current={activeId === sec.id ? 'location' : undefined}
                   >
                     <span className="notion-toc-num">{sec.num}</span>
                     <span>{sec.tocLabel || sec.heading}</span>
@@ -473,9 +508,17 @@ export function NotionArticleReader({
                   href="#article-faq"
                   onClick={(e) => handleTocClick(e, 'article-faq')}
                   className={`notion-toc-link ${activeId === 'article-faq' ? 'active' : ''}`}
+                  aria-current={activeId === 'article-faq' ? 'location' : undefined}
                 >
                   <span className="notion-toc-num">FAQ</span>
                   <span>{faqNavTitle}</span>
+                </a>
+              </li>
+              <li>
+                <a href="#article-sources" onClick={(e) => handleTocClick(e, 'article-sources')}
+                  className={`notion-toc-link ${activeId === 'article-sources' ? 'active' : ''}`}
+                  aria-current={activeId === 'article-sources' ? 'location' : undefined}>
+                  <span className="notion-toc-num">↗</span><span>{sourcesHeading}</span>
                 </a>
               </li>
             </ul>
@@ -516,13 +559,17 @@ export function NotionArticleReader({
 
             <h1 className="notion-title">{article.title}</h1>
             <p className="notion-subtitle">{article.subtitle}</p>
+            <p className="notion-entity-def">
+              <strong>{article.category}</strong> — {article.entityDefinition}
+            </p>
 
             <div className="notion-byline">
               <span>
                 <strong style={{ color: 'var(--fg)' }}>Joy N.</strong> · UX/UI Playbook
               </span>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12 }}>
-                {updatedWord} {article.updatedAt}
+                {updatedWord}{' '}
+                <time dateTime={article.updatedAt}>{article.updatedAt}</time>
               </span>
             </div>
 
@@ -541,7 +588,12 @@ export function NotionArticleReader({
                 <div key={idx} className="notion-stat-card">
                   <div className="notion-stat-val">{st.value}</div>
                   <div className="notion-stat-label">{st.label}</div>
-                  <div className="notion-stat-src">{st.source}</div>
+                  <div className="notion-stat-src">
+                    {st.url ? <a href={st.url}>{st.source}</a> : st.source}
+                  </div>
+                  <span className={`notion-refs-badge ${st.evidence}`}>
+                    {evidenceLabels[st.evidence]}
+                  </span>
                 </div>
               ))}
             </div>
@@ -576,6 +628,32 @@ export function NotionArticleReader({
                 </details>
               ))}
             </div>
+          </section>
+
+          <section id="article-sources" className="notion-refs" aria-labelledby="article-sources-heading">
+            <div className="notion-refs-head">
+              <h2 id="article-sources-heading">{sourcesHeading}</h2>
+              <span className="notion-refs-sub">UX/UI Playbook · A5</span>
+            </div>
+            <p className="notion-p" style={{ fontSize: 14, marginBottom: 18 }}>
+              {locale === 'fr'
+                ? 'Établi : source primaire identifiée pour le constat cité. Probable : transposition ou résultat à confirmer dans votre contexte. Les repères de méthode du Playbook ne sont pas des garanties de performance.'
+                : 'Established: a primary source is identified for the cited finding. Probable: an interpretation or result requiring validation in your context. Playbook guidelines are not performance guarantees.'}
+            </p>
+            <ol className="notion-refs-list">
+              {article.references.map((reference) => (
+                <li key={reference.url} className="notion-refs-item">
+                  <div className="notion-refs-main">
+                    <a href={reference.url}>{reference.title}</a>
+                    <div className="notion-refs-sub">{reference.publisher} · {reference.date}</div>
+                    <p>{reference.note}</p>
+                  </div>
+                  <span className={`notion-refs-badge ${reference.evidence}`}>
+                    {evidenceLabels[reference.evidence]}
+                  </span>
+                </li>
+              ))}
+            </ol>
           </section>
 
           {/* End-of-Article Conversion Offer: Buy UX/UI Playbook */}
@@ -720,6 +798,7 @@ export function NotionArticleReader({
       {lightboxImg && (
         <div
           className="lightbox-backdrop"
+          ref={lightboxRef}
           role="dialog"
           aria-modal="true"
           aria-label={lightboxImg.alt}
@@ -737,15 +816,18 @@ export function NotionArticleReader({
             <button
               type="button"
               className="lb-btn"
+              data-modal-close
               onClick={() => setLightboxImg(null)}
-              aria-label="Close"
+              aria-label={locale === 'fr' ? 'Fermer le schéma agrandi' : 'Close enlarged diagram'}
             >
               <X size={16} aria-hidden="true" />
             </button>
           </div>
-          <div
+          <div tabIndex={0} role="region" aria-label={zoomLabel}
             style={{
               maxWidth: 1060,
+              maxHeight: 'calc(100dvh - 120px)',
+              overflowY: 'auto',
               width: '100%',
               margin: '20px auto',
               background: '#ffffff',

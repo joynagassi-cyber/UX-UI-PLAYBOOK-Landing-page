@@ -24,6 +24,12 @@ export type ArticleBlock =
       tone?: 'neutral' | 'accent' | 'lime' | 'warn';
     }
   | {
+      type: 'inlineCta';
+      title: string;
+      text: string;
+      buttonLabel: string;
+    }
+  | {
       type: 'table';
       caption?: string;
       headers: string[];
@@ -32,6 +38,8 @@ export type ArticleBlock =
   | {
       type: 'figure';
       src: string;
+      width: number;
+      height: number;
       alt: string;
       caption: string;
       sourceRef: string;
@@ -58,6 +66,17 @@ export interface ArticleSection {
   blocks: ArticleBlock[];
 }
 
+export type EvidenceLevel = 'established' | 'probable';
+
+export interface ArticleReference {
+  title: string;
+  url: `https://${string}`;
+  publisher: string;
+  date: string;
+  evidence: EvidenceLevel;
+  note: string;
+}
+
 export interface ArticleData {
   slug: 'ux-design-guide' | 'ui-design-system-tokens' | 'product-design-ai-agents';
   category: 'UX Design' | 'UI Design' | 'Product Design';
@@ -71,9 +90,17 @@ export interface ArticleData {
   keywords: string[];
   title: string;
   subtitle: string;
+  entityDefinition: string;
   aeoSummaryTitle: string;
   aeoSummary: string;
-  keyStats: Array<{ value: string; label: string; source: string }>;
+  keyStats: Array<{
+    value: string;
+    label: string;
+    source: string;
+    evidence: EvidenceLevel;
+    url?: `https://${string}`;
+  }>;
+  references: ArticleReference[];
   sections: ArticleSection[];
   faqs: Array<{ q: string; a: string }>;
   ctaTitle: string;
@@ -101,9 +128,9 @@ export interface ArticlesIndexCopy {
 
 export const ARTICLES_UI: Record<Locale, ArticlesIndexCopy> = {
   fr: {
-    metaTitle: 'Dossiers UX Design, UI Design & Product Design 2026 — UX/UI Playbook',
+    metaTitle: "Guides UX, UI et Product Design | UX/UI Playbook",
     metaDescription:
-      'Trois cours de terrain tirés du UX/UI Playbook 2026 : psychologie cognitive et audit UX 40 points, design tokens CSS et vrai Dark Mode WCAG 2.2, pipeline Product Design et facturation à l’ère des agents IA.',
+      "Trois guides pratiques pour vos interfaces : audit UX de 40 points, tokens CSS clair/sombre et workflow Product Design avec agents IA. Exemples FR.",
     kicker: 'DOSSIERS DE TERRAIN · MÉTHODE INTÉGRALE EXTRAITE DU MANUEL',
     heading: 'Ce qui fait réellement tenir un écran : trois cours complets, zéro jargon.',
     lede:
@@ -113,16 +140,16 @@ export const ARTICLES_UI: Record<Locale, ArticlesIndexCopy> = {
     tocTitle: 'Sommaire du cours',
     copyBtn: 'Copier',
     copiedBtn: 'Copié !',
-    sourcesBadge: 'Sources primaires datées (Annexe A5)',
+    sourcesBadge: "Sources et niveaux de preuve (Annexe A5)",
     relatedHeading: 'Poursuivre avec les deux autres volets du système',
     miniCtaTag: 'MANUEL COMPLET · 29 $',
     miniCtaTitle: '148 pages A4, 12 fiches imprimables & le scanner Python des 77 règles.',
     miniCtaBtn: 'Obtenir le Playbook FR →',
   },
   en: {
-    metaTitle: 'UX Design, UI Design & Product Design Field Courses 2026 — UX/UI Playbook',
+    metaTitle: "UX, UI and Product Design Guides | UX/UI Playbook",
     metaDescription:
-      'Three deep-dive field courses from the UX/UI Playbook 2026: cognitive UX laws and the 40-point audit, CSS design tokens and halation-free Dark Mode, and deterministic AI agent product workflows.',
+      "Three practical interface guides: a 40-point UX audit, light/dark CSS design tokens and a Product Design workflow for AI agents. Copy-ready examples.",
     kicker: 'FIELD COURSES · EXTRACTED FROM THE PLAYBOOK',
     heading: 'What actually makes a screen hold up: three complete field courses, zero fluff.',
     lede:
@@ -132,7 +159,7 @@ export const ARTICLES_UI: Record<Locale, ArticlesIndexCopy> = {
     tocTitle: 'Course contents',
     copyBtn: 'Copy',
     copiedBtn: 'Copied!',
-    sourcesBadge: 'Dated primary sources (Appendix A5)',
+    sourcesBadge: "Sources and evidence levels (Appendix A5)",
     relatedHeading: 'Continue with the other two Playbook courses',
     miniCtaTag: 'COMPLETE SYSTEM · $29',
     miniCtaTitle: '139 A4 pages, 12 printable sheets & the 77-rule Python scanner.',

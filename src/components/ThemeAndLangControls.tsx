@@ -62,7 +62,7 @@ export function ThemeAndLangControls({
 
   return (
     <div className="nav-actions">
-      <div className="lang-switch" role="group" aria-label="Language edition">
+      <div className="lang-switch" role="group" aria-label={locale === 'fr' ? 'Langue de l’édition' : 'Language edition'}>
         <a
           href={frHref}
           hrefLang="fr"

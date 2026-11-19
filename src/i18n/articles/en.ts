@@ -13,9 +13,9 @@ export const ARTICLES_EN: ArticleData[] = [
     updatedAt: '2026-11-18',
     ogImage: '/og-article-ux-en.jpg',
     metaTitle:
-      'Operational UX Design: Cognitive Budgets, Day-7 Retention, 5 Screen States & 40-Point Audit | UX/UI Playbook',
+      "UX Design: User Journeys and Audits | UX/UI Playbook",
     metaDescription:
-      'Complete UX Design field course from the UX/UI Playbook 2026: kill vague briefs, apply real cognitive laws (Cowan 4±1, Fitts, Hick-Hyman), design all 5 screen states, fix checkout drop-offs, and run a 20-minute UX audit.',
+      "Design clearer user journeys with 10 UX laws and principles, 5 screen states, accessible checkout patterns and a copy-ready 40-point audit checklist.",
     keywords: [
       'operational UX design',
       'cognitive load Cowan 4 chunks',
@@ -26,27 +26,33 @@ export const ARTICLES_EN: ArticleData[] = [
       '40 point UX audit checklist',
     ],
     title:
-      'Operational UX Design: Cognitive Budgets, Habit Loops, the 5 Screen States & the 20-Minute Audit',
+      "UX Design: Build Clear User Journeys and Audit Your Screens",
     subtitle:
-      'UX is not decorative polish applied the night before launch. It is the engineering discipline that lets a distracted human reach their goal without thinking — and come back unprompted seven days later.',
+      "Turn a vague brief into testable screens: user goals, cognitive principles, edge states and a pre-ship audit. Playbook targets are starting points to validate in your own context.",
     aeoSummaryTitle: 'Executive Takeaway — What Actually Governs Usability',
     aeoSummary:
-      'A high-performing screen obeys four measurable constraints: an active working-memory budget capped at 4 ± 1 chunks (Cowan, 2001) around one primary action, a visible first win under 60 seconds from the empty state, explicit implementation of all 5 screen states (empty, loading, ideal, overflow/partial, error), and WCAG 2.2 AA compliance (≥ 4.5:1 text contrast, ≥ 44 px hit targets). Five qualitative testers catch ~85% of blockers on average (actual 5-user range: 55%–99%), whereas comparing Variant A vs B within ±10 points requires ~93 participants.',
+      "Start with a user goal and one primary action. Design the guide’s 5 screen states: empty, loading, ideal, partial/overflow and error, with confirmation after a successful action. Cowan’s 4 ± 1 chunks inform working-memory design; grouping interface elements is a heuristic to test. Measure WCAG 2.2 AA contrast (4.5:1 for body text) and aim for 44 × 44 px targets under the Playbook; the web AA minimum is 24 × 24 px with exceptions. A few observed usability tests uncover problems, but prove neither completeness nor conversion uplift.",
     keyStats: [
       {
         value: '4 ± 1 chunks',
-        label: 'True active working-memory limit while reading and deciding (not the 7 ± 2 myth)',
-        source: 'Nelson Cowan, Behavioral & Brain Sciences (2001) · Established evidence',
+        label: "Working-memory estimate in the studied conditions, not a universal button limit",
+        source: "Nelson Cowan · Behavioral and Brain Sciences (2001)",
+        evidence: "established",
+        url: "https://doi.org/10.1017/S0140525X01003922",
       },
       {
         value: '70.22%',
-        label: 'Average checkout abandonment (23.48 form elements shown vs 12–14 actually needed)',
-        source: 'Baymard Institute (28 Oct 2026, 50 studies) · Established evidence',
+        label: "Mean cart abandonment: an unweighted average of 50 studies, not your checkout’s rate",
+        source: "Baymard Institute · 28 October 2026",
+        evidence: "established",
+        url: "https://baymard.com/blog/cart-abandonment-rate",
       },
       {
         value: '95.9%',
-        label: 'Top home pages failing WCAG 2.2 Level A/AA checks (56.1 errors per page on average)',
-        source: 'WebAIM Million (February 2026) · Established evidence',
+        label: "Sampled home pages with automatically detectable WCAG failures",
+        source: "WebAIM Million · February 2026",
+        evidence: "established",
+        url: "https://webaim.org/projects/million/",
       },
     ],
     sections: [
@@ -67,7 +73,7 @@ export const ARTICLES_EN: ArticleData[] = [
           },
           {
             type: 'p',
-            text: 'To see the sharp boundary between visual styling (UI) and user experience (UX), picture two pixel-identical screens: clean typography, centred card, bold crimson primary button in the bottom-right corner. On a final payment screen ("Pay $132.90"), that prominence builds confidence and closes the sale. On an account settings page where that exact button reads "Permanently delete workspace", the identical aesthetic becomes a catastrophic trap. The pixels did not change; the user’s intent inverted the outcome.',
+            text: "To see the sharp boundary between visual styling (UI) and user experience (UX), picture two pixel-identical screens: clean typography, centred card, bold crimson primary button in the bottom-right corner. On a final payment screen (\"Pay $132.90\"), that prominence builds confidence and closes the sale. On an account settings page where that exact button reads \"Permanently delete workspace\", the identical aesthetic becomes a risk of unintended deletion. The pixels did not change; the user’s intent inverted the outcome.",
           },
           {
             type: 'h3',
@@ -101,7 +107,7 @@ export const ARTICLES_EN: ArticleData[] = [
           },
           {
             type: 'h3',
-            text: 'The free, ruthless diagnostic: the 5-second test',
+            text: "The quick, no-cost diagnostic: the 5-second test",
           },
           {
             type: 'p',
@@ -122,11 +128,11 @@ export const ARTICLES_EN: ArticleData[] = [
           },
           {
             type: 'h3',
-            text: '1. Cowan (2001) vs Miller’s myth: your real budget is 4 ± 1 chunks',
+            text: "1. Cowan (2001): about 4 chunks in working memory",
           },
           {
             type: 'p',
-            text: 'George Miller’s famous "7 ± 2" (1956) described short-term recall of isolated digits with zero concurrent decision-making. When a real user reads prices, weighs trade-offs, and hunts for a button simultaneously, active working memory caps out at 4 ± 1 chunks (Nelson Cowan, Behavioral and Brain Sciences, 2001). Group navigation items, dashboard KPIs, and feature cards into sets of 3 to 5. An ungrouped 40-item dropdown menu is an admission that nobody designed the information architecture.',
+            text: "Miller (1956) and Cowan (2001) do not measure a layout rule. Cowan reviews findings suggesting about 4 ± 1 chunks when rehearsal and grouping strategies are controlled. This supports limiting what a person must retain during a task, not a universal five-element cap for screens. The Playbook uses groups of 3 to 5 as a starting hierarchy; test comprehension with the intended users.",
           },
           {
             type: 'h3',
@@ -134,7 +140,7 @@ export const ARTICLES_EN: ArticleData[] = [
           },
           {
             type: 'p',
-            text: 'Hick-Hyman is routinely misquoted as "fewer buttons = faster clicks". Two crucial nuances appear in the original work. First, decision time scales with information entropy (how hard it is to tell vague labels apart), not raw count alone. Second, the law largely disappears once spatial position becomes automatic muscle memory! On a first-visit landing page, strip choices down to one unmistakable primary CTA. Inside a daily pro workspace used six hours a day, never hide or reshuffle established toolbar shortcuts in the name of minimalism — muscle memory beats fewer icons every time.',
+            text: "Hick-Hyman describes the relationship between choice time and information in an experimental task. Option count alone does not predict a real journey: labels, choice probabilities, grouping and learning also matter. Make the primary action recognisable for a first-time user and preserve learned shortcuts for regular users. These are design decisions to observe, not proof that daily menus escape all cognitive constraints.",
           },
           {
             type: 'h3',
@@ -142,39 +148,64 @@ export const ARTICLES_EN: ArticleData[] = [
           },
           {
             type: 'p',
-            text: 'Pointing time depends on distance divided by effective target width — measured across actual click/tap scatter, not the visual stroke of an icon. A 16 × 16 px close icon whose clickable box is also 16 × 16 px guarantees rage-taps. Always decouple the visual glyph (16–20 px) from its padded hit container (`min-width: 44px; min-height: 44px` on iOS/Web, `48 × 48 dp` on Android).',
+            text: "Pointing time depends on distance divided by effective target width — measured across actual click/tap scatter, not the visual stroke of an icon. A 16 × 16 px close icon whose clickable box is also 16 × 16 px increases the risk of missed taps. Always decouple the visual glyph (16–20 px) from its padded hit container (`min-width: 44px; min-height: 44px` on the web, `44 × 44 pt` on iOS, `48 × 48 dp` on Android).",
           },
           {
             type: 'table',
-            caption: 'Operational translation of foundational UX laws (UX/UI Playbook · Section 03)',
+            caption: "All 10 laws and principles from Section 03: research findings and design heuristics are not interchangeable.",
             headers: ['Law / Principle', 'True Cognitive Mechanism', 'Immediate Implementation Rule'],
             rows: [
-              [
-                'Jakob’s Law',
-                'Users spend 99% of their lives on other products and import those expectations.',
-                'Keep conventions intact: top-left logo goes home, top-right cart, unmistakable back & search.',
-              ],
-              [
-                'Proximity (Gestalt)',
-                'Spatial closeness signals relationship before a single word is read.',
-                'Keep 8 px inside a group (label → input) vs 24–32 px between distinct groups.',
-              ],
-              [
-                'Similarity',
-                'Elements that look alike promise identical behaviour.',
-                'Text links must never look like buttons; static status pills must never look like CTAs.',
-              ],
-              [
-                'Von Restorff Effect',
-                'Only the outlier in a calm field captures memory and gaze.',
-                'One accent-coloured primary button per screen. Three red buttons equal zero red buttons.',
-              ],
-              [
-                'Doherty Threshold',
-                'Past ~400 ms of silent waiting, human flow fractures.',
-                'Show instant press state (< 100 ms), true-size skeleton past 300 ms, progress past 2 s.',
-              ],
-            ],
+                    [
+                      "Jakob",
+                      "Habits learned in other products influence expectations.",
+                      "Keep familiar conventions, then validate them with your audience."
+                    ],
+                    [
+                      "Fitts (1954)",
+                      "Pointing time depends in part on distance and target width.",
+                      "Separate the glyph from its hit area; aim for 44 × 44 px on this web project."
+                    ],
+                    [
+                      "Hick-Hyman (1952–1953)",
+                      "Choice time varies with information; context and learning also matter.",
+                      "Name and group choices. Preserve learned shortcuts."
+                    ],
+                    [
+                      "Cowan (2001)",
+                      "About 4 ± 1 working-memory chunks in the studied conditions.",
+                      "Reduce forced recall; start with groups of 3 to 5, then test."
+                    ],
+                    [
+                      "Proximity (Gestalt)",
+                      "Nearby elements are perceived as related.",
+                      "Example rhythm: 8 px within a group, 24–32 px between groups."
+                    ],
+                    [
+                      "Similarity",
+                      "Visually similar elements suggest a shared function.",
+                      "Keep equivalent actions consistent; distinguish passive status from controls."
+                    ],
+                    [
+                      "Von Restorff effect",
+                      "A distinctive item can be better remembered in context.",
+                      "Reserve the strongest visual emphasis for the primary action."
+                    ],
+                    [
+                      "Pareto — heuristic",
+                      "Some features may concentrate usage; no fixed ratio is guaranteed.",
+                      "Measure frequent tasks and optimise them before secondary features."
+                    ],
+                    [
+                      "Doherty threshold — guideline",
+                      "Waiting without feedback can interrupt task continuity.",
+                      "Acknowledge input promptly; use 400 ms as a design guideline, not a universal limit."
+                    ],
+                    [
+                      "Aesthetic-usability effect",
+                      "Appearance can influence perceived usability without proving actual effectiveness.",
+                      "Polish the first screen and measure task success, errors and time separately."
+                    ]
+                  ],
           },
           {
             type: 'callout',
@@ -211,7 +242,7 @@ export const ARTICLES_EN: ArticleData[] = [
             doItems: [
               'One unmistakable primary action per view; secondary actions demoted to outline or quiet links.',
               'Outcome-driven action verbs: "Create workspace" or "Download PDF receipt" instead of "Next".',
-              'Smart defaults pre-selected for the 80% case (currency, billing cycle, recommended tier).',
+              "Smart defaults pre-selected for the most common use case (currency, billing cycle, recommended tier).",
               'Progressive disclosure: ask for a datum only at the exact moment it unlocks value.',
             ],
             dontItems: [
@@ -228,6 +259,8 @@ export const ARTICLES_EN: ArticleData[] = [
             caption:
               'Density ceilings by screen type: home page (1 promise, 1 action, 3 proofs), form step (5–7 fields max), SaaS dashboard (3 KPIs, 1 chart, 1 actionable list).',
             sourceRef: 'UX/UI Playbook EN · Part 01, Section 04 (p. 13)',
+            width: 1080,
+            height: 1527,
           },
           {
             type: 'h3',
@@ -242,7 +275,7 @@ export const ARTICLES_EN: ArticleData[] = [
             title: 'The 5 exact moments where products lose people (Section 05)',
             steps: [
               {
-                bold: 'Cliff 1 — The cryptic arrival (> 60% qualified bounce)',
+                bold: "Cliff 1 — The unclear arrival",
                 text: 'The hero headline talks about company philosophy instead of stating the problem solved in five seconds.',
               },
               {
@@ -279,7 +312,7 @@ export const ARTICLES_EN: ArticleData[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Why do so many rapidly shipped apps — hand-coded or AI-generated — feel brittle within sixty seconds of real use? Because only the "postcard state" was designed: six tidy database rows, 12-letter names, and a 40 ms local API. In production interface engineering, that ideal state is barely 20% of the job.',
+            text: "Why do so many rapidly shipped apps — hand-coded or AI-generated — feel brittle within sixty seconds of real use? Because only the \"postcard state\" was designed: six tidy database rows, 12-letter names, and a 40 ms local API. In production interface engineering, that ideal state is only part of the job.",
           },
           {
             type: 'figure',
@@ -288,6 +321,8 @@ export const ARTICLES_EN: ArticleData[] = [
             caption:
               'No screen is ready for production until all five states — empty, CLS-safe skeleton loading, ideal, partial/long-text overflow, and recoverable error — exist.',
             sourceRef: 'UX/UI Playbook EN · Part 01, Section 07 (p. 16)',
+            width: 1080,
+            height: 1189,
           },
           {
             type: 'h3',
@@ -295,7 +330,7 @@ export const ARTICLES_EN: ArticleData[] = [
           },
           {
             type: 'p',
-            text: 'The most important screen in your SaaS is the one 100% of new sign-ups see first: the empty state (Section 17). Most apps greet new users with a bleak "No records found" or a giant decorative illustration that shoves the primary CTA below the mobile fold. A high-converting empty state obeys six rules: 1) state the fact plainly without snark ("No boards yet"), 2) explain in one line what value appears once populated, 3) provide a single solid button that creates the first item immediately, 4) offer a low-friction escape hatch ("Or import CSV / start from a template"), 5) never let artwork push the button off mobile viewports, and 6) hide disabled gray toolbars until data exists. If a new user cannot produce a visible result within 60 seconds, voluntary retention collapses.',
+            text: "The most important screen in your SaaS is the one new users see before creating their own data: the empty state (Section 17). Most apps greet new users with a bleak \"No records found\" or a giant decorative illustration that shoves the primary CTA below the mobile fold. A high-converting empty state obeys six rules: 1) state the fact plainly without snark (\"No boards yet\"), 2) explain in one line what value appears once populated, 3) provide a single solid button that creates the first item immediately, 4) offer a low-friction escape hatch (\"Or import CSV / start from a template\"), 5) never let artwork push the button off mobile viewports, and 6) hide disabled gray toolbars until data exists. Aim for a visible first result within 60 seconds, then test that goal on your own journey: it is a Playbook target, not a universal retention threshold.",
           },
           {
             type: 'h3',
@@ -303,7 +338,7 @@ export const ARTICLES_EN: ArticleData[] = [
           },
           {
             type: 'p',
-            text: 'Baymard Institute’s synthesis of 50 e-commerce studies (updated 28 October 2026) puts average cart abandonment at 70.22% (observed spread: 55%–84%), and documents an average of 23.48 checkout form elements where 12 to 14 suffice. Checkout is the one territory where artistic flair matters zero compared to speed and anxiety reduction (Section 14):',
+            text: "Baymard’s compilation of 50 e-commerce studies, updated 28 October 2026, reports unweighted mean cart abandonment of 70.22% (range 55–84%). Its checkout research counts 23.48 form elements on average, versus 12–14 in the simplified flows studied. These are elements, not fields, and not a universal target for every store. Remove unnecessary requests and test whether the final charge is understood (Section 14):",
           },
           {
             type: 'list',
@@ -335,6 +370,12 @@ export const ARTICLES_EN: ArticleData[] = [
               },
             ],
           },
+          {
+            "type": "inlineCta",
+            "title": "Turn these rules into your next audit.",
+            "text": "The English Playbook includes 36 annotated screens, a 40-point audit checklist and 12 A4 sheets for your next review.",
+            "buttonLabel": "Get the EN Playbook · $29"
+          },
         ],
       },
 
@@ -346,7 +387,7 @@ export const ARTICLES_EN: ArticleData[] = [
         blocks: [
           {
             type: 'p',
-            text: 'In February 2026, the WebAIM Million report found that 95.9% of top home pages still fail automated WCAG 2.2 Level A/AA checks, averaging 56.1 errors per page — overwhelmingly low-contrast gray text, missing image alternatives, unlabelled inputs, and unnamed icon buttons. Fixing those fundamentals is not charity: it makes interfaces legible outdoors on phones, keyboard-navigable for power users, and safe to sell into enterprise procurement.',
+            text: "The February 2026 WebAIM Million detects WCAG 2 Level A or AA errors on 95.9% of the one million home pages analysed, averaging 56.1 detected errors per page. It examines an automatable subset: contrast, text alternatives, accessible names and labels are among the checks. These findings describe neither every site nor all accessibility; a clean scan is not conformance. Add keyboard, screen-reader and real-task evaluation.",
           },
           {
             type: 'h3',
@@ -354,7 +395,7 @@ export const ARTICLES_EN: ArticleData[] = [
           },
           {
             type: 'p',
-            text: 'Confusing a W3C working draft, a newly published European technical standard, and a directive cited in the EU Official Journal can create serious liability inside a client proposal (Section 52). Keep these five dates straight:',
+            text: "A W3C Recommendation, a published ETSI standard and a reference cited in the EU Official Journal do not have the same legal role (Section 52). This table separates their status as of 18 November 2026; then check your client’s sector, role and national law. It is not legal advice.",
           },
           {
             type: 'table',
@@ -363,8 +404,8 @@ export const ARTICLES_EN: ArticleData[] = [
             rows: [
               [
                 'European Accessibility Act — Directive (EU) 2019/882',
-                'In force since 28 June 2025',
-                'Covers targeted digital products and services sold in the EU (e-commerce, banking, ticketing, telecoms). Exempts micro-enterprises providing services (< 10 staff AND ≤ €2M turnover/balance sheet) — physical/imported products remain covered.',
+                "National measures apply from 28 June 2025",
+                "Covers the products and services listed in Article 2, not every website. Article 4(5) exempts service micro-enterprises: fewer than 10 people and annual turnover or balance sheet ≤ €2M. That exemption does not cover product obligations. Check national transposition and transitions (Arts. 31–32).",
               ],
               [
                 'WCAG 2.2 (W3C Recommendation)',
@@ -373,18 +414,18 @@ export const ARTICLES_EN: ArticleData[] = [
               ],
               [
                 'EN 301 549 v4.1.1',
-                'Published 2 September 2026',
-                'Updates the European standard to WCAG 2.2, but only grants legal presumption of conformity once cited in the Official Journal of the EU (until then, v3.2.1 remains the harmonised reference).',
+                "Version published September 2026",
+                "ETSI has published EN 301 549 v4.1.1, incorporating WCAG 2.2 for the web. Publication alone is not enough: check the Official Journal citation for the directive and requirements concerned before claiming presumption of conformity.",
               ],
               [
                 'WCAG 3.0 (W3C Working Draft)',
                 '10 September 2026 draft',
-                'Zero mandatory force. The W3C explicitly states it must not be cited as a compliance target.',
+                "A changeable working draft, not a W3C Recommendation. W3C says it should only be cited as work in progress; do not present it as replacing WCAG 2.2.",
               ],
               [
                 'EU AI Act — Regulation (EU) 2024/1689 Art. 50',
-                'Applicable since 2 August 2026',
-                'Transparency duty: disclose clearly when a user is interacting with an AI system and label synthetic outputs.',
+                "Check timeline: Arts. 50, 111(4) and 113",
+                "Article 50 sets interaction notices and marking/disclosure duties by role, content and exceptions. General application: 2 August 2026; the 27 July 2026 consolidated text gives systems already on the market before 2 August until 2 December 2026 for Article 50(2). Not all AI outputs carry the same duty.",
               ],
             ],
           },
@@ -412,19 +453,19 @@ certification nor legal advice."`,
         blocks: [
           {
             type: 'p',
-            text: 'How many testers do you really need? Nielsen & Landauer’s binomial curve (CHI 1993), `1 - (1 - L)^n` with mean discovery rate `L ≈ 31%`, shows that 5 qualitative testers uncover ~85% of usability blockers on average. Yet Laura Faulkner’s empirical replication (2003) adds the caveat every honest practitioner must cite: individual 5-person random samples actually uncover anywhere from 55% to 99% of issues!',
+            text: "Nielsen and Landauer’s model (CHI 1993) estimates cumulative discovery as 1 − (1 − L)^n. With L ≈ 31%, five participants give about 84%, often rounded to 85%. This is conditional, not a guarantee of finding every issue. Faulkner (2003), in a study with 60 users, observed five-person subsamples finding 55%–99% of that study’s issues (evidence level: Probable when generalised to your product).",
           },
           {
             type: 'p',
-            text: 'The Playbook’s rule (Sections 32 & 48) is straightforward: watch 5 real humans for 25 minutes to find what breaks and immediately fix anything 3 out of 5 stumble on. Never use 5 people to claim "Variant B beats Variant A" — estimating a completion rate within ±10 percentage points at 90% confidence takes roughly 93 participants per group. And never swap real humans for synthetic LLM personas: 2026 empirical benchmarks (Kuric et al., 2026; Pew Research Center, 2026) show AI user twins diverge from real human behaviour on 53% of tasks.',
+            text: "Start with a small round of observed sessions on a defined task and audience. Fix recurring blockers, then test again. To compare completion or conversion rates, calculate sample size from the baseline rate, minimum detectable effect, error tolerance and desired power: no single count fits every A/B test. AI personas can help formulate hypotheses, but are not observations of real users.",
           },
           {
             type: 'h3',
-            text: 'How to run and bill a 20-minute interface audit ($150–$400)',
+            text: "Run a 20-minute audit before coding a fix",
           },
           {
             type: 'p',
-            text: 'A tight 20-minute audit is the highest-converting foot-in-the-door offer a freelancer or consultant can sell: prospects experience your clarity before committing to a full build (Section 33). Score the screen `/50` across 10 axes (5-second clarity, hierarchy, single primary CTA, consistency, 5 states, < 400 ms feedback, accessibility, microcopy, trust/pricing clarity, one-handed mobile reach). Present at most the top 3 blockers formatted strictly as: Factual observation → User/revenue impact → Concrete fix on an annotated screenshot. End with a single question: "Which of these three would you like to fix first?"',
+            text: "For a developer, this audit first helps prioritise fixes before opening a ticket. Score 10 axes (/50): 5-second clarity, hierarchy, primary action, consistency, 5 states, feedback, accessibility, microcopy, price/fee clarity and mobile use. Return 3 priorities as Observation → User risk → Annotated fix. Twenty minutes means a diagnostic pass, not an accessibility certification. If you sell it as a service, the manual’s illustrative $150–$400 range is neither a market average nor an earnings promise: price the scope, analysis and report.",
           },
           {
             type: 'copyable',
@@ -469,7 +510,7 @@ certification nor legal advice."`,
 - [ ] Tokens and components are cleanly named with zero detached overrides
 
 ## 4. States, Accessibility & Engineering (10 points)
-- [ ] All 5 screen states exist: empty, loading, populated, error, success
+- [ ] All 5 screen states exist: empty, loading, ideal, partial/overflow, error
 - [ ] All 6 button states exist (idle, hover, pressed, keyboard focus, loading, disabled)
 - [ ] Every form input has a visible linked <label> (never placeholder-only)
 - [ ] Text contrast ≥ 4.5:1 and essential borders/icons ≥ 3:1 verified on actual surfaces
@@ -487,11 +528,11 @@ certification nor legal advice."`,
     faqs: [
       {
         q: 'Why does the Playbook enforce 4 ± 1 chunks (Cowan) instead of Miller’s 7 ± 2?',
-        a: 'Miller’s 1956 paper measured immediate recall of isolated stimuli without concurrent cognitive work. When users read, evaluate prices, and navigate simultaneously, Nelson Cowan’s 2001 meta-analysis shows active working memory holds 4 ± 1 chunks. Designing in groups of 3 to 5 prevents decision paralysis.',
+        a: "Cowan (2001) describes about 4 ± 1 chunks when rehearsal and grouping are controlled. This is not a universal limit on visible interface elements. Use legible groups, reduce forced recall and test comprehension.",
       },
       {
         q: 'Does the European Accessibility Act (Directive 2019/882) apply to every business in 2026?',
-        a: 'In force since 28 June 2025, it covers targeted digital products and consumer services sold in the EU (including e-commerce, banking, ticketing, and telecoms). Micro-enterprises providing services (< 10 employees AND ≤ €2M turnover or balance sheet) have a statutory exemption for services, though B2B enterprise and public-sector contracts routinely require WCAG 2.2 AA regardless of vendor size.',
+        a: "The directive covers specified products and services from 28 June 2025, not every website. Articles 3(23) and 4(5) exempt micro-enterprises providing services (fewer than 10 people and annual turnover or balance sheet ≤ €2M). Check sector, national transposition, contracts and other duties with qualified counsel.",
       },
       {
         q: 'What is the highest-ROI fix on an underperforming checkout page?',
@@ -499,17 +540,108 @@ certification nor legal advice."`,
       },
       {
         q: 'Can synthetic AI user personas replace human usability tests in 2026?',
-        a: 'No. 2026 empirical benchmarks (Kuric et al., 2026; Pew Research Center, 2026) demonstrate that LLM synthetic users diverge from real human behaviour on 53% of tasks. Use Python scripts to verify deterministic UI rules, and 5 real humans to test comprehension.',
+        a: "No. An agent can check deterministic rules and help prepare hypotheses; it does not show how a real person understands your offer or recovers from an error. Observe real users on a defined task, then iterate.",
       },
     ],
     ctaTitle: 'Go from this field course to 36 annotated screens, 12 A4 working sheets & the Python scanner.',
     ctaText:
       'Download the complete 139-page English edition of the UX/UI Playbook 2026 alongside the 26-page printable Bonus Kit (audit, client brief, handoff) and the 21-file working archive featuring agent_check.py.',
     ctaBullets: [
-      '139-page A4 Playbook PDF in English (97 sections, 36 annotated screens, 24 before/after pairs)',
+      "139-page A4 Playbook PDF in English (97 sections, 36 annotated screens, 13 before/after prototypes + 11 platform spreads)",
       '12 printable A4 working sheets + copy-ready Markdown templates for client & product work',
       'Runnable 77-rule Python scanner + AI Agent Skill for Claude Code, Cursor & Codex ($29 one-time)',
     ],
+    entityDefinition: "User experience design organises journeys, content and interactions so a person can reach a goal. It differs from UI design, which defines visual presentation, and Product Design, which also addresses value and scope.",
+    references: [
+                  {
+                    "title": "The magical number 4 in short-term memory",
+                    "url": "https://doi.org/10.1017/S0140525X01003922",
+                    "publisher": "Nelson Cowan · Behavioral and Brain Sciences",
+                    "date": "2001",
+                    "evidence": "established",
+                    "note": "About 4 chunks under specific experimental conditions. Groups of 3 to 5 in a UI are a design interpretation."
+                  },
+                  {
+                    "title": "Cart Abandonment Rate: 50 Statistics",
+                    "url": "https://baymard.com/blog/cart-abandonment-rate",
+                    "publisher": "Baymard Institute",
+                    "date": "2026-10-28",
+                    "evidence": "established",
+                    "note": "70.22%: unweighted mean of 50 studies (2006–2025). Form elements: 23.48 observed versus 12–14 in a simplified flow."
+                  },
+                  {
+                    "title": "The WebAIM Million — 2026 report",
+                    "url": "https://webaim.org/projects/million/",
+                    "publisher": "WebAIM",
+                    "date": "2026-02",
+                    "evidence": "established",
+                    "note": "1 million home pages, 95.9% with detected errors, 56.1 errors per page. An error-free scan does not prove conformance."
+                  },
+                  {
+                    "title": "Web Content Accessibility Guidelines 2.2",
+                    "url": "https://www.w3.org/TR/WCAG22/",
+                    "publisher": "W3C",
+                    "date": "2024-12-12",
+                    "evidence": "established",
+                    "note": "Normative text: distinguish body text, large text and non-text components."
+                  },
+                  {
+                    "title": "Understanding SC 2.5.8: Target Size (Minimum)",
+                    "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+                    "publisher": "W3C WAI",
+                    "date": "WCAG 2.2",
+                    "evidence": "established",
+                    "note": "AA: 24 × 24 CSS px with exceptions. 44 × 44 px is this guide’s recommendation, not the AA minimum."
+                  },
+                  {
+                    "title": "A mathematical model of the finding of usability problems",
+                    "url": "https://doi.org/10.1145/169059.169166",
+                    "publisher": "Jakob Nielsen & Thomas K. Landauer · CHI",
+                    "date": "1993",
+                    "evidence": "established",
+                    "note": "The model depends on problem-discovery probability; 5 people do not guarantee a fixed percentage."
+                  },
+                  {
+                    "title": "Beyond the five-user assumption",
+                    "url": "https://doi.org/10.3758/BF03195514",
+                    "publisher": "Laura Faulkner · Behavior Research Methods",
+                    "date": "2003",
+                    "evidence": "probable",
+                    "note": "Original study with 60 people; 5-person subsamples found 55–99% of that study’s issues. Generalisation to your product requires testing."
+                  },
+                  {
+                    "title": "Directive (EU) 2019/882 — European Accessibility Act",
+                    "url": "https://eur-lex.europa.eu/eli/dir/2019/882/oj",
+                    "publisher": "EUR-Lex · European Union",
+                    "date": "2019",
+                    "evidence": "established",
+                    "note": "Articles 2, 3(23), 4(5) and 31: scope, micro-enterprises and application. Check national transposition and your sector."
+                  },
+                  {
+                    "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+                    "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/2026-07-27/eng",
+                    "publisher": "EUR-Lex · European Union",
+                    "date": "2026-07-27",
+                    "evidence": "established",
+                    "note": "Consolidated text: Art. 50 (duties and exceptions), 111(4) (2 December 2026 transition for certain existing systems) and 113 (application). Check the role and use concerned."
+                  },
+                  {
+                    "title": "W3C Accessibility Guidelines (WCAG) 3.0 — Working Draft",
+                    "url": "https://www.w3.org/TR/2026/WD-wcag-3.0-20260910/",
+                    "publisher": "W3C",
+                    "date": "2026-09-10",
+                    "evidence": "established",
+                    "note": "Working-draft status only: does not replace WCAG 2.2 and may change."
+                  },
+                  {
+                    "title": "EN 301 549 V4.1.1 — Accessibility requirements for ICT products and services",
+                    "url": "https://www.etsi.org/deliver/etsi_en/301500_301599/301549/04.01.01_60/en_301549v040101p.pdf",
+                    "publisher": "ETSI · CEN · CENELEC",
+                    "date": "2026-09",
+                    "evidence": "established",
+                    "note": "Published standard. EU Official Journal citation and its scope must be checked separately."
+                  }
+                ],
   },
 
   /* ============================================================================
@@ -524,9 +656,9 @@ certification nor legal advice."`,
     updatedAt: '2026-11-18',
     ogImage: '/og-article-ui-en.jpg',
     metaTitle:
-      'UI Design & Design Tokens: 4 Hierarchy Levers, Type Scale, 8-pt Grid, True Dark Mode & Handoff | UX/UI Playbook',
+      "UI Design: CSS Tokens and Dark Mode | UX/UI Playbook",
     metaDescription:
-      'Complete UI Design engineering course: the 4 hierarchy levers, 1.25 type scale, 60/30/10 semantic colour tokens, 3-tier 8-pt spacing, halation-free Dark Mode, microcopy, logical RTL CSS, and 1-page dev handoff.',
+      "Build a consistent UI system with 6 type roles, 8 size tokens, 4/8-point spacing, accessible colour, copy-ready light/dark CSS and a developer handoff.",
     keywords: [
       'UI design system CSS tokens',
       'W3C design tokens 2025.10',
@@ -538,27 +670,32 @@ certification nor legal advice."`,
       'developer handoff specification',
     ],
     title:
-      'UI Design & Design Tokens: The 4 Hierarchy Levers, Type Scale, True Dark Mode, Microcopy & Dev Handoff',
+      "UI Design: Build CSS Tokens and a Readable Dark Mode",
     subtitle:
-      'Amateur-looking software almost never suffers from a lack of custom illustrations. It suffers from five ad-hoc font sizes, arbitrary 13 px and 19 px margins, competing accent colours, and a Dark Mode built by inverting white.',
+      "A reusable foundation for your interfaces: hierarchy, typography, spacing and semantic colour, with a copy-ready tokens.css file and developer handoff.",
     aeoSummaryTitle: 'Executive Takeaway — The Numbers Behind Clean UI Systems',
     aeoSummary:
-      '80% of perceived interface quality comes from a locked typographic scale (16 px base × 1.25 ratio rounded to 12, 14, 16, 20, 24, 32, 40, 64 px) paired with three strict 4/8-pt spacing tiers (internal 4–12 px, structural 16–32 px, macro 48–96 px). Colour obeys the 60% calm neutrals / 30% legible ink / 10% single accent split (WCAG 2.2 AA ≥ 4.5:1 on body & placeholders, ≥ 3:1 on borders & focus rings). True Dark Mode encodes elevation through progressively lighter surfaces (#121212 base + 4%–8% lifts) and softened ~87% white ink to prevent astigmatic halation.',
+      "A coherent UI system maps 6 semantic roles to 8 size tokens: 12, 14, 16, 20, 24, 32, 40 and 64 px. A 1.25 ratio informs the progression, rather than defining an exact rounding formula. Separate internal, structural and macro spacing on a 4/8-point base. The 60/30/10 guideline organises colour roles; it is not a scientific finding. For OLED dark mode, keep a #000000 base, lift surfaces and soften text. Measure contrast on each actual background and offer light mode too: reading comfort requires reader feedback.",
     keyStats: [
       {
-        value: '60 / 30 / 10',
-        label: 'Functional balance between calm neutral surfaces, dark structural ink, and a single action accent',
-        source: 'UX/UI Playbook · Section 22 (Semantic Colour System)',
+        value: "6 roles · 8 tokens",
+        label: "CSS sizes 12, 14, 16, 20, 24, 32, 40 and 64 px: the scale chosen in this guide",
+        source: "UX/UI Playbook · Sections 21 & 25 · Design guideline",
+        evidence: "probable",
       },
       {
         value: '≥ 4.5 : 1',
-        label: 'Minimum WCAG 2.2 AA contrast for all text < 24 px, including input placeholders',
-        source: 'W3C WCAG 2.2 (Criteria 1.4.3 & 1.4.11) · Established evidence',
+        label: "AA body-text contrast; large text and meaningful controls: 3:1 under their respective criteria",
+        source: "W3C WCAG 2.2 · 1.4.3 & 1.4.11",
+        evidence: "established",
+        url: "https://www.w3.org/TR/WCAG22/",
       },
       {
         value: '2025.10',
-        label: 'Stable vendor-neutral specification for cross-platform design tokens (JSON → CSS / iOS / Android)',
-        source: 'W3C Design Tokens Community Group (28 Oct 2025) · Established evidence',
+        label: "Stable final report from the Design Tokens Community Group; not a W3C Recommendation",
+        source: "Design Tokens Community Group · 2025-10-28",
+        evidence: "established",
+        url: "https://www.designtokens.org/tr/2025.10/format/",
       },
     ],
     sections: [
@@ -605,12 +742,12 @@ certification nor legal advice."`,
       {
         id: 'typography-without-guesswork',
         num: '02',
-        tocLabel: 'Typography: 2 families & the 1.25 scale',
-        heading: 'Typography Without Guesswork: Two Families Max, One Locked Scale, Zero Text Below 12 px',
+        tocLabel: "Typography: 6 roles, 8 sizes",
+        heading: "Typography: Two Reading Families, One Monospace and Eight Sizes",
         blocks: [
           {
             type: 'p',
-            text: 'Software interfaces are 80% written characters. If your type scale drifts, no colour palette can rescue perceived quality. Lock down two constraints once per repo (Section 21 & Appendix A4): at most two typefaces (an expressive display face like Sora + a workhorse UI sans like Inter, plus monospace for code/IDs), and six to seven sizes stored in CSS variables.',
+            text: "Typography carries much of an interface’s legibility. Set the choices once in the repository: Sora for display, Inter for prose and controls, JetBrains Mono for code and identifiers. This guide separates 6 semantic roles — Display/H1, H2, H3, Body, Small and Micro — mapped to 8 CSS size tokens from 12 to 64 px (Sections 21 & 25). These are different layers, not competing counts.",
           },
           {
             type: 'h3',
@@ -618,23 +755,23 @@ certification nor legal advice."`,
           },
           {
             type: 'p',
-            text: 'Start from a `16 px` body size and multiply by `1.25` (Major Third): `16 · 20 · 25 · 31.25 · 39 · 48.8 · 61`. Round to clean 4-pt steps so line boxes snap onto your vertical rhythm: `12 · 14 · 16 · 20 · 24 · 32 · 40 · 48 · 64 px`. Nobody on your team ever writes `font-size: 17px` or `23px` again.',
+            text: "A 16 px base and an indicative 1.25 ratio provide a useful progression, but the final values are a system choice, not mechanical rounding of every step. Use exactly 8 tokens here: 12 · 14 · 16 · 20 · 24 · 32 · 40 · 64 px. A role can use two tokens at different viewports; a fluid size between documented bounds is also possible. Document exceptions instead of silently adding a ninth size.",
           },
           {
             type: 'p',
-            text: 'Two optical details immediately separate craft from guesswork. First, `line-height` moves inversely with font size: 16 px body text needs generous leading (`1.55–1.65`) capped at `60–75 characters` per line (`max-width: 68ch`), whereas a 48 px Display H1 at `1.5` falls apart — tighten display headings to `1.05–1.15` with `-0.02em` to `-0.03em` tracking. Second, always enable `font-variant-numeric: tabular-nums` on prices, KPI counters, dates, and table columns so `1` and `8` occupy identical horizontal width.',
+            text: "Tune line-height to the chosen size and family: start around `1.55–1.65` for 16 px body text across `60–75 characters` (`max-width: 68ch`) and `1.05–1.15` for a 64 px heading, testing `-0.02em` to `-0.03em` tracking. These are starting values, not perceptual constants. Use `font-variant-numeric: tabular-nums` to align prices, counters, dates and numeric columns.",
           },
           {
             type: 'table',
-            caption: 'Production Typographic Scale Reference (Section 21 & Appendix A4)',
+            caption: "6 semantic roles mapped to 8 tokens: the sizes below are this guide’s documented choices.",
             headers: ['Semantic Role', 'CSS Size', 'Line-Height & Tracking', 'Strict Usage & Guardrails'],
             rows: [
-              ['Hero / H1', '40–64 px', '1.05–1.10 · -0.03em', 'Exactly one H1 per page, never two competing'],
-              ['Section / H2', '28–32 px', '1.15–1.22 · -0.02em', 'Major document or dashboard section headings'],
-              ['Card / H3', '20–24 px', '1.30 · -0.015em', 'Subsections, card titles, modal headers'],
-              ['Body', '15–16 px', '1.55–1.65 · normal', 'Default prose & inputs (60–75 ch max measure)'],
-              ['Small / UI', '13–14 px', '1.45 · normal', 'Form labels, helper text, table cells'],
-              ['Micro / Tag', '12 px (floor)', '1.40 · +0.04em', 'Short badges, timestamps — never multi-line prose'],
+              ["Display / H1", "40 or 64 px", '1.05–1.10 · -0.03em', "One H1 per page; fluid sizing possible between these bounds"],
+              ["H2", "32 px", '1.15–1.22 · -0.02em', "Major sections"],
+              ["H3", "20 or 24 px", '1.30 · -0.015em', "Subsections and card headings"],
+              ['Body', "16 px", '1.55–1.65 · normal', "Running prose; test reading measure"],
+              ["Small", "14 px", '1.45 · normal', "Labels, help and table cells"],
+              ["Micro", '12 px (floor)', '1.40 · +0.04em', "Short badges and timestamps"],
             ],
           },
         ],
@@ -648,7 +785,7 @@ certification nor legal advice."`,
         blocks: [
           {
             type: 'p',
-            text: 'Online palette generators that hand you five pretty pastel swatches set you up to fail. Software needs functional roles, governed by the 60 / 30 / 10 rule (Section 22): 60% quiet neutral surfaces (canvas and cards), 30% dark legible structure (primary ink, secondary ink, hairline borders), and 10% primary accent reserved strictly for action.',
+            text: "Give colours functional roles first: surfaces, text, action and statuses. The manual’s 60 / 30 / 10 rule is a composition guideline (Section 22), not a pixel-area requirement or evidence of effectiveness: keep surfaces quiet, structure legible and competing action accents limited. Then test colour pairs and status recognition, including without colour.",
           },
           {
             type: 'h3',
@@ -680,7 +817,7 @@ certification nor legal advice."`,
               },
               {
                 bold: 'Macro tier (48 · 64 · 96 px)',
-                text: 'Clean separation between major page sections — eliminating 80% of cluttered `<hr>` divider lines.',
+                text: "Clean separation between major page sections — often making redundant `<hr>` dividers unnecessary.",
               },
             ],
           },
@@ -691,6 +828,8 @@ certification nor legal advice."`,
             caption:
               'Asymmetric proximity: a heading must sit noticeably closer to the paragraph it introduces (8–12 px) than to the preceding paragraph (32 px).',
             sourceRef: 'UX/UI Playbook EN · Part 03, Section 23 (p. 45)',
+            width: 1080,
+            height: 1527,
           },
           {
             type: 'h3',
@@ -706,29 +845,29 @@ certification nor legal advice."`,
       {
         id: 'css-tokens-true-dark-mode',
         num: '04',
-        tocLabel: 'CSS Tokens & halation-free Dark Mode',
-        heading: 'CSS Design Tokens & True Dark Mode: Why Colour Inversion Breaks Human Vision',
+        tocLabel: "CSS Tokens & OLED Dark Mode",
+        heading: "CSS Tokens and OLED Dark Mode: Separate Roles Instead of Inverting Colours",
         blocks: [
           {
             type: 'p',
-            text: 'Individual screens get discarded in the next redesign; tokens compound your margin from your second project onward (Section 25). A token is not `--blue-500` — it is a named semantic decision (`--color-surface`, `--color-text`, `--color-accent`, `--space-6`) aligned with the W3C Design Tokens `2025.10` format. When components reference semantic roles exclusively, Dark Mode is a 20-line variable override; when hex codes are hardcoded across 80 files, Dark Mode is a rewrite.',
+            text: "Tokens make decisions easier to reuse across projects (Section 25), without guaranteeing a lifespan or profit margin. Separate primitive values (`--blue-500`) from semantic roles (`--color-surface`, `--color-text`, `--color-accent`, `--space-6`). Design Tokens 2025.10 is a final Design Tokens Community Group report, not a W3C Recommendation; the CSS below illustrates roles, not a DTCG JSON file. A theme change still needs component, image and state checks.",
           },
           {
             type: 'h3',
-            text: 'The 4 optical rules of comfortable, long-session Dark Mode (Section 56)',
+            text: "Four dark-mode settings to test with your readers",
           },
           {
             type: 'doDont',
             doTitle: '✓ Token-Engineered Dark Mode',
             dontTitle: '✕ Naive Colour Inversion',
             doItems: [
-              'Encode elevation as lightness: dark base (#0B0D12 or #121212), cards lifted +4%, modals/menus lifted +8%. Lightness replaces drop shadows.',
-              'Soften primary body ink to ~87% white (#ECEEF4) so 20-minute reading sessions stay effortless.',
+              "Keep an OLED #000000 base and distinguish cards and modals with progressively lighter surfaces. Measure every level.",
+              "Try softened text (#ECEEF4, for example), then gather reading feedback. No colour guarantees glare-free reading for everyone.",
               'Desaturate and lift your primary accent by one tone so it does not optically vibrate against dark surfaces.',
               'Re-verify secondary text contrast against your lightest elevated card surface, where ratios drop fastest.',
             ],
             dontItems: [
-              'Setting 15 px paragraphs in pure `#FFFFFF` on pure `#000000`: triggers astigmatic halation (glowing letter bleed affecting ~30–40% of readers).',
+              "Force pure-white-on-black text on every reader without a reading trial or an alternative light mode.",
               'Relying on black `box-shadow` on dark cards with no subtle `1px solid rgba(255,255,255,0.10)` hairline.',
               'Reusing the exact saturated light-mode brand red or blue, which often fails 3:1 contrast on `#121212`.',
               'Applying CSS `filter: invert(1)`, corrupting photos, user avatars, and semantic status colours.',
@@ -739,29 +878,33 @@ certification nor legal advice."`,
             src: '/images/articles/en/ui-sbs-dark.webp',
             alt: 'Side-by-side Dark Mode prototype comparison from the UX/UI Playbook English Edition contrasting naive inversion with semantic token elevation',
             caption:
-              'Side-by-side prototype (Section 61): naive colour inversion on the left vs progressive surface elevation and desaturated accent tokens on the right.',
+              "Side-by-side prototype (Section 61): inverted colours on the left, semantic surfaces and accents on the right. Reading comfort also requires real use.",
             sourceRef: 'UX/UI Playbook EN · Part 07, Section 61 (p. 102)',
+            width: 1080,
+            height: 755,
           },
           {
             type: 'copyable',
             label: 'tokens.css — Production Foundation (Light + True Dark Mode + Type + 8-pt + Motion)',
             langTag: 'css',
-            code: `/* UX/UI Playbook 2026 — tokens.css (covers 90% of web & SaaS interfaces) */
+            code: `/* UX/UI Playbook 2026 — tokens.css (starting foundation for a web or SaaS product) */
 :root {
-  /* 1. Light Mode Surfaces & Ink (WCAG 2.2 AA verified) */
+  /* 1. Light Mode Surfaces & Ink (measure pairs on the surfaces you use) */
   --color-bg:             #FFFFFF;
   --color-surface-1:      #F4F1EA;
   --color-surface-2:      #EAE5DA;
   --color-text:           #101319; /* > 16:1 on bg */
   --color-text-2:         #343A46; /* > 10:1 on bg */
   --color-muted:          #5B6170; /* ≥ 5.2:1 on surface-1 */
-  --color-line:           #DFDBD0;
+  --color-line:           #DFDBD0; /* decorative */
+  --color-control-line:   #737987; /* meaningful controls */
 
   /* 2. Single Action Accent & Distinct Semantic Channels */
-  --color-accent:         #F0512B;
-  --color-accent-hover:   #B93314;
-  --color-on-accent:      #101319;
-  --color-success:        #0E7C6B;
+  --color-accent:         #C2320A;
+  --color-accent-hover:   #A62806;
+  --color-on-accent:      #FFFFFF;
+  --color-success:        #137347;
+  --color-warning:        #9A5B00;
   --color-danger:         #C62828;
   --color-info:           #2C5CE6;
 
@@ -770,7 +913,7 @@ certification nor legal advice."`,
   --space-4: 16px;  --space-6: 24px;  --space-8: 32px;
   --space-12: 48px; --space-16: 64px; --space-24: 96px;
 
-  /* 4. Radii & Locked 1.25 Type Scale */
+  /* 4. Radii, 6 Semantic Roles, 8 Size Tokens */
   --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-full: 999px;
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Sora", var(--font-sans);
@@ -788,18 +931,20 @@ certification nor legal advice."`,
 
 /* Dark Mode: elevation = lightness + softened ink + lifted accent */
 [data-theme="dark"] {
-  --color-bg:             #0B0D12;
+  --color-bg:             #000000;
   --color-surface-1:      #131720;
   --color-surface-2:      #1B202C;
-  --color-text:           #ECEEF4; /* ~87% white: zero halation */
+  --color-text:           #ECEEF4; /* softened ink; test comfort */
   --color-text-2:         #B4BCCB;
   --color-muted:          #8E96A8; /* ≥ 4.6:1 verified on surface-2 */
   --color-line:           rgba(255, 255, 255, 0.10);
+  --color-control-line:   #8E96A8;
 
   --color-accent:         #FF6B47;
   --color-accent-hover:   #FF8566;
   --color-on-accent:      #0B0D12;
   --color-success:        #24D18A;
+  --color-warning:        #F5B544;
   --color-danger:         #FF6B6B;
   --color-info:           #6EA0FF;
 }
@@ -814,6 +959,12 @@ certification nor legal advice."`,
   }
 }`,
             note: 'Drop this into your root stylesheet and forbid raw hex values inside feature components.',
+          },
+          {
+            "type": "inlineCta",
+            "title": "Keep the tokens and handoff in your repository.",
+            "text": "The Playbook archive includes tokens.css, tokens.json and editable templates, with 13 before/after prototypes and 11 platform spreads in the manual.",
+            "buttonLabel": "Get the EN files · $29"
           },
         ],
       },
@@ -862,7 +1013,7 @@ certification nor legal advice."`,
           },
           {
             type: 'p',
-            text: 'Translating concise English UI ("Save") into French or German expands button width by +30% to +40%; supporting Arabic or Hebrew (`dir="rtl"` on `<html>`) mirrors the horizontal flow. Replace physical directions (`margin-left`, `padding-right`, `left: 0`, `text-align: left`) with CSS logical properties (`margin-inline-start`, `padding-inline-end`, `inset-inline-start: 0`, `text-align: start`) from your very first commit. Know what mirrors (back/forward arrows, breadcrumbs, table column order) and what never mirrors (brand logos, clock faces, media play/pause transport icons, and digits inside numbers).',
+            text: "Translating concise English labels into French or German can substantially expand them; supporting Arabic or Hebrew (`dir=\"rtl\"` on `<html>`) mirrors the horizontal flow. Replace physical directions (`margin-left`, `padding-right`, `left: 0`, `text-align: left`) with CSS logical properties (`margin-inline-start`, `padding-inline-end`, `inset-inline-start: 0`, `text-align: start`) from your very first commit. Know what mirrors (back/forward arrows, breadcrumbs, table column order) and what never mirrors (brand logos, clock faces, media play/pause transport icons, and digits inside numbers).",
           },
         ],
       },
@@ -875,7 +1026,7 @@ certification nor legal advice."`,
         blocks: [
           {
             type: 'p',
-            text: 'A design that falls apart during implementation is rarely the developer’s fault — it is the predictable result of a silent handoff (Section 28). Before inventing custom widgets, lock down the 12 foundational components that power 95% of software (Button × 6 states, Input × 5 states + label, Checkbox/Radio with full-label hit area, Switch, Select, Card, focus-trapped Modal with Escape, Toast/Banner, Tabs, Data Table + empty state, Status Badge, Skeleton loader). Pair every complex screen with a single-file Markdown handoff spec.',
+            text: "A design that falls apart during implementation is rarely the developer’s fault — it is the predictable result of a silent handoff (Section 28). Before inventing custom widgets, lock down the 12 foundational components reused across many products (Button × 6 states, Input × 5 states + label, Checkbox/Radio with full-label hit area, Switch, Select, Card, focus-trapped Modal with Escape, Toast/Banner, Tabs, Data Table + empty state, Status Badge, Skeleton loader). Pair every complex screen with a single-file Markdown handoff spec.",
           },
           {
             type: 'copyable',
@@ -890,7 +1041,7 @@ certification nor legal advice."`,
 
 ## 2. Consumed Tokens (zero raw hex values)
 - Primary CTA: var(--color-accent) · hover var(--color-accent-hover) · text var(--color-on-accent)
-- Idle border: 1px solid var(--color-line) · Keyboard focus: 2px solid var(--color-accent), offset 2px
+- Idle border: 1px solid var(--color-control-line) · Keyboard focus: 2px solid var(--color-accent), offset 2px
 - Allowed spacing tokens: var(--space-2), var(--space-4), var(--space-6), var(--space-8) only
 
 ## 3. All 6 Required States
@@ -913,8 +1064,8 @@ certification nor legal advice."`,
     ],
     faqs: [
       {
-        q: 'Why does pure white (#FFFFFF) text on pure black (#000000) hurt long-form readability?',
-        a: 'Maximum 21:1 contrast on body paragraphs causes optical halation — bright letterforms appear to bleed into the black background, triggering eye strain and blurred edges for readers with astigmatism (~30–40% of adults). Pairing deep dark surfaces (#0B0D12 or #121212) with ~87% white ink (#ECEEF4) preserves crisp AAA contrast without glare.',
+        q: "How can I make OLED dark mode more comfortable to read?",
+        a: "Keep #000000 as the base if OLED is the goal, lift surfaces to show hierarchy and try softened ink instead of pure white. Check every contrast pair and test a real paragraph: comfort varies with the person, screen and lighting. Offer light mode instead of promising zero halation.",
       },
       {
         q: 'Do input placeholders really need 4.5:1 WCAG contrast?',
@@ -929,13 +1080,48 @@ certification nor legal advice."`,
         a: 'Hardcoded physical properties (margin-left, padding-right, left, right, border-left, text-align: left). Replace them with CSS logical equivalents (margin-inline-start, padding-inline-end, inset-inline-start, border-inline-start, text-align: start) so LTR and RTL layouts flip automatically.',
       },
     ],
-    ctaTitle: 'Get the production tokens.css, tokens.json, 24 Before/After prototypes & 12 A4 sheets.',
+    ctaTitle: "Get the production tokens.css, tokens.json, 13 Before/After prototypes + 11 platform spreads & 12 A4 sheets.",
     ctaText:
-      'Stop rebuilding UI rules from scratch on every repo: the 139-page English UX/UI Playbook 2026 ships with WCAG-verified Light & Dark design tokens, handoff specs, and the runnable Python scanner.',
+      "Reuse a documented starting point on your next project: the 139-page English UX/UI Playbook includes light/dark tokens, handoff templates and the Python scanner. Then verify the colours and components in your actual rendered interface.",
     ctaBullets: [
       'Ready-to-drop tokens.css, W3C tokens.json & 4 Markdown client/handoff templates',
-      '24 side-by-side Before/After prototypes (buttons, data tables, forms, dark mode, touch targets)',
+      "13 before/after prototypes + 11 platform spreads: 24 spreads in total",
       'Unlimited commercial license for your own SaaS and paid client work ($29 one-time)',
+    ],
+    entityDefinition: "User interface design defines a product’s visual hierarchy and interactive components: typography, colour, spacing and states. A design system stores these decisions in reusable tokens and components.",
+    references: [
+      {
+        "title": "Web Content Accessibility Guidelines 2.2",
+        "url": "https://www.w3.org/TR/WCAG22/",
+        "publisher": "W3C",
+        "date": "2024-12-12",
+        "evidence": "established",
+        "note": "1.4.3: body text 4.5:1, large text 3:1. 1.4.11: meaningful controls and graphical information 3:1."
+      },
+      {
+        "title": "Understanding SC 2.5.8: Target Size (Minimum)",
+        "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+        "publisher": "W3C WAI",
+        "date": "WCAG 2.2",
+        "evidence": "established",
+        "note": "The web AA minimum is 24 × 24 CSS px with exceptions; the Playbook recommends 44 × 44 px here."
+      },
+      {
+        "title": "Design Tokens Format Module 2025.10",
+        "url": "https://www.designtokens.org/tr/2025.10/format/",
+        "publisher": "Design Tokens Community Group",
+        "date": "2025-10-28",
+        "evidence": "established",
+        "note": "Stable final community report for exchanging tokens; do not describe it as a W3C Standard."
+      },
+      {
+        "title": "The WebAIM Million — 2026 report",
+        "url": "https://webaim.org/projects/million/",
+        "publisher": "WebAIM",
+        "date": "2026-02",
+        "evidence": "established",
+        "note": "Low contrast is among the most common automatically detected errors in this sample."
+      }
     ],
   },
 
@@ -951,9 +1137,9 @@ certification nor legal advice."`,
     updatedAt: '2026-11-18',
     ogImage: '/og-article-product-en.jpg',
     metaTitle:
-      'Product Design, Revenue & AI Agents: Deterministic Pipelines, Agent UX & Pricing | UX/UI Playbook',
+      "Product Design and AI Agents | UX/UI Playbook",
     metaDescription:
-      'Complete Product Design & AI engineering course: 2-hour express research, SaaS dashboards & pricing pages, the 5-file pipeline for Claude Code / Cursor, 6 agentic UX patterns, 3-status verification, and scope-proof pricing.',
+      "Scope your product before coding: a 5-file AI pipeline, AGENTS.md, 3 copy-ready prompts, inspectable agent UX and honest 3-status verification reports.",
     keywords: [
       'Product Design for developers',
       'AGENTS.md Claude Code Cursor UI',
@@ -964,27 +1150,31 @@ certification nor legal advice."`,
       'one page client proposal',
     ],
     title:
-      'Product Design, Revenue & AI Agents: Scoping Value, Orchestrating Claude Code / Cursor & Pricing Without Scope Creep',
+      "Product Design: Scope Your Product and Guide AI Agents",
     subtitle:
-      'A coding agent can output a thousand lines of JSX in thirty seconds, yet it cannot make a single product trade-off for you: without versioned context files and grayscale gates, speed simply manufactures generic UI debt.',
+      "Write decisions before delegating code: a brief, grayscale wireframes, interface rules and an evidence report. Then protect delivery scope and your team’s time.",
     aeoSummaryTitle: 'Executive Takeaway — Governing Scope, Coding Agents & Margin',
     aeoSummary:
-      'In AI-assisted software delivery, output quality is capped by written upstream specification. A deterministic workflow splits product design into five versioned files (brief.md → screens.md → grayscale wireframe.html → multi-viewport + axe-core review → handoff.md) governed by a ~40-line AGENTS.md and 3 phase-gated prompts. On the product and commercial side: 2 hours of express research prevents building the wrong thing, honest verification reports use strictly 3 statuses (Automated, To verify on screen, Not applicable), and healthy margins rest on "structure signed off in writing before styling" plus cutting scope rather than discounting your day rate.',
+      "An AI-assisted Product Design workflow stores decisions in 5 files: brief.md → screens.md → wireframe.html → review.md → handoff.md. AGENTS.md and tokens.css govern shared constraints. The 3 prompts separate specification, structure and checking. Short research produces hypotheses to verify, not market validation. Reports distinguish Automated / To verify / Not applicable statuses; Blocking / Major severity belongs in a separate column. Approve structure before styling and adjust scope rather than promising earnings or compliance from a scan alone.",
     keyStats: [
       {
-        value: '84%',
-        label: 'Evaluated AI-generated websites shipping with immediate accessibility violations',
-        source: 'Aljedaani et al. (ACM W4A, 2024) · Evidence level: Probable',
+        value: "3 statuses",
+        label: "Automated / To verify / Not applicable; severity and outcome stay separate",
+        source: "UX/UI Playbook · Section 84 · Reporting protocol",
+        evidence: "probable",
       },
       {
         value: '2 hours',
-        label: '45-min structured brief + 75-min field reality check (3 user stories, 3 competitors, 5 support tickets)',
-        source: 'UX/UI Playbook · Section 29 (Express Brief & Research)',
+        label: "Example research timebox: 45-minute brief then 75-minute field check, adapted to risk",
+        source: "UX/UI Playbook · Section 29 · Method guideline",
+        evidence: "probable",
       },
       {
-        value: '1 in 3',
-        label: 'Healthy proposal rejection rate on price signalling your rate is no longer under-priced',
-        source: 'UX/UI Playbook · Section 36 (Setting Your Price)',
+        value: "6 patterns",
+        label: "Playbook synthesis: clarification, plan, scope, permissions, log and summary",
+        source: "Microsoft HAX + Google PAIR · UX/UI Playbook §54",
+        evidence: "probable",
+        url: "https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/",
       },
     ],
     sections: [
@@ -1004,7 +1194,7 @@ certification nor legal advice."`,
           },
           {
             type: 'quote',
-            tag: 'The One-Line Clause That Eliminates 80% of Unpaid Rewrites · Sections 02 & 37',
+            tag: "The One-Line Clause That Limits Out-of-Scope Rewrites · Sections 02 & 37",
             text: '"Structure signed off before style, in writing." Until functional scope (brief.md) and grayscale wireframes are approved, zero brand colours or visual polish enter the room.',
           },
         ],
@@ -1018,7 +1208,7 @@ certification nor legal advice."`,
         blocks: [
           {
             type: 'p',
-            text: 'User research is not a six-week enterprise luxury. Two focused hours are enough to stop designing for yourself (Section 29). Split those 120 minutes into a 45-minute red-flag brief with the decision-maker and 75 minutes of real-world evidence.',
+            text: "A two-hour research timebox helps move beyond internal assumptions, without replacing research proportionate to high risks. The Playbook protocol (Section 29) proposes 45 minutes of briefing and 75 minutes of field checks; extend it if the right people or evidence are not available.",
           },
           {
             type: 'steps',
@@ -1044,7 +1234,7 @@ certification nor legal advice."`,
           },
           {
             type: 'p',
-            text: 'Two B2B screens concentrate more product mistakes than all others combined. First, the SaaS Dashboard: its mortal enemy is decorative density — cramming 14 counters, radial gauges, and pie charts onto the canvas just because whitespace felt empty. A dashboard exists to trigger decisions, not to prove your database has rows. Organise it in three strict bands: 1) at most 3 top KPIs, each displaying Value + Delta + Time Period (because "$48.2k" without "▲ +12.4% vs Sept" is a meaningless number), 2) one time-series chart (line or bar — retire pie charts past 3 slices), and 3) one actionable table where clicking a row opens the underlying object.',
+            text: "Two B2B screens concentrate more product mistakes than all others combined. First, the SaaS Dashboard: its main pitfall is decorative density — cramming 14 counters, radial gauges, and pie charts onto the canvas just because whitespace felt empty. A dashboard exists to trigger decisions, not to prove your database has rows. Organise it in three strict bands: 1) at most 3 top KPIs, each displaying Value + Delta + Time Period (because \"$48.2k\" without \"▲ +12.4% vs Sept\" is a meaningless number), 2) one time-series chart (line or bar — retire pie charts past 3 slices), and 3) one actionable table where clicking a row opens the underlying object.",
           },
           {
             type: 'p',
@@ -1057,11 +1247,11 @@ certification nor legal advice."`,
         id: 'five-file-agent-pipeline',
         num: '03',
         tocLabel: '5-File AI Pipeline, AGENTS.md & 3 Prompts',
-        heading: 'Delegating UI to Claude Code or Cursor Without Shipping "Slop": The 5-File Pipeline',
+        heading: "Delegating UI to Claude Code or Cursor with a 5-File Pipeline",
         blocks: [
           {
             type: 'p',
-            text: 'Why does prompting "Build my SaaS billing dashboard and checkout" reliably produce the exact same generic AI aesthetic (purple gradients on slate cards, decorative icons everywhere, zero error states, and WCAG failures across 84% of generated sites per Aljedaani et al., W4A 2024)? Because coding agents rarely fail at JSX syntax — they fail at all the implicit product and UI decisions you left unwritten. Without constraints, an LLM samples the statistical median of public repositories.',
+            text: "A prompt such as \"Build my SaaS dashboard and checkout\" leaves the agent to guess hierarchy, labels, permissions and error states. The result can compile while still being unsuitable for the task. Reduce ambiguity by documenting product decisions and checking the output; do not assume fast generation replaces review.",
           },
           {
             type: 'figure',
@@ -1070,6 +1260,8 @@ certification nor legal advice."`,
             caption:
               'Paper is for diverging (5 quick sketches in 10 minutes); the 5-file chain is for converging deterministically across coding-agent sessions.',
             sourceRef: 'UX/UI Playbook EN · Part 06, Section 43 (p. 74)',
+            width: 1080,
+            height: 1527,
           },
           {
             type: 'p',
@@ -1090,7 +1282,7 @@ certification nor legal advice."`,
 - Zero "Lorem ipsum", zero invented testimonials, zero fabricated metrics.
 - Zero useful text < 12px; body prose ≥ 15px; line measure ≤ 70ch.
 - Zero verb-less button labels; maximum one accent-coloured primary button per view.
-- Zero happy-path-only screens: all 5 states (empty, loading, populated, error, success) are required.
+- Zero happy-path-only screens: all 5 states (empty, loading, ideal, partial/overflow, error) are required.
 - Zero physical left/right CSS properties where logical properties (inline-start/end) apply.
 
 ## Accessibility Gates (blocking WCAG 2.2 AA)
@@ -1101,7 +1293,8 @@ certification nor legal advice."`,
 
 ## Mandatory Output Format
 1. Complete implementation consuming @tokens.css exclusively.
-2. Three-line verification summary: Verified by script / To verify on screen / Not done.
+2. Three-line verification summary: Verified (with evidence) / Estimated (assumptions) / Not done.
+   For each rule: Automated / To verify / Not applicable status; severity and outcome separate.
 3. Numbered open product questions (never silently guessed).`,
             note: 'Works directly as AGENTS.md, CLAUDE.md, or .cursor/rules in any frontend repository.',
           },
@@ -1120,8 +1313,8 @@ certification nor legal advice."`,
             code: `=== PROMPT 1: brief.md → screens.md ===
 ROLE        : Senior Product Designer writing unambiguous screen specs.
 INPUTS      : @brief.md
-CONSTRAINTS : 1 screen = 1 user verb; specify all 5 states (empty, loading, populated,
-              error, success); real copy only, zero lorem ipsum; do not invent features
+CONSTRAINTS : 1 screen = 1 user verb; specify all 5 states (empty, loading, ideal,
+              partial/overflow, error); real copy only, zero lorem ipsum; do not invent features
               outside brief.md.
 DELIVERABLE : screens.md with exact fields per screen: verb, entry, exit, trigger + copy
               for all 5 states, edge cases (40-char names, 0 rows), real labels.
@@ -1140,8 +1333,14 @@ ROLE        : WCAG 2.2 AA Accessibility Auditor & Technical Spec Writer.
 INPUTS      : @wireframe-<screen>.html, @tokens.css
 CONSTRAINTS : Cite only verifiable source findings with line numbers and exact WCAG criteria
               (e.g. 1.4.3, 1.4.11, 2.4.7, 2.5.8). Zero subjective aesthetic opinions.
-DELIVERABLE : audit.md (Blocking / Major / Minor + exact code fix) + complete handoff.md.`,
+DELIVERABLE : review.md (rule, status, severity, outcome, evidence, fix) + complete handoff.md.`,
             note: 'Model benchmark tip (Section 44): run Prompt 2 across two different models and score them on token fidelity, zero axe violations, 390/1280 responsiveness, and fidelity to screens.md.',
+          },
+          {
+            "type": "inlineCta",
+            "title": "Reuse the protocol on your next agent run.",
+            "text": "The archive includes the AI Skill, agent_check.py scanner and 77 rules, alongside brief, review and handoff templates.",
+            "buttonLabel": "Equip my repository · $29"
           },
         ],
       },
@@ -1200,23 +1399,25 @@ DELIVERABLE : audit.md (Blocking / Major / Minor + exact code fix) + complete ha
         id: 'verifying-ai-three-statuses',
         num: '05',
         tocLabel: 'Verifying AI UI: 3 statuses, never a 4th',
-        heading: 'Verifying AI-Generated Screens: Why Our Scanner Refuses a Fourth Status',
+        heading: "Check an AI Output: Separate Method, Severity and Outcome",
         blocks: [
           {
             type: 'p',
-            text: 'Honest automation never claims to replace human judgment — it clears away mechanical failures so your human review focuses 100% on meaning, flow, and real-device feel (Sections 53, 83 & 84).',
+            text: "Honest automation never claims to replace human judgment — it clears away mechanical failures so your human review focuses on meaning, flow, and real-device feel (Sections 53, 83 & 84).",
           },
           {
             type: 'figure',
             src: '/images/articles/en/prod-verify-ai.webp',
             alt: 'Verifying an AI-generated screen sheet from the UX/UI Playbook English Edition showing the 8 mandatory exit checks',
             caption:
-              'What static/DOM verification catches reliably (missing labels, contrast failures, skipped headings, missing reduced-motion) vs what requires a human eye (wrong offer, broken mental model).',
+              "Static checks flag some label, size and markup defects. Composite backgrounds, reading order, gestures and offer clarity also require rendered checks.",
             sourceRef: 'UX/UI Playbook EN · Part 07, Section 53 (p. 91)',
+            width: 1080,
+            height: 1222,
           },
           {
             type: 'p',
-            text: 'Across the Playbook’s 77-rule dataset spanning 6 platforms (Web, iOS, Android, Windows, macOS, Linux GNOME/KDE), `agent_check.py` outputs strictly three statuses — never a fake fourth status claiming "100% Compliant": 1) Automated (settled directly from source files with file/line proof), 2) To verify on screen (requires opening a real viewport or device to check touch ergonomics, notch safe areas, or copy clarity), and 3) Not applicable (filtered out cleanly for non-target platforms). Handing a client or tech lead a report stating "42 rules settled automatically, 3 blockers fixed, 11 items verified manually on Mobile Safari" earns far more credibility than a rubber-stamp green badge.',
+            text: "The checklist defines 3 verification statuses, not 3 exclusive report columns: Automated (a rule decided on the files read, with evidence and outcome), To verify (rendered measurement or judgment required) and Not applicable (outside the platform or scope, with a reason). Severity — Blocking, Major or Minor — and outcome — pass or fail — are separate from status. An automated check can fail and block CI. An agent’s \"Verified / Estimated / Not done\" epilogue answers a different question: it summarises a run, not checklist status.",
           },
         ],
       },
@@ -1229,7 +1430,7 @@ DELIVERABLE : audit.md (Blocking / Major / Minor + exact code fix) + complete ha
         blocks: [
           {
             type: 'p',
-            text: 'Two builders can ship the exact same interface; the one who explains why each element sits where it sits wins the next engagement at twice the rate (Part 05, Sections 34–38). Retire phrases like "it feels cleaner", "it’s modern", or "everybody does it". Anchor every design rationale in the three-part chain: Undisputed observation → Deliberate choice → Business consequence ("On mobile checkout, the Pay button dropped beneath the virtual keyboard → I pinned it above the safe area → we eliminate drop-off at the highest-intent moment").',
+            text: "Defending a decision means making the reasoning inspectable, not guaranteeing conversion uplift or higher rates. Present the observation, choice and expected effect: \"On mobile, the pay button sits under the keyboard → we make it reachable without hiding the field → we aim to reduce friction.\" Separate that hypothesis from a result measured after shipping (Sections 34–38).",
           },
           {
             type: 'h3',
@@ -1237,7 +1438,7 @@ DELIVERABLE : audit.md (Blocking / Major / Minor + exact code fix) + complete ha
           },
           {
             type: 'p',
-            text: 'Price is not a referendum on your self-worth; it prices risk and value. To compute your honest starting floor: divide your monthly living + tax target by **12 realistic billable days per month** (never 20 — sales, proposals, admin, and context switching eat the rest). Add a 30% margin, then quote fixed-scope work using `Project Price = (Estimated days × Day rate) + 20% risk buffer + Tooling`. Raise your rate with every new client until roughly **1 in 3 proposals is declined on price** — that pushback proves you have reached market value.',
+            text: "Start a floor rate from your costs and actual billable capacity. The manual’s 12 billable days per month, 30% margin and 20% risk allowance are modelling assumptions, not market constants. Replace them with your own records, then calculate Price = (Estimated days × Day rate) + Risk allowance + Tooling. Track rejected proposals and stated reasons too; no rejection ratio proves that a price is right.",
           },
           {
             type: 'doDont',
@@ -1260,7 +1461,7 @@ DELIVERABLE : audit.md (Blocking / Major / Minor + exact code fix) + complete ha
             langTag: 'markdown',
             code: `# ONE-PAGE CLIENT PROPOSAL (the 7 lines that get signed)
 1. PROBLEM UNDERSTOOD (3 lines using the client's own words):
-   "Today, 68% of mobile shoppers abandon your checkout on the Shipping step..."
+   "During [period], [measured rate] of mobile shoppers leave at Shipping (source: [report])."
 2. EXACT DELIVERABLES:
    4 screens (Cart, Shipping, Payment, Confirmation) × 5 states + tokens.css + handoff.md + WCAG 2.2 AA report.
 3. OUT OF SCOPE (protects your margin):
@@ -1290,11 +1491,11 @@ DELIVERABLE : audit.md (Blocking / Major / Minor + exact code fix) + complete ha
       },
       {
         q: 'Why enforce a grayscale HTML wireframe gate when AI can generate full colour immediately?',
-        a: 'Because fast generation does not fix human psychology: the second stakeholders see brand colours, 90% of review time goes into debating shades of blue instead of verifying whether the value proposition, form fields, and error states hold up.',
+        a: "Because fast generation does not fix human psychology: the second stakeholders see brand colours, review time can drift into debating shades of blue instead of verifying whether the value proposition, form fields, and error states hold up.",
       },
       {
-        q: 'Why divide target monthly income by 12 billable days instead of 20 working days?',
-        a: 'No solo freelancer or consultant bills 20 uninterrupted days every month all year — discovery calls, proposals, bookkeeping, learning, and gaps between contracts consume the remaining days. Pricing on 12 realistic billable days prevents burnout at a loss.',
+        q: "How should I choose billable days when calculating my floor rate?",
+        a: "Use actual billed days over several months and allow for sales, administration, learning and gaps between contracts. The example’s 12 days are not a requirement: recalculate using your own activity and costs.",
       },
       {
         q: 'How do you handle a client insisting on a UI change you know will hurt conversion?',
@@ -1308,6 +1509,41 @@ DELIVERABLE : audit.md (Blocking / Major / Minor + exact code fix) + complete ha
       'Drop-in AI Skill (SKILL.md + AGENTS.md) for Claude Code, Cursor, Windsurf & OpenAI Codex',
       'Runnable agent_check.py scanner + 77-rule multi-platform JSON dataset for local & CI checks',
       'All 4 client & handoff templates + 7-day straightforward refund guarantee ($29)',
+    ],
+    entityDefinition: "Product design connects user needs, business goals and technical constraints to decide what to build and in which order. UX organises the journey; UI makes the interactions tangible. An AI agent works within that scope without replacing product judgment.",
+    references: [
+      {
+        "title": "Guidelines for Human-AI Interaction",
+        "url": "https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/",
+        "publisher": "Microsoft Research · Amershi et al.",
+        "date": "2019",
+        "evidence": "established",
+        "note": "18 guidelines validated through the CHI 2019 paper’s process; they do not prescribe the Playbook’s 6 patterns verbatim."
+      },
+      {
+        "title": "People + AI Guidebook",
+        "url": "https://pair.withgoogle.com/guidebook/",
+        "publisher": "Google PAIR",
+        "date": "2024",
+        "evidence": "established",
+        "note": "Living guide on needs, mental models, control and failure recovery; the patterns above are a practical synthesis."
+      },
+      {
+        "title": "Web Content Accessibility Guidelines 2.2",
+        "url": "https://www.w3.org/TR/WCAG22/",
+        "publisher": "W3C",
+        "date": "2024-12-12",
+        "evidence": "established",
+        "note": "Normative criteria to test; an axe-core pass is not enough to establish conformance."
+      },
+      {
+        "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/2026-07-27/eng",
+        "publisher": "EUR-Lex · European Union",
+        "date": "2026-07-27",
+        "evidence": "established",
+        "note": "Consolidated text: Art. 50 (duties and exceptions), 111(4) (2 December 2026 transition for certain existing systems) and 113 (application). Check the role and use concerned."
+      }
     ],
   },
 ];

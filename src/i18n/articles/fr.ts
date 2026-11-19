@@ -13,9 +13,9 @@ export const ARTICLES_FR: ArticleData[] = [
     updatedAt: '2026-11-18',
     ogImage: '/og-article-ux-fr.jpg',
     metaTitle:
-      'UX Design opérationnel : budget cognitif, parcours J+7, 5 états d’écran & audit 40 points | UX/UI Playbook',
+      "Guide UX Design : parcours et audit | UX/UI Playbook",
     metaDescription:
-      'Cours complet d’UX Design tiré du UX/UI Playbook 2026 : éliminer les briefs flous, appliquer les vraies lois cognitives (Cowan 4±1, Fitts, Hick-Hyman), concevoir les 5 états, sécuriser le checkout et auditer un écran en 20 minutes.',
+      "Concevez un parcours UX clair : 10 lois et principes, 5 états d’écran, checkout accessible et checklist de 40 points à appliquer avant livraison.",
     keywords: [
       'UX Design opérationnel',
       'charge cognitive Cowan 4 blocs',
@@ -26,27 +26,33 @@ export const ARTICLES_FR: ArticleData[] = [
       'checklist audit UX 40 points',
     ],
     title:
-      'UX Design opérationnel : budget cognitif, parcours d’habitude, 5 états d’écran et audit en 20 minutes',
+      "UX Design : concevoir un parcours clair et auditer vos écrans",
     subtitle:
-      'L’UX n’est pas une couche de vernis qu’on pose la veille de la mise en production. C’est la mécanique qui permet à une personne pressée d’atteindre son objectif sans réfléchir — et de revenir d’elle-même sept jours plus tard.',
+      "Passez d’un brief flou à des écrans testables : objectifs utilisateur, lois cognitives, états limites et audit avant livraison. Les seuils du Playbook sont des points de départ à vérifier dans votre contexte.",
     aeoSummaryTitle: 'Synthèse exécutive — Ce qu’il faut retenir',
     aeoSummary:
-      'Un écran performant obéit à quatre contraintes mesurables : un budget cognitif plafonné à 4 ± 1 blocs (Cowan, 2001) avec une seule action primaire, un premier succès atteint en moins de 60 secondes dès l’état vide, la conception systématique des 5 états (vide, chargement, idéal, débordement, erreur) et la conformité WCAG 2.2 AA (4,5:1 de contraste, cibles ≥ 44 px). Un test à 5 personnes détecte en moyenne 85 % des blocages (fourchette réelle 55–99 %), mais exige ~93 personnes pour trancher statistiquement entre deux variantes.',
+      "Commencez par un objectif utilisateur et une action primaire. Prévoyez les 5 états d’écran du guide : vide, chargement, idéal, partiel/débordement et erreur, avec confirmation après une action réussie. Les 4 ± 1 blocs de Cowan éclairent la mémoire de travail ; leur traduction en groupes d’interface est une heuristique à tester. Mesurez le contraste WCAG 2.2 AA (4,5:1 pour le texte courant) et visez des cibles de 44 × 44 px selon le Playbook ; le minimum web AA est 24 × 24 px avec exceptions. Quelques tests observés révèlent des problèmes, mais ne prouvent ni l’exhaustivité ni un gain de conversion.",
     keyStats: [
       {
         value: '4 ± 1 blocs',
-        label: 'Capacité réelle de la mémoire de travail en traitement actif (et non le mythe des 7 ± 2)',
-        source: 'Nelson Cowan, Behavioral & Brain Sciences (2001) · Preuve établie',
+        label: "Estimation de mémoire de travail dans les conditions étudiées, pas un plafond universel de boutons",
+        source: "Nelson Cowan · Behavioral and Brain Sciences (2001)",
+        evidence: "established",
+        url: "https://doi.org/10.1017/S0140525X01003922",
       },
       {
         value: '70,22 %',
-        label: 'Taux moyen d’abandon de panier (23,48 champs affichés en moyenne alors que 12 à 14 suffisent)',
-        source: 'Baymard Institute (28 oct. 2026, 50 études) · Preuve établie',
+        label: "Abandon moyen de panier : moyenne non pondérée de 50 études, pas le taux de votre checkout",
+        source: "Baymard Institute · 28 octobre 2026",
+        evidence: "established",
+        url: "https://baymard.com/blog/cart-abandonment-rate",
       },
       {
         value: '95,9 %',
-        label: 'Des pages d’accueil échouent encore à WCAG 2.2 A/AA (56,1 erreurs détectables par page)',
-        source: 'WebAIM Million (février 2026) · Preuve établie',
+        label: "Pages d’accueil de l’échantillon avec échecs WCAG détectables automatiquement",
+        source: "WebAIM Million · février 2026",
+        evidence: "established",
+        url: "https://webaim.org/projects/million/",
       },
     ],
     sections: [
@@ -101,7 +107,7 @@ export const ARTICLES_FR: ArticleData[] = [
           },
           {
             type: 'h3',
-            text: 'Le protocole gratuit et sans pitié : le test des 5 secondes',
+            text: "Le diagnostic rapide : le test des 5 secondes",
           },
           {
             type: 'p',
@@ -122,11 +128,11 @@ export const ARTICLES_FR: ArticleData[] = [
           },
           {
             type: 'h3',
-            text: '1. Cowan (2001) contre le mythe de Miller : votre vrai plafond est à 4 ± 1 blocs',
+            text: "1. Cowan (2001) : environ 4 blocs en mémoire de travail",
           },
           {
             type: 'p',
-            text: 'En 1956, George Miller évoquait « 7 ± 2 éléments » dans un essai devenu célèbre, mais il décrivait la répétition immédiate d’items isolés sans traitement mental simultané. Lorsqu’un utilisateur réel lit des prix, compare des garanties et cherche un bouton d’action en même temps, sa mémoire de travail active plafonne à 4 ± 1 groupements (Nelson Cowan, Behavioral and Brain Sciences, 2001). En pratique : regroupez toujours vos cartes, vos arguments, vos colonnes de tarifs et vos sections de navigation par ensembles de 3 à 5 blocs. Un menu déroulant de 40 entrées non groupées n’est pas « complet » : c’est un refus de concevoir.',
+            text: "Miller (1956) et Cowan (2001) ne mesurent pas une règle de mise en page. Cowan rassemble des résultats suggérant environ 4 ± 1 blocs lorsque les stratégies de regroupement et de répétition sont contrôlées. Cela justifie de limiter ce qu’une personne doit retenir pendant une tâche, mais pas de décréter qu’un écran ne doit jamais contenir plus de cinq éléments. Le Playbook propose des groupes de 3 à 5 pour amorcer la hiérarchie : vérifiez ensuite la compréhension avec les personnes concernées.",
           },
           {
             type: 'h3',
@@ -134,7 +140,7 @@ export const ARTICLES_FR: ArticleData[] = [
           },
           {
             type: 'p',
-            text: 'On résume souvent Hick par « moins il y a de boutons, plus vite on clique ». C’est inexact sur deux points majeurs. D’abord, le temps de décision croît logarithmiquement avec l’entropie d’information du choix (la difficulté à distinguer des options mal nommées), pas simplement avec le nombre brut d’éléments. Ensuite — nuance capitale démontrée dès l’article original — la loi ne s’applique presque plus lorsque la position spatiale est mémorisée par habitude ! Sur une landing page découverte une seule fois, réduisez impérativement à une seule action primaire. En revanche, dans la barre d’outils d’un logiciel métier ouvert six heures par jour, ne déplacez jamais et ne fusionnez jamais les raccourcis connus : le muscle gagne toujours sur le minimalisme.',
+            text: "La loi de Hick-Hyman décrit la relation entre temps de choix et quantité d’information dans une tâche expérimentale. Le nombre d’options ne suffit donc pas à prédire un parcours réel : libellés, probabilité des choix, regroupement et apprentissage comptent aussi. Rendez l’action principale reconnaissable au premier usage et préservez les raccourcis connus des utilisateurs réguliers. Ce sont des décisions de conception à observer, pas une preuve qu’un menu quotidien échappe à toute contrainte cognitive.",
           },
           {
             type: 'h3',
@@ -142,39 +148,64 @@ export const ARTICLES_FR: ArticleData[] = [
           },
           {
             type: 'p',
-            text: 'La loi de Fitts relie le temps de pointage au rapport entre la distance à parcourir et la largeur utile de la cible. Détail que beaucoup d’équipes ignorent : la largeur pertinente se mesure sur la dispersion réelle des impacts du doigt ou du curseur, pas sur le dessin de l’icône. Une croix de fermeture dessinée en 16 × 16 px qui n’a que 16 px de zone cliquable viole Fitts et provoque des erreurs de tapotement permanentes. Séparez systématiquement la boîte visuelle du glyphe (16–20 px) de la boîte d’interaction (`min-width: 44px; min-height: 44px` sur iOS/Web, `48 × 48 dp` sur Android).',
+            text: "La loi de Fitts relie le temps de pointage au rapport entre la distance à parcourir et la largeur utile de la cible. Détail que beaucoup d’équipes ignorent : la largeur pertinente se mesure sur la dispersion réelle des impacts du doigt ou du curseur, pas sur le dessin de l’icône. Une croix de fermeture dessinée en 16 × 16 px qui n’a que 16 px de zone cliquable viole Fitts et provoque des erreurs de tapotement permanentes. Séparez systématiquement la boîte visuelle du glyphe (16–20 px) de la boîte d’interaction (`min-width: 44px; min-height: 44px` sur le web, `44 × 44 pt` sur iOS, `48 × 48 dp` sur Android).",
           },
           {
             type: 'table',
-            caption: 'Synthèse opérationnelle des lois fondamentales (UX/UI Playbook · Section 03)',
+            caption: "Les 10 lois et principes de la Section 03 : résultats de recherche et heuristiques de conception ne sont pas interchangeables.",
             headers: ['Loi / Principe', 'Mécanisme cognitif réel', 'Traduction immédiate dans l’écran'],
             rows: [
-              [
-                'Loi de Jakob',
-                'L’utilisateur passe 99 % de son temps sur d’autres produits que le vôtre.',
-                'Respectez les conventions : logo en haut à gauche = accueil, panier en haut à droite, recherche reconnaissable.',
-              ],
-              [
-                'Proximité (Gestalt)',
-                'Deux objets proches sont interprétés comme un même concept avant même d’être lus.',
-                'Écart interne 8 px (label → champ) contre écart externe 24 à 32 px entre deux groupes.',
-              ],
-              [
-                'Similarité',
-                'Ce qui partage la même forme visuelle promet le même comportement.',
-                'Un lien texte ne doit jamais ressembler à un bouton ; un badge de statut ne doit jamais ressembler à un CTA.',
-              ],
-              [
-                'Effet Von Restorff',
-                'Seul l’élément qui rompt le motif ambiant capte la mémoire.',
-                'Un seul bouton de couleur d’accent par écran. Trois boutons orange équivalent à zéro bouton orange.',
-              ],
-              [
-                'Seuil de Doherty',
-                'Au-delà d’environ 400 ms d’attente muette, le fil d’attention se rompt.',
-                'Retour visuel instantané (< 100 ms à l’appui), squelette dimensionné dès 300 ms, progression explicite au-delà.',
-              ],
-            ],
+                    [
+                      "Jakob",
+                      "Les habitudes acquises sur d’autres produits influencent les attentes.",
+                      "Conservez les conventions familières ; vérifiez-les avec votre public."
+                    ],
+                    [
+                      "Fitts (1954)",
+                      "Le temps de pointage dépend notamment de la distance et de la largeur de cible.",
+                      "Découplez le glyphe de sa zone d’interaction ; visez 44 × 44 px sur ce projet web."
+                    ],
+                    [
+                      "Hick-Hyman (1952–1953)",
+                      "Le temps de choix varie avec l’information à traiter ; contexte et apprentissage comptent.",
+                      "Nommez et regroupez les choix. Préservez les raccourcis appris."
+                    ],
+                    [
+                      "Cowan (2001)",
+                      "Environ 4 ± 1 blocs en mémoire de travail dans les conditions étudiées.",
+                      "Réduisez la mémorisation imposée ; commencez par des groupes de 3 à 5, puis testez."
+                    ],
+                    [
+                      "Proximité (Gestalt)",
+                      "Des éléments proches sont perçus comme liés.",
+                      "Exemple de rythme : 8 px dans un groupe, 24–32 px entre groupes."
+                    ],
+                    [
+                      "Similarité",
+                      "Des éléments visuellement proches suggèrent une fonction commune.",
+                      "Rendez les mêmes actions cohérentes ; distinguez statut passif et contrôle."
+                    ],
+                    [
+                      "Effet Von Restorff",
+                      "Un élément distinctif peut être mieux mémorisé dans son contexte.",
+                      "Réservez la plus forte saillance à l’action primaire."
+                    ],
+                    [
+                      "Pareto — heuristique",
+                      "Une partie des fonctions peut concentrer l’usage ; aucun ratio fixe n’est garanti.",
+                      "Mesurez les tâches fréquentes et optimisez-les avant les fonctions secondaires."
+                    ],
+                    [
+                      "Seuil de Doherty — repère",
+                      "Une attente sans retour peut interrompre la continuité de la tâche.",
+                      "Accusez réception immédiatement ; utilisez 400 ms comme repère de méthode, pas comme limite universelle."
+                    ],
+                    [
+                      "Effet esthétique-utilisabilité",
+                      "L’apparence peut influencer l’utilisabilité perçue sans prouver l’efficacité réelle.",
+                      "Soignez le premier écran et mesurez séparément réussite, erreurs et temps de tâche."
+                    ]
+                  ],
           },
           {
             type: 'callout',
@@ -228,6 +259,8 @@ export const ARTICLES_FR: ArticleData[] = [
             caption:
               'Plafonds de densité recommandés par territoire : page d’accueil (1 promesse, 1 action, 3 preuves), formulaire (5 à 7 champs par étape), dashboard (3 KPI, 1 graphique, 1 liste).',
             sourceRef: 'UX/UI Playbook FR · Partie 01, Section 04 (p. 13)',
+            width: 1080,
+            height: 1527,
           },
           {
             type: 'h3',
@@ -242,7 +275,7 @@ export const ARTICLES_FR: ArticleData[] = [
             title: 'Les 5 moments exacts où un produit perd ses utilisateurs (Section 05)',
             steps: [
               {
-                bold: 'Rupture n°1 — L’arrivée muette (> 60 % de rebond)',
+                bold: "Rupture n°1 — L’arrivée peu claire",
                 text: 'Le titre parle de la vision philosophique de l’entreprise au lieu de nommer le problème résolu en cinq secondes.',
               },
               {
@@ -279,7 +312,7 @@ export const ARTICLES_FR: ArticleData[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Pourquoi tant d’applications codées vite — à la main ou avec un agent IA — donnent-elles une impression d’inachevé dès la première minute d’usage réel ? Parce qu’on n’a dessiné que l’état « carte postale » : celui où la base de données contient pile six lignes propres, où les prénoms font douze lettres et où l’API répond en 40 millisecondes. En ingénierie d’interface, cet état idéal ne représente que 20 % du livrable.',
+            text: "Pourquoi tant d’applications codées vite — à la main ou avec un agent IA — donnent-elles une impression d’inachevé dès la première minute d’usage réel ? Parce qu’on n’a dessiné que l’état « carte postale » : celui où la base de données contient pile six lignes propres, où les prénoms font douze lettres et où l’API répond en 40 millisecondes. En ingénierie d’interface, cet état idéal n’est qu’une partie du livrable.",
           },
           {
             type: 'figure',
@@ -288,6 +321,8 @@ export const ARTICLES_FR: ArticleData[] = [
             caption:
               'Un écran n’est terminé que lorsque ses cinq états — vide, chargement sans saut CLS, idéal, débordement/partiel et erreur actionnable — sont spécifiés et codés.',
             sourceRef: 'UX/UI Playbook FR · Partie 01, Section 07 (p. 17)',
+            width: 1080,
+            height: 1246,
           },
           {
             type: 'h3',
@@ -295,7 +330,7 @@ export const ARTICLES_FR: ArticleData[] = [
           },
           {
             type: 'p',
-            text: 'L’écran le plus stratégique de votre SaaS est celui que 100 % de vos nouveaux inscrits contemplent à la première seconde : l’état vide (Section 17). La plupart des produits y affichent un sinistre « Aucune donnée trouvée » ou une illustration géante qui repousse le bouton d’action sous la ligne de flottaison mobile. Un état vide qui convertit obéit à six règles strictes : 1) un constat factuel sans fausse blague (« Aucun tableau pour l’instant »), 2) une phrase expliquant la valeur une fois rempli, 3) un bouton primaire qui crée réellement le premier objet en un clic, 4) une voie rapide alternative (« Ou importer un CSV / partir d’un modèle »), 5) zéro illustration démesurée sur mobile, et 6) aucune barre d’outils grisée intimidante autour. Si l’utilisateur ne produit pas un premier résultat visible en 60 secondes, sa probabilité de retour s’effondre.',
+            text: "L’écran le plus stratégique de votre SaaS est celui que vos nouveaux inscrits découvrent avant d’avoir créé leurs données : l’état vide (Section 17). La plupart des produits y affichent un sinistre « Aucune donnée trouvée » ou une illustration géante qui repousse le bouton d’action sous la ligne de flottaison mobile. Un état vide qui convertit obéit à six règles strictes : 1) un constat factuel sans fausse blague (« Aucun tableau pour l’instant »), 2) une phrase expliquant la valeur une fois rempli, 3) un bouton primaire qui crée réellement le premier objet en un clic, 4) une voie rapide alternative (« Ou importer un CSV / partir d’un modèle »), 5) zéro illustration démesurée sur mobile, et 6) aucune barre d’outils grisée intimidante autour. Visez un premier résultat visible en moins de 60 secondes, puis testez cet objectif sur votre propre parcours : c’est un repère du Playbook, pas un seuil de rétention universel.",
           },
           {
             type: 'h3',
@@ -303,7 +338,7 @@ export const ARTICLES_FR: ArticleData[] = [
           },
           {
             type: 'p',
-            text: 'La compilation de 50 études e-commerce par le Baymard Institute (mise à jour du 28 octobre 2026) établit le taux moyen d’abandon de panier à 70,22 % (fourchette observée de 55 % à 84 %). Surtout, Baymard mesure qu’un tunnel moyen impose 23,48 éléments de formulaire alors que 12 à 14 suffisent largement pour facturer et livrer une commande. Sur cet écran, la beauté décorative ne pèse rien face à la vitesse et à la réduction d’anxiété (Section 14) :',
+            text: "La compilation Baymard de 50 études e-commerce, mise à jour le 28 octobre 2026, donne un abandon moyen non pondéré de 70,22 % (fourchette 55–84 %). Ses recherches de checkout comptent 23,48 éléments de formulaire en moyenne, contre 12 à 14 dans les parcours simplifiés étudiés. Il s’agit d’éléments, pas de champs, et non d’un objectif valable pour chaque boutique. Réduisez les demandes inutiles et testez la compréhension du montant final (Section 14) :",
           },
           {
             type: 'list',
@@ -311,7 +346,7 @@ export const ARTICLES_FR: ArticleData[] = [
             items: [
               {
                 bold: 'Invité par défaut, jamais de compte forcé',
-                text: 'Exiger la création d’un mot de passe avant l’achat reste la cause n°1 d’abandon évitable. Proposez la création de compte en un clic sur la page de confirmation, une fois le paiement acquis.',
+                text: "La création de compte obligatoire ajoute une étape avant l’achat. Proposez la création de compte en un clic sur la page de confirmation, une fois le paiement acquis.",
               },
               {
                 bold: 'Zéro frais découverts à la dernière étape',
@@ -335,6 +370,12 @@ export const ARTICLES_FR: ArticleData[] = [
               },
             ],
           },
+          {
+            "type": "inlineCta",
+            "title": "Passez de ces règles à votre prochain audit.",
+            "text": "Le Playbook FR réunit 36 écrans annotés, la checklist d’audit de 40 points et 12 fiches A4 pour préparer votre revue.",
+            "buttonLabel": "Obtenir le Playbook FR · 29 $"
+          },
         ],
       },
 
@@ -346,7 +387,7 @@ export const ARTICLES_FR: ArticleData[] = [
         blocks: [
           {
             type: 'p',
-            text: 'En février 2026, le rapport annuel WebAIM Million montre que 95,9 % des pages d’accueil analysées échouent encore aux critères automatisables WCAG 2.2 niveaux A et AA, avec 56,1 erreurs par page (dominées par le texte gris trop pâle, les images sans alternative pertinente, les champs sans `<label>` relié et les boutons-icônes muets). Corriger ces six familles de défauts ne relève pas de la charité : cela rend l’interface plus nette au soleil sur mobile, pilotable au clavier pour vos power-users et conforme aux exigences contractuelles.',
+            text: "Le WebAIM Million de février 2026 détecte des erreurs WCAG 2 de niveaux A ou AA sur 95,9 % du million de pages d’accueil analysées, avec 56,1 erreurs détectées par page en moyenne. Le rapport examine un sous-ensemble automatisable : contraste, alternatives textuelles, noms accessibles et labels font partie des points à vérifier. Ces résultats ne décrivent ni chaque site ni toute l’accessibilité ; un scan sans erreur ne vaut pas conformité. Complétez-le par un parcours clavier, un lecteur d’écran et une vérification des tâches réelles.",
           },
           {
             type: 'h3',
@@ -354,7 +395,7 @@ export const ARTICLES_FR: ArticleData[] = [
           },
           {
             type: 'p',
-            text: 'Beaucoup d’agences écrivent des bêtises juridiques dans leurs propositions commerciales en confondant une recommandation W3C, une norme technique européenne publiée et un texte cité au Journal officiel de l’Union européenne (Section 52). Voici l’état exact des textes en 2026 :',
+            text: "Une recommandation W3C, une norme ETSI publiée et un texte cité au Journal officiel n’ont pas la même portée (Section 52). Le tableau distingue leurs statuts au 18 novembre 2026 ; vérifiez ensuite le secteur, le rôle de votre client et le droit national applicable. Il ne remplace pas un avis juridique.",
           },
           {
             type: 'table',
@@ -363,8 +404,8 @@ export const ARTICLES_FR: ArticleData[] = [
             rows: [
               [
                 'European Accessibility Act — Directive (UE) 2019/882',
-                'En application depuis le 28 juin 2025',
-                'Obligatoire sur les produits et services visés (e-commerce, banque, transport, télécoms, liseuses). Exemption pour les micro-entreprises de services (< 10 salariés ET ≤ 2 M€ de CA ou bilan) — attention, les produits matériels restent couverts.',
+                "Mesures nationales applicables dès le 28 juin 2025",
+                "Vise les produits et services définis à l’article 2, pas tous les sites. L’art. 4(5) exempte les micro-entreprises de services : moins de 10 personnes et CA annuel ou bilan ≤ 2 M€. Cette exemption ne porte pas sur les obligations relatives aux produits. Vérifier transposition et transitions (art. 31–32).",
               ],
               [
                 'WCAG 2.2 (Recommandation W3C)',
@@ -373,18 +414,18 @@ export const ARTICLES_FR: ArticleData[] = [
               ],
               [
                 'Norme EN 301 549 v4.1.1',
-                'Publiée le 2 septembre 2026',
-                'Aligne la norme européenne sur WCAG 2.2, mais ne vaut présomption légale de conformité qu’une fois citée au Journal officiel de l’UE (d’ici là, la v3.2.1 demeure la référence harmonisée).',
+                "Version publiée en septembre 2026",
+                "L’EN 301 549 v4.1.1 est publiée par ETSI et reprend WCAG 2.2 pour le Web. Sa publication ne suffit pas : vérifier la citation au Journal officiel pour la directive et les exigences concernées avant d’invoquer une présomption de conformité.",
               ],
               [
                 'WCAG 3.0 (W3C Working Draft)',
                 'Projet de travail du 10 sept. 2026',
-                'Aucune valeur obligatoire. Le W3C précise explicitement qu’il ne doit pas être cité en exigence contractuelle.',
+                "Projet de travail susceptible de changer, et non une Recommandation W3C. Le W3C demande de le citer uniquement comme travail en cours ; ne le présentez pas comme un remplacement de WCAG 2.2.",
               ],
               [
                 'Règlement (UE) 2024/1689 (AI Act · art. 50)',
-                'Applicable depuis le 2 août 2026',
-                'Obligation de transparence : informer clairement l’utilisateur lorsqu’il interagit avec un système d’IA et baliser les contenus synthétiques.',
+                "Calendrier à vérifier : art. 50, 111(4) et 113",
+                "Art. 50 : information sur certaines interactions IA et marquage/divulgation selon le rôle, le contenu et les exceptions. Application générale au 2 août 2026 ; la version consolidée du 27 juillet 2026 donne jusqu’au 2 décembre 2026 pour l’art. 50(2) aux systèmes déjà commercialisés avant le 2 août. Ne pas assimiler toutes les sorties IA à une même obligation.",
               ],
             ],
           },
@@ -412,19 +453,19 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
         blocks: [
           {
             type: 'p',
-            text: 'Combien d’utilisateurs faut-il vraiment tester ? La formule binomiale de Nielsen et Landauer (CHI 1993), `1 - (1 - L)^n` avec une probabilité moyenne de découverte `L ≈ 31 %`, indique que 5 participants révèlent en moyenne 85 % des problèmes d’utilisabilité d’un parcours précis. Mais l’étude empirique de Laura Faulkner (2003) apporte le correctif que tout praticien honnête doit connaître : sur de vrais sous-échantillons aléatoires de 5 personnes, le taux réel observé oscille entre 55 % et 99 % !',
+            text: "Le modèle de Nielsen et Landauer (CHI 1993) estime la découverte cumulée par 1 − (1 − L)^n. Avec L ≈ 31 %, cinq participants donnent environ 84 %, souvent arrondis à 85 %. Ce calcul est conditionnel : il ne garantit pas de découvrir tous les problèmes d’un parcours. Faulkner (2003), sur une étude de 60 utilisateurs, observe des sous-échantillons de cinq révélant entre 55 % et 99 % des problèmes de cette étude (niveau de preuve : Probable pour la généralisation à votre produit).",
           },
           {
             type: 'p',
-            text: 'La règle du Playbook (Sections 32 & 48) est donc limpide : 5 personnes en entretiens observés de 25 minutes suffisent pour trouver ce qui bloque et corriger immédiatement ce que 3 personnes sur 5 ratent. En revanche, 5 personnes ne permettent jamais d’affirmer « la variante B convertit mieux que A » — pour comparer un taux de réussite à ± 10 points de marge d’erreur (confiance 90 %), il faut environ 93 utilisateurs par groupe. Et ne remplacez jamais ces 5 humains par des « personas IA synthétiques » : les benchmarks 2026 (Kuric et al., 2026 ; Pew Research Center, 2026) montrent qu’ils divergent du comportement humain réel sur 53 % des tâches.',
+            text: "Commencez par une petite série de sessions observées sur une tâche et une population définies. Corrigez les blocages répétés, puis testez à nouveau. Pour comparer deux taux de réussite ou de conversion, calculez la taille d’échantillon à partir du taux de départ, de l’écart minimal à détecter, du risque d’erreur et de la puissance souhaitée : aucun nombre unique ne convient à tous les tests A/B. Les personas IA peuvent aider à formuler des hypothèses, mais ne constituent pas des observations d’utilisateurs réels.",
           },
           {
             type: 'h3',
-            text: 'Vendre et conduire un audit d’interface en 20 minutes (150 à 400 €)',
+            text: "Conduire un audit de 20 minutes avant de coder un correctif",
           },
           {
             type: 'p',
-            text: 'Un audit court et structuré est la meilleure porte d’entrée commerciale d’un freelance ou d’un studio : le client constate votre rigueur avant de signer une refonte à plusieurs milliers d’euros (Section 33). Notez l’écran sur 10 critères (/50) — Clarté 5s, Hiérarchie, Action unique, Cohérence, 5 États, Feedback < 400 ms, Accessibilité, Micro-copie, Confiance (prix/frais), Mobile à une main — puis restituez uniquement les 3 problèmes majeurs selon la séquence : Constat factuel → Impact business → Correctif précis sur capture annotée. Terminez par une seule question : « Par lequel de ces trois chantiers voulez-vous commencer ? »',
+            text: "Pour un développeur, cet audit sert d’abord à ordonner les corrections avant d’ouvrir un ticket. Notez l’écran sur 10 axes (/50) : clarté en 5 s, hiérarchie, action primaire, cohérence, 5 états, feedback, accessibilité, micro-copie, frais/prix et usage mobile. Restituez les 3 priorités sous la forme Constat → Risque pour l’utilisateur → Correctif sur capture annotée. Les 20 minutes désignent la passe de diagnostic, pas une certification d’accessibilité. Si vous en faites une prestation, la fourchette illustrative de 150–400 USD du manuel n’est ni une moyenne de marché ni une promesse de revenu : chiffrez le périmètre, l’analyse et la restitution.",
           },
           {
             type: 'copyable',
@@ -469,7 +510,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
 - [ ] Fichiers, tokens et composants nommés proprement sans styles détachés
 
 ## 4. États, accessibilité & technique (10 points)
-- [ ] Les 5 états d'écran existent : vide, chargement, rempli, erreur, succès
+- [ ] Les 5 états d'écran existent : vide, chargement, idéal, partiel/débordement, erreur
 - [ ] Les 6 états interactifs des boutons existent (repos, survol, appui, focus, chargement, désactivé)
 - [ ] Chaque champ possède un <label> visible relié (jamais un placeholder seul)
 - [ ] Contraste texte ≥ 4,5:1 et bordures/icônes utiles ≥ 3:1 vérifiés sur la vraie surface
@@ -487,11 +528,11 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
     faqs: [
       {
         q: 'Pourquoi le Playbook utilise-t-il la limite de 4 ± 1 blocs (Cowan) plutôt que la règle des 7 ± 2 de Miller ?',
-        a: 'Parce que l’article de Miller (1956) portait sur la mémorisation immédiate de chiffres ou syllabes sans autre tâche concurrente. Sur une interface réelle où l’utilisateur lit, compare et décide simultanément, la méta-analyse de Nelson Cowan (2001) établit la mémoire de travail active à 4 ± 1 blocs. Structurer vos écrans par groupes de 3 à 5 éléments évite la paralysie cognitive.',
+        a: "Cowan (2001) décrit une capacité d’environ 4 ± 1 blocs lorsque répétition et regroupement sont contrôlés. Ce n’est pas un maximum universel d’éléments à l’écran. Utilisez des groupes lisibles, limitez les informations à mémoriser et vérifiez la compréhension pendant des tests.",
       },
       {
         q: 'Le European Accessibility Act (directive 2019/882) oblige-t-il tous les sites web en 2026 ?',
-        a: 'La directive s’applique depuis le 28 juin 2025 aux produits et services numériques visés (notamment e-commerce, services bancaires, billetterie, télécoms). Les micro-entreprises fournissant des services (moins de 10 salariés ET chiffre d’affaires ou bilan ≤ 2 M€) bénéficient d’une exemption légale sur les services, mais attention : dès que vous vendez à des grands comptes ou au secteur public, le niveau WCAG 2.2 AA est exigé contractuellement.',
+        a: "La directive vise certains produits et services depuis le 28 juin 2025, pas tous les sites indistinctement. Les articles 3(23) et 4(5) prévoient une exemption pour les micro-entreprises fournissant des services (moins de 10 personnes et chiffre d’affaires annuel ou bilan ≤ 2 M€). Vérifiez le secteur, la transposition nationale, les contrats et les autres obligations applicables avec un conseil compétent.",
       },
       {
         q: 'Quel est le moyen le plus rapide et le moins cher d’augmenter la conversion d’un checkout ?',
@@ -499,17 +540,108 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
       },
       {
         q: 'Peut-on valider un parcours UX uniquement avec des agents IA qui simulent des utilisateurs ?',
-        a: 'Non. Les études empiriques de 2026 (Kuric et al., 2026 ; Pew Research Center, 2026) prouvent que les personas LLM divergent du comportement humain sur 53 % des tâches. Utilisez un script déterministe pour contrôler vos contrastes, tailles et balises, et observez 5 vrais humains pendant 25 minutes pour tester la compréhension.',
+        a: "Non. Un agent peut vérifier des règles déterministes et aider à préparer des hypothèses ; il ne montre pas comment une personne réelle comprend votre offre ou récupère après une erreur. Observez de vrais utilisateurs sur une tâche définie, puis itérez.",
       },
     ],
     ctaTitle: 'Passez du cours aux 36 écrans annotés, aux 12 fiches A4 et au scanner Python.',
     ctaText:
       'Ce dossier résume une fraction de la méthode. Téléchargez l’édition française intégrale du UX/UI Playbook 2026 (148 pages A4), accompagnée du Kit Bonus imprimable de 26 pages (fiches d’audit, brief, handoff) et des 21 fichiers techniques incluant agent_check.py.',
     ctaBullets: [
-      'Livre complet de 148 pages A4 en français (97 sections, 36 écrans décortiqués, 24 paires Avant/Après)',
+      "Livre complet de 148 pages A4 en français (97 sections, 36 écrans décortiqués, 13 prototypes Avant/Après + 11 planches de plateformes)",
       'Kit Bonus de 12 fiches A4 imprimables + gabarits Markdown prêts pour vos missions clients',
       'Scanner Python exécutable des 77 règles + Skill IA pour Claude Code, Cursor & Codex (29 $ paiement unique)',
     ],
+    entityDefinition: "Le design d’expérience utilisateur organise les parcours, les contenus et les interactions pour permettre à une personne d’atteindre son objectif. Il se distingue de l’UI, qui en définit la présentation visuelle, et du Product Design, qui arbitre aussi la valeur et le périmètre.",
+    references: [
+                  {
+                    "title": "The magical number 4 in short-term memory",
+                    "url": "https://doi.org/10.1017/S0140525X01003922",
+                    "publisher": "Nelson Cowan · Behavioral and Brain Sciences",
+                    "date": "2001",
+                    "evidence": "established",
+                    "note": "Capacité d’environ 4 blocs sous certaines conditions expérimentales. Les groupes de 3 à 5 dans une UI sont une transposition de méthode."
+                  },
+                  {
+                    "title": "Cart Abandonment Rate: 50 Statistics",
+                    "url": "https://baymard.com/blog/cart-abandonment-rate",
+                    "publisher": "Baymard Institute",
+                    "date": "2026-10-28",
+                    "evidence": "established",
+                    "note": "70,22 % : moyenne non pondérée de 50 études (2006–2025). Éléments de formulaire : 23,48 observés contre 12–14 dans un parcours simplifié."
+                  },
+                  {
+                    "title": "The WebAIM Million — 2026 report",
+                    "url": "https://webaim.org/projects/million/",
+                    "publisher": "WebAIM",
+                    "date": "2026-02",
+                    "evidence": "established",
+                    "note": "1 million de pages d’accueil, 95,9 % avec erreurs détectées, 56,1 erreurs par page. Un scan sans erreur ne prouve pas la conformité."
+                  },
+                  {
+                    "title": "Web Content Accessibility Guidelines 2.2",
+                    "url": "https://www.w3.org/TR/WCAG22/",
+                    "publisher": "W3C",
+                    "date": "2024-12-12",
+                    "evidence": "established",
+                    "note": "Texte normatif : distinguer texte courant, grand texte et composants non textuels."
+                  },
+                  {
+                    "title": "Understanding SC 2.5.8: Target Size (Minimum)",
+                    "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+                    "publisher": "W3C WAI",
+                    "date": "WCAG 2.2",
+                    "evidence": "established",
+                    "note": "AA : 24 × 24 CSS px avec exceptions. 44 × 44 px est la recommandation retenue ici, pas le minimum AA."
+                  },
+                  {
+                    "title": "A mathematical model of the finding of usability problems",
+                    "url": "https://doi.org/10.1145/169059.169166",
+                    "publisher": "Jakob Nielsen & Thomas K. Landauer · CHI",
+                    "date": "1993",
+                    "evidence": "established",
+                    "note": "Le modèle dépend du taux de découverte de chaque problème ; 5 personnes ne garantissent pas un pourcentage fixe."
+                  },
+                  {
+                    "title": "Beyond the five-user assumption",
+                    "url": "https://doi.org/10.3758/BF03195514",
+                    "publisher": "Laura Faulkner · Behavior Research Methods",
+                    "date": "2003",
+                    "evidence": "probable",
+                    "note": "Étude originale sur 60 personnes ; les sous-échantillons de 5 révèlent 55–99 % des problèmes de cette étude. Généralisation à votre produit : à tester."
+                  },
+                  {
+                    "title": "Directive (EU) 2019/882 — European Accessibility Act",
+                    "url": "https://eur-lex.europa.eu/eli/dir/2019/882/oj",
+                    "publisher": "EUR-Lex · Union européenne",
+                    "date": "2019",
+                    "evidence": "established",
+                    "note": "Articles 2, 3(23), 4(5) et 31 : champ, micro-entreprises et application. Vérifier la transposition nationale et votre secteur."
+                  },
+                  {
+                    "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+                    "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/2026-07-27/eng",
+                    "publisher": "EUR-Lex · Union européenne",
+                    "date": "2026-07-27",
+                    "evidence": "established",
+                    "note": "Texte consolidé : art. 50 (obligations et exceptions), 111(4) (transition au 2 décembre 2026 pour certains systèmes existants) et 113 (application). Vérifier le rôle et l’usage concernés."
+                  },
+                  {
+                    "title": "W3C Accessibility Guidelines (WCAG) 3.0 — Working Draft",
+                    "url": "https://www.w3.org/TR/2026/WD-wcag-3.0-20260910/",
+                    "publisher": "W3C",
+                    "date": "2026-09-10",
+                    "evidence": "established",
+                    "note": "Statut de projet uniquement : ne remplace pas WCAG 2.2 et peut évoluer."
+                  },
+                  {
+                    "title": "EN 301 549 V4.1.1 — Accessibility requirements for ICT products and services",
+                    "url": "https://www.etsi.org/deliver/etsi_en/301500_301599/301549/04.01.01_60/en_301549v040101p.pdf",
+                    "publisher": "ETSI · CEN · CENELEC",
+                    "date": "2026-09",
+                    "evidence": "established",
+                    "note": "Version publiée de la norme. Une citation au JO de l’UE et son champ d’application doivent être vérifiés séparément."
+                  }
+                ],
   },
 
   /* ============================================================================
@@ -524,9 +656,9 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
     updatedAt: '2026-11-18',
     ogImage: '/og-article-ui-fr.jpg',
     metaTitle:
-      'UI Design & Design Tokens : hiérarchie en 4 leviers, échelle typo, base 8, Dark Mode & Handoff | UX/UI Playbook',
+      "UI Design : tokens CSS et Dark Mode | UX/UI Playbook",
     metaDescription:
-      'Cours complet d’UI Design pour développeurs et designers : hiérarchie visuelle sans bruit, échelle typographique 1,25, système couleur 60/30/10, 3 échelles d’espacement base 8, vrai Dark Mode sans halation, micro-copie, RTL et handoff.',
+      "Créez un système UI cohérent : 6 rôles typographiques, 8 tokens de taille, grille 4/8, couleurs accessibles et code CSS clair/sombre prêt à copier.",
     keywords: [
       'UI Design system CSS',
       'design tokens W3C 2025.10',
@@ -538,27 +670,32 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
       'spécification handoff développeur',
     ],
     title:
-      'UI Design & Design Tokens : hiérarchie en 4 leviers, échelle typographique, vrai Dark Mode, micro-copie et handoff',
+      "UI Design : créer vos tokens CSS et un mode sombre lisible",
     subtitle:
-      'Une interface qui paraît « amateur » ne souffre presque jamais d’un manque d’illustrations. Elle souffre de cinq tailles de police choisies à l’œil, de marges à 13 et 19 px, d’accents colorés partout et d’un mode sombre bricolé par inversion.',
+      "Une base réutilisable pour vos interfaces : hiérarchie, typographie, espacement et couleurs sémantiques, avec un fichier tokens.css et une fiche de passation à copier.",
     aeoSummaryTitle: 'Synthèse exécutive — Les chiffres qui tiennent un Design System',
     aeoSummary:
-      '80 % de la qualité visuelle perçue provient d’une échelle typographique fermée (base 16 px × ratio 1,25 arrondie en 12, 14, 16, 20, 24, 32, 40, 64 px) et de trois échelles d’espacement strictes en base 4/8 (interne 4–12 px, structurelle 16–32 px, macro 48–96 px). La couleur obéit au ratio 60 % surfaces neutres / 30 % encre lisible / 10 % accent unique (contraste WCAG 2.2 AA ≥ 4,5:1 sur texte et placeholders, ≥ 3:1 sur bordures et focus). Le Dark Mode ne s’obtient jamais par inversion : l’élévation se traduit par un éclaircissement progressif des surfaces (#121212 puis +4 % à +8 %) avec un texte blanc adouci à ~87 % pour supprimer le halo optique.',
+      "Un système UI cohérent relie 6 rôles sémantiques à 8 tokens de taille : 12, 14, 16, 20, 24, 32, 40 et 64 px. Le ratio 1,25 inspire la progression, sans imposer une formule d’arrondi exacte. Séparez espacements internes, structurels et macro sur une base 4/8. Le repère 60/30/10 organise les rôles de couleur ; ce n’est pas un résultat scientifique. Pour le mode sombre OLED, gardez une base #000000, relevez les surfaces et adoucissez l’encre. Mesurez les contrastes sur chaque fond réel et proposez aussi un mode clair : le confort reste à vérifier avec les lecteurs.",
     keyStats: [
       {
-        value: '60 / 30 / 10',
-        label: 'Proportion entre surfaces neutres calmes, structure foncée lisible et couleur d’action unique',
-        source: 'UX/UI Playbook · Section 22 (Système chromatique)',
+        value: "6 rôles · 8 tokens",
+        label: "Tailles CSS 12, 14, 16, 20, 24, 32, 40 et 64 px : échelle retenue dans ce guide",
+        source: "UX/UI Playbook · Sections 21 & 25 · Repère de méthode",
+        evidence: "probable",
       },
       {
         value: '≥ 4,5 : 1',
-        label: 'Contraste minimal WCAG 2.2 AA exigé sur tout texte < 24 px, y compris les placeholders',
-        source: 'W3C WCAG 2.2 (critères 1.4.3 & 1.4.11) · Preuve établie',
+        label: "Contraste AA du texte courant ; grand texte et composants utiles : 3:1 selon leur critère",
+        source: "W3C WCAG 2.2 · 1.4.3 & 1.4.11",
+        evidence: "established",
+        url: "https://www.w3.org/TR/WCAG22/",
       },
       {
         value: '2025.10',
-        label: 'Version stabilisée du standard interopérable des jetons de design (JSON → CSS / iOS / Android)',
-        source: 'W3C Design Tokens Community Group (28 oct. 2025) · Preuve établie',
+        label: "Rapport final stable du Design Tokens Community Group ; ce n’est pas une Recommandation W3C",
+        source: "Design Tokens Community Group · 2025-10-28",
+        evidence: "established",
+        url: "https://www.designtokens.org/tr/2025.10/format/",
       },
     ],
     sections: [
@@ -605,12 +742,12 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
       {
         id: 'typographie-sans-hasard',
         num: '02',
-        tocLabel: 'Typographie : 2 familles & échelle 1,25',
-        heading: 'Typographie sans hasard : deux familles maximum, une échelle mathématique et zéro texte sous 12 px',
+        tocLabel: "Typographie : 6 rôles, 8 tailles",
+        heading: "Typographie : deux familles de lecture, une monospace et huit tailles",
         blocks: [
           {
             type: 'p',
-            text: 'Une interface logicielle est constituée à 80 % de caractères écrits. Si votre typographie flotte, aucune palette de couleurs ne sauvera l’écran. Le remède tient en une contrainte libératrice (Section 21 & Annexe A4) : deux familles au grand maximum (une police de titrage expressive comme Sora + une sans-serif d’interface irréprochable comme Inter, complétée d’une chasse fixe pour le code et les identifiants), et six à sept tailles figées une fois pour toutes dans vos variables.',
+            text: "La typographie porte une grande part de la lisibilité d’une interface. Fixez les choix une fois dans le dépôt : Sora pour le titrage, Inter pour le texte et les contrôles, JetBrains Mono pour le code et les identifiants. Le guide distingue 6 rôles sémantiques — Display/H1, H2, H3, Body, Small et Micro — mappés sur 8 tokens CSS de taille, de 12 à 64 px (Sections 21 & 25). Ce sont deux niveaux différents, pas deux décomptes concurrents.",
           },
           {
             type: 'h3',
@@ -618,23 +755,23 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
           },
           {
             type: 'p',
-            text: 'Partez d’un corps de lecture confortable à `16 px` et multipliez chaque palier par un ratio harmonique de `1,25` (Major Third, polyvalent pour SaaS et web) : vous obtenez `16 · 20 · 25 · 31,25 · 39 · 48,8 · 61`. Arrondissez simplement aux multiples de 4 les plus proches pour tomber juste sur votre grille verticale : `12 · 14 · 16 · 20 · 24 · 32 · 40 · 48 · 64 px`. Plus jamais personne dans l’équipe n’écrira `font-size: 17px` ou `23px`.',
+            text: "Une base de 16 px et un ratio indicatif de 1,25 donnent une progression utile, mais les valeurs finales sont un choix de système, pas l’arrondi mécanique de chaque palier. Retenez ici exactement 8 tokens : 12 · 14 · 16 · 20 · 24 · 32 · 40 · 64 px. Un rôle peut utiliser deux tokens selon le viewport ; une variation fluide entre deux bornes documentées est également possible. Documentez les exceptions plutôt que d’ajouter une neuvième taille sans décision.",
           },
           {
             type: 'p',
-            text: 'Deux réglages optiques séparent immédiatement le professionnel du débutant. Premièrement, l’interlignage (`line-height`) varie en sens inverse de la taille : un paragraphe de corps à 16 px a besoin d’air (`1,55` à `1,65`) sur une justification plafonnée entre `60 et 75 caractères` (`max-width: 68ch`), tandis qu’un grand titre Display à 48 px avec `line-height: 1.5` se disloque complètement — resserrez vos titres entre `1,05 et 1,15` avec une approche légèrement négative (`letter-spacing: -0.02em` à `-0.03em`). Deuxièmement, activez systématiquement `font-variant-numeric: tabular-nums` sur tous les montants, compteurs, dates et colonnes de tableaux pour que le chiffre `1` occupe exactement la même chasse que le `8` et que les décimales tombent au cordeau.',
+            text: "Réglez l’interlignage avec la taille et la famille choisies : partez de `1,55–1,65` pour un corps de 16 px sur environ `60–75 caractères` (`max-width: 68ch`) et de `1,05–1,15` pour un titre de 64 px, avec une approche de `-0.02em` à `-0.03em` à tester. Ce sont des points de départ, pas des constantes perceptives. Activez `font-variant-numeric: tabular-nums` pour aligner montants, compteurs, dates et colonnes numériques.",
           },
           {
             type: 'table',
-            caption: 'Table de référence typographique prête à coder (Section 21 & Annexe A4)',
+            caption: "6 rôles sémantiques mappés sur 8 tokens : les bornes et tailles ci-dessous sont celles retenues dans ce guide.",
             headers: ['Rôle sémantique', 'Taille CSS', 'Interligne & approche', 'Usage strict & garde-fous'],
             rows: [
-              ['Hero / H1', '40 à 64 px', '1,05–1,10 · -0,03em', 'Un seul par page, jamais deux H1 concurrents'],
-              ['Section / H2', '28 à 32 px', '1,15–1,22 · -0,02em', 'Découpage majeur du document ou de la vue'],
-              ['Carte / H3', '20 à 24 px', '1,30 · -0,015em', 'Sous-sections, en-têtes de modales et de cartes'],
-              ['Corps courant', '15 à 16 px', '1,55–1,65 · normal', 'Lecture longue (largeur 60–75 ch max)'],
-              ['Secondaire / UI', '13 à 14 px', '1,45 · normal', 'Libellés de formulaires, aides contextuelles, cellules'],
-              ['Micro / Tag', '12 px (plancher)', '1,40 · +0,04em', 'Badges courts, horodatages — jamais une phrase entière'],
+              ["Display / H1", "40 ou 64 px", '1,05–1,10 · -0,03em', "Un H1 par page ; adaptation fluide possible entre ces bornes"],
+              ["H2", "32 px", '1,15–1,22 · -0,02em', "Sections majeures"],
+              ["H3", "20 ou 24 px", '1,30 · -0,015em', "Sous-sections et titres de cartes"],
+              ["Body", "16 px", '1,55–1,65 · normal', "Texte courant ; largeur de lecture à tester"],
+              ["Small", "14 px", '1,45 · normal', "Labels, aide, cellules"],
+              ["Micro", '12 px (plancher)', '1,40 · +0,04em', "Badges courts et horodatages"],
             ],
           },
         ],
@@ -648,7 +785,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
         blocks: [
           {
             type: 'p',
-            text: 'Un générateur de palettes en ligne qui vous donne cinq carrés pastel côte à côte vous tend un piège. Une interface n’a pas besoin d’une « jolie harmonie » ; elle a besoin d’une répartition fonctionnelle 60 / 30 / 10 (Section 22) : 60 % de surfaces neutres calmes (fonds de page et cartes), 30 % de neutres sombres structurants (encre principale, encre secondaire, filets subtils) et seulement 10 % d’accent réservé à l’action.',
+            text: "Attribuez d’abord des rôles à vos couleurs : surfaces, texte, action et statuts. La règle 60 / 30 / 10 du manuel est un repère de composition (Section 22), pas une proportion à mesurer pixel par pixel ni une preuve d’efficacité : gardez les surfaces calmes, une structure lisible et un accent d’action peu concurrentiel. Testez ensuite les paires de couleurs et la reconnaissance des statuts, y compris sans couleur.",
           },
           {
             type: 'h3',
@@ -680,7 +817,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
               },
               {
                 bold: 'Échelle macro (48 · 64 · 96 px)',
-                text: 'Respiration franche entre deux chapitres majeurs d’une page. Remplace avantageusement 80 % des traits horizontaux `<hr>` inutiles.',
+                text: "Respiration franche entre deux chapitres majeurs d’une page. Permet souvent de supprimer des séparateurs `<hr>` sans fonction.",
               },
             ],
           },
@@ -691,6 +828,8 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
             caption:
               'La loi d’asymétrie : un sous-titre doit toujours être nettement plus proche du paragraphe qu’il annonce (8–12 px) que du paragraphe précédent (32 px).',
             sourceRef: 'UX/UI Playbook FR · Partie 03, Section 23 (p. 49)',
+            width: 1080,
+            height: 1527,
           },
           {
             type: 'h3',
@@ -706,29 +845,29 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
       {
         id: 'tokens-vrai-dark-mode',
         num: '04',
-        tocLabel: 'Tokens CSS & vrai Dark Mode sans halation',
-        heading: 'Tokens CSS & vrai Dark Mode : pourquoi inverser une maquette claire produit une interface illisible',
+        tocLabel: "Tokens CSS & mode sombre OLED",
+        heading: "Tokens CSS et mode sombre OLED : séparer les rôles plutôt qu’inverser les couleurs",
         blocks: [
           {
             type: 'p',
-            text: 'Un écran isolé se jette à la refonte suivante ; un jeu de tokens se réutilise pendant cinq ans et fait votre marge dès le deuxième projet (Section 25). Un token n’est pas une variable `--blue-500` : c’est une décision de rôle (`--color-surface`, `--color-text`, `--color-accent`, `--space-6`), alignée sur la spécification W3C Design Tokens `2025.10`. Si votre code consomme exclusivement des rôles sémantiques, activer un mode sombre propre prend vingt lignes de CSS. Si vous avez codé `#FFFFFF` et `#F3F4F6` en dur dans cent composants React, c’est une réécriture complète.',
+            text: "Un jeu de tokens facilite la réutilisation des décisions d’un projet à l’autre (Section 25), sans garantir une durée de vie ou une marge. Séparez les valeurs primitives (`--blue-500`) des rôles sémantiques (`--color-surface`, `--color-text`, `--color-accent`, `--space-6`). Le format Design Tokens 2025.10 est un rapport final du Design Tokens Community Group, pas une Recommandation W3C ; le CSS ci-dessous illustre les rôles, sans prétendre être un fichier JSON DTCG. Un changement de thème demande aussi de tester les composants, images et états.",
           },
           {
             type: 'h3',
-            text: 'Les 4 lois physiques d’un Dark Mode confortable sur la durée (Section 56)',
+            text: "Quatre réglages de mode sombre à tester avec vos lecteurs",
           },
           {
             type: 'doDont',
             doTitle: '✓ Vrai Dark Mode par tokens',
             dontTitle: '✕ Inversion naïve (« filtre négatif »)',
             doItems: [
-              'Éclaircir progressivement les surfaces élevées : base sombre (#0B0D12 ou #121212), carte à +4 % de clarté, modale ou menu déroulant à +8 %. En mode sombre, la lumière remplace l’ombre portée.',
-              'Adoucir l’encre principale autour de #ECEEF4 (blanc à ~87 %) pour supprimer l’éblouissement sur lecture longue.',
+              "Conserver une base OLED #000000 et distinguer les cartes et modales par des surfaces progressivement plus claires. Mesurer chaque niveau.",
+              "Essayer une encre blanc cassé (#ECEEF4 par exemple), puis demander un retour de lecture. Aucune couleur ne garantit l’absence de halo pour tous.",
               'Désaturer et relever d’un ton la couleur d’accent afin qu’elle ne « vibre » pas optiquement contre le fond sombre.',
               'Re-mesurer chaque paire texte secondaire / fond sur la carte la plus claire (là où le ratio chute le plus vite).',
             ],
             dontItems: [
-              'Plaquer du texte blanc pur `#FFFFFF` en corps 15 px sur un fond `#000000` : provoque un halo optique (halation) très fatigant, surtout chez les lecteurs astigmates (~30–40 % des adultes).',
+              "Imposer du blanc pur sur noir pur à tous les lecteurs sans essai de lecture ni mode clair alternatif.",
               'Conserver des `box-shadow: 0 10px 30px rgba(0,0,0,0.12)` invisibles sur fond sombre sans bordure subtile (`1px solid rgba(255,255,255,0.09)`).',
               'Garder le même rouge ou bleu saturé du mode clair, qui tombe souvent sous 3:1 de contraste une fois posé sur `#121212`.',
               'Utiliser `filter: invert(1)` sur la page, qui détruit les photos, les avatars et les couleurs sémantiques.',
@@ -737,31 +876,35 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
           {
             type: 'figure',
             src: '/images/articles/fr/ui-sbs-dark.webp',
-            alt: 'Prototype comparé du mode sombre tiré du UX/UI Playbook Français opposant une inversion brutale à une architecture de tokens par élévation',
+            alt: "Prototype comparé du mode sombre tiré du UX/UI Playbook Français opposant une inversion directe à une architecture de tokens par élévation",
             caption:
-              'Prototype comparé (Section 61) : à gauche, l’inversion naïve qui aveugle et écrase les cartes ; à droite, la hiérarchie par surfaces progressives et accent désaturé.',
+              "Prototype comparé (Section 61) : inversion de couleurs à gauche, surfaces et accents sémantiques à droite. Le confort doit aussi être testé en lecture réelle.",
             sourceRef: 'UX/UI Playbook FR · Partie 07, Section 61 (p. 110)',
+            width: 1080,
+            height: 755,
           },
           {
             type: 'copyable',
             label: 'tokens.css — Le socle complet (Clair + Dark Mode + Typo + Base 8 + Motion)',
             langTag: 'css',
-            code: `/* UX/UI Playbook 2026 — tokens.css (couvre 90 % des produits web & SaaS) */
+            code: `/* UX/UI Playbook 2026 — tokens.css (socle de départ pour un produit web ou SaaS) */
 :root {
-  /* 1. Surfaces & Encres — Mode Clair (validé WCAG 2.2 AA) */
+  /* 1. Surfaces & Encres — Mode Clair (paires à mesurer sur les surfaces utilisées) */
   --color-bg:             #FFFFFF;
   --color-surface-1:      #F4F1EA;
   --color-surface-2:      #EAE5DA;
   --color-text:           #101319; /* > 16:1 sur bg */
   --color-text-2:         #343A46; /* > 10:1 sur bg */
   --color-muted:          #5B6170; /* ≥ 5.2:1 sur surface-1 */
-  --color-line:           #DFDBD0;
+  --color-line:           #DFDBD0; /* decorative */
+  --color-control-line:   #737987; /* meaningful controls */
 
   /* 2. Action unique & Canaux sémantiques distincts */
-  --color-accent:         #F0512B;
-  --color-accent-hover:   #B93314;
-  --color-on-accent:      #101319;
-  --color-success:        #0E7C6B;
+  --color-accent:         #C2320A;
+  --color-accent-hover:   #A62806;
+  --color-on-accent:      #FFFFFF;
+  --color-success:        #137347;
+  --color-warning:        #9A5B00;
   --color-danger:         #C62828;
   --color-info:           #2C5CE6;
 
@@ -770,7 +913,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
   --space-4: 16px;  --space-6: 24px;  --space-8: 32px;
   --space-12: 48px; --space-16: 64px; --space-24: 96px;
 
-  /* 4. Rayons & Échelle typographique fermée (ratio 1,25 arrondi) */
+  /* 4. Rayons, 6 rôles sémantiques, 8 tokens de taille */
   --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-full: 999px;
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Sora", var(--font-sans);
@@ -788,18 +931,20 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
 
 /* Mode Sombre : élévation par clarté + encre adoucie + accent désaturé */
 [data-theme="dark"] {
-  --color-bg:             #0B0D12;
+  --color-bg:             #000000;
   --color-surface-1:      #131720; /* +claire que la base */
   --color-surface-2:      #1B202C; /* +claire pour modales/popovers */
-  --color-text:           #ECEEF4; /* ~87% blanc : zéro halation */
+  --color-text:           #ECEEF4; /* encre adoucie, confort à tester */
   --color-text-2:         #B4BCCB;
   --color-muted:          #8E96A8; /* ≥ 4.6:1 vérifié sur surface-2 */
   --color-line:           rgba(255, 255, 255, 0.10);
+  --color-control-line:   #8E96A8;
 
   --color-accent:         #FF6B47; /* relevé d'un ton et adouci */
   --color-accent-hover:   #FF8566;
   --color-on-accent:      #0B0D12;
   --color-success:        #24D18A;
+  --color-warning:        #F5B544;
   --color-danger:         #FF6B6B;
   --color-info:           #6EA0FF;
 }
@@ -814,6 +959,12 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
   }
 }`,
             note: 'Copiez ce fichier à la racine de votre projet : chaque composant consomme uniquement var(--color-*) et var(--space-*), sans aucune valeur hexadécimale orpheline.',
+          },
+          {
+            "type": "inlineCta",
+            "title": "Gardez les tokens et la fiche de handoff dans votre dépôt.",
+            "text": "L’archive du Playbook fournit tokens.css, tokens.json et les gabarits éditables, avec 13 prototypes Avant/Après et 11 planches de plateformes dans le manuel.",
+            "buttonLabel": "Obtenir les fichiers FR · 29 $"
           },
         ],
       },
@@ -862,7 +1013,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
           },
           {
             type: 'p',
-            text: 'Traduire en allemand ou en français allonge déjà les libellés courts anglais (« Save » → « Enregistrer les modifications ») de +30 à +40 % ; passer en arabe ou en hébreu (`dir="rtl"` sur `<html>`) miroite en plus tout l’axe horizontal. Si vous prenez l’habitude dès aujourd’hui de remplacer `margin-left` par `margin-inline-start`, `padding-right` par `padding-inline-end`, `left: 0` par `inset-inline-start: 0` et `text-align: left` par `text-align: start`, votre mise en page bascule gratuitement. Retenez enfin la frontière de miroitage : on inverse les flèches de suite/retour, les chevrons de fil d’Ariane et l’ordre des colonnes d’un tableau, mais on n’inverse jamais un logo, les aiguilles d’une horloge, les boutons de lecture vidéo ni l’ordre des chiffres à l’intérieur d’un nombre.',
+            text: "Traduire en allemand ou en français peut fortement allonger un libellé court anglais ; passer en arabe ou en hébreu (`dir=\"rtl\"` sur `<html>`) miroite en plus tout l’axe horizontal. Si vous prenez l’habitude dès aujourd’hui de remplacer `margin-left` par `margin-inline-start`, `padding-right` par `padding-inline-end`, `left: 0` par `inset-inline-start: 0` et `text-align: left` par `text-align: start`, votre mise en page bascule gratuitement. Retenez enfin la frontière de miroitage : on inverse les flèches de suite/retour, les chevrons de fil d’Ariane et l’ordre des colonnes d’un tableau, mais on n’inverse jamais un logo, les aiguilles d’une horloge, les boutons de lecture vidéo ni l’ordre des chiffres à l’intérieur d’un nombre.",
           },
         ],
       },
@@ -875,7 +1026,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
         blocks: [
           {
             type: 'p',
-            text: 'Un design magnifique qui sort défiguré de l’intégration n’est pas la faute du développeur : c’est presque toujours la faute d’une passation muette (Section 28). Si l’intégrateur — humain ou agent IA — doit ouvrir trois onglets, deviner ce qui se passe au clic sur « Payer » et inventer la couleur d’erreur, il improvisera. Avant de multiplier les pages exotiques, verrouillez les 12 composants qui fabriquent 95 % d’un logiciel (Bouton × 6 états, Champ × 5 états + label, Checkbox/Radio avec label cliquable, Switch, Select, Carte, Modale avec piégeage du focus et touche Échap, Toast/Alerte, Onglets, Tableau + état vide, Badge de statut, Squelette de chargement). Puis joignez une fiche de Handoff qui tient sur un seul bloc Markdown.',
+            text: "Un design magnifique qui sort défiguré de l’intégration n’est pas la faute du développeur : c’est presque toujours la faute d’une passation muette (Section 28). Si l’intégrateur — humain ou agent IA — doit ouvrir trois onglets, deviner ce qui se passe au clic sur « Payer » et inventer la couleur d’erreur, il improvisera. Avant de multiplier les pages exotiques, verrouillez les 12 composants réutilisés dans de nombreux logiciels (Bouton × 6 états, Champ × 5 états + label, Checkbox/Radio avec label cliquable, Switch, Select, Carte, Modale avec piégeage du focus et touche Échap, Toast/Alerte, Onglets, Tableau + état vide, Badge de statut, Squelette de chargement). Puis joignez une fiche de Handoff qui tient sur un seul bloc Markdown.",
           },
           {
             type: 'copyable',
@@ -890,7 +1041,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
 
 ## 2. Tokens consommés (zéro valeur en dur)
 - Action primaire : var(--color-accent) · hover var(--color-accent-hover) · texte var(--color-on-accent)
-- Bordure repos : 1px solid var(--color-line) · Focus clavier : outline 2px solid var(--color-accent); outline-offset: 2px
+- Bordure repos : 1px solid var(--color-control-line) · Focus clavier : outline 2px solid var(--color-accent); outline-offset: 2px
 - Espacements autorisés : var(--space-2), var(--space-4), var(--space-6), var(--space-8) uniquement
 
 ## 3. Les 6 états à implémenter impérativement
@@ -906,15 +1057,15 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
 - Focus déplacé automatiquement sur le premier champ invalide à la soumission
 - Récapitulatif balisé en <aside aria-labelledby="summary-heading">
 - Prévoir +35 % de largeur sur les libellés sans troncature ni débordement à 320 px`,
-            note: 'Glissez ce bloc dans votre issue Linear/GitHub ou dans handoff.md : un développeur ou un agent Claude Code / Cursor dispose de 100 % des décisions implicites.',
+            note: "Glissez ce bloc dans votre issue Linear/GitHub ou dans handoff.md : un développeur ou un agent Claude Code / Cursor dispose des décisions de structure et des cas limites documentés.",
           },
         ],
       },
     ],
     faqs: [
       {
-        q: 'Pourquoi le blanc pur (#FFFFFF) sur noir pur (#000000) pose-t-il problème sur les textes longs ?',
-        a: 'Un contraste maximal de 21:1 sur du texte courant crée un phénomène optique appelé halation : les lettres lumineuses semblent baver sur le fond noir, provoquant une fatigue rapide et un flou marqué chez les lecteurs astigmates. Gardez un fond sombre profond (#0B0D12 ou #121212) pour vos surfaces et utilisez un blanc cassé vers #ECEEF4 (~87 %) pour une lecture prolongée confortable tout en dépassant largement le seuil AAA.',
+        q: "Comment rendre un mode sombre OLED plus confortable à lire ?",
+        a: "Conservez la base #000000 si l’OLED est votre objectif, relevez les surfaces pour montrer la hiérarchie et essayez une encre adoucie plutôt que du blanc pur. Vérifiez chaque contraste et faites lire un vrai paragraphe : le confort varie selon les personnes, l’écran et la lumière. Proposez un mode clair plutôt que de promettre zéro halation.",
       },
       {
         q: 'Faut-il aussi respecter un contraste de 4,5:1 sur le texte placeholder d’un champ ?',
@@ -929,13 +1080,48 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
         a: 'Remplacez systématiquement les directions physiques gauche/droite (margin-left, padding-right, left, right, border-left, text-align: left) par les propriétés logiques CSS (margin-inline-start, padding-inline-end, inset-inline-start, border-inline-start, text-align: start), et prévoyez +30 à +40 % d’élasticité horizontale sur vos boutons.',
       },
     ],
-    ctaTitle: 'Récupérez les fichiers tokens.css, tokens.json, les 24 comparatifs Avant/Après et les 12 fiches.',
+    ctaTitle: "Récupérez les fichiers tokens.css, tokens.json, les 13 prototypes Avant/Après et les 11 planches de plateformes et les 12 fiches.",
     ctaText:
-      'Ne reconstruisez pas votre système de zéro à chaque nouveau dépôt : l’édition française du UX/UI Playbook 2026 livre les 148 pages illustrées ainsi que l’archive complète des tokens validés WCAG 2.2 AA (clair & sombre), les gabarits de handoff et le scanner Python.',
+      "Réutilisez une base documentée au prochain dépôt : l’édition française du UX/UI Playbook 2026 réunit 148 pages illustrées, des tokens clair/sombre, des gabarits de handoff et le scanner Python. Vérifiez ensuite les contrastes et composants dans votre propre rendu.",
     ctaBullets: [
       'Archive prête à l’emploi : tokens.css, tokens.json (format W3C) et 4 gabarits Markdown pro',
-      '24 prototypes comparés côte à côte (boutons, tableaux, formulaires, mode sombre, cibles tactiles)',
+      "13 prototypes Avant/Après + 11 planches de plateformes : 24 planches au total",
       'Licence commerciale illimitée pour vos SaaS et les projets de vos clients (29 $ une seule fois)',
+    ],
+    entityDefinition: "Le design d’interface utilisateur définit la hiérarchie visuelle et les composants interactifs d’un produit : typographie, couleur, espacement et états. Un design system conserve ces décisions dans des tokens et des composants réutilisables.",
+    references: [
+      {
+        "title": "Web Content Accessibility Guidelines 2.2",
+        "url": "https://www.w3.org/TR/WCAG22/",
+        "publisher": "W3C",
+        "date": "2024-12-12",
+        "evidence": "established",
+        "note": "1.4.3 : texte courant 4,5:1, grand texte 3:1. 1.4.11 : composants et informations graphiques utiles 3:1."
+      },
+      {
+        "title": "Understanding SC 2.5.8: Target Size (Minimum)",
+        "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+        "publisher": "W3C WAI",
+        "date": "WCAG 2.2",
+        "evidence": "established",
+        "note": "Le minimum AA web est 24 × 24 CSS px avec exceptions ; le Playbook recommande ici 44 × 44 px."
+      },
+      {
+        "title": "Design Tokens Format Module 2025.10",
+        "url": "https://www.designtokens.org/tr/2025.10/format/",
+        "publisher": "Design Tokens Community Group",
+        "date": "2025-10-28",
+        "evidence": "established",
+        "note": "Rapport final communautaire stable pour l’échange de tokens ; ne pas le présenter comme une norme W3C."
+      },
+      {
+        "title": "The WebAIM Million — 2026 report",
+        "url": "https://webaim.org/projects/million/",
+        "publisher": "WebAIM",
+        "date": "2026-02",
+        "evidence": "established",
+        "note": "Les contrastes insuffisants figurent parmi les erreurs automatiquement détectées les plus fréquentes de l’échantillon."
+      }
     ],
   },
 
@@ -951,9 +1137,9 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
     updatedAt: '2026-11-18',
     ogImage: '/og-article-product-fr.jpg',
     metaTitle:
-      'Product Design, Revenus & Agents IA : pipeline déterministe, patterns agentiques & prix | UX/UI Playbook',
+      "Product Design & agents IA | UX/UI Playbook",
     metaDescription:
-      'Cours complet de Product Design & ingénierie agentique : brief en 2h, dashboards SaaS et pages tarifs, pipeline en 5 fichiers pour Claude Code / Cursor, 6 patterns d’UX agentique, contrôle à 3 statuts et tarification sans dérive.',
+      "Cadrez votre produit avant de coder : brief, pipeline IA en 5 fichiers, AGENTS.md, 3 prompts à copier et vérification à 3 statuts, sans faux feu vert.",
     keywords: [
       'Product Design développeur solo',
       'AGENTS.md Claude Code Cursor UI',
@@ -964,27 +1150,31 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
       'proposition commerciale 1 page',
     ],
     title:
-      'Product Design, Revenus & Agents IA : cadrer la valeur, piloter Claude Code / Cursor sans « slop » et facturer proprement',
+      "Product Design : cadrer votre produit et guider vos agents IA",
     subtitle:
-      'Un agent de code écrit mille lignes en trente secondes, mais il ne prend aucune décision produit à votre place : sans fichier de contexte ni jalon en noir et blanc, il génère une interface générique bourrée de dettes cachées.',
+      "Écrivez les décisions avant de déléguer le code : brief, wireframes en niveaux de gris, règles d’interface et rapport de preuve. Puis protégez le périmètre de livraison et le temps de votre équipe.",
     aeoSummaryTitle: 'Synthèse exécutive — Gouverner le produit, l’agent et la marge',
     aeoSummary:
-      'En Product Design moderne, la qualité d’une interface générée ou codée est plafonnée par la précision écrite en amont. Un workflow fiable sépare la décision en cinq fichiers versionnés (brief.md → screens.md → wireframe.html en niveaux de gris → revue multi-tailles + axe-core → handoff.md) gouvernés par un fichier AGENTS.md de ~40 lignes et 3 prompts séquentiels. Côté produit et business : 2 heures de recherche express suffisent à cadrer le besoin, un rapport de vérification honnête ne comporte que 3 statuts (Automatisé, À vérifier, Non applicable), et la rentabilité repose sur une règle stricte : « structure validée par écrit avant style » et réduction du périmètre plutôt que remise sur votre tarif journalier.',
+      "Un workflow de Product Design assisté par IA conserve ses décisions dans 5 fichiers : brief.md → screens.md → wireframe.html → review.md → handoff.md. AGENTS.md et tokens.css encadrent les contraintes communes. Les 3 prompts séparent spécification, structure et contrôle. Une recherche courte produit des hypothèses à vérifier, pas une validation de marché. Le rapport distingue les statuts Automatisé / À vérifier / Non applicable ; la sévérité Bloquant / Majeur reste une colonne séparée. Enfin, faites approuver la structure avant le style et ajustez le périmètre plutôt que de promettre un revenu ou une conformité sur la seule base d’un scan.",
     keyStats: [
       {
-        value: '84 %',
-        label: 'Des sites générés par IA évalués présentent des violations d’accessibilité dès la sortie',
-        source: 'Aljedaani et al. (ACM W4A, 2024) · Niveau de preuve : Probable',
+        value: "3 statuts",
+        label: "Automatisé / À vérifier / Non applicable ; sévérité et résultat séparés",
+        source: "UX/UI Playbook · Section 84 · Protocole de rapport",
+        evidence: "probable",
       },
       {
         value: '2 heures',
-        label: '45 min de brief structuré + 75 min de terrain (3 entretiens, 3 concurrents, 5 tickets support)',
-        source: 'UX/UI Playbook · Section 29 (Brief & recherche express)',
+        label: "Exemple de recherche express : 45 min de brief puis 75 min de terrain, à adapter au risque",
+        source: "UX/UI Playbook · Section 29 · Repère de méthode",
+        evidence: "probable",
       },
       {
-        value: '1 sur 3',
-        label: 'Proportion saine de propositions refusées sur le prix signalant que votre tarif a quitté la sous-évaluation',
-        source: 'UX/UI Playbook · Section 36 (Fixer ses prix)',
+        value: "6 patterns",
+        label: "Synthèse Playbook : clarification, plan, périmètre, permissions, journal et bilan",
+        source: "Microsoft HAX + Google PAIR · UX/UI Playbook §54",
+        evidence: "probable",
+        url: "https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/",
       },
     ],
     sections: [
@@ -1004,7 +1194,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
           },
           {
             type: 'quote',
-            tag: 'La phrase contractuelle qui stoppe 80 % des refontes gratuites · Section 02 & 37',
+            tag: "La clause qui limite les reprises hors périmètre · Section 02 & 37",
             text: '« Structure validée avant style, par écrit. » Tant que le périmètre fonctionnel (brief.md) et le squelette en niveaux de gris (wireframe) ne sont pas signés, aucune couleur de marque ni direction artistique n’entre dans la discussion.',
           },
         ],
@@ -1018,7 +1208,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
         blocks: [
           {
             type: 'p',
-            text: 'La recherche utilisateur n’est pas un comité de six semaines réservé aux banques. Deux heures chrono suffisent pour cesser de projeter vos propres goûts sur l’écran (Section 29). Découpez ces 120 minutes en deux blocs chirurgicaux : 45 minutes de cadrage contradictoire avec le décideur, suivies de 75 minutes de confrontation au réel.',
+            text: "Une recherche express de deux heures aide à sortir des hypothèses internes, sans remplacer une étude adaptée à un risque élevé. Le protocole du Playbook (Section 29) propose 45 minutes de cadrage et 75 minutes de confrontation au réel ; rallongez-le si vous n’avez pas accès aux bonnes personnes ou aux données nécessaires.",
           },
           {
             type: 'steps',
@@ -1044,7 +1234,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
           },
           {
             type: 'p',
-            text: 'Une fois le brief verrouillé, deux écrans concentrent l’essentiel des erreurs produit dans les logiciels B2B. Premier territoire : le Dashboard SaaS. Son ennemi mortel est la « densité décorative » — aligner 14 compteurs, deux jauges circulaires et un camembert simplement parce qu’il restait de la place sur un écran 27 pouces. Un tableau de bord n’affiche pas des données, il déclenche des décisions. Structurez-le en trois étages immuables : 1) trois KPIs maximum en haut, chacun affichant obligatoirement Valeur + Variation + Période de référence (car « 48,2 k€ » sans « ▲ +12,4 % vs sept. » est un chiffre muet), 2) un seul graphique temporel (courbe ou barres — bannissez les camemberts dès qu’on dépasse 3 parts), et 3) un tableau actionnable dont chaque ligne ouvre l’objet concerné.',
+            text: "Une fois le brief verrouillé, deux écrans concentrent l’essentiel des erreurs produit dans les logiciels B2B. Premier territoire : le Dashboard SaaS. Son principal écueil est la « densité décorative » — aligner 14 compteurs, deux jauges circulaires et un camembert simplement parce qu’il restait de la place sur un écran 27 pouces. Un tableau de bord n’affiche pas des données, il déclenche des décisions. Structurez-le en trois étages immuables : 1) trois KPIs maximum en haut, chacun affichant obligatoirement Valeur + Variation + Période de référence (car « 48,2 k€ » sans « ▲ +12,4 % vs sept. » est un chiffre muet), 2) un seul graphique temporel (courbe ou barres — bannissez les camemberts dès qu’on dépasse 3 parts), et 3) un tableau actionnable dont chaque ligne ouvre l’objet concerné.",
           },
           {
             type: 'p',
@@ -1057,11 +1247,11 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
         id: 'pipeline-5-fichiers-agents',
         num: '03',
         tocLabel: 'Pipeline IA en 5 fichiers & 3 Prompts prêts à copier',
-        heading: 'Déléguer l’interface à Claude Code ou Cursor sans récolter du « slop » : le pipeline en 5 fichiers',
+        heading: "Déléguer l’interface à Claude Code ou Cursor avec un pipeline en 5 fichiers",
         blocks: [
           {
             type: 'p',
-            text: 'Pourquoi un prompt du type « Crée-moi le dashboard et la page de paiement de mon SaaS » produit-il systématiquement la même soupe visuelle reconnaissable entre mille (cartes violettes sur fond ardoise, icônes décoratives partout, aucun état d’erreur, contrastes défaillants sur 84 % des générations selon Aljedaani et al., W4A 2024) ? Parce qu’un agent ne rate pas la syntaxe React ou CSS : il rate toutes les décisions implicites que vous n’avez pas écrites. En l’absence de contraintes, le modèle récite la médiane statistique de GitHub.',
+            text: "Un prompt comme « Crée le dashboard et la page de paiement de mon SaaS » laisse l’agent deviner la hiérarchie, les labels, les permissions et les états d’erreur. Le résultat peut être compilable tout en restant inadapté à la tâche. Réduisez cette ambiguïté en décrivant les décisions produit et en vérifiant le code généré ; ne supposez pas qu’une génération rapide remplace cette revue.",
           },
           {
             type: 'figure',
@@ -1070,6 +1260,8 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
             caption:
               'Le papier sert à diverger (5 croquis en 10 min) ; la chaîne de 5 fichiers versionnés sert à converger sans dérive entre deux sessions d’agent.',
             sourceRef: 'UX/UI Playbook FR · Partie 06, Section 43 (p. 81)',
+            width: 1080,
+            height: 1527,
           },
           {
             type: 'p',
@@ -1090,7 +1282,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
 - Zéro « Lorem ipsum », zéro témoignage inventé, zéro statistique fictive.
 - Zéro texte utile < 12px ; corps courant ≥ 15px ; largeur de lecture ≤ 70ch.
 - Zéro bouton sans verbe d'action précis ; un seul bouton primaire accentué par vue.
-- Zéro écran livré uniquement dans son état idéal : les 5 états (vide, chargement, rempli, erreur, succès) doivent exister et être testables.
+- Zéro écran livré uniquement dans son état idéal : les 5 états (vide, chargement, idéal, partiel/débordement, erreur) doivent exister et être testables.
 - Zéro propriété directionnelle physique (margin-left/right) si l'équivalent logique CSS existe.
 
 ## Accessibilité (bloquant WCAG 2.2 AA)
@@ -1101,7 +1293,8 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
 
 ## Format de sortie obligatoire
 1. Code complet fonctionnel consommant exclusivement @tokens.css.
-2. Bilan honnête en 3 lignes : Vérifié par script / À vérifier à l'écran / Non fait.
+2. Bilan honnête en 3 lignes : Vérifié (avec preuve) / Estimé (hypothèses) / Non fait.
+   Pour chaque règle : statut Automatisé / À vérifier / Non applicable ; sévérité et résultat séparés.
 3. Questions ouvertes numérotées (sans inventer la réponse produit).`,
             note: 'Compatible nativement avec Claude Code (CLAUDE.md), Cursor (.cursor/rules), OpenAI Codex, Windsurf et Cline.',
           },
@@ -1121,7 +1314,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
 RÔLE        : Designer produit senior rédigeant des spécifications d'écrans.
 ENTRÉES     : @brief.md
 CONTRAINTES : 1 écran = 1 verbe utilisateur ; définir les 5 états (vide, chargement,
-              rempli, erreur, succès) ; textes réels uniquement, zéro lorem ipsum ;
+              idéal, partiel/débordement, erreur) ; textes réels uniquement, zéro lorem ipsum ;
               n'inventer aucune fonctionnalité hors brief.md.
 LIVRABLE    : screens.md contenant pour chaque écran : verbe, entrée, sortie,
               déclencheur + message des 5 états, cas limites (texte long, 0 résultat), textes.
@@ -1140,8 +1333,14 @@ RÔLE        : Auditeur accessibilité WCAG 2.2 AA et rédacteur technique.
 ENTRÉES     : @wireframe-<ecran>.html, @tokens.css
 CONTRAINTES : Ne citer que des constats prouvables dans le code source avec numéro de ligne
               et critère WCAG exact (ex. 1.4.3, 1.4.11, 2.4.7, 2.5.8). Zéro avis esthétique.
-LIVRABLE    : audit.md (Bloquant / Majeur / Mineur + correctif exact) + handoff.md complet.`,
+LIVRABLE    : review.md (règle, statut, sévérité, résultat, preuve, correctif) + handoff.md complet.`,
             note: 'Astuce Section 44 : lancez le Prompt 2 sur deux modèles différents et notez-les sur 4 critères fixes (respect tokens, zéro erreur axe, tenue à 390/1280 px, fidélité à screens.md).',
+          },
+          {
+            "type": "inlineCta",
+            "title": "Réutilisez le protocole au prochain tour d’agent.",
+            "text": "Le Skill IA, le scanner agent_check.py et les 77 règles sont livrés dans l’archive, avec les gabarits de brief, de revue et de handoff.",
+            "buttonLabel": "Équiper mon dépôt · 29 $"
           },
         ],
       },
@@ -1200,7 +1399,7 @@ LIVRABLE    : audit.md (Bloquant / Majeur / Mineur + correctif exact) + handoff.
         id: 'verifier-ia-trois-statuts',
         num: '05',
         tocLabel: 'Contrôler la sortie IA : 3 statuts, pas 4',
-        heading: 'Vérifier un écran sorti d’une IA : pourquoi notre scanner refuse catégoriquement un quatrième statut',
+        heading: "Contrôler une sortie IA : méthode, sévérité et résultat séparés",
         blocks: [
           {
             type: 'p',
@@ -1211,12 +1410,14 @@ LIVRABLE    : audit.md (Bloquant / Majeur / Mineur + correctif exact) + handoff.
             src: '/images/articles/fr/prod-verify-ai.webp',
             alt: 'Planche des 8 contrôles de sortie d’un écran généré par IA extraite du UX/UI Playbook Français',
             caption:
-              'Ce qu’un scanner attrape à coup sûr (labels manquants, contrastes en échec, sauts de Hn, absence de prefers-reduced-motion) face à ce qu’il laisse passer (promesse floue, mauvais prix, parcours absurde).',
+              "Un contrôle statique signale certains défauts de labels, tailles ou balises. Les fonds composites, l’ordre de lecture, les gestes et la clarté de l’offre demandent aussi un contrôle du rendu.",
             sourceRef: 'UX/UI Playbook FR · Partie 07, Section 53 (p. 99)',
+            width: 1080,
+            height: 1527,
           },
           {
             type: 'p',
-            text: 'Dans les rapports générés par la checklist des 77 règles sur les 6 plateformes (Web, iOS, Android, Windows, macOS, Linux GNOME/KDE), seules trois colonnes existent — et jamais une quatrième colonne mensongère intitulée « 100 % Conforme » : 1) Automatisé (prouvé mathématiquement dans les fichiers lus avec ligne et valeur), 2) À vérifier à l’écran (exige d’ouvrir le vrai viewport ou l’appareil physique pour juger un geste, une zone sûre d’encoche ou la clarté d’un message), et 3) Non applicable (règle propre à une autre plateforme, écartée proprement par filtre). Un prestataire qui remet à son client un rapport disant « 42 règles prouvées par script, 3 bloquants corrigés, 11 points vérifiés manuellement sur iOS Safari » inspire dix fois plus confiance qu’un badge vert magique.',
+            text: "La checklist définit 3 statuts de vérification, pas 3 colonnes exclusives de tout autre champ : Automatisé (une règle décidée sur les fichiers lus, avec preuve et résultat), À vérifier (contrôle du rendu ou jugement requis) et Non applicable (hors plateforme ou périmètre, avec raison). La sévérité — Bloquant, Majeur ou Mineur — et le résultat — réussi ou échoué — sont séparés du statut. Une règle automatisée peut donc échouer et bloquer la CI. L’épilogue d’un agent « Vérifié / Estimé / Non fait » répond à une autre question : il résume une exécution, pas la checklist.",
           },
         ],
       },
@@ -1229,7 +1430,7 @@ LIVRABLE    : audit.md (Bloquant / Majeur / Mineur + correctif exact) + handoff.
         blocks: [
           {
             type: 'p',
-            text: 'Deux profils techniques peuvent coder ou maquetter exactement le même écran ; celui qui sait défendre ses décisions en termes économiques remporte le contrat suivant et le facture le double (Partie 05, Sections 34 à 38). Bannissez à jamais de votre vocabulaire les expressions « c’est plus aéré », « c’est la tendance » ou « je le sens mieux comme ça ». Structurez chaque présentation autour du triptyque invariable : Constat indiscutable → Choix assumé → Conséquence business (« Sur iPhone, le bouton d’achat passait sous le clavier virtuel → je l’ai ancré hors de la zone de saisie → on supprime la friction n°1 au moment du paiement »).',
+            text: "Défendre une décision signifie rendre son raisonnement vérifiable, pas garantir une hausse de conversion ou un tarif supérieur. Présentez le constat, le choix puis l’effet attendu : « Sur mobile, le bouton de paiement passe sous le clavier → nous le rendons accessible sans masquer le champ → nous cherchons à réduire la friction ». Distinguez cet effet attendu d’un résultat mesuré après livraison (Sections 34 à 38).",
           },
           {
             type: 'h3',
@@ -1237,7 +1438,7 @@ LIVRABLE    : audit.md (Bloquant / Majeur / Mineur + correctif exact) + handoff.
           },
           {
             type: 'p',
-            text: 'Votre prix n’est pas un jugement moral sur votre talent ; c’est la rémunération d’un risque et d’une valeur. Pour calculer votre tarif journalier plancher sans vous mentir : prenez votre besoin mensuel net + charges, et divisez-le par **12 jours réellement facturables par mois** (et jamais par 20, car la prospection, les devis, la comptabilité et les relances absorbent le reste). Ajoutez 30 % de marge de sécurité, puis chiffrez tout forfait selon `Prix = (Jours estimés × TJM) + 20 % d’aléas + Outils`. À chaque nouveau contrat signé facilement, relevez votre tarif jusqu’à ce qu’environ **1 proposition sur 3 soit déclinée pour raison budgétaire** : c’est le signal exact du prix de marché.',
+            text: "Un tarif plancher part de vos coûts et de votre capacité facturable réelle. Les 12 jours facturables par mois, 30 % de marge et 20 % d’aléas du manuel sont des hypothèses de simulation, pas des constantes de marché. Remplacez-les par vos propres relevés, puis calculez Prix = (Jours estimés × TJM) + Réserve de risque + Outils. Observez aussi les refus et les raisons données ; aucun ratio de refus ne prouve à lui seul que vous avez trouvé le bon prix.",
           },
           {
             type: 'doDont',
@@ -1260,7 +1461,7 @@ LIVRABLE    : audit.md (Bloquant / Majeur / Mineur + correctif exact) + handoff.
             langTag: 'markdown',
             code: `# PROPOSITION COMMERCIALE EN 1 PAGE (les 7 blocs qui font signer)
 1. PROBLÈME COMPRIS (3 lignes avec les mots exacts du client) :
-   « Aujourd'hui, 68 % des visiteurs mobiles quittent votre tunnel à l'étape Livraison... »
+   « Sur [période], [taux mesuré] des visiteurs mobiles quittent l’étape Livraison (source : [rapport]). »
 2. LIVRABLES EXACTS :
    4 écrans (Panier, Livraison, Paiement, Confirmation) × 5 états + tokens.css + handoff.md + rapport WCAG 2.2 AA.
 3. NON INCLUS (protège votre marge) :
@@ -1290,11 +1491,11 @@ LIVRABLE    : audit.md (Bloquant / Majeur / Mineur + correctif exact) + handoff.
       },
       {
         q: 'Pourquoi forcer une étape wireframe HTML en niveaux de gris alors que l’IA peut générer la couleur tout de suite ?',
-        a: 'Parce que la vitesse de génération ne change rien à la psychologie humaine : dès qu’un client ou un cofondateur voit du bleu ou du orange, 90 % de la réunion dérive sur la couleur au lieu de vérifier si la promesse, les champs et les cas d’erreur tiennent debout. La classe .wire verrouille le fond avant la forme.',
+        a: "Parce que la vitesse de génération ne change rien à la psychologie humaine : dès qu’un client ou un cofondateur voit du bleu ou du orange, la discussion peut dériver sur la couleur au lieu de vérifier si la promesse, les champs et les cas d’erreur tiennent debout. La classe .wire verrouille le fond avant la forme.",
       },
       {
-        q: 'Pourquoi diviser son revenu mensuel cible par 12 jours facturables et non par 20 jours ouvrés ?',
-        a: 'Parce qu’un indépendant qui facture 20 jours pleins chaque mois pendant un an n’a plus une seule heure pour prospecter, rédiger ses propositions, gérer sa facturation, se former et absorber les creux entre deux missions. Calculer son plancher sur 12 jours réels empêche l’épuisement à perte.',
+        q: "Comment choisir le nombre de jours facturables pour calculer mon tarif ?",
+        a: "Utilisez vos jours réellement facturés sur plusieurs mois et provisionnez prospection, administration, apprentissage et périodes sans contrat. Les 12 jours de l’exemple ne sont pas une obligation : recalculez le modèle avec votre activité et vos charges.",
       },
       {
         q: 'Que faire lorsqu’un client impose un changement que vous savez mauvais pour la conversion ?',
@@ -1308,6 +1509,41 @@ LIVRABLE    : audit.md (Bloquant / Majeur / Mineur + correctif exact) + handoff.
       'Skill IA prêt à déposer (SKILL.md + AGENTS.md) pour Claude Code, Cursor, Windsurf & Codex',
       'Script exécutable agent_check.py + base JSON des 77 règles multi-plateformes pour votre CI',
       'Les 4 gabarits commerciaux & techniques + garantie satisfait ou remboursé 7 jours (29 $)',
+    ],
+    entityDefinition: "Le design produit relie les besoins des utilisateurs, les objectifs de l’activité et les contraintes techniques pour décider quoi construire et dans quel ordre. L’UX organise le parcours ; l’UI matérialise les interactions. Un agent IA exécute dans ce cadre sans remplacer l’arbitrage produit.",
+    references: [
+      {
+        "title": "Guidelines for Human-AI Interaction",
+        "url": "https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/",
+        "publisher": "Microsoft Research · Amershi et al.",
+        "date": "2019",
+        "evidence": "established",
+        "note": "18 recommandations, validées selon le protocole de l’article CHI 2019 ; elles ne prescrivent pas mot pour mot les 6 patterns du Playbook."
+      },
+      {
+        "title": "People + AI Guidebook",
+        "url": "https://pair.withgoogle.com/guidebook/",
+        "publisher": "Google PAIR",
+        "date": "2024",
+        "evidence": "established",
+        "note": "Guide vivant sur besoins, modèles mentaux, contrôle et gestion des erreurs ; les patterns ci-dessus en sont une synthèse pratique."
+      },
+      {
+        "title": "Web Content Accessibility Guidelines 2.2",
+        "url": "https://www.w3.org/TR/WCAG22/",
+        "publisher": "W3C",
+        "date": "2024-12-12",
+        "evidence": "established",
+        "note": "Critères normatifs à tester ; une passe axe-core ne suffit pas à conclure à la conformité."
+      },
+      {
+        "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/2026-07-27/eng",
+        "publisher": "EUR-Lex · Union européenne",
+        "date": "2026-07-27",
+        "evidence": "established",
+        "note": "Texte consolidé : art. 50 (obligations et exceptions), 111(4) (transition au 2 décembre 2026 pour certains systèmes existants) et 113 (application). Vérifier le rôle et l’usage concernés."
+      }
     ],
   },
 ];

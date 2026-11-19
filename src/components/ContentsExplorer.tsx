@@ -31,6 +31,18 @@ export function ContentsExplorer({ data }: ContentsExplorerProps) {
     }
   };
 
+  const tabs = ['book', 'kit', 'archive'] as const;
+  const onTabKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    const index = tabs.indexOf(tab);
+    const next = event.key === 'Home' ? tabs[0]
+      : event.key === 'End' ? tabs[2]
+        : tabs[(index + (event.key === 'ArrowRight' ? 1 : 2)) % tabs.length];
+    setTab(next);
+    event.currentTarget.querySelector<HTMLButtonElement>(`#contents-tab-${next}`)?.focus();
+  };
+
   return (
     <section id="contents">
       <div className="wrap">
@@ -38,10 +50,13 @@ export function ContentsExplorer({ data }: ContentsExplorerProps) {
         <h2>{data.heading}</h2>
         <p className="sec-lede">{data.lede}</p>
 
-        <div className="explorer-tabs" role="tablist" aria-label="Package contents">
+        <div className="explorer-tabs" role="tablist" aria-label={data.heading} onKeyDown={onTabKeyDown}>
           <button
             type="button"
             role="tab"
+            id="contents-tab-book"
+            aria-controls="contents-panel-book"
+            tabIndex={tab === 'book' ? 0 : -1}
             aria-selected={tab === 'book'}
             onClick={() => setTab('book')}
             className={`filter-pill ${tab === 'book' ? 'active' : ''}`}
@@ -53,6 +68,9 @@ export function ContentsExplorer({ data }: ContentsExplorerProps) {
           <button
             type="button"
             role="tab"
+            id="contents-tab-kit"
+            aria-controls="contents-panel-kit"
+            tabIndex={tab === 'kit' ? 0 : -1}
             aria-selected={tab === 'kit'}
             onClick={() => setTab('kit')}
             className={`filter-pill ${tab === 'kit' ? 'active' : ''}`}
@@ -64,6 +82,9 @@ export function ContentsExplorer({ data }: ContentsExplorerProps) {
           <button
             type="button"
             role="tab"
+            id="contents-tab-archive"
+            aria-controls="contents-panel-archive"
+            tabIndex={tab === 'archive' ? 0 : -1}
             aria-selected={tab === 'archive'}
             onClick={() => setTab('archive')}
             className={`filter-pill ${tab === 'archive' ? 'active' : ''}`}
@@ -74,8 +95,7 @@ export function ContentsExplorer({ data }: ContentsExplorerProps) {
           </button>
         </div>
 
-        {tab === 'book' && (
-          <div>
+        <div role="tabpanel" id="contents-panel-book" aria-labelledby="contents-tab-book" tabIndex={0} hidden={tab !== 'book'}>
             <div className="toc-toolbar">
               <button type="button" onClick={toggleAll} className="btn ghost small">
                 {allExpanded ? data.collapseAll : data.expandAll}
@@ -114,11 +134,9 @@ export function ContentsExplorer({ data }: ContentsExplorerProps) {
                 );
               })}
             </div>
-          </div>
-        )}
+        </div>
 
-        {tab === 'kit' && (
-          <div>
+        <div role="tabpanel" id="contents-panel-kit" aria-labelledby="contents-tab-kit" tabIndex={0} hidden={tab !== 'kit'}>
             <p className="sec-lede" style={{ marginTop: '20px' }}>
               {data.kitIntro}
             </p>
@@ -134,11 +152,9 @@ export function ContentsExplorer({ data }: ContentsExplorerProps) {
                 </div>
               ))}
             </div>
-          </div>
-        )}
+        </div>
 
-        {tab === 'archive' && (
-          <div>
+        <div role="tabpanel" id="contents-panel-archive" aria-labelledby="contents-tab-archive" tabIndex={0} hidden={tab !== 'archive'}>
             <p className="sec-lede" style={{ marginTop: '20px' }}>
               {data.archiveIntro}
             </p>
@@ -158,8 +174,7 @@ export function ContentsExplorer({ data }: ContentsExplorerProps) {
                 </div>
               ))}
             </div>
-          </div>
-        )}
+        </div>
       </div>
     </section>
   );

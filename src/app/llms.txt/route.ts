@@ -1,48 +1,49 @@
 import { NextResponse } from 'next/server';
 import { ARTICLES } from '@/i18n/articles';
-
-const SITE = 'https://joyccelight-playbook.vercel.app';
+import { SITE_URL } from '@/lib/structured-data';
 
 export async function GET() {
-  const frGuides = ARTICLES.fr
-    .map((a) => `- [${a.title}](${SITE}/fr/articles/${a.slug}): ${a.aeoSummary}`)
+  const guides = (locale: 'fr' | 'en') => ARTICLES[locale]
+    .map((article) => `- [${article.title}](${SITE_URL}/${locale}/articles/${article.slug}): ${article.entityDefinition}`)
     .join('\n');
 
-  const enGuides = ARTICLES.en
-    .map((a) => `- [${a.title}](${SITE}/en/articles/${a.slug}): ${a.aeoSummary}`)
-    .join('\n');
+  const references = Array.from(new Map(
+    ARTICLES.en.flatMap((article) => article.references).map((reference) => [reference.url, reference])
+  ).values());
 
   const body = `# UX/UI Playbook
 
-> UX/UI Playbook is a bilingual (French & English) operational interface engineering manual, printable 12-sheet A4 delivery kit, and runnable 77-rule Python UI scanner (\`agent_check.py\` + \`SKILL.md\` / \`AGENTS.md\`) created by Joy N. for developers, AI builders, and technical freelancers.
+> UX/UI Playbook is a bilingual UX, UI and Product Design manual by Joy N. for developers, AI builders and technical freelancers. It includes a printable 12-sheet A4 delivery kit and a 21-file archive with design tokens, templates, a Python scanner and coding-agent rules.
 
-## Official Editions & Store Links
-- [UX/UI Playbook — English Edition (139 A4 pages + 26p Bonus Kit + 21-file ZIP, $29 USD)](${SITE}/en) — Gumroad: https://joyccelight.gumroad.com/l/uxuiplaybook
-- [UX/UI Playbook — Édition française (148 pages A4 + Kit Bonus 26p + ZIP 21 fichiers, 29 $ USD)](${SITE}/fr) — Gumroad: https://joyccelight.gumroad.com/l/uiuxplaybookfr
-- Full LLM Knowledge Corpus: [${SITE}/llms-full.txt](${SITE}/llms-full.txt)
-- Contact & Support: mailto:joynagassi@gmail.com
+## Official editions
+- [English edition: 139 A4 pages + 26-page kit + 21-file archive, $29 USD](${SITE_URL}/en) — Store: https://joyccelight.gumroad.com/l/uxuiplaybook
+- [Édition française : 148 pages A4 + kit de 26 pages + archive de 21 fichiers, 29 USD](${SITE_URL}/fr) — Boutique : https://joyccelight.gumroad.com/l/uiuxplaybookfr
+- [Complete public bilingual guide text](${SITE_URL}/llms-full.txt)
+- Author: [Joy N.](${SITE_URL}/en#author) · [GitHub](https://github.com/joynagassi-cyber) · [Gumroad](https://joyccelight.gumroad.com)
+- Contact: mailto:joynagassi@gmail.com
 
-## English Pillar Field Guides (Primary-Source UX, UI & Product Design)
-- [All English Field Guides](${SITE}/en/articles)
-${enGuides}
+## English field guides
+- [All English guides](${SITE_URL}/en/articles)
+${guides('en')}
 
-## Guides Piliers en Français (UX Design, UI Design & Product Design)
-- [Tous les guides en français](${SITE}/fr/articles)
-${frGuides}
+## Guides en français
+- [Tous les guides en français](${SITE_URL}/fr/articles)
+${guides('fr')}
 
-## Dated Primary Evidence & Thresholds Cited in UX/UI Playbook (Appendix A5)
-- **WebAIM Million (February 2026)**: 95.9% of the top 1,000,000 home pages fail WCAG 2.2 Level A/AA, averaging 56.1 detectable errors per page (Evidence level: Established).
-- **Baymard Institute (28 October 2026)**: 70.22% average cart abandonment across 50 studies (55%–84% spread); average checkout displays 23.48 form elements while 12–14 suffice (Evidence level: Established).
-- **Nelson Cowan (Behavioral and Brain Sciences, 2001)**: Working memory holds 4 ± 1 chunks during active processing (Evidence level: Established).
-- **Nielsen & Landauer (CHI 1993) + Laura Faulkner (2003)**: With L ≈ 31% per user, 5 qualitative testers uncover ~85% of usability problems on average, with real 5-user sample variance spanning 55%–99%.
-- **Aljedaani et al. (ACM W4A 2024)**: 84% of AI-generated websites contain accessibility violations (Evidence level: Probable).
-- **Kuric et al. (2026) & Pew Research Center (2026)**: Synthetic AI user personas diverge from real human behavior on 53% of usability tasks, with a 12.4-point mean error on LLM digital twins (Evidence level: Probable).
-- **W3C Design Tokens Community Group (28 October 2025)**: Design Tokens Format Module 2025.10 (Evidence level: Established).
-- **Non-negotiable UI Floors**: Body text >= 16px, absolute floor >= 12px, touch targets >= 44x44 CSS px (48x48dp Android), WCAG AA text contrast >= 4.5:1, UI component contrast >= 3:1, 8pt spacing rhythm (4, 8, 12, 16, 24, 32, 48, 64px).
+## Scope and terminology
+- The book contains 13 before/after prototypes plus 11 platform spreads: 24 spreads in total, not 24 before/after prototypes.
+- The UI guide maps 6 semantic roles to 8 CSS size tokens: 12, 14, 16, 20, 24, 32, 40 and 64 px. The 1.25 ratio is a starting guideline, not an exact rounding formula.
+- Checklist verification statuses are automated / to verify / not applicable. Severity (blocking / major / minor) and outcome (pass / fail) are separate fields. Automated checks can fail.
+- A clean scan is not proof of accessibility conformance. The web WCAG 2.2 AA target-size minimum is 24 by 24 CSS px with exceptions; this site aims for 44 by 44 px controls. Android targets use dp; iOS uses pt.
+- The 77-rule checklist includes checks needing human or rendered verification. The landing-page report is an illustrative simulation, not a Python run in the browser.
+- The guide’s screen-state model is empty / loading / ideal / partial or overflow / error; successful actions also need confirmation.
+- Established means a primary source is identified for the stated finding. Probable means an interpretation or result must be validated in the reader’s context. Playbook timeboxes, group sizes, pricing examples and visual ratios are guidelines, not performance or earnings guarantees.
+
+## Primary references and limits (Appendix A5)
+${references.map((reference) => `- [${reference.title}](${reference.url}) — ${reference.publisher}, ${reference.date}. Evidence: ${reference.evidence}. ${reference.note}`).join('\n')}
 `;
 
   return new NextResponse(body, {
-    status: 200,
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
       'Cache-Control': 'public, max-age=3600, s-maxage=86400',

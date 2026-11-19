@@ -13,6 +13,7 @@ import {
   HeroSampleTrigger,
 } from '@/components/BookGalleryLightbox';
 import { ContentsExplorer } from '@/components/ContentsExplorer';
+import { authorJsonLd, serializeJsonLd } from '@/lib/structured-data';
 
 export async function generateMetadata({
   params,
@@ -26,28 +27,6 @@ export async function generateMetadata({
   return {
     title: c.meta.title,
     description: c.meta.description,
-    keywords:
-      locale === 'fr'
-        ? [
-            'UX/UI Playbook',
-            'UX design développeur',
-            'UI design system tokens',
-            'Product design agent IA',
-            'checklist UX 77 règles',
-            'Claude Code UI skill',
-            'Cursor règles UI',
-            'audit accessibilité WCAG 2.2',
-          ]
-        : [
-            'UX/UI Playbook',
-            'UX design for developers',
-            'UI design tokens system',
-            'Product design AI coding agents',
-            '77 UI rules checklist',
-            'Claude Code UI skill',
-            'Cursor UI rules',
-            'WCAG 2.2 accessibility checklist',
-          ],
     alternates: {
       canonical: `/${locale}`,
       languages: {
@@ -113,6 +92,7 @@ export default async function LandingPage({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
+      authorJsonLd(locale),
       {
         '@type': 'WebSite',
         '@id': `${c.siteUrl}/#website`,
@@ -127,10 +107,7 @@ export default async function LandingPage({
         name: 'UX/UI Playbook',
         url: c.siteUrl,
         email: 'joynagassi@gmail.com',
-        founder: {
-          '@type': 'Person',
-          name: 'Joy N.',
-        },
+        founder: { '@id': `${c.siteUrl}/#joy-n` },
       },
       {
         '@type': 'Product',
@@ -159,15 +136,11 @@ export default async function LandingPage({
         '@type': 'Book',
         '@id': `${c.siteUrl}/${locale}#book`,
         name: 'UX/UI Playbook',
-        author: {
-          '@type': 'Person',
-          name: 'Joy N.',
-        },
+        author: { '@id': `${c.siteUrl}/#joy-n` },
         bookEdition: locale === 'fr' ? 'Édition française 2026' : '2026 English Edition',
         bookFormat: 'https://schema.org/EBook',
         numberOfPages: locale === 'fr' ? 148 : 139,
         inLanguage: locale,
-        datePublished: '2026-11-01',
         publisher: { '@id': `${c.siteUrl}/#organization` },
       },
       {
@@ -203,7 +176,7 @@ export default async function LandingPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
 
       <a className="sr-skip" href="#content">
@@ -446,7 +419,7 @@ export default async function LandingPage({
             <h2>{c.comparison.heading}</h2>
             <p className="sec-lede">{c.comparison.lede}</p>
 
-            <div className="comp-wrap">
+            <div className="comp-wrap" tabIndex={0} role="region" aria-label={c.comparison.heading}>
               <table className="comp-table">
                 <thead>
                   <tr>
@@ -516,6 +489,10 @@ export default async function LandingPage({
                 <p>{c.author.p1}</p>
                 <p style={{ marginTop: '12px' }}>{c.author.p2}</p>
                 <div className="author-sig">{c.author.signature}</div>
+                <div className="author-links">
+                  <a href="https://github.com/joynagassi-cyber">GitHub · Joy N.</a>
+                  <a href="https://joyccelight.gumroad.com">Gumroad · Joyccelight</a>
+                </div>
               </div>
             </div>
           </div>

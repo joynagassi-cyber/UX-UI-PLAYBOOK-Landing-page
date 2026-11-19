@@ -6,6 +6,7 @@ import { CONTENT, type Locale } from '@/i18n/content';
 import { ARTICLES, ARTICLES_UI } from '@/i18n/articles';
 import { GumroadButton } from '@/components/GumroadButton';
 import { ThemeAndLangControls } from '@/components/ThemeAndLangControls';
+import { authorJsonLd, serializeJsonLd } from '@/lib/structured-data';
 
 export function generateStaticParams() {
   return [{ locale: 'fr' }, { locale: 'en' }];
@@ -89,6 +90,7 @@ export default async function ArticlesHubPage({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
+      authorJsonLd(locale),
       {
         '@type': 'CollectionPage',
         '@id': `${c.siteUrl}/${locale}/articles#collection`,
@@ -136,7 +138,7 @@ export default async function ArticlesHubPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
 
       <a className="sr-skip" href="#hub-content">
@@ -203,7 +205,7 @@ export default async function ArticlesHubPage({
               display: 'inline-flex',
               alignItems: 'center',
               gap: 8,
-              minHeight: 40,
+              minHeight: 44,
               fontSize: 13.5,
               color: 'var(--fg-2)',
               textDecoration: 'none',
