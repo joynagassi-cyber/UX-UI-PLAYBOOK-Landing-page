@@ -10,8 +10,13 @@ import {
 } from '@/i18n/articles';
 import { GumroadButton } from '@/components/GumroadButton';
 import { ThemeAndLangControls } from '@/components/ThemeAndLangControls';
+import { FreeResourcePromo } from '@/components/FreeResourcePromo';
+import { FREE_UI } from '@/i18n/free-resource';
+import { FREE_RESOURCE_PATH } from '@/lib/free-resource-config';
 import { NotionArticleReader } from '@/components/NotionArticleReader';
 import { authorJsonLd, serializeJsonLd } from '@/lib/structured-data';
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   const locales: Locale[] = ['fr', 'en'];
@@ -228,6 +233,7 @@ export default async function ArticleDetailPage({
             >
               {c.nav.guides}
             </a>
+            <a className="nav-free" href={`/${locale}${FREE_RESOURCE_PATH}`}>{FREE_UI[locale].nav}</a>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -251,6 +257,7 @@ export default async function ArticleDetailPage({
           article={art}
           relatedArticles={relatedArticles}
         />
+        <div className="wrap article-free-resource"><FreeResourcePromo locale={locale} compact /></div>
       </main>
 
       {/* Footer */}
@@ -261,6 +268,7 @@ export default async function ArticleDetailPage({
           </div>
 
           <div className="footer-links">
+            <a href={`/${locale}${FREE_RESOURCE_PATH}`}>{FREE_UI[locale].promoLink}</a>
             <a href={`/${locale}`}>UX/UI Playbook</a>
             <a href={`/${locale}/articles`}>{c.nav.guides}</a>
             <GumroadButton href={c.gumroadUrl}>

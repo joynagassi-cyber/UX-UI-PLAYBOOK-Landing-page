@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "language": "fr",
+  "editionDate": "2026-11-18",
+  "generatedForOrigin": "https://joyccelight-playbook.pages.dev",
+  "counts": {
+    "entries": 51,
+    "categories": 6,
+    "resourceLinks": 75,
+    "guidePages": 34,
+    "worksheetPages": 3,
+    "archiveFiles": 7
+  },
+  "files": {
+    "archive": {
+      "role": "Complete French kit",
+      "path": "/downloads/repertoire-ui-ux-gratuit-v1.zip",
+      "bytes": 552353,
+      "sha256": "9db33895834dfc061c165042b2141c2f51929f68df59bd4b4da2f097db5c94fb"
+    },
+    "pdf": {
+      "role": "French guide PDF",
+      "path": "/downloads/repertoire-ui-ux-fr-v1.pdf",
+      "bytes": 820404,
+      "sha256": "b23d353b62b75df93060a82558b2e106886015e1a309e8f79608d9a773b1135d"
+    },
+    "markdown": {
+      "role": "French guide Markdown",
+      "path": "/downloads/repertoire-ui-ux-fr-v1.md",
+      "bytes": 58361,
+      "sha256": "473a5456753d6b04a94b126825de3e0506cd0686733e456e0869745259972696"
+    }
+  }
+}

@@ -1,88 +1,129 @@
-# UX/UI Playbook — Next.js bilingue
+# UX/UI Playbook — Next.js statique et Cloudflare Pages
 
-Site officiel : **https://joyccelight-playbook.vercel.app**
+**Origine canonique cible : https://joyccelight-playbook.pages.dev**. Cette valeur est la configuration du build, pas l’annonce d’un déploiement : la migration est préparée et testée localement, sans publication Cloudflare ni modification de Vercel.
 
 - **FR `/fr`** : manuel de 148 pages A4 + kit de 26 pages / 12 fiches + archive de 21 fichiers → [édition française, 29 USD](https://joyccelight.gumroad.com/l/uiuxplaybookfr).
 - **EN `/en`** : manuel de 139 pages A4 + même structure de kit et d’archive → [English edition, $29 USD](https://joyccelight.gumroad.com/l/uxuiplaybook).
 - Contact : **joynagassi@gmail.com**.
 
-## Interface et contenu
+## Interface et articles
 
-- Next.js App Router, TypeScript, palette OLED noire `#000000` et mode clair `#FAF8F4`. Choix mémorisé, sinon préférence système ; initialisation du thème avant hydratation, sans changer le comportement existant.
-- **Domine sur l’ensemble du site et des articles FR/EN**, y compris les contrôles, tableaux et blocs copiables. Deux WOFF2 variables locaux (400–700), `font-display: swap`, fallback serif ajusté par `next/font/local`. [Provenance et licence OFL](src/fonts/LICENSES.md).
-- **Lucide uniquement pour les pictogrammes d’interface** : composant partagé `Icon`, tracé de 3 px, tailles 20 / 24 / 28 / 40 px selon le contexte, sans emoji ni noms d’icônes affichés comme texte. Les icônes décoratives sont masquées aux lecteurs d’écran ; les commandes gardent leur libellé et leur cible ≥ 44 px.
-- Les chiffres des métriques, prix, dates et tableaux conservent un espacement fixe avec `TabularText` : Domine n’a pas de fonctionnalité OpenType `tnum`. Les extraits du livre dans la galerie de la landing conservent leurs images d’origine ; les articles utilisent désormais des schémas natifs HTML/CSS.
-- Redirection `/` selon le cookie explicite, puis `Accept-Language`, puis le pays Vercel ; les chemins `/fr/...` et `/en/...` restent dédiés. Le sélecteur conserve l’article courant. Les liens d’achat restent liés à leur édition.
-- Trois **articles** dans chaque langue : UX, UI/tokens, Product Design/agents IA. Paragraphes longs et développés (136 à 250 mots dans les explications actuelles), cas d’usage détaillés et **92 petits visuels explicatifs** sur les six articles (19 / 14 / 13 par langue), à côté du texte au-dessus de 760 px, dessous sur mobile. Deux schémas de synthèse compacts par article, agrandissables au clavier, complètent ces visuels. Les anciennes captures du livre sont retirées des articles et de leurs cartes de présentation.
-- Références présentées simplement sous **Sources et références / Sources and references**, sans classification ni badge. Intitulés et navigation parlent d’articles. Pieds de page limités au copyright et aux liens utiles.
-- Métadonnées localisées, canonical/hreflang, JSON-LD `Person`/`TechArticle`/citations, sitemap, `/llms.txt` et `/llms-full.txt`. Pas de `meta[name=keywords]` ; les tags thématiques restent des données d’article.
-- Galerie de dix pages réelles, dialogue avec Échap/confinement/restauration du focus, filtres à boutons et onglets du sommaire utilisables au clavier.
+Le site conserve **Domine sur tous les textes HTML**, y compris le code, les tableaux et les commandes : deux WOFF2 variables locaux, poids 400–700, chargés avec `next/font/local`. [Provenance et licence OFL](src/fonts/LICENSES.md). Les chiffres utilisent des cellules de `0.7em` dans `TabularText`, car Domine ne fournit pas de variante OpenType `tnum`. Les pictogrammes d’interface sont des SVG **Lucide**, tracé de 3 px, tailles 20 / 24 / 28 / 40 px ; les illustrations pédagogiques vectorielles originales sont distinguées des icônes dans les contrôles.
 
-### Une démonstration n’est pas une mesure
+Le rendu initial est OLED noir `#000000`. Un choix sauvegardé est prioritaire, sinon la préférence système est respectée ; le mode clair utilise `#faf8f4`. Le thème est initialisé avant hydratation. Les contrôles autonomes visent au moins 44 × 44 px, le texte utile au moins 12 px. Cela ne constitue pas une certification d’accessibilité.
 
-Le terminal du site est une **simulation annoncée**, pas une exécution Python dans le navigateur. Les compteurs illustratifs `9 automatisés + 6 à vérifier + 62 non applicables = 77` décrivent une méthode de vérification, pas 77 réussites automatiques. Sévérité (`bloquant`, `majeur`) et résultat (`réussi`, `échec`) restent séparés. Les défauts chiffrés de l’exemple concernent les fichiers témoins ; le schéma affiché reste lisible.
+Quatre articles sont disponibles **dans chaque langue** sous `/{fr|en}/articles/` :
 
-Le scanner du produit `agent_check.py` appartient à l’archive commerciale. Le script public ci-dessous est un **contrôle spécifique à ce dépôt**, sans prétendre reproduire les 77 règles ni certifier WCAG.
+| Slug | Sujet | Explications par langue |
+| --- | --- | ---: |
+| `ux-design-guide` | Parcours UX, états d’écran, audit de 40 points | 19 |
+| `ui-design-system-tokens` | Composants, typographie, couleurs et tokens CSS | 14 |
+| `product-design-ai-agents` | Cadrage et revue du travail avec des agents IA | 13 |
+| `ux-ui-product-design` | Comparaison des responsabilités sur une même application mobile | 14 |
 
-## Développement
+Le libellé de navigation et de section est **« Article »**, sans nombre figé. Les 120 explications FR/EN ont chacune leur visuel à proximité : côte à côte au-dessus de 760 px, dessous sur mobile. Deux synthèses supplémentaires par article sont agrandissables au clavier. Les sources figurent sous **Sources et références / Sources and references**, sans badge de classement. Les articles n’utilisent pas de scans du livre ; la galerie de dix pages réelles sur la landing est conservée.
 
-Node.js 22 et Python 3.12 recommandés.
+Le comparatif UX/UI/Product comprend le prototype local **Atelier** : offre, créneau et récapitulatif, trois regards qui conservent le même état, sélection, retour, confirmation simulée et reprise après un créneau refusé. L’offre de 39 € / 45 min et les horaires sont fictifs. Aucune donnée personnelle, réservation ou paiement n’est envoyé. Les six références consultées, les limites de la simulation et les essais à préparer sont indiqués dans l’article. [Choix éditoriaux](docs/EDITORIAL.md).
+
+## Nouveau : répertoire UI/UX gratuit
+
+Une ressource distincte de l’offre à 29 USD, issue du document fourni par le créateur : **51 fiches, 6 familles et 75 liens de ressources**. Les fichiers sont en français, même sur la page de présentation anglaise.
+
+- Pages statiques : `/fr/resources/ui-ux-directory` et `/en/resources/ui-ux-directory` ; promotion sur l’accueil, le hub Article et les huit articles localisés, avec liens de navigation et pied de page.
+- Téléchargement réel : `public/downloads/repertoire-ui-ux-gratuit-v1.zip` (7 fichiers, environ 540 Kio) ; guide PDF de **34 pages**, Markdown, fiche de décision PDF de **3 pages**, fiche Markdown, grille CSV, mode d’emploi et notices. PDF/Markdown également disponibles séparément.
+- Sommaire serveur des 51 fiches et 75 destinations, six accordéons natifs utilisables sans JavaScript, trois extraits éditoriaux, FAQ et distinction explicite entre gratuité du guide et licences/tarifs tiers.
+- Canonical/hreflang, images de partage 1200 × 630, schéma du livre en langue `fr`, sitemap et endpoints LLM mis à jour. Les fichiers bruts ont `noindex` pour privilégier la page de présentation et de vraies réponses MIME/téléchargement.
+- **Publication Gumroad non effectuée.** Le connecteur n’est pas pris en charge ici. Sans URL publiée, le CTA livre directement le ZIP sans collecte d’email ni traceur ajouté. Aucun slug gratuit n’est inventé.
+
+Pour raccorder le produit **après publication et test à 0**, renseigner `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL` au build. La validation n’accepte que le magasin du créateur et rejette les deux URLs payantes du Playbook. Voir le [guide de publication](products/ui-ux-directory/publication-guide.md), la [fiche Gumroad prête à copier](products/ui-ux-directory/gumroad-listing.md) et le [dossier de fabrication](products/ui-ux-directory/README.md).
+
+```bash
+# À lancer après une modification du catalogue ou de l’origine imprimée :
+# nécessite Chromium, utilise les fontes et pictogrammes locaux
+npm run generate:resource
+# Contrôles du ZIP, des PDF, des liens, du CSV, des notices et de la configuration
+npm run check:resource
+```
+
+`products/ui-ux-directory/catalogue.json` est la source unique éditée. Le document fourni est archivé séparément et non distribué. Le manifeste contrôle tailles, SHA-256 et origine des liens imprimés ; changer `NEXT_PUBLIC_SITE_URL` impose de régénérer le kit. La mise en page est contrôlée avant impression, mais les PDF ne revendiquent pas de certification PDF/UA. Aucun audit exhaustif des 75 destinations ni garantie d’accessibilité des outils n’est annoncé.
+
+## Architecture et langue
+
+- **Next.js 16 / React 19 / TypeScript**, `output: 'export'`, sortie **`out`**, `images.unoptimized: true`. Aucun serveur Next en production.
+- Toutes les pages localisées et tous les slugs du [catalogue partagé](src/i18n/article-catalog.json) sont générés au build avec `generateStaticParams` et `dynamicParams = false`.
+- Les trois **Pages Functions** `/`, `/articles` et `/articles/*` emploient `lib/locale-routing.mjs` : cookie `NEXT_LOCALE` > `Accept-Language` pondéré par `q` > `request.cf.country` / `CF-IPCountry` > anglais. Le pays n’est qu’un repli heuristique, pas la langue réelle de la personne.
+- Redirections 307, query string conservée, `Cache-Control: private, no-store`, `Vary: Cookie, Accept-Language, CF-IPCountry`. Les URLs `/fr/...` et `/en/...` ne sont pas renégociées ; un slug inconnu finit en 404, sans boucle. `_routes.json` réserve les Functions aux trois motifs non localisés ; les ressources, pages localisées et endpoints SEO sont servis statiquement.
+- `_redirects` traite uniquement `/fr.html → /fr` et `/en.html → /en` en 301, sans chevaucher les Functions.
+- `src/lib/site-config.ts` centralise l’origine publique. Canonical, hreflang, OG/Twitter, `Person`, JSON-LD/citations, robots, sitemap et endpoints LLM s’appuient sur cette origine. Les interactions client, achats localisés, galerie, copie et sommaires restent disponibles.
+
+Détails du diagnostic, de l’audit d’export et des actions restantes : **[CLOUDFLARE_MIGRATION.md](CLOUDFLARE_MIGRATION.md)**.
+
+## Développer et prévisualiser
+
+Prérequis : **Node.js 22** (`.nvmrc`, engines `>=22.17.0 <23`) et Python 3.12 pour les contrôles HTML. Wrangler **4.165.0** est précisément épinglé en dépendance de développement ; aucun compte Cloudflare n’est nécessaire pour l’aperçu local.
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Le serveur écoute sur `0.0.0.0:3000` pour fonctionner aussi dans un aperçu proxifié. Ouvrir `/fr` ou `/en`.
+Le serveur de développement Next écoute sur `0.0.0.0:3000`. Ouvrir `/fr` ou `/en` ; les redirections Pages ne sont pas exécutées par ce serveur.
 
-## Vérifications reproductibles
+Pour tester le fonctionnement cible, construire puis servir **l’export avec ses véritables Functions locales** :
 
 ```bash
 npm run typecheck
+npm run test:routing
 npm run build
-npx playwright install --with-deps chromium
-npm run test:ui
+npm run check:export
+npm run preview:pages
 ```
 
-Playwright démarre le build de production sur le port 3100, sauf si `PLAYWRIGHT_BASE_URL` désigne un serveur déjà démarré. Pour le contrôle HTML, démarrer le site dans un autre terminal :
+`preview:pages` lance `wrangler pages dev out --ip 0.0.0.0 --port 3100` avec inspecteur sur port automatique et sans interface interactive. `npm start` est un alias de cet aperçu, pas un serveur Next. L’écoute publique du sandbox permet l’aperçu proxifié ; le code navigateur n’appelle aucun serveur sur `localhost`.
+
+Le wrapper `scripts/preview_pages.cjs` écrit une **fixture géographique locale neutre** dans `.wrangler/`, puis indique ce fichier à Miniflare. Sans cela, son pays fictif US masquerait les en-têtes `CF-IPCountry` des tests. La priorité du vrai `request.cf.country` reste inchangée et est couverte séparément par les tests unitaires. Ce dispositif ne s’exécute jamais en production.
+
+## Vérifications reproductibles
+
+Dans un second terminal, sur le même serveur Pages 3100 :
 
 ```bash
-npm run start
-python3 scripts/site_check.py --base-url http://127.0.0.1:3000
+python3 scripts/site_check.py \
+  --base-url http://127.0.0.1:3100 \
+  --expected-origin https://joyccelight-playbook.pages.dev
+
+npx playwright install --with-deps chromium
+PLAYWRIGHT_BASE_URL=http://127.0.0.1:3100 npm run test:ui
 ```
 
-- `scripts/site_check.py` (stdlib Python, exécutable) : HTTP, éditions, canonical/hreflang, titres ≤ 60 caractères / descriptions de 135–155, H1, ancres, images restantes, deux schémas de synthèse, appariement de chaque explication à son visuel, présence de paragraphes développés sans plafond de longueur, non-régression des slogans retirés, retrait des anciennes mentions, tableau des dix principes, CTA, références/citations, Person, export de tous les paragraphes dans le corpus machine, licences et contraste des tokens opaques.
-- `tests/ui.spec.ts` : dix routes × deux thèmes à 1280, 390 et 320 px ; axe WCAG A/AA à 1280 et 320 px ; texte utile ≥ 12 px, cibles autonomes ≥ 44 × 44 px, chargement Domine et famille effective sur chaque texte visible (code compris), vrais SVG Lucide ≥ 20 px / tracé 3 px, absence d’emojis d’interface, cellules numériques de largeur égale, absence de débordement, contrôles non coupés, fonctionnement clavier, copie et routage des achats. Six scénarios supplémentaires contrôlent aussi les paragraphes développés et l’appariement texte/visuel à 1280, 1024, 760, 390 et 320 px ; les schémas agrandis sont aussi contrôlés au clavier et avec axe dans les deux thèmes, sur mobile et bureau. Les liens dans une phrase relèvent de l’exception inline et ne sont pas des boutons de 44 px.
-- `.github/workflows/ui-check.yml` : installation propre, compilation, vérifications HTML puis navigateur et conservation des preuves en artefact.
-- Les rapports générés `reports/`, `test-results/` et `playwright-report/` sont ignorés par Git. Le JSON Python sépare `status` (`automated` / `to verify` / `not applicable`), `severity` et `outcome`. Le code de sortie devient 1 en cas d’échec bloquant automatisé.
-- Un binaire Chromium déjà installé peut être fourni via `CHROMIUM_EXECUTABLE_PATH` ; aucune dépendance serverless n’est nécessaire dans le projet déployé.
+Sans `PLAYWRIGHT_BASE_URL`, Playwright lance lui-même `preview:pages` ; le build doit déjà exister. `CHROMIUM_EXECUTABLE_PATH` peut désigner un navigateur installé dans l’environnement. Le projet déployé n’a pas besoin de dépendance Chromium serverless.
 
-Dernière exécution locale sur le build courant : **340 contrôles automatisés, aucun échec bloquant ; 32/32 tests navigateur réussis**. Détail et limites dans [docs/AUDIT.md](docs/AUDIT.md). Ces résultats ne sont pas un déploiement en production.
+- **`test:routing`** : règles de langue, cookies valides/inconnus, valeurs `q`, exclusions `q=0`, priorité du pays Cloudflare, query répétée/encodée, slash et corps HEAD ; les handlers réels sont importés.
+- **`check:export`** : toutes les pages du catalogue, titres/descriptions, canonical/hreflang, OG/Twitter et JPEG 1200 × 630, Person/citations, couvertures, liens/ressources/polices locales, sitemap/robots/LLM, fichiers Pages et absence de l’ancienne origine dans tout `out`.
+- **Python, stdlib uniquement** : contrôle HTML/SEO/éditions/Gumroad, bibliographies, paragraphes et illustrations, corpus LLM complet, licences et contrastes des tokens ; matrice HTTP de redirections, cache, chemins explicites, slash, 404. `--expected-origin` (alias `--site-url`) ou `NEXT_PUBLIC_SITE_URL` définit l’origine attendue, **distincte** de `--base-url`.
+- **Playwright + axe** : quatorze routes × deux thèmes aux largeurs 1280, 390 et 320 px ; axe à 1280/320, commandes, police effective, nombres, icônes/vecteurs, débordements et erreurs JavaScript. Les parcours couvrent aussi galerie, thèmes sauvegardés, clavier/focus, copie/checklist/FAQ, langue de l’article et achats ; le prototype est essayé dans ses neuf annotations, avec succès simulé et refus/récupération.
+- **Workflows Actions** : `cloudflare-static-export.yml` et `ui-check.yml`, Node 22, installation verrouillée, build puis contrôles. Le workflow UI partage le même serveur Pages entre Python et Playwright. Rapports, captures et traces d’échec sont conservés 14 jours en artefact. **Aucun workflow ne publie le site.**
 
-### Composants éditoriaux
+Les preuves détaillées sont décrites dans [docs/AUDIT.md](docs/AUDIT.md). `reports/`, `test-results/`, `playwright-report/`, `out/` et `.wrangler/` sont ignorés par Git. Les statuts `automated / to verify / not applicable`, la sévérité et le résultat restent distincts ; un échec bloquant automatisé produit un code de sortie 1.
 
-- `src/i18n/articles/{fr,en}.ts` : contenu, paragraphes, légendes et libellés bilingues. Les blocs `explanation` associent le texte à un petit visuel ; `diagram` désigne les deux synthèses agrandissables.
-- `src/i18n/articles/visual-types.ts` et `src/components/ArticleVisual.tsx` : vocabulaire visuel partagé, composé de texte sélectionnable, Lucide et CSS ; pas de texte incrusté dans des images.
-- `src/components/ArticleCardVisual.tsx` : aperçus décoratifs des articles, dans le même système visuel.
-- `src/components/NotionArticleReader.tsx` : sommaire, rendu des explications, copie, bibliographie et dialogue de schéma.
-- [docs/EDITORIAL.md](docs/EDITORIAL.md) : périmètre de relecture, ressources stylistiques consultées et limites des tests de non-régression. La révision couvre aussi la landing, les FAQ, les légendes et les gabarits FR/EN ; elle ne prétend pas détecter l’origine d’un texte. Les temps de lecture affichés sont des estimations.
-- `scripts/social_images.cjs` : régénère les huit JPEG Open Graph de 1200 × 630 à partir des données éditoriales, avec Domine et Lucide. Après installation de Chromium pour Playwright : `node scripts/social_images.cjs`. Ces aperçus ne sont plus des scans du livre ; les dix images de la galerie du livre restent inchangées.
-
-## Limites explicites
-
-Un résultat axe sans violation détectée n’est pas une certification d’accessibilité. Restent à vérifier par une personne : lecteur d’écran réel, compréhension FR/EN, confort de lecture et applicabilité juridique au projet du lecteur. Les Core Web Vitals terrain, l’indexation et les citations par des moteurs demandent des données de production ; ils ne découlent pas de tests locaux.
-
-Les trois articles de chaque langue ont été publiés ensemble : leurs dates de première publication ne sont pas artificiellement décalées pour satisfaire un signal SEO. `publishedAt` et `updatedAt` sont des champs distincts ; une date différente nécessite un événement éditorial réel.
-
-Réconciliation éditoriale : **13 prototypes avant/après + 11 planches de plateformes = 24 planches** ; **6 rôles typographiques sur 8 tokens** (`12, 14, 16, 20, 24, 32, 40, 64px`). Les proportions, timeboxes et prix de prestation sont des repères de méthode, pas des résultats garantis. Les obligations juridiques sont accompagnées des sources primaires et de leurs limites, dont la transition de l’AI Act dans le texte consolidé du 27 juillet 2026.
-
-
-## Canonical domain
-
-Set `NEXT_PUBLIC_SITE_URL` to the one public origin used for canonical URLs, Open Graph assets, robots.txt, the sitemap and LLM text endpoints. Include the scheme and omit the trailing slash. The Vercel URL remains the fallback until a production domain is configured.
+### Origine publique du build
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://your-canonical-domain.example
+NEXT_PUBLIC_SITE_URL=https://joyccelight-playbook.pages.dev
 ```
 
-Configure alternate hostnames at the hosting layer to redirect to this canonical origin. Do not set different canonical origins for the French and English editions.
+Cette variable est résolue **au build** et doit être identique pour les deux langues. Sa valeur est validée comme origine HTTP(S), sans chemin, identifiants, query ni fragment. Ne pas utiliser l’adresse locale de test comme canonical. Le fichier `.env.example` et les deux workflows emploient la même valeur ; aucune détection d’origine Vercel ne subsiste.
+
+### Fichiers éditoriaux et ressources
+
+- `src/i18n/article-catalog.json` : slugs, nombres d’explications et clés des aperçus, partagés avec les outils et tests.
+- `src/i18n/articles/{fr,en}.ts`, `comparison-{fr,en}.ts` : données bilingues ; blocs `explanation`, `diagram`, `mobileLab`, références et FAQ.
+- `src/components/{ArticleVisual,DesignVector,DesignRolesLab}.tsx` et `src/i18n/design-lab.ts` : illustrations originales, prototype et annotations bilingues. Le transcript complet des neuf annotations et des états est exporté dans `/llms-full.txt`.
+- `src/components/NotionArticleReader.tsx` : sommaire, citations numérotées, copie, bibliographie et schémas agrandissables avec gestion du focus.
+- `npm run generate:social` : dix JPEG Open Graph de 1200 × 630 à partir des mêmes données, avec Domine et Lucide. Nécessite Chromium, sans service distant. Les dix pages de la galerie et les fichiers/licences locaux sont conservés.
+
+## Limites
+
+Le terminal présenté sur la landing est une **simulation annoncée**, pas une exécution Python dans le navigateur. Ses compteurs `9 + 6 + 62 = 77` décrivent des statuts de vérification, pas 77 réussites automatiques. Le scanner commercial `agent_check.py` appartient à l’archive ; le contrôle public de ce dépôt n’en est pas une réplique.
+
+Une réussite axe ne certifie pas WCAG. Lecteurs d’écran réels, compréhension et confort FR/EN, applicabilité juridique, Core Web Vitals terrain, indexation/citations et effets commerciaux restent à vérifier avec les personnes et données appropriées. Aucune étude utilisateur n’a été effectuée sur Atelier. Les trois articles initiaux conservent leurs dates ; le comparatif possède sa propre publication, sans décalage inventé pour le SEO.

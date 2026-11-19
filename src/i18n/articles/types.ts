@@ -1,4 +1,5 @@
 import type { Locale } from '../content';
+import catalog from '../article-catalog.json';
 import type { ArticleVisual } from './visual-types';
 
 export type ArticleBlock =
@@ -6,6 +7,7 @@ export type ArticleBlock =
   | { type: 'p'; text: string }
   | { type: 'explanation'; paragraphs: string[]; visual: ArticleVisual }
   | { type: 'diagram'; visual: ArticleVisual }
+  | { type: 'mobileLab'; title: string; caption: string }
   | { type: 'quote'; tag: string; text: string }
   | {
       type: 'doDont';
@@ -69,7 +71,7 @@ export interface ArticleReference {
 }
 
 export interface ArticleData {
-  slug: 'ux-design-guide' | 'ui-design-system-tokens' | 'product-design-ai-agents';
+  slug: keyof typeof catalog;
   category: 'UX Design' | 'UI Design' | 'Product Design';
   icon: 'compass' | 'palette' | 'settings';
   readTime: string;
@@ -120,11 +122,11 @@ export const ARTICLES_UI: Record<Locale, ArticlesIndexCopy> = {
   fr: {
     metaTitle: 'Articles UX, UI et Product Design | UX/UI Playbook',
     metaDescription:
-      'Trois articles pour concevoir vos interfaces : audit UX de 40 points, tokens CSS clair/sombre et workflow Product Design avec agents IA. Exemples FR.',
-    kicker: 'ARTICLES · UX, UI ET PRODUCT DESIGN',
-    heading: 'Parcours UX, composants UI et travail avec les agents IA.',
+      'Articles UX, UI et Product Design : comparaison des rôles, maquettes mobiles, audit de 40 points, tokens CSS et travail avec les agents IA. Sources citées.',
+    kicker: 'ARTICLE',
+    heading: 'Article',
     lede:
-      'L’article UX examine les informations à conserver pendant une tâche, les erreurs et les méthodes d’observation. L’article UI décrit les rôles typographiques, les couleurs et les espacements, puis leur traduction en tokens CSS. L’article Product Design suit le cadrage et la revue du travail confié à un agent. Vous y trouverez les explications, les exemples et les modèles à copier pour préparer chaque étape ; les sources sont regroupées à la fin de chaque article.',
+      'Le comparatif UX, UI et Product Design présente les rôles sur une même application mobile fictive. L’article UX examine les informations à conserver pendant une tâche, les erreurs et les méthodes d’observation. L’article UI décrit les rôles typographiques, les couleurs et les espacements, puis leur traduction en tokens CSS. L’article Product Design suit le cadrage et la revue du travail confié à un agent. Vous y trouverez les explications, les exemples et les modèles à copier pour préparer chaque étape ; les sources sont regroupées à la fin de chaque article.',
     readBtn: 'Lire l’article',
     backHome: 'Retour à UX/UI Playbook',
     tocTitle: 'Dans cet article',
@@ -139,11 +141,11 @@ export const ARTICLES_UI: Record<Locale, ArticlesIndexCopy> = {
   en: {
     metaTitle: 'UX, UI and Product Design Articles | UX/UI Playbook',
     metaDescription:
-      'Three articles for designing interfaces: a 40-point UX audit, light/dark CSS tokens and a Product Design workflow for AI agents. Practical examples.',
-    kicker: 'ARTICLES · UX, UI AND PRODUCT DESIGN',
-    heading: 'UX journeys, UI components and work with AI agents.',
+      'UX, UI and Product Design articles: compare roles with mobile mockups, apply a 40-point audit, build CSS tokens and review AI-assisted work. Sources cited.',
+    kicker: 'ARTICLE',
+    heading: 'Article',
     lede:
-      'The UX article examines information needed throughout a task, errors and observation methods. The UI article describes type roles, colour and spacing, then translates them into CSS tokens. The Product Design article follows the scoping and review of work delegated to an agent. Explanations, examples and templates support preparation for each stage; references are collected at the end of each article.',
+      'The UX, UI and Product Design comparison follows the roles in one fictional mobile application. The UX article examines information needed throughout a task, errors and observation methods. The UI article describes type roles, colour and spacing, then translates them into CSS tokens. The Product Design article follows the scoping and review of work delegated to an agent. Explanations, examples and templates support preparation for each stage; references are collected at the end of each article.',
     readBtn: 'Read the article',
     backHome: 'Back to UX/UI Playbook',
     tocTitle: 'In this article',

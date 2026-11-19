@@ -3,7 +3,7 @@ export type ArticleVisualKind =
   | 'states' | 'empty' | 'checkout' | 'checklist' | 'type' | 'colour'
   | 'spacing' | 'responsive' | 'tokens' | 'themes' | 'feedback' | 'motion'
   | 'direction' | 'handoff' | 'roles' | 'research' | 'dashboard' | 'pricing'
-  | 'pipeline' | 'permissions' | 'report' | 'scope';
+  | 'pipeline' | 'permissions' | 'report' | 'scope' | 'discipline-map' | 'decision-loop';
 
 export interface ArticleVisual {
   kind: ArticleVisualKind;

@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "joyccelight-playbook",
+  "pages_build_output_dir": "./out",
+  "compatibility_date": "2026-11-18",
+  "dev": {
+    "ip": "0.0.0.0",
+    "port": 3100,
+    "local_protocol": "http"
+  }
+}

@@ -3,7 +3,7 @@ name: UI, content and accessibility checks
 on:
   pull_request:
   push:
-    branches: [main, 'arena/b1931c91-ux-ui-playbook-landing-page']
+    branches: [main, cloudflare-migration-v2, 'arena/**']
   workflow_dispatch:
 
 permissions:
@@ -13,10 +13,16 @@ concurrency:
   group: ui-check-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  NEXT_PUBLIC_SITE_URL: https://joyccelight-playbook.pages.dev
+  NEXT_TELEMETRY_DISABLED: '1'
+  WRANGLER_SEND_METRICS: 'false'
+  PLAYWRIGHT_BASE_URL: http://127.0.0.1:3100
+
 jobs:
   ui-check:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -28,17 +34,17 @@ jobs:
           python-version: '3.12'
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - name: Type-check and build the exact revision
-        run: npm run typecheck && npm run build
-      - name: Start the production build and check rendered HTML
+      - name: Type-check, unit-test and export the exact revision
+        run: npm run check:resource && npm run typecheck && npm run test:routing && npm run build && npm run check:export
+      - name: Serve the export with real local Pages Functions and check rendered HTML
         run: |
-          npx next start --hostname 0.0.0.0 --port 3100 > /tmp/playbook-next.log 2>&1 &
-          python3 scripts/site_check.py --base-url http://127.0.0.1:3100 --wait 60
-      - name: Responsive, keyboard and axe checks (FR/EN, OLED/Light)
-        env:
-          PLAYWRIGHT_BASE_URL: http://127.0.0.1:3100
+          mkdir -p reports
+          npm run preview:pages > reports/pages-server.log 2>&1 &
+          echo $! > reports/pages-server.pid
+          python3 scripts/site_check.py --base-url "$PLAYWRIGHT_BASE_URL" --expected-origin "$NEXT_PUBLIC_SITE_URL" --wait 120
+      - name: Pages routing, FR/EN interfaces, keyboard and axe
         run: npm run test:ui
-      - name: Keep evidence, including failures and pending human checks
+      - name: Keep reports, traces, screenshots and Pages server output
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -48,6 +54,9 @@ jobs:
             test-results/
             playwright-report/
           retention-days: 14
-      - name: Server output
-        if: failure()
-        run: cat /tmp/playbook-next.log
+      - name: Stop the local-only Pages server
+        if: always()
+        run: |
+          if [ -f reports/pages-server.pid ]; then
+            kill "$(cat reports/pages-server.pid)" 2>/dev/null || true
+          fi

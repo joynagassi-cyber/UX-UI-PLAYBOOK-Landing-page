@@ -2,32 +2,13 @@
 /** Render social previews from the same editorial data as the site, without book-page scans. */
 const fs = require('node:fs');
 const path = require('node:path');
-const ts = require('typescript');
 const React = require('react');
 const { renderToStaticMarkup } = require('react-dom/server');
 const { chromium } = require('playwright');
 const icons = require('lucide-react');
 
-const root = path.resolve(__dirname, '..');
-const cache = new Map();
-function loadData(relativePath) {
-  const filename = path.join(root, relativePath);
-  if (cache.has(filename)) return cache.get(filename).exports;
-  const module = { exports: {} };
-  cache.set(filename, module);
-  const compiled = ts.transpileModule(fs.readFileSync(filename, 'utf8'), {
-    compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
-    fileName: filename,
-  }).outputText;
-  const localRequire = (name) => {
-    if (name.startsWith('@/')) return loadData(`src/${name.slice(2)}.ts`);
-    if (name.startsWith('.')) return loadData(path.relative(root, path.resolve(path.dirname(filename), `${name}.ts`)));
-    return require(name);
-  };
-  // Only this repository's trusted TypeScript data modules are evaluated.
-  new Function('require', 'module', 'exports', 'process', compiled)(localRequire, module, module.exports, process);
-  return module.exports;
-}
+const { loadData, root } = require('./content-data.cjs');
+const catalogue = loadData('src/i18n/article-catalog.json');
 const { CONTENT } = loadData('src/i18n/content.ts');
 const ARTICLES = {
   fr: loadData('src/i18n/articles/fr.ts').ARTICLES_FR,
@@ -52,12 +33,20 @@ function artPanel(locale, index) {
   if (index === 1) {
     return `<div class="panel-heading">${fr ? 'Valeur → rôle → composant' : 'Value → role → component'}</div><div class="token-value"><span class="swatch"></span>#c2320a</div><div class="token-name">--color-accent</div><div class="example-button">${fr ? 'Enregistrer' : 'Save changes'}</div><div class="theme-row"><span>${icon('Sun', 25)} ${fr ? 'Clair' : 'Light'}</span><span>${icon('Moon', 25)} OLED</span></div>`;
   }
+  if (index === 3) {
+    return `<div class="panel-heading">${fr ? 'Atelier · application fictive' : 'Atelier · fictional application'}</div>
+      <div class="comparison-offer">${icon('Bike', 36)}<div><strong>${fr ? 'Entretien vélo' : 'Bicycle service'}</strong><span>${fr ? '39 € · 45 min' : '€39 · 45 min'}</span></div></div>
+      <div class="comparison-contribution"><b>UX</b><span>${fr ? 'Parcours et reprise' : 'Journey and recovery'}</span></div>
+      <div class="comparison-contribution"><b>UI</b><span>${fr ? 'Composants et états' : 'Components and states'}</span></div>
+      <div class="comparison-contribution"><b>Product</b><span>${fr ? 'Offre et contraintes' : 'Offer and constraints'}</span></div>`;
+  }
   return `<div class="panel-heading">${fr ? 'Le pipeline de revue' : 'The review pipeline'}</div>${['brief.md', 'screens.md', 'wireframe.html', 'review.md', 'handoff.md'].map((file, i) => `<div class="pipeline-row"><b>${i + 1}</b><span>${file}</span></div>`).join('')}`;
 }
 
 function htmlFor(locale, index) {
   const c = CONTENT[locale];
   const article = index >= 0 ? ARTICLES[locale][index] : null;
+  if (article && !catalogue[article.slug]) throw new Error(`Missing social catalogue entry: ${article.slug}`);
   const fr = locale === 'fr';
   const title = article ? article.title : c.hero.titleBefore + c.hero.titleAccent + c.hero.titleAfter;
   const summary = article ? article.subtitle : fr
@@ -77,6 +66,7 @@ function htmlFor(locale, index) {
     .state-row{display:flex;align-items:center;gap:15px;padding:8px 12px;background:#22211f;border:1px solid #44423e;border-radius:8px;font-size:20px}.state-row svg{color:#ff9b7d}
     .token-value{display:flex;align-items:center;gap:14px;font-size:27px;padding:12px 0}.swatch{width:42px;height:42px;background:#c2320a;border:1px solid #ff9b7d;border-radius:10px}.token-name{font-size:19px;border:1px solid #44423e;border-radius:8px;padding:14px}.example-button{font-size:21px;text-align:center;padding:17px;background:#ff6b47;color:#17100d;border-radius:8px;font-weight:700}.theme-row{display:flex;gap:12px;margin-top:10px}.theme-row>span{display:flex;align-items:center;justify-content:center;gap:9px;font-size:17px;border:1px solid #44423e;border-radius:8px;padding:13px;flex:1}.theme-row>span:first-child{background:#faf8f4;color:#17100d}
     .pipeline-row{display:flex;align-items:center;gap:12px;font-size:20px;padding:7px 0}.pipeline-row b{display:grid;place-items:center;background:#3e2117;border:1px solid #ff9b7d;color:#ffbd9f;border-radius:50%;width:34px;height:34px;font-size:17px}.pipeline-row span{overflow-wrap:anywhere}
+    .comparison-offer{display:flex;gap:12px;align-items:center;border:1px solid #9f9fac;background:#17171d;border-radius:12px;padding:16px;margin-bottom:8px}.comparison-offer svg{flex-shrink:0;color:#ff9b7d}.comparison-offer strong{font-size:20px;display:block;line-height:1.4}.comparison-offer span{font-size:17px;display:block;color:#c8c5c0;margin-top:8px}.comparison-contribution{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #44423e}.comparison-contribution b{font-size:18px;color:#ff9b7d}.comparison-contribution span{font-size:14px;color:#f4f1eb}
     footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #44423e;padding-top:17px;font-size:16px;color:#c8c5c0}.footer-title{color:#f4f1eb;font-weight:700}
   </style></head><body><div class="canvas">
     <header class="brand"><span class="brand-name">${icon('BookOpen', 32)}UX/UI Playbook</span><span class="locale">${fr ? 'Édition française' : 'English edition'} · 2026</span></header>
@@ -94,7 +84,7 @@ function htmlFor(locale, index) {
   try {
     const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
     for (const locale of ['fr','en']) {
-      for (const index of [-1,0,1,2]) {
+      for (const index of [-1, ...ARTICLES[locale].map((_, index) => index)]) {
         await page.setContent(htmlFor(locale,index), { waitUntil: 'load' });
         await page.evaluate(() => document.fonts.ready);
         const overflow = await page.evaluate(() => Array.from(document.querySelectorAll('h1,p,.panel,footer')).some(element => {
@@ -102,7 +92,7 @@ function htmlFor(locale, index) {
           return box.top<0 || box.bottom>630 || element.scrollHeight>element.clientHeight+1;
         }));
         if (overflow) throw new Error(`Social preview overflow: ${locale}/${index}`);
-        const filename = index === -1 ? `og-${locale}.jpg` : `og-article-${['ux','ui','product'][index]}-${locale}.jpg`;
+        const filename = index === -1 ? `og-${locale}.jpg` : ARTICLES[locale][index].ogImage.slice(1);
         await page.screenshot({path:path.join(root,'public',filename),type:'jpeg',quality:92});
         console.log(filename);
       }

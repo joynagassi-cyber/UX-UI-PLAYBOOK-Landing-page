@@ -1,6 +1,9 @@
 import type { MetadataRoute } from 'next';
 import { ARTICLES, ARTICLE_SLUGS } from '@/i18n/articles';
 import { SITE_URL } from '@/lib/site-config';
+import { FREE_RESOURCE_PATH } from '@/lib/free-resource-config';
+
+export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const coreEntries: MetadataRoute.Sitemap = [
@@ -76,5 +79,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
   });
 
-  return [...coreEntries, ...articleEntries];
+  const resourceEntries: MetadataRoute.Sitemap = (['fr', 'en'] as const).map((locale) => ({
+    url: `${SITE_URL}/${locale}${FREE_RESOURCE_PATH}`,
+    changeFrequency: 'monthly',
+    priority: 0.9,
+    alternates: {
+      languages: { fr: `${SITE_URL}/fr${FREE_RESOURCE_PATH}`, en: `${SITE_URL}/en${FREE_RESOURCE_PATH}` },
+    },
+  }));
+
+  return [...coreEntries, ...articleEntries, ...resourceEntries];
 }

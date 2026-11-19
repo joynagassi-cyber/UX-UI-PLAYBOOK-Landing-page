@@ -1,7 +1,9 @@
-import { NextResponse } from 'next/server';
 import { ARTICLES, type ArticleData } from '@/i18n/articles';
+import { designLabTranscript } from '@/i18n/design-lab';
 import { CONTENT } from '@/i18n/content';
 import { SITE_URL as SITE } from '@/lib/structured-data';
+import { FREE_CATALOG, FREE_MANIFEST } from '@/i18n/free-resource';
+import { FREE_RESOURCE_PATH } from '@/lib/free-resource-config';
 
 const tableCell = (text: string) => text.replace(/\|/g, '\\|').replace(/\n/g, ' ');
 
@@ -78,6 +80,8 @@ function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
         lines.push(block.visual.labels.join(' → '));
         lines.push(block.visual.caption);
         lines.push('');
+      } else if (block.type === 'mobileLab') {
+        lines.push(`#### ${block.title}`, block.caption, '', designLabTranscript(lang), '');
       } else if (block.type === 'table') {
         lines.push(`| ${block.headers.map(tableCell).join(' | ')} |`);
         lines.push(`| ${block.headers.map(() => '---').join(' | ')} |`);
@@ -106,6 +110,8 @@ function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
   return lines.join('\n');
 }
 
+export const dynamic = 'force-static';
+
 export async function GET() {
   const chunks: string[] = [
     '# UX/UI Playbook — Bilingual article collection (llms-full.txt)',
@@ -131,7 +137,30 @@ export async function GET() {
     chunks.push('');
   }
 
-  return new NextResponse(chunks.join('\n'), {
+  chunks.push(
+    '# Répertoire UI/UX gratuit — fichiers français',
+    `FR: ${SITE}/fr${FREE_RESOURCE_PATH}`,
+    `EN presentation (French files): ${SITE}/en${FREE_RESOURCE_PATH}`,
+    `${FREE_MANIFEST.counts.entries} fiches, ${FREE_MANIFEST.counts.categories} familles, ${FREE_MANIFEST.counts.resourceLinks} liens. Guide français de ${FREE_MANIFEST.counts.guidePages} pages ; fiche de décision de ${FREE_MANIFEST.counts.worksheetPages} pages, Markdown et CSV.`,
+    `Kit gratuit : ${SITE}${FREE_MANIFEST.files.archive.path}`,
+    `PDF : ${SITE}${FREE_MANIFEST.files.pdf.path}`,
+    `Markdown : ${SITE}${FREE_MANIFEST.files.markdown.path}`,
+    'Ressource gratuite distincte du Playbook payant. Les ressources tierces conservent leurs tarifs et licences ; aucun de leurs packs n’est distribué. Les destinations n’ont pas fait l’objet d’un audit exhaustif de disponibilité ou de licence.',
+    '',
+  );
+  for (const category of FREE_CATALOG.categories) {
+    chunks.push(`## ${category.name}`, category.purpose, category.question, '');
+    for (const entry of FREE_CATALOG.entries.filter((item) => item.category === category.id)) {
+      chunks.push(`### ${entry.id}. ${entry.name}`, ...entry.urls, entry.description,
+        `Non-designer : ${entry.nonDesigner}`, `Développeur : ${entry.developer}`,
+        `Avec un agent IA : ${entry.agent}`, `À vérifier : ${entry.watch}`, '');
+    }
+  }
+  chunks.push('## Sources du répertoire et limites éditoriales',
+    'Références ciblées utilisées pour les corrections éditoriales, pas une validation juridique des 75 destinations. Les conditions peuvent évoluer. Les pistes non testées sont signalées dans leurs fiches.');
+  for (const source of FREE_CATALOG.sources) chunks.push(`${source.title} — ${source.url}`, source.note, '');
+
+  return new Response(chunks.join('\n'), {
     status: 200,
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',

@@ -15,6 +15,8 @@ const domine = localFont({
   fallback: ['Georgia', 'Times New Roman', 'serif'],
 });
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return [{ locale: 'fr' }, { locale: 'en' }];
 }
