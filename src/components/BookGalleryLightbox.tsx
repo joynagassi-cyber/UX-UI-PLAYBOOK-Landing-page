@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { BookOpen, ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
 import type { PlaybookContent, PreviewPageItem } from '@/i18n/content';
 import { GumroadButton } from './GumroadButton';
+import { useModalFocus } from './useModalFocus';
 
 export function HeroSampleTrigger({
   label,
@@ -88,11 +89,14 @@ interface BookGalleryProps {
 export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
   const [filter, setFilter] = useState<'all' | PreviewPageItem['category']>('all');
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const visiblePages =
     filter === 'all' ? data.pages : data.pages.filter((p) => p.category === filter);
 
   const closeReader = useCallback(() => setActiveIndex(null), []);
+  const isOpen = activeIndex !== null;
+  useModalFocus(isOpen, modalRef, closeReader);
 
   const prevPage = useCallback(() => {
     setActiveIndex((cur) => {
@@ -119,19 +123,16 @@ export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
   }, [data.pages.length]);
 
   useEffect(() => {
-    if (activeIndex === null) return;
+    if (!isOpen) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeReader();
       if (e.key === 'ArrowLeft') prevPage();
       if (e.key === 'ArrowRight') nextPage();
     };
-    document.body.style.overflow = 'hidden';
     window.addEventListener('keydown', onKey);
     return () => {
-      document.body.style.overflow = '';
       window.removeEventListener('keydown', onKey);
     };
-  }, [activeIndex, closeReader, prevPage, nextPage]);
+  }, [isOpen, prevPage, nextPage]);
 
   const currentModalPage = activeIndex !== null ? data.pages[activeIndex] : null;
 
@@ -143,11 +144,10 @@ export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
         <p className="sec-lede">{data.lede}</p>
 
         <div className="gallery-toolbar">
-          <div className="filter-pills" role="tablist" aria-label="Filter sample pages">
+          <div className="filter-pills" role="group" aria-label={data.filterAll}>
             <button
               type="button"
-              role="tab"
-              aria-selected={filter === 'all'}
+              aria-pressed={filter === 'all'}
               onClick={() => setFilter('all')}
               className={`filter-pill ${filter === 'all' ? 'active' : ''}`}
             >
@@ -155,8 +155,7 @@ export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
             </button>
             <button
               type="button"
-              role="tab"
-              aria-selected={filter === 'screens'}
+              aria-pressed={filter === 'screens'}
               onClick={() => setFilter('screens')}
               className={`filter-pill ${filter === 'screens' ? 'active' : ''}`}
             >
@@ -164,8 +163,7 @@ export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
             </button>
             <button
               type="button"
-              role="tab"
-              aria-selected={filter === 'before-after'}
+              aria-pressed={filter === 'before-after'}
               onClick={() => setFilter('before-after')}
               className={`filter-pill ${filter === 'before-after' ? 'active' : ''}`}
             >
@@ -173,8 +171,7 @@ export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
             </button>
             <button
               type="button"
-              role="tab"
-              aria-selected={filter === 'system'}
+              aria-pressed={filter === 'system'}
               onClick={() => setFilter('system')}
               className={`filter-pill ${filter === 'system' ? 'active' : ''}`}
             >
@@ -231,6 +228,7 @@ export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
       {currentModalPage && activeIndex !== null && (
         <div
           className="lightbox-backdrop"
+          ref={modalRef}
           role="dialog"
           aria-modal="true"
           aria-label={currentModalPage.title}
@@ -253,6 +251,7 @@ export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
                 type="button"
                 onClick={closeReader}
                 className="lb-btn"
+                data-modal-close
                 aria-label={data.readerClose}
               >
                 <X size={16} aria-hidden="true" />
@@ -263,6 +262,9 @@ export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
 
           <div
             className="lightbox-body"
+            tabIndex={0}
+            role="region"
+            aria-label={currentModalPage.title}
             onClick={(e) => {
               if (e.target === e.currentTarget) closeReader();
             }}

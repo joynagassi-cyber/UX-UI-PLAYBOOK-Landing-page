@@ -1,19 +1,3 @@
-@font-face {
-  font-family: 'InterPlaybook';
-  font-style: normal;
-  font-weight: 400 900;
-  font-display: swap;
-  src: url('/fonts/inter-var.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'JBMonoPlaybook';
-  font-style: normal;
-  font-weight: 400 800;
-  font-display: swap;
-  src: url('/fonts/jbmono-var.woff2') format('woff2');
-}
-
 :root,
 html[data-theme='dark'] {
   color-scheme: dark;
@@ -31,12 +15,18 @@ html[data-theme='dark'] {
   --accent-hover: #ff734a;
   --accent-ink: #ff7a52;
   --accent-soft: rgba(255, 90, 43, 0.14);
+  --accent-glow: rgba(255, 90, 43, 0.18);
   --on-accent: #000000;
   --lime: #c6f24e;
   --lime-soft: rgba(198, 242, 78, 0.14);
+  --ok: #2ee59d;
+  --ok-soft: rgba(46, 229, 157, 0.12);
+  --warn: #f5b544;
+  --warn-soft: rgba(245, 181, 68, 0.12);
   --danger: #ff6b5c;
   --danger-soft: rgba(255, 107, 92, 0.14);
   --nav-bg: rgba(0, 0, 0, 0.84);
+  --glass: rgba(9, 9, 11, 0.86);
   --card-grad: radial-gradient(120% 120% at 0% 0%, rgba(255, 255, 255, 0.045), transparent 48%),
     linear-gradient(168deg, #15151b 0%, #09090c 64%, #0d0d11 100%);
   --card-hot-grad: radial-gradient(130% 120% at 100% 0%, rgba(255, 90, 43, 0.2), transparent 58%),
@@ -79,29 +69,35 @@ html[data-theme='light'] {
   --fg-3: #575766;
   --line: #dfd9cd;
   --line-2: #c8c0b1;
-  --accent: #d63b10;
-  --accent-hover: #b8300a;
-  --accent-ink: #bf320b;
-  --accent-soft: rgba(214, 59, 16, 0.1);
+  --accent: #c2320a;
+  --accent-hover: #a62806;
+  --accent-ink: #b02b07;
+  --accent-soft: rgba(194, 50, 10, 0.1);
+  --accent-glow: rgba(194, 50, 10, 0.12);
   --on-accent: #ffffff;
   --lime: #1b7a36;
   --lime-soft: rgba(27, 122, 54, 0.11);
-  --danger: #c62828;
-  --danger-soft: rgba(198, 40, 40, 0.1);
+  --ok: #0b5f37;
+  --ok-soft: rgba(11, 95, 55, 0.1);
+  --warn: #804800;
+  --warn-soft: rgba(128, 72, 0, 0.1);
+  --danger: #b91c1c;
+  --danger-soft: rgba(185, 28, 28, 0.1);
   --nav-bg: rgba(250, 248, 244, 0.88);
+  --glass: rgba(250, 248, 244, 0.9);
   --card-grad: linear-gradient(180deg, #ffffff 0%, #f8f5ef 100%);
-  --card-hot-grad: radial-gradient(120% 120% at 100% 0%, rgba(214, 59, 16, 0.09), transparent 58%),
+  --card-hot-grad: radial-gradient(120% 120% at 100% 0%, rgba(194, 50, 10, 0.09), transparent 58%),
     linear-gradient(180deg, #fff9f6 0%, #f9efe9 100%);
   --card-hot-border: #e5b7a6;
   --card-hot-title: #9e2504;
-  --offer-grad: radial-gradient(90% 120% at 10% 0%, rgba(214, 59, 16, 0.1), transparent 56%),
+  --offer-grad: radial-gradient(90% 120% at 10% 0%, rgba(194, 50, 10, 0.1), transparent 56%),
     radial-gradient(80% 100% at 100% 100%, rgba(27, 122, 54, 0.07), transparent 60%),
     linear-gradient(170deg, #ffffff, #f3efe6 78%);
-  --hero-glow: radial-gradient(44% 56% at 18% 16%, rgba(214, 59, 16, 0.1), transparent 70%),
+  --hero-glow: radial-gradient(44% 56% at 18% 16%, rgba(194, 50, 10, 0.1), transparent 70%),
     radial-gradient(38% 46% at 84% 8%, rgba(27, 122, 54, 0.06), transparent 70%);
   --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 18px 42px -24px rgba(20, 18, 14, 0.14);
   --shadow-page: 0 24px 56px -24px rgba(20, 18, 14, 0.22), 0 4px 14px rgba(20, 18, 14, 0.08);
-  --top-shine: linear-gradient(90deg, transparent, rgba(214, 59, 16, 0.25) 50%, transparent);
+  --top-shine: linear-gradient(90deg, transparent, rgba(194, 50, 10, 0.25) 50%, transparent);
   --term-bg: #09090d;
   --term-bar: #121218;
   --term-line: #23232e;
@@ -115,8 +111,6 @@ html[data-theme='light'] {
   --max: 1160px;
   --pad: clamp(56px, 7vw, 104px);
   --ease: cubic-bezier(0.16, 0.84, 0.24, 1);
-  --font-sans: 'InterPlaybook', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JBMonoPlaybook', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 *,
@@ -135,7 +129,7 @@ body {
   margin: 0;
   background: var(--void);
   color: var(--fg);
-  font-family: var(--font-sans);
+  font-family: var(--font-sans, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif);
   font-size: 17px;
   line-height: 1.62;
   -webkit-font-smoothing: antialiased;
@@ -158,8 +152,9 @@ h2,
 h3,
 h4 {
   margin: 0;
+  font-family: var(--font-display, var(--font-sans, ui-sans-serif, system-ui, sans-serif));
   letter-spacing: -0.03em;
-  line-height: 1.06;
+  line-height: 1.08;
   font-weight: 800;
   text-wrap: balance;
 }
@@ -241,7 +236,8 @@ button {
 
 a:focus-visible,
 button:focus-visible,
-summary:focus-visible {
+summary:focus-visible,
+[tabindex]:focus-visible {
   outline: 2px solid var(--accent-ink);
   outline-offset: 3px;
   border-radius: 8px;
@@ -398,15 +394,15 @@ summary:focus-visible {
   border: 1px solid var(--line-2);
   border-radius: 999px;
   padding: 3px;
-  height: 44px;
+  min-height: 52px;
 }
 
 .lang-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 40px;
-  height: 36px;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0 11px;
   border-radius: 999px;
   border: 0;
@@ -688,8 +684,9 @@ summary:focus-visible {
 }
 
 .strip-num {
+  font-family: var(--font-display, var(--font-sans, ui-sans-serif, system-ui, sans-serif));
   font-size: clamp(28px, 3.2vw, 40px);
-  font-weight: 850;
+  font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -1037,8 +1034,8 @@ section h2 {
   flex: 1;
   padding: 9px 12px;
   border-radius: 8px;
-  background: #d87a61;
-  color: #fff2ee;
+  background: #9d3b22;
+  color: #ffffff;
   font-size: 12.5px;
   font-weight: 700;
   text-align: center;
@@ -1117,6 +1114,7 @@ section h2 {
 
 .term-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
@@ -1139,8 +1137,8 @@ section h2 {
 }
 
 .term-copy-btn {
-  min-height: 36px;
-  padding: 0 12px;
+  min-height: 44px;
+  padding: 0 14px;
   border-radius: 8px;
   border: 1px solid #2e2e3a;
   background: #171720;
@@ -1213,6 +1211,52 @@ section h2 {
   font-size: 12px;
   color: var(--term-dim);
   text-transform: uppercase;
+}
+
+.term-outcome {
+  margin: 0;
+  padding: 12px 18px;
+  border-top: 1px solid var(--term-line);
+  background: var(--term-bg);
+  color: #d6d6e0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.author-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.author-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--accent-ink);
+  text-underline-offset: 3px;
+}
+
+table,
+time {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 440px) {
+  .brand-mark {
+    display: none;
+  }
+  .brand {
+    font-size: 13px;
+    flex-shrink: 1;
+    gap: 0;
+  }
+  .nav-inner {
+    gap: 8px;
+  }
 }
 
 /* ---------------------------------------------------------------- States */
@@ -1471,6 +1515,39 @@ section h2 {
 
 .lb-btn:hover {
   border-color: #ff5a2b;
+}
+
+@media (max-width: 600px) {
+  .lightbox-top {
+    flex-wrap: wrap;
+    padding: 10px 12px;
+  }
+  .lightbox-top > div:first-child {
+    flex: 1 1 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .lightbox-top > div:nth-child(2) {
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .lightbox-foot {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 8px;
+    padding: 10px 12px;
+  }
+  .lightbox-foot > span {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+  .lightbox-foot .lb-btn {
+    justify-content: center;
+    padding: 0 8px;
+    gap: 5px;
+    font-size: 12px;
+  }
 }
 
 /* ---------------------------------------------------------------- Contents & Kit Explorer */
@@ -2176,7 +2253,9 @@ section h2 {
 .notion-breadcrumbs a {
   display: inline-flex;
   align-items: center;
-  min-height: 36px;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0 6px;
   border-radius: 6px;
   color: var(--fg-2);
@@ -2523,6 +2602,18 @@ section h2 {
   color: var(--fg-2);
 }
 
+.notion-stat-src a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-underline-offset: 3px;
+}
+
+.notion-stat-card .notion-refs-badge {
+  display: inline-block;
+  margin-top: 10px;
+}
+
 /* Notion Content Sections & Motion Reveal */
 .notion-section {
   scroll-margin-top: 96px;
@@ -2568,12 +2659,208 @@ section h2 {
   flex-shrink: 0;
 }
 
+.notion-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.1vw, 21px);
+  font-weight: 700;
+  line-height: 1.32;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+  margin: 30px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notion-h3::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
 .notion-p {
   font-size: 16.5px;
-  line-height: 1.76;
+  line-height: 1.78;
   color: var(--fg);
-  margin-bottom: 18px;
-  max-width: 68ch;
+  margin-bottom: 16px;
+  max-width: 70ch;
+}
+
+/* Signature Playbook Rule Block (Quote / Golden Rule) */
+.notion-quote {
+  margin: 22px 0;
+  padding: 18px 22px;
+  border-radius: 14px;
+  background: var(--s2);
+  border: 1px solid var(--line-2);
+  border-left: 4px solid var(--fg);
+}
+
+.notion-quote-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-ink);
+  margin-bottom: 6px;
+}
+
+.notion-quote blockquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 16.5px;
+  font-weight: 700;
+  line-height: 1.52;
+  color: var(--fg);
+}
+
+/* Side-by-Side ✓ DO / ✕ DON'T Grid (Playbook Signature) */
+.notion-dodont {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 22px 0;
+}
+
+@media (max-width: 700px) {
+  .notion-dodont {
+    grid-template-columns: 1fr;
+  }
+}
+
+.notion-do-col,
+.notion-dont-col {
+  padding: 18px 18px 16px;
+  border-radius: 14px;
+  background: var(--s1);
+  border: 1px solid var(--line-2);
+}
+
+.notion-do-col {
+  border-top: 3px solid var(--ok);
+}
+
+.notion-dont-col {
+  border-top: 3px solid #ef4444;
+}
+
+.notion-dodont-head {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.notion-do-col .notion-dodont-head {
+  color: var(--ok);
+}
+
+.notion-dont-col .notion-dodont-head {
+  color: #f87171;
+}
+
+[data-theme='light'] .notion-dont-col .notion-dodont-head {
+  color: #c62828;
+}
+
+.notion-dodont ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.notion-dodont li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 14.5px;
+  line-height: 1.56;
+  color: var(--fg-2);
+}
+
+.notion-do-col li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--ok);
+  font-family: var(--font-mono);
+  font-weight: 800;
+}
+
+.notion-dont-col li::before {
+  content: '✕';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #ef4444;
+  font-family: var(--font-mono);
+  font-weight: 800;
+}
+
+/* Numbered Protocol / Steps Block */
+.notion-steps {
+  margin: 22px 0;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: var(--s1);
+  border: 1px solid var(--line);
+}
+
+.notion-steps-title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-ink);
+  margin-bottom: 14px;
+}
+
+.notion-steps ol {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notion-steps li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--fg-2);
+}
+
+.notion-step-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--s2);
+  border: 1px solid var(--line-2);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.notion-steps li strong {
+  color: var(--fg);
 }
 
 .notion-bullets {
@@ -2721,8 +3008,8 @@ section h2 {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 36px;
-  padding: 0 12px;
+  min-height: 44px;
+  padding: 0 14px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.06);
@@ -2756,6 +3043,13 @@ section h2 {
   white-space: pre;
 }
 
+.term-pre:focus-visible,
+.notion-copybox pre:focus-visible,
+.lightbox-body:focus-visible {
+  outline-color: #ff8c70;
+  outline-offset: -4px;
+}
+
 .notion-copybox-note {
   padding: 9px 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -2776,19 +3070,26 @@ section h2 {
 
 .notion-figure-btn {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  padding: 14px;
-  background: #ffffff;
+  padding: 16px;
+  background: var(--s2);
   border: none;
   cursor: zoom-in;
 }
 
 .notion-figure-btn img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: 430px;
   height: auto;
+  object-fit: contain;
   border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
   transition: transform 0.3s cubic-bezier(0.16, 0.84, 0.24, 1);
 }
 
@@ -2867,6 +3168,7 @@ section h2 {
   color: var(--fg-2);
   line-height: 1.55;
   vertical-align: top;
+  font-variant-numeric: tabular-nums;
 }
 
 .notion-table tr:last-child td {
@@ -2879,12 +3181,187 @@ section h2 {
 }
 
 .notion-table-caption {
+  caption-side: bottom;
+  text-align: start;
   padding: 10px 16px;
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--fg-2);
   border-top: 1px solid var(--line);
   background: var(--s2);
+}
+
+/* Mid-Article Contextual CTA (right after peak deliverable) */
+.notion-inline-cta {
+  margin: 28px 0;
+  padding: 20px 22px;
+  border-radius: 16px;
+  background:
+    radial-gradient(420px 180px at 100% 0%, var(--accent-glow), transparent 72%),
+    var(--s1);
+  border: 1px solid var(--line-2);
+  border-left: 4px solid var(--accent);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.notion-inline-cta-copy {
+  flex: 1 1 360px;
+  min-width: 0;
+}
+
+.notion-inline-cta-kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-ink);
+  margin-bottom: 4px;
+}
+
+.notion-inline-cta-title {
+  font-family: var(--font-display);
+  font-size: 17.5px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--fg);
+  margin-bottom: 6px;
+}
+
+.notion-inline-cta-body {
+  font-size: 14px;
+  line-height: 1.56;
+  color: var(--fg-2);
+}
+
+/* Primary Sources & Verifiable Bibliography (GEO & E-E-A-T) */
+.notion-refs {
+  scroll-margin-top: 112px;
+  margin-top: 44px;
+  padding: 26px 26px 22px;
+  border-radius: 18px;
+  background: var(--s1);
+  border: 1px solid var(--line);
+}
+
+.notion-refs-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.notion-refs-head h2 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.notion-refs-sub {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-3);
+}
+
+.notion-refs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.notion-refs-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.notion-refs-item:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.notion-refs-main {
+  flex: 1 1 420px;
+  color: var(--fg-2);
+}
+
+.notion-refs-main a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  overflow-wrap: anywhere;
+  color: var(--fg);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--line-2);
+  text-underline-offset: 3px;
+  transition: color 0.16s, text-decoration-color 0.16s;
+}
+
+.notion-refs-main a:hover {
+  color: var(--accent-ink);
+  text-decoration-color: var(--accent-ink);
+}
+
+.notion-refs-badge {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.notion-refs-badge.established {
+  background: var(--ok-soft);
+  color: var(--ok);
+  border: 1px solid rgba(46, 229, 157, 0.28);
+}
+
+[data-theme='light'] .notion-refs-badge.established {
+  border-color: rgba(19, 115, 71, 0.28);
+}
+
+.notion-refs-badge.probable {
+  background: var(--warn-soft);
+  color: var(--warn);
+  border: 1px solid rgba(245, 181, 68, 0.32);
+}
+
+[data-theme='light'] .notion-refs-badge.probable {
+  border-color: rgba(154, 91, 0, 0.28);
+}
+
+/* Entity Definition Lead (AEO Snippet Anchor) */
+.notion-entity-def {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--fg-2);
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: var(--s2);
+  border: 1px solid var(--line);
+  margin-bottom: 20px;
+}
+
+.notion-entity-def strong {
+  color: var(--fg);
 }
 
 /* End-of-Article Conversion Offer Card */
@@ -2929,6 +3406,7 @@ section h2 {
 }
 
 .notion-cta-pricebox {
+  font-variant-numeric: tabular-nums;
   padding: 22px;
   border-radius: 16px;
   background: var(--s2);
@@ -2948,6 +3426,8 @@ section h2 {
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -1,31 +1,56 @@
 import { NextResponse } from 'next/server';
+import { ARTICLES, type ArticleData } from '@/i18n/articles';
+import { CONTENT } from '@/i18n/content';
+import { SITE_URL as SITE } from '@/lib/structured-data';
 
 export const dynamic = 'force-static';
-import { ARTICLES, type ArticleData } from '@/i18n/articles';
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://joyccelight-playbook.pages.dev';
+const tableCell = (text: string) => text.replace(/\|/g, '\\|').replace(/\n/g, ' ');
 
 function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
   const lines: string[] = [];
   lines.push(`## [${lang.toUpperCase()}] ${art.title}`);
   lines.push(`URL: ${SITE}/${lang}/articles/${art.slug}`);
-  lines.push(`Category: ${art.category} | Reading time: ${art.readTime} | Updated: ${art.updatedAt}`);
+  lines.push(`Category: ${art.category} | Reading time: ${art.readTime} | Published: ${art.publishedAt} | Updated: ${art.updatedAt}`);
+  lines.push('');
+  lines.push(`**${art.category}** — ${art.entityDefinition}`);
   lines.push('');
   lines.push(`> **${art.aeoSummaryTitle}**: ${art.aeoSummary}`);
   lines.push('');
-  lines.push('### Key Dated Metrics');
+  lines.push(lang === 'fr' ? '### Sources et repères de méthode' : '### Evidence and method guidelines');
   for (const st of art.keyStats) {
-    lines.push(`- **${st.value}** — ${st.label} (*${st.source}*)`);
+    const source = st.url ? `[${st.source}](${st.url})` : st.source;
+    lines.push(`- **${st.value}** — ${st.label} (${source}; evidence: ${st.evidence})`);
   }
   lines.push('');
 
   for (const sec of art.sections) {
     lines.push(`### ${sec.num}. ${sec.heading}`);
     for (const block of sec.blocks) {
-      if (block.type === 'p') {
+      if (block.type === 'h3') {
+        lines.push(`#### ${block.text}`);
+        lines.push('');
+      } else if (block.type === 'p') {
         lines.push(block.text);
         lines.push('');
+      } else if (block.type === 'quote') {
+        lines.push(`> **${block.tag}**: "${block.text}"`);
+        lines.push('');
+      } else if (block.type === 'doDont') {
+        lines.push(`**${block.doTitle}**`);
+        for (const d of block.doItems) lines.push(`- ✓ ${d}`);
+        lines.push('');
+        lines.push(`**${block.dontTitle}**`);
+        for (const d of block.dontItems) lines.push(`- ✕ ${d}`);
+        lines.push('');
+      } else if (block.type === 'steps') {
+        lines.push(`**${block.title}**`);
+        block.steps.forEach((st, idx) => {
+          lines.push(`${idx + 1}. **${st.bold}** — ${st.text}`);
+        });
+        lines.push('');
       } else if (block.type === 'list') {
+        if (block.heading) lines.push(`**${block.heading}**`);
         for (const it of block.items) {
           lines.push(it.bold ? `- **${it.bold}**: ${it.text}` : `- ${it.text}`);
         }
@@ -38,12 +63,20 @@ function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
         lines.push(`\`\`\`${block.langTag}`);
         lines.push(block.code);
         lines.push('```');
+        if (block.note) lines.push(`*${block.note}*`);
+        lines.push('');
+      } else if (block.type === 'inlineCta') {
+        lines.push(`**${block.title}** ${block.text}`);
+        lines.push(`[${block.buttonLabel}](${CONTENT[lang].gumroadUrl})`);
+        lines.push('');
+      } else if (block.type === 'figure') {
+        lines.push(`[${block.alt}](${SITE}${block.src}) — ${block.caption} (${block.sourceRef})`);
         lines.push('');
       } else if (block.type === 'table') {
-        lines.push(`| ${block.headers.join(' | ')} |`);
+        lines.push(`| ${block.headers.map(tableCell).join(' | ')} |`);
         lines.push(`| ${block.headers.map(() => '---').join(' | ')} |`);
         for (const r of block.rows) {
-          lines.push(`| ${r.join(' | ')} |`);
+          lines.push(`| ${r.map(tableCell).join(' | ')} |`);
         }
         if (block.caption) lines.push(`*${block.caption}*`);
         lines.push('');
@@ -57,6 +90,12 @@ function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
     lines.push(`A: ${f.a}`);
     lines.push('');
   }
+
+  lines.push(lang === 'fr' ? '### Sources et niveaux de preuve' : '### Sources and evidence levels');
+  for (const reference of art.references) {
+    lines.push(`- [${reference.title}](${reference.url}) — ${reference.publisher}, ${reference.date}. Evidence: ${reference.evidence}. ${reference.note}`);
+  }
+  lines.push('');
 
   return lines.join('\n');
 }

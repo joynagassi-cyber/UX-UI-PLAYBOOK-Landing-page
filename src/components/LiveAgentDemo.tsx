@@ -45,11 +45,10 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
         </div>
 
         <div className="demo-controls">
-          <div className="seg-tabs" role="tablist" aria-label="Screen version">
+          <div className="seg-tabs" role="group" aria-label={data.kicker}>
             <button
               type="button"
-              role="tab"
-              aria-selected={isBad}
+              aria-pressed={isBad}
               onClick={() => setMode('bad')}
               className={`seg-tab ${isBad ? 'active-bad' : ''}`}
             >
@@ -58,8 +57,7 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
             </button>
             <button
               type="button"
-              role="tab"
-              aria-selected={!isBad}
+              aria-pressed={!isBad}
               onClick={() => setMode('clean')}
               className={`seg-tab ${!isBad ? 'active-clean' : ''}`}
             >
@@ -204,7 +202,7 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
               </button>
             </div>
 
-            <pre className="term-pre">
+            <pre className="term-pre" tabIndex={0} role="region" aria-label={data.kicker}>
               <span className="c">$ {currentCmd}</span>
               {'\n'}
               {currentLines.map((line, i) => (
@@ -214,27 +212,22 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
               ))}
             </pre>
 
+            <p className="term-outcome" aria-live="polite">
+              {data.terminal.statusBlocking} : {isBad ? '4' : '0'}
+              {' · '}{isBad ? 'EXIT 1' : 'EXIT 0'}
+            </p>
             <div className="term-scorebar">
               <div className="term-score-cell">
-                <span
-                  className="term-score-val"
-                  style={{ color: isBad ? 'var(--term-red)' : 'var(--term-green)' }}
-                >
-                  {isBad ? '4' : '0'}
-                </span>
-                <span className="term-score-lbl">{data.terminal.statusBlocking}</span>
+                <span className="term-score-val" style={{ color: 'var(--term-green)' }}>9</span>
+                <span className="term-score-lbl">{data.terminal.statusAutomated}</span>
               </div>
               <div className="term-score-cell">
-                <span className="term-score-val" style={{ color: 'var(--term-green)' }}>
-                  {isBad ? '3' : '71'}
-                </span>
-                <span className="term-score-lbl">{data.terminal.statusVerified}</span>
-              </div>
-              <div className="term-score-cell">
-                <span className="term-score-val" style={{ color: 'var(--term-warn)' }}>
-                  {isBad ? '2' : '6'}
-                </span>
+                <span className="term-score-val" style={{ color: 'var(--term-warn)' }}>6</span>
                 <span className="term-score-lbl">{data.terminal.statusToVerify}</span>
+              </div>
+              <div className="term-score-cell">
+                <span className="term-score-val" style={{ color: 'var(--term-dim)' }}>62</span>
+                <span className="term-score-lbl">{data.terminal.statusNotApplicable}</span>
               </div>
             </div>
           </div>

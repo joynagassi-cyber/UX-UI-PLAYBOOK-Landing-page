@@ -1,9 +1,10 @@
 import type { MetadataRoute } from 'next';
 import { ARTICLE_SLUGS } from '@/i18n/articles';
+import { SITE_URL } from '@/lib/structured-data';
 
 export const dynamic = 'force-static';
 
-const BASE = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joyccelight-playbook.pages.dev').replace(/\/+$/, '');
+const BASE = SITE_URL;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date('2026-11-18T08:00:00.000Z');

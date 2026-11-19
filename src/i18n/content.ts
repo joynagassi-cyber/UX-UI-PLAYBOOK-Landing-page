@@ -1,4 +1,4 @@
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joyccelight-playbook.pages.dev').replace(/\/+$/, '');
+import { SITE_URL } from '@/lib/structured-data';
 
 export type Locale = 'fr' | 'en';
 
@@ -132,8 +132,9 @@ export interface PlaybookContent {
       linesBad: Array<{ type: 'r' | 'w' | 'g' | 'c'; text: string }>;
       linesClean: Array<{ type: 'r' | 'w' | 'g' | 'c'; text: string }>;
       statusBlocking: string;
-      statusVerified: string;
+      statusAutomated: string;
       statusToVerify: string;
+      statusNotApplicable: string;
     };
   };
   statesSection: {
@@ -250,9 +251,9 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     otherGumroadUrl: 'https://joyccelight.gumroad.com/l/uxuiplaybook',
     siteUrl: SITE_URL,
     meta: {
-      title: 'UX/UI Playbook — Édition française 2026 + Kit bonus & Skill IA',
+      title: "UX/UI Playbook — Manuel, kit et Skill IA · FR",
       description:
-        '148 pages A4, 97 sections, 36 écrans annotés, 77 règles mesurables par script Python et 21 fichiers prêts à livrer. Le système UX, UI et Product Design conçu pour les développeurs, builders IA et freelances.',
+        "Le UX/UI Playbook réunit 148 pages, 12 fiches A4 et 21 fichiers : tokens CSS/JSON, scanner Python et règles pour vos agents IA. Édition FR à 29 $.",
       ogTitle: 'UX/UI Playbook — Édition française 2026 + Kit bonus',
       ogDescription:
         'Vous avez codé l’application. Puis quelqu’un l’a ouverte. 148 pages, 77 règles vérifiables par un agent IA, 12 fiches A4 et 21 fichiers de travail.',
@@ -290,7 +291,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       note: 'Paiement unique (29 USD). Le PDF de 148 pages, le kit bonus imprimable de 26 pages et l’archive de 21 fichiers à la seconde où vous validez.',
       proofs: [
         '148 pages A4 en français',
-        '77 règles vérifiables par script',
+        "77 règles : contrôles auto + humains",
         '12 fiches + 21 fichiers & Skill IA',
         'Remboursé sous 7 jours',
       ],
@@ -299,20 +300,20 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     },
     strip: [
       { num: '148', label: 'pages en français, une section par page' },
-      { num: '36', label: 'écrans annotés + 24 prototypes avant/après' },
-      { num: '77', label: 'règles mesurables sur 6 plateformes' },
+      { num: '36', label: "écrans annotés + 13 prototypes avant/après + 11 planches de plateformes" },
+      { num: '77', label: "règles sur 6 plateformes, avec leurs méthodes de contrôle" },
       { num: '21', label: 'fichiers livrés : tokens, script Python & skill IA' },
     ],
     pillars: {
       kicker: 'PLUS QU’UN EBOOK : UN SYSTÈME D’EXÉCUTION',
       heading: 'Trois briques dans un seul téléchargement.',
       lede:
-        'La plupart des livres UX s’arrêtent à des conseils théoriques. Cette offre combine l’apprentissage visuel, les livrables de mission client et l’exécution automatisée par vos agents de code.',
+        "UX/UI Playbook est un manuel UX, UI et Product Design de Joy N., accompagné d’un kit de livraison et d’outils pour agents de code. Il s’adresse aux développeurs, indépendants et équipes qui veulent documenter leurs décisions puis vérifier leurs interfaces.",
       cards: [
         {
           tag: '01 · APPRENDRE',
           title: 'Le Playbook Visuel (148 p.)',
-          subtitle: '97 sections · 36 écrans annotés · 24 avant/après',
+          subtitle: "97 sections · 36 écrans annotés · 13 avant/après + 11 planches de plateformes",
           points: [
             'Une règle par page : principe, maquette cotée, erreurs à bannir et lignes de notes.',
             'Dix territoires d’écrans décortiqués : landing, dashboard SaaS, checkout, mobile, tarifs, back-office.',
@@ -335,17 +336,17 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           subtitle: 'agent_check.py · 77 règles · Claude Code, Cursor, Codex, CI',
           points: [
             'Un scanner Python qui lit votre HTML/CSS, tranche ce qui est mesurable dans le code et renvoie un code de sortie.',
-            'Un rapport honnête à 3 colonnes strictes : Vérifié, À vérifier à l’écran, Bloquant — jamais de faux positif.',
+            "Trois statuts : Automatisé, À vérifier, Non applicable. Sévérité (Bloquant, Majeur) et résultat restent séparés.",
             'Fichiers AGENTS.md et SKILL.md prêts à glisser dans vos dépôts pour brider les dérives visuelles des agents IA.',
           ],
         },
       ],
     },
     agentDemo: {
-      kicker: 'LA PREUVE EN DIRECT',
-      heading: 'La checklist n’est pas une image de checklist. Elle s’exécute.',
+      kicker: "DÉMONSTRATION INTERACTIVE · RAPPORT ILLUSTRATIF",
+      heading: "Avant / après : comprendre ce que le contrôle prouve.",
       lede:
-        'Testez ici ce qui se passe quand on passe un écran de paiement brut sorti d’un agent IA dans le scanner Python livré avec le livre, puis après application des règles du Playbook.',
+        "Ce comparatif simule un rapport de contrôle : aucun script Python ne s’exécute dans cette page. Copiez la commande pour lancer agent_check.py sur les fichiers témoins de l’archive, puis distinguez le résultat automatique de la revue humaine. Le schéma reste lisible ici : les défauts chiffrés décrivent les fichiers témoins, pas les tailles et contrastes de cette page.",
       bullets: [
         {
           bold: 'Intégrable en CI/CD :',
@@ -353,7 +354,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         },
         {
           bold: 'Trois statuts, jamais un quatrième :',
-          rest: 'ce que le script ne peut pas prouver sans écran réel (cible au pouce, lecteur d’écran) reste explicitement marqué « À vérifier ».',
+          rest: "Automatisé / À vérifier / Non applicable décrivent la méthode de contrôle. Une règle automatisée peut échouer ; « Bloquant » décrit sa sévérité, pas un quatrième statut.",
         },
         {
           bold: 'Deux fichiers témoins inclus :',
@@ -363,11 +364,11 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       tabBad: '1. Écran brut IA (bad.html)',
       tabClean: '2. Écran corrigé (clean.html)',
       fixAction: 'Appliquer les règles du Playbook →',
-      fixedBadge: '77 règles appliquées · Prêt à livrer',
+      fixedBadge: "Exemple corrigé · revue humaine toujours requise",
       copyCmd: 'Copier la commande',
       copiedCmd: 'Commande copiée !',
       screenHeaderBad: 'AVANT · 6 champs · 2 boutons égaux · 4 erreurs bloquantes',
-      screenHeaderClean: 'APRÈS · 4 champs · 1 action primaire · 0 erreur bloquante',
+      screenHeaderClean: "APRÈS · champs utiles · 1 action primaire · exemple corrigé",
       screenMock: {
         brand: 'ATELIER NORD · PAIEMENT',
         stepLabel: 'Panier ✓  →  Livraison  →  Paiement',
@@ -387,16 +388,16 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         clearFeeClean: 'Total TTC : 132,90 € (livraison 4,90 € incluse · retour gratuit 30 j)',
         summaryClean: '1× Sac cuir noir (98 €) + Ceinture (30 €) + Livraison (4,90 €)',
         flaws: [
-          { code: 'C01 BLOQUANT', text: 'Mentions en 9 px et 10 px sous le seuil lisible de 12 px' },
-          { code: 'B01 BLOQUANT', text: 'Contraste bouton/texte à 2,4:1 (minimum vendable : 4,5:1)' },
+          { code: 'C01 BLOQUANT', text: "Fichier témoin : textes en 9 et 10 px, sous le seuil Playbook de 12 px" },
+          { code: 'B01 BLOQUANT', text: "Fichier témoin : contraste insuffisant ; comparer au seuil texte de 4,5:1" },
           { code: 'A06 BLOQUANT', text: 'Deux boutons pleins de même poids (« Payer » vs « Enregistrer »)' },
-          { code: 'R59 MAJEUR', text: 'Montant final et frais découverts après la saisie des 6 champs' },
+          { code: "K03 MAJEUR", text: 'Montant final et frais découverts après la saisie des 6 champs' },
         ],
         improvements: [
-          { code: 'C01 VÉRIFIÉ', text: 'Échelle typographique ≥ 13 px, montants alignés en tabular-nums' },
-          { code: 'B01 VÉRIFIÉ', text: 'Contraste mesuré ≥ 7,2:1 sur texte courant et bouton primaire' },
-          { code: 'A06 VÉRIFIÉ', text: 'Portefeuille système en 1 tap + un seul bouton primaire plein' },
-          { code: 'R59 VÉRIFIÉ', text: 'Total TTC (132,90 €) et frais affichés avant le premier champ' },
+          { code: "C01 · AUTOMATISÉ", text: "Taille minimale déclarée de l’exemple : 13 px" },
+          { code: "B01 · AUTOMATISÉ", text: "Paire texte/fond de l’exemple contrôlée ; surfaces réelles à mesurer" },
+          { code: "A06 · À VÉRIFIER", text: "Action primaire distincte ; confirmer la compréhension avec un humain" },
+          { code: "K03 · À VÉRIFIER", text: "Total et frais visibles ; vérifier le parcours complet avant engagement" },
         ],
       },
       terminal: {
@@ -405,28 +406,29 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         cmdClean:
           'python3 agent_check.py --target test/clean.html \\\n    --platform web --lang fr --fail-on blocking',
         linesBad: [
-          { type: 'r', text: 'C01 BLOQUANT  2 tailles sous 12 px détectées : [9.0, 10.0]' },
-          { type: 'r', text: 'B01 BLOQUANT  contraste 2.4:1 sous le seuil requis de 4.5:1' },
-          { type: 'r', text: 'A01 BLOQUANT  aucun repère <main> nommé ni titre H1 unique' },
-          { type: 'r', text: 'A06 BLOQUANT  2 actions primaires concurrentes dans le même bloc' },
-          { type: 'w', text: 'C12 À VÉRIFIER cible tactile ≥ 44×44 px : mesurer sur appareil' },
-          { type: 'w', text: 'C19 À VÉRIFIER ordre de focus clavier : confirmer au Tab' },
-          { type: 'g', text: 'Rapport : 3 vérifiés · 2 à vérifier à l’écran · 4 bloquants' },
-          { type: 'c', text: '$ echo $?  →  1 (livraison stoppée)' },
+          { type: 'r', text: "C01 AUTOMATISÉ · BLOQUANT · échec : texte sous 12 px" },
+          { type: 'r', text: "B01 AUTOMATISÉ · BLOQUANT · échec : contraste sous 4.5:1" },
+          { type: 'r', text: "A01 AUTOMATISÉ · BLOQUANT · échec : H1 absent" },
+          { type: 'r', text: "F01 AUTOMATISÉ · BLOQUANT · échec : label non relié" },
+          { type: 'w', text: "D01 À VÉRIFIER · cible web : 24 px AA, 44 px recommandés" },
+          { type: 'w', text: "H01 À VÉRIFIER · parcours clavier et focus réel" },
+          { type: 'g', text: "Exemple : 9 automatisés · 6 à vérifier · 62 non applicables" },
+          { type: 'c', text: "Sévérité séparée : 4 échecs bloquants → sortie 1" },
         ],
         linesClean: [
-          { type: 'g', text: 'A01 VÉRIFIÉ   titre H1 unique, repères header / main / form valides' },
-          { type: 'g', text: 'B01 VÉRIFIÉ   contraste minimal mesuré : 7.2:1 (seuil 4.5:1)' },
-          { type: 'g', text: 'C01 VÉRIFIÉ   aucune taille utile sous 12 px (min trouvé : 13.0 px)' },
-          { type: 'g', text: 'A06 VÉRIFIÉ   hiérarchie d’action unique : « Payer 132,90 € »' },
-          { type: 'w', text: 'C12 À VÉRIFIER cible tactile ≥ 44×44 px : confirmé sur mobile 390 px' },
-          { type: 'w', text: 'C19 À VÉRIFIER ordre de lecture : confirmer au lecteur d’écran' },
-          { type: 'g', text: 'Rapport : 71 vérifiés · 6 à vérifier à l’écran · 0 bloquant' },
-          { type: 'c', text: '$ echo $?  →  0 (prêt à livrer)' },
+          { type: 'g', text: "A01 AUTOMATISÉ · réussi : titre H1 unique dans le fichier" },
+          { type: 'g', text: "B01 AUTOMATISÉ · réussi : paire de couleurs de l’exemple" },
+          { type: 'g', text: "C01 AUTOMATISÉ · réussi : tailles déclarées ≥ 12 px" },
+          { type: 'g', text: "F01 AUTOMATISÉ · réussi : label relié au champ" },
+          { type: 'w', text: "D01 À VÉRIFIER · mesurer la cible dans le rendu" },
+          { type: 'w', text: "H01 À VÉRIFIER · tester clavier et lecteur d’écran" },
+          { type: 'g', text: "Exemple : 9 automatisés · 6 à vérifier · 62 non applicables" },
+          { type: 'c', text: "0 échec bloquant automatique → sortie 0 ≠ conformité" },
         ],
         statusBlocking: 'Bloquants',
-        statusVerified: 'Vérifiés',
+        statusAutomated: "Automatisés",
         statusToVerify: 'À vérifier',
+        statusNotApplicable: "Non applicables",
       },
     },
     statesSection: {
@@ -694,7 +696,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         { num: '12', title: 'Cadrer le périmètre de l’agent', meta: 'Ce qu’il mesure ou non', page: 'p. 24' },
       ],
       archiveIntro:
-        'En plus des deux PDF, vous téléchargez l’archive contenant les 21 fichiers opérationnels à déposer directement dans vos projets :',
+        "En plus des deux PDF, l’offre comprend une archive de 21 fichiers opérationnels. Voici une sélection regroupée par usage :",
       archiveGroups: [
         {
           folder: 'agent-skill/',
@@ -711,7 +713,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           desc: 'Fondations visuelles prêtes à importer',
           files: [
             { name: 'tokens.css', info: 'Variables CSS (échelle typo, grille 4/8, surfaces OLED & clair)' },
-            { name: 'tokens.json', info: 'Jetons W3C / Figma / Tailwind synchronisés' },
+            { name: 'tokens.json', info: "Tokens structurés à adapter à vos outils et à votre pipeline" },
           ],
         },
         {
@@ -727,50 +729,50 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     },
     comparison: {
       kicker: 'POSITIONNEMENT CLAIR',
-      heading: 'Pourquoi cette approche change tout si vous construisez avec du code et de l’IA.',
+      heading: "Ce qui se lit dans le manuel. Ce qui s’utilise dans le kit.",
       lede:
-        'Les excellents ebooks UX classiques vous forment l’œil. Le Playbook de Joy N. forme votre œil, équipe vos missions clients et donne des règles exécutables à votre agent de programmation.',
+        "Voici la répartition des livrables de cette offre, sans comparaison invérifiable avec d’autres livres. Le PDF, le kit et l’archive sont livrés ensemble pour 29 USD.",
       colFeature: 'Ce que vous obtenez',
-      colOthers: 'Ebooks UX classiques (49 $ – 59 $)',
-      colPlaybook: 'UX/UI Playbook 2026 (29 $)',
+      colOthers: "Dans le manuel PDF",
+      colPlaybook: "Offre complète · 29 $",
       rows: [
         {
           feature: 'Exemples visuels annotés & comparaisons Avant / Après',
-          others: 'Oui (lecture passive)',
-          playbook: '36 écrans cotés + 24 prototypes comparés',
+          others: "36 écrans + 13 prototypes avant/après + 11 planches de plateformes",
+          playbook: "Le même manuel + kit et archive",
         },
         {
           feature: 'Kit de 12 fiches A4 imprimables + gabarits commerciaux',
-          others: 'Rarement inclus',
+          others: "Méthode expliquée dans le livre",
           playbook: 'Inclus (26 pages A4 + 4 gabarits éditables)',
           highlight: true,
         },
         {
           feature: 'Design tokens prêts à brancher (CSS & JSON, Dark + Light)',
-          others: 'Non',
+          others: "Méthode expliquée dans le livre",
           playbook: 'Inclus dans l’archive',
           highlight: true,
         },
         {
           feature: 'Scanner Python exécutable (agent_check.py) + 77 règles JSON',
-          others: 'Non',
+          others: "Méthode expliquée dans le livre",
           playbook: 'Inclus (utilisable en terminal & CI/CD)',
           highlight: true,
         },
         {
           feature: 'Skill IA (SKILL.md / AGENTS.md) pour Claude Code, Cursor, Codex',
-          others: 'Non',
+          others: "Méthode expliquée dans le livre",
           playbook: 'Inclus — l’agent vérifie et rend un rapport',
           highlight: true,
         },
         {
           feature: 'Couverture multi-plateforme (Web, iOS, Android, macOS, Windows, Linux)',
-          others: 'Web / Mobile générique',
+          others: "Conventions des 6 plateformes",
           playbook: 'Les 6 plateformes comparées écran par écran',
         },
         {
           feature: 'Tarif complet sans abonnement',
-          others: '49,99 $ à 59 $ USD',
+          others: "PDF non vendu séparément dans cette offre",
           playbook: '29 $ USD · paiement unique',
           highlight: true,
         },
@@ -798,9 +800,9 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     author: {
       kicker: 'L’AUTEUR',
       heading: 'Qui a écrit ce manuel, et pourquoi il existe.',
-      role: 'Entrepreneur et bâtisseur de solutions numériques.',
-      p1: 'Joy N. conçoit des systèmes agentiques — des agents qui exécutent des règles écrites, contrôlent leur propre production et rendent un rapport vérifiable. Ce playbook est né directement de cette pratique : un écran ne se défend pas avec une opinion, il se défend avec une règle et une preuve.',
-      p2: 'Le livre s’applique ses propres règles d’un bout à l’autre : contraste mesuré, rien d’utile sous 12 px, grille 4/8, sources datées, et un script livré avec l’ouvrage pour vérifier vos propres écrans.',
+      role: "Joy N. · Auteur du UX/UI Playbook et créateur de solutions numériques.",
+      p1: "Joy N. transforme les décisions d’interface en fichiers réutilisables : tokens CSS/JSON, brief, handoff et règles pour agents IA. Le UX/UI Playbook rassemble cette méthode pour aider les développeurs à livrer au-delà du seul écran idéal.",
+      p2: "La démarche sépare ce qui se mesure dans le code, ce qui exige le rendu réel et ce qui reste une hypothèse produit. Les sources, exemples annotés et limites de contrôle rendent les décisions discutables et vérifiables, sans diplôme ni gain de conversion promis.",
       signature: 'Joy N. · Édition française 2026',
     },
     faq: {
@@ -825,7 +827,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         },
         {
           q: 'Quelle est la différence entre l’édition française (148 pages) et l’édition anglaise (139 pages) ?',
-          a: 'Elles contiennent exactement la même méthode, les 97 mêmes sections, les 77 mêmes règles et les 21 mêmes fichiers traduits. Le français est naturellement plus long de 8 à 10 % en typographie, d’où 148 pages au lieu de 139.',
+          a: "Les deux éditions reprennent la même méthode, les 97 sections, les 77 règles et les 21 fichiers traduits. La composition et les retours à la ligne diffèrent selon la langue : le PDF français compte 148 pages et le PDF anglais 139.",
         },
         {
           q: 'Et si le playbook ne correspond pas à mon besoin ?',
@@ -864,7 +866,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         'Usage commercial autorisé sur vos propres projets et ceux de vos clients. La revente ou redistribution des fichiers est interdite. La TVA éventuelle est gérée par Gumroad en tant que revendeur officiel.',
       gumroadLinkLabel: 'Boutique française (Gumroad)',
       otherEditionLabel: 'English edition',
-      builtWithRule: 'UX/UI Playbook respecte ses propres règles : contraste ≥ 4,5:1 (OLED & Clair), corps ≥ 12 px, cibles ≥ 44 px.',
+      builtWithRule: "Contrôles du site rejouables dans le dépôt ; mesures automatiques et revue humaine distinguées.",
     },
   },
 
@@ -875,9 +877,9 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     otherGumroadUrl: 'https://joyccelight.gumroad.com/l/uiuxplaybookfr',
     siteUrl: SITE_URL,
     meta: {
-      title: 'UX/UI Playbook — 2026 English Edition + Bonus Kit & AI Skill',
+      title: "UX/UI Playbook — Manual, Kit and AI Skill · EN",
       description:
-        '139 A4 pages, 97 sections, 36 annotated screens, 77 rules a Python script can check, and 21 working files. The practical UX, UI & Product Design system for developers and builders.',
+        "UX/UI Playbook combines 139 pages, 12 A4 sheets and 21 files: CSS/JSON tokens, a Python scanner and AI-agent rules. Get the English edition for $29.",
       ogTitle: 'UX/UI Playbook — 2026 English Edition + Bonus Kit',
       ogDescription:
         'You wrote the app. Then somebody opened it. 139 pages, 77 rules an AI agent can check, 12 printable A4 sheets and 21 working files.',
@@ -915,7 +917,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       note: 'One-time payment ($29 USD). The 139-page PDF, the 26-page printable kit and all 21 working files, the second you buy.',
       proofs: [
         '139 A4 pages in English',
-        '77 rules a script can check',
+        "77 rules: automated + human checks",
         '12 sheets + 21 files & AI Skill',
         '7-day refund guarantee',
       ],
@@ -924,20 +926,20 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     },
     strip: [
       { num: '139', label: 'pages in English, one section per page' },
-      { num: '36', label: 'annotated screens + 24 before/after prototypes' },
-      { num: '77', label: 'measurable rules across 6 platforms' },
+      { num: '36', label: "annotated screens + 13 before/after prototypes + 11 platform spreads" },
+      { num: '77', label: "rules across 6 platforms, with verification methods" },
       { num: '21', label: 'working files: tokens, Python scanner & AI skill' },
     ],
     pillars: {
       kicker: 'MORE THAN AN EBOOK: AN EXECUTION SYSTEM',
       heading: 'Three operational layers in one download.',
       lede:
-        'Most UX books stop at visual inspiration. This package combines visual training, client-ready delivery templates, and automated verification built for AI-assisted development.',
+        "UX/UI Playbook is a UX, UI and Product Design manual by Joy N., paired with a delivery kit and coding-agent tools. It is for developers, freelancers and teams who want to document decisions and check their interfaces.",
       cards: [
         {
           tag: '01 · LEARN',
           title: 'The Visual Playbook (139 p.)',
-          subtitle: '97 sections · 36 annotated screens · 24 side-by-side pairs',
+          subtitle: "97 sections · 36 annotated screens · 13 before/after + 11 platform spreads",
           points: [
             'One rule per page: the principle, a measured mockup, what breaks it, and space for notes.',
             'Ten core screen territories dissected: landing page, SaaS dashboard, checkout, mobile, pricing, admin tables.',
@@ -960,17 +962,17 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           subtitle: 'agent_check.py · 77 rules · Claude Code, Cursor, Codex, CI',
           points: [
             'A Python scanner that parses your HTML/CSS, settles what can be measured in source, and returns an exit code.',
-            'An honest 3-column report — Verified, To Verify on Screen, Blocking — refusing fake AI certainty.',
+            "Three statuses: Automated, To verify, Not applicable. Severity (Blocking, Major) and outcome are separate fields.",
             'Ready-to-drop AGENTS.md and SKILL.md files so coding agents apply objective UI rules before handing back code.',
           ],
         },
       ],
     },
     agentDemo: {
-      kicker: 'LIVE INTERACTIVE PROOF',
-      heading: 'The checklist is not a picture of a checklist. It runs.',
+      kicker: "INTERACTIVE DEMO · ILLUSTRATIVE REPORT",
+      heading: "Before / after: understand what a check proves.",
       lede:
-        'Switch below between a raw AI-generated checkout screen and the corrected version to see how the included Python scanner evaluates the source and builds its 3-status report.',
+        "This comparison simulates a check report: no Python script runs in this page. Copy the command to run agent_check.py on the archive’s sample files, then separate automated outcomes from human review. This diagram stays readable: the numeric defects describe the sample files, not this page’s font sizes or colours.",
       bullets: [
         {
           bold: 'Usable in CI/CD:',
@@ -978,7 +980,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         },
         {
           bold: 'Three statuses, never a fourth:',
-          rest: 'what static source analysis cannot prove (real finger target, screen reader flow) stays explicitly flagged "To verify".',
+          rest: "Automated / To verify / Not applicable describe verification. An automated rule can fail; Blocking is severity, not a fourth status.",
         },
         {
           bold: 'Ships with test fixtures:',
@@ -988,11 +990,11 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       tabBad: '1. Raw AI Screen (bad.html)',
       tabClean: '2. Fixed Screen (clean.html)',
       fixAction: 'Apply Playbook rules →',
-      fixedBadge: '77 rules enforced · Ready to ship',
+      fixedBadge: "Corrected example · human review still required",
       copyCmd: 'Copy CLI command',
       copiedCmd: 'Command copied!',
       screenHeaderBad: 'BEFORE · 6 fields · 2 equal buttons · 4 blocking failures',
-      screenHeaderClean: 'AFTER · 4 fields · 1 primary action · 0 blocking failures',
+      screenHeaderClean: "AFTER · useful fields · 1 primary action · corrected example",
       screenMock: {
         brand: 'NORTH STUDIO · CHECKOUT',
         stepLabel: 'Cart ✓  →  Shipping  →  Payment',
@@ -1012,16 +1014,16 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         clearFeeClean: 'Total due: $132.90 (includes $4.90 shipping · free 30-day returns)',
         summaryClean: '1× Leather Tote ($98) + Belt ($30) + Tracked Shipping ($4.90)',
         flaws: [
-          { code: 'C01 BLOCKING', text: '9 px and 10 px micro-text below the 12 px legibility floor' },
-          { code: 'B01 BLOCKING', text: 'Button/text contrast at 2.4:1 (minimum sellable threshold: 4.5:1)' },
+          { code: 'C01 BLOCKING', text: "Sample file: 9 and 10 px text, below the Playbook’s 12 px floor" },
+          { code: 'B01 BLOCKING', text: "Sample file: insufficient contrast; compare with the 4.5:1 text threshold" },
           { code: 'A06 BLOCKING', text: 'Two competing solid primary buttons ("Pay" vs "Save draft")' },
-          { code: 'R59 MAJOR', text: 'Final amount & shipping fees hidden until after 6 form fields' },
+          { code: "K03 MAJOR", text: 'Final amount & shipping fees hidden until after 6 form fields' },
         ],
         improvements: [
-          { code: 'C01 VERIFIED', text: 'Type scale ≥ 13 px everywhere, prices aligned with tabular-nums' },
-          { code: 'B01 VERIFIED', text: 'Measured contrast ≥ 7.2:1 across body copy and primary CTA' },
-          { code: 'A06 VERIFIED', text: 'System wallet first (1 tap) + one unambiguous primary button' },
-          { code: 'R59 VERIFIED', text: 'Full total ($132.90) and shipping shown before the first input' },
+          { code: "C01 · AUTOMATED", text: "Example’s minimum declared font size: 13 px" },
+          { code: "B01 · AUTOMATED", text: "Example text/background pair checked; measure actual surfaces" },
+          { code: "A06 · TO VERIFY", text: "Distinct primary action; confirm comprehension with a person" },
+          { code: "K03 · TO VERIFY", text: "Total and fees visible; review the full path before commitment" },
         ],
       },
       terminal: {
@@ -1030,28 +1032,29 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         cmdClean:
           'python3 agent_check.py --target test/clean.html \\\n    --platform web --lang en --fail-on blocking',
         linesBad: [
-          { type: 'r', text: 'C01 BLOCKING  2 distinct sizes below 12 px: [9.0, 10.0]' },
-          { type: 'r', text: 'B01 BLOCKING  contrast 2.4:1 under the 4.5:1 threshold' },
-          { type: 'r', text: 'A01 BLOCKING  missing named <main> landmark and unique H1' },
-          { type: 'r', text: 'A06 BLOCKING  2 competing primary actions in the same container' },
-          { type: 'w', text: 'C12 TO VERIFY touch target ≥ 44×44 px: measure on physical device' },
-          { type: 'w', text: 'C19 TO VERIFY keyboard focus order: confirm with Tab sequence' },
-          { type: 'g', text: 'Summary: 3 verified · 2 to verify on screen · 4 blocking' },
-          { type: 'c', text: '$ echo $?  →  1 (delivery blocked)' },
+          { type: 'r', text: "C01 AUTOMATED · BLOCKING · fail: text below 12 px" },
+          { type: 'r', text: "B01 AUTOMATED · BLOCKING · fail: contrast below 4.5:1" },
+          { type: 'r', text: "A01 AUTOMATED · BLOCKING · fail: missing H1" },
+          { type: 'r', text: "F01 AUTOMATED · BLOCKING · fail: unlinked label" },
+          { type: 'w', text: "D01 TO VERIFY · web target: 24 px AA, 44 px recommended" },
+          { type: 'w', text: "H01 TO VERIFY · real keyboard path and focus" },
+          { type: 'g', text: "Example: 9 automated · 6 to verify · 62 not applicable" },
+          { type: 'c', text: "Separate severity: 4 blocking failures → exit 1" },
         ],
         linesClean: [
-          { type: 'g', text: 'A01 VERIFIED  single H1, valid header / main / form landmarks' },
-          { type: 'g', text: 'B01 VERIFIED  minimum measured contrast: 7.2:1 (threshold 4.5:1)' },
-          { type: 'g', text: 'C01 VERIFIED  zero useful text below 12 px (lowest found: 13.0 px)' },
-          { type: 'g', text: 'A06 VERIFIED  single unambiguous primary action: "Pay $132.90"' },
-          { type: 'w', text: 'C12 TO VERIFY touch target ≥ 44×44 px: verified at 390 px viewport' },
-          { type: 'w', text: 'C19 TO VERIFY reading order: confirm with a screen reader' },
-          { type: 'g', text: 'Summary: 71 verified · 6 to verify on screen · 0 blocking' },
-          { type: 'c', text: '$ echo $?  →  0 (ready to ship)' },
+          { type: 'g', text: "A01 AUTOMATED · pass: one H1 in the source file" },
+          { type: 'g', text: "B01 AUTOMATED · pass: this example’s colour pair" },
+          { type: 'g', text: "C01 AUTOMATED · pass: declared font sizes ≥ 12 px" },
+          { type: 'g', text: "F01 AUTOMATED · pass: label linked to input" },
+          { type: 'w', text: "D01 TO VERIFY · measure targets in the rendered page" },
+          { type: 'w', text: "H01 TO VERIFY · test keyboard and screen reader" },
+          { type: 'g', text: "Example: 9 automated · 6 to verify · 62 not applicable" },
+          { type: 'c', text: "0 automated blocking failures → exit 0 ≠ conformance" },
         ],
         statusBlocking: 'Blocking',
-        statusVerified: 'Verified',
+        statusAutomated: "Automated",
         statusToVerify: 'To verify',
+        statusNotApplicable: "Not applicable",
       },
     },
     statesSection: {
@@ -1319,7 +1322,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         { num: '12', title: 'Scoping what the agent checks', meta: 'Limits & human checks', page: 'p. 24' },
       ],
       archiveIntro:
-        'Alongside the two PDFs, you get the 21-file working archive ready to drop straight into your repositories:',
+        "Alongside the two PDFs, the offer includes a 21-file working archive. Here is a selection grouped by use:",
       archiveGroups: [
         {
           folder: 'agent-skill/',
@@ -1336,7 +1339,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           desc: 'Production visual foundations',
           files: [
             { name: 'tokens.css', info: 'CSS custom properties (type scale, 4/8 spacing, dark & light tokens)' },
-            { name: 'tokens.json', info: 'Synchronised W3C / Figma / Tailwind token definitions' },
+            { name: 'tokens.json', info: "Structured tokens to adapt to your tools and pipeline" },
           ],
         },
         {
@@ -1352,50 +1355,50 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     },
     comparison: {
       kicker: 'CLEAR POSITIONING',
-      heading: 'Why this system stands apart if you build with code and AI.',
+      heading: "What you read in the manual. What you use in the kit.",
       lede:
-        'Traditional UX ebooks train your eye. Joy N.’s Playbook trains your eye, equips your client engagements, and hands executable rules to your coding agent.',
+        "Here is how this offer’s deliverables are organised, without unverifiable comparisons to other books. The PDF, kit and archive are delivered together for $29 USD.",
       colFeature: 'What is included',
-      colOthers: 'Typical UX Ebooks ($49 – $59)',
-      colPlaybook: 'UX/UI Playbook 2026 ($29)',
+      colOthers: "In the PDF manual",
+      colPlaybook: "Complete offer · $29",
       rows: [
         {
           feature: 'Annotated screens & Before / After visual comparisons',
-          others: 'Yes (static reading)',
-          playbook: '36 annotated screens + 24 side-by-side prototypes',
+          others: "36 screens + 13 before/after prototypes + 11 platform spreads",
+          playbook: "The same manual + kit and archive",
         },
         {
           feature: '12 printable A4 working sheets + commercial templates',
-          others: 'Rarely included',
+          others: "Method explained in the book",
           playbook: 'Included (26-page A4 kit + 4 editable templates)',
           highlight: true,
         },
         {
           feature: 'Ready-to-import Design Tokens (CSS & JSON, Dark + Light)',
-          others: 'No',
+          others: "Method explained in the book",
           playbook: 'Included in the ZIP archive',
           highlight: true,
         },
         {
           feature: 'Runnable Python scanner (agent_check.py) + 77 JSON rules',
-          others: 'No',
+          others: "Method explained in the book",
           playbook: 'Included (runs locally & in CI/CD)',
           highlight: true,
         },
         {
           feature: 'AI Agent Skill (SKILL.md / AGENTS.md) for Claude Code, Cursor, Codex',
-          others: 'No',
+          others: "Method explained in the book",
           playbook: 'Included — agents check rules & output a report',
           highlight: true,
         },
         {
           feature: 'Cross-platform native coverage (Web, iOS, Android, macOS, Windows, Linux)',
-          others: 'Generic Web / Mobile',
+          others: "Conventions for 6 platforms",
           playbook: 'All 6 platforms compared screen by screen',
         },
         {
           feature: 'Complete one-time price (no subscription)',
-          others: '$49.99 to $59 USD',
+          others: "PDF not sold separately in this offer",
           playbook: '$29 USD · one-time payment',
           highlight: true,
         },
@@ -1423,9 +1426,9 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     author: {
       kicker: 'THE AUTHOR',
       heading: 'Who wrote this playbook, and why it exists.',
-      role: 'Entrepreneur and builder of digital solutions.',
-      p1: 'Joy N. designs agentic systems — software agents that execute written rules, inspect their own output, and report back honestly. This playbook comes directly out of that work: a screen is not defended with an opinion, it is defended with a rule and a proof.',
-      p2: 'The book obeys its own rules from page 1 to page 139: measured contrast, nothing useful below 12 px, a 4/8 spacing base, dated sources, and a runnable script shipped alongside the PDF.',
+      role: "Joy N. · UX/UI Playbook author and digital product builder.",
+      p1: "Joy N. turns interface decisions into reusable files: CSS/JSON tokens, briefs, handoffs and rules for AI agents. UX/UI Playbook brings this method together so developers can deliver more than a happy-path screen.",
+      p2: "The method separates what can be measured in code, what needs a rendered check and what remains a product hypothesis. Sources, annotated examples and verification limits make decisions inspectable without promising a qualification or conversion uplift.",
       signature: 'Joy N. · 2026 English Edition',
     },
     faq: {
@@ -1450,7 +1453,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         },
         {
           q: 'Why is the English edition 139 pages while the French edition is 148 pages?',
-          a: 'Both editions hold the exact same 97 sections, 77 rules, 36 annotated screens and 21 working files. French prose naturally runs ~8% longer than English, resulting in 9 extra pages.',
+          a: "Both editions cover the same method, 97 sections, 77 rules and 21 translated files. Typesetting and line breaks differ by language: the French PDF has 148 pages and the English PDF has 139.",
         },
         {
           q: 'What is the refund policy?',
@@ -1489,7 +1492,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         'Commercial use permitted on your own projects and your clients’. Resale or redistribution of the files is not permitted. Applicable VAT is handled by Gumroad as seller of record.',
       gumroadLinkLabel: 'English store (Gumroad)',
       otherEditionLabel: 'Édition française',
-      builtWithRule: 'UX/UI Playbook obeys its own rules: contrast ≥ 4.5:1 (OLED & Light), type ≥ 12 px, targets ≥ 44 px.',
+      builtWithRule: "Reproducible site checks in the repository; automated measurements and human review kept separate.",
     },
   },
 };

@@ -1,8 +1,7 @@
 import type { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/structured-data';
 
 export const dynamic = 'force-static';
-
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joyccelight-playbook.pages.dev').replace(/\/+$/, '');
 
 export default function robots(): MetadataRoute.Robots {
   return {

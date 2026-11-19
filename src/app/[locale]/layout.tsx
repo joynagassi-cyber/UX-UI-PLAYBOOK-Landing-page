@@ -1,9 +1,41 @@
 import type { Metadata, Viewport } from 'next';
+import localFont from 'next/font/local';
 import { notFound } from 'next/navigation';
 import '../globals.css';
 import { CONTENT, type Locale } from '@/i18n/content';
 
 export const dynamicParams = false;
+
+const soraDisplay = localFont({
+  src: [
+    { path: '../../fonts/sora-latin.woff2', weight: '400 800', style: 'normal' },
+    { path: '../../fonts/sora-latin-ext.woff2', weight: '400 800', style: 'normal' },
+  ],
+  variable: '--font-display',
+  display: 'swap',
+  adjustFontFallback: 'Arial',
+});
+
+const interSans = localFont({
+  src: [
+    { path: '../../fonts/inter-latin.woff2', weight: '400 900', style: 'normal' },
+    { path: '../../fonts/inter-latin-ext.woff2', weight: '400 900', style: 'normal' },
+  ],
+  variable: '--font-sans',
+  display: 'swap',
+  adjustFontFallback: 'Arial',
+});
+
+const jbMono = localFont({
+  src: [
+    { path: '../../fonts/jbmono-latin.woff2', weight: '400 800', style: 'normal' },
+    { path: '../../fonts/jbmono-latin-ext.woff2', weight: '400 800', style: 'normal' },
+  ],
+  variable: '--font-mono',
+  display: 'swap',
+  adjustFontFallback: 'Arial',
+  fallback: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+});
 
 export function generateStaticParams() {
   return [{ locale: 'fr' }, { locale: 'en' }];
@@ -28,7 +60,7 @@ export async function generateMetadata({
   return {
     metadataBase: new URL(c.siteUrl),
     applicationName: 'UX/UI Playbook',
-    authors: [{ name: 'Joy N.', url: `${c.siteUrl}/${locale}` }],
+    authors: [{ name: 'Joy N.', url: `${c.siteUrl}/${locale}#author` }],
     creator: 'Joy N.',
     publisher: 'UX/UI Playbook',
     robots: {
@@ -75,22 +107,13 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale} data-theme="dark" suppressHydrationWarning>
+    <html
+      lang={locale}
+      data-theme="dark"
+      className={`${soraDisplay.variable} ${interSans.variable} ${jbMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
-        <link
-          rel="preload"
-          href="/fonts/inter-var.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/jbmono-var.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="UX/UI Playbook LLM Index" />
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>

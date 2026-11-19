@@ -11,6 +11,7 @@ import {
 import { GumroadButton } from '@/components/GumroadButton';
 import { ThemeAndLangControls } from '@/components/ThemeAndLangControls';
 import { NotionArticleReader } from '@/components/NotionArticleReader';
+import { authorJsonLd, serializeJsonLd } from '@/lib/structured-data';
 
 export const dynamicParams = false;
 
@@ -39,8 +40,7 @@ export async function generateMetadata({
   return {
     title: art.metaTitle,
     description: art.metaDescription,
-    keywords: art.keywords,
-    authors: [{ name: 'Joy N.', url: `${c.siteUrl}/${locale}` }],
+    authors: [{ name: 'Joy N.', url: `${c.siteUrl}/${locale}#author` }],
     alternates: {
       canonical: `/${locale}/articles/${art.slug}`,
       languages: {
@@ -102,6 +102,7 @@ export default async function ArticleDetailPage({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
+      authorJsonLd(locale),
       {
         '@type': 'TechArticle',
         '@id': `${articleUrl}#article`,
@@ -116,11 +117,7 @@ export default async function ArticleDetailPage({
         articleSection: art.category,
         keywords: art.keywords.join(', '),
         proficiencyLevel: 'Beginner to Expert',
-        author: {
-          '@type': 'Person',
-          name: 'Joy N.',
-          url: `${c.siteUrl}/${locale}`,
-        },
+        author: { '@id': `${c.siteUrl}/#joy-n` },
         publisher: {
           '@type': 'Organization',
           '@id': `${c.siteUrl}/#organization`,
@@ -130,10 +127,18 @@ export default async function ArticleDetailPage({
         },
         isPartOf: {
           '@type': 'Book',
+          '@id': `${c.siteUrl}/${locale}#book`,
           name: 'UX/UI Playbook',
           url: `${c.siteUrl}/${locale}`,
         },
-        citation: art.keyStats.map((st) => `${st.value} — ${st.label} (${st.source})`),
+        citation: art.references.map((reference) => ({
+          '@type': 'CreativeWork',
+          name: reference.title,
+          url: reference.url,
+          publisher: { '@type': 'Organization', name: reference.publisher },
+          description: reference.note,
+          ...( /^\d{4}-\d{2}-\d{2}$/.test(reference.date) ? { datePublished: reference.date } : {} ),
+        })),
       },
       {
         '@type': 'FAQPage',
@@ -178,7 +183,7 @@ export default async function ArticleDetailPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
 
       <a className="sr-skip" href="#article-main">
