@@ -1,0 +1,51 @@
+name: Cloudflare static export check
+
+on:
+  push:
+    branches:
+      - cloudflare-migration-v2
+  pull_request:
+    branches:
+      - arena/b1931c91-ux-ui-playbook-landing-page
+
+jobs:
+  build-static-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static export
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://joyccelight-playbook.pages.dev
+          NEXT_TELEMETRY_DISABLED: "1"
+
+      - name: Verify exported routes and assets
+        run: |
+          set -eu
+          test -f out/fr.html
+          test -f out/en.html
+          test -f out/fr/articles.html
+          test -f out/en/articles.html
+          test -f out/fr/articles/ux-design-guide.html
+          test -f out/en/articles/ux-design-guide.html
+          test -f out/robots.txt
+          test -f out/sitemap.xml
+          test -f out/og-fr.jpg
+          test -f out/og-en.jpg
+          test -f out/images/fr/cover.webp
+          test -f out/images/en/cover.webp
+          test -f out/_redirects
+          test -f out/_routes.json
+          ! grep -R "joyccelight-playbook.vercel.app" out/fr.html out/en.html out/sitemap.xml out/robots.txt
+          echo "Static export smoke checks passed."
