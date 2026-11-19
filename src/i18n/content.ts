@@ -1,3 +1,5 @@
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joyccelight-playbook.pages.dev').replace(/\/+$/, '');
+
 export type Locale = 'fr' | 'en';
 
 export interface PreviewPageItem {
@@ -245,7 +247,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     otherLocale: 'en',
     gumroadUrl: 'https://joyccelight.gumroad.com/l/uiuxplaybookfr',
     otherGumroadUrl: 'https://joyccelight.gumroad.com/l/uxuiplaybook',
-    siteUrl: 'https://joyccelight-playbook.vercel.app',
+    siteUrl: SITE_URL,
     meta: {
       title: 'UX/UI Playbook 2026 + Kit bonus — Édition française · Joy N.',
       description:
@@ -253,7 +255,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       ogTitle: 'UX/UI Playbook 2026 + Kit bonus (Édition française)',
       ogDescription:
         'Vous avez codé l’application. Puis quelqu’un l’a ouverte. 148 pages, 77 règles vérifiables par un agent IA, 12 fiches A4 et 21 fichiers de travail.',
-      ogImage: 'https://joyccelight-playbook.vercel.app/og-fr.jpg',
+      ogImage: `${SITE_URL}/og-fr.jpg`,
       ogLocale: 'fr_FR',
       productName: 'UX/UI Playbook 2026 + Kit bonus (Édition française)',
     },
@@ -869,7 +871,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     otherLocale: 'fr',
     gumroadUrl: 'https://joyccelight.gumroad.com/l/uxuiplaybook',
     otherGumroadUrl: 'https://joyccelight.gumroad.com/l/uiuxplaybookfr',
-    siteUrl: 'https://joyccelight-playbook.vercel.app',
+    siteUrl: SITE_URL,
     meta: {
       title: 'UX/UI Playbook 2026 + Bonus Kit — For Developers & Builders · Joy N.',
       description:
@@ -877,7 +879,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       ogTitle: 'UX/UI Playbook 2026 — For Developers, AI Builders & Non-Designers',
       ogDescription:
         'You wrote the app. Then somebody opened it. 139 pages, 77 rules an AI agent can check, 12 printable A4 sheets and 21 working files.',
-      ogImage: 'https://joyccelight-playbook.vercel.app/og-en.jpg',
+      ogImage: `${SITE_URL}/og-en.jpg`,
       ogLocale: 'en_US',
       productName: 'UX/UI Playbook 2026 + Bonus Kit (English Edition)',
     },
