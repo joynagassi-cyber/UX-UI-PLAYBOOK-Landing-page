@@ -37,16 +37,19 @@ export const ARTICLES_FR: ArticleData[] = [
         value: '4 ± 1 blocs',
         label: 'Capacité réelle de la mémoire de travail en traitement actif (et non le mythe des 7 ± 2)',
         source: 'Nelson Cowan, Behavioral & Brain Sciences (2001) · Preuve établie',
+        urls: ['https://www.cambridge.org/core/journals/behavioral-and-brain-sciences/article/magical-number-4-in-shortterm-memory/44023F1147D4A1D44BDC0AD226838496'],
       },
       {
         value: '70,22 %',
         label: 'Taux moyen d’abandon de panier (23,48 champs affichés en moyenne alors que 12 à 14 suffisent)',
         source: 'Baymard Institute (28 oct. 2026, 50 études) · Preuve établie',
+        urls: ['https://baymard.com/blog/cart-abandonment-rate'],
       },
       {
         value: '95,9 %',
         label: 'Des pages d’accueil échouent encore à WCAG 2.2 A/AA (56,1 erreurs détectables par page)',
         source: 'WebAIM Million (février 2026) · Preuve établie',
+        urls: ['https://webaim.org/projects/million/'],
       },
     ],
     sections: [
@@ -554,11 +557,13 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
         value: '≥ 4,5 : 1',
         label: 'Contraste minimal WCAG 2.2 AA exigé sur tout texte < 24 px, y compris les placeholders',
         source: 'W3C WCAG 2.2 (critères 1.4.3 & 1.4.11) · Preuve établie',
+        urls: ['https://www.w3.org/TR/WCAG22/'],
       },
       {
         value: '2025.10',
         label: 'Version stabilisée du standard interopérable des jetons de design (JSON → CSS / iOS / Android)',
         source: 'W3C Design Tokens Community Group (28 oct. 2025) · Preuve établie',
+        urls: ['https://www.designtokens.org/TR/2025.10/format/'],
       },
     ],
     sections: [
@@ -975,6 +980,7 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
         value: '84 %',
         label: 'Des sites générés par IA évalués présentent des violations d’accessibilité dès la sortie',
         source: 'Aljedaani et al. (ACM W4A, 2024) · Niveau de preuve : Probable',
+        urls: ['https://doi.org/10.1145/3677846.3677854'],
       },
       {
         value: '2 heures',
