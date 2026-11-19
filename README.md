@@ -25,6 +25,28 @@ Le libellé de navigation et de section est **« Article »**, sans nombre figé
 
 Le comparatif UX/UI/Product comprend le prototype local **Atelier** : offre, créneau et récapitulatif, trois regards qui conservent le même état, sélection, retour, confirmation simulée et reprise après un créneau refusé. L’offre de 39 € / 45 min et les horaires sont fictifs. Aucune donnée personnelle, réservation ou paiement n’est envoyé. Les six références consultées, les limites de la simulation et les essais à préparer sont indiqués dans l’article. [Choix éditoriaux](docs/EDITORIAL.md).
 
+## Nouveau : répertoire UI/UX gratuit
+
+Une ressource distincte de l’offre à 29 USD, issue du document fourni par le créateur : **51 fiches, 6 familles et 75 liens de ressources**. Les fichiers sont en français, même sur la page de présentation anglaise.
+
+- Pages statiques : `/fr/resources/ui-ux-directory` et `/en/resources/ui-ux-directory` ; promotion sur l’accueil, le hub Article et les huit articles localisés, avec liens de navigation et pied de page.
+- Téléchargement réel : `public/downloads/repertoire-ui-ux-gratuit-v1.zip` (7 fichiers, environ 540 Kio) ; guide PDF de **34 pages**, Markdown, fiche de décision PDF de **3 pages**, fiche Markdown, grille CSV, mode d’emploi et notices. PDF/Markdown également disponibles séparément.
+- Sommaire serveur des 51 fiches et 75 destinations, six accordéons natifs utilisables sans JavaScript, trois extraits éditoriaux, FAQ et distinction explicite entre gratuité du guide et licences/tarifs tiers.
+- Canonical/hreflang, images de partage 1200 × 630, schéma du livre en langue `fr`, sitemap et endpoints LLM mis à jour. Les fichiers bruts ont `noindex` pour privilégier la page de présentation et de vraies réponses MIME/téléchargement.
+- **Publication Gumroad non effectuée.** Le connecteur n’est pas pris en charge ici. Sans URL publiée, le CTA livre directement le ZIP sans collecte d’email ni traceur ajouté. Aucun slug gratuit n’est inventé.
+
+Pour raccorder le produit **après publication et test à 0**, renseigner `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL` au build. La validation n’accepte que le magasin du créateur et rejette les deux URLs payantes du Playbook. Voir le [guide de publication](products/ui-ux-directory/publication-guide.md), la [fiche Gumroad prête à copier](products/ui-ux-directory/gumroad-listing.md) et le [dossier de fabrication](products/ui-ux-directory/README.md).
+
+```bash
+# À lancer après une modification du catalogue ou de l’origine imprimée :
+# nécessite Chromium, utilise les fontes et pictogrammes locaux
+npm run generate:resource
+# Contrôles du ZIP, des PDF, des liens, du CSV, des notices et de la configuration
+npm run check:resource
+```
+
+`products/ui-ux-directory/catalogue.json` est la source unique éditée. Le document fourni est archivé séparément et non distribué. Le manifeste contrôle tailles, SHA-256 et origine des liens imprimés ; changer `NEXT_PUBLIC_SITE_URL` impose de régénérer le kit. La mise en page est contrôlée avant impression, mais les PDF ne revendiquent pas de certification PDF/UA. Aucun audit exhaustif des 75 destinations ni garantie d’accessibilité des outils n’est annoncé.
+
 ## Architecture et langue
 
 - **Next.js 16 / React 19 / TypeScript**, `output: 'export'`, sortie **`out`**, `images.unoptimized: true`. Aucun serveur Next en production.
@@ -79,7 +101,7 @@ Sans `PLAYWRIGHT_BASE_URL`, Playwright lance lui-même `preview:pages` ; le buil
 - **`test:routing`** : règles de langue, cookies valides/inconnus, valeurs `q`, exclusions `q=0`, priorité du pays Cloudflare, query répétée/encodée, slash et corps HEAD ; les handlers réels sont importés.
 - **`check:export`** : toutes les pages du catalogue, titres/descriptions, canonical/hreflang, OG/Twitter et JPEG 1200 × 630, Person/citations, couvertures, liens/ressources/polices locales, sitemap/robots/LLM, fichiers Pages et absence de l’ancienne origine dans tout `out`.
 - **Python, stdlib uniquement** : contrôle HTML/SEO/éditions/Gumroad, bibliographies, paragraphes et illustrations, corpus LLM complet, licences et contrastes des tokens ; matrice HTTP de redirections, cache, chemins explicites, slash, 404. `--expected-origin` (alias `--site-url`) ou `NEXT_PUBLIC_SITE_URL` définit l’origine attendue, **distincte** de `--base-url`.
-- **Playwright + axe** : douze routes × deux thèmes aux largeurs 1280, 390 et 320 px ; axe à 1280/320, commandes, police effective, nombres, icônes/vecteurs, débordements et erreurs JavaScript. Les parcours couvrent aussi galerie, thèmes sauvegardés, clavier/focus, copie/checklist/FAQ, langue de l’article et achats ; le prototype est essayé dans ses neuf annotations, avec succès simulé et refus/récupération.
+- **Playwright + axe** : quatorze routes × deux thèmes aux largeurs 1280, 390 et 320 px ; axe à 1280/320, commandes, police effective, nombres, icônes/vecteurs, débordements et erreurs JavaScript. Les parcours couvrent aussi galerie, thèmes sauvegardés, clavier/focus, copie/checklist/FAQ, langue de l’article et achats ; le prototype est essayé dans ses neuf annotations, avec succès simulé et refus/récupération.
 - **Workflows Actions** : `cloudflare-static-export.yml` et `ui-check.yml`, Node 22, installation verrouillée, build puis contrôles. Le workflow UI partage le même serveur Pages entre Python et Playwright. Rapports, captures et traces d’échec sont conservés 14 jours en artefact. **Aucun workflow ne publie le site.**
 
 Les preuves détaillées sont décrites dans [docs/AUDIT.md](docs/AUDIT.md). `reports/`, `test-results/`, `playwright-report/`, `out/` et `.wrangler/` sont ignorés par Git. Les statuts `automated / to verify / not applicable`, la sévérité et le résultat restent distincts ; un échec bloquant automatisé produit un code de sortie 1.

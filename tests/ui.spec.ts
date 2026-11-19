@@ -1,6 +1,10 @@
 import { expect, test, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import catalogue from '../src/i18n/article-catalog.json';
+import resourceManifest from '../products/ui-ux-directory/manifest.json';
+import resourceCatalog from '../products/ui-ux-directory/catalogue.json';
+import { createHash } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
 import { DESIGN_LAB } from '../src/i18n/design-lab';
 
 const slugs = Object.keys(catalogue) as Array<keyof typeof catalogue>;
@@ -9,6 +13,7 @@ const removedSlogans = /plus qu[’']un ebook|more than an ebook|execution syste
 const routes = ['fr', 'en'].flatMap((locale) => [
   `/${locale}`,
   `/${locale}/articles`,
+  `/${locale}/resources/ui-ux-directory`,
   ...slugs.map((slug) => `/${locale}/articles/${slug}`),
 ]);
 const store = (locale: string) => locale === 'fr'
@@ -460,3 +465,77 @@ test('Pages Functions · qvalues, cookies, country, query and static exclusions'
     expect(response.status()).toBe(404);
   }
 });
+
+for (const locale of ['fr', 'en']) {
+  test(`${locale} · free directory categories, downloads and language continuity`, async ({ page, context }) => {
+    await page.goto(`/${locale}/resources/ui-ux-directory`);
+    await expect(page.locator('[data-directory-entry]')).toHaveCount(51);
+    await expect(page.locator('.resource-family')).toHaveCount(6);
+    await page.locator('.resource-hero-copy > a[href="#directory"]').click();
+    await expect.poll(() => page.evaluate(() =>
+      document.querySelector('#resource-directory-title')!.getBoundingClientRect().top
+      - document.querySelector('.site-nav')!.getBoundingClientRect().bottom
+    )).toBeGreaterThanOrEqual(8);
+    // Native details work by keyboard; expanded content is included in rendered accessibility checks.
+    for (const family of await page.locator('.resource-family').all()) {
+      if ((await family.getAttribute('open')) === null) {
+        await family.locator('summary').focus();
+        await page.keyboard.press('Enter');
+      }
+      await expect(family).toHaveAttribute('open', '');
+    }
+    const sourceLinks = await page.locator('.resource-source-links a').evaluateAll((anchors) => anchors.map(a => (a as HTMLAnchorElement).href));
+    expect(sourceLinks.sort()).toEqual(resourceCatalog.entries.flatMap(entry => entry.urls).sort());
+    expect(await layoutIssues(page)).toEqual({ pageOverflow: false, textIssues: [], fontIssues: [], symbolIssues: [], iconIssues: [], targets: [], numericIssues: [], clippedControls: [], badImages: [] });
+    const axe = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
+    expect(axe.violations.map(v => ({ id: v.id, targets: v.nodes.map(n => n.target) }))).toEqual([]);
+    await expect(page.locator('form, input[type=email]')).toHaveCount(0);
+    const firstDownload = page.locator('[data-free-download]').first();
+    if (await firstDownload.getAttribute('data-free-download') === 'direct') {
+      const [download] = await Promise.all([page.waitForEvent('download'), firstDownload.locator('.free-download-primary').click()]);
+      expect(download.suggestedFilename()).toBe(resourceManifest.files.archive.path.split('/').pop());
+      const file = await download.path();
+      expect(file).not.toBeNull();
+      const bytes = await readFile(file!);
+      expect(createHash('sha256').update(bytes).digest('hex')).toBe(resourceManifest.files.archive.sha256);
+    } else {
+      await expect(firstDownload.locator('.free-download-primary')).toHaveAttribute('href', /^https:\/\/joyccelight\.gumroad\.com\/l\/(?!uiuxplaybookfr(?:$|\?)|uxuiplaybook(?:$|\?))/);
+    }
+    // These files remain available and valid even after a real Gumroad product is connected.
+    for (const kind of ['archive', 'pdf', 'markdown'] as const) {
+      const file = resourceManifest.files[kind];
+      const response = await context.request.get(file.path);
+      expect(response.status()).toBe(200);
+      expect(response.headers()['x-robots-tag']).toContain('noindex');
+      const bytes = await response.body();
+      expect(bytes.length).toBe(file.bytes);
+      expect(createHash('sha256').update(bytes).digest('hex')).toBe(file.sha256);
+    }
+    if (locale === 'en') {
+      await expect(page.locator('.resource-hero')).toContainText('downloadable files are in French');
+      await expect(page.locator('.resource-file-meta').first()).toContainText('French-language files');
+    }
+    const other = locale === 'fr' ? 'en' : 'fr';
+    await page.locator(`.lang-btn[lang="${other}"]`).click();
+    await expect(page).toHaveURL(new RegExp(`/${other}/resources/ui-ux-directory$`));
+    await expect(page.locator('[data-directory-entry]')).toHaveCount(51);
+  });
+
+  test(`${locale} · free directory works without JavaScript`, async ({ browser, baseURL }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false, baseURL });
+    try {
+      const page = await context.newPage();
+      await page.goto(`/${locale}/resources/ui-ux-directory`);
+      const last = page.locator('.resource-family').last();
+      await last.locator('summary').click();
+      await expect(last).toHaveAttribute('open', '');
+      await expect(last.locator('[data-directory-entry="6.7"]')).toBeVisible();
+      await expect(page.locator('a[href="' + resourceManifest.files.pdf.path + '"]').first()).toBeVisible();
+      const mode = await page.locator('[data-free-download]').first().getAttribute('data-free-download');
+      if (mode === 'direct') await expect(page.locator('a[download][href="' + resourceManifest.files.archive.path + '"]').first()).toBeVisible();
+      await expect(page.locator('[data-directory-entry]')).toHaveCount(51);
+    } finally {
+      await context.close();
+    }
+  });
+}

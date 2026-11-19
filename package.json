@@ -12,7 +12,9 @@
     "preview:pages": "node scripts/preview_pages.cjs",
     "check:export": "node scripts/check_static_export.cjs",
     "test:routing": "node --test tests/locale-routing.test.mjs",
-    "generate:social": "node scripts/social_images.cjs"
+    "generate:social": "node scripts/social_images.cjs",
+    "generate:resource": "node scripts/generate_free_resource.cjs",
+    "check:resource": "node --test tests/free-resource.test.cjs"
   },
   "dependencies": {
     "lucide-react": "^0.511.0",

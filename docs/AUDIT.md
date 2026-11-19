@@ -95,3 +95,43 @@ La migration conserve les distinctions éditoriales de la passe précédente ; e
 - Applicabilité juridique, transposition nationale et exceptions pour un client donné : conseil qualifié nécessaire.
 - Core Web Vitals terrain, indexation, classement, citations par les moteurs et effet commercial : aucune mesure de production nouvelle, aucun résultat revendiqué.
 - Aucune réussite automatique, y compris axe, ne constitue une certification d’accessibilité ou une promesse de conformité intégrale.
+
+## Complément — produit gratuit « Répertoire UI/UX »
+
+Cette passe concerne l’arbre de travail de `arena/b41a2b1b-ux-ui-playbook-landing-page`, après la migration décrite plus haut. Les chiffres de cette section sont ceux de la nouvelle passe locale, et non une annonce de publication ou de réussite CI distante.
+
+### Livrables et périmètre
+
+- Source fournie par le créateur conservée dans `products/ui-ux-directory/source-original.md`, non distribuée. Source éditée : `catalogue.json` ; **51 fiches / 6 familles / 75 liens**, sans assimiler les liens à des outils distincts.
+- ZIP client de sept fichiers : PDF **34 pages**, Markdown, fiche de décision PDF **3 pages**, fiche Markdown, CSV à six lignes de familles, mode d’emploi et notices Domine/Lucide. Le PDF de la fiche est imprimable, pas un formulaire interactif.
+- Couverture **1280 × 720**, vignette **1080 × 1080**, texte de fiche Gumroad, message de livraison, proposition de lancement et guide de publication. Le générateur fabrique aussi deux images sociales **1200 × 630** et le JPEG de présentation du site.
+- Deux pages statiques sous `/{fr|en}/resources/ui-ux-directory` : langues de présentation distinctes, **mêmes fichiers français explicitement annoncés**. Promotion dans l’accueil, le hub Article, les huit articles, navigation et pied de page ; offre payante et ses liens localisés préservés.
+- Accordéons de catégories natifs, 51 fiches/75 destinations dans le HTML serveur, trois extraits par profil, FAQ, téléchargements réels, MIME/Content-Disposition et `noindex` des fichiers bruts. Sitemap, canonical/hreflang, schéma du livre et textes LLM mis à jour.
+- La source originale a été réécrite pour retirer les garanties générales d’accessibilité, de performance et d’absence d’erreurs IA. Les restrictions/licences d’ApexCharts, unDraw, Storyset et Fontshare, les usages de Radix Colors et le modèle de distribution shadcn/ui sont qualifiés. Adresses RNR/Recharts/Chartist actualisées. Références ciblées dans le catalogue et le guide ; **pas d’audit juridique ou de disponibilité des 75 destinations**.
+
+### Résultats locaux finaux
+
+| Contrôle exécuté | Résultat |
+| --- | --- |
+| `generate:resource` | Deux PDF, images et ZIP produits ; aucun débordement HTML détecté avant impression sur les 37 pages. Un fichier sentinelle local ajouté au dossier de travail a bien été exclu du ZIP par la liste blanche. |
+| `check:resource` | **14/14** : intégrité ZIP, sept noms attendus, tailles/SHA-256, nombre de pages, langue française, destinations PDF, contenu Markdown, CSV, notices, dimensions PNG et validation/fallback du lien Gumroad. |
+| Extraction indépendante avec `pypdf` temporaire | **34 + 3 pages**, noms des 51 fiches extraits, texte et langue `fr`, balises structurelles présentes. **Pas une certification PDF/UA.** Aucune dépendance PDF ajoutée au site. |
+| TypeScript | Réussi. |
+| Routage Pages | **34/34** tests unitaires réussis. |
+| Build statique | **21/21** pages/ressources de build générées, dont les deux nouvelles pages. |
+| Export | **249/249** contrôles réussis. |
+| Python sur Pages local | **729 contrôles automatisés**, **0 échec bloquant**, 4 à vérifier, 1 non applicable. Les téléchargements HTTP sont confrontés au SHA-256 du manifeste. |
+| Navigateur | **53/53**, aucun test ignoré ou instable. Quatorze routes, OLED/clair, 1280/390/320 px, contrôles axe et anciens parcours préservés ; nouvelles catégories au clavier, lien d’ancrage dégagé de la navigation fixe, fichier téléchargé et changement de langue conservant la page gratuite. |
+| JavaScript désactivé | Deux parcours FR/EN : catégories et liens de fichiers utilisables sans JavaScript. |
+| `npm audit --audit-level=high` | **0 vulnérabilité signalée.** |
+| Diff | `git diff --check` réussi. |
+
+Les images du guide, de la fiche et des visuels de publication ont été ouvertes pour relecture. Six captures supplémentaires couvrent le hero FR OLED desktop et clair mobile, les extraits EN clairs, une famille EN OLED et les promotions d’accueil/article. Le cadrage d’un élément très haut peut inclure la barre fixe ; une capture de viewport initial complète complète la vérification mobile. Les captures ne remplacent pas une étude utilisateur.
+
+Preuves locales ignorées : `reports/{static-export-check,site-check,browser-check,free-resource-pdf-check,free-resource-visual-inspection}.json`, `reports/final-resource-validation.log`, `reports/directory-*.png` ; pages HTML d’impression et captures intermédiaires dans `.cache/free-resource/`. Les workflows d’export et d’UI exécutent désormais aussi `check:resource`, sans générer ni publier de produit distant.
+
+### Ce qui reste à effectuer hors de l’aperçu
+
+**Aucun produit Gumroad n’a été créé ou publié.** Le connecteur n’est pas pris en charge ici. La configuration vide sert un téléchargement direct sans email demandé ; aucun checkout fictif n’est exposé. `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL` accepte seulement une URL HTTPS du magasin du créateur et rejette les deux URLs payantes connues. La validation porte sur sa forme et sa séparation du Playbook, **pas sur l’existence ou le prix du produit distant** : publier et tester le parcours à 0 dans le vrai compte reste indispensable.
+
+Le propriétaire doit relire et approuver les conditions d’usage proposées pour son guide, publier le ZIP, tester sa livraison, transmettre le lien public puis déployer un build avec cette variable. **Aucun push, PR, nouveau déploiement, DNS ou action Vercel n’a été effectué pour cette tâche.** Ni le trafic, ni l’indexation, ni la conversion ne sont mesurés ou garantis. Les liens UTM du kit facilitent une éventuelle attribution dans des outils futurs ; ils n’ajoutent pas de collecte au site.

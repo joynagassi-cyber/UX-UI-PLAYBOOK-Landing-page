@@ -1,5 +1,7 @@
 import { ARTICLES } from '@/i18n/articles';
 import { SITE_URL } from '@/lib/structured-data';
+import { FREE_MANIFEST } from '@/i18n/free-resource';
+import { FREE_RESOURCE_PATH, FREE_GUMROAD_URL } from '@/lib/free-resource-config';
 
 export const dynamic = 'force-static';
 
@@ -22,6 +24,13 @@ export async function GET() {
 - [Full text of the bilingual articles](${SITE_URL}/llms-full.txt)
 - Author: [Joy N.](${SITE_URL}/en#author) · [GitHub](https://github.com/joynagassi-cyber) · [Gumroad](https://joyccelight.gumroad.com)
 - Contact: mailto:joynagassi@gmail.com
+
+## Free UI/UX directory — French-language files
+- [Présentation française](${SITE_URL}/fr${FREE_RESOURCE_PATH}) · [English presentation, French download](${SITE_URL}/en${FREE_RESOURCE_PATH})
+- ${FREE_MANIFEST.counts.entries} entries, ${FREE_MANIFEST.counts.categories} categories, ${FREE_MANIFEST.counts.resourceLinks} resource links; ${FREE_MANIFEST.counts.guidePages}-page French PDF, Markdown, ${FREE_MANIFEST.counts.worksheetPages}-page printable decision worksheet and CSV.
+- [Free complete kit, ZIP](${SITE_URL}${FREE_MANIFEST.files.archive.path}) · [French PDF](${SITE_URL}${FREE_MANIFEST.files.pdf.path}) · [French Markdown](${SITE_URL}${FREE_MANIFEST.files.markdown.path})
+- ${FREE_GUMROAD_URL ? `Published free Gumroad product: ${FREE_GUMROAD_URL}. Enter 0 to download.` : 'Free direct download on this site, with no email requested.'}
+- This is a separate free resource, not the $29 Playbook. Third-party resources have their own prices and licenses; no third-party asset packs are included. The 75 destinations are not an exhaustive link or legal audit.
 
 ## English articles
 - [All English articles](${SITE_URL}/en/articles)

@@ -6,6 +6,8 @@ const { loadData, root } = require('./content-data.cjs');
 const { SITE_URL } = loadData('src/lib/site-config.ts');
 const { ARTICLES, ARTICLE_SLUGS, ARTICLES_UI } = loadData('src/i18n/articles.ts');
 const { CONTENT } = loadData('src/i18n/content.ts');
+const { FREE_UI, FREE_MANIFEST, FREE_CATALOG } = loadData('src/i18n/free-resource.ts');
+const { FREE_RESOURCE_PATH, FREE_GUMROAD_URL } = loadData('src/lib/free-resource-config.ts');
 const { designLabTranscript } = loadData('src/i18n/design-lab.ts');
 const catalogue = loadData('src/i18n/article-catalog.json');
 const out = path.join(root, 'out');
@@ -39,7 +41,7 @@ const allRoutes = [];
 check('catalogue:slugs', JSON.stringify(ARTICLE_SLUGS) === JSON.stringify(Object.keys(catalogue)), ARTICLE_SLUGS);
 for (const locale of ['fr', 'en']) {
   check(`catalogue:${locale}`, JSON.stringify(ARTICLES[locale].map((article) => article.slug)) === JSON.stringify(ARTICLE_SLUGS), ARTICLES[locale].map((article) => article.slug));
-  for (const suffix of ['', '/articles', ...ARTICLE_SLUGS.map((slug) => `/articles/${slug}`)]) {
+  for (const suffix of ['', '/articles', FREE_RESOURCE_PATH, ...ARTICLE_SLUGS.map((slug) => `/articles/${slug}`)]) {
     const route = `/${locale}${suffix}`;
     allRoutes.push(route);
     const file = `${route.slice(1)}.html`;
@@ -48,11 +50,12 @@ for (const locale of ['fr', 'en']) {
     const tags = meta(html);
     const title = decode(/<title>([^<]+)<\/title>/.exec(html)?.[1]);
     const article = ARTICLES[locale].find((entry) => suffix === `/articles/${entry.slug}`);
-    const expectedTitle = article?.metaTitle || (suffix === '/articles' ? ARTICLES_UI[locale].metaTitle : CONTENT[locale].meta.title);
-    const expectedDescription = article?.metaDescription || (suffix === '/articles' ? ARTICLES_UI[locale].metaDescription : CONTENT[locale].meta.description);
+    const isResource = suffix === FREE_RESOURCE_PATH;
+    const expectedTitle = (isResource ? FREE_UI[locale].metaTitle : article?.metaTitle) || (suffix === '/articles' ? ARTICLES_UI[locale].metaTitle : CONTENT[locale].meta.title);
+    const expectedDescription = (isResource ? FREE_UI[locale].metaDescription : article?.metaDescription) || (suffix === '/articles' ? ARTICLES_UI[locale].metaDescription : CONTENT[locale].meta.description);
     const expectedSocialTitle = suffix ? expectedTitle : CONTENT[locale].meta.ogTitle;
     const expectedSocialDescription = suffix ? expectedDescription : CONTENT[locale].meta.ogDescription;
-    const expectedImage = SITE_URL + (article?.ogImage || `/og-${locale}.jpg`);
+    const expectedImage = SITE_URL + (isResource ? `/og-directory-${locale}.jpg` : article?.ogImage || `/og-${locale}.jpg`);
     check(`metadata:${route}`, title === expectedTitle && title.length <= 60 && tags.description === expectedDescription && tags.description.length >= 135 && tags.description.length <= 155 && !('keywords' in tags), { title, descriptionLength: tags.description?.length });
     check(`canonical:${route}`, html.includes(`rel="canonical" href="${SITE_URL}${route}"`), SITE_URL + route);
     for (const other of ['fr', 'en']) check(`hreflang:${route}:${other}`, html.includes(`hrefLang="${other}" href="${SITE_URL}/${other}${suffix}"`), `${other}${suffix}`);
@@ -68,6 +71,12 @@ for (const locale of ['fr', 'en']) {
     const schemas = [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].flatMap((match) => { const graph = JSON.parse(match[1]); return graph['@graph'] || [graph]; });
     const person = schemas.find((item) => item['@type'] === 'Person');
     check(`person:${route}`, person?.['@id'] === `${SITE_URL}/#joy-n` && person.url === `${SITE_URL}/${locale}#author` && person.image === `${SITE_URL}/images/author-joy.webp` && person.sameAs?.includes('https://github.com/joynagassi-cyber') && person.sameAs?.includes('https://joyccelight.gumroad.com'), person);
+    if (isResource) {
+      const book = schemas.find((item) => item['@type'] === 'Book');
+      check(`resource-schema:${route}`, book?.inLanguage === 'fr' && book.isAccessibleForFree === true && book.numberOfPages === FREE_MANIFEST.counts.guidePages && book.encoding?.contentUrl === SITE_URL + FREE_MANIFEST.files.pdf.path, book);
+      check(`resource-catalogue:${route}`, FREE_CATALOG.entries.every((entry) => html.includes(`data-directory-entry="${entry.id}"`) && entry.urls.every((url) => html.includes(`href="${url.replaceAll('&', '&amp;')}"`))), '51 entries and all 75 resource destinations server-rendered.');
+      check(`resource-download:${route}`, html.includes(`data-free-download="${FREE_GUMROAD_URL ? 'gumroad' : 'direct'}"`) && html.includes(`href="${FREE_GUMROAD_URL || FREE_MANIFEST.files.archive.path}"`) && html.includes(`href="${FREE_MANIFEST.files.pdf.path}"`) && html.includes(`href="${FREE_MANIFEST.files.markdown.path}"`), 'Real files and optional validated checkout.');
+    }
     if (!article) {
       check(`hub-links:${route}`, ARTICLE_SLUGS.every((slug) => html.includes(`href="/${locale}/articles/${slug}"`)), ARTICLE_SLUGS);
     } else {
@@ -80,13 +89,15 @@ for (const locale of ['fr', 'en']) {
       check(`summary-diagrams:${route}`, article.sections.flatMap((section) => section.blocks).filter((block) => block.type === 'diagram').length === 2 && (html.match(/data-summary-diagram=/g) || []).length === 2, 'Two native, zoomable summary diagrams per article.');
     }
   }
-  for (const image of [`og-${locale}.jpg`, ...ARTICLES[locale].map((article) => article.ogImage.slice(1))]) {
+  for (const image of [`og-${locale}.jpg`, `og-directory-${locale}.jpg`, ...ARTICLES[locale].map((article) => article.ogImage.slice(1))]) {
     requireFile(image);
     const size = jpegSize(image);
     check(`social-image-size:${image}`, size?.width === 1200 && size?.height === 630, size);
   }
   requireFile(`images/${locale}/cover.webp`);
 }
+for (const file of Object.values(FREE_MANIFEST.files).map((file) => file.path.slice(1))) requireFile(file);
+check('resource:generated-origin', FREE_MANIFEST.generatedForOrigin === SITE_URL, 'Regenerate the downloadable pack if the public origin changes.');
 for (const file of ['404.html', 'robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', '_redirects', '_routes.json', '_headers', 'icon.svg']) requireFile(file);
 for (const file of ['_routes.json', '_redirects', '_headers']) {
   check(`routing-file:${file}`, readOut(file) === fs.readFileSync(path.join(root, 'public', file), 'utf8'), 'Public routing configuration copied unchanged.');
@@ -102,6 +113,7 @@ check('sitemap:all-localized-pages', JSON.stringify(sitemapUrls) === JSON.string
 const discovery = readOut('llms.txt');
 const full = readOut('llms-full.txt');
 for (const locale of ['fr', 'en']) {
+  check(`llms:${locale}:free-directory`, discovery.includes(`${SITE_URL}/${locale}${FREE_RESOURCE_PATH}`) && full.includes(`${SITE_URL}/${locale}${FREE_RESOURCE_PATH}`) && full.includes(SITE_URL + FREE_MANIFEST.files.archive.path) && FREE_CATALOG.entries.every((entry) => full.includes(entry.description) && entry.urls.every((url) => full.includes(url))), 'Free resource, French file language and complete directory content discoverable.');
   check(`llms:${locale}:catalogue-and-references`, ARTICLES[locale].every((article) => discovery.includes(`${SITE_URL}/${locale}/articles/${article.slug}`) && full.includes(article.title) && article.references.every((reference) => discovery.includes(reference.url) && full.includes(reference.url))), `${ARTICLES[locale].length} articles and every bibliography URL`);
   check(`llms:${locale}:all-prototype-viewpoints`, full.includes(designLabTranscript(locale)), 'All nine annotations and hidden screen states are serialized, not just the initial render.');
 }

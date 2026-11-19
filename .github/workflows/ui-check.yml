@@ -35,7 +35,7 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - name: Type-check, unit-test and export the exact revision
-        run: npm run typecheck && npm run test:routing && npm run build && npm run check:export
+        run: npm run check:resource && npm run typecheck && npm run test:routing && npm run build && npm run check:export
       - name: Serve the export with real local Pages Functions and check rendered HTML
         run: |
           mkdir -p reports
