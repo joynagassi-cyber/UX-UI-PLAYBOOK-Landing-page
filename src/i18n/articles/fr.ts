@@ -13,9 +13,9 @@ export const ARTICLES_FR: ArticleData[] = [
     updatedAt: '2026-11-18',
     ogImage: '/og-article-ux-fr.jpg',
     metaTitle:
-      'UX Design opérationnel : budget cognitif, parcours J+7, 5 états d’écran & audit 40 points | UX/UI Playbook',
+      'UX Design : lois cognitives, états d’écran & audit | UX/UI Playbook',
     metaDescription:
-      'Cours complet d’UX Design tiré du UX/UI Playbook 2026 : éliminer les briefs flous, appliquer les vraies lois cognitives (Cowan 4±1, Fitts, Hick-Hyman), concevoir les 5 états, sécuriser le checkout et auditer un écran en 20 minutes.',
+      'Guide pratique d’UX Design : lois cognitives, cinq états d’écran, ergonomie du checkout et audit d’interface en 20 minutes.',
     keywords: [
       'UX Design opérationnel',
       'charge cognitive Cowan 4 blocs',
@@ -527,9 +527,9 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
     updatedAt: '2026-11-18',
     ogImage: '/og-article-ui-fr.jpg',
     metaTitle:
-      'UI Design & Design Tokens : hiérarchie en 4 leviers, échelle typo, base 8, Dark Mode & Handoff | UX/UI Playbook',
+      'UI Design : tokens, typographie & Dark Mode | UX/UI Playbook',
     metaDescription:
-      'Cours complet d’UI Design pour développeurs et designers : hiérarchie visuelle sans bruit, échelle typographique 1,25, système couleur 60/30/10, 3 échelles d’espacement base 8, vrai Dark Mode sans halation, micro-copie, RTL et handoff.',
+      'Construire un système UI cohérent : design tokens, contraste accessible, typographie, espacements, Dark Mode et handoff.',
     keywords: [
       'UI Design system CSS',
       'design tokens W3C 2025.10',
@@ -956,9 +956,9 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
     updatedAt: '2026-11-18',
     ogImage: '/og-article-product-fr.jpg',
     metaTitle:
-      'Product Design, Revenus & Agents IA : pipeline déterministe, patterns agentiques & prix | UX/UI Playbook',
+      'Product Design : agents IA, SaaS & tarification | UX/UI Playbook',
     metaDescription:
-      'Cours complet de Product Design & ingénierie agentique : brief en 2h, dashboards SaaS et pages tarifs, pipeline en 5 fichiers pour Claude Code / Cursor, 6 patterns d’UX agentique, contrôle à 3 statuts et tarification sans dérive.',
+      'Guide de Product Design : recherche rapide, pages tarifaires SaaS, workflows d’agents IA, vérification et cadrage des missions.',
     keywords: [
       'Product Design développeur solo',
       'AGENTS.md Claude Code Cursor UI',
