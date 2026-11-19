@@ -1,6 +1,8 @@
 import type { MetadataRoute } from 'next';
 import { ARTICLE_SLUGS } from '@/i18n/articles';
 
+export const dynamic = 'force-static';
+
 const BASE = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joyccelight-playbook.pages.dev').replace(/\/+$/, '');
 
 export default function sitemap(): MetadataRoute.Sitemap {
