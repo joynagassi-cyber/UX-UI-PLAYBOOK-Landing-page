@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next';
 
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joyccelight-playbook.pages.dev').replace(/\/+$/, '');
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
@@ -21,7 +23,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: ['/', '/llms.txt', '/llms-full.txt', '/fr/articles/', '/en/articles/'],
       },
     ],
-    sitemap: 'https://joyccelight-playbook.vercel.app/sitemap.xml',
-    host: 'https://joyccelight-playbook.vercel.app',
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }
