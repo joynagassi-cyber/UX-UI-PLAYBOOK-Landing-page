@@ -1,0 +1,44 @@
+name: Cloudflare static export check
+
+on:
+  push:
+    branches:
+      - cloudflare-migration
+  pull_request:
+    branches:
+      - main
+      - cloudflare-migration
+
+jobs:
+  build-static-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static export
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://joyccelight-playbook.pages.dev
+
+      - name: Verify localized output and public assets
+        run: |
+          test -f out/fr.html
+          test -f out/en.html
+          test -f out/robots.txt
+          test -f out/sitemap.xml
+          test -f out/og-fr.jpg
+          test -f out/og-en.jpg
+          test -f out/images/fr/cover.webp
+          test -f out/images/en/cover.webp
+          test -f out/_redirects
+          echo "Static export contains both editions and required public assets."
