@@ -273,14 +273,14 @@ summary:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: var(--space-4);
   min-height: 44px;
 }
 
 .topbar-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
   color: var(--fg-3);
 }
 
@@ -340,7 +340,7 @@ summary:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: var(--space-4);
   min-height: 68px;
 }
 
@@ -396,7 +396,7 @@ summary:focus-visible {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 @media (max-width: 1040px) {
@@ -586,7 +586,7 @@ summary:focus-visible {
 .hero-ctas {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--space-3);
   margin-top: 28px;
 }
 
@@ -609,7 +609,7 @@ summary:focus-visible {
 .hero-proof span {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .hero-proof span::before {
@@ -625,7 +625,7 @@ summary:focus-visible {
 .hero-stack {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
-  gap: 16px;
+  gap: var(--space-4);
   align-items: start;
 }
 
@@ -797,7 +797,7 @@ section h2 {
 
 .pillar-tag {
   color: var(--accent-ink);
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
 }
 
 .pillar-card h3 {
@@ -809,8 +809,8 @@ section h2 {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--fg-3);
-  padding-bottom: 16px;
-  margin-bottom: 16px;
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-4);
   border-bottom: 1px solid var(--line);
 }
 
@@ -847,7 +847,7 @@ section h2 {
 .demo-top {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
-  gap: 32px;
+  gap: var(--space-8);
   align-items: end;
 }
 
@@ -861,7 +861,7 @@ section h2 {
 .demo-controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--space-2);
   margin-top: 28px;
   align-items: center;
   justify-content: space-between;
@@ -889,7 +889,7 @@ section h2 {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   transition: all 0.18s;
 }
 
@@ -971,7 +971,7 @@ section h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
   padding-bottom: 10px;
   border-bottom: 1px solid var(--line);
   font-size: var(--text-xs);
@@ -986,13 +986,13 @@ section h2 {
   font-size: var(--text-xs);
   font-weight: 600;
   color: var(--fg);
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
 }
 
 .mock-fields-bad {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .mock-fields-clean {
@@ -1024,8 +1024,8 @@ section h2 {
 
 .mock-wallet-row {
   display: flex;
-  gap: 8px;
-  margin-top: 12px;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
 }
 
 .wallet-pill {
@@ -1044,8 +1044,8 @@ section h2 {
 
 .mock-btn-row {
   display: flex;
-  gap: 8px;
-  margin-top: 12px;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
 }
 
 .mock-pay-bad {
@@ -1087,7 +1087,7 @@ section h2 {
 .rule-diagnostics {
   padding: 14px 18px;
   display: grid;
-  gap: 8px;
+  gap: var(--space-2);
   flex: 1;
 }
 
@@ -1234,7 +1234,7 @@ section h2 {
 .states-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: var(--space-4);
   margin-top: 34px;
 }
 
@@ -1289,7 +1289,7 @@ section h2 {
 .gallery-toolbar {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--space-3);
   align-items: center;
   justify-content: space-between;
   margin-top: 28px;
@@ -1298,7 +1298,7 @@ section h2 {
 .filter-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .filter-pill {
@@ -1328,8 +1328,8 @@ section h2 {
 .shots-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-  margin-top: 24px;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
 }
 
 @media (max-width: 1120px) {
@@ -1406,7 +1406,7 @@ section h2 {
   display: block;
   font-size: var(--text-sm);
   color: var(--fg);
-  margin-bottom: 4px;
+  margin-bottom: var(--space-1);
 }
 
 .shot-meta span {
@@ -1431,7 +1431,7 @@ section h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-3);
   padding: 12px 20px;
   border-bottom: 1px solid #25252e;
   background: #08080b;
@@ -1461,7 +1461,7 @@ section h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-3);
   padding: 12px 20px;
   border-top: 1px solid #25252e;
   background: #08080b;
@@ -1481,7 +1481,7 @@ section h2 {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .lb-btn:hover {
@@ -1492,18 +1492,18 @@ section h2 {
 .explorer-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--space-2);
   margin-top: 28px;
 }
 
 .toc-toolbar {
   display: flex;
   justify-content: flex-end;
-  margin-top: 16px;
+  margin-top: var(--space-4);
 }
 
 .toc-list {
-  margin-top: 12px;
+  margin-top: var(--space-3);
   border-top: 1px solid var(--line);
 }
 
@@ -1520,7 +1520,7 @@ section h2 {
   color: var(--fg);
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--space-4);
   text-align: left;
   font-size: var(--text-base);
   font-weight: 750;
@@ -1613,7 +1613,7 @@ section h2 {
 .archive-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: var(--space-4);
   margin-top: 22px;
 }
 
@@ -1640,7 +1640,7 @@ section h2 {
 .archive-desc {
   font-size: var(--text-sm);
   color: var(--fg-3);
-  margin-top: 4px;
+  margin-top: var(--space-1);
   padding-bottom: 14px;
   border-bottom: 1px solid var(--line);
 }
@@ -1650,7 +1650,7 @@ section h2 {
   padding: 0;
   margin: 14px 0 0;
   display: grid;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .archive-files code {
@@ -1673,7 +1673,7 @@ section h2 {
 
 /* ---------------------------------------------------------------- Comparison Table */
 .comp-wrap {
-  margin-top: 32px;
+  margin-top: var(--space-8);
   border-radius: 18px;
   border: 1px solid var(--line-2);
   background: var(--s2);
@@ -1847,7 +1847,7 @@ section h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: var(--space-4);
   list-style: none;
   font-weight: 700;
   font-size: var(--text-base);
@@ -1923,14 +1923,14 @@ section h2 {
 .offer-sub {
   font-size: var(--text-xs);
   color: var(--fg-3);
-  margin-top: 8px;
+  margin-top: var(--space-2);
 }
 
 .offer-guarantees {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 14px;
-  margin-top: 16px;
+  margin-top: var(--space-4);
   font-size: var(--text-xs);
   color: var(--fg-2);
 }
@@ -1945,7 +1945,7 @@ section h2 {
   margin-top: 22px;
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: var(--space-4);
   align-items: center;
   justify-content: space-between;
   border: 1px solid var(--line);
@@ -1958,7 +1958,7 @@ section h2 {
   font-size: var(--text-sm);
   color: var(--fg-2);
   max-width: 58ch;
-  margin-top: 4px;
+  margin-top: var(--space-1);
 }
 
 /* ---------------------------------------------------------------- Footer */
@@ -1971,7 +1971,7 @@ section h2 {
 .footer-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: var(--space-6);
   justify-content: space-between;
   align-items: flex-start;
   font-size: var(--text-sm);
@@ -2004,7 +2004,7 @@ section h2 {
 }
 
 .footer-rule-badge {
-  margin-top: 12px;
+  margin-top: var(--space-3);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--fg-2);
@@ -2072,7 +2072,7 @@ section h2 {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
 
 .guide-cat-pill {
@@ -2182,10 +2182,10 @@ section h2 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   font-size: var(--text-xs);
   color: var(--fg-2);
-  margin-bottom: 24px;
+  margin-bottom: var(--space-6);
 }
 
 .notion-breadcrumbs a {
@@ -2253,7 +2253,7 @@ section h2 {
 .notion-toc-label {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: 700;
@@ -2262,7 +2262,7 @@ section h2 {
   color: var(--fg-2);
   padding: 0 8px 10px;
   border-bottom: 1px solid var(--line);
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
 }
 
 .notion-toc-list {
@@ -2440,14 +2440,14 @@ section h2 {
   line-height: 1.12;
   letter-spacing: -0.03em;
   color: var(--fg);
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
 
 .notion-subtitle {
   font-size: clamp(16.5px, 2vw, 19.5px);
   line-height: 1.62;
   color: var(--fg-2);
-  margin-bottom: 24px;
+  margin-bottom: var(--space-6);
 }
 
 .notion-byline {
@@ -2455,7 +2455,7 @@ section h2 {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-3);
   padding: 14px 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -2477,14 +2477,14 @@ section h2 {
 .notion-aeo-title {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--accent-ink);
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
 }
 
 .notion-aeo-box p {
@@ -2521,7 +2521,7 @@ section h2 {
   letter-spacing: -0.02em;
   color: var(--accent-ink);
   font-variant-numeric: tabular-nums;
-  margin-bottom: 4px;
+  margin-bottom: var(--space-1);
 }
 
 .notion-stat-label {
@@ -2562,7 +2562,7 @@ section h2 {
 .notion-h2 {
   display: flex;
   align-items: baseline;
-  gap: 12px;
+  gap: var(--space-3);
   font-family: var(--font-display);
   font-size: clamp(22px, 2.8vw, 28px);
   font-weight: 800;
@@ -2609,7 +2609,7 @@ section h2 {
   font-size: var(--text-base);
   line-height: 1.78;
   color: var(--fg);
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
   max-width: 70ch;
 }
 
@@ -2625,7 +2625,7 @@ section h2 {
 
 .notion-quote-tag {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: var(--text-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -2678,7 +2678,7 @@ section h2 {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
   display: flex;
   align-items: center;
   gap: 7px;
@@ -2754,13 +2754,13 @@ section h2 {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .notion-steps li {
   display: grid;
   grid-template-columns: 28px minmax(0, 1fr);
-  gap: 12px;
+  gap: var(--space-3);
   align-items: start;
   font-size: var(--text-sm);
   line-height: 1.6;
@@ -2799,7 +2799,7 @@ section h2 {
   font-size: var(--text-sm);
   font-weight: 700;
   color: var(--fg);
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
 }
 
 .notion-bullets ul {
@@ -2869,7 +2869,7 @@ section h2 {
   font-size: var(--text-sm);
   font-weight: 700;
   color: var(--fg);
-  margin-bottom: 4px;
+  margin-bottom: var(--space-1);
 }
 
 .notion-callout-body {
@@ -3035,7 +3035,7 @@ section h2 {
   border-top: 1px solid var(--line);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--space-1);
 }
 
 .notion-figure-badge {
@@ -3107,7 +3107,7 @@ section h2 {
 
 /* End-of-Article Conversion Offer Card */
 .notion-cta-card {
-  margin-top: 48px;
+  margin-top: var(--space-12);
   padding: 34px 30px;
   border-radius: 22px;
   background:
@@ -3134,14 +3134,14 @@ section h2 {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 16px;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
 }
 
 .notion-cta-bullets li {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: var(--space-2);
   font-size: var(--text-sm);
   color: var(--fg);
 }
