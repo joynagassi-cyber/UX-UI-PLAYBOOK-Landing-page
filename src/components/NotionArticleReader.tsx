@@ -111,7 +111,7 @@ export function NotionArticleReader({
     sourceRef: string;
   } | null>(null);
 
-  const zoomLabel = locale === 'fr' ? 'Agrandir la planche' : 'Zoom diagram';
+  const zoomLabel = locale === 'fr' ? 'Agrandir le schéma' : 'Zoom diagram';
   const faqHeading =
     locale === 'fr'
       ? 'Questions fréquentes (synthèse opérationnelle)'
@@ -150,10 +150,9 @@ export function NotionArticleReader({
 
     const spyObserver = new IntersectionObserver(
       (entries) => {
-        const visible =
-          entries
-            .filter((e) => e.isIntersecting)
-            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
         if (visible.length > 0) {
           setActiveId(visible[0].target.id);
         }
@@ -213,15 +212,66 @@ export function NotionArticleReader({
 
   const renderBlock = (block: ArticleBlock, idx: number) => {
     switch (block.type) {
+      case 'h3':
+        return (
+          <h3 key={idx} className="notion-h3">
+            {block.text}
+          </h3>
+        );
       case 'p':
         return (
           <p key={idx} className="notion-p">
             {block.text}
           </p>
         );
+      case 'quote':
+        return (
+          <div key={idx} className="notion-quote">
+            <div className="notion-quote-tag">{block.tag}</div>
+            <blockquote>{block.text}</blockquote>
+          </div>
+        );
+      case 'doDont':
+        return (
+          <div key={idx} className="notion-dodont">
+            <div className="notion-do-col">
+              <div className="notion-dodont-head">{block.doTitle}</div>
+              <ul>
+                {block.doItems.map((it, i) => (
+                  <li key={i}>{it}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="notion-dont-col">
+              <div className="notion-dodont-head">{block.dontTitle}</div>
+              <ul>
+                {block.dontItems.map((it, i) => (
+                  <li key={i}>{it}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        );
+      case 'steps':
+        return (
+          <div key={idx} className="notion-steps">
+            <div className="notion-steps-title">{block.title}</div>
+            <ol>
+              {block.steps.map((st, i) => (
+                <li key={i}>
+                  <span className="notion-step-badge">{i + 1}</span>
+                  <div>
+                    <strong>{st.bold}</strong> — {st.text}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        );
       case 'list':
         return (
           <div key={idx} className="notion-bullets">
+            {block.heading && <div className="notion-bullets-heading">{block.heading}</div>}
             <ul>
               {block.items.map((it, i) => (
                 <li key={i}>
@@ -239,7 +289,13 @@ export function NotionArticleReader({
         );
       case 'callout': {
         const toneClass =
-          block.tone === 'lime' ? 'ok' : block.tone === 'accent' ? 'accent' : '';
+          block.tone === 'lime'
+            ? 'ok'
+            : block.tone === 'accent'
+              ? 'accent'
+              : block.tone === 'warn'
+                ? 'warn'
+                : '';
         return (
           <aside key={idx} className={`notion-callout ${toneClass}`}>
             <span className="notion-callout-icon" aria-hidden="true">
@@ -371,7 +427,7 @@ export function NotionArticleReader({
                     className={`notion-toc-link ${activeId === sec.id ? 'active' : ''}`}
                   >
                     <span className="notion-toc-num">{sec.num}</span>
-                    <span>{sec.heading}</span>
+                    <span>{sec.tocLabel || sec.heading}</span>
                   </a>
                 </li>
               ))}
@@ -408,7 +464,7 @@ export function NotionArticleReader({
                     className={`notion-toc-link ${activeId === sec.id ? 'active' : ''}`}
                   >
                     <span className="notion-toc-num">{sec.num}</span>
-                    <span>{sec.heading}</span>
+                    <span>{sec.tocLabel || sec.heading}</span>
                   </a>
                 </li>
               ))}

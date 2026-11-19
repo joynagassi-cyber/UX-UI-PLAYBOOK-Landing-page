@@ -20,10 +20,30 @@ function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
   for (const sec of art.sections) {
     lines.push(`### ${sec.num}. ${sec.heading}`);
     for (const block of sec.blocks) {
-      if (block.type === 'p') {
+      if (block.type === 'h3') {
+        lines.push(`#### ${block.text}`);
+        lines.push('');
+      } else if (block.type === 'p') {
         lines.push(block.text);
         lines.push('');
+      } else if (block.type === 'quote') {
+        lines.push(`> **${block.tag}**: "${block.text}"`);
+        lines.push('');
+      } else if (block.type === 'doDont') {
+        lines.push(`**${block.doTitle}**`);
+        for (const d of block.doItems) lines.push(`- ✓ ${d}`);
+        lines.push('');
+        lines.push(`**${block.dontTitle}**`);
+        for (const d of block.dontItems) lines.push(`- ✕ ${d}`);
+        lines.push('');
+      } else if (block.type === 'steps') {
+        lines.push(`**${block.title}**`);
+        block.steps.forEach((st, idx) => {
+          lines.push(`${idx + 1}. **${st.bold}** — ${st.text}`);
+        });
+        lines.push('');
       } else if (block.type === 'list') {
+        if (block.heading) lines.push(`**${block.heading}**`);
         for (const it of block.items) {
           lines.push(it.bold ? `- **${it.bold}**: ${it.text}` : `- ${it.text}`);
         }

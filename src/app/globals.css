@@ -2568,12 +2568,208 @@ section h2 {
   flex-shrink: 0;
 }
 
+.notion-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.1vw, 21px);
+  font-weight: 700;
+  line-height: 1.32;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+  margin: 30px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notion-h3::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
 .notion-p {
   font-size: 16.5px;
-  line-height: 1.76;
+  line-height: 1.78;
   color: var(--fg);
-  margin-bottom: 18px;
-  max-width: 68ch;
+  margin-bottom: 16px;
+  max-width: 70ch;
+}
+
+/* Signature Playbook Rule Block (Quote / Golden Rule) */
+.notion-quote {
+  margin: 22px 0;
+  padding: 18px 22px;
+  border-radius: 14px;
+  background: var(--s2);
+  border: 1px solid var(--line-2);
+  border-left: 4px solid var(--fg);
+}
+
+.notion-quote-tag {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-ink);
+  margin-bottom: 6px;
+}
+
+.notion-quote blockquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 16.5px;
+  font-weight: 700;
+  line-height: 1.52;
+  color: var(--fg);
+}
+
+/* Side-by-Side ✓ DO / ✕ DON'T Grid (Playbook Signature) */
+.notion-dodont {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 22px 0;
+}
+
+@media (max-width: 700px) {
+  .notion-dodont {
+    grid-template-columns: 1fr;
+  }
+}
+
+.notion-do-col,
+.notion-dont-col {
+  padding: 18px 18px 16px;
+  border-radius: 14px;
+  background: var(--s1);
+  border: 1px solid var(--line-2);
+}
+
+.notion-do-col {
+  border-top: 3px solid var(--ok);
+}
+
+.notion-dont-col {
+  border-top: 3px solid #ef4444;
+}
+
+.notion-dodont-head {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.notion-do-col .notion-dodont-head {
+  color: var(--ok);
+}
+
+.notion-dont-col .notion-dodont-head {
+  color: #f87171;
+}
+
+[data-theme='light'] .notion-dont-col .notion-dodont-head {
+  color: #c62828;
+}
+
+.notion-dodont ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.notion-dodont li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 14.5px;
+  line-height: 1.56;
+  color: var(--fg-2);
+}
+
+.notion-do-col li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--ok);
+  font-family: var(--font-mono);
+  font-weight: 800;
+}
+
+.notion-dont-col li::before {
+  content: '✕';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #ef4444;
+  font-family: var(--font-mono);
+  font-weight: 800;
+}
+
+/* Numbered Protocol / Steps Block */
+.notion-steps {
+  margin: 22px 0;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: var(--s1);
+  border: 1px solid var(--line);
+}
+
+.notion-steps-title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-ink);
+  margin-bottom: 14px;
+}
+
+.notion-steps ol {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notion-steps li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--fg-2);
+}
+
+.notion-step-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--s2);
+  border: 1px solid var(--line-2);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.notion-steps li strong {
+  color: var(--fg);
 }
 
 .notion-bullets {
@@ -2776,19 +2972,26 @@ section h2 {
 
 .notion-figure-btn {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  padding: 14px;
-  background: #ffffff;
+  padding: 16px;
+  background: var(--s2);
   border: none;
   cursor: zoom-in;
 }
 
 .notion-figure-btn img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: 430px;
   height: auto;
+  object-fit: contain;
   border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
   transition: transform 0.3s cubic-bezier(0.16, 0.84, 0.24, 1);
 }
 
