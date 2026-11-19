@@ -7,8 +7,8 @@ Official bilingual Next.js (App Router) landing page for **Joy N.'s UX/UI Playbo
 
 ## Key Features
 
-- **Pure OLED Dark Mode (`#000000`) by Default + Editorial Light Mode (`#FAF8F4`)**:
-  - Zero-FOUC inline theme initialization defaulting strictly to `#000000` OLED black.
+- **OLED Dark Mode (`#000000`) + Editorial Light Mode (`#FAF8F4`)**:
+  - Zero-FOUC inline initialization respects a saved choice first, then the visitor's operating-system color preference.
   - Persistent user preference (`localStorage`) with dynamic `<meta name="theme-color">`.
   - Calibrated WCAG AA (`≥ 4.5:1`) contrast tokens in both OLED Dark and Light modes.
 - **Automatic Audience Detection (`src/proxy.ts`)**:
@@ -28,3 +28,13 @@ npm run dev
 ```
 
 Open `http://localhost:3000` (auto-routes to `/fr` or `/en`).
+
+## Canonical Domain Configuration
+
+Set `NEXT_PUBLIC_SITE_URL` to the one public origin that should be canonical, including the scheme and without a trailing slash. Use the same value in the deployment environment for every host serving this site.
+
+```env
+NEXT_PUBLIC_SITE_URL=https://your-canonical-domain.example
+```
+
+The sitemap, robots.txt, Open Graph image URLs, and both LLM text endpoints read this setting. The fallback remains the current Vercel URL until a real production domain is configured. Configure redirects at the hosting/DNS layer so alternate hostnames resolve to that canonical origin.
