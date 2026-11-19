@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import '../globals.css';
 import { CONTENT, type Locale } from '@/i18n/content';
 
+export const dynamicParams = false;
+
 const soraDisplay = localFont({
   src: [
     { path: '../../fonts/sora-latin.woff2', weight: '400 800', style: 'normal' },

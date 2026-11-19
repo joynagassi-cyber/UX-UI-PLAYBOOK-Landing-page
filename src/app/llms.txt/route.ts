@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { ARTICLES } from '@/i18n/articles';
 import { SITE_URL } from '@/lib/structured-data';
 
+export const dynamic = 'force-static';
+
 export async function GET() {
   const guides = (locale: 'fr' | 'en') => ARTICLES[locale]
     .map((article) => `- [${article.title}](${SITE_URL}/${locale}/articles/${article.slug}): ${article.entityDefinition}`)

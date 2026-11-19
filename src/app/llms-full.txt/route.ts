@@ -3,6 +3,8 @@ import { ARTICLES, type ArticleData } from '@/i18n/articles';
 import { CONTENT } from '@/i18n/content';
 import { SITE_URL as SITE } from '@/lib/structured-data';
 
+export const dynamic = 'force-static';
+
 const tableCell = (text: string) => text.replace(/\|/g, '\\|').replace(/\n/g, ' ');
 
 function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {

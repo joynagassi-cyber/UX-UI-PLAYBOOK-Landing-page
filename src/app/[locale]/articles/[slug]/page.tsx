@@ -13,6 +13,8 @@ import { ThemeAndLangControls } from '@/components/ThemeAndLangControls';
 import { NotionArticleReader } from '@/components/NotionArticleReader';
 import { authorJsonLd, serializeJsonLd } from '@/lib/structured-data';
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   const locales: Locale[] = ['fr', 'en'];
   return locales.flatMap((locale) =>

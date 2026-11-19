@@ -1,4 +1,7 @@
 import type { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/structured-data';
+
+export const dynamic = 'force-static';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -21,7 +24,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: ['/', '/llms.txt', '/llms-full.txt', '/fr/articles/', '/en/articles/'],
       },
     ],
-    sitemap: 'https://joyccelight-playbook.vercel.app/sitemap.xml',
-    host: 'https://joyccelight-playbook.vercel.app',
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }

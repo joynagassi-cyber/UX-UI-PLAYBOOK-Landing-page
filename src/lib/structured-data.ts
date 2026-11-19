@@ -1,6 +1,6 @@
 import type { Locale } from '@/i18n/content';
 
-export const SITE_URL = 'https://joyccelight-playbook.vercel.app';
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joyccelight-playbook.pages.dev').replace(/\/+$/, '');
 
 // Only identities linked to the supplied store and this repository owner.
 // Do not invent social profiles or professional qualifications.
