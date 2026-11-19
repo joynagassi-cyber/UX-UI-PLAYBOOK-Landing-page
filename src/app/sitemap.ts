@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { ARTICLE_SLUGS } from '@/i18n/articles';
 
-const BASE = 'https://joyccelight-playbook.vercel.app';
+const BASE = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joyccelight-playbook.pages.dev').replace(/\/+$/, '');
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date('2026-11-18T08:00:00.000Z');
