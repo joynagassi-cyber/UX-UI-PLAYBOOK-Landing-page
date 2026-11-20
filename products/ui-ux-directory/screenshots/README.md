@@ -2,7 +2,11 @@
 
 ## État actuel — à ne pas confondre avec des captures terminées
 
-**Aucune capture Microlink réelle n’a été obtenue dans cette session.** Le manifeste contient actuellement zéro image. L’essai GitHub s’est arrêté au contrôle local `ENOKEY`, avant toute requête API. La clé publiée dans le chat n’a pas été recopiée ni utilisée ; elle doit être révoquée et remplacée.
+**Aucun appel API Microlink n’a été effectué depuis cet environnement.** L’essai GitHub local s’est arrêté sur `ENOKEY`. Lors de l’ouverture de la PR, le commit distant `ddf2bccc6864d4f23b15e0da043df7189d869c76`, déjà présent sur cette même branche, a apporté **21 PNG marqués approuvés par leur soumission**. Ils sont conservés sans modification, ainsi que leur [manifeste original](manifest.external-ddf2bcc.json), archivé octet pour octet. Ses 75 entrées déclarent 21 approuvées, 3 rejetées, 1 en échec et 50 en attente ; le commit rapporte un arrêt de quota `ERATE`. Ces déclarations ne sont pas une nouvelle revue visuelle réalisée ici.
+
+Le manifeste canonique `manifest.json` signale `pendingExternalImport`. Le format externe, les noms et les dimensions **2560 × 1600** diffèrent du pipeline local ; **14 PNG dépassent 200 000 octets**. Les 21 SHA-256, tailles et dimensions ont été vérifiés hors réseau, mais les images ne sont pas encore intégrées au pipeline PDF. **Les appels de capture sont bloqués sur `EIMPORTPENDING`** pour éviter de repayer des URLs déjà capturées. Le plan reste utilisable sans réseau et indique une estimation d’appels inconnue (`null`), pas 75 nouvelles captures à lancer.
+
+La clé précédemment publiée dans le chat n’a pas été recopiée ni utilisée ici ; elle doit être révoquée et remplacée.
 
 Le code prépare **75 captures uniques**, réutilisées dans les guides français et anglais. L’intégration PDF ajoute une galerie avec, pour chaque destination, une image cliquable, une URL cliquable, le numéro de fiche et la date d’obtention. Aucun emplacement vide, aperçu inventé, résultat Google ou capture locale ne remplace une vraie capture Microlink.
 
@@ -16,6 +20,17 @@ Les PDF et ZIP existants restent les éditions **sans captures**, de 34 pages de
 - L’accès sortant du sandbox est limité à une liste d’hôtes qui n’inclut pas l’API/CDN Microlink. **Aucun appel API ni téléchargement CDN n’a été tenté** : l’essai s’est arrêté sur l’absence de clé. L’échec du téléchargement du skill n’est donc pas une mesure de connectivité de l’API/CDN. Le login CLI utilise en outre un retour `127.0.0.1` sur la machine qui lance la commande : le navigateur du propriétaire n’est pas cette machine. **Aucun login approuvé ni clé récupérée automatiquement ici.**
 
 La suite doit donc être exécutée sur un ordinateur ayant accès à Microlink, ou reprise dans un environnement qui le permet. Ne pas contourner les restrictions réseau ou les blocages d’un site.
+
+## 0. Réconcilier d’abord le lot externe, hors réseau
+
+Les commandes d’acquisition des sections suivantes ne doivent être reprises **qu’après** cette étape. Ne pas supprimer `pendingExternalImport` simplement pour débloquer un appel.
+
+1. Conserver les originaux et leur manifeste externe ; les tests comparent leurs SHA-256, tailles, dimensions et destinations au catalogue.
+2. Préparer un import explicite vers le schéma canonique `captures`, les chemins attendus et les bornes d’images du pipeline. Si des dérivés optimisés sont nécessaires, ne pas remplacer les originaux ni réutiliser silencieusement leur approbation : conserver la provenance et relire les dérivés. Cette PR ne transforme ni ne recadre les PNG reçus.
+3. Transcrire aussi les rejets, échecs et entrées en attente : ne pas les convertir en réussites. L’arrêt de quota rapporté doit être examiné avant toute autorisation de reprise ; aucune boucle de nouvelle tentative n’est permise.
+4. Vérifier l’import hors réseau et l’absence de doublons payants avant de retirer le marqueur de blocage. Recalculer alors le vrai plan restant, plutôt que relancer arbitrairement 75 captures.
+
+L’import complet et la nouvelle revue restent à effectuer. Cette conservation de branche ne constitue pas une édition illustrée achevée.
 
 ## 1. Installer l’outil isolé et s’authentifier localement
 
@@ -67,6 +82,7 @@ En cas de succès, le chemin du PNG est affiché. Ouvrez ce fichier pour vérifi
 
 **Ne pas relancer en boucle.** En cas d’échec, lire le `code` affiché et celui sauvegardé dans le manifeste. Exemples :
 
+- `EIMPORTPENDING` : lot externe à réconcilier hors réseau avant tout nouvel appel ; ne pas supprimer le marqueur ni recapturer les URLs déjà présentes.
 - `ENOKEY` : clé renouvelée absente de `.env.local`, aucune requête API tentée.
 - `ENODEVERSION` : utiliser Node 24+ pour l’outil isolé, sans migrer le site.
 - `EAUTH` : clé invalide, à vérifier dans le compte.
@@ -83,7 +99,7 @@ Une tentative interrompue sans reçu peut avoir été comptée par Microlink. Ap
 npm run microlink:plan
 ```
 
-Cette commande est hors réseau, ne nécessite aucune clé et ne consomme aucun appel. Elle affiche les images présentes, les validations, les reçus à télécharger, les échecs et le nombre de nouvelles requêtes nécessaires.
+Cette commande est hors réseau, ne nécessite aucune clé et ne consomme aucun appel. Elle affiche les images reconnues dans le schéma canonique, les validations, les reçus et les échecs. Tant que `pendingExternalImport` est présent, elle affiche aussi le lot externe et `captureBlocked: true` ; `apiCallsNeeded: null` signifie que le budget restant n’est pas encore déterminé. Ne pas confondre zéro image canonique avec l’absence des 21 PNG externes conservés.
 
 Les 75 liens du répertoire ont 75 destinations distinctes. Le test `https://github.com/` n’en fait pas partie : le premier essai puis une série complète peuvent donc nécessiter **jusqu’à 76 requêtes API**, hors tentatives expressément renouvelées. Vérifiez votre quota réel dans le compte ; aucun abonnement ou achat n’est engagé par le code.
 
@@ -142,9 +158,10 @@ Après cette génération seulement, relire les PDF, vérifier les liens d’ima
 - `tools/microlink/capture.mjs` : SDK côté serveur, budget, reçus, cache, arrêt sur erreur, PNG optimisés et revue.
 - `tools/microlink/import-key.mjs` : copie locale de la clé autorisée, sans l’afficher.
 - `scripts/free_resource_screenshots.cjs` : plan hors ligne, contrôles d’intégrité, galerie PDF et liens image/texte.
-- `manifest.json` : provenance et revue, sans clé ni en-têtes authentifiés.
-- `images/` : vrais aperçus optimisés seulement, lorsqu’ils auront été obtenus.
+- `manifest.json` : schéma canonique, provenance/revue et marqueur d’import en attente, sans clé ni en-têtes authentifiés.
+- `manifest.external-ddf2bcc.json` : soumission distante originale conservée octet pour octet, non interprétée comme un import terminé.
+- `images/` : les 21 PNG externes originaux sont conservés inchangés ; leurs noms et poids ne sont pas encore ceux du pipeline optimisé.
 
 Documentation de la méthode : https://microlink.io/docs/sdk/methods/screenshot.md
 
-**Aucune capture distante, aucun crédit Microlink, aucune connexion approuvée, aucune publication Gumroad et aucun déploiement ne sont revendiqués par cette préparation.**
+**Aucun appel distant, crédit Microlink ou login approuvé n’est revendiqué depuis cet environnement.** Le lot externe est attribué à son commit et à son manifeste, sans prétendre l’avoir capturé ou approuvé ici. Aucune publication Gumroad ni aucun déploiement n’est effectué.

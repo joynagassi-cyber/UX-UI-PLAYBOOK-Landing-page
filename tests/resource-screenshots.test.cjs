@@ -201,6 +201,56 @@ test('local key import refuses regular and dangling symlinks without touching th
     fs.unlinkSync(env);
   }
 });
+test('the external submission retains catalogue coverage and original PNG integrity without implicit import', () => {
+  const base = path.join(root, 'products/ui-ux-directory/screenshots');
+  const bytes = fs.readFileSync(path.join(base, 'manifest.external-ddf2bcc.json'));
+  const incoming = JSON.parse(bytes);
+  const expected = capturePlan(catalog).map(item => item.url).sort();
+  assert.equal(incoming.entries.length, 75);
+  assert.deepEqual(incoming.entries.map(item => item.url).sort(), expected);
+  const approved = incoming.entries.filter(item => item.status === 'approved');
+  assert.equal(approved.length, 21);
+  for (const item of approved) {
+    assert.match(item.file, /^images\/[a-zA-Z0-9_.-]+\.png$/u);
+    const filename = path.join(base, item.file);
+    assert.ok(fs.lstatSync(filename).isFile() && !fs.lstatSync(filename).isSymbolicLink());
+    const png = fs.readFileSync(filename);
+    assert.equal(sha256(png), item.sha256);
+    assert.equal(png.length, item.bytes);
+    assert.deepEqual(pngDimensions(png), { width: item.width, height: item.height });
+  }
+  const canonical = readManifest();
+  if (canonical.pendingExternalImport) {
+    assert.equal(canonical.pendingExternalImport.sha256, sha256(bytes));
+    assert.equal(canonical.pendingExternalImport.manifest, 'manifest.external-ddf2bcc.json');
+  }
+});
+test('an unresolved external submission blocks all paid requests before credentials or SDK loading', t => {
+  const directory = temporary(t);
+  for (const filename of ['tools/microlink/capture.mjs', 'scripts/free_resource_screenshots.cjs', 'products/ui-ux-directory/catalogue.json']) {
+    const target = path.join(directory, filename);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.copyFileSync(path.join(root, filename), target);
+  }
+  const manifest = emptyManifest();
+  manifest.pendingExternalImport = { manifest: 'manifest.external-fixture.json', reportedCounts: { approved: 1 } };
+  const base = path.join(directory, 'products/ui-ux-directory/screenshots');
+  fs.mkdirSync(base, { recursive: true });
+  save(base, manifest);
+  const marker = 'unit-only-not-a-real-key';
+  const run = args => spawnSync(process.execPath, [path.join(directory, 'tools/microlink/capture.mjs'), ...args], { cwd: directory, env: { ...process.env, MICROLINK_API_KEY: marker }, encoding: 'utf8' });
+  const plan = run(['--plan']);
+  assert.equal(plan.status, 0, plan.stderr);
+  assert.equal(JSON.parse(plan.stdout).captureBlocked, true);
+  assert.equal(JSON.parse(plan.stdout).apiCallsNeeded, null);
+  assert.equal(JSON.parse(plan.stdout).networkCallsMadeByThisPlan, 0);
+  for (const args of [['--url', 'https://github.com/'], ['--all', '--max-calls', '75', '--confirm-billable']]) {
+    const result = run(args);
+    assert.equal(result.status, 1);
+    assert.equal(JSON.parse(result.stderr).code, 'EIMPORTPENDING');
+    assert.ok(!result.stdout.includes(marker) && !result.stderr.includes(marker));
+  }
+});
 test('secrets and isolated SDK dependencies are Git-ignored and never imported in browser source', () => {
   for (const filename of ['.env.local', 'tools/microlink/node_modules/microlink.io/package.json']) assert.equal(execFileSync('git', ['check-ignore', filename], { cwd: root, encoding: 'utf8' }).trim(), filename);
   function walk(directory) { return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? walk(path.join(directory, entry.name)) : [path.join(directory, entry.name)]); }

@@ -35,4 +35,6 @@ Les 75 destinations n’ont pas subi d’audit exhaustif de disponibilité ou de
 
 ## Demande suivante : aperçus cliquables Microlink
 
-[Workflow, sécurité de la clé, essai GitHub, quota et intégration PDF](screenshots/README.md). L’outillage et la galerie cliquable sont préparés, **pas les captures réelles** : zéro image obtenue et aucun appel API effectué ici. Les kits actuels restent sans galerie. Le drapeau `--with-screenshots` exige les 75 PNG présents, intègres et relus avant de modifier un livrable. Les images seront communes aux deux langues ; il faudra ensuite actualiser les pages/tailles des textes de publication d’après les nouveaux manifestes.
+[Workflow, sécurité de la clé, essai GitHub, quota et intégration PDF](screenshots/README.md). Aucun appel API n’a été effectué ici. Un commit distant déjà présent sur cette branche a fourni **21 PNG marqués approuvés dans son manifeste**, conservés sans modification avec `screenshots/manifest.external-ddf2bcc.json`. Leur import reste à réconcilier (schéma, chemins, dimensions et poids) ; le manifeste canonique bloque toute nouvelle capture sur `EIMPORTPENDING` pour éviter des appels payants en double. Les hashes, tailles et dimensions ont été contrôlés, pas une nouvelle approbation visuelle.
+
+Les kits actuels restent sans galerie. Le drapeau `--with-screenshots` exige les 75 PNG présents, compatibles, intègres et relus avant de modifier un livrable. Les images seront communes aux deux langues ; il faudra ensuite actualiser les pages/tailles des textes de publication d’après les nouveaux manifestes.

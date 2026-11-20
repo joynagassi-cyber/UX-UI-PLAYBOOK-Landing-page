@@ -6,7 +6,7 @@ The English downloadable product and its website integration are prepared in thi
 
 Until a real English checkout is published and tested, the English website export serves the English ZIP directly, without an email form or an invented Gumroad link. A local preview is not a production deployment.
 
-**Later illustration request:** the [Microlink workflow](../screenshots/README.md) is prepared, but no real website screenshots have been obtained here. The files and counts below describe the current kit **without screenshots**. Update the listing and these counts after real illustrated generation; do not advertise previews before they are in the delivered PDF.
+**Later illustration request:** the [Microlink workflow](../screenshots/README.md) preserves 21 externally supplied PNGs and their original manifest. Offline reconciliation is still required; new capture calls are blocked to prevent duplicate paid requests. No illustrated kit has been generated here. The files and counts below describe the current kit **without screenshots**. Update the listing and these counts after real illustrated generation; do not advertise previews before they are in the delivered PDF.
 
 ## 1. Files to use
 

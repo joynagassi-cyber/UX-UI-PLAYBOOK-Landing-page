@@ -83,6 +83,7 @@ function safeError(error) {
     ECONNREFUSED: 'The API/CDN connection was refused. Check network access.',
     EPREVIOUS: 'A previous attempt failed. Read its saved code before explicitly retrying one URL.',
     EINCOMPLETE: 'Obtain and review all 75 real captures before generating illustrated PDFs.',
+    EIMPORTPENDING: 'Reconcile the preserved external manifest, image paths and size limits offline. Do not recapture existing URLs or automatically retry quota errors.',
   };
   return { code, ...(Number.isInteger(error?.statusCode) ? { statusCode: error.statusCode } : {}), hint: hints[code] || 'Stopped without automatic retry. Review the saved code and local configuration.' };
 }

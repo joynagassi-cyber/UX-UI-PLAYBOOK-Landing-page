@@ -53,11 +53,16 @@ function pendingSummary(manifest) {
     resourceLinks: plan.length,
     validLocalImages: plan.filter(item => isValidLocal(item.url, manifest.captures[item.url])).length,
     approvedImages: plan.filter(item => isValidLocal(item.url, manifest.captures[item.url]) && manifest.captures[item.url].review === 'approved').length,
-    apiCallsNeeded: plan.filter(item => !isValidLocal(item.url, manifest.captures[item.url]) && !manifest.captures[item.url]?.asset?.url).length,
+    // Incoming submissions may already have spent calls. Do not recommend recapture
+    // while their different manifest/filenames/image bounds remain unreconciled.
+    apiCallsNeeded: manifest.pendingExternalImport ? null : plan.filter(item => !isValidLocal(item.url, manifest.captures[item.url]) && !manifest.captures[item.url]?.asset?.url).length,
+    ...(manifest.pendingExternalImport ? { captureBlocked: true, pendingExternalImport: manifest.pendingExternalImport } : {}),
     storedReceiptsToDownload: plan.filter(item => !isValidLocal(item.url, manifest.captures[item.url]) && manifest.captures[item.url]?.asset?.url).length,
     previousFailures: plan.filter(item => ['failed', 'requested'].includes(manifest.captures[item.url]?.status) && !isValidLocal(item.url, manifest.captures[item.url])).map(item => ({ url: item.url, code: manifest.captures[item.url].error?.code || 'EINTERRUPTED' })),
     networkCallsMadeByThisPlan: 0,
-    note: 'One shared image set for both languages. The separate GitHub smoke test can use one additional API request. No automatic API or HTTP retries.',
+    note: manifest.pendingExternalImport
+      ? 'External PNGs and their original manifest are preserved but need offline reconciliation. API-call estimate is unknown; capture is blocked to prevent duplicate paid requests. No network calls.'
+      : 'One shared image set for both languages. The separate GitHub smoke test can use one additional API request. No automatic API or HTTP retries.',
   };
 }
 async function downloadAndOptimize(asset, target, sharp) {
@@ -113,6 +118,7 @@ export async function main(argv = process.argv.slice(2)) {
   if (values['retry-failed'] && !values.url) throw failure('EUSAGE', 'A failed URL can only be retried individually after reading its saved error code.');
   const budget = values.all ? Number(values['max-calls']) : 1;
   if (values.all && (!values['confirm-billable'] || !Number.isInteger(budget) || budget < 1 || budget > 75)) throw failure('EBUDGET', 'Batch capture requires --confirm-billable and --max-calls between 1 and 75.');
+  if (manifest.pendingExternalImport) throw failure('EIMPORTPENDING', 'Reconcile the preserved external submission offline before requesting captures.');
   const targets = values.all ? plan.map(item => item.url) : [normalized];
   const remaining = targets.filter(target => !isValidLocal(target, manifest.captures[target]));
   if (!remaining.length) { console.log('All selected PNGs are already valid locally. No API request made.'); return; }
