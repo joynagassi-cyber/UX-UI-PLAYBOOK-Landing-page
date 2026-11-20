@@ -135,3 +135,66 @@ Preuves locales ignorées : `reports/{static-export-check,site-check,browser-che
 **Aucun produit Gumroad n’a été créé ou publié.** Le connecteur n’est pas pris en charge ici. La configuration vide sert un téléchargement direct sans email demandé ; aucun checkout fictif n’est exposé. `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL` accepte seulement une URL HTTPS du magasin du créateur et rejette les deux URLs payantes connues. La validation porte sur sa forme et sa séparation du Playbook, **pas sur l’existence ou le prix du produit distant** : publier et tester le parcours à 0 dans le vrai compte reste indispensable.
 
 Le propriétaire doit relire et approuver les conditions d’usage proposées pour son guide, publier le ZIP, tester sa livraison, transmettre le lien public puis déployer un build avec cette variable. **Aucun push, PR, nouveau déploiement, DNS ou action Vercel n’a été effectué pour cette tâche.** Ni le trafic, ni l’indexation, ni la conversion ne sont mesurés ou garantis. Les liens UTM du kit facilitent une éventuelle attribution dans des outils futurs ; ils n’ajoutent pas de collecte au site.
+
+
+## Complément — édition anglaise et préparation Microlink
+
+Travail sur `arena/ee9c08d1-ux-ui-playbook-landing-page`, à partir de `247b41733667afa502aba75232c894d438c62df9`. Cette section est une nouvelle passe locale ; elle ne réécrit pas les résultats historiques français ci-dessus et n’annonce aucune publication distante.
+
+### Édition anglaise effectivement produite
+
+- Traduction complète : **51 fiches / 6 familles / 75 URLs / 11 références**, avec mêmes IDs et destinations que la source française. Guide **34 pages**, fiche imprimable **3 pages**, Markdown, CSV anglais (virgules), README et notices : ZIP de **7 fichiers**, **516 449 octets**. Les SHA-256 exacts sont dans `products/ui-ux-directory/en/manifest.json`.
+- Couverture anglaise **1280 × 720**, vignette **1080 × 1080**, image sociale **1200 × 630**, textes de fiche Gumroad et guide de publication distincts. La traduction conserve la date de l’édition française ; elle ne prétend pas à un nouvel audit des services externes.
+- Chaque page fournit sa propre langue : catalogue, extraits, visuels, PDF, ZIP, Markdown et schéma Book/MediaObject localisés. Les corpus LLM contiennent les deux catalogues complets. Les checkouts optionnels FR/EN sont séparés ; l’ancienne variable n’est qu’un repli FR et ne contrôle jamais l’anglais.
+- Contrôle indépendant `pypdf` : **34 + 3 pages A4**, langue `en`, texte non vide, noms des **51 fiches** et **75 destinations** présents ; balises structurelles, pas une certification PDF/UA. Neuf fichiers français (source, manifeste, téléchargements et visuels) comparés octet par octet à la base : inchangés. Un fichier sentinelle a été exclu du ZIP anglais par la liste blanche.
+
+### Microlink : infrastructure prête, résultats distants absents
+
+**Zéro capture réelle obtenue, zéro appel API Microlink effectué.** `products/ui-ux-directory/screenshots/manifest.json` est vide. Les téléchargements actuels restent sans captures. La clé exposée dans le chat n’a été ni recopiée ni utilisée ; aucune valeur secrète n’est enregistrée dans les sources, rapports ou sorties du site.
+
+- `npx -y microlink.io setup` : échec « could not determine executable to run ». Invocation explicitement versionnée : commande trouvée, téléchargement du skill en échec réseau. La référence officielle a ensuite été lue depuis GitHub et installée localement pour la session. **Aucun setup standard réussi ni login approuvé revendiqué.**
+- SDK **1.1.7** et Sharp installés dans `tools/microlink/`, avec verrou distinct et prérequis **Node 24+**. L’installation depuis Node 22 a signalé les contraintes de moteur ; aucun runtime Node n’a été ajouté et le site reste sur Node 22. L’outil refuse un appel réel sous une version non prise en charge.
+- Le login nécessite le navigateur de la machine qui exécute sa boucle locale. Les hôtes API/CDN ne figurent pas dans la liste réseau autorisée du sandbox ; aucun appel direct ni téléchargement CDN n’a été tenté et leur connectivité n’a pas été mesurée. L’essai GitHub a été exécuté **une fois**, arrêté au contrôle local **`ENOKEY` avant réseau**. L’échec du téléchargement du skill ne constitue pas un test de l’API/CDN. Aucun PNG GitHub n’est présenté comme résultat réussi.
+- L’outil SDK lit `MICROLINK_API_KEY` depuis `.env.local`, jamais via une variable publique. Import local depuis le config du login, fichier ignoré/non suivi, permissions `0600`. Aucun header authentifié ou objet d’erreur SDK complet n’est imprimé. Le PNG CDN est téléchargé sans clé.
+- Un plan hors réseau déduplique **75 destinations** pour les deux langues. Série uniquement avec budget/confirmation explicites ; arrêt au premier échec, reprise des reçus existants et garde contre les doubles requêtes HTTP du SDK. Les PNG sont optimisés localement et bornés en poids ; les originaux restent dans `.cache/`.
+- Le mode PDF `--with-screenshots` exige tous les PNG présents, intègres et approuvés. Il est prévu pour **19 pages de galerie** avec image et URL cliquables, en conservant les fiches du guide. Les essais actuels des deux générateurs avec les 75 images absentes ont échoué avant d’écraser les six téléchargements FR/EN ; leurs hashes sont inchangés.
+- Vérification de galerie **sur fixtures uniquement** : 19 pages FR et 19 EN, aucun débordement, **75 zones d’images cliquables + 75 URLs textuelles** par PDF, contrôlées via les annotations PDF et leurs rectangles. Ces images de test ne sont pas des captures et ne figurent pas dans les livrables. Contrat du vrai SDK testé avec transport simulé : une requête, type PNG, clé en en-tête seulement, `retry=0`, aucun appel distant.
+
+### Contrôles exécutés sur la révision préparée
+
+| Contrôle | Résultat local |
+| --- | --- |
+| `check:resource` | **48/48**, dont 31 contrôles des deux kits/configurations et 17 contrôles hors réseau de captures/galerie/sécurité, y compris l’import local de clé sur fixtures. |
+| TypeScript | Réussi. |
+| Routage Pages | **34/34**, relancés après les derniers contrôles de sécurité de l’outil. |
+| Build statique | **21/21**, export réussi. |
+| `check:export` | **259/259**, aucune erreur. |
+| Python sur Pages local | **746 automatisés**, aucun échec bloquant ; 4 à vérifier, 1 non applicable. |
+| Playwright/axe | **53/53**, aucun test ignoré ou instable ; downloads FR/EN conformes à leur SHA-256, changement de langue, absence de JS et parcours existants préservés. |
+| Isolation de la clé | Aucun `MICROLINK_API_KEY`, en-tête `x-api-key` ou endpoint Pro dans l’export navigateur. |
+| Préservation | Sources/artefacts français inchangés ; les six téléchargements FR/EN inchangés par les essais de génération illustrée incomplets. |
+| Diff | `git diff --check` réussi. |
+
+Preuves locales ignorées : `reports/{static-export-check,site-check,browser-check,free-resource-en-pdf-check,microlink-gallery-fixture-check,microlink-sdk-offline-contract,microlink-incomplete-output-guard}.json`. Les fixtures de galerie sont sous `.cache/microlink/gallery-fixture/`, non distribuées.
+
+### Reste à faire
+
+Révoquer la clé exposée ; effectuer le login et l’essai GitHub sur une machine autorisée à joindre Microlink, vérifier le résultat et le quota, puis obtenir et relire les 75 captures. Transmettre seulement les images et leur manifeste, sans fichiers de secrets. Régénérer ensuite les deux PDF/ZIP illustrés et actualiser les pages/tailles dans les documents de publication. **Aucun produit Gumroad publié, aucun déploiement, aucun commit/push/PR et aucune action Vercel pour ces tâches.** Les contrôles locaux ne valent ni disponibilité des 75 sites, ni permission universelle de diffuser leurs contenus, ni certification d’accessibilité, ni résultat commercial.
+
+## Consolidation éditoriale après veille concurrentielle
+
+La passe décrite dans [COMPETITIVE_CONTENT_STRATEGY.md](COMPETITIVE_CONTENT_STRATEGY.md) conserve les quatre URLs d’article par langue et toutes les explications illustrées. Elle ajoute des aides au choix/revue, des références et des liens contextuels rendus aussi dans le corpus textuel. Le [protocole complet](drafts/USABILITY_TEST_PROTOCOL_FR.md) est un brouillon interne sans session exécutée, pas un nouveau téléchargement public.
+
+Contrôles relancés sur ces sources : **21/21 tests de contenu**, TypeScript réussi, **34/34 routage**, **48/48 ressources**, build **21 sorties**, export **259/259**, contrôle HTTP **746 automatisés sans échec bloquant** (4 à vérifier, 1 non applicable), **57/57 Playwright/axe** (4 nouveaux scénarios), sans test ignoré ou instable. Le test des snippets utilise le CSS et le HTML de l’article, vérifie les couleurs attendues des thèmes/états puis calcule les contrastes ; il ne constitue pas un audit complet ou une étude utilisateur. Les index mobiles et des visuels locaux ont aussi été relus.
+
+Preuves locales régénérables : rapports d’export, HTTP et navigateur déjà utilisés par le projet, `reports/competitive-token-example-check.json` et captures `reports/editorial-*.png`. Les horodatages bruts sont conservés. La date de référence éditoriale du rapport n’est pas une preuve de fraîcheur ou de déploiement. Les contrôles de contenu sont ajoutés aux workflows de vérification, qui ne publient pas le site.
+
+Aucun classement Google, volume de recherche ou citation de moteur IA n’est présenté comme mesuré. Les pages concurrentes ont été lues par extraction, souvent partiellement ; aucune capture Microlink réelle, aucun appel API ni aucune approbation supplémentaire ne résulte de cette passe. Aucun commit, push, publication ou déploiement n’est effectué.
+
+## Préparation de PR : conservation du lot distant Microlink
+
+Le premier push a été refusé car la même branche distante contenait déjà `ddf2bccc6864d4f23b15e0da043df7189d869c76`. Ce commit apporte 21 PNG et un manifeste dans un autre schéma. Les deux historiques sont conservés sans force-push. Le manifeste reçu est archivé **octet pour octet** dans `products/ui-ux-directory/screenshots/manifest.external-ddf2bcc.json`, et ses 21 PNG restent inchangés.
+
+Les 75 destinations correspondent au catalogue ; les SHA-256, tailles et dimensions des 21 fichiers sont vérifiés. L’approbation reste celle déclarée par la soumission, pas une nouvelle revue visuelle de cet agent. Le lot déclare 21 approuvées, 3 rejetées, 1 échec et 50 en attente ; son commit rapporte un arrêt `ERATE`. Tous les PNG reçus mesurent 2560 × 1600 et 14 dépassent la limite locale de 200 000 octets. Leur schéma, chemins et bornes doivent être réconciliés hors réseau, sans effacer les rejets ni remplacer silencieusement une approbation après transformation.
+
+Le manifeste canonique conserve donc `pendingExternalImport`. Le plan hors réseau expose le lot et une estimation d’appels inconnue (`null`) ; les demandes de capture s’arrêtent sur `EIMPORTPENDING` avant lecture de clé ou chargement du SDK. Deux tests supplémentaires couvrent l’intégrité du lot et ce blocage, portant `check:resource` à **50/50**. Aucun nouvel appel API, aucune transformation ou approbation de PNG et aucune génération de PDF illustré n’est effectué lors de cette intégration. Les téléchargements existants restent inchangés.

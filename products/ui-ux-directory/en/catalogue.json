@@ -1,0 +1,798 @@
+{
+  "version": "1.0",
+  "language": "en",
+  "editionDate": "2026-11-18",
+  "title": "UI/UX Directory",
+  "subtitle": "51 entries to help you choose resources",
+  "sourceDocument": "English translation of the edited French directory, adapted from repertoire-complet-ui-ux-profils.md supplied by the creator",
+  "categories": [
+    {
+      "id": 1,
+      "name": "Colors and themes",
+      "icon": "palette",
+      "purpose": "Compare a palette on real text, surfaces and states.",
+      "question": "Which text/background pairs remain readable in both themes?"
+    },
+    {
+      "id": 2,
+      "name": "Typography",
+      "icon": "file-text",
+      "purpose": "Examine families, weights and sizes using your own content.",
+      "question": "Do accents, numbers, long labels and hosting conditions fit?"
+    },
+    {
+      "id": 3,
+      "name": "Icons",
+      "icon": "compass",
+      "purpose": "Choose a coherent family and understandable symbols.",
+      "question": "Do the names exist, and do important actions keep their text labels?"
+    },
+    {
+      "id": 4,
+      "name": "Components and kits",
+      "icon": "layers",
+      "purpose": "Choose a base compatible with your platform and maintenance needs.",
+      "question": "Which behaviors and updates will become your responsibility?"
+    },
+    {
+      "id": 5,
+      "name": "Data charts",
+      "icon": "list-tree",
+      "purpose": "Explain a question and its data without hiding units or limits.",
+      "question": "Does the chart have units, a legend and a text alternative?"
+    },
+    {
+      "id": 6,
+      "name": "Illustrations and 3D",
+      "icon": "sparkles",
+      "purpose": "Find a useful visual without forgetting rights, loading or alternatives.",
+      "question": "Does the illustration convey information rather than obstruct loading?"
+    }
+  ],
+  "entries": [
+    {
+      "id": "1.1",
+      "category": 1,
+      "urls": [
+        "https://tweakcn.com/"
+      ],
+      "name": "tweakcn",
+      "description": "tweakcn helps you explore a theme in the shadcn/ui ecosystem. Its value is seeing a color alongside cards, fields and charts rather than approving a palette in isolation. Change one setting at a time, then keep the selected values together with their intended roles. A convincing demonstration does not replace checking the screens in your own application.",
+      "nonDesigner": "Compare the states of the same screen before choosing a visual direction.",
+      "developer": "Identify the useful variables, then adapt them to the project's actual version.",
+      "agent": "Supply the approved tokens and require justification before adding any new colors.",
+      "watch": "Check actual contrast and export compatibility; do not confuse a demonstration with validation."
+    },
+    {
+      "id": "1.2",
+      "category": 1,
+      "urls": [
+        "https://www.realtimecolors.com/dashboard"
+      ],
+      "name": "Realtime Colors",
+      "description": "Realtime Colors applies color and typography choices to a page layout. This makes it easier to discuss text, backgrounds and accents in context. Try a long heading, links and a secondary button to uncover problems that an attractive combination may hide. If the tool reports contrast, also measure the specific pairs actually used in your interface.",
+      "nonDesigner": "See how a palette behaves in readable content blocks rather than isolated swatches.",
+      "developer": "Record semantic colors and inspect the available export before integrating it.",
+      "agent": "Supply the chosen values, their permitted uses and the pairs to measure.",
+      "watch": "A set of colors is not WCAG-validated for every possible combination."
+    },
+    {
+      "id": "1.3",
+      "category": 1,
+      "urls": [
+        "https://www.shadcndesign.com/theme-generator"
+      ],
+      "name": "Shadcn Design Theme Generator",
+      "description": "This generator from Shadcn Design is a candidate for comparing a theme across different page types. Distinguish the service from the shadcn/ui project's documentation: similar names do not imply the same team or terms. Treat the result as a proposed hierarchy, then compare it with your own content, components and themes before adopting it in the project.",
+      "nonDesigner": "Compare a marketing page's identity with that of a denser working interface.",
+      "developer": "Check the variable format and the dependencies expected by the generator.",
+      "agent": "Provide the configuration actually exported, not just an inspirational screenshot.",
+      "watch": "This service is separate from shadcn/ui; examine its current access terms and export options."
+    },
+    {
+      "id": "1.4",
+      "category": 1,
+      "urls": [
+        "https://huemint.com/"
+      ],
+      "name": "Huemint",
+      "description": "Huemint offers automated exploration of palettes applied to different visual settings. The results can help you describe a direction, especially when brand colors have not yet been chosen. It cannot decide which text matters most, which error needs attention or which chart must distinguish several series. Choose a candidate, assign semantic roles and then try it in those situations.",
+      "nonDesigner": "Compare several visual directions using the same starting content.",
+      "developer": "Turn the chosen palette into background, text, border and action roles.",
+      "agent": "Require colors to stay within their defined roles instead of varying them arbitrarily.",
+      "watch": "A generated palette does not guarantee contrast, comprehension or harmony in every state."
+    },
+    {
+      "id": "1.5",
+      "category": 1,
+      "urls": [
+        "https://www.radix-ui.com/colors"
+      ],
+      "name": "Radix Colors",
+      "description": "Radix Colors organizes each scale into twelve steps and documents typical uses: backgrounds, components, borders, solid surfaces and text. The documentation explicitly notes exceptions. This structure is a starting point for naming decisions and comparing themes; it does not make every text/background combination suitable. Keep your product's semantic aliases and check the actual rendered states and color pairs.",
+      "nonDesigner": "Use documented roles instead of choosing every shade in isolation.",
+      "developer": "Map scale steps to your tokens and component states.",
+      "agent": "Supply the step-to-role mapping and check the pairs actually rendered.",
+      "watch": "The official documentation describes uses, not a general accessibility or contrast guarantee."
+    },
+    {
+      "id": "1.6",
+      "category": 1,
+      "urls": [
+        "https://uicolors.app/"
+      ],
+      "name": "UI Colors",
+      "description": "UI Colors lets you explore a scale based on a starting color, including shade conventions commonly used with Tailwind. A scale helps distribute uses, but does not yet describe an entire theme. A brand color may work as a decorative accent while being unsuitable for the text or background of a small button. Keep those roles separate when selecting shades.",
+      "nonDesigner": "Expand a known color into a scale and compare its uses on components.",
+      "developer": "Check the generated scale, variable names and the export offered by the tool.",
+      "agent": "Supply only the approved shades together with the roles they may serve.",
+      "watch": "Examine free versus paid features, then measure contrast after assigning roles."
+    },
+    {
+      "id": "1.7",
+      "category": 1,
+      "urls": [
+        "https://m3.material.io/theme-builder"
+      ],
+      "name": "Material Theme Builder",
+      "description": "Material Theme Builder is part of the Material Design ecosystem and helps explore themes from source colors. It supports thinking in interface roles rather than repeating a single brand color everywhere. Decisions still depend on the platform, component version and content. An Android preview does not validate a web interface, nor does it establish suitability for a different design system.",
+      "nonDesigner": "Understand the difference between a brand color and its interface roles.",
+      "developer": "Confirm the platforms and export formats supported by the version you use.",
+      "agent": "Provide the selected Material roles and the target platform's conventions.",
+      "watch": "Do not present a generated theme as automatic platform or WCAG conformance."
+    },
+    {
+      "id": "1.8",
+      "category": 1,
+      "urls": [
+        "https://coolors.co/",
+        "https://colorhunt.co/"
+      ],
+      "name": "Coolors and Color Hunt",
+      "description": "Coolors provides palette exploration, while Color Hunt offers color combinations to browse as visual references. They help compare moods rather than choose a complete design system. A palette of a few colors does not define focus, errors or secondary text. After choosing a direction, prepare those missing roles on a small real interface before extending the theme throughout the product.",
+      "nonDesigner": "Create a shortlist and explain what appeals to you in each candidate.",
+      "developer": "Record the values, then define the missing semantic roles and states.",
+      "agent": "Assign specific uses to the colors instead of giving only a vague style instruction.",
+      "watch": "Features, exports and terms differ between the two services; check each separately."
+    },
+    {
+      "id": "1.9",
+      "category": 1,
+      "urls": [
+        "https://www.khroma.co/"
+      ],
+      "name": "Khroma",
+      "description": "Khroma explores combinations based on a person's stated color preferences. It helps turn a preference into something concrete to discuss when phrases such as warmer or more restrained are not enough for a brief. Do not assume everyone will interpret a favorite combination in the same way. Try it with the project's actual text, components and accessibility constraints before adopting it.",
+      "nonDesigner": "Use examples to explain a visual preference that is difficult to describe.",
+      "developer": "Keep a few selected pairs and compare them with the existing theme.",
+      "agent": "Provide accepted and rejected references together with the reasons for each decision.",
+      "watch": "Aesthetic preference and readability are separate questions; examine the service's terms."
+    },
+    {
+      "id": "1.10",
+      "category": 1,
+      "urls": [
+        "https://www.aibrandkits.com/live-brand-preview-tool"
+      ],
+      "name": "AI Brand Kits — Live Brand Preview",
+      "description": "The preview tool cited under AI Brand Kits is a candidate for viewing an identity across different interface elements. Use this kind of preview to look for contradictions: faint text, an overlooked action or a chart that blends into the background. The most flattering example may not resemble your application. Confirm current access and functionality before making the service part of your process.",
+      "nonDesigner": "Examine the same direction across several blocks rather than a single cover screen.",
+      "developer": "Compare the demonstrated components with your project's constraints and information density.",
+      "agent": "Supply decisions extracted from the preview and identify the files that actually need changes.",
+      "watch": "Availability, exports and the current offering were not tested for this directory; verify the service first."
+    },
+    {
+      "id": "2.1",
+      "category": 2,
+      "urls": [
+        "https://typehue.com/"
+      ],
+      "name": "TypeHue",
+      "description": "The supplied source lists TypeHue as a way to try typography in an interface context. The useful comparison is a form, table or card with your own labels. An expressive family in a large heading may behave differently at small sizes. Before making this tool part of the team's workflow, confirm its current features and whether you can access them.",
+      "nonDesigner": "Compare how a family affects different reading tasks and content types.",
+      "developer": "Record the chosen sizes, weights and line heights instead of assuming optimal values.",
+      "agent": "Provide a written typography specification alongside the visual reference.",
+      "watch": "A candidate from the supplied document; its current functionality and availability were not tested here."
+    },
+    {
+      "id": "2.2",
+      "category": 2,
+      "urls": [
+        "https://www.webfontpreview.com/"
+      ],
+      "name": "Web Font Preview",
+      "description": "The supplied source cites Web Font Preview for comparing families and variants on an example interface. This kind of preview can shorten selection if you keep the same text throughout the comparison. You should then test the characters in your language, numbers and unusually long strings. Seeing a variant in a tester does not establish that you possess its file or license.",
+      "nonDesigner": "Compare a few families in an otherwise identical layout.",
+      "developer": "Confirm the available files, weights and languages before preparing styles.",
+      "agent": "Supply the exact family name, authorized files and fallback choices.",
+      "watch": "Verify current access, font provenance and usage rights separately from the visual preview."
+    },
+    {
+      "id": "2.3",
+      "category": 2,
+      "urls": [
+        "https://www.uifonts.app/"
+      ],
+      "name": "UI Fonts",
+      "description": "UI Fonts is a candidate for comparing typefaces on interface elements. Looking at buttons, badges and cards supports more precise questions than style alone: can letters be distinguished, does the label fit and do the weights establish a hierarchy? References to other products can provide inspiration, but do not grant access to their identity or demonstrate their usability results.",
+      "nonDesigner": "Evaluate letters and labels on components similar to those in your project.",
+      "developer": "Compare weights without assuming the tester optimizes the files you will ship.",
+      "agent": "Specify one family and a few explicit roles instead of imitating a brand.",
+      "watch": "No tester guarantees file weight, readability or the license of the families it displays."
+    },
+    {
+      "id": "2.4",
+      "category": 2,
+      "urls": [
+        "https://fontpair.co/"
+      ],
+      "name": "Fontpair",
+      "description": "Fontpair collects ideas for pairing typefaces. A heading/body combination can help you begin, but two families are not compulsory: one family with several weights may be enough. Examine the combination on a long page rather than only a headline. Differences in height, width and rhythm become easier to notice in a real form or paragraph with the project's actual content.",
+      "nonDesigner": "Compare suggested pairings without having to invent a combination immediately.",
+      "developer": "Check each family's files and the cost of loading them.",
+      "agent": "Specify each family's role and prevent unnecessary additions for individual components.",
+      "watch": "Verify licenses and available variants at the original source of each typeface."
+    },
+    {
+      "id": "2.5",
+      "category": 2,
+      "urls": [
+        "https://fontjoy.com/"
+      ],
+      "name": "Fontjoy",
+      "description": "Fontjoy suggests typeface pairings that you can explore by varying their visual similarity. Treat a result as a hypothesis for a page, not a universal typography rule. Keep one starting family, compare a few alternatives and then reread the whole page rather than inspecting only headings. This helps distinguish useful contrast from a difference that draws attention in the wrong place.",
+      "nonDesigner": "Explore combinations and explain why one fits the project's intended use.",
+      "developer": "Verify that the required weights and characters exist in the selected files.",
+      "agent": "Provide a specific pairing and its roles rather than simply asking for elegance.",
+      "watch": "A generated pairing does not establish readability or license compatibility."
+    },
+    {
+      "id": "2.6",
+      "category": 2,
+      "urls": [
+        "https://fonts.google.com/"
+      ],
+      "name": "Google Fonts",
+      "description": "Google Fonts provides open-source families and information about their supported languages and styles. Its FAQ permits commercial use subject to each license, which should be read and retained. Choose a family using your real text: accents, currencies, numbers and necessary weights. Loading methods, subsets and fallbacks still require integration decisions; a free font is not automatically lightweight or readable in every setting.",
+      "nonDesigner": "Compare a family using the characters that actually appear on your screens.",
+      "developer": "Select files and a hosting method, and retain the license notice.",
+      "agent": "Supply the approved files and typography roles without loading additional families.",
+      "watch": "The official FAQ distinguishes free access from redistribution conditions; check each license."
+    },
+    {
+      "id": "2.7",
+      "category": 2,
+      "urls": [
+        "https://www.fontshare.com/"
+      ],
+      "name": "Fontshare",
+      "description": "Fontshare, offered by Indian Type Foundry, includes families such as Satoshi, General Sans and Clash Display. Its catalog distinguishes closed-source families, so free access does not automatically mean open source or unrestricted redistribution. A family may suit your project, but read its license and check the available files before including it in a website, application or kit delivered to a client.",
+      "nonDesigner": "Compare less familiar families without confusing originality with readability.",
+      "developer": "Check the license, formats, languages and permission to transfer files to a client.",
+      "agent": "Name the approved family and include its license instead of supplying only a brand reference.",
+      "watch": "Do not describe the entire catalog as unrestricted; conditions depend on the family."
+    },
+    {
+      "id": "2.8",
+      "category": 2,
+      "urls": [
+        "https://uncut.wtf/",
+        "https://fontesk.com/"
+      ],
+      "name": "Uncut.wtf and Fontesk",
+      "description": "Uncut.wtf and Fontesk are starting points for exploring typefaces with a distinctive character. Poster and identity examples can communicate an intention, but do not always show how a family behaves in a dense interface. Make a short selection, then locate each file's original source and license. For body text, pay particular attention to accents, numbers and the distinction between similar letters.",
+      "nonDesigner": "Explore expressive directions and decide whether they fit a heading or body text.",
+      "developer": "Trace files back to their authors before distributing or hosting them.",
+      "agent": "Supply the chosen family and its limited role rather than an entire gallery reference.",
+      "watch": "Directories may list different licenses; do not generalize the rights of one entry to another."
+    },
+    {
+      "id": "2.9",
+      "category": 2,
+      "urls": [
+        "https://typescale.com/"
+      ],
+      "name": "Typescale",
+      "description": "Typescale helps you explore a progression of sizes from a base and ratio. The calculation proposes a hierarchy, but does not know the length of your headings or the width of a phone. Try rounded sizes, line heights and line breaks afterward. A scale is a shared constraint, not proof that every level is needed on every screen in the product.",
+      "nonDesigner": "Compare typographic levels without selecting every size in isolation.",
+      "developer": "Convert the chosen values into tokens and test zoom and narrow screens.",
+      "agent": "Supply the selected roles, values and documented exceptions.",
+      "watch": "A mathematical ratio does not guarantee a clear hierarchy; check the offering's limits too."
+    },
+    {
+      "id": "2.10",
+      "category": 2,
+      "urls": [
+        "https://sitepeel.dev/font-preview/"
+      ],
+      "name": "Sitepeel Font Changer",
+      "description": "The supplied source cites Sitepeel's font changer as a way to preview different typography on an existing page. This can support a quick comparison, provided you distinguish a local preview from work actually delivered. If an extension is involved, review its permissions and do not test it on sensitive data without approval. Then implement the chosen files and verify the page without the extension.",
+      "nonDesigner": "Compare a direction on familiar content and inspect changes in line breaks.",
+      "developer": "Distinguish a temporary preview from the files and styles actually deployed.",
+      "agent": "Supply the decisions you kept, not a dependency on a browser extension.",
+      "watch": "Confirm current features, permissions and privacy terms before installing anything."
+    },
+    {
+      "id": "3.1",
+      "category": 3,
+      "urls": [
+        "https://phosphoricons.com/"
+      ],
+      "name": "Phosphor Icons",
+      "description": "Phosphor presents concepts in several stroke and fill styles. A consistent family lets you compare normal and selected states without mixing unrelated drawings. Try a few symbols on the real backgrounds and at their intended sizes. A style difference must not be the only way to communicate selection: accompanying text and the programmatically exposed state also matter to people using the interface.",
+      "nonDesigner": "Compare styles within one family before choosing a direction for the interface.",
+      "developer": "Check the packages and names available for your chosen platform.",
+      "agent": "Provide existing names and permitted variants, then verify the generated imports.",
+      "watch": "Retain license notices and do not use a lone icon for an ambiguous action."
+    },
+    {
+      "id": "3.2",
+      "category": 3,
+      "urls": [
+        "https://www.figma.com/community/file/1166831539721848736"
+      ],
+      "name": "Solar Icons",
+      "description": "Solar is an icon collection distributed through channels including Figma and aggregators. Its variants can help explore rounded or two-color directions. A collection listing does not, however, define the rights of every distribution method. After selecting it, keep a consistent style, examine each color's contrast and provide text labels where the meaning of a symbol is not obvious.",
+      "nonDesigner": "Compare navigation built with one family rather than a mixture of styles.",
+      "developer": "Identify the actual source, format and license used in the project.",
+      "agent": "Supply exact identifiers and prevent the invention of missing symbols.",
+      "watch": "Access through Iconify or Figma does not replace reading the collection's license."
+    },
+    {
+      "id": "3.3",
+      "category": 3,
+      "urls": [
+        "https://lucide.dev/"
+      ],
+      "name": "Lucide",
+      "description": "Lucide provides SVG icons with a customizable stroke. A coherent family and discoverable names help maintain a consistent vocabulary; they do not prevent an AI agent from making mistakes. Choose a size and stroke suited to the interface, then inspect commands in context. The Playbook website uses a deliberately heavier stroke and keeps text for important actions: these are project choices, not library requirements.",
+      "nonDesigner": "Keep one family and test whether people understand the symbols.",
+      "developer": "Import the icons you use and retain the package's license notice.",
+      "agent": "Use names from the installed version and verify generated imports.",
+      "watch": "The reviewed package has an ISC license with inherited Feather notices. Keep the full notice."
+    },
+    {
+      "id": "3.4",
+      "category": 3,
+      "urls": [
+        "https://tabler.io/icons"
+      ],
+      "name": "Tabler Icons",
+      "description": "Tabler offers icons organized around a grid and drawing variants. The catalog is a candidate for applications with many business functions, but its size does not guarantee that people will recognize a symbol. Choose icons as a small shared vocabulary and inspect distinctions between related actions, such as archiving and deleting, in the context where those commands will actually be used.",
+      "nonDesigner": "Compare related symbols and keep the text labels that remain necessary.",
+      "developer": "Check variants and names before choosing the appropriate package.",
+      "agent": "Supply approved identifiers and a rule for concepts that have no matching icon.",
+      "watch": "Do not mix variants arbitrarily; retain the license of the version you use."
+    },
+    {
+      "id": "3.5",
+      "category": 3,
+      "urls": [
+        "https://heroicons.com/"
+      ],
+      "name": "Heroicons",
+      "description": "Heroicons is associated with the Tailwind ecosystem. Its variants target different formats and styles, encouraging you to choose a suitable drawing rather than resize the same one indefinitely. You can also consider the collection outside a Tailwind project. Select a few representative actions and check whether their meaning remains clear at the actual size used in the interface.",
+      "nonDesigner": "Start with familiar actions and inspect both resting and focused states.",
+      "developer": "Choose SVG files or components that are compatible with the project.",
+      "agent": "Provide exact variant and icon names rather than a vague resemblance instruction.",
+      "watch": "A small, sharp icon does not justify a touch target that is too small."
+    },
+    {
+      "id": "3.6",
+      "category": 3,
+      "urls": [
+        "https://hugeicons.com/"
+      ],
+      "name": "Hugeicons",
+      "description": "Hugeicons offers several styles and plans; its free subset should not be confused with the entire catalog. A rounded direction may fit a product's identity, as long as it remains consistent across commands. Start with a shortlist of essential symbols and check that they are all available in the same style under terms compatible with the project's requirements and distribution.",
+      "nonDesigner": "Compare a rounded family on the important actions in your journey.",
+      "developer": "Confirm that every required symbol belongs to the selected offering.",
+      "agent": "Supply references that actually exist in the authorized package.",
+      "watch": "Examine the precise rights and limits of the free offering instead of generalizing to every style."
+    },
+    {
+      "id": "3.7",
+      "category": 3,
+      "urls": [
+        "https://remixicon.com/",
+        "https://iconoir.com/"
+      ],
+      "name": "Remix Icon and Iconoir",
+      "description": "Remix Icon and Iconoir offer distinct visual vocabularies. Compare them on the same actions before choosing rather than combining their catalogs. Proportions, details and fill variants can change how a navigation bar is read. Once you choose a family, establish a replacement rule for missing concepts and check its integration with neighboring text and visible focus states throughout the interface.",
+      "nonDesigner": "Choose one family using a set of representative actions.",
+      "developer": "Review each project's formats, packages and licenses separately.",
+      "agent": "Limit approved names to the chosen family and flag missing symbols.",
+      "watch": "Read notice requirements in each license; free access does not mean there are no conditions."
+    },
+    {
+      "id": "3.8",
+      "category": 3,
+      "urls": [
+        "https://www.mingcute.com/"
+      ],
+      "name": "MingCute",
+      "description": "MingCute is a candidate for compact line or filled icons. The variants can support discussion of states, but an active state should not be communicated only by the difference between drawings. Try similar shapes on a dark background and in a dense menu. Consistency also depends on spacing, nearby text and the size of the complete interactive command around each symbol.",
+      "nonDesigner": "Compare symbols in a list or menu rather than only in the catalog.",
+      "developer": "Check names, formats and license notices before integrating files.",
+      "agent": "Supply selected variants and state rules instead of an improvised mixture.",
+      "watch": "Measure the full control and its contrast, not only the SVG's dimensions."
+    },
+    {
+      "id": "3.9",
+      "category": 3,
+      "urls": [
+        "https://fonts.google.com/icons",
+        "https://ionic.io/ionicons"
+      ],
+      "name": "Material Symbols and Ionicons",
+      "description": "Material Symbols and Ionicons belong to different ecosystems. Material Symbols includes variation axes, while Ionicons accompanies the Ionic ecosystem. Merely using these icons does not make an application native or establish platform conformance. Choose the platform and family first, then examine actions, sizes and states within the intended navigation context, including the gestures and focus behavior you actually implement.",
+      "nonDesigner": "Compare platform conventions without equating an icon with a native experience.",
+      "developer": "Choose an integration method and prevent ligature names appearing instead of symbols.",
+      "agent": "Specify the family, variants and target platform, then verify every rendered result.",
+      "watch": "Gestures, navigation and focus rules still need to be implemented and tested."
+    },
+    {
+      "id": "3.10",
+      "category": 3,
+      "urls": [
+        "https://icon-sets.iconify.design/",
+        "https://www.svgrepo.com/"
+      ],
+      "name": "Iconify and SVG Repo",
+      "description": "Iconify brings many collections together through an identifier system, while SVG Repo supports searches across vectors from varied sources. They help compare families, but do not make their licenses identical. A search result is not yet an approved resource. Trace the selection back to its collection and author, retain the notice and do not mix styles simply because importing them is convenient.",
+      "nonDesigner": "Compare representations of a concept, then choose a coherent family.",
+      "developer": "Check license, provenance, network dependency and the SVG delivery method.",
+      "agent": "Supply approved identifiers together with their source and license.",
+      "watch": "Do not present every vector in an aggregator as unrestricted or interchangeable."
+    },
+    {
+      "id": "4.1",
+      "category": 4,
+      "urls": [
+        "https://ui.shadcn.com/"
+      ],
+      "name": "shadcn/ui",
+      "description": "shadcn/ui distributes component code that you integrate and adapt within your own project. Its documentation emphasizes open code, composition and distribution rather than an opaque library imported unchanged. This makes behavior easier to inspect, but also means tracking your adaptations and updates. Retest a modified component with its actual labels, error conditions and focus behavior rather than assuming the original example still represents it.",
+      "nonDesigner": "Examine variants of a component before fixing the visual direction.",
+      "developer": "Read added files, their dependencies and the update strategy.",
+      "agent": "Provide the component actually in the project and its documentation instead of requesting an approximate rewrite.",
+      "watch": "Accessible building blocks do not certify the accessibility of the assembled or modified journey."
+    },
+    {
+      "id": "4.2",
+      "category": 4,
+      "urls": [
+        "https://originui.com/",
+        "https://21st.dev/"
+      ],
+      "name": "Origin UI and 21st.dev",
+      "description": "Origin UI and 21st.dev provide entry points to component variants and interface blocks. Look for an answer to a specific need, such as a search field with an empty state, instead of collecting visually appealing blocks. Before importing code, examine its provenance, dependencies, license and consistency with the components the project already uses and the team will need to maintain.",
+      "nonDesigner": "Compare a few variants against a known need, not visual impact alone.",
+      "developer": "Read the distributed code and assess adaptation and maintenance costs.",
+      "agent": "Supply the selected block, its origin and the permitted scope of changes.",
+      "watch": "A marketplace or registry may mix different authors, licenses and commercial offerings."
+    },
+    {
+      "id": "4.3",
+      "category": 4,
+      "urls": [
+        "https://magicui.design/",
+        "https://ui.aceternity.com/"
+      ],
+      "name": "Magic UI and Aceternity UI",
+      "description": "These resources are associated with animated components and visual effects. An animation may clarify a transition, but it may also delay information or disrupt reading. Start by naming its role in the journey, then try the result without motion, by keyboard and on a phone. A presentation effect must not become necessary for understanding an action or reaching essential content.",
+      "nonDesigner": "Choose motion that explains a transition rather than a permanent visual effect.",
+      "developer": "Measure dependencies and rendering, and check reduced-motion behavior.",
+      "agent": "Specify the animation's purpose and the static states that replace it.",
+      "watch": "Separate free components from paid offerings; test reduced motion and loading."
+    },
+    {
+      "id": "4.4",
+      "category": 4,
+      "urls": [
+        "https://ant.design/",
+        "https://mantine.dev/"
+      ],
+      "name": "Ant Design and Mantine",
+      "description": "Ant Design and Mantine provide component sets for applications with substantial forms and data. The choice depends on the technical platform, essential components and expected customization. Try a difficult screen with a table, validation and a modal before choosing a base. A large catalog does not remove decisions about states, content or responsibility for maintaining the interface over time.",
+      "nonDesigner": "Evaluate overall consistency on a representative business screen.",
+      "developer": "Compare APIs, versions, loading cost, customization and update policies.",
+      "agent": "Specify the installed version and limit examples to its documented API.",
+      "watch": "Do not choose solely by component count; examine each project's terms."
+    },
+    {
+      "id": "4.5",
+      "category": 4,
+      "urls": [
+        "https://www.heroui.com/",
+        "https://daisyui.com/",
+        "https://flowbite.com/"
+      ],
+      "name": "HeroUI, DaisyUI and Flowbite",
+      "description": "These three resources take different approaches to interfaces. DaisyUI notably uses semantic classes, while HeroUI and Flowbite provide their own components and conventions. Compare the project you must maintain, not just the speed of a first screen. Changing a theme does not solve validation, information hierarchy or content constraints. Prepare a real form to judge the compromises each approach introduces.",
+      "nonDesigner": "Compare themes using the same labels and component states.",
+      "developer": "Choose an approach compatible with the framework and existing styles.",
+      "agent": "Provide the selected API or classes without mixing different systems.",
+      "watch": "Offerings and advanced components can differ; check licenses and availability before committing."
+    },
+    {
+      "id": "4.6",
+      "category": 4,
+      "urls": [
+        "https://ionicframework.com/docs/components",
+        "https://konstaui.com/",
+        "https://reactnativereusables.com/"
+      ],
+      "name": "Ionic, Konsta UI and React Native Reusables",
+      "description": "Ionic, Konsta UI and React Native Reusables take different approaches to mobile interfaces. A mobile-looking web interface, a hybrid application and a React Native application have different constraints. This guide links to the current React Native Reusables site instead of the former documentation address. Test navigation, virtual keyboards, safe areas and screen readers on the target devices; a component catalog cannot replace those checks.",
+      "nonDesigner": "Compare mobile conventions without confusing visual appearance with native behavior.",
+      "developer": "Distinguish web, hybrid and React Native stacks before choosing components.",
+      "agent": "Provide the platform, navigation and device constraints before the visual references.",
+      "watch": "Platforms and dependencies differ; the directory does not promise automatic native conformance."
+    },
+    {
+      "id": "4.7",
+      "category": 4,
+      "urls": [
+        "https://github.com/satnaing/shadcn-admin",
+        "https://www.tremor.so/",
+        "https://www.untitledui.com/free-figma-ui-kit"
+      ],
+      "name": "shadcn-admin, Tremor and Untitled UI",
+      "description": "shadcn-admin, Tremor and Untitled UI offer different kinds of starting points: an administration template, data-oriented components or a design kit. A Figma mockup is not a working application, and an executable template is not a specification tailored to your service. Inspect exactly what is delivered, what is missing and what you would need to change before adopting its structure.",
+      "nonDesigner": "Observe screen organization and identify the blocks your project actually needs.",
+      "developer": "Distinguish executable code, design kits and dependencies that require maintenance.",
+      "agent": "Specify the selected medium and the elements that may be reused.",
+      "watch": "Do not present an entire commercial catalog as free; inspect the exact scope of the kit."
+    },
+    {
+      "id": "5.1",
+      "category": 5,
+      "urls": [
+        "https://www.tremor.so/docs/visualizations/area-chart",
+        "https://ui.shadcn.com/charts"
+      ],
+      "name": "Tremor Charts and shadcn Charts",
+      "description": "These resources offer chart presentations integrated with their component environments. They can help organize cards, legends, axes and tooltips consistently with the rest of a dashboard. They do not choose the right measure or representation for you. Start with a reading question, realistic data and a text alternative before customizing colors or interactions to suit the surrounding interface.",
+      "nonDesigner": "Compare several representations of the same measure.",
+      "developer": "Check component versions and the versions of underlying chart libraries.",
+      "agent": "Provide the data schema, units and expected empty/error states.",
+      "watch": "Verify current URLs and offerings; a default appearance is not evidence that readers understand the data."
+    },
+    {
+      "id": "5.2",
+      "category": 5,
+      "urls": [
+        "https://recharts.github.io/"
+      ],
+      "name": "Recharts",
+      "description": "Recharts composes charts with React components and SVG rendering. This structure helps you discuss axes, series, legends and tooltip contents separately. It does not remove decisions about units, scales or label placement. Try missing data, extreme values and a narrow screen; supplement the chart with a summary or table when it carries information that people must be able to access.",
+      "nonDesigner": "Compare representations against a reading question rather than a style effect.",
+      "developer": "Check the responsive container and components in the installed version.",
+      "agent": "Supply an explicit data schema and review values and scales.",
+      "watch": "The official site describes React/SVG composition; project accessibility and performance still need testing."
+    },
+    {
+      "id": "5.3",
+      "category": 5,
+      "urls": [
+        "https://apexcharts.com/"
+      ],
+      "name": "ApexCharts",
+      "description": "ApexCharts offers interactive charts with structured configuration. Distinguish this capability from permission to use it: the current official license page describes conditional Community, Commercial and OEM/redistribution regimes. The supplied document called it open source too broadly. Before integration, examine the current license, distribution model and organization's circumstances; a working example does not establish free use for every organization or purpose.",
+      "nonDesigner": "Compare the interactions you need without assuming every offering is free.",
+      "developer": "Confirm the applicable license before adding the dependency.",
+      "agent": "Read the selected version and license instead of installing the library automatically.",
+      "watch": "Payment may be required depending on the organization and usage; the current license page is the reference."
+    },
+    {
+      "id": "5.4",
+      "category": 5,
+      "urls": [
+        "https://echarts.apache.org/"
+      ],
+      "name": "Apache ECharts",
+      "description": "Apache ECharts provides varied visualizations and multiple rendering options. Its catalog can help examine needs that basic charts do not cover, but this flexibility increases configuration decisions. First identify the question to explain. Then prepare representative data, units, a legend and an alternative reading format before pursuing effects or trying to maximize the number of data points on screen.",
+      "nonDesigner": "Find an example close to the need and explain what it lets readers understand.",
+      "developer": "Measure rendering on the target device and limit loaded functionality.",
+      "agent": "Specify the chart type, data and permitted interactions.",
+      "watch": "No data-volume limit or performance result has been measured for this guide."
+    },
+    {
+      "id": "5.5",
+      "category": 5,
+      "urls": [
+        "https://www.chartjs.org/"
+      ],
+      "name": "Chart.js",
+      "description": "Chart.js is a charting library that renders on Canvas. It is a candidate for common representations with documented configuration, without requiring React. Canvas needs particular attention to replacement content: a chart image does not automatically expose values to every reader. Prepare a summary and, when needed, an accessible table, then inspect incomplete data and the behavior on narrow screens.",
+      "nonDesigner": "Choose the representation based on the comparison the reader needs to make.",
+      "developer": "Configure the container, necessary plugins and accessible replacement content.",
+      "agent": "Provide data, units and scale rules rather than only a visual example.",
+      "watch": "No popularity ranking or performance guarantee is claimed; test rendering and text alternatives."
+    },
+    {
+      "id": "5.6",
+      "category": 5,
+      "urls": [
+        "https://www.tradingview.com/lightweight-charts/"
+      ],
+      "name": "Lightweight Charts",
+      "description": "Lightweight Charts, offered by TradingView, focuses notably on time series and financial charts. It is a more relevant candidate when time-based interaction or financial representation is genuinely needed than for a single isolated indicator. Evaluate detail, zoom and information available by touch. Do not repeat a bundle size from an old listing: measure the project's selected version and options instead.",
+      "nonDesigner": "Examine how a time series and its values can be read.",
+      "developer": "Check notices, attribution and the selected version's performance.",
+      "agent": "Provide the time structure, units and update rules.",
+      "watch": "A financial chart library does not guarantee meaningful data or a fixed file size."
+    },
+    {
+      "id": "5.7",
+      "category": 5,
+      "urls": [
+        "https://chartist.dev/",
+        "https://github.com/leeoniya/uPlot",
+        "https://airbnb.io/visx/"
+      ],
+      "name": "Chartist, uPlot and Visx",
+      "description": "Chartist, uPlot and Visx address different architectural choices: styled SVG charts, time series or React visualization primitives. This guide replaces the supplied document's old Chartist URL with the current documentation address. Compare candidates on a real case rather than a general speed ranking. More control changes development and maintenance work; a lower-level tool does not automatically produce a more understandable interface.",
+      "nonDesigner": "Compare the same question and data using equivalent legends.",
+      "developer": "Assess control, integration, measured performance and maintenance effort.",
+      "agent": "Provide the constraints and selected library instead of requesting a mixture of all three.",
+      "watch": "APIs and licenses differ; measure rather than repeating unverified bundle-size figures."
+    },
+    {
+      "id": "6.1",
+      "category": 6,
+      "urls": [
+        "https://undraw.co/illustrations"
+      ],
+      "name": "unDraw",
+      "description": "unDraw offers illustrations to consider for empty states or presentation pages. Its specific license permits some free uses, including commercial ones, but explicitly restricts asset-pack redistribution and use of its files for AI training or development without separate permission. This directory does not redistribute any unDraw illustration. Choose a visual for the meaning it adds rather than simply to fill unused space.",
+      "nonDesigner": "Choose an illustration that explains a state without replacing the useful message.",
+      "developer": "Retain the source and review the license, weight and text alternative before use.",
+      "agent": "Provide an approved reference; do not scrape or reuse files to train a model.",
+      "watch": "This is a specific license, not a blanket open-source permission; read the current license page."
+    },
+    {
+      "id": "6.2",
+      "category": 6,
+      "urls": [
+        "https://storyset.com/"
+      ],
+      "name": "Storyset",
+      "description": "Storyset provides illustration collections and customization tools. Using one family can support consistency, but licensing must remain part of the decision. The reviewed terms require attribution for free use and restrict redistribution. An animation must not be necessary to understand a state and needs a suitable alternative. This kit includes no Storyset files; examine the exact intended use before downloading or delivering an illustration.",
+      "nonDesigner": "Choose a family and examine what its visual communicates on the intended screen.",
+      "developer": "Plan the required attribution and check weight, reduced motion and delivery rights.",
+      "agent": "Provide authorized references and terms, without bulk downloads or a derived asset pack.",
+      "watch": "The reviewed free-use terms require attribution; check other applicable restrictions too."
+    },
+    {
+      "id": "6.3",
+      "category": 6,
+      "urls": [
+        "https://www.drawkit.com/",
+        "https://www.manypixels.co/gallery"
+      ],
+      "name": "DrawKit and ManyPixels",
+      "description": "DrawKit and ManyPixels let you explore illustrations grouped by style or subject. A category such as health or finance does not validate meaning, representation of people or suitability for your service. Choose a few consistent images, then inspect the specific files and their rights. Free and paid collections can coexist; one pack's permissions do not establish those of another resource from the same site.",
+      "nonDesigner": "Compare a few visuals alongside the message they should support.",
+      "developer": "Check the pack's terms, format and weight before delivery.",
+      "agent": "Supply approved files rather than a gallery to download automatically.",
+      "watch": "Read each collection's license; this guide does not redistribute any third-party pack."
+    },
+    {
+      "id": "6.4",
+      "category": 6,
+      "urls": [
+        "https://www.humaaans.com/",
+        "https://www.openpeeps.com/"
+      ],
+      "name": "Humaaans and Open Peeps",
+      "description": "Humaaans and Open Peeps, created by Pablo Stanley, provide character elements that can be combined. This modular approach helps you discuss a scene, the people in it and their poses without drawing every shape. It does not guarantee inclusive representation or suitability for the audience. Review the actual combinations, intended context and license of the resource you download before using the scene.",
+      "nonDesigner": "Compose a scene and discuss what it represents before adopting it.",
+      "developer": "Keep references and check the rights of the file or pack actually used.",
+      "agent": "Supply an approved composition rather than requesting unchecked variations.",
+      "watch": "Verify the author, rights and conditions for the collection you actually downloaded."
+    },
+    {
+      "id": "6.5",
+      "category": 6,
+      "urls": [
+        "https://blush.design/",
+        "https://icons8.com/illustrations"
+      ],
+      "name": "Blush and Ouch!",
+      "description": "Blush and Ouch! bring together illustrations in different styles and offerings. Download format, resolution, attribution and rights may depend on the selected work and plan. First choose a direction that fits the content, then check what can be used and delivered. A visible gallery preview does not authorize downloading it by another method to bypass an access or format restriction.",
+      "nonDesigner": "Choose a consistent illustrated direction with a few examples rather than mixed styles.",
+      "developer": "Compare formats and access conditions before planning integration.",
+      "agent": "Supply authorized files and the limits on modification or attribution.",
+      "watch": "Do not promise a free SVG for every illustration; inspect the specific offering and license."
+    },
+    {
+      "id": "6.6",
+      "category": 6,
+      "urls": [
+        "https://iradesign.io/"
+      ],
+      "name": "IRA Design",
+      "description": "IRA Design is a candidate for character and object illustrations with an identity built notably around gradients. Before adopting this direction, try it on the actual background and at the interface's intended size: a detailed scene may lose meaning as a thumbnail. Check nearby text and file weight. If an illustration is purely decorative and carries no information, an empty text alternative may be appropriate.",
+      "nonDesigner": "Examine whether the scene supports the state message or distracts from it.",
+      "developer": "Check the format, license and light/dark theme adaptation.",
+      "agent": "Supply the authorized file and state whether it is informative or decorative.",
+      "watch": "Do not let an agent recolor or redistribute files without reviewing both rights and results."
+    },
+    {
+      "id": "6.7",
+      "category": 6,
+      "urls": [
+        "https://3dicons.co/",
+        "https://www.shapefest.com/",
+        "https://www.toyfaces.com/",
+        "https://3d.khagwal.com/",
+        "https://app.spline.design/community"
+      ],
+      "name": "3Dicons, Shapefest, Toy Faces, Khagwal 3D and Spline",
+      "description": "These resources do not all deliver the same kind of material: a rendered image, avatar, object or interactive scene. A PNG may be enough for a welcome screen, whereas a Spline scene introduces interactions and loading costs to examine. Free and paid offerings and rights vary by pack. Do not describe the entire group as open source. Choose the simplest medium that conveys the intended information and provide a static replacement where needed.",
+      "nonDesigner": "Compare what depth adds against a simpler image carrying the same message.",
+      "developer": "Distinguish static rendering, source model and embedded scene; measure loading.",
+      "agent": "Provide the approved resource and require an accessible fallback, without automatic purchases or imports.",
+      "watch": "Inspect each pack's rights and limits; this guide includes no third-party render or model."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Radix Colors — Understanding the scale",
+      "url": "https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale",
+      "note": "Twelve steps and their typical uses, with explicit exceptions; no general contrast guarantee."
+    },
+    {
+      "title": "Google Fonts — FAQ",
+      "url": "https://fonts.google.com/faq",
+      "note": "Free access and commercial use under each license; files, languages and hosting still require a choice."
+    },
+    {
+      "title": "Lucide — package notice 0.511.0",
+      "url": "https://github.com/lucide-icons/lucide/blob/main/LICENSE",
+      "note": "ISC notice reviewed in the local lucide-react package, including inherited Feather notices. Copy included in LICENSES.txt."
+    },
+    {
+      "title": "shadcn/ui — Introduction",
+      "url": "https://ui.shadcn.com/docs",
+      "note": "Open-code distribution, composition and responsibility for adaptations and updates."
+    },
+    {
+      "title": "Recharts",
+      "url": "https://recharts.github.io/",
+      "note": "React component composition, SVG and D3 submodules. The supplied domain redirected to this site during the French editorial review."
+    },
+    {
+      "title": "ApexCharts — License Options",
+      "url": "https://apexcharts.com/license/",
+      "note": "Current model distinguishes conditional Community, Commercial and OEM/redistribution regimes; avoid blanket claims of free use."
+    },
+    {
+      "title": "unDraw — License",
+      "url": "https://undraw.co/license",
+      "note": "Specific license with restrictions on asset-pack redistribution and AI training/development uses."
+    },
+    {
+      "title": "Storyset — Terms of Use, section 6",
+      "url": "https://storyset.com/terms",
+      "note": "Free use is conditional on attribution; read redistribution restrictions and other applicable terms."
+    },
+    {
+      "title": "Fontshare",
+      "url": "https://www.fontshare.com/",
+      "note": "The catalog includes closed-source families; free access does not establish a universal license."
+    },
+    {
+      "title": "React Native Reusables",
+      "url": "https://reactnativereusables.com/",
+      "note": "Address consulted for the French editorial corrections, replacing the former documentation host."
+    },
+    {
+      "title": "Chartist",
+      "url": "https://chartist.dev/",
+      "note": "Documentation address consulted for the French editorial corrections, replacing the supplied older URL."
+    }
+  ]
+}

@@ -6,12 +6,12 @@ export const ARTICLES_EN: ArticleData[] = [
     slug: "ux-design-guide",
     category: "UX Design",
     icon: "compass",
-    readTime: "About 30 min read",
+    readTime: "About 33 min read",
     publishedAt: "2026-11-18",
     updatedAt: "2026-11-18",
     ogImage: "/og-article-ux-en.jpg",
-    metaTitle: "UX Design: User Journeys and Audits | UX/UI Playbook",
-    metaDescription: "Design clearer user journeys with 10 UX laws and principles, 5 screen states, accessible checkout patterns and a copy-ready 40-point audit checklist.",
+    metaTitle: "UX Design: Research, Journeys and Audits | UX/UI Playbook",
+    metaDescription: "Choose a UX research method, design user journeys and screen states, and use a 40-point audit while separating observations, hypotheses and measurements.",
     keywords: [
       "operational UX design",
       "cognitive load Cowan 4 chunks",
@@ -22,9 +22,9 @@ export const ARTICLES_EN: ArticleData[] = [
       "40 point UX audit checklist",
     ],
     title: "UX Design: Build Clear User Journeys and Audit Your Screens",
-    subtitle: "How to describe a task, preserve context between steps and prepare for errors. Cognitive principles, checkout, accessibility and a 40-point audit checklist.",
+    subtitle: "Choose a research method, describe a task and prepare for errors. Cognitive principles, checkout, accessibility and a 40-point audit checklist.",
     aeoSummaryTitle: "At a glance",
-    aeoSummary: "Start with a user goal and one primary action. Design the article’s 5 screen states: empty, loading, ideal, partial/overflow and error, with confirmation after a successful action. Cowan’s 4 ± 1 chunks inform working-memory design; grouping interface elements is a heuristic to test. Measure WCAG 2.2 AA contrast (4.5:1 for body text) and aim for 44 × 44 px targets under the Playbook; the web AA minimum is 24 × 24 px with exceptions. A few observed usability tests uncover problems, but prove neither completeness nor conversion uplift.",
+    aeoSummary: "Start with the decision to inform: interviews explore accounts of use, observation examines a task in context, and usability testing examines interaction with a product. Measuring frequency or an effect requires an appropriate quantitative protocol. Then design journeys and their states, including waiting and error recovery. The 40-point audit complements these methods without replacing research with participants. Cognitive principles guide design hypotheses; contrast, keyboard and rendering checks need to examine the interface actually used. Neither five participants nor an error-free scan guarantees completeness or conversion uplift.",
     keyStats: [
       {
         value: "4 ± 1 chunks",
@@ -52,6 +52,17 @@ export const ARTICLES_EN: ArticleData[] = [
         tocLabel: "Task and context",
         heading: "Describe the task and its conditions of use",
         blocks: [
+          {
+            type: "p",
+            text: "UX is not just a stage before mockups: the experience continues through use, support and service changes. UI also shapes that experience through interactions and feedback; distinguishing it from UX does not mean separating appearance from function. Job titles alone do not allocate responsibilities. [12]",
+          },
+          {
+            type: "readingLink",
+            slug: "ux-ui-product-design",
+            sectionId: "responsibilities",
+            label: "Compare UX, UI and Product Design responsibilities",
+            text: "To place these decisions in a team, the comparison applies them to one fictional application.",
+          },
           {
             type: "explanation",
             paragraphs: [
@@ -569,6 +580,93 @@ certification nor legal advice."`,
         heading: "Observe use and organise an audit",
         blocks: [
           {
+            type: "h3",
+            text: "Which method answers your UX question?",
+          },
+          {
+            type: "p",
+            text: "An audit, an interview and a usability test provide different kinds of information. Define the decision to inform, then choose an activity that could challenge your assumption. Rohrer’s framework distinguishes attitudinal from behavioural research, separately from qualitative and quantitative research. GOV.UK connects method choice to research questions, relevant people and sharing findings. The following matrix adapts those principles to an invoice-export example; it is not a completed study. [13] [14]",
+          },
+          {
+            type: "table",
+            caption: "Choose an activity for invoice export — hypothetical example",
+            headers: [
+              "Question to inform",
+              "Suitable activity",
+              "Information and limitation",
+            ],
+            rows: [
+              [
+                "How is month-end reporting prepared today?",
+                "Interview about a recent case, complemented by contextual observation.",
+                "An account and working constraints; reported memories alone do not demonstrate behaviour.",
+              ],
+              [
+                "Can someone find and complete the export?",
+                "Usability test with a task and a known set of invoices.",
+                "Observed hesitation, errors and recovery; not a representative estimate of failure rate.",
+              ],
+              [
+                "Where do people stop in the product?",
+                "Event analysis with verified triggers and denominators.",
+                "Distribution of instrumented events; does not establish reasons for abandonment on its own.",
+              ],
+              [
+                "Which document categories make sense?",
+                "Card sorting to explore groupings, then tree testing for a candidate structure.",
+                "Information organisation and retrieval; does not validate the entire layout or download.",
+              ],
+              [
+                "Does a new version change completion rate?",
+                "Quantitative comparison or experiment with a planned hypothesis, sample and measure.",
+                "An estimate and uncertainty within the chosen protocol; a few positive comments do not measure an effect.",
+              ],
+              [
+                "Are the expected labels, states and controls present?",
+                "Interface inspection and technical checks, followed by manual review.",
+                "Defects against the inspected criteria; this is not an observation of use.",
+              ],
+            ],
+          },
+          {
+            type: "p",
+            text: "Qualitative does not mean “what people say”, and quantitative does not mean “what they do”. A usability study may yield qualitative observations or quantitative measures depending on its protocol; a questionnaire can collect both open and numerical responses. Describe the method alongside the data and sample limitations. [13]",
+          },
+          {
+            type: "h3",
+            text: "Prepare a session before recruiting",
+          },
+          {
+            type: "steps",
+            title: "A short protocol to adapt to your study",
+            steps: [
+              {
+                bold: "Question and decision",
+                text: "Record what you need to understand and which decision depends on it. Name a finding that could change your mind.",
+              },
+              {
+                bold: "People and data",
+                text: "Recruit for the actual task, contexts and access needs. Plan useful accommodations, participant information, recording permission and retention; use demonstration data.",
+              },
+              {
+                bold: "Task and facilitation",
+                text: "Prepare a task without naming the expected control: “You need to send October invoices to your accountant. Prepare what they need.” Define an observable outcome, pilot the wording and record any assistance.",
+              },
+              {
+                bold: "Notes and follow-up",
+                text: "Separate observed actions, reported speech and interpretation. Connect each issue to the task, a pseudonymous identifier and context; assign the correction and plan a retest.",
+              },
+            ],
+          },
+          {
+            type: "p",
+            text: "Do not send transcripts, recordings or invoice data to an AI service without checking authorisation, processing terms and applicable requirements. A pseudonymous identifier does not make a recording anonymous. A generated profile may help prepare questions, but counts as neither a participant nor a research finding. [14] [15]",
+          },
+          {
+            type: "h3",
+            text: "Participant numbers: distinguish exploration from measurement",
+          },
+          {
             type: "explanation",
             paragraphs: [
               "The Nielsen and Landauer model (CHI 1993) expresses cumulative problem discovery as `1 − (1 − L)^n`. With a discovery rate `L` of about 31%, five participants give a result near 84%, often rounded to 85%. This depends on the model's assumptions and the rate associated with the problems; it cannot guarantee that five people will find a fixed share of your product's defects. In Faulkner's 2003 study with sixty users, five-person subsets revealed between 55 and 99% of the problems in that study. These variations matter when planning sessions. An initial group can expose obstacles to correct, and a later group can examine the revised journey. Account for the variety of tasks, relevant populations and consequences of errors as well. A medical operation or consequential payment needs an evaluation strategy appropriate to the risk, including expertise and participants that a convenient small sample may not provide.",
@@ -665,6 +763,13 @@ For each item: outcome, observation and a link to the test or screenshot.
 - [ ] Delivery specification updated with edge cases and remaining checks`,
             note: "Place this file in docs/audit-40.md or the pull-request template. Record the journey, date and results; leave unexamined items open. Time required depends on scope.",
           },
+          {
+            type: "readingLink",
+            slug: "product-design-ai-agents",
+            sectionId: "verifying-ai-three-statuses",
+            label: "Document checks and limitations in review.md",
+            text: "An audit identifies issues to examine. The review report keeps the executed method separate from what still needs observation with people.",
+          },
         ],
       },
     ],
@@ -693,7 +798,7 @@ For each item: outcome, observation and a link to the test or screenshot.
       "12 A4 worksheets for briefing, auditing and handoff",
       "Tokens, templates, rules and a Python scanner in the archive",
     ],
-    entityDefinition: "User experience design organises journeys, content and interactions so a person can reach a goal. It differs from UI design, which defines visual presentation, and Product Design, which also addresses value and scope.",
+    entityDefinition: "User experience design develops and improves products and services around people’s needs, behaviour and context. It connects research, content, journeys and interactions, then evaluates the resulting choices. UI specifies visual and interactive components; responsibilities overlap and vary between teams.",
     references: [
       {
         title: "The magical number 4 in short-term memory",
@@ -772,21 +877,49 @@ For each item: outcome, observation and a link to the test or screenshot.
         date: "2026-09",
         note: "Published standard. EU Official Journal citation and its scope must be checked separately.",
       },
+      {
+        title: "UX Disciplines: Glossary",
+        url: "https://www.nngroup.com/articles/ux-disciplines-glossary/",
+        publisher: "Raluca Budiu · Nielsen Norman Group",
+        date: "2026-10-23",
+        note: "Accessed 18 November 2026. Visual and interactive UI; responsibilities vary across organisations; Product Design is distinct from Product Management.",
+      },
+      {
+        title: "When to Use Which User-Experience Research Methods",
+        url: "https://www.nngroup.com/articles/which-ux-research-methods/",
+        publisher: "Christian Rohrer · Nielsen Norman Group",
+        date: "2026-07-15",
+        note: "Published in 2022, reviewed 15 July 2026, accessed 18 November 2026. Distinguishes attitudinal/behavioural, qualitative/quantitative and use context; these are separate dimensions.",
+      },
+      {
+        title: "Plan user research for your service",
+        url: "https://www.gov.uk/service-manual/user-research/plan-user-research-for-your-service",
+        publisher: "GOV.UK · Service Manual",
+        date: "2026-10-15",
+        note: "Accessed 18 November 2026. Research questions, inclusive recruitment, activities and sharing findings. UK public-service guidance, not a universal sample size or cadence.",
+      },
+      {
+        title: "Synthetic Users: If, When, and How to Use AI-Generated “Research”",
+        url: "https://www.nngroup.com/articles/synthetic-users/",
+        publisher: "Maria Rosala & Kate Moran · Nielsen Norman Group",
+        date: "2024-06-21",
+        note: "Accessed 18 November 2026. Evaluation of simulated profiles and methodological limits: preparation hypotheses are not observations of participants.",
+      },
     ],
   },
   {
     slug: "ui-design-system-tokens",
     category: "UI Design",
     icon: "palette",
-    readTime: "About 21 min read",
+    readTime: "About 23 min read",
     publishedAt: "2026-11-18",
     updatedAt: "2026-11-18",
     ogImage: "/og-article-ui-en.jpg",
     metaTitle: "UI Design: CSS Tokens and Dark Mode | UX/UI Playbook",
-    metaDescription: "Build a consistent UI system with 6 type roles, 8 size tokens, 4/8-point spacing, accessible colour, copy-ready light/dark CSS and a developer handoff.",
+    metaDescription: "Connect design tokens, CSS variables and components with a copy-ready light/dark example, contrast pairs to check and a developer handoff.",
     keywords: [
       "UI design system CSS tokens",
-      "W3C design tokens 2025.10",
+      "DTCG design tokens 2025.10",
       "1.25 typography scale UI",
       "8 point grid spacing system",
       "dark mode tokens halation",
@@ -824,6 +957,13 @@ For each item: outcome, observation and a link to the test or screenshot.
         tocLabel: "Visual hierarchy",
         heading: "Build a visual hierarchy",
         blocks: [
+          {
+            type: "readingLink",
+            slug: "ux-ui-product-design",
+            sectionId: "ui-interface",
+            label: "See UI decisions in the Atelier prototype",
+            text: "Colour and spacing do not cover all of UI. The comparison also examines controls, their states and feedback in one application.",
+          },
           {
             type: "explanation",
             paragraphs: [
@@ -1152,6 +1292,71 @@ For each item: outcome, observation and a link to the test or screenshot.
             note: "Load Domine from your local font files, then adapt these tokens. Measure each colour pair on the surfaces actually used.",
           },
           {
+            type: "h3",
+            text: "From a named role to a rendered component",
+          },
+          {
+            type: "p",
+            text: "A token expresses a named decision; a CSS custom property is one way to distribute it in the browser. Figma variables can also hold values and aliases, but their presence does not automatically synchronise an application. Material documents reference, system and component tokens: that architecture is an example, not a requirement to create three layers in every project. The DTCG format concerns data exchange; the CSS above implements presentation choices rather than being a file in that format. [3] [5] [6]",
+          },
+          {
+            type: "table",
+            caption: "One pair of roles retained across both themes",
+            headers: [
+              "Role",
+              "Light theme in this example",
+              "Dark theme in this example",
+            ],
+            rows: [
+              [
+                "--color-accent",
+                "#C2320A",
+                "#FF6B47",
+              ],
+              [
+                "--color-on-accent",
+                "#FFFFFF",
+                "#0B0D12",
+              ],
+              [
+                "Consumer",
+                ".export-action",
+                ".export-action",
+              ],
+            ],
+          },
+          {
+            type: "copyable",
+            label: "component.html — consume the tokens.css above",
+            langTag: "html",
+            code: `<button type="button" class="export-action">Export invoices</button>
+
+<style>
+.export-action {
+  font: inherit;
+  min-block-size: 44px;
+  max-inline-size: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+.export-action:hover {
+  background: var(--color-accent-hover);
+}
+.export-action:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 3px;
+}
+</style>`,
+            note: "Load the article’s tokens.css first. To compare themes, apply data-theme=\"dark\" to the html element, then remove the attribute. This button demonstrates styles and focus; it performs no export.",
+          },
+          {
+            type: "p",
+            text: "Measure text against its background at rest and on hover in both themes; then check focus, visibility and obscuration in the complete page. Opacity, an image or a local override can change a valid pair. Token names therefore do not guarantee contrast, and this isolated component proves neither the accessibility of a journey nor comprehension of its label. [1]",
+          },
+          {
             type: "inlineCta",
             title: "Token files and templates in the archive",
             text: "The Playbook archive includes tokens.css, tokens.json and editable templates, with 13 before/after prototypes and 11 platform spreads in the manual.",
@@ -1204,6 +1409,10 @@ For each item: outcome, observation and a link to the test or screenshot.
               ["Data loading", "Please wait…", "Loading invoices… Add a time estimate only if it is known."],
               ["Synchronisation", "Bidirectional sync", "Edits sync across your devices. Explain actual delays and limits."],
             ],
+          },
+          {
+            type: "p",
+            text: "Distinguish an input error someone can correct from a service problem. “The date must be before today” can be associated with its field; “Export is unavailable; your filters have been saved” describes a service failure and needs an actually supported next step. Do not present an outage as an input mistake. Connect errors to fields, preserve useful answers and make notifications perceivable without relying on colour alone. [7] [8]",
           },
           {
             type: "h3",
@@ -1291,6 +1500,13 @@ For each item: outcome, observation and a link to the test or screenshot.
 - Record executed commands, results and checks still needed.`,
             note: "Add links to components, mockups and test results. Values in this template are example choices to adapt to the product.",
           },
+          {
+            type: "readingLink",
+            slug: "product-design-ai-agents",
+            sectionId: "five-file-agent-pipeline",
+            label: "Connect handoff to the brief and implementation review",
+            text: "A handoff does not finish verification. The product workflow shows where to keep decisions and outstanding checks.",
+          },
         ],
       },
     ],
@@ -1319,7 +1535,7 @@ For each item: outcome, observation and a link to the test or screenshot.
       "12 A4 worksheets for briefing, auditing and handoff",
       "Tokens, templates, rules and a Python scanner in the archive",
     ],
-    entityDefinition: "User interface design defines a product’s visual hierarchy and interactive components: typography, colour, spacing and states. A design system stores these decisions in reusable tokens and components.",
+    entityDefinition: "User interface design specifies how components look and behave: hierarchy, typography, colour, controls, states and feedback. It is not just decoration. Tokens express reusable decisions; a design system also includes components, usage guidance, documentation and maintenance.",
     references: [
       {
         title: "Web Content Accessibility Guidelines 2.2",
@@ -1349,18 +1565,46 @@ For each item: outcome, observation and a link to the test or screenshot.
         date: "2026-02",
         note: "Low contrast is among the most common automatically detected errors in this sample.",
       },
+      {
+        title: "Design tokens — Overview",
+        url: "https://m3.material.io/foundations/design-tokens/overview",
+        publisher: "Google · Material Design 3",
+        date: "Accessed 18 November 2026",
+        note: "Values, roles and token classes in Material. A system architecture example, not a universal rule.",
+      },
+      {
+        title: "Create and manage variables and collections",
+        url: "https://help.figma.com/hc/en-us/articles/15145852043927-Create-and-manage-variables-and-collections",
+        publisher: "Figma Learn · Help Center",
+        date: "Accessed 18 November 2026",
+        note: "Variables, collections, aliases and code syntax. Features and access rights depend on the product and its plans.",
+      },
+      {
+        title: "Error message",
+        url: "https://design-system.service.gov.uk/components/error-message/",
+        publisher: "GOV.UK · Design System",
+        date: "Accessed 18 November 2026",
+        note: "Distinguishes input errors from service problems; associates messages with fields and preserves answers. Adapt the GOV.UK context.",
+      },
+      {
+        title: "User Notification — Forms Tutorial",
+        url: "https://www.w3.org/WAI/tutorials/forms/notifications/",
+        publisher: "W3C · Web Accessibility Initiative",
+        date: "Accessed 18 November 2026",
+        note: "Informative tutorial on notifications, errors and field associations; complements the normative WCAG criteria.",
+      },
     ],
   },
   {
     slug: "product-design-ai-agents",
     category: "Product Design",
     icon: "settings",
-    readTime: "About 20 min read",
+    readTime: "About 23 min read",
     publishedAt: "2026-11-18",
     updatedAt: "2026-11-18",
     ogImage: "/og-article-product-en.jpg",
     metaTitle: "Product Design and AI Agents | UX/UI Playbook",
-    metaDescription: "Scope your product before coding: a 5-file AI pipeline, AGENTS.md, 3 prompts, agent permissions and reports separating check method, severity and outcome.",
+    metaDescription: "From the product brief to AI-generated interface review: responsibilities, permissions, working files and a report template with evidence and limitations.",
     keywords: [
       "Product Design for developers",
       "AGENTS.md Claude Code Cursor UI",
@@ -1373,7 +1617,7 @@ For each item: outcome, observation and a link to the test or screenshot.
     title: "Product Design: Scope Your Product and Guide AI Agents",
     subtitle: "Define scope, record decisions and prepare reviews of generated code. A five-file pipeline, three prompts, and examples of permissions and project proposals.",
     aeoSummaryTitle: "At a glance",
-    aeoSummary: "This workflow records decisions in five files: brief.md, screens.md, wireframe.html, review.md and handoff.md. AGENTS.md and tokens.css provide shared constraints. Three prompts separate specification, construction and review; the team remains responsible for unresolved scope questions. Reports distinguish check method, severity and outcome, using Automated / To verify / Not applicable statuses. Research, permission and proposal examples need adapting to risk, the people concerned and available data.",
+    aeoSummary: "The Playbook’s proposed workflow records decisions in five files: brief.md, screens.md, wireframe.html, review.md and handoff.md. This organisational format is not a vendor-mandated standard. Distinguish an agent assisting the coding team, an agent used inside the product and simulated profiles used to prepare research. Review reports separate method, severity, outcome and evidence, keeping unexecuted checks visible. The team remains responsible for permissions, decisions and studies with relevant people.",
     keyStats: [
       {
         value: "3 statuses",
@@ -1399,6 +1643,17 @@ For each item: outcome, observation and a link to the test or screenshot.
         tocLabel: "Product, UX and UI",
         heading: "Separate product, UX and UI decisions",
         blocks: [
+          {
+            type: "p",
+            text: "Product Designer does not mean the same scope in every organisation. Design contributes to exploring problems and solutions; product management usually carries vision and prioritisation with its partners. Record who decides, contributes and verifies in your team instead of assigning the entire roadmap to the designer. Nor are UX and UI two departments that hand a screen over just once. [5]",
+          },
+          {
+            type: "readingLink",
+            slug: "ux-ui-product-design",
+            sectionId: "responsibilities",
+            label: "Place Product Design within team responsibilities",
+            text: "The comparison explains these overlaps before examining work delegated to an agent.",
+          },
           {
             type: "explanation",
             paragraphs: [
@@ -1513,6 +1768,10 @@ For each item: outcome, observation and a link to the test or screenshot.
               caption: "The next pass starts from written decisions, not a memory of the chat.",
               labels: ["brief.md", "screens.md", "wireframe.html"],
             },
+          },
+          {
+            type: "p",
+            text: "The five files below are an organisational format proposed by the Playbook, not a HAX or PAIR standard or a protocol imposed on coding agents. Adapt them to the repository and how your tool loads context. Instructions replace neither limited technical permissions nor review of the diff and executed commands. GitHub’s documentation also distinguishes agent capabilities, environments and risks; it does not validate this particular workflow. [8]",
           },
           {
             type: "diagram",
@@ -1631,6 +1890,44 @@ OUTPUTS: review.md with finding, evidence and fix; handoff.md with states and re
         heading: "Keep control of agent actions",
         blocks: [
           {
+            type: "h3",
+            text: "Three uses of AI that should not be conflated",
+          },
+          {
+            type: "p",
+            text: "Generating an interface during development, integrating an agent into a product and simulating a user profile raise different questions. NN/g distinguishes AI-assisted design from interfaces generated at runtime and separately addresses synthetic-user limitations. A review should name which of these objects it examines. [6] [7]",
+          },
+          {
+            type: "table",
+            caption: "Review object and warranted conclusion",
+            headers: [
+              "Use",
+              "What to examine",
+              "What it does not prove",
+            ],
+            rows: [
+              [
+                "Coding agent for the team",
+                "Diff, dependencies, commands, tests and the rendered output.",
+                "That a need exists or that people understand the journey.",
+              ],
+              [
+                "Agent inside the product",
+                "Permissions, consent, actual action logs, stopping and recovery; any runtime UI generation.",
+                "That a demonstration covers real consequences or all failure cases.",
+              ],
+              [
+                "Simulated user profile",
+                "Data provenance and hypothesis status; questions to examine with people afterwards.",
+                "A participant observation, usage frequency or market validation.",
+              ],
+            ],
+          },
+          {
+            type: "h3",
+            text: "Control the agent’s actions inside the product",
+          },
+          {
             type: "explanation",
             paragraphs: [
               "Microsoft HAX and Google PAIR discuss understanding capabilities, recovering from errors and maintaining user control. The six patterns below are a design synthesis to adapt to the product's permissions and consequences. Before execution, show the resources the agent can access and the planned actions. Reading a draft, editing a document and sending an email may require different approvals. During execution, an understandable log identifies completed, pending and failed operations; it needs to describe actual activity rather than invented progress. A stop control should remain accessible and explain its limits. If an email has already been sent, stopping the next task does not recall it. The final report therefore needs to show what executed, which changes can be reversed and which operations still require a decision, with access to the affected results. Review those recovery paths when designing the permission model, since a confirmation screen cannot undo an operation the underlying system treats as final. A useful test interrupts a sequence after its first write. The log should identify the changed document and show whether later steps began. If undo is offered, describe its scope: restoring an earlier version may overwrite edits made meanwhile by a colleague. Present those consequences before restoration and retain a checkable result afterward. This scenario requires technical input to distinguish what the system can reverse from what the interface can only explain.",
@@ -1725,6 +2022,76 @@ OUTPUTS: review.md with finding, evidence and fix; handoff.md with states and re
               caption: "An automated check can fail and block a release.",
               labels: ["Method", "Severity", "Outcome", "Automated", "Blocking", "Failed"],
             },
+          },
+          {
+            type: "h3",
+            text: "Connect each conclusion to its method",
+          },
+          {
+            type: "p",
+            text: "Build evidence, a contrast measurement and a participant observation answer different questions. Tools cannot determine accessibility on their own; an agent able to operate a browser is not thereby a representative participant. Keep the environment, scenario, observed result and a way to locate the evidence. Simulated outputs remain hypotheses even when plausible. [6] [9]",
+          },
+          {
+            type: "table",
+            caption: "Limit conclusions to the check actually performed",
+            headers: [
+              "Check",
+              "Record to retain",
+              "Limitation to state",
+            ],
+            rows: [
+              [
+                "Build and static analysis",
+                "Command, revision, outcome and a log redacted for secrets.",
+                "Compilation does not demonstrate use, keyboard operation or readability.",
+              ],
+              [
+                "Contrast and layout",
+                "Browser, width, theme, state, composed colours and scenario.",
+                "A screenshot alone does not measure every property; one state does not cover the others.",
+              ],
+              [
+                "Manual keyboard and assistive-technology review",
+                "Journey, tool and version, action, expected and observed behaviour.",
+                "Limited to that environment and scenario; not complete certification.",
+              ],
+              [
+                "Study with participants",
+                "Protocol, recruitment, context, pseudonymous notes and sample limitations.",
+                "Do not turn a qualitative round into a representative rate or a simulation into testimony.",
+              ],
+            ],
+          },
+          {
+            type: "copyable",
+            label: "review.md — embedded YAML record (not run)",
+            langTag: "yaml",
+            code: `# Template only: no check has been executed here.
+scenario: resume_export_after_error
+context:
+  revision: to_fill_in
+  browser_and_version: to_fill_in
+  css_width_px: null
+  theme_and_state: to_fill_in
+check:
+  method: to_verify
+  severity_if_failed: to_decide
+  outcome: not_run
+  expected: "Filters are preserved after the failure."
+  observed: null
+  evidence: null
+follow_up:
+  owner: to_assign
+  action: to_decide
+  retest: not_run`,
+            note: "This record can be embedded in review.md. The outcome is deliberately not run: fill in the fields after the actual check, with no participant data or secrets in a public report.",
+          },
+          {
+            type: "readingLink",
+            slug: "ux-design-guide",
+            sectionId: "audit-20-min-40-point-checklist",
+            label: "Choose the method and prepare a participant session",
+            text: "To understand hesitation or a usage error, return to the research question instead of asking a simulated profile for validation.",
           },
         ],
       },
@@ -1826,7 +2193,7 @@ OUTPUTS: review.md with finding, evidence and fix; handoff.md with states and re
       "12 A4 worksheets for briefing, auditing and handoff",
       "Tokens, templates, rules and a Python scanner in the archive",
     ],
-    entityDefinition: "Product design connects user needs, business goals and technical constraints to decide what to build and in which order. UX organises the journey; UI makes the interactions tangible. An AI agent works within that scope without replacing product judgment.",
+    entityDefinition: "Product design contributes to a product’s design and evolution by connecting user needs, business goals and technical constraints. It works with product management, research and engineering; it does not own strategy or the roadmap alone. An AI agent assists this work without replacing team decisions.",
     references: [
       {
         title: "Guidelines for Human-AI Interaction",
@@ -1855,6 +2222,41 @@ OUTPUTS: review.md with finding, evidence and fix; handoff.md with states and re
         publisher: "EUR-Lex · European Union",
         date: "2026-07-27",
         note: "Consolidated text: Art. 50 (duties and exceptions), 111(4) (2 December 2026 transition for certain existing systems) and 113 (application). Check the role and use concerned.",
+      },
+      {
+        title: "UX Disciplines: Glossary",
+        url: "https://www.nngroup.com/articles/ux-disciplines-glossary/",
+        publisher: "Raluca Budiu · Nielsen Norman Group",
+        date: "2026-10-23",
+        note: "Accessed 18 November 2026. Visual and interactive UI; responsibilities vary across organisations; Product Design is distinct from Product Management.",
+      },
+      {
+        title: "Synthetic Users: If, When, and How to Use AI-Generated “Research”",
+        url: "https://www.nngroup.com/articles/synthetic-users/",
+        publisher: "Maria Rosala & Kate Moran · Nielsen Norman Group",
+        date: "2024-06-21",
+        note: "Accessed 18 November 2026. Evaluation of simulated profiles and methodological limits: preparation hypotheses are not observations of participants.",
+      },
+      {
+        title: "Generative UI and Outcome-Oriented Design",
+        url: "https://www.nngroup.com/articles/generative-ui/",
+        publisher: "Kate Moran & Sarah Gibbons · Nielsen Norman Group",
+        date: "2024-03-22",
+        note: "Accessed 18 November 2026. Distinguishes assisted design from runtime generation. Its prospective scenario does not establish the maturity of every current tool.",
+      },
+      {
+        title: "Application card: GitHub Copilot Agents",
+        url: "https://docs.github.com/en/copilot/responsible-use/agents",
+        publisher: "GitHub Docs",
+        date: "Accessed 18 November 2026",
+        note: "Agent capabilities, permissions and limitations; human oversight and responsibility for commands. Vendor documentation, not validation of the Playbook workflow.",
+      },
+      {
+        title: "Selecting Web Accessibility Evaluation Tools",
+        url: "https://www.w3.org/WAI/test-evaluate/tools/selecting/",
+        publisher: "W3C · Web Accessibility Initiative",
+        date: "Accessed 18 November 2026",
+        note: "Tools assist evaluation; some checks require human judgement and results may be inaccurate.",
       },
     ],
   },

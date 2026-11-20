@@ -1,0 +1,22 @@
+{
+  "name": "ui-ux-directory-capture-tools",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Isolated, server-side Microlink screenshot tooling. Not part of the static website runtime.",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "setup": "microlink setup",
+    "login": "microlink login",
+    "import-key": "node import-key.mjs",
+    "plan": "node capture.mjs --plan",
+    "github": "node capture.mjs --url https://github.com/",
+    "capture": "node capture.mjs"
+  },
+  "dependencies": {
+    "microlink.io": "1.1.7",
+    "sharp": "0.34.5"
+  }
+}

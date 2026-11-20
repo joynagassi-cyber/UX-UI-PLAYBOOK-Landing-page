@@ -12,9 +12,14 @@
     "preview:pages": "node scripts/preview_pages.cjs",
     "check:export": "node scripts/check_static_export.cjs",
     "test:routing": "node --test tests/locale-routing.test.mjs",
+    "test:content": "node --test tests/editorial-content.test.cjs",
     "generate:social": "node scripts/social_images.cjs",
     "generate:resource": "node scripts/generate_free_resource.cjs",
-    "check:resource": "node --test tests/free-resource.test.cjs"
+    "generate:resource:en": "node scripts/generate_free_resource_en.cjs",
+    "check:resource": "node --test tests/free-resource.test.cjs tests/resource-screenshots.test.cjs",
+    "microlink:plan": "node tools/microlink/capture.mjs --plan",
+    "microlink:github": "node tools/microlink/capture.mjs --url https://github.com/",
+    "microlink:capture": "node tools/microlink/capture.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.511.0",

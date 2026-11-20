@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "provider": "microlink",
+  "requestOptions": {
+    "type": "png",
+    "fullPage": false,
+    "meta": false,
+    "retry": 0,
+    "animations": false,
+    "viewport": {
+      "width": 1280,
+      "height": 720,
+      "deviceScaleFactor": 1,
+      "isMobile": false
+    }
+  },
+  "captures": {},
+  "pendingExternalImport": {
+    "manifest": "manifest.external-ddf2bcc.json",
+    "sha256": "011e4bf6271acf95696e23204e2db2388e26e8445f6b9aa650ba7c63ff88661a",
+    "sourceCommit": "ddf2bccc6864d4f23b15e0da043df7189d869c76",
+    "reportedCounts": {
+      "approved": 21,
+      "rejected": 3,
+      "failed": 1,
+      "pending": 50
+    },
+    "reason": "Reconcile manifest schema, filenames, 2560x1600 images and size limits offline before capture or PDF use."
+  }
+}

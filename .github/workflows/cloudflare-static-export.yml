@@ -30,8 +30,8 @@ jobs:
           cache: npm
       - name: Install the locked dependencies
         run: npm ci
-      - name: Free-product integrity, TypeScript and shared Pages Functions tests
-        run: npm run check:resource && npm run typecheck && npm run test:routing
+      - name: Free-product integrity, TypeScript, routing and editorial checks
+        run: npm run check:resource && npm run typecheck && npm run test:routing && npm run test:content
       - name: Build the complete static site
         run: npm run build
       - name: Check every catalogue slug, asset, routing file and production origin

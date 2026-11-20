@@ -6,6 +6,8 @@ Le produit téléchargeable et son intégration au site sont préparés dans ce 
 
 En attendant, le site exporté sert un téléchargement direct réel, sans email ni lien Gumroad inventé. L’aperçu local n’est pas une mise en production.
 
+**Demande d’illustration ultérieure :** le [workflow Microlink](screenshots/README.md) est préparé, mais aucune vraie capture n’a encore été obtenue. Les fichiers et chiffres ci-dessous décrivent le kit actuel **sans captures**. Actualiser cette fiche après la génération illustrée réelle ; ne pas annoncer les aperçus avant leur présence dans le PDF.
+
 ## 1. Fichiers à utiliser
 
 | Usage | Fichier dans le dépôt |
@@ -17,6 +19,8 @@ En attendant, le site exporté sert un téléchargement direct réel, sans email
 | PDF pour relecture | [repertoire-ui-ux-fr-v1.pdf](../../public/downloads/repertoire-ui-ux-fr-v1.pdf) |
 
 Le ZIP inclut sept fichiers : guide PDF de 34 pages, même contenu en Markdown, fiche PDF de 3 pages, fiche Markdown, CSV, mode d’emploi et notices. Il pèse environ **540 Kio**. Ne pas charger le dossier source, le document original ni ce guide de publication comme contenu client.
+
+La [version anglaise](en/README.md) possède son propre ZIP, ses visuels, sa [fiche Gumroad](en/gumroad-listing.md) et son [guide de publication](en/publication-guide.md). Ne pas remplacer les fichiers français par les fichiers anglais dans ce produit.
 
 Avant publication, le créateur doit relire les textes, les conditions d’usage proposées dans `LICENCES.txt` et les références, et confirmer le régime applicable à son activité. Ne pas ajouter de fichiers tiers au ZIP sans permission.
 
@@ -38,7 +42,7 @@ Avant publication, le créateur doit relire les textes, les conditions d’usage
 - Télécharger le ZIP livré par Gumroad, le décompresser et ouvrir les deux PDF.
 - Vérifier **34 pages / 3 pages**, accents, liens cliquables et présence des sept fichiers.
 - Vérifier le CSV dans un tableur (UTF-8, point-virgule).
-- Relire la fiche produit sur téléphone ; ne pas annoncer une version anglaise des fichiers.
+- Relire la fiche produit sur téléphone ; ce produit livre uniquement les fichiers français. L’édition anglaise possède un téléchargement et un produit distincts.
 - Si Gumroad propose des communications marketing, traiter le consentement séparément de la remise du fichier. Ne pas inscrire implicitement tous les destinataires à une newsletter.
 - Copier **l’URL publique réellement publiée**.
 
@@ -47,10 +51,10 @@ Avant publication, le créateur doit relire les textes, les conditions d’usage
 Définir la variable de build suivante avec la vraie URL obtenue :
 
 ```env
-NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL=
+NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_FR=
 ```
 
-La valeur doit être une URL HTTPS de produit du magasin `joyccelight.gumroad.com`, avec un chemin `/l/` suivi du slug réellement attribué. **Laisser la valeur vide tant que le produit n’existe pas.** La configuration rejette les deux URLs payantes existantes du Playbook, les autres domaines, les paramètres de suivi et les identifiants dans l’URL. Les paramètres UTM entrants sont ensuite transmis par le bouton existant.
+La valeur doit être une URL HTTPS de produit du magasin `joyccelight.gumroad.com`, avec un chemin `/l/` suivi du slug réellement attribué. **Laisser la valeur vide tant que le produit n’existe pas.** La configuration rejette les deux URLs payantes existantes du Playbook, les autres domaines, les paramètres de suivi et les identifiants dans l’URL. Les paramètres UTM entrants sont ensuite transmis par le bouton existant. L’ancien `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL` reste un repli français si la nouvelle variable française est vide. La page anglaise ne lit que `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_EN` et conserve son ZIP direct si cette valeur est vide. Les deux langues ne peuvent pas réutiliser la même URL de checkout. La validation ne vérifie ni le contenu ni le prix du produit distant : le test manuel à 0 reste obligatoire.
 
 ```bash
 npm run check:resource
@@ -69,9 +73,9 @@ Le CTA principal de la page gratuite devient alors **« Obtenir gratuitement sur
 Pages du site à partager **après déploiement** :
 
 - FR : `/fr/resources/ui-ux-directory`.
-- EN : `/en/resources/ui-ux-directory` (présentation anglaise, fichiers français clairement annoncés).
+- EN : `/en/resources/ui-ux-directory` (guide, fiche et grille en anglais, dans un ZIP distinct).
 
-L’origine canonique de build actuelle est `https://joyccelight-playbook.pages.dev`. Sa présence dans les documents n’établit pas que la page est publiée. Si l’origine publique définitive change, régénérer le kit avec `NEXT_PUBLIC_SITE_URL` avant publication puis relancer les contrôles : les liens imprimés ne changent pas tout seuls.
+L’origine canonique de build actuelle est `https://joyccelight-playbook.pages.dev`. Sa présence dans les documents n’établit pas que la page est publiée. Si l’origine publique définitive change, régénérer les deux kits avec `NEXT_PUBLIC_SITE_URL` avant publication puis relancer les contrôles : les liens imprimés ne changent pas tout seuls.
 
 ## 5. Une promotion simple, sans promesse de trafic
 
@@ -88,4 +92,4 @@ L’origine canonique de build actuelle est `https://joyccelight-playbook.pages.
 - Limite des fichiers gratuits : https://gumroad.com/help/article/289-file-size-limits-on-gumroad
 - Couverture et vignette : https://gumroad.com/help/article/60-adding-a-cover-image
 
-Ces liens documentent les réglages au moment de la préparation. L’interface et les règles peuvent évoluer ; les vérifier dans le compte avant publication.
+Ces liens documentent les réglages au moment de la préparation française ; ils n’ont pas été revalidés lors de la traduction anglaise. L’interface et les règles peuvent évoluer ; les vérifier dans le compte avant publication.

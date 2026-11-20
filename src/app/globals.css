@@ -2244,7 +2244,7 @@ time {
 .article-card-art .visual-flow li:last-child { padding-bottom: 0; }
 .article-card-art .visual-themes > div { padding: 12px; gap: 8px; }
 
-.guide-card h3 {
+.guide-card :is(h2, h3) {
   font-family: var(--font-display);
   font-size: var(--text-lg);
   font-weight: 700;
@@ -2745,6 +2745,34 @@ time {
   margin-bottom: var(--space-4);
   max-width: 70ch;
 }
+
+/* Contextual reading, without creating another same-intent article. */
+.notion-reading-link {
+  margin: 24px 0;
+  padding: 16px 20px;
+  background: var(--s2);
+  border-inline-start: 3px solid var(--accent-ink);
+  border-radius: 0 10px 10px 0;
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.notion-reading-link p { margin: 0; color: var(--fg-2); }
+.notion-reading-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  max-width: 100%;
+  padding-block: 8px;
+  font-weight: 700;
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.notion-reading-link a span { min-width: 0; }
+.notion-reading-link svg { flex-shrink: 0; }
 
 /* Article quote and example-decision block */
 .notion-quote {

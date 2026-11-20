@@ -11,6 +11,7 @@ import { ARTICLES_UI } from '@/i18n/articles';
 import { GumroadButton } from '@/components/GumroadButton';
 import { DesignRolesLab } from './DesignRolesLab';
 import { useModalFocus } from '@/components/useModalFocus';
+import { articleHref } from '@/lib/article-links';
 
 function InlineArticleText({ text, locale }: { text: string; locale: Locale }) {
   return <>{text.split(/(`[^`]+`|\[\d+\])/g).map((part, index) =>
@@ -360,6 +361,15 @@ export function NotionArticleReader({
         );
       case 'mobileLab':
         return <DesignRolesLab key={idx} locale={locale} title={block.title} caption={block.caption} />;
+      case 'readingLink':
+        return (
+          <aside key={idx} className="notion-reading-link">
+            <p>{block.text}</p>
+            <a href={articleHref(locale, block.slug, block.sectionId)}>
+              <span>{block.label}</span><Icon name="arrow-right" size="sm" />
+            </a>
+          </aside>
+        );
       case 'table':
         return (
           <div
@@ -565,7 +575,7 @@ export function NotionArticleReader({
               </span>
             </div>
 
-            {/* AEO Direct Answer Box (Featured Snippet & AI Overview target) */}
+            {/* A concise reader summary, not a promise of search or AI inclusion. */}
             <div className="notion-aeo-box">
               <div className="notion-aeo-title">
                 <Icon name="sparkles" size="sm" />

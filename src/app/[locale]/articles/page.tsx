@@ -12,6 +12,7 @@ import { FreeResourcePromo } from '@/components/FreeResourcePromo';
 import { FREE_UI } from '@/i18n/free-resource';
 import { FREE_RESOURCE_PATH } from '@/lib/free-resource-config';
 import { authorJsonLd, serializeJsonLd } from '@/lib/structured-data';
+import { articleHref } from '@/lib/article-links';
 
 export const dynamicParams = false;
 
@@ -221,6 +222,12 @@ export default async function ArticlesHubPage({
           <p className="notion-subtitle" style={{ marginBottom: 0 }}>
             {ui.lede}
           </p>
+          <aside className="notion-reading-link">
+            <p>{ui.startLinkText}</p>
+            <a href={articleHref(locale, 'ux-ui-product-design')}>
+              <span>{ui.startLinkLabel}</span><Icon name="arrow-right" size="sm" />
+            </a>
+          </aside>
         </header>
 
         {/* Article grid */}
@@ -241,7 +248,7 @@ export default async function ArticlesHubPage({
                     <span className="guide-read-meta">{art.readTime}</span>
                   </div>
                   <ArticleCardVisual article={art} locale={locale} />
-                  <h3>{art.title}</h3>
+                  <h2>{art.title}</h2>
                   <p>{art.subtitle}</p>
 
                   {/* Mini Stat Preview */}
