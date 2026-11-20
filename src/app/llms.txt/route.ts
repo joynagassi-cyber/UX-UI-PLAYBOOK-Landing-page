@@ -1,7 +1,7 @@
 import { ARTICLES } from '@/i18n/articles';
 import { SITE_URL } from '@/lib/structured-data';
-import { FREE_MANIFEST } from '@/i18n/free-resource';
-import { FREE_RESOURCE_PATH, FREE_GUMROAD_URL } from '@/lib/free-resource-config';
+import { freeResourceManifest } from '@/i18n/free-resource';
+import { FREE_RESOURCE_PATH, FREE_GUMROAD_URLS } from '@/lib/free-resource-config';
 
 export const dynamic = 'force-static';
 
@@ -14,6 +14,17 @@ export async function GET() {
     ARTICLES.en.flatMap((article) => article.references).map((reference) => [reference.url, reference])
   ).values());
 
+  const directory = (locale: 'fr' | 'en') => {
+    const manifest = freeResourceManifest(locale);
+    const language = locale === 'fr' ? 'French' : 'English';
+    const checkout = FREE_GUMROAD_URLS[locale];
+    return `### ${language} directory edition
+- [${language} page and download](${SITE_URL}/${locale}${FREE_RESOURCE_PATH})
+- ${manifest.counts.entries} entries, ${manifest.counts.categories} categories, ${manifest.counts.resourceLinks} resource links; ${manifest.counts.guidePages}-page ${language} PDF, Markdown, ${manifest.counts.worksheetPages}-page printable decision worksheet and CSV. All files in this kit are in ${language}.
+- [${language} complete kit, ZIP](${SITE_URL}${manifest.files.archive.path}) · [${language} PDF](${SITE_URL}${manifest.files.pdf.path}) · [${language} Markdown](${SITE_URL}${manifest.files.markdown.path})
+- ${checkout ? `Configured free Gumroad product: ${checkout}. Enter 0 to download.` : 'Free direct download on this site, with no email requested.'}`;
+  };
+
   const body = `# UX/UI Playbook
 
 > UX/UI Playbook is a bilingual UX, UI and Product Design manual by Joy N. for developers, AI builders and technical freelancers. It includes a printable 12-sheet A4 delivery kit and a 21-file archive with design tokens, templates, a Python scanner and coding-agent rules.
@@ -25,12 +36,13 @@ export async function GET() {
 - Author: [Joy N.](${SITE_URL}/en#author) · [GitHub](https://github.com/joynagassi-cyber) · [Gumroad](https://joyccelight.gumroad.com)
 - Contact: mailto:joynagassi@gmail.com
 
-## Free UI/UX directory — French-language files
-- [Présentation française](${SITE_URL}/fr${FREE_RESOURCE_PATH}) · [English presentation, French download](${SITE_URL}/en${FREE_RESOURCE_PATH})
-- ${FREE_MANIFEST.counts.entries} entries, ${FREE_MANIFEST.counts.categories} categories, ${FREE_MANIFEST.counts.resourceLinks} resource links; ${FREE_MANIFEST.counts.guidePages}-page French PDF, Markdown, ${FREE_MANIFEST.counts.worksheetPages}-page printable decision worksheet and CSV.
-- [Free complete kit, ZIP](${SITE_URL}${FREE_MANIFEST.files.archive.path}) · [French PDF](${SITE_URL}${FREE_MANIFEST.files.pdf.path}) · [French Markdown](${SITE_URL}${FREE_MANIFEST.files.markdown.path})
-- ${FREE_GUMROAD_URL ? `Published free Gumroad product: ${FREE_GUMROAD_URL}. Enter 0 to download.` : 'Free direct download on this site, with no email requested.'}
-- This is a separate free resource, not the $29 Playbook. Third-party resources have their own prices and licenses; no third-party asset packs are included. The 75 destinations are not an exhaustive link or legal audit.
+## Free UI/UX directory — separate English and French kits
+${directory('en')}
+
+${directory('fr')}
+
+- This is a separate free resource, not the $29 Playbook. Third-party resources have their own prices and licenses; no third-party asset packs are included. The 75 destinations have not undergone an exhaustive availability or legal audit.
+- The English catalogue translates the edited French edition dated November 18, 2026. It does not imply a fresh exhaustive review of external services.
 
 ## English articles
 - [All English articles](${SITE_URL}/en/articles)

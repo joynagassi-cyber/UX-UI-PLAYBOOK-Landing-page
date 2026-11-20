@@ -1,8 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import catalogue from '../src/i18n/article-catalog.json';
-import resourceManifest from '../products/ui-ux-directory/manifest.json';
-import resourceCatalog from '../products/ui-ux-directory/catalogue.json';
+import { freeResourceCatalog, freeResourceManifest } from '../src/i18n/free-resource';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { DESIGN_LAB } from '../src/i18n/design-lab';
@@ -466,7 +465,9 @@ test('Pages Functions · qvalues, cookies, country, query and static exclusions'
   }
 });
 
-for (const locale of ['fr', 'en']) {
+for (const locale of ['fr', 'en'] as const) {
+  const resourceManifest = freeResourceManifest(locale);
+  const resourceCatalog = freeResourceCatalog(locale);
   test(`${locale} · free directory categories, downloads and language continuity`, async ({ page, context }) => {
     await page.goto(`/${locale}/resources/ui-ux-directory`);
     await expect(page.locator('[data-directory-entry]')).toHaveCount(51);
@@ -512,13 +513,20 @@ for (const locale of ['fr', 'en']) {
       expect(createHash('sha256').update(bytes).digest('hex')).toBe(file.sha256);
     }
     if (locale === 'en') {
-      await expect(page.locator('.resource-hero')).toContainText('downloadable files are in French');
-      await expect(page.locator('.resource-file-meta').first()).toContainText('French-language files');
+      await expect(page.locator('.resource-hero')).toContainText('All files are in English');
+      await expect(page.locator('.resource-file-meta').first()).toContainText('English-language files');
     }
+    await expect(page.locator('.resource-cover img')).toHaveAttribute('src', `/images/free-directory/cover-${locale}.jpg`);
+    await expect(page.locator(`a[href="${resourceManifest.files.pdf.path}"]`).first()).toHaveAttribute('hreflang', locale);
     const other = locale === 'fr' ? 'en' : 'fr';
+    const otherManifest = freeResourceManifest(other);
+    await expect(page.locator(`a[href="${otherManifest.files.archive.path}"]`)).toHaveCount(0);
     await page.locator(`.lang-btn[lang="${other}"]`).click();
     await expect(page).toHaveURL(new RegExp(`/${other}/resources/ui-ux-directory$`));
     await expect(page.locator('[data-directory-entry]')).toHaveCount(51);
+    await expect(page.locator(`a[href="${otherManifest.files.pdf.path}"]`).first()).toHaveAttribute('hreflang', other);
+    await expect(page.locator(`a[href="${resourceManifest.files.archive.path}"]`)).toHaveCount(0);
+    await expect(page.locator('.resource-cover img')).toHaveAttribute('src', `/images/free-directory/cover-${other}.jpg`);
   });
 
   test(`${locale} · free directory works without JavaScript`, async ({ browser, baseURL }) => {

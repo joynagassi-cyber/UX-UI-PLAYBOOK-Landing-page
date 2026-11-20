@@ -2,8 +2,9 @@ import { ARTICLES, type ArticleData } from '@/i18n/articles';
 import { designLabTranscript } from '@/i18n/design-lab';
 import { CONTENT } from '@/i18n/content';
 import { SITE_URL as SITE } from '@/lib/structured-data';
-import { FREE_CATALOG, FREE_MANIFEST } from '@/i18n/free-resource';
+import { freeResourceCatalog, freeResourceManifest } from '@/i18n/free-resource';
 import { FREE_RESOURCE_PATH } from '@/lib/free-resource-config';
+import { articleHref } from '@/lib/article-links';
 
 const tableCell = (text: string) => text.replace(/\|/g, '\\|').replace(/\n/g, ' ');
 
@@ -82,6 +83,9 @@ function renderArticleMarkdown(lang: 'en' | 'fr', art: ArticleData): string {
         lines.push('');
       } else if (block.type === 'mobileLab') {
         lines.push(`#### ${block.title}`, block.caption, '', designLabTranscript(lang), '');
+      } else if (block.type === 'readingLink') {
+        lines.push(block.text);
+        lines.push(`[${block.label}](${SITE}${articleHref(lang, block.slug, block.sectionId)})`, '');
       } else if (block.type === 'table') {
         lines.push(`| ${block.headers.map(tableCell).join(' | ')} |`);
         lines.push(`| ${block.headers.map(() => '---').join(' | ')} |`);
@@ -137,28 +141,38 @@ export async function GET() {
     chunks.push('');
   }
 
-  chunks.push(
-    '# Répertoire UI/UX gratuit — fichiers français',
-    `FR: ${SITE}/fr${FREE_RESOURCE_PATH}`,
-    `EN presentation (French files): ${SITE}/en${FREE_RESOURCE_PATH}`,
-    `${FREE_MANIFEST.counts.entries} fiches, ${FREE_MANIFEST.counts.categories} familles, ${FREE_MANIFEST.counts.resourceLinks} liens. Guide français de ${FREE_MANIFEST.counts.guidePages} pages ; fiche de décision de ${FREE_MANIFEST.counts.worksheetPages} pages, Markdown et CSV.`,
-    `Kit gratuit : ${SITE}${FREE_MANIFEST.files.archive.path}`,
-    `PDF : ${SITE}${FREE_MANIFEST.files.pdf.path}`,
-    `Markdown : ${SITE}${FREE_MANIFEST.files.markdown.path}`,
-    'Ressource gratuite distincte du Playbook payant. Les ressources tierces conservent leurs tarifs et licences ; aucun de leurs packs n’est distribué. Les destinations n’ont pas fait l’objet d’un audit exhaustif de disponibilité ou de licence.',
-    '',
-  );
-  for (const category of FREE_CATALOG.categories) {
-    chunks.push(`## ${category.name}`, category.purpose, category.question, '');
-    for (const entry of FREE_CATALOG.entries.filter((item) => item.category === category.id)) {
-      chunks.push(`### ${entry.id}. ${entry.name}`, ...entry.urls, entry.description,
-        `Non-designer : ${entry.nonDesigner}`, `Développeur : ${entry.developer}`,
-        `Avec un agent IA : ${entry.agent}`, `À vérifier : ${entry.watch}`, '');
+  for (const locale of ['en', 'fr'] as const) {
+    const catalog = freeResourceCatalog(locale);
+    const manifest = freeResourceManifest(locale);
+    const fr = locale === 'fr';
+    chunks.push(
+      fr ? '# Répertoire UI/UX gratuit — édition française' : '# Free UI/UX directory — English edition',
+      `${locale.toUpperCase()}: ${SITE}/${locale}${FREE_RESOURCE_PATH}`,
+      fr
+        ? `${manifest.counts.entries} fiches, ${manifest.counts.categories} familles, ${manifest.counts.resourceLinks} liens. Guide français de ${manifest.counts.guidePages} pages ; fiche de décision de ${manifest.counts.worksheetPages} pages, Markdown et CSV.`
+        : `${manifest.counts.entries} entries, ${manifest.counts.categories} categories, ${manifest.counts.resourceLinks} links. English guide: ${manifest.counts.guidePages} pages; decision worksheet: ${manifest.counts.worksheetPages} pages, plus Markdown and CSV.`,
+      `ZIP: ${SITE}${manifest.files.archive.path}`,
+      `PDF: ${SITE}${manifest.files.pdf.path}`,
+      `Markdown: ${SITE}${manifest.files.markdown.path}`,
+      fr
+        ? 'Ressource gratuite distincte du Playbook payant. Les ressources tierces conservent leurs tarifs et licences ; aucun de leurs packs n’est distribué. Les destinations n’ont pas fait l’objet d’un audit exhaustif de disponibilité ou de licence.'
+        : 'A free resource separate from the paid Playbook. Third-party resources retain their own prices and licenses; none of their packs are distributed. The destinations have not undergone an exhaustive availability or license audit. This English translation preserves the edited French edition dated November 18, 2026; it does not imply a fresh exhaustive review.',
+      '',
+    );
+    for (const category of catalog.categories) {
+      chunks.push(`## ${category.name}`, category.purpose, category.question, '');
+      for (const entry of catalog.entries.filter((item) => item.category === category.id)) {
+        chunks.push(`### ${entry.id}. ${entry.name}`, ...entry.urls, entry.description,
+          `Non-designer: ${entry.nonDesigner}`, `${fr ? 'Développeur' : 'Developer'}: ${entry.developer}`,
+          `${fr ? 'Avec un agent IA' : 'With an AI agent'}: ${entry.agent}`, `${fr ? 'À vérifier' : 'Check first'}: ${entry.watch}`, '');
+      }
     }
+    chunks.push(fr ? '## Sources du répertoire et limites éditoriales' : '## Directory sources and editorial limitations',
+      fr
+        ? 'Références ciblées utilisées pour les corrections éditoriales, pas une validation juridique des 75 destinations. Les conditions peuvent évoluer. Les pistes non testées sont signalées dans leurs fiches.'
+        : 'Targeted references used for editorial corrections, not legal validation of all 75 destinations. Terms may change. Untested candidates are identified in their entries.');
+    for (const source of catalog.sources) chunks.push(`${source.title} — ${source.url}`, source.note, '');
   }
-  chunks.push('## Sources du répertoire et limites éditoriales',
-    'Références ciblées utilisées pour les corrections éditoriales, pas une validation juridique des 75 destinations. Les conditions peuvent évoluer. Les pistes non testées sont signalées dans leurs fiches.');
-  for (const source of FREE_CATALOG.sources) chunks.push(`${source.title} — ${source.url}`, source.note, '');
 
   return new Response(chunks.join('\n'), {
     status: 200,

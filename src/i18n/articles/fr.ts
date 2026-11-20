@@ -6,12 +6,12 @@ export const ARTICLES_FR: ArticleData[] = [
     slug: "ux-design-guide",
     category: "UX Design",
     icon: "compass",
-    readTime: "Environ 33 min de lecture",
+    readTime: "Environ 36 min de lecture",
     publishedAt: "2026-11-18",
     updatedAt: "2026-11-18",
     ogImage: "/og-article-ux-fr.jpg",
-    metaTitle: "UX Design : parcours et audit | UX/UI Playbook",
-    metaDescription: "Concevez un parcours UX clair : 10 lois et principes, 5 états d’écran, checkout accessible et checklist de 40 points à appliquer avant livraison.",
+    metaTitle: "UX Design : méthodes, parcours et audit | UX/UI Playbook",
+    metaDescription: "Méthodes de recherche UX, parcours, états d’écran et audit de 40 points : choisissez vos contrôles et distinguez observation, hypothèse et mesure.",
     keywords: [
       "UX Design opérationnel",
       "charge cognitive Cowan 4 blocs",
@@ -22,9 +22,9 @@ export const ARTICLES_FR: ArticleData[] = [
       "checklist audit UX 40 points",
     ],
     title: "UX Design : concevoir un parcours clair et auditer vos écrans",
-    subtitle: "Comment décrire une tâche, conserver le contexte entre les étapes et préparer les erreurs. Principes cognitifs, paiement, accessibilité et checklist d’audit de 40 points.",
+    subtitle: "Choisir une méthode de recherche, décrire une tâche et préparer les erreurs. Principes cognitifs, paiement, accessibilité et checklist d’audit de 40 points.",
     aeoSummaryTitle: "L’essentiel",
-    aeoSummary: "Commencez par un objectif utilisateur et une action primaire. Prévoyez les 5 états d’écran de cet article : vide, chargement, idéal, partiel/débordement et erreur, avec confirmation après une action réussie. Les 4 ± 1 blocs de Cowan éclairent la mémoire de travail ; leur traduction en groupes d’interface est une heuristique à tester. Mesurez le contraste WCAG 2.2 AA (4,5:1 pour le texte courant) et visez des cibles de 44 × 44 px selon le Playbook ; le minimum web AA est 24 × 24 px avec exceptions. Quelques tests observés révèlent des problèmes, mais ne prouvent ni l’exhaustivité ni un gain de conversion.",
+    aeoSummary: "Partez de la décision à éclairer : un entretien explore un récit d’usage, une observation montre une tâche en contexte et un test d’utilisabilité examine l’interaction avec un produit. Une mesure de fréquence ou d’effet demande un protocole quantitatif adapté. Concevez ensuite les parcours et leurs états, y compris l’attente et la reprise après erreur. L’audit de 40 points complète ces méthodes sans remplacer la recherche avec des participants. Les principes cognitifs guident des hypothèses de conception ; les contrôles de contraste, de clavier et de rendu doivent porter sur l’interface réellement utilisée. Ni cinq participants ni un scan sans erreur ne garantissent l’exhaustivité ou un gain de conversion.",
     keyStats: [
       {
         value: "4 ± 1 blocs",
@@ -52,6 +52,17 @@ export const ARTICLES_FR: ArticleData[] = [
         tocLabel: "Tâche et contexte",
         heading: "Décrire la tâche et ses conditions d’usage",
         blocks: [
+          {
+            type: "p",
+            text: "L’UX ne désigne pas seulement une étape avant les maquettes : l’expérience se poursuit pendant l’usage, l’assistance et les changements du service. L’UI influence aussi cette expérience par ses interactions et ses retours ; la séparer de l’UX ne signifie pas opposer apparence et fonctionnement. Les intitulés de poste ne suffisent pas à répartir les responsabilités. [12]",
+          },
+          {
+            type: "readingLink",
+            slug: "ux-ui-product-design",
+            sectionId: "responsabilites",
+            label: "Comparer les responsabilités UX, UI et Product Design",
+            text: "Pour situer ces décisions dans une équipe, le comparatif les applique à une seule application fictive.",
+          },
           {
             type: "explanation",
             paragraphs: [
@@ -569,6 +580,93 @@ ni à une certification officielle ni à un avis juridique sur vos obligations s
         heading: "Observer les usages et organiser un audit",
         blocks: [
           {
+            type: "h3",
+            text: "Quelle méthode répond à votre question UX ?",
+          },
+          {
+            type: "p",
+            text: "Un audit, un entretien et un test d’utilisabilité ne produisent pas les mêmes informations. Définissez d’abord la décision à éclairer, puis choisissez une activité susceptible de contredire votre hypothèse. La cartographie de Rohrer distingue le déclaratif du comportemental, indépendamment du qualitatif et du quantitatif. GOV.UK relie ce choix aux questions de recherche, aux personnes concernées et à la restitution des résultats. La matrice suivante est une adaptation pour un exemple d’export de factures, pas une étude déjà réalisée. [13] [14]",
+          },
+          {
+            type: "table",
+            caption: "Choisir une activité pour l’export de factures — exemple hypothétique",
+            headers: [
+              "Question à éclairer",
+              "Activité adaptée",
+              "Information et limite",
+            ],
+            rows: [
+              [
+                "Comment la clôture est-elle préparée aujourd’hui ?",
+                "Entretien sur un cas récent, complété par une observation en contexte.",
+                "Récit et contraintes de travail ; un souvenir déclaré ne montre pas à lui seul le comportement.",
+              ],
+              [
+                "La personne trouve-t-elle et termine-t-elle l’export ?",
+                "Test d’utilisabilité sur une tâche et un jeu de factures connus.",
+                "Hésitations, erreurs et reprise observées ; pas une estimation représentative du taux d’échec.",
+              ],
+              [
+                "Où les personnes s’arrêtent-elles dans le produit ?",
+                "Analyse d’événements dont le déclenchement et le dénominateur sont vérifiés.",
+                "Répartition des événements instrumentés ; ne révèle pas à elle seule les raisons d’un abandon.",
+              ],
+              [
+                "Quel libellé est compris pour classer les documents ?",
+                "Tri de cartes pour explorer les regroupements, puis test d’arborescence pour une structure candidate.",
+                "Organisation et recherche d’information ; ne valide pas toute la mise en page ou le téléchargement.",
+              ],
+              [
+                "Une nouvelle version modifie-t-elle le taux de réussite ?",
+                "Comparaison quantitative ou expérimentation conçue avec hypothèse, échantillon et métrique prévus.",
+                "Estimation et incertitude dans le protocole retenu ; quelques retours positifs ne mesurent pas un effet.",
+              ],
+              [
+                "Les labels, états et contrôles attendus sont-ils présents ?",
+                "Inspection de l’interface et contrôles techniques, puis revue manuelle.",
+                "Défauts identifiables selon les critères inspectés ; ce n’est pas une observation d’usage.",
+              ],
+            ],
+          },
+          {
+            type: "p",
+            text: "Qualitatif ne signifie pas « ce que les gens disent », et quantitatif ne signifie pas « ce qu’ils font ». Un test d’utilisabilité peut produire des observations qualitatives ou des mesures quantitatives selon son protocole ; un questionnaire peut recueillir des réponses ouvertes et des réponses chiffrées. La méthode doit être décrite avec la nature des données et les limites de l’échantillon. [13]",
+          },
+          {
+            type: "h3",
+            text: "Préparer une session avant de recruter",
+          },
+          {
+            type: "steps",
+            title: "Mini-protocole à adapter à votre recherche",
+            steps: [
+              {
+                bold: "Question et décision",
+                text: "Écrivez ce que vous cherchez à comprendre et quelle décision dépend de la réponse. Nommez aussi un constat qui vous ferait changer d’avis.",
+              },
+              {
+                bold: "Personnes et données",
+                text: "Recrutez selon la tâche réellement pratiquée, les contextes et les besoins d’accès. Prévoyez les adaptations utiles, l’information des participants, les autorisations d’enregistrement et la durée de conservation ; utilisez des données de démonstration.",
+              },
+              {
+                bold: "Tâche et conduite",
+                text: "Préparez une consigne sans nommer le contrôle attendu : « Vous devez transmettre les factures d’octobre à votre comptable. Préparez ce dont elle a besoin. » Définissez une sortie observable, prétestez la consigne et notez toute aide fournie.",
+              },
+              {
+                bold: "Notes et suite",
+                text: "Séparez action observée, parole rapportée et interprétation. Reliez chaque problème à la tâche, à un identifiant pseudonymisé et au contexte ; attribuez la correction et prévoyez un nouvel essai.",
+              },
+            ],
+          },
+          {
+            type: "p",
+            text: "N’envoyez pas de verbatims, d’enregistrements ou de données de facturation dans un service IA sans avoir vérifié les autorisations, les conditions de traitement et les exigences applicables. Un identifiant pseudonymisé ne rend pas un enregistrement anonyme. Un profil généré peut aider à préparer des questions, mais ne compte ni comme participant ni comme résultat de recherche. [14] [15]",
+          },
+          {
+            type: "h3",
+            text: "Combien de participants : distinguer exploration et mesure",
+          },
+          {
             type: "explanation",
             paragraphs: [
               "Le modèle de Nielsen et Landauer (CHI 1993) exprime la découverte cumulée de problèmes par `1 − (1 − L)^n`. Avec un taux de découverte `L` d’environ 31 %, cinq participants donnent un résultat proche de 84 %, souvent arrondi à 85 %. Ce calcul dépend des hypothèses du modèle et du taux associé aux problèmes ; il ne garantit pas qu’un groupe de cinq personnes trouvera une proportion fixe des défauts de votre produit. Dans l’étude de Faulkner (2003), menée avec soixante utilisateurs, les sous-échantillons de cinq personnes révélaient de 55 à 99 % des problèmes de cette étude. Ces écarts comptent pour organiser les sessions : une première série peut révéler des obstacles à corriger, puis une autre série examine le parcours modifié. La diversité des tâches, les populations concernées et la gravité des erreurs doivent aussi être prises en compte. Une opération médicale ou un paiement engageant demande une stratégie d’évaluation adaptée à ses conséquences.",
@@ -665,6 +763,13 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
 - [ ] Spécification de livraison à jour avec cas limites et vérifications restantes`,
             note: "Placez ce fichier dans docs/audit-40.md ou dans le modèle de pull request. Renseignez le parcours, la date et les résultats ; laissez ouverts les points non examinés. Le temps nécessaire dépend du périmètre.",
           },
+          {
+            type: "readingLink",
+            slug: "product-design-ai-agents",
+            sectionId: "verifier-ia-trois-statuts",
+            label: "Documenter les contrôles et leurs limites dans review.md",
+            text: "L’audit révèle des points à examiner. Le rapport de revue conserve la méthode exécutée et ce qui reste à observer avec des personnes.",
+          },
         ],
       },
     ],
@@ -693,7 +798,7 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
       "12 fiches A4 pour le brief, l’audit et la passation",
       "Tokens, gabarits, règles et scanner Python dans l’archive",
     ],
-    entityDefinition: "Le design d’expérience utilisateur organise les parcours, les contenus et les interactions pour permettre à une personne d’atteindre son objectif. Il se distingue de l’UI, qui en définit la présentation visuelle, et du Product Design, qui arbitre aussi la valeur et le périmètre.",
+    entityDefinition: "Le design d’expérience utilisateur conçoit et améliore des produits et services à partir des besoins, des usages et du contexte des personnes. Il articule recherche, contenus, parcours et interactions, puis évalue les choix réalisés. L’UI en précise les composants visuels et interactifs ; les responsabilités se recouvrent et varient selon les équipes.",
     references: [
       {
         title: "The magical number 4 in short-term memory",
@@ -772,21 +877,49 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
         date: "2026-09",
         note: "Version publiée de la norme. Une citation au JO de l’UE et son champ d’application doivent être vérifiés séparément.",
       },
+      {
+        title: "UX Disciplines: Glossary",
+        url: "https://www.nngroup.com/articles/ux-disciplines-glossary/",
+        publisher: "Raluca Budiu · Nielsen Norman Group",
+        date: "2026-10-23",
+        note: "Consulté le 18 novembre 2026. UI visuelle et interactive ; responsabilités variables selon les organisations ; Product Design distinct du Product Management.",
+      },
+      {
+        title: "When to Use Which User-Experience Research Methods",
+        url: "https://www.nngroup.com/articles/which-ux-research-methods/",
+        publisher: "Christian Rohrer · Nielsen Norman Group",
+        date: "2026-07-15",
+        note: "Publié en 2022, revu le 15 juillet 2026, consulté le 18 novembre 2026. Distingue déclaratif/comportemental, qualitatif/quantitatif et contexte d’usage ; ces axes ne se confondent pas.",
+      },
+      {
+        title: "Plan user research for your service",
+        url: "https://www.gov.uk/service-manual/user-research/plan-user-research-for-your-service",
+        publisher: "GOV.UK · Service Manual",
+        date: "2026-10-15",
+        note: "Consulté le 18 novembre 2026. Questions, recrutement inclusif, activités et restitution. Recommandations du service public britannique, pas un effectif ou une cadence universels.",
+      },
+      {
+        title: "Synthetic Users: If, When, and How to Use AI-Generated “Research”",
+        url: "https://www.nngroup.com/articles/synthetic-users/",
+        publisher: "Maria Rosala & Kate Moran · Nielsen Norman Group",
+        date: "2024-06-21",
+        note: "Consulté le 18 novembre 2026. Évaluation de profils simulés et limites méthodologiques : des hypothèses de préparation ne sont pas des observations de participants.",
+      },
     ],
   },
   {
     slug: "ui-design-system-tokens",
     category: "UI Design",
     icon: "palette",
-    readTime: "Environ 24 min de lecture",
+    readTime: "Environ 26 min de lecture",
     publishedAt: "2026-11-18",
     updatedAt: "2026-11-18",
     ogImage: "/og-article-ui-fr.jpg",
     metaTitle: "UI Design : tokens CSS et Dark Mode | UX/UI Playbook",
-    metaDescription: "Créez un système UI cohérent : 6 rôles typographiques, 8 tokens de taille, grille 4/8, couleurs accessibles et code CSS clair/sombre prêt à copier.",
+    metaDescription: "Design tokens, variables CSS et composants : exemple clair/sombre à copier, paires de contraste à vérifier et fiche de passation développeur.",
     keywords: [
       "UI Design system CSS",
-      "design tokens W3C 2025.10",
+      "design tokens DTCG 2025.10",
       "échelle typographique 1.25",
       "grille espacement 8px",
       "dark mode tokens halation",
@@ -824,6 +957,13 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
         tocLabel: "Hiérarchie visuelle",
         heading: "Construire une hiérarchie visuelle",
         blocks: [
+          {
+            type: "readingLink",
+            slug: "ux-ui-product-design",
+            sectionId: "interface-ui",
+            label: "Voir les décisions UI dans le prototype Atelier",
+            text: "Les couleurs et les espacements ne résument pas l’UI. Le comparatif montre aussi les commandes, leurs états et leurs retours dans une même application.",
+          },
           {
             type: "explanation",
             paragraphs: [
@@ -1152,6 +1292,71 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
             note: "Chargez Domine depuis vos fichiers locaux, puis adaptez ces tokens. Mesurez chaque paire de couleurs sur les surfaces réellement utilisées.",
           },
           {
+            type: "h3",
+            text: "Du rôle nommé au composant rendu",
+          },
+          {
+            type: "p",
+            text: "Un token exprime une décision nommée ; une propriété personnalisée CSS est un moyen de la distribuer dans le navigateur. Les variables Figma permettent aussi de porter des valeurs et des alias, mais leur présence ne synchronise pas automatiquement une application. Material documente des tokens de référence, de système et de composant : cette architecture est un exemple, pas une obligation de créer trois couches pour chaque projet. Le format DTCG concerne l’échange de données ; le CSS ci-dessus en est une implémentation de présentation, pas un fichier conforme à ce format. [3] [5] [6]",
+          },
+          {
+            type: "table",
+            caption: "Une paire de rôles conservée dans les deux thèmes",
+            headers: [
+              "Rôle",
+              "Mode clair dans cet exemple",
+              "Mode sombre dans cet exemple",
+            ],
+            rows: [
+              [
+                "--color-accent",
+                "#C2320A",
+                "#FF6B47",
+              ],
+              [
+                "--color-on-accent",
+                "#FFFFFF",
+                "#0B0D12",
+              ],
+              [
+                "Consommateur",
+                ".export-action",
+                ".export-action",
+              ],
+            ],
+          },
+          {
+            type: "copyable",
+            label: "composant.html — consommer les tokens.css ci-dessus",
+            langTag: "html",
+            code: `<button type="button" class="export-action">Exporter les factures</button>
+
+<style>
+.export-action {
+  font: inherit;
+  min-block-size: 44px;
+  max-inline-size: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+.export-action:hover {
+  background: var(--color-accent-hover);
+}
+.export-action:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 3px;
+}
+</style>`,
+            note: "Chargez d’abord le tokens.css de cet article. Pour comparer les thèmes, appliquez data-theme=\"dark\" à l’élément html, puis retirez cet attribut. Ce bouton montre les styles et le focus ; il ne déclenche aucun export.",
+          },
+          {
+            type: "p",
+            text: "Mesurez le texte sur son fond au repos et au survol, dans les deux thèmes ; vérifiez ensuite le focus, sa visibilité et l’absence de masquage dans la page complète. Une paire valide peut être dégradée par l’opacité, une image ou une surcharge locale. Les noms des tokens ne garantissent donc pas le contraste, et ce composant isolé ne prouve ni l’accessibilité d’un parcours ni la compréhension de son libellé. [1]",
+          },
+          {
             type: "inlineCta",
             title: "Fichiers de tokens et gabarits dans l’archive",
             text: "L’archive du Playbook fournit tokens.css, tokens.json et les gabarits éditables, avec 13 prototypes Avant/Après et 11 planches de plateformes dans le manuel.",
@@ -1212,6 +1417,10 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
                 "Les modifications sont synchronisées sur vos appareils. Préciser les délais et les limites réels.",
               ],
             ],
+          },
+          {
+            type: "p",
+            text: "Distinguez une erreur de saisie que la personne peut corriger d’un problème du service. « La date doit précéder aujourd’hui » peut être associé au champ concerné ; « L’export est indisponible, vos filtres sont conservés » décrit une panne et doit proposer une suite réellement prise en charge. Ne présentez pas une indisponibilité comme une faute de saisie. Reliez les erreurs aux champs, préservez les réponses utiles et rendez la notification perceptible sans dépendre de la couleur seule. [7] [8]",
           },
           {
             type: "h3",
@@ -1299,6 +1508,13 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
 - Noter les commandes exécutées, résultats et vérifications encore nécessaires.`,
             note: "Ajoutez les liens vers les composants, les maquettes et les résultats des tests. Les valeurs de cette fiche sont des choix d’exemple à adapter au produit.",
           },
+          {
+            type: "readingLink",
+            slug: "product-design-ai-agents",
+            sectionId: "pipeline-5-fichiers-agents",
+            label: "Relier la passation au brief et à la revue d’implémentation",
+            text: "La fiche de passation ne clôt pas la vérification. Le workflow produit indique où garder les décisions et les contrôles restant à réaliser.",
+          },
         ],
       },
     ],
@@ -1327,7 +1543,7 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
       "12 fiches A4 pour le brief, l’audit et la passation",
       "Tokens, gabarits, règles et scanner Python dans l’archive",
     ],
-    entityDefinition: "Le design d’interface utilisateur définit la hiérarchie visuelle et les composants interactifs d’un produit : typographie, couleur, espacement et états. Un design system conserve ces décisions dans des tokens et des composants réutilisables.",
+    entityDefinition: "Le design d’interface utilisateur définit la présentation et le comportement des composants : hiérarchie, typographie, couleur, commandes, états et retours. Il ne se réduit pas à la décoration. Les tokens expriment des décisions réutilisables ; un design system comprend aussi les composants, leurs règles d’usage, leur documentation et leur évolution.",
     references: [
       {
         title: "Web Content Accessibility Guidelines 2.2",
@@ -1357,18 +1573,46 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
         date: "2026-02",
         note: "Les contrastes insuffisants figurent parmi les erreurs automatiquement détectées les plus fréquentes de l’échantillon.",
       },
+      {
+        title: "Design tokens — Overview",
+        url: "https://m3.material.io/foundations/design-tokens/overview",
+        publisher: "Google · Material Design 3",
+        date: "Consulté le 18 novembre 2026",
+        note: "Valeurs, rôles et classes de tokens dans Material. Exemple d’architecture de système, pas une règle universelle.",
+      },
+      {
+        title: "Create and manage variables and collections",
+        url: "https://help.figma.com/hc/en-us/articles/15145852043927-Create-and-manage-variables-and-collections",
+        publisher: "Figma Learn · Help Center",
+        date: "Consulté le 18 novembre 2026",
+        note: "Variables, collections, alias et correspondances de code. Les fonctions et droits d’accès dépendent du produit et de ses offres.",
+      },
+      {
+        title: "Error message",
+        url: "https://design-system.service.gov.uk/components/error-message/",
+        publisher: "GOV.UK · Design System",
+        date: "Consulté le 18 novembre 2026",
+        note: "Distingue erreur de saisie et incident du service ; messages associés aux champs et conservation des réponses. Contexte GOV.UK à adapter.",
+      },
+      {
+        title: "User Notification — Forms Tutorial",
+        url: "https://www.w3.org/WAI/tutorials/forms/notifications/",
+        publisher: "W3C · Web Accessibility Initiative",
+        date: "Consulté le 18 novembre 2026",
+        note: "Tutoriel informatif sur notifications, erreurs et associations aux champs ; complète les critères normatifs WCAG.",
+      },
     ],
   },
   {
     slug: "product-design-ai-agents",
     category: "Product Design",
     icon: "settings",
-    readTime: "Environ 23 min de lecture",
+    readTime: "Environ 26 min de lecture",
     publishedAt: "2026-11-18",
     updatedAt: "2026-11-18",
     ogImage: "/og-article-product-fr.jpg",
     metaTitle: "Product Design & agents IA | UX/UI Playbook",
-    metaDescription: "Cadrez votre produit avant de coder : brief, pipeline IA en 5 fichiers, AGENTS.md, 3 prompts à copier, permissions et rapport de vérification à 3 statuts.",
+    metaDescription: "Du brief à la revue d’une interface générée par IA : rôles, permissions, fichiers de travail et modèle de rapport avec preuves et limites.",
     keywords: [
       "Product Design développeur solo",
       "AGENTS.md Claude Code Cursor UI",
@@ -1381,7 +1625,7 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
     title: "Product Design : cadrer votre produit et guider vos agents IA",
     subtitle: "Définir le périmètre, consigner les décisions et préparer la revue du code généré. Un pipeline en cinq fichiers, trois prompts et des exemples de permissions et de devis.",
     aeoSummaryTitle: "L’essentiel",
-    aeoSummary: "Le workflow présenté conserve les décisions dans cinq fichiers : brief.md, screens.md, wireframe.html, review.md et handoff.md. AGENTS.md et tokens.css fournissent les contraintes communes. Trois prompts séparent spécification, construction et revue ; les questions de périmètre restent à trancher par l’équipe. Le rapport distingue méthode de contrôle, sévérité et résultat, avec les statuts Automatisé / À vérifier / Non applicable. Les exemples de recherche, de permissions et de devis doivent être adaptés au risque, aux personnes concernées et aux données disponibles.",
+    aeoSummary: "Le workflow proposé par le Playbook conserve les décisions dans cinq fichiers : brief.md, screens.md, wireframe.html, review.md et handoff.md. Ce format d’organisation n’est pas une norme imposée par un fournisseur. Distinguez l’agent qui aide l’équipe à coder, l’agent utilisé dans le produit et les profils simulés pour préparer une recherche. Le rapport de revue sépare méthode, sévérité, résultat et preuve, et laisse visibles les contrôles non exécutés. L’équipe garde la responsabilité des permissions, des arbitrages et des études avec les personnes concernées.",
     keyStats: [
       {
         value: "3 statuts",
@@ -1407,6 +1651,17 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
         tocLabel: "Produit, UX et UI",
         heading: "Distinguer les décisions produit, UX et UI",
         blocks: [
+          {
+            type: "p",
+            text: "Le titre Product Designer ne désigne pas partout le même périmètre. La conception participe à l’exploration des problèmes et des solutions ; le product management porte habituellement la vision et la priorisation avec ses partenaires. Décrivez qui décide, qui contribue et qui vérifie dans votre équipe, plutôt que d’attribuer toute la roadmap au designer. UX et UI ne forment pas non plus deux services qui se transmettent un écran une seule fois. [5]",
+          },
+          {
+            type: "readingLink",
+            slug: "ux-ui-product-design",
+            sectionId: "responsabilites",
+            label: "Situer le Product Design parmi les responsabilités de l’équipe",
+            text: "Le comparatif précise ces recouvrements avant d’examiner le travail confié à un agent.",
+          },
           {
             type: "explanation",
             paragraphs: [
@@ -1521,6 +1776,10 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
               caption: "Le prochain passage reprend les décisions écrites, pas un souvenir du chat.",
               labels: ["brief.md", "screens.md", "wireframe.html"],
             },
+          },
+          {
+            type: "p",
+            text: "Les cinq fichiers ci-dessous constituent un format d’organisation proposé par le Playbook, pas une norme HAX, PAIR ou un protocole imposé aux agents de code. Adaptez-les au dépôt et à la manière dont votre outil charge le contexte. Les instructions ne remplacent ni des permissions techniques limitées, ni la revue du diff et des commandes exécutées. La documentation GitHub distingue également capacités, environnements et risques des agents ; elle ne valide pas ce workflow particulier. [8]",
           },
           {
             type: "diagram",
@@ -1639,6 +1898,44 @@ SORTIES : review.md avec constat, preuve et correctif ; handoff.md avec états e
         heading: "Garder le contrôle sur les actions de l’agent",
         blocks: [
           {
+            type: "h3",
+            text: "Trois usages de l’IA à ne pas confondre",
+          },
+          {
+            type: "p",
+            text: "Faire produire une interface pendant le développement, intégrer un agent dans un produit et simuler un profil utilisateur posent des questions différentes. NN/g distingue notamment le design assisté de l’interface générée à l’exécution, et traite séparément les limites des utilisateurs synthétiques. La revue doit annoncer lequel de ces objets elle examine. [6] [7]",
+          },
+          {
+            type: "table",
+            caption: "Objet de la revue et conclusion permise",
+            headers: [
+              "Usage",
+              "Ce qu’il faut examiner",
+              "Ce que cela ne prouve pas",
+            ],
+            rows: [
+              [
+                "Agent de code pour l’équipe",
+                "Diff, dépendances, commandes, tests et rendu produit.",
+                "Que le besoin existe ou que des personnes comprennent le parcours.",
+              ],
+              [
+                "Agent dans le produit",
+                "Permissions, accord, journal réel, arrêt et reprise des actions ; génération d’UI éventuelle à l’exécution.",
+                "Qu’une démonstration couvre les conséquences réelles ou tous les cas d’échec.",
+              ],
+              [
+                "Profil utilisateur simulé",
+                "Origine des données et statut d’hypothèse ; questions à examiner ensuite avec des personnes.",
+                "Une observation de participant, une fréquence d’usage ou une validation du marché.",
+              ],
+            ],
+          },
+          {
+            type: "h3",
+            text: "Contrôler les actions de l’agent dans le produit",
+          },
+          {
             type: "explanation",
             paragraphs: [
               "Les recommandations Microsoft HAX et Google PAIR abordent la compréhension des capacités, la correction des erreurs et le contrôle laissé à la personne. Les six patterns ci-dessous en sont une synthèse de conception, à adapter aux permissions et aux conséquences du produit. Avant l’exécution, l’interface doit montrer les ressources auxquelles l’agent aura accès et les actions prévues. Lire un brouillon, modifier un document et envoyer un e-mail demandent des accords qui peuvent différer. Pendant l’exécution, un journal compréhensible indique ce qui est terminé, en attente ou en échec ; il doit décrire des opérations réelles plutôt qu’un texte de progression inventé. La commande d’arrêt doit être accessible et préciser ses limites. Si un e-mail est déjà parti, arrêter la tâche suivante ne le rappelle pas. Le bilan doit donc présenter ce qui a été exécuté, les changements réversibles et les opérations qui nécessitent encore une décision, avec un accès aux résultats concernés. Un essai utile consiste à interrompre une série d’actions après la première écriture. Le journal doit permettre de retrouver le document modifié et de savoir si les étapes suivantes ont commencé. Si une annulation est proposée, elle doit décrire son périmètre : restaurer une version précédente peut écraser des modifications faites entre-temps par un collègue. Présentez donc les effets de cette restauration avant de l’exécuter et conservez un résultat vérifiable après l’opération. Ce scénario exige la participation de l’équipe technique pour distinguer ce que le système peut annuler de ce que l’interface peut seulement expliquer.",
@@ -1733,6 +2030,76 @@ SORTIES : review.md avec constat, preuve et correctif ; handoff.md avec états e
               caption: "Un contrôle automatique peut échouer et bloquer une livraison.",
               labels: ["Méthode", "Sévérité", "Résultat", "Automatisé", "Bloquant", "Échoué"],
             },
+          },
+          {
+            type: "h3",
+            text: "Relier chaque conclusion à sa méthode",
+          },
+          {
+            type: "p",
+            text: "Une preuve de compilation, une mesure de contraste et une observation de participant répondent à des questions différentes. Les outils ne déterminent pas à eux seuls l’accessibilité ; un agent capable de parcourir le navigateur ne devient pas pour autant un participant représentatif. Conservez l’environnement, le scénario, le résultat observé et l’élément qui permet de le retrouver. Les sorties simulées restent des hypothèses, même lorsqu’elles sont plausibles. [6] [9]",
+          },
+          {
+            type: "table",
+            caption: "Une conclusion limitée au contrôle réellement effectué",
+            headers: [
+              "Contrôle",
+              "Trace à conserver",
+              "Limite à annoncer",
+            ],
+            rows: [
+              [
+                "Build et analyse statique",
+                "Commande, révision, résultat et journal expurgé des secrets.",
+                "La compilation ne montre pas l’usage, le clavier ou la lisibilité.",
+              ],
+              [
+                "Contraste et mise en page",
+                "Navigateur, largeur, thème, état, couleurs composées et scénario.",
+                "Une capture seule ne mesure pas toutes les propriétés ; un état ne couvre pas les autres.",
+              ],
+              [
+                "Revue manuelle clavier et technologie d’assistance",
+                "Parcours, outil et version, action, comportement attendu et observé.",
+                "Résultat limité à l’environnement et au scénario ; pas une certification complète.",
+              ],
+              [
+                "Étude avec des participants",
+                "Protocole, recrutement, contexte, notes pseudonymisées et limites de l’échantillon.",
+                "Ne pas convertir une série qualitative en taux représentatif ni une simulation en témoignage.",
+              ],
+            ],
+          },
+          {
+            type: "copyable",
+            label: "review.md — fiche YAML à intégrer (contrôle non exécuté)",
+            langTag: "yaml",
+            code: `# Gabarit uniquement : aucune vérification n’a été exécutée ici.
+scenario: reprise_export_apres_erreur
+contexte:
+  revision: a_renseigner
+  navigateur_et_version: a_renseigner
+  largeur_css_px: null
+  theme_et_etat: a_renseigner
+controle:
+  methode: a_verifier
+  severite_si_echec: a_decider
+  resultat: non_execute
+  attendu: "Les filtres sont conservés après l’échec."
+  observe: null
+  preuve: null
+suivi:
+  responsable: a_attribuer
+  action: a_decider
+  contre_test: non_execute`,
+            note: "Ce bloc peut être intégré à review.md. Le résultat est volontairement non exécuté : remplacez les champs après le contrôle réel, sans données de participant ni secret dans un rapport public.",
+          },
+          {
+            type: "readingLink",
+            slug: "ux-design-guide",
+            sectionId: "audit-20-min-checklist-40",
+            label: "Choisir la méthode et préparer une session avec des participants",
+            text: "Pour comprendre une hésitation ou une erreur d’usage, revenez à la question de recherche plutôt que de demander une validation à un profil simulé.",
           },
         ],
       },
@@ -1834,7 +2201,7 @@ SORTIES : review.md avec constat, preuve et correctif ; handoff.md avec états e
       "12 fiches A4 pour le brief, l’audit et la passation",
       "Tokens, gabarits, règles et scanner Python dans l’archive",
     ],
-    entityDefinition: "Le design produit relie les besoins des utilisateurs, les objectifs de l’activité et les contraintes techniques pour décider quoi construire et dans quel ordre. L’UX organise le parcours ; l’UI matérialise les interactions. Un agent IA exécute dans ce cadre sans remplacer l’arbitrage produit.",
+    entityDefinition: "Le design produit contribue à la conception et à l’évolution d’un produit en reliant besoins des utilisateurs, objectifs de l’activité et contraintes techniques. Il travaille avec le product management, la recherche et l’ingénierie ; il ne possède pas seul la stratégie ni la roadmap. Un agent IA assiste ce travail sans remplacer les décisions de l’équipe.",
     references: [
       {
         title: "Guidelines for Human-AI Interaction",
@@ -1863,6 +2230,41 @@ SORTIES : review.md avec constat, preuve et correctif ; handoff.md avec états e
         publisher: "EUR-Lex · Union européenne",
         date: "2026-07-27",
         note: "Texte consolidé : art. 50 (obligations et exceptions), 111(4) (transition au 2 décembre 2026 pour certains systèmes existants) et 113 (application). Vérifier le rôle et l’usage concernés.",
+      },
+      {
+        title: "UX Disciplines: Glossary",
+        url: "https://www.nngroup.com/articles/ux-disciplines-glossary/",
+        publisher: "Raluca Budiu · Nielsen Norman Group",
+        date: "2026-10-23",
+        note: "Consulté le 18 novembre 2026. UI visuelle et interactive ; responsabilités variables selon les organisations ; Product Design distinct du Product Management.",
+      },
+      {
+        title: "Synthetic Users: If, When, and How to Use AI-Generated “Research”",
+        url: "https://www.nngroup.com/articles/synthetic-users/",
+        publisher: "Maria Rosala & Kate Moran · Nielsen Norman Group",
+        date: "2024-06-21",
+        note: "Consulté le 18 novembre 2026. Évaluation de profils simulés et limites méthodologiques : des hypothèses de préparation ne sont pas des observations de participants.",
+      },
+      {
+        title: "Generative UI and Outcome-Oriented Design",
+        url: "https://www.nngroup.com/articles/generative-ui/",
+        publisher: "Kate Moran & Sarah Gibbons · Nielsen Norman Group",
+        date: "2024-03-22",
+        note: "Consulté le 18 novembre 2026. Distingue design assisté et génération à l’exécution. Le scénario prospectif présenté n’est pas une preuve de maturité de tous les outils actuels.",
+      },
+      {
+        title: "Application card: GitHub Copilot Agents",
+        url: "https://docs.github.com/en/copilot/responsible-use/agents",
+        publisher: "GitHub Docs",
+        date: "Consulté le 18 novembre 2026",
+        note: "Capacités, permissions et limites des agents ; supervision humaine et responsabilité des commandes. Documentation d’un fournisseur, pas validation du workflow Playbook.",
+      },
+      {
+        title: "Selecting Web Accessibility Evaluation Tools",
+        url: "https://www.w3.org/WAI/test-evaluate/tools/selecting/",
+        publisher: "W3C · Web Accessibility Initiative",
+        date: "Consulté le 18 novembre 2026",
+        note: "Les outils assistent l’évaluation ; certaines vérifications demandent un jugement humain et des résultats peuvent être inexacts.",
       },
     ],
   },

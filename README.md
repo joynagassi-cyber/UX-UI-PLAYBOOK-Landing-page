@@ -21,31 +21,44 @@ Quatre articles sont disponibles **dans chaque langue** sous `/{fr|en}/articles/
 | `product-design-ai-agents` | Cadrage et revue du travail avec des agents IA | 13 |
 | `ux-ui-product-design` | Comparaison des responsabilités sur une même application mobile | 14 |
 
-Le libellé de navigation et de section est **« Article »**, sans nombre figé. Les 120 explications FR/EN ont chacune leur visuel à proximité : côte à côte au-dessus de 760 px, dessous sur mobile. Deux synthèses supplémentaires par article sont agrandissables au clavier. Les sources figurent sous **Sources et références / Sources and references**, sans badge de classement. Les articles n’utilisent pas de scans du livre ; la galerie de dix pages réelles sur la landing est conservée.
+Le libellé de navigation reste **« Article »**, sans nombre figé ; les index portent désormais un titre explicite **Guides UX, UI et Product Design / UX, UI and Product Design guides**. Les 120 explications FR/EN ont chacune leur visuel à proximité : côte à côte au-dessus de 760 px, dessous sur mobile. Deux synthèses supplémentaires par article sont agrandissables au clavier. Les sources figurent sous **Sources et références / Sources and references**, sans badge de classement. Les articles n’utilisent pas de scans du livre ; la galerie de dix pages réelles sur la landing est conservée.
 
 Le comparatif UX/UI/Product comprend le prototype local **Atelier** : offre, créneau et récapitulatif, trois regards qui conservent le même état, sélection, retour, confirmation simulée et reprise après un créneau refusé. L’offre de 39 € / 45 min et les horaires sont fictifs. Aucune donnée personnelle, réservation ou paiement n’est envoyé. Les six références consultées, les limites de la simulation et les essais à préparer sont indiqués dans l’article. [Choix éditoriaux](docs/EDITORIAL.md).
 
+### Stratégie de contenu et ajouts pratiques
+
+Le [rapport concurrentiel FR/EN](docs/COMPETITIVE_CONTENT_STRATEGY.md) distingue les observations de pages, les hypothèses éditoriales et la visibilité non mesurée. Les guides existants accueillent une matrice de choix de méthode UX, un consommateur HTML des tokens, une fiche de revue IA explicitement non exécutée et des liens de lecture contextuels dans chaque langue, sans nouvelle URL publique. Le [protocole de test complet](docs/drafts/USABILITY_TEST_PROTOCOL_FR.md) reste un brouillon interne non importé dans le site. Aucune étude utilisateur ni citation par un moteur IA n’est revendiquée.
+
 ## Nouveau : répertoire UI/UX gratuit
 
-Une ressource distincte de l’offre à 29 USD, issue du document fourni par le créateur : **51 fiches, 6 familles et 75 liens de ressources**. Les fichiers sont en français, même sur la page de présentation anglaise.
+Une ressource distincte de l’offre à 29 USD, issue du document fourni par le créateur : **51 fiches, 6 familles et 75 liens de ressources**. Deux kits complets sont disponibles : chaque page fournit les fichiers de sa langue (français ou anglais).
 
 - Pages statiques : `/fr/resources/ui-ux-directory` et `/en/resources/ui-ux-directory` ; promotion sur l’accueil, le hub Article et les huit articles localisés, avec liens de navigation et pied de page.
-- Téléchargement réel : `public/downloads/repertoire-ui-ux-gratuit-v1.zip` (7 fichiers, environ 540 Kio) ; guide PDF de **34 pages**, Markdown, fiche de décision PDF de **3 pages**, fiche Markdown, grille CSV, mode d’emploi et notices. PDF/Markdown également disponibles séparément.
+- Téléchargements réels : `public/downloads/repertoire-ui-ux-gratuit-v1.zip` (FR, environ 540 Kio) et `public/downloads/ui-ux-directory-free-en-v1.zip` (EN, environ 504 Kio), **7 fichiers chacun** ; guide PDF de **34 pages**, Markdown, fiche de décision PDF de **3 pages**, fiche Markdown, grille CSV, mode d’emploi et notices. PDF/Markdown également disponibles séparément.
 - Sommaire serveur des 51 fiches et 75 destinations, six accordéons natifs utilisables sans JavaScript, trois extraits éditoriaux, FAQ et distinction explicite entre gratuité du guide et licences/tarifs tiers.
-- Canonical/hreflang, images de partage 1200 × 630, schéma du livre en langue `fr`, sitemap et endpoints LLM mis à jour. Les fichiers bruts ont `noindex` pour privilégier la page de présentation et de vraies réponses MIME/téléchargement.
+- Canonical/hreflang, images de partage 1200 × 630, schéma du livre et encodage PDF dans la langue de chaque page, sitemap et endpoints LLM mis à jour. Les fichiers bruts ont `noindex` pour privilégier la page de présentation et de vraies réponses MIME/téléchargement.
 - **Publication Gumroad non effectuée.** Le connecteur n’est pas pris en charge ici. Sans URL publiée, le CTA livre directement le ZIP sans collecte d’email ni traceur ajouté. Aucun slug gratuit n’est inventé.
 
-Pour raccorder le produit **après publication et test à 0**, renseigner `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL` au build. La validation n’accepte que le magasin du créateur et rejette les deux URLs payantes du Playbook. Voir le [guide de publication](products/ui-ux-directory/publication-guide.md), la [fiche Gumroad prête à copier](products/ui-ux-directory/gumroad-listing.md) et le [dossier de fabrication](products/ui-ux-directory/README.md).
+Pour raccorder le produit **après publication et test à 0**, renseigner `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_FR` et/ou `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_EN` au build avec les URLs de deux produits distincts. Une variable vide conserve le ZIP direct de sa langue ; l’ancien `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL` reste un repli français uniquement. La validation n’accepte que le magasin du créateur et rejette les deux URLs payantes du Playbook. Voir le [guide de publication](products/ui-ux-directory/publication-guide.md), la [fiche Gumroad prête à copier](products/ui-ux-directory/gumroad-listing.md) et le [dossier de fabrication](products/ui-ux-directory/README.md). Équivalents anglais : [guide de publication](products/ui-ux-directory/en/publication-guide.md), [fiche Gumroad](products/ui-ux-directory/en/gumroad-listing.md) et [livrables](products/ui-ux-directory/en/README.md).
 
 ```bash
 # À lancer après une modification du catalogue ou de l’origine imprimée :
 # nécessite Chromium, utilise les fontes et pictogrammes locaux
-npm run generate:resource
+npm run generate:resource       # Français
+npm run generate:resource:en    # Anglais
 # Contrôles du ZIP, des PDF, des liens, du CSV, des notices et de la configuration
 npm run check:resource
 ```
 
-`products/ui-ux-directory/catalogue.json` est la source unique éditée. Le document fourni est archivé séparément et non distribué. Le manifeste contrôle tailles, SHA-256 et origine des liens imprimés ; changer `NEXT_PUBLIC_SITE_URL` impose de régénérer le kit. La mise en page est contrôlée avant impression, mais les PDF ne revendiquent pas de certification PDF/UA. Aucun audit exhaustif des 75 destinations ni garantie d’accessibilité des outils n’est annoncé.
+`products/ui-ux-directory/catalogue.json` est la source française éditée ; `products/ui-ux-directory/en/catalogue.json` en est la traduction anglaise intégrale, avec les mêmes IDs et destinations. Le document fourni est archivé séparément et non distribué. Chaque manifeste contrôle tailles, SHA-256 et origine des liens imprimés ; changer `NEXT_PUBLIC_SITE_URL` impose de régénérer les deux kits. La mise en page est contrôlée avant impression, mais les PDF ne revendiquent pas de certification PDF/UA. Aucun audit exhaustif des 75 destinations ni garantie d’accessibilité des outils n’est annoncé.
+
+## Aperçus Microlink — préparation, pas de captures publiées
+
+Le [mode d’emploi des captures](products/ui-ux-directory/screenshots/README.md) décrit l’outil SDK **isolé sous Node 24+** (`tools/microlink/`), sans migrer le site Node 22. `npm run microlink:plan` prépare hors réseau les **75 URLs uniques**, communes aux deux langues. `npm run microlink:github` est un essai unique ; une série demande un budget et une confirmation explicites. Les erreurs arrêtent la série, les reçus/images sont réutilisés et aucun secret n’est envoyé au navigateur ou au CDN.
+
+**Aucune vraie capture obtenue ici.** Le manifeste est vide et l’essai GitHub s’est arrêté sur `ENOKEY` avant l’API. Aucun appel API ni téléchargement CDN n’a été tenté ; leur connectivité n’a pas été mesurée et ces hôtes ne figurent pas dans la liste réseau autorisée du sandbox. Le login doit se faire sur la machine du propriétaire. La clé exposée dans le chat n’a pas été recopiée : la révoquer et utiliser une remplaçante dans `.env.local`, jamais dans le chat ou Git.
+
+Les générateurs acceptent `--with-screenshots` seulement avec un ensemble complet de PNG relus et vérifiés par SHA-256. Ils ajoutent alors des pages avec **image et URL cliquables** ; sans les 75 images approuvées, ils refusent d’écraser les kits. **Les PDF/ZIP actuels restent sans captures.** Les dépendances Microlink ne sont pas nécessaires au build ou aux tests hors ligne du site.
 
 ## Architecture et langue
 
@@ -74,6 +87,7 @@ Pour tester le fonctionnement cible, construire puis servir **l’export avec se
 ```bash
 npm run typecheck
 npm run test:routing
+npm run test:content
 npm run build
 npm run check:export
 npm run preview:pages
@@ -99,6 +113,7 @@ PLAYWRIGHT_BASE_URL=http://127.0.0.1:3100 npm run test:ui
 Sans `PLAYWRIGHT_BASE_URL`, Playwright lance lui-même `preview:pages` ; le build doit déjà exister. `CHROMIUM_EXECUTABLE_PATH` peut désigner un navigateur installé dans l’environnement. Le projet déployé n’a pas besoin de dépendance Chromium serverless.
 
 - **`test:routing`** : règles de langue, cookies valides/inconnus, valeurs `q`, exclusions `q=0`, priorité du pays Cloudflare, query répétée/encodée, slash et corps HEAD ; les handlers réels sont importés.
+- **`test:content`** : catalogue inchangé, liens contextuels et ancres FR/EN, export textuel, références numérotées, explications et limites existantes, modèle de revue non exécuté et protocole conservé hors publication. Ces contrôles de cohérence ne notent pas automatiquement la qualité éditoriale.
 - **`check:export`** : toutes les pages du catalogue, titres/descriptions, canonical/hreflang, OG/Twitter et JPEG 1200 × 630, Person/citations, couvertures, liens/ressources/polices locales, sitemap/robots/LLM, fichiers Pages et absence de l’ancienne origine dans tout `out`.
 - **Python, stdlib uniquement** : contrôle HTML/SEO/éditions/Gumroad, bibliographies, paragraphes et illustrations, corpus LLM complet, licences et contrastes des tokens ; matrice HTTP de redirections, cache, chemins explicites, slash, 404. `--expected-origin` (alias `--site-url`) ou `NEXT_PUBLIC_SITE_URL` définit l’origine attendue, **distincte** de `--base-url`.
 - **Playwright + axe** : quatorze routes × deux thèmes aux largeurs 1280, 390 et 320 px ; axe à 1280/320, commandes, police effective, nombres, icônes/vecteurs, débordements et erreurs JavaScript. Les parcours couvrent aussi galerie, thèmes sauvegardés, clavier/focus, copie/checklist/FAQ, langue de l’article et achats ; le prototype est essayé dans ses neuf annotations, avec succès simulé et refus/récupération.
@@ -117,7 +132,7 @@ Cette variable est résolue **au build** et doit être identique pour les deux l
 ### Fichiers éditoriaux et ressources
 
 - `src/i18n/article-catalog.json` : slugs, nombres d’explications et clés des aperçus, partagés avec les outils et tests.
-- `src/i18n/articles/{fr,en}.ts`, `comparison-{fr,en}.ts` : données bilingues ; blocs `explanation`, `diagram`, `mobileLab`, références et FAQ.
+- `src/i18n/articles/{fr,en}.ts`, `comparison-{fr,en}.ts` : données bilingues ; blocs `explanation`, `diagram`, `mobileLab`, `readingLink`, références et FAQ.
 - `src/components/{ArticleVisual,DesignVector,DesignRolesLab}.tsx` et `src/i18n/design-lab.ts` : illustrations originales, prototype et annotations bilingues. Le transcript complet des neuf annotations et des états est exporté dans `/llms-full.txt`.
 - `src/components/NotionArticleReader.tsx` : sommaire, citations numérotées, copie, bibliographie et schémas agrandissables avec gestion du focus.
 - `npm run generate:social` : dix JPEG Open Graph de 1200 × 630 à partir des mêmes données, avec Domine et Lucide. Nécessite Chromium, sans service distant. Les dix pages de la galerie et les fichiers/licences locaux sont conservés.

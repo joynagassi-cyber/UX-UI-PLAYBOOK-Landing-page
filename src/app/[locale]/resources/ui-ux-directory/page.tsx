@@ -7,7 +7,7 @@ import { ThemeAndLangControls } from '@/components/ThemeAndLangControls';
 import { TabularText } from '@/components/TabularText';
 import { CONTENT, type Locale } from '@/i18n/content';
 import { ARTICLES } from '@/i18n/articles';
-import { FREE_MANIFEST, FREE_UI, resourceCategories, resourceSamples } from '@/i18n/free-resource';
+import { FREE_UI, freeResourceCatalog, freeResourceManifest, resourceCategories, resourceSamples } from '@/i18n/free-resource';
 import { FREE_RESOURCE_PATH } from '@/lib/free-resource-config';
 import { SITE_URL } from '@/lib/site-config';
 import { authorJsonLd, serializeJsonLd } from '@/lib/structured-data';
@@ -50,10 +50,12 @@ export default async function FreeDirectoryPage({ params }: { params: Promise<{ 
   const locale: Locale = raw;
   const c = CONTENT[locale];
   const t = FREE_UI[locale];
+  const catalog = freeResourceCatalog(locale);
+  const manifest = freeResourceManifest(locale);
   const categories = resourceCategories(locale);
   const samples = resourceSamples(locale);
   const url = `${SITE_URL}/${locale}${FREE_RESOURCE_PATH}`;
-  // The landing page language and the downloadable work's language are intentionally separate.
+  // Each page describes and serves its own language edition.
   // No fake Gumroad offer: the actual free files are available on this page in either configuration.
   const graph = {
     '@context': 'https://schema.org',
@@ -67,16 +69,16 @@ export default async function FreeDirectoryPage({ params }: { params: Promise<{ 
       },
       {
         '@type': 'Book', '@id': `${url}#guide`, url,
-        name: 'Répertoire UI/UX — 51 fiches pour choisir vos ressources',
-        description: FREE_UI.fr.metaDescription,
+        name: `${catalog.title} — ${catalog.subtitle}`,
+        description: t.metaDescription,
         author: { '@id': `${SITE_URL}/#joy-n` },
-        inLanguage: 'fr', isAccessibleForFree: true, bookFormat: 'https://schema.org/EBook',
-        numberOfPages: FREE_MANIFEST.counts.guidePages, version: FREE_MANIFEST.version,
-        image: `${SITE_URL}/images/free-directory/cover-fr.jpg`,
+        inLanguage: locale, isAccessibleForFree: true, bookFormat: 'https://schema.org/EBook',
+        numberOfPages: manifest.counts.guidePages, version: manifest.version,
+        image: `${SITE_URL}/images/free-directory/cover-${locale}.jpg`,
         encoding: {
-          '@type': 'MediaObject', inLanguage: 'fr', encodingFormat: 'application/pdf',
-          contentUrl: SITE_URL + FREE_MANIFEST.files.pdf.path,
-          contentSize: `${FREE_MANIFEST.files.pdf.bytes} bytes`,
+          '@type': 'MediaObject', inLanguage: locale, encodingFormat: 'application/pdf',
+          contentUrl: SITE_URL + manifest.files.pdf.path,
+          contentSize: `${manifest.files.pdf.bytes} bytes`,
         },
       },
       {
@@ -121,7 +123,7 @@ export default async function FreeDirectoryPage({ params }: { params: Promise<{ 
             <h1>{t.title}</h1>
             <p className="resource-lede">{t.lede}</p>
             <dl className="resource-stats">
-              {[[FREE_MANIFEST.counts.entries, t.entries], [FREE_MANIFEST.counts.categories, t.categories], [FREE_MANIFEST.counts.resourceLinks, t.links]].map(([value, label]) => (
+              {[[manifest.counts.entries, t.entries], [manifest.counts.categories, t.categories], [manifest.counts.resourceLinks, t.links]].map(([value, label]) => (
                 <div key={label}><dt><TabularText>{String(value)}</TabularText></dt><dd>{label}</dd></div>
               ))}
             </dl>
@@ -129,7 +131,7 @@ export default async function FreeDirectoryPage({ params }: { params: Promise<{ 
             <a className="resource-text-link" href="#directory"><span>{t.readDirectory}</span><Icon name="arrow-right" size="sm" /></a>
           </div>
           <figure className="resource-cover">
-            <img src="/images/free-directory/cover-fr.jpg" width={1280} height={720} alt={t.coverAlt} fetchPriority="high" />
+            <img src={`/images/free-directory/cover-${locale}.jpg`} width={1280} height={720} alt={t.coverAlt} fetchPriority="high" />
             <figcaption>{t.coverCaption}</figcaption>
           </figure>
         </header>
@@ -187,7 +189,7 @@ export default async function FreeDirectoryPage({ params }: { params: Promise<{ 
               <p className="resource-sample-watch"><strong>{t.watch}.</strong> {entry.watch}</p>
             </article>)}
           </div>
-          <aside className="resource-rights"><Icon name="alert-triangle" size="lg" /><div><h3>{t.rightsTitle}</h3><p>{t.rightsText}</p><a href={FREE_MANIFEST.files.pdf.path}>{t.rightsLink}</a></div></aside>
+          <aside className="resource-rights"><Icon name="alert-triangle" size="lg" /><div><h3>{t.rightsTitle}</h3><p>{t.rightsText}</p><a href={manifest.files.pdf.path}>{t.rightsLink}</a></div></aside>
         </section>
 
         <section className="wrap resource-section" aria-labelledby="resource-faq-title">
@@ -197,7 +199,7 @@ export default async function FreeDirectoryPage({ params }: { params: Promise<{ 
 
         <section className="wrap resource-section resource-bottom" aria-labelledby="resource-bottom-title">
           <h2 id="resource-bottom-title">{t.bottomTitle}</h2><FreeResourceDownload locale={locale} />
-          <a className="resource-text-link" href={FREE_MANIFEST.files.markdown.path} download hrefLang="fr"><Icon name="file-text" size="sm" /><span>{t.markdown}</span></a>
+          <a className="resource-text-link" href={manifest.files.markdown.path} download hrefLang={locale}><Icon name="file-text" size="sm" /><span>{t.markdown}</span></a>
           <p className="resource-subnote">{t.edition}</p>
         </section>
 

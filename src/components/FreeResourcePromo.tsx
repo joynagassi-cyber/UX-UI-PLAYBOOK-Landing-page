@@ -20,7 +20,7 @@ export function FreeResourcePromo({ locale, compact = false }: { locale: Locale;
       </div>
       {!compact && (
         <div className="free-promo-image">
-          <img src="/images/free-directory/cover-fr.jpg" width={1280} height={720} alt={t.coverAlt} loading="lazy" />
+          <img src={`/images/free-directory/cover-${locale}.jpg`} width={1280} height={720} alt={t.coverAlt} loading="lazy" />
         </div>
       )}
     </aside>

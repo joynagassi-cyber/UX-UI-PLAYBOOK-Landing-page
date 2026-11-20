@@ -8,6 +8,13 @@ export type ArticleBlock =
   | { type: 'explanation'; paragraphs: string[]; visual: ArticleVisual }
   | { type: 'diagram'; visual: ArticleVisual }
   | { type: 'mobileLab'; title: string; caption: string }
+  | {
+      type: 'readingLink';
+      slug: keyof typeof catalog;
+      sectionId?: string;
+      label: string;
+      text: string;
+    }
   | { type: 'quote'; tag: string; text: string }
   | {
       type: 'doDont';
@@ -106,6 +113,8 @@ export interface ArticlesIndexCopy {
   kicker: string;
   heading: string;
   lede: string;
+  startLinkText: string;
+  startLinkLabel: string;
   readBtn: string;
   backHome: string;
   tocTitle: string;
@@ -120,13 +129,15 @@ export interface ArticlesIndexCopy {
 
 export const ARTICLES_UI: Record<Locale, ArticlesIndexCopy> = {
   fr: {
-    metaTitle: 'Articles UX, UI et Product Design | UX/UI Playbook',
+    metaTitle: 'Guides UX, UI et Product Design | UX/UI Playbook',
     metaDescription:
-      'Articles UX, UI et Product Design : comparaison des rôles, maquettes mobiles, audit de 40 points, tokens CSS et travail avec les agents IA. Sources citées.',
-    kicker: 'ARTICLE',
-    heading: 'Article',
+      'Comparez les rôles UX, UI et Product Design, choisissez une méthode de recherche, créez des tokens CSS et préparez la revue d’une interface générée par IA.',
+    kicker: 'LES GUIDES',
+    heading: 'Guides UX, UI et Product Design',
     lede:
-      'Le comparatif UX, UI et Product Design présente les rôles sur une même application mobile fictive. L’article UX examine les informations à conserver pendant une tâche, les erreurs et les méthodes d’observation. L’article UI décrit les rôles typographiques, les couleurs et les espacements, puis leur traduction en tokens CSS. L’article Product Design suit le cadrage et la revue du travail confié à un agent. Vous y trouverez les explications, les exemples et les modèles à copier pour préparer chaque étape ; les sources sont regroupées à la fin de chaque article.',
+      'Quatre guides pour comparer les responsabilités, choisir une méthode de recherche, construire des composants et revoir le travail d’un agent IA. Le cas mobile Atelier est fictif. Chaque article relie explications, exemples, modèles à copier et sources.',
+    startLinkText: 'Vous cherchez d’abord à distinguer les disciplines ?',
+    startLinkLabel: 'Commencer par le comparatif UX, UI et Product Design',
     readBtn: 'Lire l’article',
     backHome: 'Retour à UX/UI Playbook',
     tocTitle: 'Dans cet article',
@@ -139,13 +150,15 @@ export const ARTICLES_UI: Record<Locale, ArticlesIndexCopy> = {
     miniCtaBtn: 'Voir le livre',
   },
   en: {
-    metaTitle: 'UX, UI and Product Design Articles | UX/UI Playbook',
+    metaTitle: 'UX, UI and Product Design Guides | UX/UI Playbook',
     metaDescription:
-      'UX, UI and Product Design articles: compare roles with mobile mockups, apply a 40-point audit, build CSS tokens and review AI-assisted work. Sources cited.',
-    kicker: 'ARTICLE',
-    heading: 'Article',
+      'Compare UX, UI and Product Design roles, choose a research method, build CSS tokens and prepare an evidence-based review of an AI-generated interface.',
+    kicker: 'THE GUIDES',
+    heading: 'UX, UI and Product Design guides',
     lede:
-      'The UX, UI and Product Design comparison follows the roles in one fictional mobile application. The UX article examines information needed throughout a task, errors and observation methods. The UI article describes type roles, colour and spacing, then translates them into CSS tokens. The Product Design article follows the scoping and review of work delegated to an agent. Explanations, examples and templates support preparation for each stage; references are collected at the end of each article.',
+      'Four guides to compare responsibilities, choose a research method, build components and review work delegated to an AI agent. The Atelier mobile app is fictional. Each article connects explanations, examples, copy-ready templates and references.',
+    startLinkText: 'Need to distinguish the disciplines first?',
+    startLinkLabel: 'Start with the UX, UI and Product Design comparison',
     readBtn: 'Read the article',
     backHome: 'Back to UX/UI Playbook',
     tocTitle: 'In this article',
