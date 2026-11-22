@@ -35,13 +35,14 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - name: Type-check, unit-test and export the exact revision
-        run: npm run check:resource && npm run typecheck && npm run test:routing && npm run test:content && npm run build && npm run check:export
+        run: npm run check:preservation && npm run lint && npm run typecheck && npm test && npm run build && npm run check:export
       - name: Serve the export with real local Pages Functions and check rendered HTML
         run: |
           mkdir -p reports
           npm run preview:pages > reports/pages-server.log 2>&1 &
           echo $! > reports/pages-server.pid
           python3 scripts/site_check.py --base-url "$PLAYWRIGHT_BASE_URL" --expected-origin "$NEXT_PUBLIC_SITE_URL" --wait 120
+          python3 scripts/seo_check.py --base-url "$PLAYWRIGHT_BASE_URL" --expected-origin "$NEXT_PUBLIC_SITE_URL"
       - name: Pages routing, FR/EN interfaces, keyboard and axe
         run: npm run test:ui
       - name: Keep reports, traces, screenshots and Pages server output

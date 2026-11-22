@@ -15,6 +15,7 @@ import { FREE_UI } from '@/i18n/free-resource';
 import { FREE_RESOURCE_PATH } from '@/lib/free-resource-config';
 import { NotionArticleReader } from '@/components/NotionArticleReader';
 import { authorJsonLd, serializeJsonLd } from '@/lib/structured-data';
+import { articleSummary } from '@/lib/article-summary';
 
 export const dynamicParams = false;
 
@@ -60,8 +61,8 @@ export async function generateMetadata({
       title: art.metaTitle,
       description: art.metaDescription,
       url: `${c.siteUrl}/${locale}/articles/${art.slug}`,
-      publishedTime: `${art.publishedAt}T08:00:00.000Z`,
-      modifiedTime: `${art.updatedAt}T08:00:00.000Z`,
+      publishedTime: art.publishedAt,
+      modifiedTime: art.updatedAt,
       authors: ['Joy N.'],
       section: art.category,
       tags: art.keywords,
@@ -78,7 +79,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: art.metaTitle,
       description: art.metaDescription,
-      images: [art.ogImage],
+      images: [{ url: art.ogImage, alt: art.title }],
     },
   };
 }
@@ -99,7 +100,7 @@ export default async function ArticleDetailPage({
   }
 
   const c = CONTENT[locale];
-  const relatedArticles = ARTICLES[locale].filter((a) => a.slug !== art.slug);
+  const relatedArticles = ARTICLES[locale].filter((a) => a.slug !== art.slug).map(articleSummary);
   const articleUrl = `${c.siteUrl}/${locale}/articles/${art.slug}`;
 
   const jsonLd = {
@@ -115,8 +116,8 @@ export default async function ArticleDetailPage({
         abstract: art.aeoSummary,
         image: `${c.siteUrl}${art.ogImage}`,
         inLanguage: locale,
-        datePublished: `${art.publishedAt}T08:00:00.000Z`,
-        dateModified: `${art.updatedAt}T08:00:00.000Z`,
+        datePublished: art.publishedAt,
+        dateModified: art.updatedAt,
         articleSection: art.category,
         keywords: art.keywords.join(', '),
         author: { '@id': `${c.siteUrl}/#joy-n` },
@@ -134,10 +135,10 @@ export default async function ArticleDetailPage({
           },
         },
         isPartOf: {
-          '@type': 'Book',
-          '@id': `${c.siteUrl}/${locale}#book`,
+          '@type': 'WebSite',
+          '@id': `${c.siteUrl}/#website`,
           name: 'UX/UI Playbook',
-          url: `${c.siteUrl}/${locale}`,
+          url: c.siteUrl,
         },
         citation: art.references.map((reference) => ({
           '@type': 'CreativeWork',
@@ -250,7 +251,7 @@ export default async function ArticleDetailPage({
         </div>
       </nav>
 
-      <main id="article-main">
+      <main tabIndex={-1} id="article-main">
         <NotionArticleReader
           locale={locale}
           gumroadUrl={c.gumroadUrl}

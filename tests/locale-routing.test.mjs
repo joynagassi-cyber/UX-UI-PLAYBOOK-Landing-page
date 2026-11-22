@@ -31,6 +31,9 @@ const cases = [
   ['Cloudflare property before client header', { 'CF-IPCountry': 'BJ' }, { country: 'US' }, 'en'],
   ['unsupported header uses country', { 'Accept-Language': 'de,es;q=0.8', 'CF-IPCountry': 'BJ' }, undefined, 'fr'],
   ['wildcard uses country', { 'Accept-Language': '*', 'CF-IPCountry': 'BJ' }, undefined, 'fr'],
+  ['English exclusion permits French without a French country', { 'Accept-Language': 'en;q=0', 'CF-IPCountry': 'US' }, undefined, 'fr'],
+  ['English regional exclusion permits French fallback', { 'Accept-Language': 'en-US;q=0' }, undefined, 'fr'],
+  ['both languages excluded use the documented navigable fallback', { 'Accept-Language': 'en;q=0,fr;q=0' }, undefined, 'en'],
   ['English final fallback', {}, undefined, 'en'],
 ];
 for (const [name, headers, cf, expected] of cases) {
@@ -47,6 +50,9 @@ for (const locale of ['fr', 'en']) {
       assert.equal(target.pathname, `/${locale}${path === '/' ? '' : path.replace(/\/+$/, '')}`);
       assert.equal(target.search, '?utm_source=test&a=1&a=2&label=hello%20world');
       assert.equal(response.headers.get('Cache-Control'), 'private, no-store');
+      assert.equal(response.headers.get('X-Content-Type-Options'), 'nosniff');
+      assert.equal(response.headers.get('Referrer-Policy'), 'strict-origin-when-cross-origin');
+      assert.equal(response.headers.get('Set-Cookie'), null);
       assert.deepEqual(new Set(response.headers.get('Vary').toLowerCase().split(',').map((part) => part.trim())), new Set(['cookie', 'accept-language', 'cf-ipcountry']));
     });
   }

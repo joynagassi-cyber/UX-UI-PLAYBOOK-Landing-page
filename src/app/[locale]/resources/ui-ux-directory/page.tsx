@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       url: `${SITE_URL}/${locale}${FREE_RESOURCE_PATH}`,
       images: [{ url: image, width: 1200, height: 630, alt: t.coverAlt }],
     },
-    twitter: { card: 'summary_large_image', title: t.metaTitle, description: t.metaDescription, images: [image] },
+    twitter: { card: 'summary_large_image', title: t.metaTitle, description: t.metaDescription, images: [{ url: image, alt: t.coverAlt }] },
   };
 }
 
@@ -116,7 +116,7 @@ export default async function FreeDirectoryPage({ params }: { params: Promise<{ 
         </div>
       </nav>
 
-      <main id="resource-content" className="resource-page">
+      <main tabIndex={-1} id="resource-content" className="resource-page">
         <header className="resource-hero wrap">
           <div className="resource-hero-copy">
             <div className="mono sec-kicker">{t.kicker}</div>

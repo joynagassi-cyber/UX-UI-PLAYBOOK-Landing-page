@@ -3638,9 +3638,10 @@ time {
   *,
   *::before,
   *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
+    /* Tiny durations still create thousands of transition events on a theme
+       change. Nothing depends on animationend: reduced motion means no motion. */
+    animation: none !important;
+    transition: none !important;
     scroll-behavior: auto !important;
   }
 }
@@ -3904,3 +3905,20 @@ time {
 
 /* Keep in-page directory and skip-link targets clear of the sticky navigation. */
 .resource-page, .resource-page [id] { scroll-margin-top: 88px; }
+
+/* Shared static 404: usable without a localized layout or JavaScript. */
+.error-page { max-width: 720px; min-height: 100svh; padding-block: 80px; display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+.error-page h1 { font-size: clamp(32px, 6vw, 56px); }
+.error-page h2 { font-size: 28px; margin-bottom: 12px; }
+.error-page nav { display: flex; flex-wrap: wrap; gap: 16px; }
+
+/* Focus/skip targets clear the sticky header without adding a second offset
+   to article sections, which already carry their own scroll margins. */
+main[id], main a, main button, main summary { scroll-margin-block-start: 96px; }
+
+/* Express the same states in the user's system palette. Explicit dark-preview
+   colors must not survive as pale text on a forced white canvas. */
+@media (forced-colors: active) {
+  .lang-btn.active { color: HighlightText; background: Highlight; outline: 1px solid ButtonText; }
+  .visual-theme-dark { color: CanvasText; background: Canvas; }
+}

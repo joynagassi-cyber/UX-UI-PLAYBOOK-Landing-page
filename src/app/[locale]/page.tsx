@@ -63,7 +63,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: c.meta.ogTitle,
       description: c.meta.ogDescription,
-      images: [locale === 'fr' ? '/og-fr.jpg' : '/og-en.jpg'],
+      images: [{ url: locale === 'fr' ? '/og-fr.jpg' : '/og-en.jpg', alt: c.meta.productName }],
     },
   };
 }
@@ -116,7 +116,6 @@ export default async function LandingPage({
           '@type': 'Brand',
           name: 'UX/UI Playbook',
         },
-        inLanguage: locale,
         category: 'Software & Interface Design Playbook',
         image: c.meta.ogImage,
         offers: {
@@ -285,7 +284,7 @@ export default async function LandingPage({
         </div>
       </div>
 
-      <main id="content">
+      <main tabIndex={-1} id="content">
         <section id="free-resource" className="free-promo-section">
           <div className="wrap"><FreeResourcePromo locale={locale} /></div>
         </section>

@@ -118,7 +118,12 @@ check('routing:Functions-only-unlocalized', routing.version === 1 && JSON.string
 check('routing:no-static-overlap', allRoutes.every((route) => !routing.include?.some((pattern) => pattern.endsWith('*') ? route.startsWith(pattern.slice(0, -1)) : route === pattern)) && !routing.include?.some((pattern) => /images|_next|robots|sitemap|llms|og-/.test(pattern)), 'Localized pages, images, fonts and discovery files do not invoke a Function.');
 check('routing:legacy-html-only', readOut('_redirects').trim() === '/fr.html /fr 301\n/en.html /en 301', readOut('_redirects').trim());
 const robots = readOut('robots.txt');
-check('robots:production-origin', robots.includes(`Sitemap: ${SITE_URL}/sitemap.xml`) && robots.includes(`Host: ${SITE_URL}`), SITE_URL);
+check('robots:production-origin', robots.includes(`Sitemap: ${SITE_URL}/sitemap.xml`) && !/^Host:/m.test(robots), SITE_URL);
+const crawlers = require('../src/config/crawler-policy.json');
+check('robots:explicit-crawlers', crawlers.every(({ userAgent }) => robots.includes(`User-Agent: ${userAgent}\nAllow: /`)), crawlers.map(bot => bot.userAgent));
+check('sitemap:no-artificial-lastmod', !/<lastmod>|<changefreq>|<priority>/i.test(readOut('sitemap.xml')), 'Optional dates/frequencies omitted until backed by actual page-change provenance.');
+const errorPage = readOut('404.html');
+check('404:accessible-noindex', /name="robots" content="[^"]*noindex/.test(errorPage) && errorPage.includes('<main') && errorPage.includes('href="/fr"') && errorPage.includes('href="/en"') && !errorPage.includes('rel="canonical"'), 'Bilingual recovery links, semantic main, no indexable/canonical error page.');
 const sitemapUrls = [...readOut('sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]).sort();
 check('sitemap:all-localized-pages', JSON.stringify(sitemapUrls) === JSON.stringify(allRoutes.map((route) => SITE_URL + route).sort()), sitemapUrls);
 const discovery = readOut('llms.txt');

@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useSyncExternalStore } from 'react';
+import { browserSearch, serverSearch, subscribeSearch } from '@/lib/browser-stores';
 
 interface GumroadButtonProps {
   href: string;
@@ -10,24 +11,23 @@ interface GumroadButtonProps {
 }
 
 export function GumroadButton({ href, className, style, children }: GumroadButtonProps) {
-  const [finalHref, setFinalHref] = useState(href);
-
-  useEffect(() => {
+  const search = useSyncExternalStore(subscribeSearch, browserSearch, serverSearch);
+  let finalHref = href;
+  if (search) {
     try {
-      const currentParams = new URLSearchParams(window.location.search);
-      if ([...currentParams.keys()].length === 0) return;
+      const currentParams = new URLSearchParams(search);
       const target = new URL(href);
+      // Forward only the existing attribution allowlist. Never arbitrary URL
+      // parameters, and never move a query string after a #fragment.
       for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref']) {
         const val = currentParams.get(key);
-        if (val && !target.searchParams.has(key)) {
-          target.searchParams.set(key, val);
-        }
+        if (val && !target.searchParams.has(key)) target.searchParams.set(key, val);
       }
-      setFinalHref(target.toString());
+      finalHref = target.toString();
     } catch {
-      // Keep original href on parse error
+      // Keep the original href if configuration is invalid.
     }
-  }, [href]);
+  }
 
   return (
     <a
