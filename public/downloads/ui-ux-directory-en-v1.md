@@ -8,7 +8,7 @@ A directory for comparing, choosing and documenting interface resources. It is f
 
 > The guide and worksheet are free. Listed services may offer paid features or conditional licenses. The 75 links are not 75 distinct tools and have not undergone an exhaustive availability audit. This edition offers starting points to verify; it does not promise business results, performance, accessibility conformance or error-free AI output.
 
-Guide page: https://joyccelight-playbook.pages.dev/en/resources/ui-ux-directory?utm_source=ui-ux-directory&utm_medium=markdown&utm_campaign=free-resource
+Guide page: https://joyccelight-playbook.uxplay.workers.dev/en/resources/ui-ux-directory?utm_source=ui-ux-directory&utm_medium=markdown&utm_campaign=free-resource
 
 ## How to use it
 
@@ -701,9 +701,9 @@ English translation of the edited directory adapted from repertoire-complet-ui-u
 
 This guide helps you choose resources. The separate paid UX/UI Playbook covers preparing and reviewing interfaces with a manual, A4 worksheets and an archive of tokens, templates and a scanner. The paid product is not included in this free download.
 
-Explore the English edition ($29 USD): https://joyccelight-playbook.pages.dev/en?utm_source=ui-ux-directory&utm_medium=markdown&utm_campaign=free-resource#buy
+Explore the English edition ($29 USD): https://joyccelight-playbook.uxplay.workers.dev/en?utm_source=ui-ux-directory&utm_medium=markdown&utm_campaign=free-resource#buy
 
-Read the free articles: https://joyccelight-playbook.pages.dev/en/articles?utm_source=ui-ux-directory&utm_medium=markdown&utm_campaign=free-resource
+Read the free articles: https://joyccelight-playbook.uxplay.workers.dev/en/articles?utm_source=ui-ux-directory&utm_medium=markdown&utm_campaign=free-resource
 
 ## Terms of use
 

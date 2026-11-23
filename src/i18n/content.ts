@@ -1,4 +1,5 @@
 import { SITE_URL } from '@/lib/site-config';
+import { PLAYBOOK_COUNTS, playbookPages } from '@/lib/playbook-edition';
 
 export type Locale = 'fr' | 'en';
 
@@ -103,6 +104,7 @@ export interface PlaybookContent {
     fixedBadge: string;
     copyCmd: string;
     copiedCmd: string;
+    illustrationLabel: string;
     screenHeaderBad: string;
     screenHeaderClean: string;
     screenMock: {
@@ -251,12 +253,12 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     otherGumroadUrl: 'https://joyccelight.gumroad.com/l/uxuiplaybook',
     siteUrl: SITE_URL,
     meta: {
-      title: "UX/UI Playbook — Manuel, kit et Skill IA · FR",
+      title: `UX/UI Playbook 2026 · ${playbookPages('fr')} pages, 120 sections · FR`,
       description:
-        "Le UX/UI Playbook réunit 148 pages, 12 fiches A4 et 21 fichiers : tokens CSS/JSON, scanner Python et règles pour vos agents IA. Édition FR à 29 $.",
-      ogTitle: 'UX/UI Playbook — Édition française 2026 + Kit bonus',
+        `120 sections, ${playbookPages('fr')} pages et un lexique de 56 composants. Manuel UX/UI, kit de 12 fiches A4 et 21 fichiers en français. Paiement unique : 29 USD.`,
+      ogTitle: 'UX/UI Playbook 2026 · Édition française',
       ogDescription:
-        "Manuel UX, UI et Product Design de 148 pages, kit de 12 fiches A4 et archive de 21 fichiers : tokens, gabarits et scanner Python. Édition FR à 29 USD.",
+        `${playbookPages('fr')} pages, 120 sections et 56 entrées de lexique. Kit de 26 pages et archive de 21 fichiers en français. 29 USD, paiement unique.`,
       ogImage: `${SITE_URL}/og-fr.jpg`,
       ogLocale: 'fr_FR',
       productName: 'UX/UI Playbook 2026 + Kit bonus (Édition française)',
@@ -265,7 +267,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     topBar: {
       badge: "ÉDITION FRANÇAISE 2026 · PDF, KIT A4 ET FICHIERS",
       audienceHint: "Manuel, fiches et instructions en français",
-      cta: 'Obtenir le Playbook — 29 $',
+      cta: 'Obtenir le Playbook · 29 $',
     },
     nav: {
       pillars: "Livre et fichiers",
@@ -274,10 +276,10 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       contents: 'Sommaire',
       guides: 'Articles',
       faq: 'FAQ',
-      buy: 'Acheter — 29 $',
+      buy: 'Acheter · 29 $',
       themeDarkLabel: 'Passer en mode clair',
       themeLightLabel: 'Passer en mode sombre',
-      switchLangTitle: 'Switch to the English edition (139 pages)',
+      switchLangTitle: `Switch to the English edition (${playbookPages('en')} pages)`,
     },
     hero: {
       kicker: "UX, UI ET PRODUCT DESIGN POUR LES DÉVELOPPEURS",
@@ -288,19 +290,19 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         "Le UX/UI Playbook de Joy N. accompagne la conception d’une interface, depuis la définition du parcours jusqu’aux états d’erreur et à la passation. Le manuel explique les choix de typographie, de couleur et d’espacement avec des écrans annotés. Les fiches A4 servent à préparer un brief ou une revue ; les tokens et le scanner Python permettent ensuite de reprendre certaines décisions dans le code. Les points qui demandent une observation du rendu ou un essai avec des utilisateurs restent à vérifier.",
       primaryCta: 'Obtenir l’édition française · 29 $',
       secondaryCta: 'Feuilleter les 10 extraits',
-      note: "29 USD, paiement unique. Téléchargement après achat : PDF français de 148 pages, kit A4 de 26 pages et archive de 21 fichiers.",
+      note: `29 USD, paiement unique. Téléchargement après achat : PDF français de ${playbookPages('fr')} pages, kit A4 de 26 pages et archive de 21 fichiers.`,
       proofs: [
-        '148 pages A4 en français',
+        `${playbookPages('fr')} pages A4 en français`,
         "77 règles : contrôles auto + humains",
         '12 fiches + 21 fichiers & Skill IA',
         'Demande de remboursement sous 7 jours',
       ],
-      coverCaption: 'Édition FR · 148 pages',
+      coverCaption: `Édition FR · ${playbookPages('fr')} pages`,
       spreadCaption: "Exemples annotés et consignes de revue",
     },
     strip: [
-      { num: '148', label: "pages dans le manuel français" },
-      { num: '36', label: "écrans annotés + 13 prototypes avant/après + 11 planches de plateformes" },
+      { num: String(playbookPages('fr')), label: "pages dans le manuel français" },
+      { num: String(PLAYBOOK_COUNTS.sections), label: "sections réparties en neuf parties, dont le lexique des composants" },
       { num: '77', label: "règles sur 6 plateformes, avec leurs méthodes de contrôle" },
       { num: '21', label: 'fichiers livrés : tokens, script Python & skill IA' },
     ],
@@ -312,8 +314,8 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       cards: [
         {
           tag: '01 · APPRENDRE',
-          title: "Le manuel visuel · 148 pages",
-          subtitle: "97 sections · 36 écrans annotés · 13 avant/après + 11 planches de plateformes",
+          title: `Le manuel visuel · ${playbookPages('fr')} pages`,
+          subtitle: "120 sections · 9 parties · lexique de 56 composants · 24 comparaisons",
           points: [
             "Des principes accompagnés de maquettes annotées, d’erreurs à examiner et d’espace pour les notes.",
             "Dix types d’écrans : landing page, tableau de bord, paiement, application mobile, tarifs et back-office notamment.",
@@ -326,7 +328,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           subtitle: 'Kit A4 de 26 pages (12 fiches) + gabarits + CSS/JSON',
           points: [
             '12 fiches imprimables A4 suivies chacune d’une page de notes réglée pour vos réunions.',
-            "Quatre gabarits éditables : brief de 12 questions, proposition en une page, passation développeur et audit de 40 points.",
+            "Quatre gabarits éditables : brief client, passation développeur, audit de 40 points et journal de preuves. La proposition en une page figure dans le kit PDF.",
             "Variables CSS et tokens JSON pour préparer les valeurs des thèmes clair et sombre, à adapter à votre projet.",
           ],
         },
@@ -343,32 +345,24 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       ],
     },
     agentDemo: {
-      kicker: "DÉMONSTRATION INTERACTIVE · RAPPORT ILLUSTRATIF",
+      kicker: "DÉMONSTRATION · RÉSULTATS DES FICHIERS TÉMOINS",
       heading: "Comparer un fichier en échec et un exemple corrigé.",
       lede:
-        "Ce comparatif simule un rapport de contrôle : aucun script Python ne s’exécute dans cette page. Copiez la commande pour lancer agent_check.py sur les fichiers témoins de l’archive, puis distinguez le résultat automatique de la revue humaine. Le schéma reste lisible ici : les défauts chiffrés décrivent les fichiers témoins, pas les tailles et contrastes de cette page.",
+        'Aucun script Python ne s’exécute dans cette page. À gauche, une maquette de paiement illustre des décisions à examiner. À droite, les résumés de rapports viennent des contrôles des fichiers test/bad.html et test/good.html de l’archive, pas de cette maquette. Ouvrez un terminal dans checklist-agent/ et copiez la commande pour reproduire le contrôle des fichiers témoins.',
       bullets: [
-        {
-          bold: 'Intégrable en CI/CD :',
-          rest: "l’option --fail-on blocking renvoie un code de sortie non nul lorsqu’un contrôle automatisé de sévérité bloquante échoue. Le pipeline doit utiliser ce code pour arrêter la livraison.",
-        },
-        {
-          bold: "Méthode, sévérité et résultat :",
-          rest: "Automatisé / À vérifier / Non applicable décrivent la méthode de contrôle. Une règle automatisée peut échouer ; « Bloquant » décrit sa sévérité, pas un quatrième statut.",
-        },
-        {
-          bold: 'Deux fichiers témoins inclus :',
-          rest: 'test/bad.html échoue immédiatement ; test/clean.html passe sans erreur bloquante.',
-        },
+        { bold: 'Une commande reproductible :', rest: 'avec --platform web, 57 des 77 règles entrent dans le périmètre. Le script examine 9 lignes sur bad.html et 8 sur good.html ; les autres restent à vérifier.' },
+        { bold: 'Un code de sortie pour la CI :', rest: '--fail-on blocking renvoie 1 pour bad.html, qui présente sept échecs bloquants, et 0 pour good.html. Ce résultat ne certifie ni le rendu ni l’accessibilité.' },
+        { bold: 'Méthode, sévérité et résultat :', rest: 'Automatisé / À vérifier décrivent le contrôle. Bloquant / Majeur décrivent la sévérité. Réussi / Échec sont les résultats ; une ligne peut aussi rester informative.' },
       ],
       tabBad: "1. Fichier témoin bad.html",
-      tabClean: '2. Écran corrigé (clean.html)',
+      tabClean: '2. Fichier témoin good.html',
       fixAction: "Afficher l’exemple corrigé",
       fixedBadge: "Exemple corrigé · revue humaine toujours requise",
       copyCmd: 'Copier la commande',
       copiedCmd: 'Commande copiée !',
-      screenHeaderBad: 'AVANT · 6 champs · 2 boutons égaux · 4 erreurs bloquantes',
-      screenHeaderClean: "APRÈS · champs utiles · 1 action primaire · exemple corrigé",
+      illustrationLabel: 'MAQUETTE',
+      screenHeaderBad: 'ILLUSTRATION · AVANT',
+      screenHeaderClean: 'ILLUSTRATION · APRÈS',
       screenMock: {
         brand: 'ATELIER NORD · PAIEMENT',
         stepLabel: 'Étapes du paiement',
@@ -389,47 +383,47 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         clearFeeClean: 'Total TTC : 132,90 € (livraison 4,90 € incluse · retour gratuit 30 j)',
         summaryClean: '1× Sac cuir noir (98 €) + Ceinture (30 €) + Livraison (4,90 €)',
         flaws: [
-          { code: 'C01 BLOQUANT', text: "Fichier témoin : textes en 9 et 10 px, sous le seuil Playbook de 12 px" },
-          { code: 'B01 BLOQUANT', text: "Fichier témoin : contraste insuffisant ; comparer au seuil texte de 4,5:1" },
-          { code: 'A06 BLOQUANT', text: 'Deux boutons pleins de même poids (« Payer » vs « Enregistrer »)' },
-          { code: "K03 MAJEUR", text: 'Montant final et frais découverts après la saisie des 6 champs' },
+          { code: 'C01 · REVUE', text: 'Vérifier les petites tailles de texte dans le rendu réel' },
+          { code: 'B01 · REVUE', text: 'Mesurer les contrastes sur chaque surface et dans chaque état' },
+          { code: 'A06 · REVUE', text: 'Deux boutons pleins de même poids : clarifier l’action principale' },
+          { code: 'K03 · REVUE', text: 'Rendre le total et les frais consultables avant l’engagement' },
         ],
         improvements: [
-          { code: "C01 · AUTOMATISÉ", text: "Taille minimale déclarée de l’exemple : 13 px" },
-          { code: "B01 · AUTOMATISÉ", text: "Paire texte/fond de l’exemple contrôlée ; surfaces réelles à mesurer" },
-          { code: "A06 · À VÉRIFIER", text: "Action primaire distincte ; confirmer la compréhension avec un humain" },
-          { code: "K03 · À VÉRIFIER", text: "Total et frais visibles ; vérifier le parcours complet avant engagement" },
+          { code: 'C01 · À VÉRIFIER', text: 'Examiner les tailles de texte avec le zoom et sur téléphone' },
+          { code: 'B01 · À VÉRIFIER', text: 'Mesurer texte, fond, focus et états dans le projet' },
+          { code: 'A06 · À VÉRIFIER', text: 'Action primaire distincte ; observer la compréhension' },
+          { code: 'K03 · À VÉRIFIER', text: 'Total et frais visibles ; essayer le parcours complet' },
         ],
       },
       terminal: {
         cmdBad:
           'python3 agent_check.py --target test/bad.html \\\n    --platform web --lang fr --fail-on blocking',
         cmdClean:
-          'python3 agent_check.py --target test/clean.html \\\n    --platform web --lang fr --fail-on blocking',
+          'python3 agent_check.py --target test/good.html \\\n    --platform web --lang fr --fail-on blocking',
         linesBad: [
-          { type: 'r', text: "C01 AUTOMATISÉ · BLOQUANT · échec : texte sous 12 px" },
-          { type: 'r', text: "B01 AUTOMATISÉ · BLOQUANT · échec : contraste sous 4.5:1" },
-          { type: 'r', text: "A01 AUTOMATISÉ · BLOQUANT · échec : H1 absent" },
-          { type: 'r', text: "F01 AUTOMATISÉ · BLOQUANT · échec : label non relié" },
-          { type: 'w', text: "D01 À VÉRIFIER · cible web : 24 px AA, 44 px recommandés" },
-          { type: 'w', text: "H01 À VÉRIFIER · parcours clavier et focus réel" },
-          { type: 'g', text: "Exemple : 9 automatisés · 6 à vérifier · 62 non applicables" },
-          { type: 'c', text: "Sévérité séparée : 4 échecs bloquants → sortie 1" },
+          { type: 'c', text: 'Résumé d’exécution · test/bad.html · périmètre web' },
+          { type: 'r', text: 'G01 · BLOQUANT · échec : attribut lang absent' },
+          { type: 'r', text: 'H02 · BLOQUANT · échec : image sans alt' },
+          { type: 'r', text: 'F01 · BLOQUANT · échec : champ sans id ni aria-label' },
+          { type: 'r', text: 'I03 · BLOQUANT · échec : réduction du mouvement absente' },
+          { type: 'w', text: 'Contraste, cibles et clavier : revue du rendu requise' },
+          { type: 'c', text: '9 lignes automatiques : 8 échecs, 1 information' },
+          { type: 'r', text: '7 échecs bloquants, 1 majeur · sortie 1' },
         ],
         linesClean: [
-          { type: 'g', text: "A01 AUTOMATISÉ · réussi : titre H1 unique dans le fichier" },
-          { type: 'g', text: "B01 AUTOMATISÉ · réussi : paire de couleurs de l’exemple" },
-          { type: 'g', text: "C01 AUTOMATISÉ · réussi : tailles déclarées ≥ 12 px" },
-          { type: 'g', text: "F01 AUTOMATISÉ · réussi : label relié au champ" },
-          { type: 'w', text: "D01 À VÉRIFIER · mesurer la cible dans le rendu" },
-          { type: 'w', text: "H01 À VÉRIFIER · tester clavier et lecteur d’écran" },
-          { type: 'g', text: "Exemple : 9 automatisés · 6 à vérifier · 62 non applicables" },
-          { type: 'c', text: "0 échec bloquant automatique → sortie 0 ≠ conformité" },
+          { type: 'c', text: 'Résumé d’exécution · test/good.html · périmètre web' },
+          { type: 'g', text: 'G01 · réussi : lang="en" sur le fichier témoin' },
+          { type: 'g', text: 'H02 · réussi : attribut alt présent sur l’image' },
+          { type: 'g', text: 'F01 · réussi : point d’accroche du libellé présent' },
+          { type: 'g', text: 'I03 · réussi : prefers-reduced-motion présent' },
+          { type: 'w', text: 'Contraste, cibles et clavier : revue du rendu requise' },
+          { type: 'g', text: '8 lignes automatiques, aucun échec signalé' },
+          { type: 'c', text: '49 règles web restent à vérifier · sortie 0 ≠ conformité' },
         ],
         statusBlocking: 'Bloquants',
         statusAutomated: "Automatisés",
         statusToVerify: 'À vérifier',
-        statusNotApplicable: "Non applicables",
+        statusNotApplicable: 'Hors périmètre web',
       },
     },
     statesSection: {
@@ -460,7 +454,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       kicker: 'FEUILLETER L’ÉDITION FRANÇAISE',
       heading: "Dix pages du manuel et du kit à consulter.",
       lede:
-        "Ouvrez les pages en grand pour lire les annotations et examiner les exemples avant l’achat. La sélection comprend le sommaire, des écrans de paiement, des comparaisons et une page de la checklist. Les filtres séparent les écrans annotés, les avant/après et les pages du système.",
+        "Ouvrez les pages en grand pour lire les annotations et examiner les exemples avant l’achat. La sélection comprend le sommaire, le lexique des composants, une page de sources, des écrans de paiement, des comparaisons et une page de la checklist. Les filtres séparent les écrans annotés, les avant/après et les pages du système.",
       openReaderBtn: 'Ouvrir la liseuse plein écran (10 pages)',
       filterAll: 'Tout voir (10)',
       filterScreens: 'Écrans annotés',
@@ -468,11 +462,11 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       filterSystem: 'Checklist & Kit Bonus',
       previewLabel: 'Extrait du livre',
       clickHint: 'Cliquer pour zoomer',
-      note: "L’édition française contient un PDF de 148 pages avec signets cliquables, le kit A4 séparé de 26 pages et l’archive de 21 fichiers. Les pages présentées ici sont des extraits de ces documents.",
+      note: `L’édition française contient un PDF de ${playbookPages('fr')} pages avec signets cliquables, le kit A4 séparé de 26 pages et l’archive de 21 fichiers. Les pages présentées ici sont des extraits de ces documents.`,
       readerClose: 'Fermer',
       readerPrev: 'Page précédente',
       readerNext: 'Page suivante',
-      readerBuy: 'Obtenir les 148 pages · 29 $',
+      readerBuy: `Obtenir les ${playbookPages('fr')} pages · 29 $`,
       pages: [
         {
           id: 'cover',
@@ -480,7 +474,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           category: 'system',
           badge: 'Couverture FR',
           title: 'Couverture · Édition française 2026',
-          caption: '148 pages, 97 sections, 36 écrans annotés, 77 règles et kit de 12 fiches.',
+          caption: `${playbookPages('fr')} pages et 120 sections. Neuf parties, dont le lexique des composants et les comparaisons de plateformes.`,
           alt: 'Couverture française du UX/UI Playbook 2026 par Joy N.',
         },
         {
@@ -488,15 +482,15 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           src: '/images/fr/contents.webp',
           category: 'system',
           badge: 'p. 04 · Sommaire',
-          title: 'Sommaire général',
-          caption: "Huit parties et 97 sections : parcours, conception visuelle, livraison, plateformes et outils.",
+          title: 'Sommaire : première page',
+          caption: "Neuf parties et 120 sections : parcours, conception visuelle, livraison, plateformes et outils.",
           alt: 'Page sommaire du UX/UI Playbook en français',
         },
         {
           id: 'landing',
           src: '/images/fr/landing-annotated.webp',
           category: 'screens',
-          badge: 'p. 24 · Landing page',
+          badge: 'p. 30 · Landing page',
           title: "Structure d’une landing page",
           caption: "Maquette B2B annotée en six zones : ordre de lecture, contenu du premier écran et place de l’action.",
           alt: 'Page annotée sur la structure d’une landing page en français',
@@ -505,25 +499,25 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           id: 'checkout',
           src: '/images/fr/checkout-annotated.webp',
           category: 'screens',
-          badge: 'p. 30 · Checkout',
+          badge: 'p. 36 · Checkout',
           title: "Organisation d’un écran de paiement",
           caption: "Exemple avec formulaire à gauche et récapitulatif à droite pour garder le total consultable.",
           alt: 'Page annotée sur l’écran de paiement checkout en français',
         },
         {
-          id: 'questions',
-          src: '/images/fr/eight-questions.webp',
+          id: 'evidence',
+          src: '/images/fr/evidence-sources.webp',
           category: 'screens',
-          badge: 'p. 22 · Méthode',
-          title: 'Les 8 questions avant de dessiner',
-          caption: "Questions sur la tâche, les données nécessaires et les conditions d’usage avant la maquette.",
-          alt: 'Les 8 questions avant de dessiner un écran',
+          badge: 'p. 26 · Sources',
+          title: 'Ce que les chiffres disent vraiment',
+          caption: "Section X, repère 09b : attention et abandon de panier, avec la source et la date sous les chiffres. La section se poursuit p. 27.",
+          alt: 'Extrait de la section X, Ce que les chiffres disent vraiment, p. 26 du PDF français',
         },
         {
           id: 'sbs-checkout',
           src: '/images/fr/before-after-checkout.webp',
           category: 'before-after',
-          badge: 'p. 88 · Avant / Après',
+          badge: 'p. 96 · Avant / Après',
           title: 'Prototype comparé : le paiement',
           caption: '6 champs et 2 boutons égaux contre 4 champs, Apple Pay en tête et 1 action claire.',
           alt: 'Comparaison avant et après d’un écran de paiement en français',
@@ -532,25 +526,25 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           id: 'sbs-loading',
           src: '/images/fr/before-after-loading.webp',
           category: 'before-after',
-          badge: 'p. 112 · Avant / Après',
+          badge: 'p. 120 · Avant / Après',
           title: 'Prototype comparé : le chargement',
           caption: "Comparaison d’une attente sur page vide et d’un squelette qui réserve l’espace du contenu.",
           alt: 'Comparaison avant et après de l’état de chargement en français',
         },
         {
-          id: 'revenue',
-          src: '/images/fr/part-05-revenue.webp',
+          id: 'lexicon',
+          src: '/images/fr/component-lexicon.webp',
           category: 'screens',
-          badge: 'p. 67 · Partie 05',
-          title: 'Le design comme revenu',
-          caption: 'Cadrage de mission, estimation, proposition en une page et présentation des choix au client.',
-          alt: 'Ouverture de la partie 05 : Le design comme revenu',
+          badge: 'p. 127 · Lexique',
+          title: 'Nommer les composants web',
+          caption: 'Section LXXVI, repère L3 : barre latérale, onglets, menu déroulant et bouton, avec exemples de consignes.',
+          alt: 'Lexique des composants web, section LXXVI, p. 127 du PDF français',
         },
         {
           id: 'checklist',
           src: '/images/fr/checklist-rules.webp',
           category: 'system',
-          badge: 'p. 140 · 77 Règles',
+          badge: 'p. 174 · Checklist',
           title: 'Checklist agent 1/4 · règles A à C',
           caption: "Identifiant de règle, sévérité, plateforme concernée et méthode de contrôle.",
           alt: 'Page de la checklist des 77 règles en français',
@@ -569,59 +563,53 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     contentsSection: {
       kicker: "THÈMES DU LIVRE ET FICHIERS INCLUS",
       heading: "Parcourir le livre, le kit et l’archive.",
-      lede: "Les huit parties ci-dessous regroupent les sujets du manuel français de 148 pages. Les deux autres onglets présentent les douze fiches imprimables et une sélection des fichiers techniques de l’archive. Les repères de pages permettent de situer les parties du livre.",
-      tabBook: 'Le Livre (8 parties · 97 sections)',
+      lede: `Les neuf parties ci-dessous regroupent les sujets du manuel français de ${playbookPages('fr')} pages. Les deux autres onglets présentent les douze fiches imprimables et une sélection des fichiers techniques de l’archive. Les repères indiquent la page d’ouverture de chaque partie dans le PDF. Les listes résument les thèmes, pas les 120 titres de section.`,
+      tabBook: 'Le Livre (9 parties · 120 sections)',
       tabKit: 'Le Kit Bonus (12 fiches A4)',
       tabArchive: 'L’Archive Technique (21 fichiers)',
       expandAll: 'Tout déplier',
       collapseAll: 'Tout replier',
       parts: [
         {
-          num: '01',
-          title: 'Comprendre avant de dessiner',
-          page: 'p. 9',
+          num: "01",
+          title: "Comprendre avant de dessiner",
+          page: "p. 10",
           sections: [
-            "Objectifs utilisateurs et conception du parcours",
-            "Répartition des décisions UX, UI et produit",
-            "Dix lois et principes cognitifs",
-            "Charge cognitive et informations à conserver",
-            "Arrivée, action, confirmation et retour",
-            "Hiérarchie visuelle et cinq états d’écran",
-            "Accessibilité : référentiels et périmètre de revue",
-            "Structure d’un écran et huit questions de cadrage",
+            "Objectifs utilisateurs et répartition des décisions UX, UI et produit",
+            "Lois cognitives, parcours et hiérarchie visuelle",
+            "États d’écran et accessibilité : référentiels et périmètre",
+            "Anatomie d’un écran et huit questions de cadrage",
+            "Section X (repère 09b) : Ce que les chiffres disent vraiment",
           ],
         },
         {
-          num: '02',
-          title: "Dix types d’écrans",
-          page: 'p. 23',
+          num: "02",
+          title: "Dix écrans, dix logiques",
+          page: "p. 29",
           sections: [
-            "Landing page : contenu et hiérarchie",
-            "Tableau de bord SaaS : données et actions",
-            "Application mobile : tâche et navigation",
-            "Paiement : formulaire et récapitulatif",
-            "Tarifs, connexion et inscription",
-            "États vides, première utilisation et formulaires longs",
-            "Tableaux, back-office, réservation et rendez-vous",
+            "Landing page, tableau de bord SaaS et application mobile",
+            "Paiement et tarifs : formulaire, total et récapitulatif",
+            "Connexion, inscription, états vides et première utilisation",
+            "Paramètres, formulaires longs, tableaux et back-office",
+            "Réservation et prise de rendez-vous",
           ],
         },
         {
-          num: '03',
-          title: "Typographie, couleurs et composants",
-          page: 'p. 44',
+          num: "03",
+          title: "Le métier du pixel",
+          page: "p. 50",
           sections: [
             "Typographie : échelle et familles",
-            "Couleur : valeurs et rôles",
-            "Espacement : échelle de 4 et 8",
-            "Grilles, points de rupture et responsive",
+            "Couleur, espacement et grille responsive",
             "Tokens et composants",
-            "Iconographie, micro-copie et passation développeur",
+            "Iconographie et micro-copie",
+            "Passation au développement",
           ],
         },
         {
-          num: '04',
-          title: 'Du brief au livrable',
-          page: 'p. 59',
+          num: "04",
+          title: "Du brief au livrable",
+          page: "p. 66",
           sections: [
             "Brief et recherche : exemple de créneau de deux heures",
             "Wireframes : structure et ordre du contenu",
@@ -631,24 +619,23 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           ],
         },
         {
-          num: '05',
-          title: 'Le design comme revenu',
-          page: 'p. 67',
+          num: "05",
+          title: "Le design comme revenu",
+          page: "p. 74",
           sections: [
             "Présenter une décision à un commanditaire",
-            "Portfolio : choix et description des projets",
-            "Trois modèles de facturation",
-            "Proposition commerciale en une page",
-            "Périmètre, livraison, retours et maintenance",
+            "Portfolio et description des projets",
+            "Modèles de facturation et proposition en une page",
+            "Périmètre, livraison et retours",
+            "Design system et maintenance",
           ],
         },
         {
-          num: '06',
-          title: 'Outils & workflow',
-          page: 'p. 77',
+          num: "06",
+          title: "Outils & workflow",
+          page: "p. 85",
           sections: [
-            "Outils par phase et modèle économique",
-            "Choix d’outils selon le budget",
+            "Outils par phase et choix selon le budget",
             "Formats de fichiers et destinataires",
             "Pipeline du brief à la revue du code",
             "Trois prompts, couleurs et dégradés",
@@ -656,28 +643,41 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           ],
         },
         {
-          num: '07',
-          title: "Sources, droit, IA et prototypes comparés",
-          page: 'p. 86',
+          num: "07",
+          title: "Preuves, droit et IA",
+          page: "p. 94",
           sections: [
             "Recherche, questions et attribution des chiffres",
             "Mesures, accessibilité et textes applicables en 2026",
             "Revue d’un écran généré et interfaces d’agents",
             "Instructions dans le fichier AGENTS.md",
             "Thèmes de couleur, mouvement et RTL",
-            "Treize avant/après : paiement, contraste, tableaux, états, cibles et chargement",
+            "Treize paires avant/après : paiement, contraste, tableaux, états, cibles et chargement",
           ],
         },
         {
-          num: '08',
-          title: 'Plateformes et boîte à outils (6 OS + 77 règles)',
-          page: 'p. 116',
+          num: "08",
+          title: "Lexique des composants",
+          page: "p. 124",
           sections: [
-            "Android, iOS, Windows, macOS, GNOME, KDE et Web avec encoche",
-            "Organisation de la checklist agent",
-            "Méthode de contrôle, sévérité et résultat par plateforme",
-            "Annexes A1–A6 : audit, brief, passation, barèmes et protocoles",
-            "Annexes A14–A17 : détail des 77 règles A à L",
+            "22 sections, repères L1–L22 et numéros romains LXXIV–XCV",
+            "56 entrées : nom, définition, contexte et consigne",
+            "Web : en-tête, fil d’Ariane, champs, modales et tableaux",
+            "Téléphone : navigation basse, feuille modale, gestes et clavier",
+            "Tableau de bord : indicateurs, filtres, actions groupées et journal d’audit",
+            "Planches sur les moments du parcours et les erreurs de hiérarchie",
+          ],
+        },
+        {
+          num: "09",
+          title: "Plateformes et boîte à outils",
+          page: "p. 149",
+          sections: [
+            "Onze comparaisons de plateformes : Android, iOS, Windows, macOS, GNOME, KDE et Web",
+            "Organisation des 77 règles, méthodes de contrôle et sévérités",
+            "Preuves et périmètre par plateforme",
+            "Annexes A1–A6 : audit, brief, passation, références, sources et protocoles",
+            "Annexes A14–A17 : détail des règles A à L",
           ],
         },
       ],
@@ -686,47 +686,84 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       kitSheets: [
         { num: '01', title: 'Audit UX/UI en 40 points', meta: 'Évaluer un existant', page: 'p. 02' },
         { num: '02', title: 'Fiche de passation', meta: 'Prêt à livrer ?', page: 'p. 04' },
-        { num: '03', title: 'Brief projet — 12 questions', meta: 'Cadrage client', page: 'p. 06' },
+        { num: '03', title: 'Brief projet · 12 questions', meta: 'Cadrage client', page: 'p. 06' },
         { num: '04', title: 'Fiche de spécification développeur', meta: 'Handoff 1 page', page: 'p. 08' },
         { num: '05', title: 'Proposition en une page', meta: "Périmètre et prix", page: 'p. 10' },
-        { num: '06', title: 'Contrôle final — 12 points', meta: 'Avant envoi', page: 'p. 12' },
-        { num: '07', title: 'Grille de vérification — écran IA', meta: '8 + 4 points critiques', page: 'p. 14' },
-        { num: '08', title: 'Checklist agent — 77 règles', meta: 'Six plateformes', page: 'p. 16' },
+        { num: '06', title: 'Contrôle final · 12 points', meta: 'Avant envoi', page: 'p. 12' },
+        { num: '07', title: 'Grille de vérification · écran IA', meta: '8 + 4 points critiques', page: 'p. 14' },
+        { num: '08', title: 'Checklist agent · 77 règles', meta: 'Six plateformes', page: 'p. 16' },
         { num: '09', title: 'Brief à coller pour un agent', meta: 'Prompt structuré', page: 'p. 18' },
-        { num: '10', title: 'Rapport d’agent — trois statuts', meta: "Constats et résultats", page: 'p. 20' },
+        { num: '10', title: 'Rapport d’agent · trois statuts', meta: "Constats et résultats", page: 'p. 20' },
         { num: '11', title: 'Quelle cible, sur quelle plateforme', meta: 'Web, iOS, Android, Desktop', page: 'p. 22' },
         { num: '12', title: 'Cadrer le périmètre de l’agent', meta: 'Ce qu’il mesure ou non', page: 'p. 24' },
       ],
       archiveIntro:
-        "En plus des deux PDF, l’offre comprend une archive de 21 fichiers opérationnels. Voici une sélection regroupée par usage :",
+        "En plus du livre et du kit PDF, cette édition inclut les 21 fichiers du dossier FR de l’archive source. Ce total comprend les copies des scripts et des tokens intégrées au skill. Les fichiers anglais sont livrés avec l’édition anglaise, vendue séparément. Voici les dossiers et leurs usages :",
       archiveGroups: [
         {
-          folder: 'agent-skill/',
-          desc: 'Contrôle automatisé & instructions pour agents IA',
-          files: [
-            { name: 'agent_check.py', info: 'Scanner exécutable localement ou en CI (--fail-on blocking)' },
-            { name: 'rules_77.json', info: 'Les 77 règles structurées par ID, sévérité et plateforme' },
-            { name: 'SKILL.md & AGENTS.md', info: "Instructions à adapter au format de contexte de votre agent" },
-            { name: 'test/bad.html & clean.html', info: "Fichiers témoins pour comparer les résultats du scanner" },
-          ],
+          "folder": "checklist-agent/",
+          "desc": "Scanner Python, règles et instructions de revue",
+          "files": [
+            {
+              "name": "agent_check.py",
+              "info": "Commande locale ou CI, avec --fail-on blocking et sortie JSON en option"
+            },
+            {
+              "name": "rules.py",
+              "info": "77 règles structurées dans un module Python, catégories A à L"
+            },
+            {
+              "name": "AGENTS.md & RAPPORT-TYPE.md",
+              "info": "Instructions de contexte et gabarit de rapport"
+            },
+            {
+              "name": "test/bad.html & test/good.html",
+              "info": "Deux fichiers témoins pour comparer les codes de sortie"
+            }
+          ]
         },
         {
-          folder: 'tokens/',
-          desc: "Valeurs visuelles à adapter au projet",
-          files: [
-            { name: 'tokens.css', info: 'Variables CSS (échelle typo, grille 4/8, surfaces OLED & clair)' },
-            { name: 'tokens.json', info: "Tokens structurés à adapter à vos outils et à votre pipeline" },
-          ],
+          "folder": "skill/ux-ui-checklist/",
+          "desc": "Le skill et ses copies de scripts et de tokens",
+          "files": [
+            {
+              "name": "SKILL.md & references/rules.md",
+              "info": "Instructions à adapter au format de contexte de votre agent"
+            },
+            {
+              "name": "scripts/",
+              "info": "Copies du scanner, des règles, des fichiers témoins et des tokens, comptées dans les 21 fichiers"
+            }
+          ]
         },
         {
-          folder: 'templates/',
-          desc: 'Gabarits éditables pour vos missions',
-          files: [
-            { name: 'brief-client-12q.md', info: "Questionnaire pour préparer le cadrage du projet" },
-            { name: 'proposition-1-page.md', info: 'Structure d’offre chiffrée à 3 options' },
-            { name: 'handoff-spec.md & audit-40.md', info: "Documents de passation et de revue d’interface" },
-          ],
+          "folder": "tokens/",
+          "desc": "Valeurs visuelles à adapter au projet",
+          "files": [
+            {
+              "name": "tokens.css",
+              "info": "Variables CSS pour les couleurs, espacements, textes et mouvements"
+            },
+            {
+              "name": "tokens.json",
+              "info": "Tokens structurés à adapter à vos outils et à votre pipeline"
+            }
+          ]
         },
+        {
+          "folder": "templates/",
+          "desc": "Quatre documents Markdown modifiables",
+          "files": [
+            {
+              "name": "brief-client.md & audit-40-points.md",
+              "info": "Cadrage du projet et revue d’un écran"
+            },
+            {
+              "name": "handoff-developpeur.md & journal-de-preuves.md",
+              "info": "Passation et traçabilité des sources, dates et observations"
+            }
+          ]
+        }
       ],
     },
     comparison: {
@@ -740,7 +777,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       rows: [
         {
           feature: 'Exemples visuels annotés & comparaisons Avant / Après',
-          others: "36 écrans + 13 prototypes avant/après + 11 planches de plateformes",
+          others: "24 paires comparées : 13 thèmes et 11 cas de plateformes",
           playbook: "Le même manuel + kit et archive",
         },
         {
@@ -756,7 +793,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           highlight: true,
         },
         {
-          feature: 'Scanner Python exécutable (agent_check.py) + 77 règles JSON',
+          feature: 'Scanner Python exécutable (agent_check.py) + 77 règles dans rules.py',
           others: "Méthode expliquée dans le livre",
           playbook: 'Inclus (utilisable en terminal & CI/CD)',
           highlight: true,
@@ -813,11 +850,11 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       items: [
         {
           q: 'Que contient exactement le téléchargement à 29 $ ?',
-          a: 'Trois éléments à télécharger après l’achat : 1) le UX/UI Playbook complet en français (PDF A4 de 148 pages avec sommaire interactif), 2) le Kit Bonus de livraison (PDF A4 de 26 pages contenant 12 fiches pratiques et leurs pages de notes), et 3) l’archive ZIP des 21 fichiers de travail (design tokens CSS/JSON, 4 gabarits, les 77 règles en JSON, le script Python agent_check.py et le skill IA).',
+          a: `Trois éléments à télécharger après l’achat : 1) le UX/UI Playbook complet en français (PDF A4 de ${playbookPages('fr')} pages avec sommaire interactif), 2) le Kit Bonus de livraison (PDF A4 de 26 pages contenant 12 fiches pratiques et leurs pages de notes), et 3) l’archive ZIP des 21 fichiers de travail (design tokens CSS/JSON, 4 gabarits, les 77 règles dans rules.py, le script Python agent_check.py et le skill IA).`,
         },
         {
           q: 'Avec quels outils IA fonctionnent la checklist et le skill ?',
-          a: "Le scanner s’exécute avec Python 3, dans un terminal ou une CI qui peut lancer cette commande. Les fichiers Markdown/JSON servent d’instructions et de données aux agents capables de les lire. Adaptez le format de contexte reconnu par votre outil, notamment Claude Code, Cursor ou Codex, ainsi que les chemins vers le projet ; l’exécution dépend aussi des permissions accordées à l’agent.",
+          a: "Le scanner s’exécute avec Python 3, dans un terminal ou une CI qui peut lancer cette commande. Les fichiers Markdown et Python servent d’instructions et de données aux agents capables de les lire. Adaptez le format de contexte reconnu par votre outil, notamment Claude Code, Cursor ou Codex, ainsi que les chemins vers le projet ; l’exécution dépend aussi des permissions accordées à l’agent.",
         },
         {
           q: 'Faut-il savoir utiliser Figma ou être designer pour en profiter ?',
@@ -828,8 +865,8 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           a: 'Oui, sans aucune limite de nombre de projets. L’usage commercial est inclus pour vos propres produits et les missions de vos clients. Seule la revente ou la redistribution publique des fichiers du playbook eux-mêmes est interdite.',
         },
         {
-          q: 'Quelle est la différence entre l’édition française (148 pages) et l’édition anglaise (139 pages) ?',
-          a: "Les deux éditions reprennent la même méthode, les 97 sections, les 77 règles et les 21 fichiers traduits. La composition et les retours à la ligne diffèrent selon la langue : le PDF français compte 148 pages et le PDF anglais 139.",
+          q: `Quelle est la différence entre l’édition française (${playbookPages('fr')} pages) et l’édition anglaise (${playbookPages('en')} pages) ?`,
+          a: `Les deux éditions reprennent la même méthode, les 120 sections, les 77 règles et les 21 fichiers traduits. La composition et les retours à la ligne diffèrent selon la langue : le PDF français compte ${playbookPages('fr')} pages et le PDF anglais ${playbookPages('en')}.`,
         },
         {
           q: 'Et si le playbook ne correspond pas à mon besoin ?',
@@ -841,12 +878,12 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       kicker: "ÉDITION FRANÇAISE",
       heading: "Le livre, le kit et l’archive pour 29 USD.",
       lede:
-        "L’achat donne accès au manuel français de 148 pages, au kit imprimable et aux fichiers techniques présentés sur cette page. Utilisez le livre pour préparer les décisions d’un écran, puis conservez vos observations et vos corrections dans les gabarits du projet. Les dix pages d’aperçu restent consultables avant de choisir cette édition.",
+        `L’achat donne accès au manuel français de ${playbookPages('fr')} pages, au kit imprimable et aux fichiers techniques présentés sur cette page. Utilisez le livre pour préparer les décisions d’un écran, puis conservez vos observations et vos corrections dans les gabarits du projet. Les dix pages d’aperçu restent consultables avant de choisir cette édition.`,
       includedTitle: 'Les fichiers de l’édition française :',
       includedList: [
-        'UX/UI Playbook 2026 — PDF A4 de 148 pages (97 sections, 36 écrans annotés)',
-        'Kit Bonus Imprimable — PDF A4 de 26 pages (12 fiches d’atelier & notes)',
-        'Scanner Python agent_check.py + base JSON des 77 règles (6 plateformes)',
+        `UX/UI Playbook 2026 · PDF A4 de ${playbookPages('fr')} pages (120 sections, 9 parties, lexique de 56 composants)`,
+        'Kit Bonus Imprimable · PDF A4 de 26 pages (12 fiches d’atelier & notes)',
+        'Scanner Python agent_check.py + 77 règles dans rules.py (6 plateformes)',
         'Skill IA (SKILL.md + AGENTS.md) pour Claude Code, Cursor & Codex',
         "Design tokens CSS et JSON à adapter + quatre gabarits de projet",
         'Licence d’utilisation commerciale sur vos projets & missions clients',
@@ -859,7 +896,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       guarantees: ['Téléchargement après achat', 'Demande de remboursement sous 7 jours', 'Paiement via Gumroad'],
       crosslinkTag: 'VOUS TRAVAILLEZ EN ANGLAIS ?',
       crosslinkText:
-        "L’édition anglaise est vendue séparément : manuel de 139 pages, kit A4 et archive de 21 fichiers en anglais. Le sélecteur de langue ouvre les pages et les liens d’achat de cette édition.",
+        `L’édition anglaise est vendue séparément : manuel de ${playbookPages('en')} pages, kit A4 et archive de 21 fichiers en anglais. Le sélecteur de langue ouvre les pages et les liens d’achat de cette édition.`,
       crosslinkBtn: 'Voir l’édition anglaise (EN)',
     },
     footer: {
@@ -876,12 +913,12 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     otherGumroadUrl: 'https://joyccelight.gumroad.com/l/uiuxplaybookfr',
     siteUrl: SITE_URL,
     meta: {
-      title: "UX/UI Playbook — Manual, Kit and AI Skill · EN",
+      title: `UX/UI Playbook 2026 · ${playbookPages('en')} pages, 120 sections · EN`,
       description:
-        "UX/UI Playbook combines 139 pages, 12 A4 sheets and 21 files: CSS/JSON tokens, a Python scanner and AI-agent rules. Get the English edition for $29.",
-      ogTitle: 'UX/UI Playbook — 2026 English Edition + Bonus Kit',
+        `120 sections, ${playbookPages('en')} pages and a 56-component glossary. UX/UI manual, 12 A4 worksheets and 21 English working files. One-time payment: $29 USD.`,
+      ogTitle: 'UX/UI Playbook 2026 · English edition',
       ogDescription:
-        "A 139-page UX, UI and Product Design manual, 12 A4 worksheets and a 21-file archive with tokens, templates and a Python scanner. English edition: $29 USD.",
+        `${playbookPages('en')} pages, 120 sections and 56 glossary entries. A 26-page kit and a 21-file archive in English. $29 USD, one-time payment.`,
       ogImage: `${SITE_URL}/og-en.jpg`,
       ogLocale: 'en_US',
       productName: 'UX/UI Playbook 2026 + Bonus Kit (English Edition)',
@@ -890,7 +927,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     topBar: {
       badge: "2026 ENGLISH EDITION · PDF, A4 KIT AND FILES",
       audienceHint: "Manual, worksheets and instructions in English",
-      cta: 'Get the Playbook — $29',
+      cta: 'Get the Playbook · $29',
     },
     nav: {
       pillars: "Book and files",
@@ -899,10 +936,10 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       contents: 'Contents',
       guides: 'Articles',
       faq: 'FAQ',
-      buy: 'Buy — $29',
+      buy: 'Buy · $29',
       themeDarkLabel: 'Switch to light mode',
       themeLightLabel: 'Switch to dark mode',
-      switchLangTitle: 'Voir l’édition française (148 pages)',
+      switchLangTitle: `Voir l’édition française (${playbookPages('fr')} pages)`,
     },
     hero: {
       kicker: "UX, UI AND PRODUCT DESIGN FOR DEVELOPERS",
@@ -913,19 +950,19 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         "Joy N.’s UX/UI Playbook follows interface design from defining a journey to preparing error states and developer handoff. The manual explains typography, colour and spacing decisions through annotated screens. A4 worksheets support briefing and review, while tokens and a Python scanner carry some of those decisions into code. Checks requiring inspection of the rendered interface or observation with users remain open for review. The book is intended for developers and teams preparing screens alongside their implementation.",
       primaryCta: 'Get the English edition · $29',
       secondaryCta: 'Read the 10 book excerpts',
-      note: "One-time payment of $29 USD. After purchase: 139-page English PDF, 26-page A4 kit and 21-file archive.",
+      note: `One-time payment of $29 USD. After purchase: ${playbookPages('en')}-page English PDF, 26-page A4 kit and 21-file archive.`,
       proofs: [
-        '139 A4 pages in English',
+        `${playbookPages('en')} A4 pages in English`,
         "77 rules: automated + human checks",
         '12 sheets + 21 files & AI Skill',
         'Refund requests within 7 days',
       ],
-      coverCaption: 'EN Edition · 139 pages',
+      coverCaption: `EN Edition · ${playbookPages('en')} pages`,
       spreadCaption: "Annotated examples and review guidance",
     },
     strip: [
-      { num: '139', label: "pages in the English manual" },
-      { num: '36', label: "annotated screens + 13 before/after prototypes + 11 platform spreads" },
+      { num: String(playbookPages('en')), label: "pages in the English manual" },
+      { num: String(PLAYBOOK_COUNTS.sections), label: "sections across nine parts, including the component glossary" },
       { num: '77', label: "rules across 6 platforms, with verification methods" },
       { num: '21', label: 'working files: tokens, Python scanner & AI skill' },
     ],
@@ -937,8 +974,8 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       cards: [
         {
           tag: '01 · LEARN',
-          title: "The illustrated manual · 139 pages",
-          subtitle: "97 sections · 36 annotated screens · 13 before/after + 11 platform spreads",
+          title: `The illustrated manual · ${playbookPages('en')} pages`,
+          subtitle: "120 sections · 9 parts · 56-component glossary · 24 comparisons",
           points: [
             "Principles accompanied by annotated mockups, issues to examine and space for notes.",
             "Ten screen types, including landing pages, dashboards, checkout, mobile apps, pricing and admin views.",
@@ -950,8 +987,8 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           title: "Worksheets and design tokens",
           subtitle: '26-page A4 Bonus Kit (12 sheets) + templates + CSS/JSON',
           points: [
-            '12 printable A4 working sheets, each paired with a 26-line ruled notes page for live reviews.',
-            "Four editable templates: a 12-question brief, one-page proposal, developer handoff and 40-point audit.",
+            '12 printable A4 working sheets, each paired with a ruled notes page for live reviews.',
+            "Four editable templates: client brief, developer handoff, 40-point audit and evidence log. The one-page proposal is in the PDF kit.",
             "CSS variables and JSON tokens for light and dark theme values, to adapt to your project.",
           ],
         },
@@ -968,32 +1005,24 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       ],
     },
     agentDemo: {
-      kicker: "INTERACTIVE DEMO · ILLUSTRATIVE REPORT",
-      heading: "Compare a failing file with a corrected example.",
+      kicker: 'DEMONSTRATION · TEST-FIXTURE RESULTS',
+      heading: 'Compare a failing fixture with a corrected example.',
       lede:
-        "This comparison simulates a check report: no Python script runs in this page. Copy the command to run agent_check.py on the archive’s sample files, then separate automated outcomes from human review. This diagram stays readable: the numeric defects describe the sample files, not this page’s font sizes or colours.",
+        'No Python runs in this page. On the left, a checkout mockup illustrates design decisions to examine. On the right, report summaries come from checks of the archive’s test/bad.html and test/good.html fixtures, not that mockup. Open a terminal in checklist-agent/ and copy the command to reproduce the fixture check.',
       bullets: [
-        {
-          bold: 'Usable in CI/CD:',
-          rest: "--fail-on blocking returns a non-zero exit code when an automated check with blocking severity fails. The pipeline needs to use that code to stop delivery.",
-        },
-        {
-          bold: "Method, severity and outcome:",
-          rest: "Automated / To verify / Not applicable describe verification. An automated rule can fail; Blocking is severity, not a fourth status.",
-        },
-        {
-          bold: 'Ships with test fixtures:',
-          rest: 'point it at test/bad.html in the archive and it exits 1; point it at test/clean.html and it exits 0.',
-        },
+        { bold: 'A reproducible command:', rest: 'with --platform web, 57 of the 77 rules enter scope. The script examines 9 lines on bad.html and 8 on good.html; the remaining rules stay open for review.' },
+        { bold: 'An exit code for CI:', rest: '--fail-on blocking returns 1 for bad.html, with seven blocking failures, and 0 for good.html. This result certifies neither rendering nor accessibility.' },
+        { bold: 'Method, severity and outcome:', rest: 'Automated / To verify describe the check. Blocking / Major describe severity. Pass / Fail are outcomes; a line can also remain informational.' },
       ],
       tabBad: "1. Sample file bad.html",
-      tabClean: '2. Fixed Screen (clean.html)',
+      tabClean: '2. Sample file good.html',
       fixAction: "Show the corrected example",
       fixedBadge: "Corrected example · human review still required",
       copyCmd: 'Copy CLI command',
       copiedCmd: 'Command copied!',
-      screenHeaderBad: 'BEFORE · 6 fields · 2 equal buttons · 4 blocking failures',
-      screenHeaderClean: "AFTER · useful fields · 1 primary action · corrected example",
+      illustrationLabel: 'MOCKUP',
+      screenHeaderBad: 'ILLUSTRATION · BEFORE',
+      screenHeaderClean: 'ILLUSTRATION · AFTER',
       screenMock: {
         brand: 'NORTH STUDIO · CHECKOUT',
         stepLabel: 'Checkout steps',
@@ -1014,47 +1043,47 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         clearFeeClean: 'Total due: $132.90 (includes $4.90 shipping · free 30-day returns)',
         summaryClean: '1× Leather Tote ($98) + Belt ($30) + Tracked Shipping ($4.90)',
         flaws: [
-          { code: 'C01 BLOCKING', text: "Sample file: 9 and 10 px text, below the Playbook’s 12 px floor" },
-          { code: 'B01 BLOCKING', text: "Sample file: insufficient contrast; compare with the 4.5:1 text threshold" },
-          { code: 'A06 BLOCKING', text: 'Two competing solid primary buttons ("Pay" vs "Save draft")' },
-          { code: "K03 MAJOR", text: 'Final amount & shipping fees hidden until after 6 form fields' },
+          { code: 'C01 · REVIEW', text: 'Examine small text sizes in the actual rendered interface' },
+          { code: 'B01 · REVIEW', text: 'Measure contrast on each surface and in each state' },
+          { code: 'A06 · REVIEW', text: 'Two equally filled buttons: distinguish the main action' },
+          { code: 'K03 · REVIEW', text: 'Make the total and fees available before committing' },
         ],
         improvements: [
-          { code: "C01 · AUTOMATED", text: "Example’s minimum declared font size: 13 px" },
-          { code: "B01 · AUTOMATED", text: "Example text/background pair checked; measure actual surfaces" },
-          { code: "A06 · TO VERIFY", text: "Distinct primary action; confirm comprehension with a person" },
-          { code: "K03 · TO VERIFY", text: "Total and fees visible; review the full path before commitment" },
+          { code: 'C01 · TO VERIFY', text: 'Review text at zoom and on a phone' },
+          { code: 'B01 · TO VERIFY', text: 'Measure text, backgrounds, focus and states in the project' },
+          { code: 'A06 · TO VERIFY', text: 'Distinct primary action; observe comprehension' },
+          { code: 'K03 · TO VERIFY', text: 'Visible total and fees; try the complete journey' },
         ],
       },
       terminal: {
         cmdBad:
           'python3 agent_check.py --target test/bad.html \\\n    --platform web --lang en --fail-on blocking',
         cmdClean:
-          'python3 agent_check.py --target test/clean.html \\\n    --platform web --lang en --fail-on blocking',
+          'python3 agent_check.py --target test/good.html \\\n    --platform web --lang en --fail-on blocking',
         linesBad: [
-          { type: 'r', text: "C01 AUTOMATED · BLOCKING · fail: text below 12 px" },
-          { type: 'r', text: "B01 AUTOMATED · BLOCKING · fail: contrast below 4.5:1" },
-          { type: 'r', text: "A01 AUTOMATED · BLOCKING · fail: missing H1" },
-          { type: 'r', text: "F01 AUTOMATED · BLOCKING · fail: unlinked label" },
-          { type: 'w', text: "D01 TO VERIFY · web target: 24 px AA, 44 px recommended" },
-          { type: 'w', text: "H01 TO VERIFY · real keyboard path and focus" },
-          { type: 'g', text: "Example: 9 automated · 6 to verify · 62 not applicable" },
-          { type: 'c', text: "Separate severity: 4 blocking failures → exit 1" },
+          { type: 'c', text: 'Execution summary · test/bad.html · web scope' },
+          { type: 'r', text: 'G01 · BLOCKING · fail: no lang attribute' },
+          { type: 'r', text: 'H02 · BLOCKING · fail: image without alt' },
+          { type: 'r', text: 'F01 · BLOCKING · fail: input without id or aria-label' },
+          { type: 'r', text: 'I03 · BLOCKING · fail: no reduced-motion handling' },
+          { type: 'w', text: 'Contrast, targets and keyboard: rendered review required' },
+          { type: 'c', text: '9 automated lines: 8 failures, 1 informational result' },
+          { type: 'r', text: '7 blocking failures, 1 major · exit 1' },
         ],
         linesClean: [
-          { type: 'g', text: "A01 AUTOMATED · pass: one H1 in the source file" },
-          { type: 'g', text: "B01 AUTOMATED · pass: this example’s colour pair" },
-          { type: 'g', text: "C01 AUTOMATED · pass: declared font sizes ≥ 12 px" },
-          { type: 'g', text: "F01 AUTOMATED · pass: label linked to input" },
-          { type: 'w', text: "D01 TO VERIFY · measure targets in the rendered page" },
-          { type: 'w', text: "H01 TO VERIFY · test keyboard and screen reader" },
-          { type: 'g', text: "Example: 9 automated · 6 to verify · 62 not applicable" },
-          { type: 'c', text: "0 automated blocking failures → exit 0 ≠ conformance" },
+          { type: 'c', text: 'Execution summary · test/good.html · web scope' },
+          { type: 'g', text: 'G01 · pass: lang="en" on the fixture' },
+          { type: 'g', text: 'H02 · pass: alt attribute present on the image' },
+          { type: 'g', text: 'F01 · pass: label hook present' },
+          { type: 'g', text: 'I03 · pass: prefers-reduced-motion present' },
+          { type: 'w', text: 'Contrast, targets and keyboard: rendered review required' },
+          { type: 'g', text: '8 automated lines, no reported failure' },
+          { type: 'c', text: '49 web rules remain to verify · exit 0 ≠ conformance' },
         ],
         statusBlocking: 'Blocking',
         statusAutomated: "Automated",
         statusToVerify: 'To verify',
-        statusNotApplicable: "Not applicable",
+        statusNotApplicable: 'Outside web scope',
       },
     },
     statesSection: {
@@ -1085,7 +1114,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       kicker: 'LOOK INSIDE THE ENGLISH EDITION',
       heading: "Ten pages from the manual and kit to inspect.",
       lede:
-        "Open a page at reading size to inspect its annotations and examples before buying. The selection includes contents, checkout screens, comparisons and a checklist page. Filters separate annotated screens, before/after examples and system pages.",
+        "Open a page at reading size to inspect its annotations and examples before buying. The selection includes contents, the component glossary, a page of sources, checkout screens, comparisons and a checklist page. Filters separate annotated screens, before/after examples and system pages.",
       openReaderBtn: 'Open fullscreen reader (10 pages)',
       filterAll: 'All pages (10)',
       filterScreens: 'Annotated screens',
@@ -1093,11 +1122,11 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       filterSystem: 'Checklist & Bonus Kit',
       previewLabel: 'Book excerpt',
       clickHint: 'Click to inspect',
-      note: "The English edition contains a 139-page PDF with clickable bookmarks, a separate 26-page A4 kit and the 21-file archive. The pages shown here are extracts from those documents.",
+      note: `The English edition contains a ${playbookPages('en')}-page PDF with clickable bookmarks, a separate 26-page A4 kit and the 21-file archive. The pages shown here are extracts from those documents.`,
       readerClose: 'Close',
       readerPrev: 'Previous page',
       readerNext: 'Next page',
-      readerBuy: 'Get all 139 pages · $29',
+      readerBuy: `Get all ${playbookPages('en')} pages · $29`,
       pages: [
         {
           id: 'cover',
@@ -1105,7 +1134,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           category: 'system',
           badge: 'EN Cover',
           title: 'Cover · 2026 English Edition',
-          caption: '139 pages, 97 sections, 36 annotated screens, 77 rules and the 12-sheet kit.',
+          caption: `${playbookPages('en')} pages and 120 sections. Nine parts, including the component glossary and platform comparisons.`,
           alt: 'Cover of the UX/UI Playbook 2026 English Edition by Joy N.',
         },
         {
@@ -1113,15 +1142,15 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           src: '/images/en/contents.webp',
           category: 'system',
           badge: 'p. 04 · Contents',
-          title: 'Full Table of Contents',
-          caption: "Eight parts and 97 sections covering journeys, visual design, delivery, platforms and tools.",
+          title: 'Contents: first page',
+          caption: "Nine parts and 120 sections covering journeys, visual design, delivery, platforms and tools.",
           alt: 'Contents page of the UX/UI Playbook in English',
         },
         {
           id: 'landing',
           src: '/images/en/landing-annotated.webp',
           category: 'screens',
-          badge: 'p. 23 · Landing page',
+          badge: 'p. 28 · Landing page',
           title: "Landing-page structure",
           caption: "B2B mockup annotated in six areas: reading order, first-screen content and action placement.",
           alt: 'Annotated landing page blueprint from the playbook',
@@ -1130,25 +1159,25 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           id: 'checkout',
           src: '/images/en/checkout-annotated.webp',
           category: 'screens',
-          badge: 'p. 29 · Checkout',
+          badge: 'p. 34 · Checkout',
           title: "Checkout-screen layout",
           caption: "Example with a form on the left and a summary on the right to keep the total available.",
           alt: 'Annotated checkout screen page from the playbook',
         },
         {
-          id: 'questions',
-          src: '/images/en/eight-questions.webp',
+          id: 'evidence',
+          src: '/images/en/evidence-sources.webp',
           category: 'screens',
-          badge: 'p. 21 · Foundations',
-          title: 'The 8 questions before you draw',
-          caption: "Questions about the task, required data and conditions of use before making a mockup.",
-          alt: 'Page showing the eight questions to ask before drawing',
+          badge: 'p. 24 · Sources',
+          title: 'What the numbers actually say',
+          caption: 'Section X, reference 09b: attention and cart abandonment, with a source and date beneath the figures. The section continues on p. 25.',
+          alt: 'Excerpt from section X, What the numbers actually say, p. 24 of the English PDF',
         },
         {
           id: 'sbs-checkout',
           src: '/images/en/before-after-checkout.webp',
           category: 'before-after',
-          badge: 'p. 80 · Side-by-side',
+          badge: 'p. 85 · Before / After',
           title: 'Side-by-side: checkout',
           caption: '6 fields and 2 equal buttons vs. 4 fields, system wallet first, and 1 clear action.',
           alt: 'Before and after comparison of a checkout interface',
@@ -1157,25 +1186,25 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           id: 'sbs-loading',
           src: '/images/en/before-after-loading.webp',
           category: 'before-after',
-          badge: 'p. 103 · Side-by-side',
+          badge: 'p. 109 · Before / After',
           title: 'Side-by-side: loading',
           caption: "Comparison of a wait on an empty page with a skeleton that reserves content space.",
           alt: 'Before and after comparison of loading states',
         },
         {
-          id: 'revenue',
-          src: '/images/en/part-05-revenue.webp',
+          id: 'lexicon',
+          src: '/images/en/component-lexicon.webp',
           category: 'screens',
-          badge: 'p. 62 · Part 05',
-          title: 'Design as revenue',
-          caption: 'Project scope, estimates, a one-page proposal and presenting design decisions to a client.',
-          alt: 'Opening page of Part 05: Design as revenue',
+          badge: 'p. 117 · Glossary',
+          title: 'Naming web components',
+          caption: 'Section LXXVI, reference L3: sidebar, tabs, dropdown and button, with example instructions.',
+          alt: 'Web component glossary, section LXXVI, p. 117 of the English PDF',
         },
         {
           id: 'checklist',
           src: '/images/en/checklist-rules.webp',
           category: 'system',
-          badge: 'p. 131 · 77 Rules',
+          badge: 'p. 163 · Checklist',
           title: 'Checklist 1/4 · rules A to C',
           caption: "Rule identifier, severity, relevant platform and verification method.",
           alt: 'Page of the 77-rule checklist in English',
@@ -1194,115 +1223,121 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     contentsSection: {
       kicker: "BOOK TOPICS AND INCLUDED FILES",
       heading: "Browse the book, kit and archive.",
-      lede: "The eight parts below group the topics in the 139-page English manual. The other tabs describe the twelve printable worksheets and a selection of technical archive files. Page references locate each part in the book.",
-      tabBook: 'The Book (8 parts · 97 sections)',
+      lede: `The nine parts below group the topics in the ${playbookPages('en')}-page English manual. The other tabs describe the twelve printable worksheets and a selection of technical archive files. Page references locate each part’s opening page in the PDF. The lists summarise topics rather than reproduce all 120 section titles.`,
+      tabBook: 'The Book (9 parts · 120 sections)',
       tabKit: 'Bonus Kit (12 A4 sheets)',
       tabArchive: 'Working Archive (21 files)',
       expandAll: 'Expand all',
       collapseAll: 'Collapse all',
       parts: [
         {
-          num: '01',
-          title: 'Understand before you draw',
-          page: 'p. 9',
+          num: "01",
+          title: "Understand before you draw",
+          page: "p. 10",
           sections: [
-            "User goals and journey design",
-            "Product, UX and UI decision responsibilities",
-            "Ten cognitive laws and principles",
-            "Cognitive load and information to preserve",
-            "Arrival, action, confirmation and return",
-            "Visual hierarchy and five screen states",
-            "Accessibility references and review scope",
-            "Screen structure and eight framing questions",
+            "User goals and UX, UI and product decision responsibilities",
+            "Cognitive principles, journeys and visual hierarchy",
+            "Screen states and accessibility references and review scope",
+            "Screen anatomy and eight framing questions",
+            "Section X (reference 09b): What the numbers actually say",
           ],
         },
         {
-          num: '02',
-          title: "Ten screen types",
-          page: 'p. 22',
+          num: "02",
+          title: "Ten screens, ten logics",
+          page: "p. 27",
           sections: [
-            "Landing page: content and hierarchy",
-            "SaaS dashboard: data and actions",
-            "Mobile application: task and navigation",
-            "Checkout: form and summary",
-            "Pricing, login and registration",
-            "Empty states, first use and long forms",
-            "Tables, admin views, booking and appointments",
+            "Landing pages, SaaS dashboards and mobile applications",
+            "Checkout and pricing: forms, total and summary",
+            "Login, registration, empty states and first use",
+            "Settings, long forms, tables and admin views",
+            "Booking and appointments",
           ],
         },
         {
-          num: '03',
-          title: "Typography, colour and components",
-          page: 'p. 40',
+          num: "03",
+          title: "The craft of the pixel",
+          page: "p. 45",
           sections: [
             "Typography: scale and families",
-            "Colour: values and roles",
-            "Spacing: 4 and 8 point scale",
-            "Grids, breakpoints and responsive design",
+            "Colour, spacing and responsive grids",
             "Tokens and components",
-            "Icons, microcopy and developer handoff",
+            "Iconography and microcopy",
+            "Developer handoff",
           ],
         },
         {
-          num: '04',
-          title: 'From brief to deliverable',
-          page: 'p. 54',
+          num: "04",
+          title: "From brief to deliverable",
+          page: "p. 59",
           sections: [
-            "Brief and research: a two-hour session example",
+            "Brief and research: a two-hour timebox example",
             "Wireframes: structure and content order",
-            "Moving to visual presentation",
-            "Prototypes and observation of use",
-            "An initial twenty-minute audit pass",
+            "Moving into visual presentation",
+            "Prototypes and observing use",
+            "A first twenty-minute audit pass",
           ],
         },
         {
-          num: '05',
-          title: 'Design as revenue',
-          page: 'p. 62',
+          num: "05",
+          title: "Design as revenue",
+          page: "p. 67",
           sections: [
-            "Presenting a decision to a stakeholder",
-            "Portfolio: selecting and describing projects",
-            "Three billing models",
-            "One-page client proposal",
-            "Scope, delivery, feedback and maintenance",
+            "Presenting a decision to a client",
+            "Portfolio and project descriptions",
+            "Pricing models and a one-page proposal",
+            "Scope, delivery and feedback",
+            "Design systems and maintenance",
           ],
         },
         {
-          num: '06',
-          title: 'Tools & workflow',
-          page: 'p. 70',
+          num: "06",
+          title: "Tools & workflow",
+          page: "p. 75",
           sections: [
-            "Tools by phase and business model",
-            "Tool choices for different budgets",
+            "Tools by phase and budget",
             "File formats and recipients",
             "Pipeline from brief to code review",
             "Three prompts, colours and gradients",
-            "Agent delegation and defects to examine",
+            "Delegating to an agent and defects to look for",
           ],
         },
         {
-          num: '07',
-          title: "Sources, law, AI and comparative prototypes",
-          page: 'p. 78',
+          num: "07",
+          title: "Evidence, law and AI",
+          page: "p. 83",
           sections: [
-            "Research, questions and attribution of figures",
-            "Measurements, accessibility and legislation in 2026",
+            "Research, questions and attributing figures",
+            "Measurements, accessibility and applicable 2026 legislation",
             "Reviewing generated screens and agent interfaces",
             "Instructions in AGENTS.md",
             "Colour themes, motion and RTL",
-            "Thirteen before/after examples: checkout, contrast, tables, states, targets and loading",
+            "Thirteen before/after pairs: checkout, contrast, tables, states, targets and loading",
           ],
         },
         {
-          num: '08',
-          title: 'Platforms and toolbox (6 OS + 77 rules)',
-          page: 'p. 107',
+          num: "08",
+          title: "Component lexicon",
+          page: "p. 113",
           sections: [
-            "Android, iOS, Windows, macOS, GNOME, KDE and notched web views",
-            "Agent checklist organisation",
-            "Check method, severity and outcome by platform",
-            "Appendices A1–A6: audit, brief, handoff, rates and protocols",
-            "Appendices A14–A17: all 77 rules A to L",
+            "22 sections, references L1–L22 and Roman numerals LXXIV–XCV",
+            "56 entries: name, definition, context and instruction",
+            "Web: headers, breadcrumbs, fields, modals and tables",
+            "Phone: bottom navigation, sheets, gestures and keyboards",
+            "Dashboard: indicators, filters, bulk actions and audit logs",
+            "Spreads on journey moments and hierarchy mistakes",
+          ],
+        },
+        {
+          num: "09",
+          title: "Platforms and toolbox",
+          page: "p. 138",
+          sections: [
+            "Eleven platform comparisons: Android, iOS, Windows, macOS, GNOME, KDE and Web",
+            "The 77 rules, verification methods and severity",
+            "Evidence and scope by platform",
+            "Appendices A1–A6: audit, brief, handoff, references, sources and protocols",
+            "Appendices A14–A17: rules A to L in full",
           ],
         },
       ],
@@ -1311,47 +1346,84 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       kitSheets: [
         { num: '01', title: '40-point UX/UI audit', meta: 'Review existing UI', page: 'p. 02' },
         { num: '02', title: 'Delivery sign-off sheet', meta: 'Ready to ship?', page: 'p. 04' },
-        { num: '03', title: 'Project brief — 12 questions', meta: 'Client scoping', page: 'p. 06' },
+        { num: '03', title: 'Project brief · 12 questions', meta: 'Client scoping', page: 'p. 06' },
         { num: '04', title: 'Developer specification sheet', meta: '1-page handoff', page: 'p. 08' },
         { num: '05', title: 'One-page proposal', meta: "Scope and price", page: 'p. 10' },
-        { num: '06', title: 'Final check — 12 points', meta: 'Pre-delivery gate', page: 'p. 12' },
-        { num: '07', title: 'Verification grid — AI screen', meta: '8 + 4 critical checks', page: 'p. 14' },
-        { num: '08', title: 'Agent checklist — 77 rules', meta: 'Six platforms', page: 'p. 16' },
+        { num: '06', title: 'Final check · 12 points', meta: 'Pre-delivery gate', page: 'p. 12' },
+        { num: '07', title: 'Verification grid · AI screen', meta: '8 + 4 critical checks', page: 'p. 14' },
+        { num: '08', title: 'Agent checklist · 77 rules', meta: 'Six platforms', page: 'p. 16' },
         { num: '09', title: 'Brief to paste to an agent', meta: 'Structured prompt', page: 'p. 18' },
-        { num: '10', title: 'Agent report — three statuses', meta: "Findings and results", page: 'p. 20' },
+        { num: '10', title: 'Agent report · three statuses', meta: "Findings and results", page: 'p. 20' },
         { num: '11', title: 'Which target, on which platform', meta: 'Web, iOS, Android, Desktop', page: 'p. 22' },
         { num: '12', title: 'Scoping what the agent checks', meta: 'Limits & human checks', page: 'p. 24' },
       ],
       archiveIntro:
-        "Alongside the two PDFs, the offer includes a 21-file working archive. Here is a selection grouped by use:",
+        "Alongside the book and kit PDFs, this edition includes the 21 files in the EN folder of the source archive. This count includes the script and token copies nested in the skill. French files accompany the separately sold French edition. Here are the folders and their uses:",
       archiveGroups: [
         {
-          folder: 'agent-skill/',
-          desc: 'Automated verification & AI coding agent instructions',
-          files: [
-            { name: 'agent_check.py', info: 'CLI & CI scanner (--fail-on blocking returns non-zero exit code)' },
-            { name: 'rules_77.json', info: 'All 77 rules structured as machine-readable data' },
-            { name: 'SKILL.md & AGENTS.md', info: "Instructions to adapt to your agent’s context format" },
-            { name: 'test/bad.html & clean.html', info: "Sample files for comparing scanner results" },
-          ],
+          "folder": "checklist-agent/",
+          "desc": "Python scanner, rules and review instructions",
+          "files": [
+            {
+              "name": "agent_check.py",
+              "info": "Local or CI command, with --fail-on blocking and optional JSON output"
+            },
+            {
+              "name": "rules.py",
+              "info": "77 rules structured in a Python module, categories A to L"
+            },
+            {
+              "name": "AGENTS.md & REPORT-TEMPLATE.md",
+              "info": "Context instructions and report template"
+            },
+            {
+              "name": "test/bad.html & test/good.html",
+              "info": "Two fixtures for comparing exit codes"
+            }
+          ]
         },
         {
-          folder: 'tokens/',
-          desc: "Visual values to adapt to the project",
-          files: [
-            { name: 'tokens.css', info: 'CSS custom properties (type scale, 4/8 spacing, dark & light tokens)' },
-            { name: 'tokens.json', info: "Structured tokens to adapt to your tools and pipeline" },
-          ],
+          "folder": "skill/ux-ui-checklist/",
+          "desc": "The skill and its script and token copies",
+          "files": [
+            {
+              "name": "SKILL.md & references/rules.md",
+              "info": "Instructions to adapt to your agent’s context format"
+            },
+            {
+              "name": "scripts/",
+              "info": "Copies of the scanner, rules, test fixtures and tokens, included in the 21-file count"
+            }
+          ]
         },
         {
-          folder: 'templates/',
-          desc: 'Editable client & product templates',
-          files: [
-            { name: 'brief-12q.md', info: "Questionnaire for preparing project scope" },
-            { name: 'one-page-proposal.md', info: '3-option pricing & scope template' },
-            { name: 'handoff-spec.md & audit-40.md', info: "Developer handoff and interface-review documents" },
-          ],
+          "folder": "tokens/",
+          "desc": "Visual values to adapt to the project",
+          "files": [
+            {
+              "name": "tokens.css",
+              "info": "CSS variables for colour, spacing, text and motion"
+            },
+            {
+              "name": "tokens.json",
+              "info": "Structured tokens to adapt to your tools and pipeline"
+            }
+          ]
         },
+        {
+          "folder": "templates/",
+          "desc": "Four editable Markdown documents",
+          "files": [
+            {
+              "name": "brief-client.md & audit-40-points.md",
+              "info": "Project framing and screen review"
+            },
+            {
+              "name": "handoff-developer.md & journal-of-proof.md",
+              "info": "Handoff and a record of sources, dates and observations"
+            }
+          ]
+        }
       ],
     },
     comparison: {
@@ -1365,7 +1437,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       rows: [
         {
           feature: 'Annotated screens & Before / After visual comparisons',
-          others: "36 screens + 13 before/after prototypes + 11 platform spreads",
+          others: "24 comparison pairs: 13 themes and 11 platform cases",
           playbook: "The same manual + kit and archive",
         },
         {
@@ -1438,11 +1510,11 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       items: [
         {
           q: 'Which files are included in the $29 download?',
-          a: 'Three downloads after purchase: 1) the complete UX/UI Playbook 2026 in English (139-page A4 PDF with clickable contents and bookmarks), 2) the Printable Delivery Bonus Kit (26-page A4 PDF with 12 working sheets + ruled note pages), and 3) the 21-file ZIP archive (CSS/JSON design tokens, 4 markdown templates, 77 rules as JSON, the runnable Python scanner agent_check.py, and the AI agent skill).',
+          a: `Three downloads after purchase: 1) the complete UX/UI Playbook 2026 in English (${playbookPages('en')}-page A4 PDF with clickable contents and bookmarks), 2) the Printable Delivery Bonus Kit (26-page A4 PDF with 12 working sheets + ruled note pages), and 3) the 21-file ZIP archive (CSS/JSON design tokens, 4 markdown templates, 77 rules in rules.py, the runnable Python scanner agent_check.py, and the AI agent skill).`,
         },
         {
           q: 'Which AI coding tools work with the checklist and skill?',
-          a: "The scanner runs with Python 3 in a terminal or CI environment able to execute the command. Markdown/JSON files provide instructions and data to agents able to read them. Adapt the context format recognised by your tool, including Claude Code, Cursor or Codex, and the project paths; execution also depends on the permissions granted to the agent.",
+          a: "The scanner runs with Python 3 in a terminal or CI environment able to execute the command. Markdown and Python files provide instructions and data to agents able to read them. Adapt the context format recognised by your tool, including Claude Code, Cursor or Codex, and the project paths; execution also depends on the permissions granted to the agent.",
         },
         {
           q: 'Do I need Figma experience or a design background?',
@@ -1453,8 +1525,8 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           a: 'Yes, across unlimited personal and client projects. Commercial use on your own products and client deliverables is included. Only reselling or redistributing the playbook files themselves is prohibited.',
         },
         {
-          q: 'Why is the English edition 139 pages while the French edition is 148 pages?',
-          a: "Both editions cover the same method, 97 sections, 77 rules and 21 translated files. Typesetting and line breaks differ by language: the French PDF has 148 pages and the English PDF has 139.",
+          q: `Why is the English edition ${playbookPages('en')} pages while the French edition is ${playbookPages('fr')} pages?`,
+          a: `Both editions cover the same method, 120 sections, 77 rules and 21 translated files. Typesetting and line breaks differ by language: the French PDF has ${playbookPages('fr')} pages and the English PDF has ${playbookPages('en')}.`,
         },
         {
           q: 'What is the refund policy?',
@@ -1466,12 +1538,12 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       kicker: "ENGLISH EDITION",
       heading: "The book, kit and archive for $29 USD.",
       lede:
-        "The purchase includes the 139-page English manual, printable kit and technical files described on this page. Use the book to prepare screen decisions, then keep observations and corrections in the project templates. The ten-page preview remains available before you choose this edition.",
+        `The purchase includes the ${playbookPages('en')}-page English manual, printable kit and technical files described on this page. Use the book to prepare screen decisions, then keep observations and corrections in the project templates. The ten-page preview remains available before you choose this edition.`,
       includedTitle: 'Files in the English edition:',
       includedList: [
-        'UX/UI Playbook 2026 — 139-page A4 PDF (97 sections, 36 annotated screens)',
-        'Printable Bonus Kit — 26-page A4 PDF (12 working sheets & note pages)',
-        'Runnable Python scanner agent_check.py + 77-rule JSON dataset (6 platforms)',
+        `UX/UI Playbook 2026 · ${playbookPages('en')}-page A4 PDF (120 sections, 9 parts, 56-component glossary)`,
+        'Printable Bonus Kit · 26-page A4 PDF (12 working sheets & note pages)',
+        'Runnable Python scanner agent_check.py + 77 rules in rules.py (6 platforms)',
         'AI Agent Skill (SKILL.md + AGENTS.md) for Claude Code, Cursor & Codex',
         "CSS and JSON design tokens to adapt + four project templates",
         'Commercial license for unlimited personal & client projects',
@@ -1484,7 +1556,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       guarantees: ['Download after purchase', 'Refund requests within 7 days', 'Payment via Gumroad'],
       crosslinkTag: 'WORKING IN FRENCH?',
       crosslinkText:
-        "The French edition is sold separately: a 148-page manual, A4 kit and 21-file archive in French. The language selector opens that edition’s pages and purchase links.",
+        `The French edition is sold separately: a ${playbookPages('fr')}-page manual, A4 kit and 21-file archive in French. The language selector opens that edition’s pages and purchase links.`,
       crosslinkBtn: 'See the French edition (FR)',
     },
     footer: {

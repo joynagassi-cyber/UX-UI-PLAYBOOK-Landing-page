@@ -75,7 +75,7 @@ Pages du site à partager **après déploiement** :
 - FR : `/fr/resources/ui-ux-directory`.
 - EN : `/en/resources/ui-ux-directory` (guide, fiche et grille en anglais, dans un ZIP distinct).
 
-L’origine canonique de build actuelle est `https://joyccelight-playbook.pages.dev`. Sa présence dans les documents n’établit pas que la page est publiée. Si l’origine publique définitive change, régénérer les deux kits avec `NEXT_PUBLIC_SITE_URL` avant publication puis relancer les contrôles : les liens imprimés ne changent pas tout seuls.
+L’origine canonique de build actuelle est `https://joyccelight-playbook.uxplay.workers.dev`. Sa présence dans les documents n’établit pas que la page est publiée. Si l’origine publique définitive change, régénérer les deux kits avec `NEXT_PUBLIC_SITE_URL` avant publication puis relancer les contrôles : les liens imprimés ne changent pas tout seuls.
 
 ## 5. Une promotion simple, sans promesse de trafic
 

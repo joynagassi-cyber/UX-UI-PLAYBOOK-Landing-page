@@ -130,5 +130,5 @@ export const COMPARISON_EN: ArticleData = {
   ],
   ctaTitle: 'Prepare the brief, screens and review',
   ctaText: 'The manual and A4 kit offer examples and worksheets for documenting your next project. This comparison remains freely available to read.',
-  ctaBullets: ['139-page English manual and 26-page A4 kit.', 'Brief, handoff and audit templates to adapt to your team.', '21-file archive with tokens, Python scanner and coding-agent instructions.'],
+  ctaBullets: ['171-page English manual and 26-page A4 kit.', 'Brief, handoff and audit templates to adapt to your team.', '21-file archive with tokens, Python scanner and coding-agent instructions.'],
 };

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Icon } from '@/components/Icon';
 import { TabularText } from '@/components/TabularText';
 import type { PlaybookContent } from '@/i18n/content';
+import { PLAYBOOK_EDITION } from '@/lib/playbook-edition';
 
 interface LiveAgentDemoProps {
   data: PlaybookContent['agentDemo'];
@@ -16,6 +17,7 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
   const isBad = mode === 'bad';
   const currentCmd = isBad ? data.terminal.cmdBad : data.terminal.cmdClean;
   const currentLines = isBad ? data.terminal.linesBad : data.terminal.linesClean;
+  const totals = PLAYBOOK_EDITION.scannerExamples[isBad ? 'bad' : 'good'];
 
   const handleCopy = async () => {
     try {
@@ -90,7 +92,7 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
           <div className="inspector-pane">
             <div className={`inspector-bar ${isBad ? 'is-bad' : 'is-clean'}`}>
               <span>{isBad ? data.screenHeaderBad : data.screenHeaderClean}</span>
-              <span>{isBad ? 'EXIT 1' : 'EXIT 0'}</span>
+              <span>{data.illustrationLabel}</span>
             </div>
 
             <div className="mock-canvas">
@@ -222,20 +224,20 @@ export function LiveAgentDemo({ data }: LiveAgentDemoProps) {
             </pre>
 
             <p className="term-outcome" aria-live="polite">
-              {data.terminal.statusBlocking} : {isBad ? '4' : '0'}
+              {data.terminal.statusBlocking} : {totals.blockingFailures}
               {' · '}{isBad ? 'EXIT 1' : 'EXIT 0'}
             </p>
             <div className="term-scorebar">
               <div className="term-score-cell">
-                <span className="term-score-val" style={{ color: 'var(--term-green)' }}><TabularText>9</TabularText></span>
+                <span className="term-score-val" style={{ color: 'var(--term-green)' }}><TabularText>{String(totals.automated)}</TabularText></span>
                 <span className="term-score-lbl">{data.terminal.statusAutomated}</span>
               </div>
               <div className="term-score-cell">
-                <span className="term-score-val" style={{ color: 'var(--term-warn)' }}><TabularText>6</TabularText></span>
+                <span className="term-score-val" style={{ color: 'var(--term-warn)' }}><TabularText>{String(totals.toVerify)}</TabularText></span>
                 <span className="term-score-lbl">{data.terminal.statusToVerify}</span>
               </div>
               <div className="term-score-cell">
-                <span className="term-score-val" style={{ color: 'var(--term-dim)' }}><TabularText>62</TabularText></span>
+                <span className="term-score-val" style={{ color: 'var(--term-dim)' }}><TabularText>{String(PLAYBOOK_EDITION.scannerExamples.outsidePlatformScope)}</TabularText></span>
                 <span className="term-score-lbl">{data.terminal.statusNotApplicable}</span>
               </div>
             </div>

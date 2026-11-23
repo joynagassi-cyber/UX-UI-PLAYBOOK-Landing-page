@@ -130,5 +130,5 @@ export const COMPARISON_FR: ArticleData = {
   ],
   ctaTitle: 'Préparer le brief, les écrans et la revue',
   ctaText: 'Le manuel et le kit A4 proposent des exemples et des fiches pour documenter votre prochain projet. Le comparatif ci-dessus reste librement consultable.',
-  ctaBullets: ['Manuel français de 148 pages et kit A4 de 26 pages.', 'Gabarits de brief, de passation et d’audit à adapter à votre équipe.', 'Archive de 21 fichiers avec tokens, scanner Python et instructions pour agents.'],
+  ctaBullets: ['Manuel français de 182 pages et kit A4 de 26 pages.', 'Gabarits de brief, de passation et d’audit à adapter à votre équipe.', 'Archive de 21 fichiers avec tokens, scanner Python et instructions pour agents.'],
 };

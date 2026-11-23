@@ -378,3 +378,8 @@ Preuves historiques clairement séparées : `baseline/` (entrée et campagne pr�
 Le contrôle de remise vérifie la cohérence des sources/commandes, preuves, préservation, inventaires, liens documentaires et index vide. Son succès ne transforme **ni un REVIEW TBT, ni le timeout antérieur, ni une preuve publique/terrain manquante en validation**. Les résultats locaux sont reproductibles selon le protocole documenté, pas une promesse que chaque valeur fluctuante sera identique.
 
 **Prochaine étape Git : revue humaine du patch cumulé et des réserves, puis instruction explicite avant toute opération d’écriture distante ou commit.** Aucun transfert vers la branche de migration n’est préparé automatiquement. Le serveur local sur 3100 reste un aperçu, pas une publication.
+
+
+## Addendum du 18 novembre 2026 : origine et édition augmentée
+
+Les résultats et l’ancienne origine cités ci-dessus décrivent la passe historique ; ils ne sont pas réécrits. Pour la mise à jour issue du Drive du 9 novembre, le propriétaire a choisi **`https://joyccelight-playbook.uxplay.workers.dev`** comme origine officielle et **21 fichiers par langue et par achat**. Les valeurs courantes sont dans le README et le runbook ; les liens des kits gratuits sont régénérés. Voir le [rapport de mise à jour](EDITION_2026_UPDATE_REPORT.md) pour le diagnostic CI, les compteurs vérifiés et les validations de cette nouvelle révision. Aucune modification DNS ni publication distante n’est impliquée.

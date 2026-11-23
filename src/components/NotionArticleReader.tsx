@@ -13,6 +13,7 @@ import { GumroadButton } from '@/components/GumroadButton';
 import { DesignRolesLab } from './DesignRolesLab';
 import { useModalFocus } from '@/components/useModalFocus';
 import { articleHref } from '@/lib/article-links';
+import { PLAYBOOK_COUNTS, playbookPages } from '@/lib/playbook-edition';
 
 function InlineArticleText({ text, locale }: { text: string; locale: Locale }) {
   return <>{text.split(/(`[^`]+`|\[\d+\])/g).map((part, index) =>
@@ -719,8 +720,8 @@ export function NotionArticleReader({
                 </div>
                 <p style={{ fontSize: 12.5, color: 'var(--fg-2)', marginBottom: 16 }}>
                   {locale === 'fr'
-                    ? 'Paiement unique · PDF 148 p. + Kit A4 + ZIP 21 fichiers'
-                    : 'One-time payment · 139p PDF + A4 Kit + 21-file ZIP'}
+                    ? `Paiement unique · PDF ${playbookPages(locale)} p. + Kit A4 + ZIP ${PLAYBOOK_COUNTS.workingFilesPerEdition} fichiers`
+                    : `One-time payment · ${playbookPages(locale)}p PDF + A4 Kit + ${PLAYBOOK_COUNTS.workingFilesPerEdition}-file ZIP`}
                 </p>
                 <GumroadButton
                   href={gumroadUrl}

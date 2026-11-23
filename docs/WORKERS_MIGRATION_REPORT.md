@@ -97,3 +97,8 @@ Ces artefacts sont locaux ; les workflows modifiés les produiront aussi lors de
 3. **Confirmer le domaine réellement servi.** La configuration canonique **`https://joyccelight-playbook.pages.dev` est volontairement inchangée** pour les liens imprimés des kits ; elle ne définit pas le domaine du Worker. Une autre origine implique une décision séparée sur kits, canonical et redirections entre hosts, sans modification DNS dans ce lot.
 4. Après une publication autorisée, vérifier logs, réponses HTTP publiques, cache/Vary, 404, normalisations, téléchargements et en-têtes. Le local ne reproduit pas WAF, Access, robots géré, cache CDN ou géolocalisation réelle.
 5. Conserver la revue humaine d’accessibilité et des langues. **Aucune optimisation ni nouvelle mesure Lighthouse n’est revendiquée** : les réserves TBT historiques restent ouvertes. Axe n’est pas une certification, Lighthouse n’est pas du terrain, TBT n’est pas INP. Indexation, crawls authentiques, citations IA et performances commerciales restent non établis.
+
+
+## Addendum du 18 novembre 2026 : origine et édition augmentée
+
+Les résultats et l’ancienne origine cités ci-dessus décrivent la passe historique ; ils ne sont pas réécrits. Pour la mise à jour issue du Drive du 9 novembre, le propriétaire a choisi **`https://joyccelight-playbook.uxplay.workers.dev`** comme origine officielle et **21 fichiers par langue et par achat**. Les valeurs courantes sont dans le README et le runbook ; les liens des kits gratuits sont régénérés. Voir le [rapport de mise à jour](EDITION_2026_UPDATE_REPORT.md) pour le diagnostic CI, les compteurs vérifiés et les validations de cette nouvelle révision. Aucune modification DNS ni publication distante n’est impliquée.

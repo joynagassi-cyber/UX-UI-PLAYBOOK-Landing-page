@@ -149,6 +149,26 @@ for (const route of routes) {
 }
 
 for (const locale of ['fr', 'en']) {
+  test(`${locale} · book facts and glossary without a release announcement`, async ({ page }) => {
+    await page.goto(`/${locale}`);
+    await expect(page.locator('#edition-2026')).toHaveCount(0);
+    await expect(page.locator('main')).not.toContainText(/ce qui est nouveau|what is new in this edition|édition française augmentée|expanded english edition/iu);
+    expect(await page.locator('#contents').evaluate(element => element.nextElementSibling?.id)).toBe('guides');
+    await expect(page.locator('.toc-summary')).toHaveCount(9);
+    await page.locator('.toc-summary').nth(7).click();
+    await expect(page.locator('.toc-item').nth(7)).toContainText('56');
+    await expect(page.locator('.toc-item').nth(7)).toContainText(locale === 'fr' ? 'p. 124' : 'p. 113');
+    const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
+    const graph = schemas.flatMap(value => JSON.parse(value)['@graph'] || []);
+    const book = graph.find(item => item['@type'] === 'Book');
+    expect(book.numberOfPages).toBe(locale === 'fr' ? 182 : 171);
+    expect(book.bookEdition).toBe(locale === 'fr' ? 'Édition française' : 'English edition');
+    expect(book.dateModified).toBeUndefined();
+    await page.locator('.shot-card').filter({ hasText: locale === 'fr' ? 'Nommer les composants web' : 'Naming web components' }).click();
+    await expect(page.getByRole('dialog').locator('img')).toHaveAttribute('src', `/images/${locale}/component-lexicon.webp`);
+    await page.keyboard.press('Escape');
+  });
+
   test(`${locale} · existing system theme and saved choice`, async ({ page }) => {
     await page.emulateMedia({ colorScheme: 'light' });
     await page.goto(`/${locale}`);
@@ -176,11 +196,12 @@ for (const locale of ['fr', 'en']) {
     await page.locator('.seg-tab').nth(1).click();
     await expect(page.locator('.seg-tab').nth(1)).toHaveAttribute('aria-pressed', 'true');
     await expect(page.locator('.term-outcome')).toContainText('EXIT 0');
-    await expect(page.locator('.term-score-val')).toHaveText(['9', '6', '62']);
+    await expect(page.locator('.term-score-val')).toHaveText(['8', '49', '20']);
     const cleanAxe = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
     expect(cleanAxe.violations).toEqual([]);
     await page.locator('.seg-tab').first().click();
     await expect(page.locator('.term-outcome')).toContainText('EXIT 1');
+    await expect(page.locator('.term-score-val')).toHaveText(['9', '48', '20']);
     await page.setViewportSize({ width: 320, height: 900 });
     const opener = page.locator('.shot-card').first();
     await opener.click();
@@ -214,10 +235,13 @@ for (const locale of ['fr', 'en']) {
     await page.keyboard.press('End');
     await expect(page.locator('.explorer-tabs button').nth(2)).toBeFocused();
     await expect(page.locator('#contents-panel-archive')).toBeVisible();
-    // The UI lists three representative groups, not all 21 archive files.
-    await expect(page.locator('.archive-card')).toHaveCount(3);
+    // The four folders represent the 21 localized files, including nested copies.
+    await expect(page.locator('.archive-card')).toHaveCount(4);
     await expect(page.locator('#contents-panel-archive')).toContainText('21');
-    await expect(page.locator('.archive-files')).toContainText(['agent_check.py', 'tokens.css', 'handoff-spec.md']);
+    await expect(page.locator('.archive-files')).toContainText([
+      'agent_check.py', 'SKILL.md', 'tokens.css',
+      locale === 'fr' ? 'handoff-developpeur.md' : 'handoff-developer.md',
+    ]);
 
     const otherLocale = locale === 'fr' ? 'en' : 'fr';
     await page.locator(`.lang-btn[lang="${otherLocale}"]`).click();

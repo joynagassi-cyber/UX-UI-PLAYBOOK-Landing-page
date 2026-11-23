@@ -13,8 +13,8 @@ for (const locale of ['fr', 'en']) {
     assert.doesNotMatch(strings(copy).join('\n'), /pages? réelles?|real pages?/iu);
     assert.equal(copy.insideSection.pages.length, 10);
     assert.deepEqual(copy.insideSection.pages.map(page => page.id), [
-      'cover', 'contents', 'landing', 'checkout', 'questions', 'sbs-checkout',
-      'sbs-loading', 'revenue', 'checklist', 'bonus-cover',
+      'cover', 'contents', 'landing', 'checkout', 'evidence', 'sbs-checkout',
+      'sbs-loading', 'lexicon', 'checklist', 'bonus-cover',
     ]);
     assert.ok(copy.insideSection.pages.every(page => page.src.startsWith(`/images/${locale}/`)));
   });

@@ -43,6 +43,24 @@ STORES = {
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 
 
+# These are exact bibliographic references verified in the 9 Nov source PDFs,
+# not the previously removed badges that graded whole sources as established.
+REJECTED_AUTHORITY_COPY = re.compile(
+    r"niveaux? de preuve|sources and evidence|annexe a5|appendix a5|dossiers? de terrain|field courses|"
+    r"\b(?:établi|established|probable)\b", re.I)
+VERIFIED_EDITION_REFERENCES = (
+    "l’annexe A5, « Sources et niveaux de preuve »",
+    "appendix A5, “Sources and evidence levels”",
+    "Dated sources are printed beneath the figures and in appendix A5.",
+)
+
+
+def has_rejected_authority_copy(text):
+    for reference in VERIFIED_EDITION_REFERENCES:
+        text = text.replace(reference, "")
+    return REJECTED_AUTHORITY_COPY.search(text) is not None
+
+
 class Element:
     def __init__(self, tag="document", attrs=(), parent=None):
         self.tag = tag
@@ -96,7 +114,7 @@ class NoRedirect(HTTPRedirectHandler):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--base-url", default="http://127.0.0.1:3100", help="Local HTTP target; independent of the expected public canonical origin")
-    parser.add_argument("--expected-origin", "--site-url", default=os.environ.get("NEXT_PUBLIC_SITE_URL") or DEFAULT_SITE, help="Expected public canonical origin (NEXT_PUBLIC_SITE_URL or the Pages default)")
+    parser.add_argument("--expected-origin", "--site-url", default=os.environ.get("NEXT_PUBLIC_SITE_URL") or DEFAULT_SITE, help="Expected public canonical origin (NEXT_PUBLIC_SITE_URL or the configured Worker origin)")
     parser.add_argument("--output", default="reports/site-check.json")
     parser.add_argument("--wait", type=int, default=0, help="Startup grace period in seconds")
     args = parser.parse_args()
@@ -139,7 +157,6 @@ def main():
     source_urls = set()
     prose_paragraphs = set()
     visual_titles = set()
-    rejected_copy = re.compile(r"niveaux? de preuve|sources and evidence|annexe a5|appendix a5|dossiers? de terrain|field courses|\b(?:établi|established|probable)\b", re.I)
     # Targeted regressions for phrases removed in editorial review, not an AI detector
     # or an exhaustive judgement of prose quality. See docs/EDITORIAL.md.
     removed_slogans = re.compile(
@@ -203,7 +220,7 @@ def main():
             resource_links = [a for a in doc.all("a") if a.attrs.get("href") == f"/{lang}{FREE_PATH}"]
             record("FREE01", route, bool(resource_links), "Free directory is internally linked from every localized page")
             record("CONTACT01", route, any(element.attrs.get("href") == "mailto:joynagassi@gmail.com" for element in doc.all("a")), "Public contact mailto link")
-            record("COPY01", route, not rejected_copy.search(doc.text()), "No source-rating badges or book-authority promotional labels")
+            record("COPY01", route, not has_rejected_authority_copy(doc.text()), "No source-rating badges or book-authority promotional labels")
             record("COPY03", route, not removed_slogans.search(doc.text()), "Selected removed promotional phrases have not returned; this is not an AI or style detector")
             footers = doc.all("footer")
             footer_text = " ".join(footer.text() for footer in footers)
@@ -369,9 +386,9 @@ def main():
                 record("MACHINE03", endpoint, all(url in text for url in source_urls) and all(store in text for store in STORES.values()), "Full text includes every visible reference and both localized inline purchase CTAs")
                 normalised = re.sub(r"(?<=[^\s])\s+(\[\d+\])", r" \1", text.replace("`", ""))
                 missing = [paragraph[:90] for paragraph in prose_paragraphs if paragraph not in normalised]
-                record("MACHINE04", endpoint, not missing and all(title in text for title in visual_titles) and not rejected_copy.search(text) and not removed_slogans.search(text), f"All developed paragraphs and visual titles exported; removed source ratings and selected slogans absent; missing={missing}")
+                record("MACHINE04", endpoint, not missing and all(title in text for title in visual_titles) and not has_rejected_authority_copy(text) and not removed_slogans.search(text), f"All developed paragraphs and visual titles exported; removed source ratings and selected slogans absent; missing={missing}")
             if endpoint == "/llms.txt":
-                record("MACHINE05", endpoint, not rejected_copy.search(body.decode("utf-8")) and "English articles" in body.decode("utf-8"), "Article terminology and plain source list in the discovery endpoint")
+                record("MACHINE05", endpoint, not has_rejected_authority_copy(body.decode("utf-8")) and "English articles" in body.decode("utf-8"), "Article terminology and plain source list in the discovery endpoint")
         except (URLError, TimeoutError, OSError, ET.ParseError) as error:
             record("MACHINE01", endpoint, False, str(error))
 

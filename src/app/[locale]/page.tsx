@@ -15,6 +15,7 @@ import {
   HeroSampleTrigger,
 } from '@/components/BookGalleryLightbox';
 import { ContentsExplorer } from '@/components/ContentsExplorer';
+import { playbookPages } from '@/lib/playbook-edition';
 import { FreeResourcePromo } from '@/components/FreeResourcePromo';
 import { FREE_UI } from '@/i18n/free-resource';
 import { FREE_RESOURCE_PATH } from '@/lib/free-resource-config';
@@ -134,10 +135,10 @@ export default async function LandingPage({
         '@id': `${c.siteUrl}/${locale}#book`,
         name: 'UX/UI Playbook',
         author: { '@id': `${c.siteUrl}/#joy-n` },
-        bookEdition: locale === 'fr' ? 'Édition française 2026' : '2026 English Edition',
+        bookEdition: locale === 'fr' ? 'Édition française' : 'English edition',
         bookFormat: 'https://schema.org/EBook',
         isRelatedTo: { '@id': `${c.siteUrl}/${locale}#product` },
-        numberOfPages: locale === 'fr' ? 148 : 139,
+        numberOfPages: playbookPages(locale),
         inLanguage: locale,
         publisher: { '@id': `${c.siteUrl}/#organization` },
       },
@@ -344,7 +345,7 @@ export default async function LandingPage({
         {/* Complete Table of Contents + 12-Sheet Bonus Kit + 21-File Archive */}
         <ContentsExplorer data={c.contentsSection} />
 
-        {/* Three free articles (UX Design, UI Design, Product Design) */}
+        {/* Four free guides, with matching-language links. */}
         <section id="guides">
           <div className="wrap">
             <div

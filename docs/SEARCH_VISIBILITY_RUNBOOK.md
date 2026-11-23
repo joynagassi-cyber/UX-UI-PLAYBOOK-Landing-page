@@ -16,7 +16,7 @@ La validation locale ne nécessite aucun compte Cloudflare. Le preview utilise *
 node --version
 npm ci
 npx playwright install --with-deps chromium
-export NEXT_PUBLIC_SITE_URL=https://joyccelight-playbook.pages.dev
+export NEXT_PUBLIC_SITE_URL=https://joyccelight-playbook.uxplay.workers.dev
 ```
 
 Le téléchargement Playwright dépend de l’accès au CDN du navigateur. Dans le sandbox de cette mission, un Chromium portable a été installé **uniquement dans `.cache/`** depuis le registre npm autorisé. Alternative locale exactement utilisée, sans modifier les dépendances du produit :
@@ -47,7 +47,7 @@ git diff --check
 ```
 
 - `npm test` réunit les tests unitaires de routage, contenu, ressources, captures hors réseau et SEO. Les alias `test:routing`, `test:content`, `check:resource` et `test:seo` permettent d’isoler un échec.
-- `check:preservation` compare 108 fichiers à la base de cette mission et vérifie que l’inventaire des fichiers `page.tsx` n’a pas grandi. Il ne faut **pas** rafraîchir automatiquement la baseline pour faire passer un changement éditorial inattendu. Un futur changement intentionnel doit mettre à jour la baseline avec sa revue.
+- `check:preservation` garde la baseline historique des 108 fichiers, l’inventaire des `page.tsx` et les rapports append-only. Les révisions intentionnelles et relues figurent dans `docs/preservation-revisions.json`, avec chaîne d’empreintes et motif par fichier. Une modification différente du SHA exact attendu échoue encore. Ne pas réinitialiser la baseline ni créer une exclusion globale pour faire passer un changement inattendu.
 - `check:export` doit être exécuté après le build de la même révision. Ne pas valider un ancien `out/`.
 - Les tests et builds créent `reports/`, `out/`, `.next/`, `.cache/`, etc., ignorés par Git. Aucun besoin de régénérer les kits ou de lancer Microlink.
 
@@ -116,7 +116,7 @@ Le vrai diagnostic de terrain nécessite des données représentatives au 75e pe
 Examiner en lecture seule et conserver une preuve horodatée/anonymisée avant toute modification future autorisée :
 
 1. Projet **Workers Builds**, rattachement au nom **imposé `joyccelight-playbook`**, compte/droits et branche de production ; commande de build `npm run build`, commande de publication **`npm run deploy:worker`** seulement après autorisation, point d’entrée `worker/index.mjs` et binding `ASSETS` sur `out`. Le garde-fou refuse les remplacements de nom par la CI, les environnements nommés et les surcharges CLI ; il ne supprime pas les variables de contrôle de compte/tag. Ne pas utiliser directement `npx wrangler deploy`, qui contournerait ce verrou. Ce réglage distant n’a pas été modifié ici. Node 22.19+ dans la branche 22 et variable `NEXT_PUBLIC_SITE_URL` dans les contextes production **et** preview. Voir la [configuration Workers](../CLOUDFLARE_MIGRATION.md#configuration-workers).
-2. Domaine réellement choisi et certificat ; redirections entre ancien host, origine canonique Pages conservée, domaine réellement servi par le Worker et éventuel domaine personnalisé. Ne jamais mélanger plusieurs origines canoniques. **Ne pas changer les DNS dans cette mission.**
+2. Domaine réellement choisi et certificat ; redirections entre ancien host, ancienne origine Pages et origine canonique Workers choisie, domaine réellement servi par le Worker et éventuel domaine personnalisé. Ne jamais mélanger plusieurs origines canoniques. **Ne pas changer les DNS dans cette mission.**
 3. Cloudflare Access, WAF, règles personnalisées, rate limiting, Bot Fight/Super Bot Fight, blocage des robots IA et règles de challenge. Vérifier les chemins, méthodes et identités vérifiées sans créer une exemption générale sur simple User-Agent.
 4. Robots géré, préfixes injectés, `Content-Signal`, AI Labyrinth et réglages IA disponibles dans le compte : rapprocher la réponse publique réelle de la politique du dépôt. Autoriser la recherche n’implique pas nécessairement autoriser l’entraînement, et inversement.
 5. Cache Rules, Transform Rules, Redirect Rules/Bulk Redirects, Workers/routes hérités, Rocket Loader et réécriture de sécurité : aucun ne doit transformer une 404 en 200, cacher des en-têtes `noindex`, partager une redirection de langue privée ou casser les scripts statiques.
@@ -133,7 +133,7 @@ python3 scripts/check_public_access.py --origin "$NEXT_PUBLIC_SITE_URL"
 
 Le script s’arrête au premier échec réseau ou statut non-200 ; il ne contourne pas un challenge et ne demande aucune clé. Code 2 : preuve publique incomplète/indisponible, distinct d’un échec des tests locaux. La sortie précise les chemins réellement essayés, pas une liste de requêtes supposées exécutées.
 
-Si un domaine personnalisé est décidé **dans une mission ultérieure autorisée** : reconstruire avec la nouvelle origine, régénérer séparément les deux kits qui contiennent des liens imprimés, relire leurs manifestes et mettre à jour volontairement la baseline de conservation. `check:export` refuse un kit dont `generatedForOrigin` diffère. Le simple changement d’une variable ou l’ajout d’un canonical ne redirige pas les anciens hosts. Le propriétaire devra contrôler les redirections HTTP entre hosts tout en conservant chemins, langues et paramètres, sans boucle. Aucune commande DNS ou de déploiement n’est exécutée ici.
+Si un domaine personnalisé est décidé **dans une mission ultérieure autorisée** : reconstruire avec la nouvelle origine, régénérer séparément les deux kits qui contiennent des liens imprimés, relire leurs manifestes et ajouter les révisions exactes au registre de préservation après revue. `check:export` refuse un kit dont `generatedForOrigin` diffère. Le simple changement d’une variable ou l’ajout d’un canonical ne redirige pas les anciens hosts. Le propriétaire devra contrôler les redirections HTTP entre hosts tout en conservant chemins, langues et paramètres, sans boucle. Aucune commande DNS ou de déploiement n’est exécutée ici.
 
 ## 7. Google Search Console — accès/propriété nécessaires, non réalisé ici
 

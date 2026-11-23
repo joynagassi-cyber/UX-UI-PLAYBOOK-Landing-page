@@ -8,6 +8,7 @@ const { chromium } = require('playwright');
 const { loadData, root } = require('./content-data.cjs');
 const { escape, icon, pdfCSS, categoryIcon, heading, sheet, marketingHTML } = require('./free_resource_layout.cjs');
 const { SITE_URL } = loadData('src/lib/site-config.ts');
+const { playbookPages } = loadData('src/lib/playbook-edition.ts');
 const { screenshotSheets } = require('./free_resource_screenshots.cjs');
 const catalog = require('../products/ui-ux-directory/en/catalogue.json');
 // Explicit opt-in; missing or unreviewed PNGs fail before any deliverable is overwritten.
@@ -86,7 +87,7 @@ function buildGuide() {
   for (let start = 0; start < catalog.sources.length; start += 6) {
     sheets.push(sheet(`${heading('Editorial traceability', 'Sources and references.', `${start === 0 ? 1 : 2} / 2`)}${start === 0 ? `<p class="small">${escape(sourceNote)}</p>` : ''}<div>${catalog.sources.slice(start, start + 6).map(source => `<article class="source"><h3>${escape(source.title)}</h3><a href="${escape(source.url)}">${escape(source.url)}</a><p>${escape(source.note)}</p></article>`).join('')}</div>${start > 0 ? `<aside class="note small">${rights}</aside>` : ''}`));
   }
-  sheets.push(sheet(`${heading('From choice to review', 'A directory is not a complete method.')}<p class="lead">Keep a small resource selection and record important decisions. A useful starting point is one you can explain, maintain and test.</p><h3>A brief for your AI agent</h3><pre class="prompt">${escape(prompt)}</pre><div class="cta-box"><div class="eyebrow" style="color:#ffac87">Go further · Separate paid product</div><h2>UX/UI Playbook</h2><p>The 139-page English manual, 12-sheet A4 kit and 21-file archive: tokens, templates and a Python scanner. These paid files are not part of the free directory.</p><div class="cta-price">$29 USD · One-time payment</div><a href="${escape(tracked('#buy', 'pdf'))}">Explore the Playbook on the website</a></div><p><a href="${escape(tracked('/articles', 'pdf'))}">Continue with the free articles</a> · <a href="${escape(tracked(resourcePath, 'pdf'))}">Return to the directory</a></p>`));
+  sheets.push(sheet(`${heading('From choice to review', 'A directory is not a complete method.')}<p class="lead">Keep a small resource selection and record important decisions. A useful starting point is one you can explain, maintain and test.</p><h3>A brief for your AI agent</h3><pre class="prompt">${escape(prompt)}</pre><div class="cta-box"><div class="eyebrow" style="color:#ffac87">Go further · Separate paid product</div><h2>UX/UI Playbook</h2><p>The ${playbookPages('en')}-page English manual, 12-sheet A4 kit and 21-file archive: tokens, templates and a Python scanner. These paid files are not part of the free directory.</p><div class="cta-price">$29 USD · One-time payment</div><a href="${escape(tracked('#buy', 'pdf'))}">Explore the Playbook on the website</a></div><p><a href="${escape(tracked('/articles', 'pdf'))}">Continue with the free articles</a> · <a href="${escape(tracked(resourcePath, 'pdf'))}">Return to the directory</a></p>`));
   sheets.splice(sheets.length - 1, 0, ...screenshotGallery);
   return sheets;
 }
@@ -144,10 +145,12 @@ function pdfHTML(sheets, title) {
       if (overflow.length) throw new Error('English marketing overflow: ' + output + ' ' + JSON.stringify(overflow));
       await page.screenshot({ path: output, type, ...(type === 'jpeg' ? { quality: 91 } : {}) });
     }
+    if (!process.argv.includes('--downloads-only')) {
     await art(1280, 720, path.join(marketing, 'cover-1280x720.png'));
     await page.screenshot({ path: path.join(root, 'public/images/free-directory/cover-en.jpg'), type: 'jpeg', quality: 89 });
     await art(1080, 1080, path.join(marketing, 'thumbnail-1080x1080.png'), 'png', true);
     await art(1200, 630, path.join(root, 'public/og-directory-en.jpg'), 'jpeg');
+    }
   } finally {
     await browser.close();
   }

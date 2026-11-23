@@ -2,7 +2,7 @@
   "version": "1.0",
   "language": "en",
   "editionDate": "2026-11-18",
-  "generatedForOrigin": "https://joyccelight-playbook.pages.dev",
+  "generatedForOrigin": "https://joyccelight-playbook.uxplay.workers.dev",
   "counts": {
     "entries": 51,
     "categories": 6,
@@ -15,20 +15,20 @@
     "archive": {
       "role": "Complete English kit",
       "path": "/downloads/ui-ux-directory-free-en-v1.zip",
-      "bytes": 516449,
-      "sha256": "66ab11a040f5548b02766edb32c5b5fd5b23a9f53f2cc426be986a18b66e0bb9"
+      "bytes": 615434,
+      "sha256": "fe9a38135f83f0f79a26d756be9eeded0be183d9ab61d436deb0f21bcafa5fd8"
     },
     "pdf": {
       "role": "English guide PDF",
       "path": "/downloads/ui-ux-directory-en-v1.pdf",
-      "bytes": 779515,
-      "sha256": "12fe29737e7f164175af8b3ce341e09bd10999c99c25a55530d99fef0a81e9f9"
+      "bytes": 960321,
+      "sha256": "2788b121329469f11399c925a3fa6153b38b2bf5e99e3bf0d7bb7a6f9995c489"
     },
     "markdown": {
       "role": "English guide Markdown",
       "path": "/downloads/ui-ux-directory-en-v1.md",
-      "bytes": 53244,
-      "sha256": "fea0ec54af4c604d312ce2c47ce9b6825c2fbeb4bbed2da237372fda96b21a68"
+      "bytes": 53271,
+      "sha256": "c733a6bf62741bc5e4df5ce09edbe76005882fe2324e9b2af230c00f3974ca0b"
     }
   }
 }

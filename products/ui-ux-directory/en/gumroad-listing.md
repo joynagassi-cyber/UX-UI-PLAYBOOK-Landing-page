@@ -62,10 +62,10 @@ No third-party font files, libraries, icon collections, illustrations or 3D scen
 The directory is a standalone resource, separate from the Playbook. The **paid UX/UI Playbook** covers preparing and reviewing interfaces with a manual, A4 worksheets and a file archive. It is not included, and you do not need to buy it to use this free guide.
 
 Continue with the free articles:
-https://joyccelight-playbook.pages.dev/en/articles?utm_source=gumroad&utm_medium=product-description&utm_campaign=free-directory-en
+https://joyccelight-playbook.uxplay.workers.dev/en/articles?utm_source=gumroad&utm_medium=product-description&utm_campaign=free-directory-en
 
 Explore the Playbook and its files:
-https://joyccelight-playbook.pages.dev/en?utm_source=gumroad&utm_medium=product-description&utm_campaign=free-directory-en#buy
+https://joyccelight-playbook.uxplay.workers.dev/en?utm_source=gumroad&utm_medium=product-description&utm_campaign=free-directory-en#buy
 
 **Language: English. Version 1.0, November 18, 2026 edition. Created by Joy N. / Joyccelight.** This is the English translation of the edited French directory, not a new exhaustive audit of external services. A separate French kit is also available.
 
@@ -93,7 +93,7 @@ Extract the ZIP and open `README.md`. Start with one screen, compare a small num
 All files are in English. The guide is free; third-party resources keep their own prices and licenses.
 
 For articles and this resource’s download page:
-https://joyccelight-playbook.pages.dev/en/resources/ui-ux-directory?utm_source=gumroad&utm_medium=delivery&utm_campaign=free-directory-en
+https://joyccelight-playbook.uxplay.workers.dev/en/resources/ui-ux-directory?utm_source=gumroad&utm_medium=delivery&utm_campaign=free-directory-en
 
 A question or a link to report? joynagassi@gmail.com
 

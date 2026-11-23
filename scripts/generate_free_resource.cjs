@@ -7,6 +7,7 @@ const { execFileSync } = require('node:child_process');
 const { chromium } = require('playwright');
 const { loadData, root } = require('./content-data.cjs');
 const { SITE_URL } = loadData('src/lib/site-config.ts');
+const { playbookPages } = loadData('src/lib/playbook-edition.ts');
 const { screenshotSheets } = require('./free_resource_screenshots.cjs');
 const { escape, icon, pdfCSS, categoryIcon, heading, sheet, marketingHTML } = require('./free_resource_layout.cjs');
 const catalog = require('../products/ui-ux-directory/catalogue.json');
@@ -75,7 +76,7 @@ function buildGuide() {
   for (let start=0;start<catalog.sources.length;start+=6) {
     sheets.push(sheet(`${heading('Traçabilité éditoriale', 'Sources et références.', `${start===0?1:2} / 2`)}${start===0?'<p class="small">Adaptation du document fourni par le créateur : repertoire-complet-ui-ux-profils.md. Références utilisées pour des corrections ciblées au 18 novembre 2026, et non pour un audit des 75 destinations. Les conditions peuvent évoluer.</p>':''}<div>${catalog.sources.slice(start,start+6).map(s => `<article class="source"><h3>${escape(s.title)}</h3><a href="${escape(s.url)}">${escape(s.url)}</a><p>${escape(s.note)}</p></article>`).join('')}</div>${start>0?`<aside class="note small">${rights}</aside>`:''}`));
   }
-  sheets.push(sheet(`${heading('Du choix à la revue', 'Un répertoire n’est pas une méthode complète.')}<p class="lead">Gardez une petite sélection de ressources et documentez les décisions importantes. Le bon point de départ est celui que vous pouvez expliquer, maintenir et tester.</p><h3>Un cadre pour votre agent IA</h3><pre class="prompt">${escape(prompt)}</pre><div class="cta-box"><div class="eyebrow" style="color:#ffac87">Pour aller plus loin · Offre distincte</div><h2>UX/UI Playbook</h2><p>Le manuel français de 148 pages, le kit de 12 fiches A4 et l’archive de 21 fichiers : tokens, gabarits et scanner Python. Le répertoire gratuit n’inclut pas ces fichiers.</p><div class="cta-price">29 USD · Paiement unique</div><a href="${escape(tracked('#buy','pdf'))}">Découvrir le Playbook sur le site</a></div><p><a href="${escape(tracked('/articles','pdf'))}">Continuer avec les articles gratuits</a> · <a href="${escape(tracked(resourcePath,'pdf'))}">Retrouver le répertoire</a></p>`));
+  sheets.push(sheet(`${heading('Du choix à la revue', 'Un répertoire n’est pas une méthode complète.')}<p class="lead">Gardez une petite sélection de ressources et documentez les décisions importantes. Le bon point de départ est celui que vous pouvez expliquer, maintenir et tester.</p><h3>Un cadre pour votre agent IA</h3><pre class="prompt">${escape(prompt)}</pre><div class="cta-box"><div class="eyebrow" style="color:#ffac87">Pour aller plus loin · Offre distincte</div><h2>UX/UI Playbook</h2><p>Le manuel français de ${playbookPages('fr')} pages, le kit de 12 fiches A4 et l’archive de 21 fichiers : tokens, gabarits et scanner Python. Le répertoire gratuit n’inclut pas ces fichiers.</p><div class="cta-price">29 USD · Paiement unique</div><a href="${escape(tracked('#buy','pdf'))}">Découvrir le Playbook sur le site</a></div><p><a href="${escape(tracked('/articles','pdf'))}">Continuer avec les articles gratuits</a> · <a href="${escape(tracked(resourcePath,'pdf'))}">Retrouver le répertoire</a></p>`));
   sheets.splice(sheets.length - 1, 0, ...screenshotGallery);
   return sheets;
 }
@@ -129,6 +130,7 @@ function pdfHTML(sheets, title) {
       }
       console.log(`${name}.pdf: ${sheets.length} pages, no HTML overflow`);
     }
+    if (!process.argv.includes('--downloads-only')) {
     const marketPage=await browser.newPage({viewport:{width:1280,height:720},deviceScaleFactor:1});
     async function art(locale,width,height,output,type='png',square=false){
       await marketPage.setViewportSize({width,height});
@@ -145,6 +147,7 @@ function pdfHTML(sheets, title) {
     await marketPage.screenshot({path:path.join(root,'public/images/free-directory/cover-fr.jpg'),type:'jpeg',quality:89});
     await art('fr',1080,1080,path.join(marketing,'thumbnail-1080x1080.png'),'png',true);
     for(const locale of ['fr'])await art(locale,1200,630,path.join(root,`public/og-directory-${locale}.jpg`),'jpeg');
+    }
   }finally{await browser.close();}
   fs.writeFileSync(path.join(pack,'LIRE-MOI.md'),`# Votre répertoire UI/UX gratuit\n\nMerci d’avoir téléchargé cette ressource de Joy N. / Joyccelight.\n\n**51 fiches · 6 familles · 75 liens de ressources · Fichiers en français**\n\n- repertoire-ui-ux-fr.pdf : guide de ${guide.length} pages A4, avec liens cliquables.\n- repertoire-ui-ux-fr.md : même contenu éditorial dans un format texte modifiable.\n- fiche-decision.pdf : ${worksheet.length} pages A4 à imprimer ; pas un formulaire PDF interactif.\n- fiche-decision.md : fiche à dupliquer et compléter dans un éditeur Markdown.\n- grille-selection.csv : 6 lignes de familles à compléter dans un tableur (UTF-8, séparateur point-virgule).\n- LICENCES.txt : conditions d’usage du guide et notices Domine/Lucide.\n\nCommencez par un écran, comparez peu d’options et gardez la raison de chaque choix. Les services tiers ont leurs propres tarifs et licences ; ce téléchargement ne contient aucun de leurs packs ni bibliothèques. Les liens n’ont pas subi d’audit exhaustif de disponibilité.\n\nVersion 1.0 · Édition du 18 novembre 2026\nPage du guide : ${tracked(resourcePath,'readme')}\nArticles gratuits : ${tracked('/articles','readme')}\nLe Playbook payant (offre distincte) : ${tracked('','readme')}#buy\n\nContact : joynagassi@gmail.com\n`);
   const archive='repertoire-ui-ux-gratuit-v1.zip';

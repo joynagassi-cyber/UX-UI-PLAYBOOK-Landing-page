@@ -6,6 +6,7 @@ const { loadData, root } = require('./content-data.cjs');
 const { SITE_URL } = loadData('src/lib/site-config.ts');
 const { ARTICLES, ARTICLE_SLUGS, ARTICLES_UI } = loadData('src/i18n/articles.ts');
 const { CONTENT } = loadData('src/i18n/content.ts');
+const { PLAYBOOK_EDITION, playbookPages } = loadData('src/lib/playbook-edition.ts');
 const { FREE_UI, freeResourceManifest, freeResourceCatalog } = loadData('src/i18n/free-resource.ts');
 const { FREE_RESOURCE_PATH, FREE_GUMROAD_URLS } = loadData('src/lib/free-resource-config.ts');
 const { designLabTranscript } = loadData('src/i18n/design-lab.ts');
@@ -76,6 +77,23 @@ for (const locale of ['fr', 'en']) {
     const schemas = [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].flatMap((match) => { const graph = JSON.parse(match[1]); return graph['@graph'] || [graph]; });
     const person = schemas.find((item) => item['@type'] === 'Person');
     check(`person:${route}`, person?.['@id'] === `${SITE_URL}/#joy-n` && person.url === `${SITE_URL}/${locale}#author` && person.image === `${SITE_URL}/images/author-joy.webp` && person.sameAs?.includes('https://github.com/joynagassi-cyber') && person.sameAs?.includes('https://joyccelight.gumroad.com'), person);
+    if (!suffix) {
+      const book = schemas.find(item => item['@type'] === 'Book');
+      const product = schemas.find(item => item['@type'] === 'Product');
+      const c = CONTENT[locale];
+      check(`edition:${route}:book-and-price`, book?.numberOfPages === playbookPages(locale)
+        && book.inLanguage === locale && !book.dateModified && !book.datePublished
+        && book.bookEdition === (locale === 'fr' ? 'Édition française' : 'English edition')
+        && product?.offers?.price === '29.00' && product.offers.priceCurrency === 'USD'
+        && product.offers.url === c.gumroadUrl, { pages: book?.numberOfPages, date: book?.dateModified, offer: product?.offers });
+      check(`edition:${route}:no-release-announcement`, !html.includes('id="edition-2026"')
+        && !/ce qui est nouveau|what is new in this edition|édition[^<.]*augmentée|expanded english edition/iu.test(decode(html)),
+        'The landing presents book contents without suggesting a new or expanded replacement edition.');
+      check(`edition:${route}:nine-parts`, (html.match(/class="toc-item"/g) || []).length === 9
+        && c.contentsSection.parts.every(part => decode(html).includes(part.title)), 'All nine part summaries are present without JavaScript.');
+      check(`edition:${route}:selected-previews`, PLAYBOOK_EDITION.editions[locale].previews.every(item =>
+        html.includes(`src="${item.path}"`) && fs.existsSync(path.join(out, item.path))), 'Ten source-mapped preview pages including the evidence section and glossary.');
+    }
     if (isResource) {
       const book = schemas.find((item) => item['@type'] === 'Book');
       check(`resource-schema:${route}`, book?.inLanguage === locale && book.name === `${catalog.title} — ${catalog.subtitle}` && book.isAccessibleForFree === true && book.numberOfPages === manifest.counts.guidePages && book.encoding?.inLanguage === locale && book.encoding?.contentUrl === SITE_URL + manifest.files.pdf.path && book.image === `${SITE_URL}/images/free-directory/cover-${locale}.jpg`, book);
@@ -141,12 +159,27 @@ for (const locale of ['fr', 'en']) {
   const catalog = freeResourceCatalog(locale);
   check(`llms:${locale}:free-directory`, discovery.includes(`${SITE_URL}/${locale}${FREE_RESOURCE_PATH}`) && full.includes(`${SITE_URL}/${locale}${FREE_RESOURCE_PATH}`) && discovery.includes(SITE_URL + manifest.files.archive.path) && full.includes(SITE_URL + manifest.files.archive.path) && catalog.entries.every((entry) => [entry.description, entry.nonDesigner, entry.developer, entry.agent, entry.watch, ...entry.urls].every(value => full.includes(value))) && catalog.sources.every(source => full.includes(source.note)), 'Matching-language free kit and complete editorial content discoverable.');
   check(`llms:${locale}:catalogue-and-references`, ARTICLES[locale].every((article) => discovery.includes(`${SITE_URL}/${locale}/articles/${article.slug}`) && full.includes(article.title) && article.references.every((reference) => discovery.includes(reference.url) && full.includes(reference.url))), `${ARTICLES[locale].length} articles and every bibliography URL`);
+  check(`llms:${locale}:book-facts`, full.includes(CONTENT[locale].hero.note)
+    && CONTENT[locale].contentsSection.parts.every(item => full.includes(item.title))
+    && PLAYBOOK_EDITION.researchSources.every(item => discovery.includes(item.url) && full.includes(item.url))
+    && discovery.includes(String(playbookPages(locale))), 'Measured book contents and attributed sources remain available without a release-history announcement.');
   check(`llms:${locale}:all-prototype-viewpoints`, full.includes(designLabTranscript(locale)), 'All nine annotations and hidden screen states are serialized, not just the initial render.');
 }
 function walk(dir) { return fs.existsSync(dir) ? fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => entry.isDirectory() ? walk(path.join(dir, entry.name)) : [path.join(dir, entry.name)]) : []; }
 const forbidden = /vercel\.app|VERCEL_URL|x-vercel-ip-country|@vercel\//i;
 const textFiles = walk(out).filter((file) => /\.(?:html|txt|xml|json|js|css|svg)$/.test(file));
 const obsolete = textFiles.filter((file) => forbidden.test(fs.readFileSync(file, 'utf8'))).map((file) => path.relative(out, file));
+const staleOrigin = textFiles.filter(file => fs.readFileSync(file, 'utf8').includes('https://joyccelight-playbook.pages.dev')).map(file => path.relative(out, file));
+check('all-generated-files:no-retired-canonical-origin', staleOrigin.length === 0, { scanned: textFiles.length, matches: staleOrigin });
+const obsoleteEditionClaims = /\b(?:148|139)[- ](?:page|pages)|97 sections|36 (?:écrans|annotated screens)|rules_77\.json|test\/clean\.html/iu;
+const staleClaims = textFiles.filter(file => obsoleteEditionClaims.test(fs.readFileSync(file, 'utf8'))).map(file => path.relative(out, file));
+check('all-generated-files:no-obsolete-edition-claims', staleClaims.length === 0, { scanned: textFiles.length, matches: staleClaims });
+const releaseAnnouncements = /ce qui est nouveau dans cette édition|what is new in this edition|édition française augmentée|expanded (?:english|2026) edition|expanded edition, 9 november 2026/iu;
+const releaseHistoryFiles = textFiles.filter(file => releaseAnnouncements.test(fs.readFileSync(file, 'utf8'))).map(file => path.relative(out, file));
+check('all-generated-files:no-release-history-marketing', releaseHistoryFiles.length === 0, { scanned: textFiles.length, matches: releaseHistoryFiles });
+const paidFileNames = [PLAYBOOK_EDITION.sourceArchive.name, ...Object.values(PLAYBOOK_EDITION.editions).flatMap(item => [item.bookSource.name, item.kitSource.name])];
+const exposedPaidFiles = walk(out).filter(file => paidFileNames.includes(path.basename(file)));
+check('all-generated-files:no-private-paid-deliverables', exposedPaidFiles.length === 0, exposedPaidFiles);
 check('all-generated-files:no-vercel-origin', textFiles.length > 0 && obsolete.length === 0, { scanned: textFiles.length, matches: obsolete });
 const fontUrls = textFiles.filter((file) => file.endsWith('.css')).flatMap((file) => [...fs.readFileSync(file, 'utf8').matchAll(/url\(["']?([^"')]+\.woff2)["']?\)/g)].map((match) => path.resolve(path.dirname(file), match[1])));
 check('fonts:self-hosted-exported', fontUrls.length >= 2 && fontUrls.every((file) => file.startsWith(out + path.sep) && fs.existsSync(file)), fontUrls.map((file) => path.relative(out, file)));

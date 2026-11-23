@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  NEXT_PUBLIC_SITE_URL: https://joyccelight-playbook.pages.dev
+  NEXT_PUBLIC_SITE_URL: https://joyccelight-playbook.uxplay.workers.dev
   NEXT_TELEMETRY_DISABLED: '1'
   WRANGLER_SEND_METRICS: 'false'
 
@@ -30,8 +30,14 @@ jobs:
           cache: npm
       - name: Install the locked dependencies
         run: npm ci
-      - name: Preserve editorial assets, lint, type-check and run all unit/content/SEO tests
-        run: npm run check:preservation && npm run lint && npm run typecheck && npm test
+      - name: Verify unchanged assets and explicitly reviewed revisions
+        run: npm run check:preservation
+      - name: Lint
+        run: npm run lint
+      - name: Type-check
+        run: npm run typecheck
+      - name: Run all unit, content and SEO tests
+        run: npm test
       - name: Build the complete static site
         run: npm run build
       - name: Validate the Worker entry and assets without publishing

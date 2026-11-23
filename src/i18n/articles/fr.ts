@@ -487,7 +487,7 @@ export const ARTICLES_FR: ArticleData[] = [
           {
             type: "inlineCta",
             title: "Le livre et les fiches d’audit",
-            text: "Le Playbook FR réunit 36 écrans annotés, la checklist d’audit de 40 points et 12 fiches A4 pour préparer votre revue.",
+            text: "Le Playbook FR réunit des maquettes annotées, un lexique de 56 composants, la checklist d’audit de 40 points et 12 fiches A4 pour préparer votre revue.",
             buttonLabel: "Obtenir le Playbook FR · 29 $",
           },
         ],
@@ -792,7 +792,7 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
       },
     ],
     ctaTitle: "Pour préparer votre prochain audit",
-    ctaText: "L’édition française du UX/UI Playbook comprend le livre de 148 pages, le kit imprimable de 26 pages et une archive de 21 fichiers de travail.",
+    ctaText: "L’édition française du UX/UI Playbook comprend le livre de 182 pages, le kit imprimable de 26 pages et une archive de 21 fichiers de travail.",
     ctaBullets: [
       "Livre en français avec exemples d’écrans annotés",
       "12 fiches A4 pour le brief, l’audit et la passation",
@@ -1359,7 +1359,7 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
           {
             type: "inlineCta",
             title: "Fichiers de tokens et gabarits dans l’archive",
-            text: "L’archive du Playbook fournit tokens.css, tokens.json et les gabarits éditables, avec 13 prototypes Avant/Après et 11 planches de plateformes dans le manuel.",
+            text: "L’archive du Playbook fournit tokens.css, tokens.json et les gabarits éditables, avec 13 paires avant/après et 11 comparaisons de plateformes dans le manuel.",
             buttonLabel: "Obtenir les fichiers FR · 29 $",
           },
         ],
@@ -1537,7 +1537,7 @@ Pour chaque point : résultat, observation et lien vers le test ou la capture.
       },
     ],
     ctaTitle: "Des tokens et des gabarits à réutiliser",
-    ctaText: "L’édition française du UX/UI Playbook comprend le livre de 148 pages, le kit imprimable de 26 pages et une archive de 21 fichiers de travail.",
+    ctaText: "L’édition française du UX/UI Playbook comprend le livre de 182 pages, le kit imprimable de 26 pages et une archive de 21 fichiers de travail.",
     ctaBullets: [
       "Livre en français avec exemples d’écrans annotés",
       "12 fiches A4 pour le brief, l’audit et la passation",
@@ -2195,7 +2195,7 @@ suivi:
       },
     ],
     ctaTitle: "Un kit pour votre prochain projet",
-    ctaText: "L’édition française du UX/UI Playbook comprend le livre de 148 pages, le kit imprimable de 26 pages et une archive de 21 fichiers de travail.",
+    ctaText: "L’édition française du UX/UI Playbook comprend le livre de 182 pages, le kit imprimable de 26 pages et une archive de 21 fichiers de travail.",
     ctaBullets: [
       "Livre en français avec exemples d’écrans annotés",
       "12 fiches A4 pour le brief, l’audit et la passation",
