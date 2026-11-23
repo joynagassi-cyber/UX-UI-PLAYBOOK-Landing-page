@@ -1,6 +1,11 @@
-import { defineConfig } from '@playwright/test';
+import { defineConfig, type ReporterDescription } from '@playwright/test';
 
 const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? 'http://127.0.0.1:3100';
+const reporters: ReporterDescription[] = [
+  ['list'], ['json', { outputFile: 'reports/browser-check.json' }], ['html', { open: 'never' }],
+];
+// Expose exact assertion failures through the Checks API as well as artifacts.
+if (process.env.GITHUB_ACTIONS) reporters.push(['github']);
 
 export default defineConfig({
   testDir: './tests',
@@ -10,7 +15,7 @@ export default defineConfig({
   timeout: 90_000,
   expect: { timeout: 10_000 },
   retries: 0,
-  reporter: [['list'], ['json', { outputFile: 'reports/browser-check.json' }], ['html', { open: 'never' }]],
+  reporter: reporters,
   use: {
     baseURL,
     browserName: 'chromium',
