@@ -288,3 +288,10 @@ La configuration locale attend :
 ## Addendum du 18 novembre 2026 : origine et édition augmentée
 
 Les résultats et l’ancienne origine cités ci-dessus décrivent la passe historique ; ils ne sont pas réécrits. Pour la mise à jour issue du Drive du 9 novembre, le propriétaire a choisi **`https://joyccelight-playbook.uxplay.workers.dev`** comme origine officielle et **21 fichiers par langue et par achat**. Les valeurs courantes sont dans le README et le runbook ; les liens des kits gratuits sont régénérés. Voir le [rapport de mise à jour](docs/EDITION_2026_UPDATE_REPORT.md) pour le diagnostic CI, les compteurs vérifiés et les validations de cette nouvelle révision. Aucune modification DNS ni publication distante n’est impliquée.
+
+
+## Correctif des aperçus de branche après la PR 11
+
+Le journal Workers Builds fourni par le propriétaire montre un build Next.js réussi, suivi de `npx wrangler preview` et de l’erreur `Your Wrangler configuration is missing a previews block`. La configuration déclare maintenant un bloc racine vide `"previews": {}`. Pour ce site, le binding `ASSETS`, l’entrée `worker/index.mjs`, le nom `joyccelight-playbook` et la compatibilité restent à la racine, sans redéfinition dans les Previews.
+
+Ce bloc permet à la commande d’aperçu de passer cette vérification de configuration ; il ne constitue pas une preuve d’upload, de publication de production ou de droits distants. Production : `npm run deploy:worker` avec les garde-fous existants ; aperçu distant de branche : `npx wrangler preview` ; serveur local : `npm run preview:worker`. Ne pas substituer une commande de publication de production à la commande de test d’une branche. Voir le [diagnostic et les validations du correctif](docs/PR_11_CI_FIX_REPORT.md#journal-fourni-après-la-fusion--cause-désormais-établie) et la [configuration officielle des Previews](https://developers.cloudflare.com/workers/previews/configuration/#wrangler-configuration-file).

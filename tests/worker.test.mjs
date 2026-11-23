@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { unstable_readConfig } from 'wrangler';
 import { ORIGINAL_WORKER_NAME, deploymentArgs } from '../scripts/deploy_worker.cjs';
 import worker, { isNegotiatedPath } from '../worker/index.mjs';
 
@@ -77,6 +78,23 @@ test('deployment enforces the original name, static export and genuine 404 witho
     assert.equal(isNegotiatedPath(path), configured);
   }
   assert.match(fs.readFileSync(new URL('public/.assetsignore', root), 'utf8'), /^\/_routes\.json$/m);
+});
+test('remote branch Previews are explicitly enabled without production overrides', () => {
+  assert.deepEqual(config.previews, {});
+  assert.equal(config.name, 'joyccelight-playbook');
+  assert.equal(config.main, 'worker/index.mjs');
+  assert.equal(config.compatibility_date, '2026-11-18');
+  assert.equal(config.env, undefined);
+  assert.equal(config.assets.binding, 'ASSETS');
+  assert.equal(config.assets.directory, './out');
+});
+test('the pinned Wrangler parser accepts the empty Preview block and top-level static assets offline', () => {
+  const normalized = unstable_readConfig({ config: fileURLToPath(new URL('wrangler.jsonc', root)) });
+  assert.deepEqual(normalized.previews, {});
+  assert.equal(normalized.name, config.name);
+  assert.equal(normalized.main, fileURLToPath(new URL(config.main, root)));
+  assert.equal(normalized.compatibility_date, config.compatibility_date);
+  assert.deepEqual(normalized.assets, config.assets);
 });
 test('Worker uses only the shared locale helper and static asset service, never a Next server or external fetch', () => {
   const source = fs.readFileSync(new URL(config.main, root), 'utf8');

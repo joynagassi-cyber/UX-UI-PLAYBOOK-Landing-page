@@ -3,6 +3,7 @@
   "name": "joyccelight-playbook",
   "main": "worker/index.mjs",
   "compatibility_date": "2026-11-18",
+  "previews": {},
   "assets": {
     "directory": "./out",
     "binding": "ASSETS",
