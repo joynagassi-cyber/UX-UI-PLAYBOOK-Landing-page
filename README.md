@@ -73,6 +73,28 @@ Les générateurs acceptent `--with-screenshots` seulement avec un ensemble comp
 
 Détails du diagnostic, de l’audit d’export et des actions restantes : **[CLOUDFLARE_MIGRATION.md](CLOUDFLARE_MIGRATION.md)**.
 
+## Publication Cloudflare : Pages, pas Workers Builds
+
+Si les logs affichent `Success: Build command completed`, puis `Executing user deploy command: npx wrangler deploy` et `Missing entry-point to Worker script or to assets directory`, **l’export Next.js a réussi ; la commande de publication vise le mauvais produit**. `wrangler.jsonc` configure **Pages** avec `pages_build_output_dir: "./out"`, pas un Worker avec `main` ou `assets`.
+
+Dans le tableau de bord **Workers & Pages**, utiliser un **projet Pages connecté au dépôt Git**. Si l’écran demande une **Deploy command** avec `npx wrangler deploy`, vérifier le parcours **Workers Builds** et revenir à une cible Pages ; ne pas supprimer le Worker existant ou changer les DNS pour résoudre ce seul problème.
+
+| Réglage du projet Pages | Valeur attendue |
+| --- | --- |
+| Projet | `joyccelight-playbook` ; existence et droits à confirmer dans le compte |
+| Branche de production | `main` |
+| Racine | racine du dépôt ; laisser le champ vide si c’est la valeur par défaut |
+| Framework | `Next.js (Static HTML Export)` ou `None` avec les réglages manuels ci-dessous |
+| Build command | `npm run build` |
+| Build output directory | `out` |
+| Deploy command | **Aucune dans l’intégration Git Pages** : Pages publie le résultat du build |
+| Node | `22` ; la version 22.23.5 du journal transmis satisfait le minimum 22.19 |
+| Variable de build | `NEXT_PUBLIC_SITE_URL=https://joyccelight-playbook.pages.dev` |
+
+Pages doit aussi compiler le dossier **`functions/` à la racine**. Ne pas corriger ce message en ajoutant `main`, une configuration Workers `assets`, un adaptateur SSR ou un upload manuel du seul dossier `out` : cela ne conserve pas automatiquement le routage linguistique prévu.
+
+Le [dépannage de publication](CLOUDFLARE_MIGRATION.md#échec-de-wrangler-deploy-après-un-build-réussi) détaille la procédure et l’alternative CLI **`wrangler pages deploy`**, qui constitue une vraie publication et ne doit pas être exécutée comme simple test. Aucun réglage du compte ni déploiement n’est effectué par ces instructions.
+
 ## Développer et prévisualiser
 
 Prérequis : **Node.js 22.19+ dans la branche 22** (`.nvmrc`, engines `>=22.19.0 <23` ; minimum de l’outil Lighthouse) et Python 3.11+ pour les contrôles HTML (CI : 3.12). Wrangler **4.165.0** est précisément épinglé en dépendance de développement ; aucun compte Cloudflare n’est nécessaire pour l’aperçu local.

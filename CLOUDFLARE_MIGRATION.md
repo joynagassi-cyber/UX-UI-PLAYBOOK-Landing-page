@@ -1,5 +1,7 @@
 # Migration Cloudflare Pages — diagnostic et état de livraison
 
+> Les sections A à D conservent le compte rendu de la migration initiale : leurs branches et commits sont historiques. Le dépannage de l’échec de publication `wrangler deploy` après un build réussi figure en section E ; il ne change pas l’architecture Pages retenue.
+
 ## A. Diagnostic et causes
 
 ### Architecture retenue
@@ -121,15 +123,58 @@ Les identifiants de commits et les conclusions GitHub éventuelles sont donnés 
 
 ## E. Configuration Cloudflare restante — non exécutée
 
+### Échec de `wrangler deploy` après un build réussi
+
+Le journal de publication transmis montre successivement :
+
+```text
+Success: Build command completed
+Executing user deploy command: npx wrangler deploy
+It seems that you have run `wrangler deploy` on a Pages project
+Missing entry-point to Worker script or to assets directory
+```
+
+**Cause établie par le journal et le dépôt :** la génération des 21 pages statiques et TypeScript réussissent ; l’échec concerne ensuite l’usage de la commande **Workers** `wrangler deploy` avec une configuration **Pages** (`pages_build_output_dir: "./out"`). Le projet n’a volontairement ni script Worker `main` ni configuration Workers `assets`. Les avertissements de cache Next absent, de télémétrie et de dépréciation `node-domexception` ne sont pas l’erreur bloquante de ce journal.
+
+Le champ **Deploy command** et cette séquence de logs indiquent un flux de publication de type **Workers Builds** ; le compte n’ayant pas été consulté, le type exact du projet et ses autorisations restent à confirmer dans le tableau de bord. Changer seulement le code React, la version Node ou le nom du fichier Wrangler ne corrige pas ce décalage.
+
+**Correction recommandée — intégration Git Pages :**
+
+1. Dans **Workers & Pages**, ouvrir le projet **Pages** voulu. S’il n’existe pas, la personne responsable peut créer une application en choisissant explicitement **Pages** et l’intégration Git, pas un nouveau Worker ; ne pas supprimer le projet existant ni modifier les DNS.
+2. Sélectionner le dépôt `joynagassi-cyber/UX-UI-PLAYBOOK-Landing-page` et la branche de production `main` ; conserver la racine du dépôt, sans sous-dossier.
+3. Choisir le preset **Next.js (Static HTML Export)**, ou **None** avec `npm run build` comme commande de build et **`out`** comme dossier de sortie. Garder Node 22.19+ dans la branche 22 et l’origine canonique de la table ci-dessous. Le nom `joyccelight-playbook` et l’adresse Pages attendue restent à confirmer ; ne pas substituer silencieusement un autre domaine aux liens déjà imprimés dans les kits.
+4. **Ne pas renseigner `npx wrangler deploy` comme commande de publication.** L’intégration Git Pages prend en charge la publication après le build, y compris les trois handlers de `functions/` ; un écran imposant une Deploy command Workers n’est pas la configuration Git Pages décrite ici.
+5. La personne responsable peut alors relancer une publication Pages. Son succès doit être établi par les nouveaux logs puis les contrôles HTTP publics, pas par le seul succès du build.
+
+**Alternative CLI, uniquement pour une publication explicitement autorisée vers un projet Pages existant :**
+
+```bash
+# Depuis la racine du dépôt, après validation du build :
+# Vraie publication distante, pas une commande de diagnostic local.
+npx wrangler pages deploy out --project-name=joyccelight-playbook --branch=main
+```
+
+Confirmer d’abord le compte, le nom du projet, les droits Pages et que `main` est bien sa branche de production. L’authentification reste dans l’environnement du propriétaire ; aucune clé ne doit être copiée dans le chat, Git ou une URL. Une commande Pages exécutée dans un pipeline Workers n’établit pas que le jeton de ce pipeline dispose des permissions Pages : l’intégration Git Pages reste la voie recommandée ici.
+
+Exécuter la commande depuis la **racine** permet à Wrangler de trouver et compiler `functions/`. Le glisser-déposer du seul `out` dans le tableau de bord ne compile pas ces Functions ; `wrangler deploy --assets=out` n’est pas un remplacement équivalent. Ajouter un faux `main` ou migrer vers Workers/OpenNext/vinext serait un autre projet d’architecture, pas la correction de ce journal.
+
+La documentation officielle distingue [l’export Next statique sur Pages](https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/), [l’intégration Git Pages](https://developers.cloudflare.com/pages/get-started/git-integration/) et [l’envoi avec Wrangler et les limites du glisser-déposer pour les Functions](https://developers.cloudflare.com/pages/get-started/direct-upload/).
+
+**Portée de cette correction : documentation uniquement.** `wrangler.jsonc`, `next.config.mjs`, les scripts npm, les Functions, les workflows et l’éditorial ne changent pas. Aucun compte Cloudflare, DNS ou domaine n’est modifié ; aucune commande de publication n’est lancée. Ce diagnostic ne lève ni les réserves TBT ni les vérifications de production restant à faire.
+
+### Réglages attendus du projet Pages
+
 La configuration locale attend :
 
 | Réglage Pages | Valeur |
 | --- | --- |
 | Projet attendu | `joyccelight-playbook` — existence et accès distants non vérifiés |
-| Racine du dépôt | `/` |
+| Branche de production | `main`, à confirmer dans le projet Pages |
+| Racine du dépôt | racine ; champ vide si c’est le réglage par défaut |
 | Framework preset | Next.js Static HTML Export, ou réglages manuels équivalents |
 | Build command | `npm run build` |
 | Build output directory | `out` |
+| Deploy command | aucune dans l’intégration Git Pages ; pas de `npx wrangler deploy` |
 | Node | `22` (`NODE_VERSION=22`, `.nvmrc` déjà présent) |
 | Variable de build, production et preview | `NEXT_PUBLIC_SITE_URL=https://joyccelight-playbook.pages.dev` |
 | Functions | dossier `functions/` à la racine ; motifs définis par `out/_routes.json` |
