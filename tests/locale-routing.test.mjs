@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { preferredLocale, redirectToLocale } from '../lib/locale-routing.mjs';
-import { onRequest as root } from '../functions/index.js';
-import { onRequest as hub } from '../functions/articles/index.js';
-import { onRequest as article } from '../functions/articles/[[catchall]].js';
+import { preferredLocale } from '../lib/locale-routing.mjs';
+import worker from '../worker/index.mjs';
+
+const assetsMustNotRun = { ASSETS: { fetch() { assert.fail('Locale negotiation must run before static assets.'); } } };
 
 const request = (headers = {}, cf) => {
   const result = new Request('https://local.example/?utm_source=test', { headers });
@@ -37,13 +37,17 @@ const cases = [
   ['English final fallback', {}, undefined, 'en'],
 ];
 for (const [name, headers, cf, expected] of cases) {
-  test(name, () => assert.equal(preferredLocale(request(headers, cf)), expected));
+  test(name, () => {
+    const input = request(headers, cf);
+    assert.equal(preferredLocale(input), expected);
+    assert.equal(worker.fetch(input, assetsMustNotRun).headers.get('Location'), `https://local.example/${expected}?utm_source=test`);
+  });
 }
 for (const locale of ['fr', 'en']) {
-  for (const [handler, path] of [[root, '/'], [hub, '/articles'], [hub, '/articles/'], [article, '/articles/ux-design-guide'], [article, '/articles/ux-ui-product-design/'], [article, '/articles/unknown/nested']]) {
+  for (const path of ['/', '/articles', '/articles/', '/articles/ux-design-guide', '/articles/ux-ui-product-design/', '/articles/unknown/nested']) {
     test(`${locale} ${path}: same origin, query, 307, privacy`, () => {
       const input = new Request(`https://preview.example${path}?utm_source=test&a=1&a=2&label=hello%20world`, { headers: { Cookie: `NEXT_LOCALE=${locale}` } });
-      const response = handler({ request: input });
+      const response = worker.fetch(input, assetsMustNotRun);
       const target = new URL(response.headers.get('Location'));
       assert.equal(response.status, 307);
       assert.equal(target.origin, 'https://preview.example');
@@ -52,12 +56,13 @@ for (const locale of ['fr', 'en']) {
       assert.equal(response.headers.get('Cache-Control'), 'private, no-store');
       assert.equal(response.headers.get('X-Content-Type-Options'), 'nosniff');
       assert.equal(response.headers.get('Referrer-Policy'), 'strict-origin-when-cross-origin');
+      assert.equal(response.headers.get('Permissions-Policy'), 'camera=(), microphone=(), geolocation=()');
       assert.equal(response.headers.get('Set-Cookie'), null);
       assert.deepEqual(new Set(response.headers.get('Vary').toLowerCase().split(',').map((part) => part.trim())), new Set(['cookie', 'accept-language', 'cf-ipcountry']));
     });
   }
 }
 test('HEAD redirect has no body', async () => {
-  const response = redirectToLocale(new Request('https://preview.example/', { method: 'HEAD' }), '');
+  const response = worker.fetch(new Request('https://preview.example/', { method: 'HEAD' }), assetsMustNotRun);
   assert.equal(await response.text(), '');
 });

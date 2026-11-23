@@ -1,8 +1,15 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "joyccelight-playbook",
-  "pages_build_output_dir": "./out",
+  "main": "worker/index.mjs",
   "compatibility_date": "2026-11-18",
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/", "/articles", "/articles/*"]
+  },
   "dev": {
     "ip": "0.0.0.0",
     "port": 3100,

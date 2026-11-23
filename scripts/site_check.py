@@ -325,7 +325,7 @@ def main():
             path = f"/{locale}" + suffix
             status, response_headers, _ = get(path)
             location = urlparse(response_headers.get("Location", ""))
-            # Pages canonicalises trailing slashes; no Function should change the explicit locale.
+            # Worker static assets canonicalise trailing slashes without changing the explicit locale.
             ok = status == 200 or (status in {301, 308} and location.path == path.rstrip("/") and get(location.path)[0] == 200)
             record("REDIRECT02", path, ok, f"Trailing slash: {status} {response_headers.get('Location')}")
     for path in ("/does-not-exist", "/fr/articles/does-not-exist", "/en/articles/does-not-exist", "/fr/resources/does-not-exist", "/en/resources/does-not-exist"):

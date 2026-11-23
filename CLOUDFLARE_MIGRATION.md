@@ -1,6 +1,81 @@
-# Migration Cloudflare Pages — diagnostic et état de livraison
+# Cloudflare — adaptation Workers et historique Pages
 
-> Les sections A à D conservent le compte rendu de la migration initiale : leurs branches et commits sont historiques. Le dépannage de l’échec de publication `wrangler deploy` après un build réussi figure en section E ; il ne change pas l’architecture Pages retenue.
+**Cible actuelle choisie : Next.js statique + Worker léger + Workers Static Assets.** La préparation est locale, sans publication. Les sections A à E ci-dessous sont **l’historique Pages**, y compris la correction documentaire de la PR #8 : leurs commandes Pages et recommandations ne sont plus la procédure courante. Les anciens résultats ne valident pas cette adaptation.
+
+## Configuration Workers
+
+Le build Next (`output: 'export'`) produit toujours **`out/`** : 14 URL éditoriales FR/EN et les endpoints statiques. Aucun serveur Next, adaptateur SSR, OpenNext/vinext, stockage ou appel distant n’est ajouté au runtime.
+
+### Point d’entrée, assets et ordre de routage
+
+- `wrangler.jsonc` déclare **`main: "worker/index.mjs"`** et **`assets: { directory: "./out", binding: "ASSETS" }`** ; `pages_build_output_dir` est supprimé.
+- **`assets.run_worker_first: ["/", "/articles", "/articles/*"]`** donne la priorité au Worker seulement pour la négociation. Ces routes appellent le helper existant `lib/locale-routing.mjs`, dont la logique est préservée : cookie valide > `Accept-Language` pondéré/exclusions `q=0` > pays Cloudflare > anglais. `request.cf.country` est prioritaire sur l’en-tête de repli.
+- Les réponses de négociation restent des **307**, même origine, query répétée/encodée intacte, `Cache-Control: private, no-store`, `Vary: Cookie, Accept-Language, CF-IPCountry`, trois en-têtes de sécurité et aucun cookie créé.
+- Les pages explicitement `/fr/...` ou `/en/...` et les fichiers sont **asset-first**, sans négociation. Un chemin sans asset peut invoquer le Worker ; hors des trois motifs, il délègue la **Request d’origine** à `env.ASSETS.fetch(request)` sans transformation ni appel réseau externe.
+- **`html_handling: "drop-trailing-slash"`**, **`not_found_handling: "404-page"`** et l’export `404.html` conservent les URL sans extension/slash et les vraies 404, pas de fallback SPA. Un article inconnu non localisé reçoit une 307 puis une 404 localisée.
+- **`public/_redirects`** contient les **28 alias permanents des 14 pages** : `/fr.html` et `/en.html` restent en 301 ; les autres `.html` et les slashs finaux sont en 308. Les premiers essais ont révélé des 307 du service d’assets pour certaines normalisations. Ces règles explicites corrigent le comportement ; les tests ne sont pas assouplis pour accepter des redirections temporaires.
+- **`public/_headers` reste intact** : sécurité, Content-Language, cache immutable des fichiers hashés, MIME robots/sitemap/LLM et téléchargements/noindex/Content-Disposition. Ces règles concernent les assets, pas les réponses personnalisées du Worker ; le helper fixe donc ses propres en-têtes.
+- Les trois anciens wrappers `functions/` et `public/_routes.json` restent conservés comme historique, mais **ne participent plus au routage actif Workers**. `public/.assetsignore`, copié dans `out/`, exclut `_routes.json` de l’upload. Ni les sources Worker/Functions, ni les règles `_headers`/`_redirects`, ni le brouillon interne ne doivent être accessibles comme fichiers publics.
+
+Le nom d’origine **`joyccelight-playbook` est imposé**, sans suffixe ni adaptation au libellé du check `Workers Builds: ux-ui-playbook`. La date de compatibilité **`2026-11-18`** est conservée.
+
+**Garde-fou de publication :** `scripts/deploy_worker.cjs` vérifie le `name` du fichier Wrangler du dépôt, refuse une valeur contradictoire de `WRANGLER_CI_OVERRIDE_NAME` (que Wrangler privilégie même face à `--name`), refuse `CLOUDFLARE_ENV` et les surcharges CLI, puis transmet explicitement **`--name joyccelight-playbook`**. Seul l’argument `--dry-run` est accepté. Les variables de compte/tag CI restent intactes : on échoue en cas de conflit, on ne contourne pas les vérifications de Cloudflare.
+
+La Deploy command à configurer est **`npm run deploy:worker`**. Ne pas appeler `npx wrangler deploy` directement pour contourner ce garde-fou. Si Workers Builds attend une autre ressource, rattacher le pipeline au Worker au nom imposé lors d’une intervention autorisée, sans renommer implicitement un projet existant. **Ce réglage distant n’a pas été changé ici** ; le compte, les droits et le rattachement effectif restent non vérifiés.
+
+### Réglages Workers Builds à contrôler ultérieurement
+
+| Réglage | Valeur / réserve |
+| --- | --- |
+| Racine | racine de ce dépôt, sans sous-dossier |
+| Branche de production | `main`, à confirmer dans le compte ; branche de travail actuelle non publiée |
+| Build command | `npm run build` |
+| Deploy command | **`npm run deploy:worker`**, garde-fou puis Wrangler avec le nom imposé ; seulement dans une publication explicitement autorisée |
+| Point d’entrée / assets | `worker/index.mjs` / `out`, déclarés dans Wrangler ; pas de `pages_build_output_dir` |
+| Node | 22.19+ dans la branche 22 (`.nvmrc`, engines et CI) |
+| Variable de build production et preview | **`NEXT_PUBLIC_SITE_URL=https://joyccelight-playbook.pages.dev`** |
+| Binding applicatif | `ASSETS`, géré avec les fichiers de la même version par Wrangler |
+| Nom imposé | **`joyccelight-playbook`**, vérifié par les tests, l’export et le garde-fou |
+| Compte / rattachement / droits | non vérifiés ; à aligner sur ce nom, pas l’inverse |
+| Domaine public Workers | **non confirmé** ; aucune adresse `workers.dev` ou personnalisée inventée |
+
+L’origine canonique de configuration **reste Pages pour préserver les liens imprimés des kits**. Ce choix ne fait pas pointer ce domaine vers le Worker et ne prouve pas qu’il est publiquement accessible. Avant une mise en service sur un domaine différent, décider séparément la convergence des origines et la mise à jour des kits ; aucun DNS, domaine, redirect entre hosts ou produit Gumroad n’est modifié ici.
+
+### Vérification locale, sans publier
+
+```bash
+npm ci
+npm run check:preservation
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm run check:export
+npm run check:worker
+npm run preview:worker
+```
+
+`check:worker` lance **`node scripts/deploy_worker.cjs --dry-run`** : le même verrou de nom précède `wrangler deploy --config wrangler.jsonc --name joyccelight-playbook --dry-run --outdir .cache/worker-dry-run`. Empaquetage local et validation du binding, **pas un upload ni une publication**. `npm run deploy:worker` sans `--dry-run` est une vraie publication, jamais exécutée dans cette préparation. `preview:worker` utilise **`wrangler dev --local`**, `0.0.0.0:3100`, avec le véritable point d’entrée et le binding Static Assets. `npm start` lui délègue ; l’ancien `preview:pages` avertit puis lance le même Worker, **sans `wrangler pages dev`**.
+
+Le wrapper `scripts/preview_worker.cjs` conserve la fixture géographique neutre `{}` dans `.wrangler/cf-worker-local.json`. Elle empêche le faux pays US de Miniflare de masquer les en-têtes `CF-IPCountry` des tests locaux. La priorité du vrai `request.cf.country` reste testée séparément en unitaire. Ce wrapper n’est pas exécuté en production et ne demande aucun compte.
+
+Sur ce même serveur, dans un second terminal :
+
+```bash
+python3 scripts/site_check.py --base-url http://127.0.0.1:3100 --expected-origin https://joyccelight-playbook.pages.dev
+python3 scripts/seo_check.py --base-url http://127.0.0.1:3100 --expected-origin https://joyccelight-playbook.pages.dev
+PLAYWRIGHT_BASE_URL=http://127.0.0.1:3100 npm run test:ui
+```
+
+`test:routing` importe le **vrai Worker**, pas les anciens wrappers Pages : priorités, query, sécurité, HEAD/POST, délégation et configuration. `check:export` vérifie la configuration Workers, les aliases, les en-têtes et les 14 URL. Les tests HTTP couvrent les normalisations permanentes de toutes les pages, les téléchargements, les endpoints, les 404 et l’exclusion des fichiers internes ; Playwright conserve aussi les interfaces FR/EN, le clavier, l’absence de JS et les contrôles axe existants.
+
+**Les workflows GitHub vérifient seulement** : l’export inclut le dry-run ; le workflow UI partage un vrai serveur Worker entre Python et Playwright. Aucun secret Cloudflare n’est requis. Le commit, le push de la branche de travail et l’ouverture d’une PR sont demandés séparément pour la livraison ; l’intégration **externe** Workers Builds peut publier en réaction à ce push. Cela ne constitue pas une commande manuelle de déploiement ni une validation de production. Aucune fusion ou modification de réglage Cloudflare/DNS n’est comprise dans cette livraison.
+
+Les preuves, différences avec la base `fa2f5dd46a10612b986eb4fb2aea7037657a670b` et réserves de ce lot figurent dans le [rapport Workers](docs/WORKERS_MIGRATION_REPORT.md). Les réserves TBT historiques restent ouvertes : cette adaptation du routage ne revendique aucune optimisation de performance, certification WCAG, indexation, citation IA ou validation de production.
+
+## Historique Pages — sections A à E
+
+**Archive de décisions remplacées par le choix Workers ci-dessus.** Les branches et commandes des sections suivantes sont historiques ; ne pas utiliser leur procédure de publication Pages pour la configuration actuelle.
 
 ## A. Diagnostic et causes
 
@@ -191,6 +266,16 @@ La configuration locale attend :
 **Rien de distant n’a été modifié ici :** pas de login/token Cloudflare, création de projet, commande de déploiement, DNS, domaine personnalisé, bascule de trafic, suppression de déploiement Vercel ou fusion de PR. Vercel reste intact ; il n’y a pas de retour arrière d’infrastructure à effectuer pour ces modifications locales.
 
 ## Documentation primaire consultée
+
+**Cible actuelle Workers :**
+
+- [Workers — Static Assets](https://developers.cloudflare.com/workers/static-assets/) : export statique avec script Worker et binding d’assets.
+- [Workers — Worker script routing](https://developers.cloudflare.com/workers/static-assets/routing/worker-script/) : asset-first, motifs `run_worker_first` et délégation au binding.
+- [Workers — HTML handling](https://developers.cloudflare.com/workers/static-assets/routing/advanced/html-handling/) : normalisation HTML/slash.
+- [Workers — Redirects](https://developers.cloudflare.com/workers/static-assets/redirects/) : règles permanentes des assets, distinctes des réponses Worker.
+- [Workers — Headers](https://developers.cloudflare.com/workers/static-assets/headers/) : en-têtes statiques et limites de `_headers`.
+
+**Références de l’historique Pages :**
 
 - [Next.js — Static Exports](https://nextjs.org/docs/app/guides/static-exports) : capacités et fonctions serveur non prises en charge.
 - [Cloudflare — Static Next.js on Pages](https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/) : build et sortie statique.

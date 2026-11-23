@@ -84,11 +84,14 @@ test('related cards serialize summaries, not three hidden duplicate guide bodies
     assert.ok(!('sections' in summary) && !('references' in summary));
   }
 });
-test('production serving remains static Pages with no deploy command in CI', () => {
+test('production serving remains a static export on Workers with no publishing command in GitHub CI', () => {
   const config = fs.readFileSync(`${root}/next.config.mjs`, 'utf8');
   assert.match(config, /output: 'export'/);
+  const pkg = JSON.parse(fs.readFileSync(`${root}/package.json`, 'utf8'));
+  assert.equal(pkg.scripts['check:worker'], 'node scripts/deploy_worker.cjs --dry-run');
+  assert.equal(pkg.scripts['deploy:worker'], 'node scripts/deploy_worker.cjs');
   for (const name of ['cloudflare-static-export.yml', 'ui-check.yml']) {
     const text = fs.readFileSync(`${root}/.github/workflows/${name}`, 'utf8');
-    assert.ok(!/wrangler\s+(?:pages\s+deploy|deploy)|vercel\s+(?:deploy|--prod)/i.test(text));
+    assert.ok(!/wrangler\s+(?:pages\s+deploy|deploy)|vercel\s+(?:deploy|--prod)|npm\s+(?:run\s+)?deploy:worker/i.test(text));
   }
 });

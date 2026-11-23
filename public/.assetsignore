@@ -1,0 +1,3 @@
+# Legacy Pages routing metadata is kept for reference, not published as an asset.
+# Workers routing is configured by assets.run_worker_first and worker/index.mjs.
+/_routes.json

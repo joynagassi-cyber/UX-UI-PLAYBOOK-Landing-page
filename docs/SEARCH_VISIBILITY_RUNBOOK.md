@@ -4,7 +4,7 @@
 
 Ce document est une procédure, **pas l’autorisation de publier**. Ne pas déployer, modifier des DNS, ouvrir un compte d’hébergement, toucher à Vercel, fusionner une PR ou supprimer une branche dans cette mission. Ne jamais placer une clé, cookie d’authentification, jeton Search Console ou export de compte dans le dépôt/chat.
 
-La validation locale ne nécessite aucun compte Cloudflare. Le preview utilise `wrangler pages dev out`, jamais `wrangler deploy` ni `wrangler pages deploy`. Les deux workflows CI ne font que vérifier et conserver des rapports.
+La validation locale ne nécessite aucun compte Cloudflare. Le preview utilise **`wrangler dev --local`**, avec le vrai Worker et son binding Static Assets. `npm run check:worker` utilise le garde-fou de nom puis **`wrangler deploy --name joyccelight-playbook --dry-run` uniquement**, sans publier. Ne pas lancer `wrangler deploy` sans dry-run ni `wrangler pages deploy` comme test. Les deux workflows GitHub ne font que vérifier et conserver des rapports ; l’intégration externe Workers Builds peut déployer lors d’un push et reste inchangée.
 
 ## 1. Préparer un environnement reproductible
 
@@ -42,6 +42,7 @@ npm run typecheck
 npm test
 npm run build
 npm run check:export
+npm run check:worker
 git diff --check
 ```
 
@@ -57,7 +58,7 @@ Le lint utilise ESLint 10 et des plugins Next/hooks/TypeScript compatibles expli
 Dans un terminal/processus durable :
 
 ```bash
-npm run preview:pages
+npm run preview:worker
 ```
 
 Le serveur écoute `0.0.0.0:3100` et accepte le host de preview ; les appels navigateur restent relatifs/même origine. `CF-IPCountry` est une fixture locale ; `request.cf.country` réel et sa priorité sont testés séparément en unitaire. Le wrapper ne se connecte pas à un compte Cloudflare.
@@ -84,7 +85,7 @@ En cas de test intermittent : conserver la trace et le JSON avant de relancer ; 
 - Robots : les dix noms demandés et les deux contrôles étendus ; sitemap absolu de la bonne origine ; pas d’interdiction indirecte sur les pages.
 - Chaque agent simulé : GET local des 14 pages et quatre endpoints, sans challenge ni variation du corps par rapport au client standard.
 - Les six téléchargements : vrais octets/empreintes/MIME, `noindex` intentionnel des fichiers bruts ; les deux langues ne partagent pas le mauvais kit.
-- En-têtes des assets et des Functions testés séparément ; `_headers` ne gouverne pas les réponses Functions.
+- En-têtes des assets et des réponses personnalisées du Worker testés séparément ; `_headers` ne gouverne pas ces dernières. Les 28 alias des 14 pages sont permanents (301 pour `/fr.html` et `/en.html`, 308 pour les autres). `functions/` et `_routes.json` ne sont plus le routage actif.
 
 ## 4. Mesurer les performances sans fabriquer du terrain
 
@@ -114,8 +115,8 @@ Le vrai diagnostic de terrain nécessite des données représentatives au 75e pe
 
 Examiner en lecture seule et conserver une preuve horodatée/anonymisée avant toute modification future autorisée :
 
-1. Projet Pages, branche de production, dossier `out`, commande de build, version Node 22.19+ et variable `NEXT_PUBLIC_SITE_URL` dans les contextes production **et** preview.
-2. Domaine réellement choisi et certificat ; redirections entre ancien host, Pages et éventuel domaine personnalisé. Ne jamais mélanger plusieurs origines canoniques. **Ne pas changer les DNS dans cette mission.**
+1. Projet **Workers Builds**, rattachement au nom **imposé `joyccelight-playbook`**, compte/droits et branche de production ; commande de build `npm run build`, commande de publication **`npm run deploy:worker`** seulement après autorisation, point d’entrée `worker/index.mjs` et binding `ASSETS` sur `out`. Le garde-fou refuse les remplacements de nom par la CI, les environnements nommés et les surcharges CLI ; il ne supprime pas les variables de contrôle de compte/tag. Ne pas utiliser directement `npx wrangler deploy`, qui contournerait ce verrou. Ce réglage distant n’a pas été modifié ici. Node 22.19+ dans la branche 22 et variable `NEXT_PUBLIC_SITE_URL` dans les contextes production **et** preview. Voir la [configuration Workers](../CLOUDFLARE_MIGRATION.md#configuration-workers).
+2. Domaine réellement choisi et certificat ; redirections entre ancien host, origine canonique Pages conservée, domaine réellement servi par le Worker et éventuel domaine personnalisé. Ne jamais mélanger plusieurs origines canoniques. **Ne pas changer les DNS dans cette mission.**
 3. Cloudflare Access, WAF, règles personnalisées, rate limiting, Bot Fight/Super Bot Fight, blocage des robots IA et règles de challenge. Vérifier les chemins, méthodes et identités vérifiées sans créer une exemption générale sur simple User-Agent.
 4. Robots géré, préfixes injectés, `Content-Signal`, AI Labyrinth et réglages IA disponibles dans le compte : rapprocher la réponse publique réelle de la politique du dépôt. Autoriser la recherche n’implique pas nécessairement autoriser l’entraînement, et inversement.
 5. Cache Rules, Transform Rules, Redirect Rules/Bulk Redirects, Workers/routes hérités, Rocket Loader et réécriture de sécurité : aucun ne doit transformer une 404 en 200, cacher des en-têtes `noindex`, partager une redirection de langue privée ou casser les scripts statiques.

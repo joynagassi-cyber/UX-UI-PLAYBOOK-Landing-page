@@ -433,7 +433,7 @@ for (const locale of ['fr', 'en'] as const) {
   });
 }
 
-test('Pages Functions · qvalues, cookies, country, query and static exclusions', async ({ request }) => {
+test('Worker · qvalues, cookies, country, query and static exclusions', async ({ request }) => {
   for (const route of ['/', '/articles', '/articles/', ...slugs.map((slug) => `/articles/${slug}`), '/articles/missing']) {
     for (const [headers, locale] of [
       [{ 'Accept-Language': 'fr;q=0.2,en;q=0.9', 'CF-IPCountry': 'BJ' }, 'en'],
@@ -460,12 +460,25 @@ test('Pages Functions · qvalues, cookies, country, query and static exclusions'
     expect(response.headers().location).toBeUndefined();
     expect(response.headers().vary ?? '').not.toMatch(/cookie|accept-language|cf-ipcountry/i);
   }
-  for (const locale of ['fr', 'en']) {
-    const response = await request.get(`/${locale}.html`, { maxRedirects: 0 });
-    expect(response.status()).toBe(301);
-    expect(response.headers().location).toBe(`/${locale}`);
+  for (const route of routes) {
+    for (const suffix of ['.html', '/']) {
+      const response = await request.get(`${route}${suffix}?source=browser&a=1&a=2&label=hello%20world`, {
+        headers: { Cookie: 'NEXT_LOCALE=fr', 'Accept-Language': 'en' }, maxRedirects: 0,
+      });
+      const expectedStatus = suffix === '.html' && ['/fr', '/en'].includes(route) ? 301 : 308;
+      expect(response.status()).toBe(expectedStatus);
+      expect(response.headers().location).toBe(`${route}?source=browser&a=1&a=2&label=hello%20world`);
+      expect(response.headers().vary ?? '').not.toMatch(/cookie|accept-language|cf-ipcountry/i);
+    }
   }
-  for (const path of ['/missing', '/fr/articles/missing', '/en/articles/missing', '/articles/missing']) {
+  for (const route of ['/', '/articles', '/articles/ux-design-guide']) {
+    const response = await request.head(`${route}?a=1&a=2`, { headers: { Cookie: 'NEXT_LOCALE=fr' }, maxRedirects: 0 });
+    expect(response.status()).toBe(307);
+    expect(response.headers().location).toMatch(/\/fr(?:\/articles(?:\/ux-design-guide)?)?\?a=1&a=2$/);
+    expect(response.headers()['cache-control']).toBe('private, no-store');
+    expect(await response.body()).toHaveLength(0);
+  }
+  for (const path of ['/missing', '/fr/articles/missing', '/en/articles/missing', '/articles/missing', '/_routes.json', '/_headers', '/_redirects', '/.assetsignore', '/worker/index.mjs', '/functions/index.js', '/docs/drafts/USABILITY_TEST_PROTOCOL_FR.md']) {
     const response = await request.get(path);
     expect(response.status()).toBe(404);
   }
