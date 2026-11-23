@@ -268,6 +268,7 @@ export default async function LandingPage({
             spreadSrc={`/images/${locale}/landing-annotated.webp`}
             spreadAlt={c.insideSection.pages[2].alt}
             spreadCaption={c.hero.spreadCaption}
+            previewLabel={c.insideSection.previewLabel}
           />
         </div>
       </header>
@@ -337,7 +338,7 @@ export default async function LandingPage({
           </div>
         </section>
 
-        {/* Real Pages Gallery + Fullscreen Sample Reader */}
+        {/* Book Excerpts Gallery + Fullscreen Sample Reader */}
         <BookGalleryLightbox data={c.insideSection} gumroadUrl={c.gumroadUrl} />
 
         {/* Complete Table of Contents + 12-Sheet Bonus Kit + 21-File Archive */}
