@@ -75,7 +75,7 @@ Détails du diagnostic, de l’audit d’export et des actions restantes : **[CL
 
 ## Développer et prévisualiser
 
-Prérequis : **Node.js 22** (`.nvmrc`, engines `>=22.17.0 <23`) et Python 3.12 pour les contrôles HTML. Wrangler **4.165.0** est précisément épinglé en dépendance de développement ; aucun compte Cloudflare n’est nécessaire pour l’aperçu local.
+Prérequis : **Node.js 22.19+ dans la branche 22** (`.nvmrc`, engines `>=22.19.0 <23` ; minimum de l’outil Lighthouse) et Python 3.11+ pour les contrôles HTML (CI : 3.12). Wrangler **4.165.0** est précisément épinglé en dépendance de développement ; aucun compte Cloudflare n’est nécessaire pour l’aperçu local.
 
 ```bash
 npm ci
@@ -129,7 +129,7 @@ Les preuves détaillées sont décrites dans [docs/AUDIT.md](docs/AUDIT.md). `re
 NEXT_PUBLIC_SITE_URL=https://joyccelight-playbook.pages.dev
 ```
 
-Cette variable est résolue **au build** et doit être identique pour les deux langues. Sa valeur est validée comme origine HTTP(S), sans chemin, identifiants, query ni fragment. Ne pas utiliser l’adresse locale de test comme canonical. Le fichier `.env.example` et les deux workflows emploient la même valeur ; aucune détection d’origine Vercel ne subsiste.
+Cette variable est résolue **au build** et doit être identique pour les deux langues. Sa valeur doit être une origine **HTTPS publique**, sans chemin, identifiants, port personnalisé, query ni fragment ; les valeurs locales/preview connues et la valeur vide explicite sont refusées. Le défaut est défini dans `src/config/site-policy.json`, sans détection depuis un provider ou l’hôte de requête. Le fichier `.env.example` et les deux workflows emploient la même cible. Un changement de domaine impose aussi de régénérer les deux kits et de contrôler séparément les redirections publiques, dans une mission autorisée.
 
 ### Fichiers éditoriaux et ressources
 
@@ -144,3 +144,17 @@ Cette variable est résolue **au build** et doit être identique pour les deux l
 Le terminal présenté sur la landing est une **simulation annoncée**, pas une exécution Python dans le navigateur. Ses compteurs `9 + 6 + 62 = 77` décrivent des statuts de vérification, pas 77 réussites automatiques. Le scanner commercial `agent_check.py` appartient à l’archive ; le contrôle public de ce dépôt n’en est pas une réplique.
 
 Une réussite axe ne certifie pas WCAG. Lecteurs d’écran réels, compréhension et confort FR/EN, applicabilité juridique, Core Web Vitals terrain, indexation/citations et effets commerciaux restent à vérifier avec les personnes et données appropriées. Aucune étude utilisateur n’a été effectuée sur Atelier. Les trois articles initiaux conservent leurs dates ; le comparatif possède sa propre publication, sans décalage inventé pour le SEO.
+
+## Finalisation technique SEO / AEO / GEO
+
+La passe technique, distincte de la mission éditoriale, est documentée dans :
+
+- [Inventaire initial et conservation](docs/TECHNICAL_INVENTORY.md) ;
+- [Audit SEO/AEO/GEO et cinq niveaux de preuve robots](docs/SEO_AEO_GEO_AUDIT.md) ;
+- [Runbook reproductible : local, compte Cloudflare, GSC et production](docs/SEARCH_VISIBILITY_RUNBOOK.md) ;
+- [Checklist de décision](docs/SEO_RELEASE_CHECKLIST.md) ;
+- [Rapport final, nouvelles exécutions et limites](docs/TECHNICAL_READINESS_REPORT.md).
+
+Les commandes supplémentaires sont `check:preservation`, `lint`, `test:seo`, `check:seo`, `check:performance` et `check:public` ; `npm test` regroupe tous les tests unitaires/contenu/ressources/SEO. Après le build, `check:seo` s’exécute contre Wrangler et `test:ui` inclut aussi le contenu sans JS, le focus sous navigation sticky, la 404 et les couleurs forcées. Les mesures Lighthouse/Event Timing restent **du laboratoire**, pas des Core Web Vitals de terrain. Les budgets dépassés, contrôles humains et accès indisponibles restent explicites. La sonde publique retourne 2 si les preuves réseau sont incomplètes, sans conclure à une panne de production.
+
+Le sitemap ne fabrique plus de `lastmod` à partir des dates éditoriales. Les dix agents de recherche/IA demandés sont explicitement déclarés, mais leur autorisation n’est pas une preuve d’exploration ou de citation. Aucun déploiement, changement DNS, accès Vercel ou publication n’est réalisé.

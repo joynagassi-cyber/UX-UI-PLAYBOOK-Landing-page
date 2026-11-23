@@ -1,19 +1,8 @@
 import type { Metadata, Viewport } from 'next';
-import localFont from 'next/font/local';
+import { domine } from '@/lib/fonts';
 import { notFound } from 'next/navigation';
 import '../globals.css';
 import { CONTENT, type Locale } from '@/i18n/content';
-
-const domine = localFont({
-  src: [
-    { path: '../../fonts/domine-latin.woff2', weight: '400 700', style: 'normal' },
-    { path: '../../fonts/domine-latin-ext.woff2', weight: '400 700', style: 'normal' },
-  ],
-  variable: '--font-domine',
-  display: 'swap',
-  adjustFontFallback: 'Times New Roman',
-  fallback: ['Georgia', 'Times New Roman', 'serif'],
-});
 
 export const dynamicParams = false;
 

@@ -21,33 +21,34 @@ export function DesignRolesLab({ locale, title, caption }: { locale: Locale; tit
   const [failureArmed, setFailureArmed] = useState(false);
   const [error, setError] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
-  const [focusTarget, setFocusTarget] = useState<'title' | 'error' | null>(null);
+  // A new request object also focuses repeated transitions to the same target;
+  // no clearing setState/cascading render is necessary inside the effect.
+  const [focusTarget, setFocusTarget] = useState<{ node: 'title' | 'error' } | null>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const errorRef = useRef<HTMLDivElement>(null);
   const id = useId();
   const annotation = copy.annotations[stage][role];
 
   useEffect(() => {
-    if (focusTarget === 'title') titleRef.current?.focus({ preventScroll: true });
-    if (focusTarget === 'error') errorRef.current?.focus({ preventScroll: true });
-    setFocusTarget(null);
+    if (focusTarget?.node === 'title') titleRef.current?.focus({ preventScroll: true });
+    if (focusTarget?.node === 'error') errorRef.current?.focus({ preventScroll: true });
   }, [focusTarget]);
 
   const go = (next: LabStage) => {
     setStage(next);
     setError(false);
     setConfirmed(false);
-    setFocusTarget('title');
+    setFocusTarget({ node: 'title' });
   };
   const reset = () => {
     setStage('service'); setSelectedSlot(null); setBlockedSlot(null);
-    setFailureArmed(false); setError(false); setConfirmed(false); setFocusTarget('title');
+    setFailureArmed(false); setError(false); setConfirmed(false); setFocusTarget({ node: 'title' });
   };
   const reviewSelection = () => {
     if (!selectedSlot) return;
     if (failureArmed) {
       setBlockedSlot(selectedSlot); setSelectedSlot(null); setError(true);
-      setFailureArmed(false); setFocusTarget('error');
+      setFailureArmed(false); setFocusTarget({ node: 'error' });
     } else go('review');
   };
   const phoneTitle = confirmed ? copy.complete : stage === 'service' ? copy.service : stage === 'slot' ? copy.chooseTime : copy.review;
@@ -119,7 +120,7 @@ export function DesignRolesLab({ locale, title, caption }: { locale: Locale; tit
               <div className="phone-booking-total" data-phone-layer="product"><span>{copy.total}</span><strong><TabularText>{copy.price}</TabularText></strong></div>
               <p className="phone-payment">{copy.payment}</p><p className="phone-small">{copy.noCard}</p>
               {!selectedSlot && <p className="phone-missing" role="status">{copy.missing}</p>}
-              {!confirmed && selectedSlot && <button className="phone-primary" type="button" data-phone-layer="ui" onClick={() => { setConfirmed(true); setFocusTarget('title'); }}>{copy.confirm}<Icon name="check" size="sm" /></button>}
+              {!confirmed && selectedSlot && <button className="phone-primary" type="button" data-phone-layer="ui" onClick={() => { setConfirmed(true); setFocusTarget({ node: 'title' }); }}>{copy.confirm}<Icon name="check" size="sm" /></button>}
               {!confirmed && <button className="phone-secondary" type="button" onClick={() => go('slot')}>{copy.change}</button>}
               {confirmed && <button className="phone-primary" type="button" onClick={reset}>{copy.reset}</button>}
             </>}

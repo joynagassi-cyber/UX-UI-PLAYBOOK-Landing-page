@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useSyncExternalStore } from 'react';
 import { usePathname } from 'next/navigation';
+import { browserTheme, serverTheme, subscribeTheme } from '@/lib/browser-stores';
 import { Icon } from '@/components/Icon';
 import type { Locale } from '@/i18n/content';
 
@@ -29,18 +30,10 @@ export function ThemeAndLangControls({
   switchLangTitle,
 }: ControlsProps) {
   const pathname = usePathname();
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-
-  useEffect(() => {
-    const current = document.documentElement.getAttribute('data-theme');
-    if (current === 'light' || current === 'dark') {
-      setTheme(current);
-    }
-  }, []);
+  const theme = useSyncExternalStore(subscribeTheme, browserTheme, serverTheme);
 
   const toggleTheme = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
-    setTheme(next);
     document.documentElement.setAttribute('data-theme', next);
     try {
       localStorage.setItem('playbook-theme', next);
@@ -54,7 +47,12 @@ export function ThemeAndLangControls({
   };
 
   const handleLangClick = (targetLocale: Locale) => {
-    document.cookie = `NEXT_LOCALE=${targetLocale}; path=/; max-age=31536000; SameSite=Lax`;
+    try {
+      const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+      document.cookie = `NEXT_LOCALE=${targetLocale}; path=/; max-age=31536000; SameSite=Lax${secure}`;
+    } catch {
+      // An explicit localized link must still work when cookie storage is denied.
+    }
   };
 
   const frHref = swapLocaleInPath(pathname, 'fr');

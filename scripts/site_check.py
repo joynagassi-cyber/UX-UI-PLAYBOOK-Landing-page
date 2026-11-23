@@ -24,8 +24,8 @@ from urllib.parse import parse_qs, urljoin, urlparse
 from urllib.request import Request, build_opener, HTTPRedirectHandler
 import xml.etree.ElementTree as ET
 
-DEFAULT_SITE = "https://joyccelight-playbook.pages.dev"
 ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_SITE = json.loads((ROOT / "src/config/site-policy.json").read_text())["defaultOrigin"]
 CATALOG = json.loads((ROOT / "src/i18n/article-catalog.json").read_text())
 SLUGS = tuple(CATALOG)
 FREE_FOLDERS = {"fr": ROOT / "products/ui-ux-directory", "en": ROOT / "products/ui-ux-directory/en"}
@@ -103,8 +103,8 @@ def main():
     base = args.base_url.rstrip("/")
     site = args.expected_origin.rstrip("/")
     parsed_site = urlparse(site)
-    if parsed_site.scheme not in {"http", "https"} or not parsed_site.netloc or parsed_site.username or parsed_site.password or parsed_site.path or parsed_site.query or parsed_site.fragment:
-        parser.error("--expected-origin must be an absolute HTTP(S) origin without credentials, path, query or fragment")
+    if parsed_site.scheme != "https" or not parsed_site.netloc or parsed_site.username or parsed_site.password or parsed_site.path or parsed_site.query or parsed_site.fragment:
+        parser.error("--expected-origin must be an absolute public HTTPS origin without credentials, path, query or fragment")
     checks = []
     cache = {}
     opener = build_opener(NoRedirect)
@@ -293,6 +293,8 @@ def main():
         ({"Accept-Language": "fr;q=0.2,en-GB;q=0.9", "CF-IPCountry": "BJ"}, "en"),
         ({"Accept-Language": "fr;q=0,en;q=0.5", "CF-IPCountry": "BJ"}, "en"),
         ({"Accept-Language": "fr;q=0", "CF-IPCountry": "BJ"}, "en"),
+        ({"Accept-Language": "en;q=0", "CF-IPCountry": "US"}, "fr"),
+        ({"Accept-Language": "en;q=0,fr;q=0"}, "en"),
         ({"Accept-Language": "fr;q=2,en;q=0.3"}, "en"),
         ({"Cookie": "NEXT_LOCALE=de", "Accept-Language": "fr-CA;q=0.8,en;q=0.4", "CF-IPCountry": "US"}, "fr"),
         ({"Accept-Language": "de", "CF-IPCountry": "ZZ"}, "en"),
@@ -356,7 +358,7 @@ def main():
                         complete = all(value in text for entry in catalog["entries"] for value in (entry["description"], entry["nonDesigner"], entry["developer"], entry["agent"], entry["watch"], *entry["urls"]))
                         record("FREE11", f"{endpoint} {lang}", complete and all(source["note"] in text for source in catalog["sources"]), "Complete 51-entry catalogue and source notes in the matching language")
             if endpoint == "/robots.txt":
-                record("MACHINE07", endpoint, f"Sitemap: {site}/sitemap.xml" in body.decode("utf-8") and f"Host: {site}" in body.decode("utf-8"), "robots.txt uses the configured public origin")
+                record("MACHINE07", endpoint, f"Sitemap: {site}/sitemap.xml" in body.decode("utf-8") and not re.search(r"^Host:", body.decode("utf-8"), re.M), "robots.txt uses the configured public sitemap origin; no nonstandard Host canonicalization")
             if endpoint == "/sitemap.xml" and status == 200:
                 sitemap = ET.fromstring(body)
                 namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}

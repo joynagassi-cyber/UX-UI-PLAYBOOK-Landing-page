@@ -62,7 +62,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: ui.metaTitle,
       description: ui.metaDescription,
-      images: [locale === 'fr' ? '/og-fr.jpg' : '/og-en.jpg'],
+      images: [{ url: locale === 'fr' ? '/og-fr.jpg' : '/og-en.jpg', alt: ui.metaTitle }],
     },
   };
 }
@@ -191,7 +191,7 @@ export default async function ArticlesHubPage({
         </div>
       </nav>
 
-      <main id="hub-content" className="notion-page-wrap">
+      <main tabIndex={-1} id="hub-content" className="notion-page-wrap">
         <div style={{ marginBottom: 24 }}>
           <a
             href={`/${locale}`}

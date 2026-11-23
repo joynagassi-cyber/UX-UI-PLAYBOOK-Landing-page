@@ -187,6 +187,8 @@ for (const locale of ['fr', 'en']) {
     const dialog = page.getByRole('dialog');
     await expect(dialog).toBeVisible();
     await expect(dialog.locator('[data-modal-close]')).toBeFocused();
+    expect(await page.locator('.site-nav').evaluate(element => !!element.closest('[inert]'))).toBe(true);
+    expect(await dialog.evaluate(element => !!element.closest('[inert]'))).toBe(false);
     expect(await layoutIssues(page)).toEqual({ pageOverflow: false, textIssues: [], fontIssues: [], symbolIssues: [], iconIssues: [], targets: [], numericIssues: [], clippedControls: [], badImages: [] });
     const modalAxe = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
     expect(modalAxe.violations).toEqual([]);
@@ -199,6 +201,7 @@ for (const locale of ['fr', 'en']) {
     await page.keyboard.press('Escape');
     await expect(dialog).toHaveCount(0);
     await expect(opener).toBeFocused();
+    expect(await page.locator('.site-nav').evaluate(element => !!element.closest('[inert]'))).toBe(false);
 
     await page.locator('.filter-pills button').nth(1).click();
     await expect(page.locator('.filter-pills button').nth(1)).toHaveAttribute('aria-pressed', 'true');
@@ -241,6 +244,8 @@ for (const locale of ['fr', 'en']) {
         await expect(dialog).toBeVisible();
         await expect(dialog.locator('img')).toHaveCount(0);
         await expect(page.locator('[data-modal-close]')).toBeFocused();
+        expect(await page.locator('.site-nav').evaluate(element => !!element.closest('[inert]'))).toBe(true);
+        expect(await dialog.evaluate(element => !!element.closest('[inert]'))).toBe(false);
         for (let i = 0; i < 4; i++) {
           await page.keyboard.press('Tab');
           expect(await dialog.evaluate((element) => element.contains(document.activeElement))).toBe(true);
@@ -251,6 +256,7 @@ for (const locale of ['fr', 'en']) {
         await page.keyboard.press('Escape');
         await expect(dialog).toHaveCount(0);
         await expect(figure).toBeFocused();
+        expect(await page.locator('.site-nav').evaluate(element => !!element.closest('[inert]'))).toBe(false);
       }
     }
     await page.setViewportSize({ width: 1280, height: 900 });

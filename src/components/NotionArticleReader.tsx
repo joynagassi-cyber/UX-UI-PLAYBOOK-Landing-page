@@ -7,7 +7,8 @@ import type { ArticleVisual as ArticleVisualData } from '@/i18n/articles/visual-
 import { TabularText } from '@/components/TabularText';
 import type { Locale } from '@/i18n/content';
 import type { ArticleBlock, ArticleData } from '@/i18n/articles';
-import { ARTICLES_UI } from '@/i18n/articles';
+import { ARTICLES_UI } from '@/i18n/articles/types';
+import type { ArticleSummary } from '@/lib/article-summary';
 import { GumroadButton } from '@/components/GumroadButton';
 import { DesignRolesLab } from './DesignRolesLab';
 import { useModalFocus } from '@/components/useModalFocus';
@@ -27,7 +28,7 @@ interface NotionArticleReaderProps {
   locale: Locale;
   gumroadUrl: string;
   article: ArticleData;
-  relatedArticles: ArticleData[];
+  relatedArticles: ArticleSummary[];
 }
 
 function CopyableNotionBlock({

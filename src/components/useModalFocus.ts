@@ -13,6 +13,20 @@ export function useModalFocus(
     const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    // aria-modal describes the dialog, but does not make background controls
+    // unfocusable or remove them from the accessibility tree. Inert each sibling
+    // along the ancestor path, keeping this nested dialog and its ancestors live.
+    const background: Array<{ element: HTMLElement; inert: boolean }> = [];
+    let current: HTMLElement | null = container.current;
+    while (current?.parentElement) {
+      for (const sibling of current.parentElement.children) {
+        if (sibling === current || !(sibling instanceof HTMLElement) || sibling.matches('script, style, link')) continue;
+        background.push({ element: sibling, inert: sibling.inert });
+        sibling.toggleAttribute('inert', true);
+      }
+      if (current.parentElement === document.body) break;
+      current = current.parentElement;
+    }
     const focusable = () => Array.from(container.current?.querySelectorAll<HTMLElement>(
       'button:not([disabled]), a[href], [tabindex="0"]',
     ) ?? []).filter((element) => element.getClientRects().length > 0);
@@ -45,6 +59,7 @@ export function useModalFocus(
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', onKey);
+      for (const { element, inert } of background) element.toggleAttribute('inert', inert);
       previousFocus?.focus({ preventScroll: true });
     };
   }, [open, container, onClose]);

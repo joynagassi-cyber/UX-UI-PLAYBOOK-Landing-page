@@ -19,7 +19,14 @@
     "check:resource": "node --test tests/free-resource.test.cjs tests/resource-screenshots.test.cjs",
     "microlink:plan": "node tools/microlink/capture.mjs --plan",
     "microlink:github": "node tools/microlink/capture.mjs --url https://github.com/",
-    "microlink:capture": "node tools/microlink/capture.mjs"
+    "microlink:capture": "node tools/microlink/capture.mjs",
+    "lint": "eslint . --max-warnings=0",
+    "test:seo": "node --test tests/seo.test.cjs",
+    "check:preservation": "node scripts/check_preservation.cjs",
+    "test": "node --test tests/*.test.cjs tests/*.test.mjs",
+    "check:seo": "python3 scripts/seo_check.py",
+    "check:performance": "node scripts/check_performance.cjs",
+    "check:public": "python3 scripts/check_public_access.py"
   },
   "dependencies": {
     "lucide-react": "^0.511.0",
@@ -29,14 +36,21 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
+    "@eslint/js": "10.0.1",
+    "@next/eslint-plugin-next": "16.4.6",
     "@playwright/test": "^1.65.1",
     "@types/node": "^22.15.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "eslint": "10.15.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "globals": "17.14.0",
+    "lighthouse": "13.6.0",
     "typescript": "^5.8.3",
+    "typescript-eslint": "8.73.0",
     "wrangler": "4.165.0"
   },
   "engines": {
-    "node": ">=22.17.0 <23"
+    "node": ">=22.19.0 <23"
   }
 }

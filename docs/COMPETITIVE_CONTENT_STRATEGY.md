@@ -562,3 +562,17 @@ Artefacts locaux régénérables, ignorés par Git : `reports/static-export-chec
 3. Éprouver la fiche Discovery sur une vraie décision de l’équipe, sans publier de données confidentielles ni inventer de résultats.
 4. Entretenir le petit exemple tokens/composant et ses contrôles ; étendre à la gouvernance seulement en présence d’un besoin distinct.
 5. Mesurer la visibilité par le protocole ci-dessus après une publication explicitement décidée. **Aucune publication ou action d’hébergement n’est incluse dans cette remise.**
+
+## 12. Relais vers la finalisation technique du site
+
+La mission éditoriale/concurrentielle ci-dessus est conservée : aucun nouveau guide ni nouvelle variante d’URL n’est créé dans la passe suivante. Les quatre guides par langue et le brouillon interne restent inchangés. Les paragraphes précédents et leurs résultats décrivent la révision éditoriale historique ; ils ne remplacent pas les nouvelles exécutions techniques.
+
+La finalisation SEO/AEO/GEO, l’export Pages, les règles de robots, les paramètres d’origine, les redirections/404, les contrôles d’accessibilité et les mesures de laboratoire sont désormais décrits dans :
+
+- [l’inventaire technique initial](TECHNICAL_INVENTORY.md) ;
+- [l’audit technique et la séparation des cinq niveaux de preuve robots](SEO_AEO_GEO_AUDIT.md) ;
+- [le runbook de validation et de visibilité](SEARCH_VISIBILITY_RUNBOOK.md) ;
+- [la checklist de décision avant publication](SEO_RELEASE_CHECKLIST.md) ;
+- [le rapport final de la passe technique et ses exécutions nouvelles](TECHNICAL_READINESS_REPORT.md).
+
+Aucun résultat de classement, indexation, trafic, exploration authentifiée ou citation par un moteur IA n’est ajouté à ce rapport. L’accès public et les réglages du compte Cloudflare restent distincts du succès de tests locaux. Les dates de consultation/observations concurrentielles ne sont pas utilisées comme `lastmod` du sitemap ; cette passe technique ne les requalifie pas en preuve de fraîcheur. Aucune publication n’est exécutée.

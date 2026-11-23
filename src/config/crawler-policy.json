@@ -1,0 +1,14 @@
+[
+  { "userAgent": "Googlebot", "purpose": "search" },
+  { "userAgent": "Bingbot", "purpose": "search" },
+  { "userAgent": "OAI-SearchBot", "purpose": "search" },
+  { "userAgent": "GPTBot", "purpose": "training" },
+  { "userAgent": "ChatGPT-User", "purpose": "user-requested-retrieval" },
+  { "userAgent": "ClaudeBot", "purpose": "training" },
+  { "userAgent": "Claude-SearchBot", "purpose": "search" },
+  { "userAgent": "Claude-User", "purpose": "user-requested-retrieval" },
+  { "userAgent": "PerplexityBot", "purpose": "search" },
+  { "userAgent": "Perplexity-User", "purpose": "user-requested-retrieval" },
+  { "userAgent": "Google-Extended", "purpose": "provider-control-not-google-search" },
+  { "userAgent": "Applebot-Extended", "purpose": "provider-control-not-apple-search" }
+]
