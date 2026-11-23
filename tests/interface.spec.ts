@@ -178,9 +178,19 @@ for (const locale of ['fr', 'en'] as const) {
     const headingTop = (await page.locator('#article-sources-heading').boundingBox())!.y;
     const toggleBox = (await toggle.boundingBox())!;
     expect(headingTop).toBeGreaterThanOrEqual(toggleBox.y + toggleBox.height);
+    const readingScroll = await page.evaluate(() => scrollY);
     await toggle.click();
     await expect(panel).toBeVisible();
     expect((await page.locator('#article-sources-heading').boundingBox())!.y).toBe(headingTop);
+    expect(await page.evaluate(() => scrollY)).toBe(readingScroll);
+    await expect(toggle).toBeFocused();
+    // Closing and reopening from the keyboard must preserve the same reading position.
+    await page.keyboard.press('Space');
+    await expect(panel).toBeHidden();
+    await page.keyboard.press('Enter');
+    await expect(panel).toBeVisible();
+    expect((await page.locator('#article-sources-heading').boundingBox())!.y).toBe(headingTop);
+    expect(await page.evaluate(() => scrollY)).toBe(readingScroll);
     await expect(panel.locator('a[href="#article-sources"]')).toHaveAttribute('aria-current', 'location');
   });
 
@@ -272,8 +282,16 @@ for (const locale of ['fr', 'en'] as const) {
         await toggle.focus();
         await page.keyboard.press('Space');
         await expect(panel).toBeHidden();
+        const readingPosition = await page.locator('#article-sources-heading').evaluate(element => ({
+          top: element.getBoundingClientRect().top, scroll: scrollY,
+        }));
         await page.keyboard.press('Enter');
         await expect(panel).toBeVisible();
+        if (width === 320) {
+          expect(await page.locator('#article-sources-heading').evaluate(element => ({
+            top: element.getBoundingClientRect().top, scroll: scrollY,
+          }))).toEqual(readingPosition);
+        }
       }
       await page.goto(`/${locale}`);
       for (const preview of await page.locator('.hero-stack .page-frame, .shot-card').all()) {
