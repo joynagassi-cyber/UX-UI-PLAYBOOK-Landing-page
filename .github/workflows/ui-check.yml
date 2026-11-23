@@ -36,16 +36,16 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Type-check, unit-test and export the exact revision
         run: npm run check:preservation && npm run lint && npm run typecheck && npm test && npm run build && npm run check:export
-      - name: Serve the export with real local Pages Functions and check rendered HTML
+      - name: Serve the actual Worker and asset binding locally and check rendered HTML
         run: |
           mkdir -p reports
-          npm run preview:pages > reports/pages-server.log 2>&1 &
-          echo $! > reports/pages-server.pid
+          npm run preview:worker > reports/worker-server.log 2>&1 &
+          echo $! > reports/worker-server.pid
           python3 scripts/site_check.py --base-url "$PLAYWRIGHT_BASE_URL" --expected-origin "$NEXT_PUBLIC_SITE_URL" --wait 120
           python3 scripts/seo_check.py --base-url "$PLAYWRIGHT_BASE_URL" --expected-origin "$NEXT_PUBLIC_SITE_URL"
-      - name: Pages routing, FR/EN interfaces, keyboard and axe
+      - name: Worker routing, FR/EN interfaces, keyboard and axe
         run: npm run test:ui
-      - name: Keep reports, traces, screenshots and Pages server output
+      - name: Keep reports, traces, screenshots and Worker server output
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -55,9 +55,9 @@ jobs:
             test-results/
             playwright-report/
           retention-days: 14
-      - name: Stop the local-only Pages server
+      - name: Stop the local-only Worker server
         if: always()
         run: |
-          if [ -f reports/pages-server.pid ]; then
-            kill "$(cat reports/pages-server.pid)" 2>/dev/null || true
+          if [ -f reports/worker-server.pid ]; then
+            kill "$(cat reports/worker-server.pid)" 2>/dev/null || true
           fi

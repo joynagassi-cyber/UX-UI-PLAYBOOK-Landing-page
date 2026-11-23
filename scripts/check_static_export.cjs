@@ -11,6 +11,8 @@ const { FREE_RESOURCE_PATH, FREE_GUMROAD_URLS } = loadData('src/lib/free-resourc
 const { designLabTranscript } = loadData('src/i18n/design-lab.ts');
 const catalogue = loadData('src/i18n/article-catalog.json');
 const out = path.join(root, 'out');
+const workerConfigResult = require('typescript').parseConfigFileTextToJson('wrangler.jsonc', fs.readFileSync(path.join(root, 'wrangler.jsonc'), 'utf8'));
+const workerConfig = workerConfigResult.config || {};
 const checks = [];
 const check = (name, ok, evidence) => checks.push({ name, outcome: ok ? 'pass' : 'fail', evidence });
 const requireFile = (file) => {
@@ -109,14 +111,20 @@ for (const locale of ['fr', 'en']) {
   for (const file of Object.values(manifest.files).map(file => file.path.slice(1))) requireFile(file);
   check(`resource:generated-origin:${locale}`, manifest.generatedForOrigin === SITE_URL, 'Regenerate both downloadable kits if the public origin changes.');
 }
-for (const file of ['404.html', 'robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', '_redirects', '_routes.json', '_headers', 'icon.svg']) requireFile(file);
-for (const file of ['_routes.json', '_redirects', '_headers']) {
+for (const file of ['404.html', 'robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', '_redirects', '_routes.json', '_headers', '.assetsignore', 'icon.svg']) requireFile(file);
+for (const file of ['_routes.json', '_redirects', '_headers', '.assetsignore']) {
   check(`routing-file:${file}`, readOut(file) === fs.readFileSync(path.join(root, 'public', file), 'utf8'), 'Public routing configuration copied unchanged.');
 }
 const routing = JSON.parse(readOut('_routes.json') || '{}');
-check('routing:Functions-only-unlocalized', routing.version === 1 && JSON.stringify(routing.include) === JSON.stringify(['/', '/articles', '/articles/*']) && JSON.stringify(routing.exclude) === '[]', routing);
-check('routing:no-static-overlap', allRoutes.every((route) => !routing.include?.some((pattern) => pattern.endsWith('*') ? route.startsWith(pattern.slice(0, -1)) : route === pattern)) && !routing.include?.some((pattern) => /images|_next|robots|sitemap|llms|og-/.test(pattern)), 'Localized pages, images, fonts and discovery files do not invoke a Function.');
-check('routing:legacy-html-only', readOut('_redirects').trim() === '/fr.html /fr 301\n/en.html /en 301', readOut('_redirects').trim());
+check('routing:legacy-Pages-metadata-preserved', routing.version === 1 && JSON.stringify(routing.include) === JSON.stringify(['/', '/articles', '/articles/*']) && JSON.stringify(routing.exclude) === '[]', 'Legacy file retained, not used for Workers routing.');
+const workerRoutes = Array.isArray(workerConfig.assets?.run_worker_first) ? workerConfig.assets.run_worker_first : [];
+check('worker:original-name-enforced', workerConfig.name === 'joyccelight-playbook', 'The original Worker name is required; do not adopt a CI-provided replacement.');
+check('worker:entry-and-assets', !workerConfigResult.error && workerConfig.main === 'worker/index.mjs' && fs.existsSync(path.join(root, workerConfig.main)) && !('pages_build_output_dir' in workerConfig) && workerConfig.assets?.directory === './out' && workerConfig.assets?.binding === 'ASSETS' && workerConfig.assets?.html_handling === 'drop-trailing-slash' && workerConfig.assets?.not_found_handling === '404-page', 'A real Worker + ASSETS binding, clean URLs and genuine static 404.');
+check('routing:Worker-first-only-unlocalized', JSON.stringify(workerRoutes) === JSON.stringify(['/', '/articles', '/articles/*']), workerRoutes);
+check('routing:no-static-overlap', allRoutes.every((route) => !workerRoutes.some((pattern) => pattern.endsWith('*') ? route.startsWith(pattern.slice(0, -1)) : route === pattern)) && !workerRoutes.some((pattern) => /images|_next|robots|sitemap|llms|og-/.test(pattern)), 'Localized pages, images, fonts and discovery files use asset-first routing.');
+check('worker:legacy-routing-file-not-uploaded', /^\/_routes\.json$/m.test(readOut('.assetsignore')), 'Workers assets ignore the obsolete Pages routing metadata.');
+const canonicalRedirects = readOut('_redirects').trim().split('\n').map(line => line.trim().split(/\s+/));
+check('routing:permanent-canonical-aliases', canonicalRedirects.length === allRoutes.length * 2 && allRoutes.every(route => canonicalRedirects.some(([from, to, status]) => from === route + '.html' && to === route && status === (['/fr', '/en'].includes(route) ? '301' : '308')) && canonicalRedirects.some(([from, to, status]) => from === route + '/' && to === route && status === '308')), 'Only the 14 known pages have permanent HTML/trailing-slash aliases; private language negotiation stays in the Worker.');
 const robots = readOut('robots.txt');
 check('robots:production-origin', robots.includes(`Sitemap: ${SITE_URL}/sitemap.xml`) && !/^Host:/m.test(robots), SITE_URL);
 const crawlers = require('../src/config/crawler-policy.json');
@@ -142,7 +150,7 @@ const obsolete = textFiles.filter((file) => forbidden.test(fs.readFileSync(file,
 check('all-generated-files:no-vercel-origin', textFiles.length > 0 && obsolete.length === 0, { scanned: textFiles.length, matches: obsolete });
 const fontUrls = textFiles.filter((file) => file.endsWith('.css')).flatMap((file) => [...fs.readFileSync(file, 'utf8').matchAll(/url\(["']?([^"')]+\.woff2)["']?\)/g)].map((match) => path.resolve(path.dirname(file), match[1])));
 check('fonts:self-hosted-exported', fontUrls.length >= 2 && fontUrls.every((file) => file.startsWith(out + path.sep) && fs.existsSync(file)), fontUrls.map((file) => path.relative(out, file)));
-check('root-redirect:Function-not-Next-proxy', !fs.existsSync(path.join(root, 'src/proxy.ts')) && !fs.existsSync(path.join(root, 'src/middleware.ts')) && fs.existsSync(path.join(root, 'functions/index.js')), 'No request-time Next.js dependency.');
+check('root-redirect:Worker-not-Next-proxy', !fs.existsSync(path.join(root, 'src/proxy.ts')) && !fs.existsSync(path.join(root, 'src/middleware.ts')) && fs.existsSync(path.join(root, 'worker/index.mjs')), 'No request-time Next.js dependency; Worker reuses the existing locale helper.');
 const failed = checks.filter((item) => item.outcome === 'fail');
 fs.mkdirSync(path.join(root, 'reports'), { recursive: true });
 fs.writeFileSync(path.join(root, 'reports/static-export-check.json'), JSON.stringify({ siteUrl: SITE_URL, passed: checks.length - failed.length, failed: failed.length, checks }, null, 2) + '\n');

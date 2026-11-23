@@ -24,7 +24,7 @@ export default defineConfig({
     } : {},
   },
   webServer: process.env.PLAYWRIGHT_BASE_URL ? undefined : {
-    command: 'npm run preview:pages',
+    command: 'npm run preview:worker',
     env: { WRANGLER_SEND_METRICS: 'false' },
     url: `${baseURL}/fr`,
     reuseExistingServer: !process.env.CI,

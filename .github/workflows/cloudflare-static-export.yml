@@ -1,4 +1,4 @@
-name: Cloudflare static export check
+name: Cloudflare Worker static export check
 
 on:
   push:
@@ -34,6 +34,8 @@ jobs:
         run: npm run check:preservation && npm run lint && npm run typecheck && npm test
       - name: Build the complete static site
         run: npm run build
+      - name: Validate the Worker entry and assets without publishing
+        run: npm run check:worker
       - name: Check every catalogue slug, asset, routing file and production origin
         run: npm run check:export
       - name: Keep export verification evidence

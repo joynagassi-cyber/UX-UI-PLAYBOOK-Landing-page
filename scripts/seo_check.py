@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only SEO/robots/links/HTTP checks against the actual static Pages server.
+"""Read-only SEO/robots/links/HTTP checks against the actual Worker + static assets.
 
 A forged local User-Agent is NOT evidence that a real crawler reached production.
 JSON-LD validation below is a scoped structural/content check, not a Google rich
@@ -204,7 +204,7 @@ def main():
         status, _, body = get(route)
         doc = Document(body.decode("utf-8", errors="replace")).root
         check("REAL_404", route, status == 404 and any("noindex" in v for v in meta(doc, "robots")) and not [n for n in doc.all("link") if n.attrs.get("rel") == "canonical"] and {"/fr", "/en"} <= {a.attrs.get("href") for a in doc.all("a")}, {"status": status, "noindex": meta(doc, "robots")})
-    for path in ["/fr.html", "/en.html", "/fr/articles/ux-design-guide.html", "/en/resources/ui-ux-directory.html", "/fr/", "/en/articles/"]:
+    for path in [route + suffix for route in ROUTES for suffix in (".html", "/")]:
         query = "?utm_source=seo&a=1&a=2&label=hello%20world"
         status, headers, _ = get(path + query)
         target = urlparse(urljoin(base, headers.get("Location", "")))
