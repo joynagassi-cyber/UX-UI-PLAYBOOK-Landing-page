@@ -106,7 +106,7 @@ Website pages to share **after their deployment is confirmed**:
 - English files: `/en/resources/ui-ux-directory`.
 - French files: `/fr/resources/ui-ux-directory`.
 
-The current canonical build origin is `https://joyccelight-playbook.pages.dev`. Its appearance in the guide does not establish that these pages are live. If the final origin changes, regenerate **both editions** with the correct `NEXT_PUBLIC_SITE_URL` before publication. Printed links do not change by themselves.
+The current canonical build origin is `https://joyccelight-playbook.uxplay.workers.dev`. Its appearance in the guide does not establish that these pages are live. If the final origin changes, regenerate **both editions** with the correct `NEXT_PUBLIC_SITE_URL` before publication. Printed links do not change by themselves.
 
 ## 5. Regenerate the English edition when needed
 

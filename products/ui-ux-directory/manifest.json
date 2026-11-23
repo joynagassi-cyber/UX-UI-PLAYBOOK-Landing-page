@@ -2,7 +2,7 @@
   "version": "1.0",
   "language": "fr",
   "editionDate": "2026-11-18",
-  "generatedForOrigin": "https://joyccelight-playbook.pages.dev",
+  "generatedForOrigin": "https://joyccelight-playbook.uxplay.workers.dev",
   "counts": {
     "entries": 51,
     "categories": 6,
@@ -15,20 +15,20 @@
     "archive": {
       "role": "Complete French kit",
       "path": "/downloads/repertoire-ui-ux-gratuit-v1.zip",
-      "bytes": 552353,
-      "sha256": "9db33895834dfc061c165042b2141c2f51929f68df59bd4b4da2f097db5c94fb"
+      "bytes": 701279,
+      "sha256": "0069860f5ef94d6d1a272309ce07302cf57a3ea59cf8fb0ca812e826ef792aae"
     },
     "pdf": {
       "role": "French guide PDF",
       "path": "/downloads/repertoire-ui-ux-fr-v1.pdf",
-      "bytes": 820404,
-      "sha256": "b23d353b62b75df93060a82558b2e106886015e1a309e8f79608d9a773b1135d"
+      "bytes": 1016874,
+      "sha256": "47e86075652ec6283cf5a0f123c37f022ff1a4dadf0aec638f7a46adf5f372b5"
     },
     "markdown": {
       "role": "French guide Markdown",
       "path": "/downloads/repertoire-ui-ux-fr-v1.md",
-      "bytes": 58361,
-      "sha256": "473a5456753d6b04a94b126825de3e0506cd0686733e456e0869745259972696"
+      "bytes": 58388,
+      "sha256": "60e9802e282c99568e6489ccaf60eecffcdb4f6158a75be4207914d929a47586"
     }
   }
 }

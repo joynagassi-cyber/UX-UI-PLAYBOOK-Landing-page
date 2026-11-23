@@ -283,3 +283,8 @@ La configuration locale attend :
 - [Pages Functions — Routing](https://developers.cloudflare.com/pages/functions/routing/) : index, catch-all et `_routes.json`.
 - [Pages — Serving Pages](https://developers.cloudflare.com/pages/configuration/serving-pages/) : URLs sans extension et 404.
 - [Pages — Redirects](https://developers.cloudflare.com/pages/configuration/redirects/) : règles statiques et séparation des Functions.
+
+
+## Addendum du 18 novembre 2026 : origine et édition augmentée
+
+Les résultats et l’ancienne origine cités ci-dessus décrivent la passe historique ; ils ne sont pas réécrits. Pour la mise à jour issue du Drive du 9 novembre, le propriétaire a choisi **`https://joyccelight-playbook.uxplay.workers.dev`** comme origine officielle et **21 fichiers par langue et par achat**. Les valeurs courantes sont dans le README et le runbook ; les liens des kits gratuits sont régénérés. Voir le [rapport de mise à jour](docs/EDITION_2026_UPDATE_REPORT.md) pour le diagnostic CI, les compteurs vérifiés et les validations de cette nouvelle révision. Aucune modification DNS ni publication distante n’est impliquée.

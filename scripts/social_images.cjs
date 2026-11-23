@@ -10,6 +10,7 @@ const icons = require('lucide-react');
 const { loadData, root } = require('./content-data.cjs');
 const catalogue = loadData('src/i18n/article-catalog.json');
 const { CONTENT } = loadData('src/i18n/content.ts');
+const { playbookPages } = loadData('src/lib/playbook-edition.ts');
 const ARTICLES = {
   fr: loadData('src/i18n/articles/fr.ts').ARTICLES_FR,
   en: loadData('src/i18n/articles/en.ts').ARTICLES_EN,
@@ -22,7 +23,7 @@ function artPanel(locale, index) {
   const fr = locale === 'fr';
   if (index === -1) {
     return `<div class="panel-heading">${fr ? 'Dans le téléchargement' : 'In the download'}</div>
-      <div class="file-row">${icon('BookOpen', 32)}<div><strong>${fr ? '148 pages' : '139 pages'}</strong><span>${fr ? 'Manuel PDF' : 'PDF manual'}</span></div></div>
+      <div class="file-row">${icon('BookOpen', 32)}<div><strong>${playbookPages(locale)} pages</strong><span>${fr ? 'Manuel PDF' : 'PDF manual'}</span></div></div>
       <div class="file-row">${icon('FileText', 32)}<div><strong>${fr ? '12 fiches A4' : '12 A4 worksheets'}</strong><span>${fr ? 'Kit de 26 pages' : '26-page kit'}</span></div></div>
       <div class="file-row">${icon('Terminal', 32)}<div><strong>${fr ? '21 fichiers' : '21 files'}</strong><span>${fr ? 'Tokens, gabarits, scanner' : 'Tokens, templates, scanner'}</span></div></div>`;
   }
@@ -71,7 +72,7 @@ function htmlFor(locale, index) {
   </style></head><body><div class="canvas">
     <header class="brand"><span class="brand-name">${icon('BookOpen', 32)}UX/UI Playbook</span><span class="locale">${fr ? 'Édition française' : 'English edition'} · 2026</span></header>
     <main><section><div class="kicker">${escape(article ? article.category + ' · ' + (fr ? 'ARTICLE' : 'ARTICLE') : fr ? 'LE LIVRE ET LES FICHIERS' : 'THE BOOK AND FILES')}</div><h1 class="${article ? '' : 'landing'}">${escape(title)}</h1><p>${escape(summary)}</p></section><aside class="panel">${artPanel(locale,index)}</aside></main>
-    <footer><span class="footer-title">${article ? (fr ? 'Exemples, schémas et modèles' : 'Examples, diagrams and templates') : fr ? '29 USD · Paiement unique' : '$29 USD · One-time payment'}</span><span>${article ? escape(article.readTime) : fr ? 'Joy N. · 148 pages + kit et archive' : 'Joy N. · 139 pages + kit and archive'}</span></footer>
+    <footer><span class="footer-title">${article ? (fr ? 'Exemples, schémas et modèles' : 'Examples, diagrams and templates') : fr ? '29 USD · Paiement unique' : '$29 USD · One-time payment'}</span><span>${article ? escape(article.readTime) : fr ? `Joy N. · ${playbookPages(locale)} pages + kit et archive` : `Joy N. · ${playbookPages(locale)} pages + kit and archive`}</span></footer>
   </div></body></html>`;
 }
 
@@ -84,7 +85,7 @@ function htmlFor(locale, index) {
   try {
     const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
     for (const locale of ['fr','en']) {
-      for (const index of [-1, ...ARTICLES[locale].map((_, index) => index)]) {
+      for (const index of process.argv.includes('--landing-only') ? [-1] : [-1, ...ARTICLES[locale].map((_, index) => index)]) {
         await page.setContent(htmlFor(locale,index), { waitUntil: 'load' });
         await page.evaluate(() => document.fonts.ready);
         const overflow = await page.evaluate(() => Array.from(document.querySelectorAll('h1,p,.panel,footer')).some(element => {

@@ -1,0 +1,1067 @@
+{
+  "schemaVersion": 1,
+  "editionDate": "2026-11-09",
+  "countingPolicy": {
+    "pages": "Physical PDF pages, including covers, notes and appendices.",
+    "sections": "120 level-2 PDF bookmarks matched to running-head Roman numerals I–CXX.",
+    "glossaryEntries": "56 named rows in the component tables, not the stale 67 printed on the lexicon introduction.",
+    "comparisons": "13 thematic before/after pairs plus 11 platform pairs. Not 24 thematic prototypes.",
+    "workingFiles": "21 stored files in the purchased language, including the copies nested in the skill. The source ZIP contains both languages: 42 files in total.",
+    "unpublishedClaims": "No aggregate screen/figure count is advertised: the covers say 35 and the release notes say 36. The original 36-check product QA report was not supplied."
+  },
+  "counts": {
+    "sections": 120,
+    "parts": 9,
+    "glossarySections": 22,
+    "glossaryEntries": 56,
+    "thematicComparisons": 13,
+    "platformComparisons": 11,
+    "comparisons": 24,
+    "checklistRules": 77,
+    "platforms": 6,
+    "kitSheets": 12,
+    "workingFilesPerEdition": 21,
+    "sourceZipFiles": 42
+  },
+  "editions": {
+    "fr": {
+      "pages": 182,
+      "kitPages": 26,
+      "bookSource": {
+        "name": "UX-UI-Playbook_FR.pdf",
+        "bytes": 1942981,
+        "sha256": "2da9afdd5ce27de7ffacf55b59d2bd18c3573c82c85eb5e5ddf55dc7e90395f6"
+      },
+      "kitSource": {
+        "name": "UX-UI-Playbook_BONUS-KIT_FR.pdf",
+        "bytes": 379115,
+        "sha256": "7b272e6e478b7216ae87873322aefe83097e1aec6cfd1166bb063595ae15dd54"
+      },
+      "parts": [
+        {
+          "num": "01",
+          "title": "Comprendre avant de dessiner",
+          "page": 10,
+          "sectionCount": 11
+        },
+        {
+          "num": "02",
+          "title": "Dix écrans, dix logiques",
+          "page": 29,
+          "sectionCount": 10
+        },
+        {
+          "num": "03",
+          "title": "Le métier du pixel",
+          "page": 50,
+          "sectionCount": 8
+        },
+        {
+          "num": "04",
+          "title": "Du brief au livrable",
+          "page": 66,
+          "sectionCount": 5
+        },
+        {
+          "num": "05",
+          "title": "Le design comme revenu",
+          "page": 74,
+          "sectionCount": 6
+        },
+        {
+          "num": "06",
+          "title": "Outils & workflow",
+          "page": 85,
+          "sectionCount": 7
+        },
+        {
+          "num": "07",
+          "title": "Preuves, droit et IA",
+          "page": 94,
+          "sectionCount": 26
+        },
+        {
+          "num": "08",
+          "title": "Lexique des composants",
+          "page": 124,
+          "sectionCount": 22
+        },
+        {
+          "num": "09",
+          "title": "Plateformes et boîte à outils",
+          "page": 149,
+          "sectionCount": 25
+        }
+      ],
+      "comparisonPages": {
+        "thematic": [
+          96,
+          98,
+          100,
+          102,
+          104,
+          106,
+          108,
+          110,
+          113,
+          115,
+          118,
+          119,
+          120
+        ],
+        "platform": [
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160
+        ]
+      },
+      "glossaryEntries": [
+        {
+          "page": 126,
+          "name": "En-tête"
+        },
+        {
+          "page": 126,
+          "name": "Barre de navigation"
+        },
+        {
+          "page": 126,
+          "name": "Fil d'Ariane"
+        },
+        {
+          "page": 126,
+          "name": "Héros"
+        },
+        {
+          "page": 127,
+          "name": "Barre latérale"
+        },
+        {
+          "page": 127,
+          "name": "Barre d'onglets"
+        },
+        {
+          "page": 127,
+          "name": "Menu déroulant"
+        },
+        {
+          "page": 127,
+          "name": "Bouton"
+        },
+        {
+          "page": 128,
+          "name": "Champ de saisie"
+        },
+        {
+          "page": 128,
+          "name": "Zone de texte"
+        },
+        {
+          "page": 128,
+          "name": "Liste déroulante"
+        },
+        {
+          "page": 128,
+          "name": "Case à cocher"
+        },
+        {
+          "page": 128,
+          "name": "Bouton radio"
+        },
+        {
+          "page": 129,
+          "name": "Interrupteur"
+        },
+        {
+          "page": 129,
+          "name": "Infobulle"
+        },
+        {
+          "page": 129,
+          "name": "Modale"
+        },
+        {
+          "page": 129,
+          "name": "Panneau latéral"
+        },
+        {
+          "page": 131,
+          "name": "Notification flottante"
+        },
+        {
+          "page": 131,
+          "name": "Bannière"
+        },
+        {
+          "page": 131,
+          "name": "Carte"
+        },
+        {
+          "page": 131,
+          "name": "Accordéon"
+        },
+        {
+          "page": 131,
+          "name": "Pagination"
+        },
+        {
+          "page": 132,
+          "name": "Étiquette"
+        },
+        {
+          "page": 132,
+          "name": "Avatar"
+        },
+        {
+          "page": 132,
+          "name": "Fil d'activité"
+        },
+        {
+          "page": 132,
+          "name": "Tableau de données"
+        },
+        {
+          "page": 132,
+          "name": "Zone de dépôt"
+        },
+        {
+          "page": 133,
+          "name": "Barre d'état"
+        },
+        {
+          "page": 133,
+          "name": "Barre de navigation basse"
+        },
+        {
+          "page": 133,
+          "name": "Barre d'onglets haute"
+        },
+        {
+          "page": 133,
+          "name": "Barre d'application"
+        },
+        {
+          "page": 133,
+          "name": "Bouton d'action flottant"
+        },
+        {
+          "page": 133,
+          "name": "Feuille du bas"
+        },
+        {
+          "page": 134,
+          "name": "Écran plein"
+        },
+        {
+          "page": 134,
+          "name": "Glisser pour actualiser"
+        },
+        {
+          "page": 136,
+          "name": "Glisser pour agir"
+        },
+        {
+          "page": 136,
+          "name": "Liste de réglages"
+        },
+        {
+          "page": 136,
+          "name": "Sélecteur segmenté"
+        },
+        {
+          "page": 136,
+          "name": "Champ avec bouton"
+        },
+        {
+          "page": 136,
+          "name": "Clavier numérique"
+        },
+        {
+          "page": 136,
+          "name": "Zone de notification"
+        },
+        {
+          "page": 136,
+          "name": "Indicateur de pages"
+        },
+        {
+          "page": 136,
+          "name": "En-tête repliable"
+        },
+        {
+          "page": 139,
+          "name": "Barre supérieure"
+        },
+        {
+          "page": 139,
+          "name": "Panneau de filtres"
+        },
+        {
+          "page": 139,
+          "name": "Indicateur clé"
+        },
+        {
+          "page": 139,
+          "name": "Graphique en courbe"
+        },
+        {
+          "page": 139,
+          "name": "Barres empilées"
+        },
+        {
+          "page": 139,
+          "name": "Entonnoir"
+        },
+        {
+          "page": 139,
+          "name": "Tableau de bord de suivi"
+        },
+        {
+          "page": 141,
+          "name": "Barre de recherche globale"
+        },
+        {
+          "page": 141,
+          "name": "Vue enregistrée"
+        },
+        {
+          "page": 141,
+          "name": "Action groupée"
+        },
+        {
+          "page": 141,
+          "name": "Panneau de détail"
+        },
+        {
+          "page": 141,
+          "name": "Journal d'audit"
+        },
+        {
+          "page": 141,
+          "name": "Éditeur en ligne"
+        }
+      ],
+      "previews": [
+        {
+          "id": "cover",
+          "document": "book",
+          "page": 1,
+          "path": "/images/fr/cover.webp"
+        },
+        {
+          "id": "contents",
+          "document": "book",
+          "page": 4,
+          "path": "/images/fr/contents.webp"
+        },
+        {
+          "id": "landing",
+          "document": "book",
+          "page": 30,
+          "path": "/images/fr/landing-annotated.webp"
+        },
+        {
+          "id": "checkout",
+          "document": "book",
+          "page": 36,
+          "path": "/images/fr/checkout-annotated.webp"
+        },
+        {
+          "id": "evidence",
+          "document": "book",
+          "page": 26,
+          "path": "/images/fr/evidence-sources.webp"
+        },
+        {
+          "id": "sbs-checkout",
+          "document": "book",
+          "page": 96,
+          "path": "/images/fr/before-after-checkout.webp"
+        },
+        {
+          "id": "sbs-loading",
+          "document": "book",
+          "page": 120,
+          "path": "/images/fr/before-after-loading.webp"
+        },
+        {
+          "id": "lexicon",
+          "document": "book",
+          "page": 127,
+          "path": "/images/fr/component-lexicon.webp"
+        },
+        {
+          "id": "checklist",
+          "document": "book",
+          "page": 174,
+          "path": "/images/fr/checklist-rules.webp"
+        },
+        {
+          "id": "bonus-cover",
+          "document": "kit",
+          "page": 1,
+          "path": "/images/fr/bonus-cover.webp"
+        }
+      ]
+    },
+    "en": {
+      "pages": 171,
+      "kitPages": 26,
+      "bookSource": {
+        "name": "UX-UI-Playbook_EN.pdf",
+        "bytes": 1856683,
+        "sha256": "1237d47edce3c07e7ac96e617cd05db0e00bee6d3fff21f436bc8653cdce0be8"
+      },
+      "kitSource": {
+        "name": "UX-UI-Playbook_BONUS-KIT_EN.pdf",
+        "bytes": 375416,
+        "sha256": "90fe92a9a63005bce8c46770a7a3841843681e5d5b3048b6fb0aa1538b971295"
+      },
+      "parts": [
+        {
+          "num": "01",
+          "title": "Understand before you draw",
+          "page": 10,
+          "sectionCount": 11
+        },
+        {
+          "num": "02",
+          "title": "Ten screens, ten logics",
+          "page": 27,
+          "sectionCount": 10
+        },
+        {
+          "num": "03",
+          "title": "The craft of the pixel",
+          "page": 45,
+          "sectionCount": 8
+        },
+        {
+          "num": "04",
+          "title": "From brief to deliverable",
+          "page": 59,
+          "sectionCount": 5
+        },
+        {
+          "num": "05",
+          "title": "Design as revenue",
+          "page": 67,
+          "sectionCount": 6
+        },
+        {
+          "num": "06",
+          "title": "Tools & workflow",
+          "page": 75,
+          "sectionCount": 7
+        },
+        {
+          "num": "07",
+          "title": "Evidence, law and AI",
+          "page": 83,
+          "sectionCount": 26
+        },
+        {
+          "num": "08",
+          "title": "Component lexicon",
+          "page": 113,
+          "sectionCount": 22
+        },
+        {
+          "num": "09",
+          "title": "Platforms and toolbox",
+          "page": 138,
+          "sectionCount": 25
+        }
+      ],
+      "comparisonPages": {
+        "thematic": [
+          85,
+          87,
+          89,
+          91,
+          93,
+          96,
+          98,
+          100,
+          103,
+          105,
+          107,
+          108,
+          109
+        ],
+        "platform": [
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149
+        ]
+      },
+      "glossaryEntries": [
+        {
+          "page": 115,
+          "name": "Header"
+        },
+        {
+          "page": 115,
+          "name": "Navbar"
+        },
+        {
+          "page": 115,
+          "name": "Breadcrumb"
+        },
+        {
+          "page": 115,
+          "name": "Hero"
+        },
+        {
+          "page": 117,
+          "name": "Sidebar"
+        },
+        {
+          "page": 117,
+          "name": "Tabs"
+        },
+        {
+          "page": 117,
+          "name": "Dropdown"
+        },
+        {
+          "page": 117,
+          "name": "Button"
+        },
+        {
+          "page": 118,
+          "name": "Input"
+        },
+        {
+          "page": 118,
+          "name": "Textarea"
+        },
+        {
+          "page": 118,
+          "name": "Select"
+        },
+        {
+          "page": 118,
+          "name": "Checkbox"
+        },
+        {
+          "page": 118,
+          "name": "Radio"
+        },
+        {
+          "page": 119,
+          "name": "Switch"
+        },
+        {
+          "page": 119,
+          "name": "Tooltip"
+        },
+        {
+          "page": 119,
+          "name": "Modal"
+        },
+        {
+          "page": 119,
+          "name": "Drawer"
+        },
+        {
+          "page": 121,
+          "name": "Toast"
+        },
+        {
+          "page": 121,
+          "name": "Banner"
+        },
+        {
+          "page": 121,
+          "name": "Card"
+        },
+        {
+          "page": 121,
+          "name": "Accordion"
+        },
+        {
+          "page": 121,
+          "name": "Pagination"
+        },
+        {
+          "page": 122,
+          "name": "Badge"
+        },
+        {
+          "page": 122,
+          "name": "Avatar"
+        },
+        {
+          "page": 122,
+          "name": "Feed"
+        },
+        {
+          "page": 122,
+          "name": "Data table"
+        },
+        {
+          "page": 122,
+          "name": "Dropzone"
+        },
+        {
+          "page": 123,
+          "name": "Status bar"
+        },
+        {
+          "page": 123,
+          "name": "Bottom navigation bar"
+        },
+        {
+          "page": 123,
+          "name": "Top tabs"
+        },
+        {
+          "page": 123,
+          "name": "App bar"
+        },
+        {
+          "page": 123,
+          "name": "FAB"
+        },
+        {
+          "page": 123,
+          "name": "Bottom sheet"
+        },
+        {
+          "page": 124,
+          "name": "Full-screen modal"
+        },
+        {
+          "page": 124,
+          "name": "Pull to refresh"
+        },
+        {
+          "page": 126,
+          "name": "Swipe action"
+        },
+        {
+          "page": 126,
+          "name": "Settings list"
+        },
+        {
+          "page": 126,
+          "name": "Segmented control"
+        },
+        {
+          "page": 126,
+          "name": "Input with button"
+        },
+        {
+          "page": 126,
+          "name": "Numeric keypad"
+        },
+        {
+          "page": 126,
+          "name": "Snackbar"
+        },
+        {
+          "page": 126,
+          "name": "Dots"
+        },
+        {
+          "page": 126,
+          "name": "Collapsing header"
+        },
+        {
+          "page": 128,
+          "name": "Top bar"
+        },
+        {
+          "page": 128,
+          "name": "Filter panel"
+        },
+        {
+          "page": 128,
+          "name": "KPI card"
+        },
+        {
+          "page": 128,
+          "name": "Line chart"
+        },
+        {
+          "page": 128,
+          "name": "Stacked bars"
+        },
+        {
+          "page": 128,
+          "name": "Funnel"
+        },
+        {
+          "page": 128,
+          "name": "Monitoring board"
+        },
+        {
+          "page": 130,
+          "name": "Global search"
+        },
+        {
+          "page": 130,
+          "name": "Saved view"
+        },
+        {
+          "page": 130,
+          "name": "Bulk action"
+        },
+        {
+          "page": 130,
+          "name": "Detail panel"
+        },
+        {
+          "page": 130,
+          "name": "Audit log"
+        },
+        {
+          "page": 130,
+          "name": "Inline edit"
+        }
+      ],
+      "previews": [
+        {
+          "id": "cover",
+          "document": "book",
+          "page": 1,
+          "path": "/images/en/cover.webp"
+        },
+        {
+          "id": "contents",
+          "document": "book",
+          "page": 4,
+          "path": "/images/en/contents.webp"
+        },
+        {
+          "id": "landing",
+          "document": "book",
+          "page": 28,
+          "path": "/images/en/landing-annotated.webp"
+        },
+        {
+          "id": "checkout",
+          "document": "book",
+          "page": 34,
+          "path": "/images/en/checkout-annotated.webp"
+        },
+        {
+          "id": "evidence",
+          "document": "book",
+          "page": 24,
+          "path": "/images/en/evidence-sources.webp"
+        },
+        {
+          "id": "sbs-checkout",
+          "document": "book",
+          "page": 85,
+          "path": "/images/en/before-after-checkout.webp"
+        },
+        {
+          "id": "sbs-loading",
+          "document": "book",
+          "page": 109,
+          "path": "/images/en/before-after-loading.webp"
+        },
+        {
+          "id": "lexicon",
+          "document": "book",
+          "page": 117,
+          "path": "/images/en/component-lexicon.webp"
+        },
+        {
+          "id": "checklist",
+          "document": "book",
+          "page": 163,
+          "path": "/images/en/checklist-rules.webp"
+        },
+        {
+          "id": "bonus-cover",
+          "document": "kit",
+          "page": 1,
+          "path": "/images/en/bonus-cover.webp"
+        }
+      ]
+    }
+  },
+  "scannerExamples": {
+    "platform": "web",
+    "applicableRules": 57,
+    "outsidePlatformScope": 20,
+    "bad": {
+      "automated": 9,
+      "toVerify": 48,
+      "failures": 8,
+      "blockingFailures": 7,
+      "informational": 1,
+      "exitCode": 1
+    },
+    "good": {
+      "automated": 8,
+      "toVerify": 49,
+      "failures": 0,
+      "blockingFailures": 0,
+      "informational": 0,
+      "exitCode": 0
+    }
+  },
+  "sourceArchive": {
+    "name": "TEMPLATES.zip",
+    "bytes": 113919,
+    "sha256": "5278d8ce9d2f3e35d49f08de4e6e033349ade64b93fe98cb1f9266f88a0adac0",
+    "files": [
+      {
+        "path": "FR/LISEZ-MOI.md",
+        "bytes": 2342,
+        "sha256": "e2bba487b5122e4fc43ff91dbdf9bbd0ab1c272427e2a155b6f960bcd3a2bf14"
+      },
+      {
+        "path": "FR/checklist-agent/AGENTS.md",
+        "bytes": 2749,
+        "sha256": "82d064d911f2676e3a3f25abc2dd7abb518cd7390422bc208cbfaf7711982422"
+      },
+      {
+        "path": "FR/checklist-agent/RAPPORT-TYPE.md",
+        "bytes": 1524,
+        "sha256": "bdf9cafde598583b8e09e95563008118872918ca5b28393014844d924daefc60"
+      },
+      {
+        "path": "FR/checklist-agent/agent_check.py",
+        "bytes": 12517,
+        "sha256": "ee7c3ba654d0fa2d7afe881605b28463fc9dc5ddf6659ef1cc408975c3509a63"
+      },
+      {
+        "path": "FR/checklist-agent/rules.py",
+        "bytes": 26395,
+        "sha256": "6c394db78cf307aefc0d8f81fc540acee407c57af9192809dff57056eec71529"
+      },
+      {
+        "path": "FR/checklist-agent/test/bad.html",
+        "bytes": 511,
+        "sha256": "156e3bb839be0e5a43be6dac82671bb4f13a4ed6d083bec858e489aa85e8bc2f"
+      },
+      {
+        "path": "FR/checklist-agent/test/good.html",
+        "bytes": 512,
+        "sha256": "d48feb703fac8e6d5bd9d94e059e177a51d6e2e75b5ce0e6b8f20755a3cc182f"
+      },
+      {
+        "path": "FR/skill/ux-ui-checklist/SKILL.md",
+        "bytes": 3844,
+        "sha256": "0120ce73bbc81f676d9ee68673a6b1484971c799a6245ad6c768d02dc480655e"
+      },
+      {
+        "path": "FR/skill/ux-ui-checklist/references/rules.md",
+        "bytes": 20741,
+        "sha256": "66d7e1e4eb190b6fa5dccfabf4716e07c32468b57428f2a5b761b489ab405e87"
+      },
+      {
+        "path": "FR/skill/ux-ui-checklist/scripts/agent_check.py",
+        "bytes": 12517,
+        "sha256": "ee7c3ba654d0fa2d7afe881605b28463fc9dc5ddf6659ef1cc408975c3509a63"
+      },
+      {
+        "path": "FR/skill/ux-ui-checklist/scripts/rules.py",
+        "bytes": 26395,
+        "sha256": "6c394db78cf307aefc0d8f81fc540acee407c57af9192809dff57056eec71529"
+      },
+      {
+        "path": "FR/skill/ux-ui-checklist/scripts/test/bad.html",
+        "bytes": 511,
+        "sha256": "156e3bb839be0e5a43be6dac82671bb4f13a4ed6d083bec858e489aa85e8bc2f"
+      },
+      {
+        "path": "FR/skill/ux-ui-checklist/scripts/test/good.html",
+        "bytes": 512,
+        "sha256": "d48feb703fac8e6d5bd9d94e059e177a51d6e2e75b5ce0e6b8f20755a3cc182f"
+      },
+      {
+        "path": "FR/skill/ux-ui-checklist/scripts/tokens/tokens.css",
+        "bytes": 7314,
+        "sha256": "0a18095d01c978b1344a580fe9d79fc8fb78611e5b947ccfe4aba0b211e009f4"
+      },
+      {
+        "path": "FR/skill/ux-ui-checklist/scripts/tokens/tokens.json",
+        "bytes": 2482,
+        "sha256": "b6fc3c729fd3c2778360df4bd70627e6861178a09c59b6294106586f1fbf3c0a"
+      },
+      {
+        "path": "FR/templates/audit-40-points.md",
+        "bytes": 2334,
+        "sha256": "cd3645efa021d09fc53d4329bc3207ee2a1a70673565cfade90855115bf0638a"
+      },
+      {
+        "path": "FR/templates/brief-client.md",
+        "bytes": 2287,
+        "sha256": "b858551302d5671546298438bf4945202f6a31421c01283477ae4d42959d2a48"
+      },
+      {
+        "path": "FR/templates/handoff-developpeur.md",
+        "bytes": 3099,
+        "sha256": "910f967c827836ecda50c9eb99d8b3e323531a768ebe21bac00cd57ba5ccf367"
+      },
+      {
+        "path": "FR/templates/journal-de-preuves.md",
+        "bytes": 1324,
+        "sha256": "c5cbd0f6a03cb0d92300c397e2dfaec2ad44097c548a028b38bded2146fca983"
+      },
+      {
+        "path": "FR/tokens/tokens.css",
+        "bytes": 7314,
+        "sha256": "0a18095d01c978b1344a580fe9d79fc8fb78611e5b947ccfe4aba0b211e009f4"
+      },
+      {
+        "path": "FR/tokens/tokens.json",
+        "bytes": 2482,
+        "sha256": "b6fc3c729fd3c2778360df4bd70627e6861178a09c59b6294106586f1fbf3c0a"
+      },
+      {
+        "path": "EN/README.md",
+        "bytes": 2168,
+        "sha256": "3354067a775fe35bf81b793022cf9ff2b643235d4e0e4e2b200f60776e3f905a"
+      },
+      {
+        "path": "EN/checklist-agent/AGENTS.md",
+        "bytes": 2488,
+        "sha256": "b4f3da9f53bf663660057951e912c3384f705fb98ae7012d7393c14f312b0e85"
+      },
+      {
+        "path": "EN/checklist-agent/REPORT-TEMPLATE.md",
+        "bytes": 1462,
+        "sha256": "2d4badc1ccbc1ddf544fe1b46b908a4b08273fdcd66671875c4d8f7481f9776e"
+      },
+      {
+        "path": "EN/checklist-agent/agent_check.py",
+        "bytes": 12517,
+        "sha256": "ee7c3ba654d0fa2d7afe881605b28463fc9dc5ddf6659ef1cc408975c3509a63"
+      },
+      {
+        "path": "EN/checklist-agent/rules.py",
+        "bytes": 26395,
+        "sha256": "6c394db78cf307aefc0d8f81fc540acee407c57af9192809dff57056eec71529"
+      },
+      {
+        "path": "EN/checklist-agent/test/bad.html",
+        "bytes": 511,
+        "sha256": "156e3bb839be0e5a43be6dac82671bb4f13a4ed6d083bec858e489aa85e8bc2f"
+      },
+      {
+        "path": "EN/checklist-agent/test/good.html",
+        "bytes": 512,
+        "sha256": "d48feb703fac8e6d5bd9d94e059e177a51d6e2e75b5ce0e6b8f20755a3cc182f"
+      },
+      {
+        "path": "EN/skill/ux-ui-checklist/SKILL.md",
+        "bytes": 3573,
+        "sha256": "1cdc0917e93ca9e9799421955ab59b6c85ec3e1bf93b1da78906d3769111c9d7"
+      },
+      {
+        "path": "EN/skill/ux-ui-checklist/references/rules.md",
+        "bytes": 19722,
+        "sha256": "37a8b2c3dde5a00151bc5a3c64a5e8220ea044664406a74a8a774a8f1e71fea9"
+      },
+      {
+        "path": "EN/skill/ux-ui-checklist/scripts/agent_check.py",
+        "bytes": 12517,
+        "sha256": "ee7c3ba654d0fa2d7afe881605b28463fc9dc5ddf6659ef1cc408975c3509a63"
+      },
+      {
+        "path": "EN/skill/ux-ui-checklist/scripts/rules.py",
+        "bytes": 26395,
+        "sha256": "6c394db78cf307aefc0d8f81fc540acee407c57af9192809dff57056eec71529"
+      },
+      {
+        "path": "EN/skill/ux-ui-checklist/scripts/test/bad.html",
+        "bytes": 511,
+        "sha256": "156e3bb839be0e5a43be6dac82671bb4f13a4ed6d083bec858e489aa85e8bc2f"
+      },
+      {
+        "path": "EN/skill/ux-ui-checklist/scripts/test/good.html",
+        "bytes": 512,
+        "sha256": "d48feb703fac8e6d5bd9d94e059e177a51d6e2e75b5ce0e6b8f20755a3cc182f"
+      },
+      {
+        "path": "EN/skill/ux-ui-checklist/scripts/tokens/tokens.css",
+        "bytes": 7314,
+        "sha256": "0a18095d01c978b1344a580fe9d79fc8fb78611e5b947ccfe4aba0b211e009f4"
+      },
+      {
+        "path": "EN/skill/ux-ui-checklist/scripts/tokens/tokens.json",
+        "bytes": 2482,
+        "sha256": "b6fc3c729fd3c2778360df4bd70627e6861178a09c59b6294106586f1fbf3c0a"
+      },
+      {
+        "path": "EN/templates/audit-40-points.md",
+        "bytes": 2085,
+        "sha256": "706c9339a2cae7caa9e00321bf9322e4b47b80dd106bd68e3dcb6fd0c2a7c20f"
+      },
+      {
+        "path": "EN/templates/brief-client.md",
+        "bytes": 2213,
+        "sha256": "57d555f35ce0ca9fa6f0c8a39313e095af6414da0a8a46302151861a73983d43"
+      },
+      {
+        "path": "EN/templates/handoff-developer.md",
+        "bytes": 2993,
+        "sha256": "101e2e09394689b09aeea04132c8c233dba9ae8134a7352ecaf00bac8cba0482"
+      },
+      {
+        "path": "EN/templates/journal-of-proof.md",
+        "bytes": 1325,
+        "sha256": "13070df1c36a4a0c69b329680641f3f8dc683fa221a91650d09078801459bad1"
+      },
+      {
+        "path": "EN/tokens/tokens.css",
+        "bytes": 7314,
+        "sha256": "0a18095d01c978b1344a580fe9d79fc8fb78611e5b947ccfe4aba0b211e009f4"
+      },
+      {
+        "path": "EN/tokens/tokens.json",
+        "bytes": 2482,
+        "sha256": "b6fc3c729fd3c2778360df4bd70627e6861178a09c59b6294106586f1fbf3c0a"
+      }
+    ]
+  },
+  "researchSources": [
+    {
+      "id": "attention",
+      "title": "Scrolling and Attention",
+      "publisher": "Nielsen Norman Group",
+      "author": "Therese Fessenden",
+      "date": "2018-04-15",
+      "url": "https://www.nngroup.com/articles/scrolling-and-attention/"
+    },
+    {
+      "id": "checkout",
+      "title": "Cart Abandonment Rate",
+      "publisher": "Baymard Institute",
+      "date": "2026-10-28",
+      "url": "https://baymard.com/blog/cart-abandonment-rate"
+    },
+    {
+      "id": "comprehension",
+      "title": "5-Second Tests: Measuring Your Site’s Content Pages",
+      "publisher": "UIE / Center Centre",
+      "author": "Christine Perfetti",
+      "date": "2007-09-11",
+      "url": "https://articles.centercentre.com/five_second_test/"
+    }
+  ]
+}

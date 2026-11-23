@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "baselineSha256": "68329e1ac8b7cf1a150be421139c1a7902e0ad4e912c2bdc2ef266b04cb756d2",
+  "policy": "Append exact before/after transitions only after a scoped review. No wildcards, folder exemptions, changed historical baseline or automatic refresh. Subsequent edits to any reviewed bytes still fail.",
+  "revisions": [
+    {
+      "id": "merged-interface-refinements-pr-10",
+      "reason": "Reconcile only the already merged PR 10 copy change that made the historical hash-only guard fail at main 228c4b1. The old baseline is retained, not overwritten.",
+      "reviewReport": "docs/INTERFACE_REFINEMENTS_REPORT.md",
+      "reference": "https://github.com/joynagassi-cyber/UX-UI-PLAYBOOK-Landing-page/pull/10",
+      "files": [
+        {
+          "path": "src/i18n/content.ts",
+          "fromSha256": "d464141ccf49689e51cf31a7560d0a99959cfac640061f0307795157f8c65c7a",
+          "toSha256": "cee9871f537d818104d82855838a2807a057c0d3872f4530e5248279ea5fc337",
+          "reason": "Exact merged state at 228c4b1 after factual interface copy refinements; this pre-existing change was the 107/108 mismatch before the edition update."
+        }
+      ]
+    },
+    {
+      "id": "expanded-edition-2026-11-09-reviewed-2026-11-18",
+      "reason": "Owner-requested Drive-based edition update, explicit official Worker origin, and localized 21-file-per-purchase offer. Exact file scope documented with source recounts and tests.",
+      "reviewReport": "docs/EDITION_2026_UPDATE_REPORT.md",
+      "baseCommit": "228c4b1439e5a36d8f8858dc2aa6d154e08844ff",
+      "files": [
+        {
+          "path": "products/ui-ux-directory/en/gumroad-listing.md",
+          "fromSha256": "919b1240563791c7b9cf2761d44a3a63ff57623929c06c373146f8e88e6cb21f",
+          "toSha256": "c10b38338dd6ce55c9e3657948e6734ebb89a8196fb02d6d14569abb0e0ba156",
+          "reason": "Only the selected official Worker origin replaces the retired canonical target in prepared publication instructions. No remote listing publication."
+        },
+        {
+          "path": "products/ui-ux-directory/en/manifest.json",
+          "fromSha256": "4f00c375cbcfb841fd94efc07e6d53ad78bd6781cce6df91b3bc9aca0ae633aa",
+          "toSha256": "d23884c98f862cafd0bba206c1ced5d3f470ac6732f0ef67047194d9dcf0f41e",
+          "reason": "Generated free-kit origin, actual byte sizes and SHA-256 digests refreshed after rebuilding the same localized download formats."
+        },
+        {
+          "path": "products/ui-ux-directory/en/publication-guide.md",
+          "fromSha256": "baf63fd834b8792267af7aa5880afe911e7c69ef718ddb0b29c45543f25adde5",
+          "toSha256": "57ebe85cf9c844082709c0da2561bdbe17e6e6c2601924ddff4332555eb9a665",
+          "reason": "Only the selected official Worker origin replaces the retired canonical target in prepared publication instructions. No remote listing publication."
+        },
+        {
+          "path": "products/ui-ux-directory/gumroad-listing.md",
+          "fromSha256": "8a7cca63fe219b62189b034f0585e9e830b5fd9418e00f71f2c60096c4089ba4",
+          "toSha256": "01ffce0b6eab2ea502ed9cebb95d3a446982856d057283aac88c04d68cbaa4f9",
+          "reason": "Only the selected official Worker origin replaces the retired canonical target in prepared publication instructions. No remote listing publication."
+        },
+        {
+          "path": "products/ui-ux-directory/manifest.json",
+          "fromSha256": "227ab6f3cd615799a23384c2407aa21f0917bd1dd2879fbb97206da536aadb76",
+          "toSha256": "428d1084d3b576a1a858c7210ce5e1fe0695a823dd1d7aaa9394fd5207d4888f",
+          "reason": "Generated free-kit origin, actual byte sizes and SHA-256 digests refreshed after rebuilding the same localized download formats."
+        },
+        {
+          "path": "products/ui-ux-directory/publication-guide.md",
+          "fromSha256": "f777b745ba612e3e8c129caaa04486d9ba22c8116e5705f5827fc4f6557da489",
+          "toSha256": "79cc50d9db7e6603dc29f47174506aec4ed68c137122b873188301d0b38a23cd",
+          "reason": "Only the selected official Worker origin replaces the retired canonical target in prepared publication instructions. No remote listing publication."
+        },
+        {
+          "path": "public/downloads/repertoire-ui-ux-fr-v1.md",
+          "fromSha256": "473a5456753d6b04a94b126825de3e0506cd0686733e456e0869745259972696",
+          "toSha256": "60e9802e282c99568e6489ccaf60eecffcdb4f6158a75be4207914d929a47586",
+          "reason": "Rebuilt free resource for the explicitly selected Worker origin and new paid-book CTA; same catalogue, edition date, file roles and file counts. All archive and PDF links were rechecked."
+        },
+        {
+          "path": "public/downloads/repertoire-ui-ux-fr-v1.pdf",
+          "fromSha256": "b23d353b62b75df93060a82558b2e106886015e1a309e8f79608d9a773b1135d",
+          "toSha256": "47e86075652ec6283cf5a0f123c37f022ff1a4dadf0aec638f7a46adf5f372b5",
+          "reason": "Rebuilt free resource for the explicitly selected Worker origin and new paid-book CTA; same catalogue, edition date, file roles and file counts. All archive and PDF links were rechecked."
+        },
+        {
+          "path": "public/downloads/repertoire-ui-ux-gratuit-v1.zip",
+          "fromSha256": "9db33895834dfc061c165042b2141c2f51929f68df59bd4b4da2f097db5c94fb",
+          "toSha256": "0069860f5ef94d6d1a272309ce07302cf57a3ea59cf8fb0ca812e826ef792aae",
+          "reason": "Rebuilt free resource for the explicitly selected Worker origin and new paid-book CTA; same catalogue, edition date, file roles and file counts. All archive and PDF links were rechecked."
+        },
+        {
+          "path": "public/downloads/ui-ux-directory-en-v1.md",
+          "fromSha256": "fea0ec54af4c604d312ce2c47ce9b6825c2fbeb4bbed2da237372fda96b21a68",
+          "toSha256": "c733a6bf62741bc5e4df5ce09edbe76005882fe2324e9b2af230c00f3974ca0b",
+          "reason": "Rebuilt free resource for the explicitly selected Worker origin and new paid-book CTA; same catalogue, edition date, file roles and file counts. All archive and PDF links were rechecked."
+        },
+        {
+          "path": "public/downloads/ui-ux-directory-en-v1.pdf",
+          "fromSha256": "12fe29737e7f164175af8b3ce341e09bd10999c99c25a55530d99fef0a81e9f9",
+          "toSha256": "2788b121329469f11399c925a3fa6153b38b2bf5e99e3bf0d7bb7a6f9995c489",
+          "reason": "Rebuilt free resource for the explicitly selected Worker origin and new paid-book CTA; same catalogue, edition date, file roles and file counts. All archive and PDF links were rechecked."
+        },
+        {
+          "path": "public/downloads/ui-ux-directory-free-en-v1.zip",
+          "fromSha256": "66ab11a040f5548b02766edb32c5b5fd5b23a9f53f2cc426be986a18b66e0bb9",
+          "toSha256": "fe9a38135f83f0f79a26d756be9eeded0be183d9ab61d436deb0f21bcafa5fd8",
+          "reason": "Rebuilt free resource for the explicitly selected Worker origin and new paid-book CTA; same catalogue, edition date, file roles and file counts. All archive and PDF links were rechecked."
+        },
+        {
+          "path": "public/images/en/before-after-checkout.webp",
+          "fromSha256": "ab722e1775731aa4a2c12e992d26117024bdeaffe70d8b156a087b2d101c2a6c",
+          "toSha256": "05c02dc50055076cf13a611b78d6bfe0d40dd26f904a46db7d6238fc76f25da7",
+          "reason": "Rerendered selected EN book excerpt, physical PDF page 85, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/en/before-after-loading.webp",
+          "fromSha256": "f1a6285e9321d72908c7b1a63599db177222775026c75cf0eb62e2be5c54ad6c",
+          "toSha256": "e11aaf2ff4051f9c3ae9caf7838b8004c49f1fde58d53564de5cdb3046e36c19",
+          "reason": "Rerendered selected EN book excerpt, physical PDF page 109, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/en/bonus-cover.webp",
+          "fromSha256": "8a8b105b7120b242ddd4a379660e7ee64c347738a1764f1809da956ef5b990b1",
+          "toSha256": "c9e1ebbe038a054a1ff4f9b3e520914f198325e3ed8fc1355fec7d0979e567dd",
+          "reason": "Rerendered selected EN kit excerpt, physical PDF page 1, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/en/checklist-rules.webp",
+          "fromSha256": "21610566fc821a28cfbe185fb07868ed16198453a4f01530ac9f38ad45e3faba",
+          "toSha256": "fcbf40db92a402b6633c6bc6d1f0bc3f468de04cda80aad9acb8acf252c6bf47",
+          "reason": "Rerendered selected EN book excerpt, physical PDF page 163, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/en/checkout-annotated.webp",
+          "fromSha256": "0d9a0ff3b0f55a8d46d1412a13b9ea51877f3429ff41b00960c9962405613db5",
+          "toSha256": "7ac3ff0f3af612f60bf42837cddef9fd41495d306c04cadd7aeeb430228bb78f",
+          "reason": "Rerendered selected EN book excerpt, physical PDF page 34, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/en/contents.webp",
+          "fromSha256": "dd2af018a6cadad9c2ac97c734705e54a40e9c9adccee009fc979293bdc5504d",
+          "toSha256": "1106bb5411ead66681dba069886eb124c449c711518fb79e4cc248ce88d868e4",
+          "reason": "Rerendered selected EN book excerpt, physical PDF page 4, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/en/cover.webp",
+          "fromSha256": "e3b2d44f0398ca0e0f957fecb22f8eae15f4197db90356f2e340a299cb9e8835",
+          "toSha256": "5c6ee4ec27c46078244a599fe1dc9ea14283dcf090899484ef05f3adf26355d9",
+          "reason": "Rerendered selected EN book excerpt, physical PDF page 1, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/en/landing-annotated.webp",
+          "fromSha256": "c95926a8383ef8b1114e11b92cd3c6b841ea9e2d3b1764befbcdffdf321fc2c6",
+          "toSha256": "e24c7389d8f7cc09e2f783a83487ae65dd74431d340187bd50f11431d3b07e6c",
+          "reason": "Rerendered selected EN book excerpt, physical PDF page 28, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/fr/before-after-checkout.webp",
+          "fromSha256": "aefc6c19670c176c5aaeaf06401f7658e04f748fa3974572be5eec2d39aed7a3",
+          "toSha256": "7646e75ece8f4e7b6b418f086cc0818e082e7f9c9fdaa51c90822dfd2d9b3714",
+          "reason": "Rerendered selected FR book excerpt, physical PDF page 96, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/fr/before-after-loading.webp",
+          "fromSha256": "958414932552a87932433005737accd2a0739baf81780732335e681273b7c175",
+          "toSha256": "93bbfc640111fb57426f855630d76467522888ba79c718ee8538220778995d38",
+          "reason": "Rerendered selected FR book excerpt, physical PDF page 120, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/fr/bonus-cover.webp",
+          "fromSha256": "111eb0aa153de103ec95f5a849b244b488c5926e7f13167ec869729a559fd745",
+          "toSha256": "aad8a3f0c1135960b5ab640eed9526ae0610a7b5cf323b2093bd218e72b00b14",
+          "reason": "Rerendered selected FR kit excerpt, physical PDF page 1, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/fr/checklist-rules.webp",
+          "fromSha256": "728d045a708ecbee46f9406e58e007e9f9afb0f6d5a1f245b2e45d50ad032543",
+          "toSha256": "4746cefdd9beb0b4b8b59c15a4f42155b4cb2008cfb8b10a1458171ceb305592",
+          "reason": "Rerendered selected FR book excerpt, physical PDF page 174, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/fr/checkout-annotated.webp",
+          "fromSha256": "2aedb7d1b57450412c3f08c9b1ae22156c542a93310550f307dac2a222b80a81",
+          "toSha256": "badb56af268448587db6b56cd092fac8a05a52cbe9529414c87a834a47aedcac",
+          "reason": "Rerendered selected FR book excerpt, physical PDF page 36, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/fr/contents.webp",
+          "fromSha256": "0f981af2384e8ba36b1701624998bfe3454c75627e0cc4e2d30daec7416a8d21",
+          "toSha256": "f419baf2cbc5167a810096bffdebb7880459d785c57ff96dfdb9f28c5dd78ae4",
+          "reason": "Rerendered selected FR book excerpt, physical PDF page 4, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/fr/cover.webp",
+          "fromSha256": "3970a896beac6fb80b4fd8fda3265d645acc6c8def7a1fea3f773a3ba7aaa0bd",
+          "toSha256": "398d571e90bc43f35fb0dae5ec4e317bed94ed64561bf2ecef5a90dc9f53d212",
+          "reason": "Rerendered selected FR book excerpt, physical PDF page 1, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/images/fr/landing-annotated.webp",
+          "fromSha256": "a49045f0d49a61ee1fb0228f0884de2de6b450f89a7553724a39958f41421568",
+          "toSha256": "c93332140323e37ce24398c20545b144dc3c4fe3fd3b7441903387fbe0c8761f",
+          "reason": "Rerendered selected FR book excerpt, physical PDF page 30, from the hash-verified edition; no full paid PDF published."
+        },
+        {
+          "path": "public/og-en.jpg",
+          "fromSha256": "ae5fede536e2dd5d9d2afddf47c695d2c4869d8b73d1ec28a79054106dda1eed",
+          "toSha256": "e50a71d9b316c7b5b7c1ff3d1426b934c8573e93725d57b327bac81946484682",
+          "reason": "Landing social card regenerated at 1200×630 with measured book pagination; guide social cards are untouched."
+        },
+        {
+          "path": "public/og-fr.jpg",
+          "fromSha256": "ff14a7db8a5f48ded44720911a078a08037804788dbde738c189e97cf811c75f",
+          "toSha256": "6b56f47ddeacaf73e3434c1364ce29286ce9a013a93a76d7747405f0507488f4",
+          "reason": "Landing social card regenerated at 1200×630 with measured book pagination; guide social cards are untouched."
+        },
+        {
+          "path": "src/i18n/articles/comparison-en.ts",
+          "fromSha256": "e3aaa42ab7a7120f27f754ef7d9b38619cf90309f0e297aac1a0f9801ac3ed0f",
+          "toSha256": "7ce8c3657151f0353df0b4de3ac8370b470567c7c71e5375896c49edc06cf3da",
+          "reason": "Only paid-product CTA facts change: correct edition pagination and comparison/glossary names. Substantive guide bodies, original visuals, sources, slugs and dates are retained."
+        },
+        {
+          "path": "src/i18n/articles/comparison-fr.ts",
+          "fromSha256": "02bce3cd195c7e04355506c17de23f813e6793a3dc55936b98d07533cb62bffa",
+          "toSha256": "3257d5ac0453d3af3569abc4562516e2c473fe26a90ecc07f299521c89c2f0d1",
+          "reason": "Only paid-product CTA facts change: correct edition pagination and comparison/glossary names. Substantive guide bodies, original visuals, sources, slugs and dates are retained."
+        },
+        {
+          "path": "src/i18n/articles/en.ts",
+          "fromSha256": "052c59b496b8f825be71d56e1417b8adc00eb705fd325fcd4437e1cfb1893caa",
+          "toSha256": "19e5df4ea5597730fb1a6352af868e5320a7dfd4ef7c0d0164c3b6976d92624c",
+          "reason": "Only paid-product CTA facts change: correct edition pagination and comparison/glossary names. Substantive guide bodies, original visuals, sources, slugs and dates are retained."
+        },
+        {
+          "path": "src/i18n/articles/fr.ts",
+          "fromSha256": "4428ef8be2f8eb894626d9e52736a3931d9724d9da37b702cf88eb0f4de0472f",
+          "toSha256": "d5c7358fa6b3049e4ac4313dd27ee84b12cbaced996f5d72233a00aa062eb352",
+          "reason": "Only paid-product CTA facts change: correct edition pagination and comparison/glossary names. Substantive guide bodies, original visuals, sources, slugs and dates are retained."
+        },
+        {
+          "path": "src/i18n/content.ts",
+          "fromSha256": "cee9871f537d818104d82855838a2807a057c0d3872f4530e5248279ea5fc337",
+          "toSha256": "f61b5ed3bd07dcd32acb71e76719ab32cfb8b94c051bca48214ccbcee083348b",
+          "reason": "Requested FR/EN edition update: measured pages and contents, 56-entry lexicon, dated sources, localized 21-file archive, and replayed fixture summaries. No aggregate annotated-screen or original-QA claim."
+        },
+        {
+          "path": "src/i18n/free-resource.ts",
+          "fromSha256": "249b665ff71679b90879bc901e025a3af27d550732df417976ce75480ed24ee2",
+          "toSha256": "0ccb15ed4a974004e88af2bd7e8614ce190123bb52e91ff5911ddfeb999a1169",
+          "reason": "Only the paid-product CTA pagination changes to 182 FR / 171 EN; free guide catalogue and sources are retained."
+        }
+      ],
+      "introducedFiles": [
+        {
+          "path": "products/playbook-2026/counts.json",
+          "sha256": "512548e6235a18b24b097d36acc042d2404cb8ccfd6ee97ee0e0a8ceba9d0e6d",
+          "reason": "Measured source manifest and file inventory, with explicit counting policy and private-source hashes."
+        },
+        {
+          "path": "public/images/fr/component-lexicon.webp",
+          "sha256": "9ad60c0f0a780a901d4475f72780c13983e568b1d603b589eadeabf344dada2e",
+          "reason": "Selected new lexicon or evidence excerpt; source document/page recorded in the measured manifest."
+        },
+        {
+          "path": "public/images/fr/evidence-sources.webp",
+          "sha256": "61f3a108a9ddc22f92c1b184d34c0e28abc4ef2358d09f4b69ccd54cf084884c",
+          "reason": "Selected new lexicon or evidence excerpt; source document/page recorded in the measured manifest."
+        },
+        {
+          "path": "public/images/en/component-lexicon.webp",
+          "sha256": "5bfc253942fddc449c1366c610f2cd87925236053bd43c123b504a94c710a7d7",
+          "reason": "Selected new lexicon or evidence excerpt; source document/page recorded in the measured manifest."
+        },
+        {
+          "path": "public/images/en/evidence-sources.webp",
+          "sha256": "11e09683046c03cd076ad156557fd16817dcc6f09936800903d91dc7fd2903c6",
+          "reason": "Selected new lexicon or evidence excerpt; source document/page recorded in the measured manifest."
+        }
+      ]
+    },
+    {
+      "id": "owner-correction-first-publication-copy",
+      "reason": "Owner clarification: the book is in its first days of publication. Remove the release-announcement block and wording suggesting a new or expanded replacement edition; preserve measured contents and the offer.",
+      "reviewReport": "docs/EDITION_2026_UPDATE_REPORT.md",
+      "files": [
+        {
+          "path": "src/i18n/content.ts",
+          "fromSha256": "f61b5ed3bd07dcd32acb71e76719ab32cfb8b94c051bca48214ccbcee083348b",
+          "toSha256": "3c13ef6735b33f63c6df4e7daef740eba91b88621867d884703938e21da08cf5",
+          "reason": "Remove the dedicated editionUpdates data and novelty labels in FR/EN metadata, preview descriptions and contents. Retain verified page/section/glossary counts, price, deliverables and purchase links."
+        }
+      ]
+    }
+  ]
+}

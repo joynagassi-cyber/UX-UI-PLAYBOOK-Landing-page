@@ -487,7 +487,7 @@ export const ARTICLES_EN: ArticleData[] = [
           {
             type: "inlineCta",
             title: "The book and audit worksheets",
-            text: "The English Playbook includes 36 annotated screens, a 40-point audit checklist and 12 A4 sheets for your next review.",
+            text: "The English Playbook includes annotated mockups, a 56-component glossary, a 40-point audit checklist and 12 A4 sheets for your next review.",
             buttonLabel: "Get the EN Playbook · $29",
           },
         ],
@@ -792,7 +792,7 @@ For each item: outcome, observation and a link to the test or screenshot.
       },
     ],
     ctaTitle: "Prepare your next audit",
-    ctaText: "The English edition of UX/UI Playbook includes the 139-page book, a 26-page printable kit and an archive of 21 working files.",
+    ctaText: "The English edition of UX/UI Playbook includes the 171-page book, a 26-page printable kit and an archive of 21 working files.",
     ctaBullets: [
       "English book with annotated screen examples",
       "12 A4 worksheets for briefing, auditing and handoff",
@@ -1359,7 +1359,7 @@ For each item: outcome, observation and a link to the test or screenshot.
           {
             type: "inlineCta",
             title: "Token files and templates in the archive",
-            text: "The Playbook archive includes tokens.css, tokens.json and editable templates, with 13 before/after prototypes and 11 platform spreads in the manual.",
+            text: "The Playbook archive includes tokens.css, tokens.json and editable templates, with 13 before/after pairs and 11 platform comparisons in the manual.",
             buttonLabel: "Get the EN files · $29",
           },
         ],
@@ -1529,7 +1529,7 @@ For each item: outcome, observation and a link to the test or screenshot.
       },
     ],
     ctaTitle: "Reusable tokens and templates",
-    ctaText: "The English edition of UX/UI Playbook includes the 139-page book, a 26-page printable kit and an archive of 21 working files.",
+    ctaText: "The English edition of UX/UI Playbook includes the 171-page book, a 26-page printable kit and an archive of 21 working files.",
     ctaBullets: [
       "English book with annotated screen examples",
       "12 A4 worksheets for briefing, auditing and handoff",
@@ -2187,7 +2187,7 @@ follow_up:
       },
     ],
     ctaTitle: "A kit for your next project",
-    ctaText: "The English edition of UX/UI Playbook includes the 139-page book, a 26-page printable kit and an archive of 21 working files.",
+    ctaText: "The English edition of UX/UI Playbook includes the 171-page book, a 26-page printable kit and an archive of 21 working files.",
     ctaBullets: [
       "English book with annotated screen examples",
       "12 A4 worksheets for briefing, auditing and handoff",

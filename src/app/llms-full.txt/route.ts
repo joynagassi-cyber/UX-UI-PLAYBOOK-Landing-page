@@ -5,6 +5,7 @@ import { SITE_URL as SITE } from '@/lib/structured-data';
 import { freeResourceCatalog, freeResourceManifest } from '@/i18n/free-resource';
 import { FREE_RESOURCE_PATH } from '@/lib/free-resource-config';
 import { articleHref } from '@/lib/article-links';
+import { PLAYBOOK_COUNTS, PLAYBOOK_EDITION, playbookPages } from '@/lib/playbook-edition';
 
 const tableCell = (text: string) => text.replace(/\|/g, '\\|').replace(/\n/g, ' ');
 
@@ -122,12 +123,29 @@ export async function GET() {
     '',
     `Canonical site: ${SITE}`,
     'Author: Joy N. | Contact: joynagassi@gmail.com',
-    'English Edition: https://joyccelight.gumroad.com/l/uxuiplaybook ($29 USD, 139p PDF + 26p Kit + 21-file ZIP)',
-    'French Edition: https://joyccelight.gumroad.com/l/uiuxplaybookfr ($29 USD, 148p PDF + 26p Kit + 21-file ZIP)',
+    `English edition: https://joyccelight.gumroad.com/l/uxuiplaybook ($29 USD, ${playbookPages('en')}p PDF + 26p kit + 21-file English ZIP)`,
+    `French edition: https://joyccelight.gumroad.com/l/uiuxplaybookfr ($29 USD, ${playbookPages('fr')}p PDF + 26p kit + 21-file French ZIP)`,
+    'Editions are sold separately. The source archive contains 42 files in total: 21 FR + 21 EN, not 42 per purchase.',
     '',
     '---',
     '',
   ];
+
+  for (const locale of ['en', 'fr'] as const) {
+    const data = CONTENT[locale];
+    chunks.push(`## [${locale.toUpperCase()}] ${data.meta.productName}`, data.hero.note, '');
+    chunks.push(locale === 'fr'
+      ? `${PLAYBOOK_COUNTS.sections} sections en ${PLAYBOOK_COUNTS.parts} parties, dont un lexique de ${PLAYBOOK_COUNTS.glossaryEntries} composants pour le web, le téléphone et le tableau de bord.`
+      : `${PLAYBOOK_COUNTS.sections} sections in ${PLAYBOOK_COUNTS.parts} parts, including a ${PLAYBOOK_COUNTS.glossaryEntries}-component glossary for web, phone and dashboard.`);
+    for (const part of data.contentsSection.parts) chunks.push(`- ${part.num}. ${part.title} (${part.page})`);
+    chunks.push('', locale === 'fr' ? '### Références de la section sur les chiffres' : '### References for the section on figures');
+    for (const source of PLAYBOOK_EDITION.researchSources) {
+      chunks.push(`- [${source.title}](${source.url}): ${source.publisher}, ${source.date}.`);
+    }
+    chunks.push('', locale === 'fr'
+      ? 'Une moyenne indique où chercher, pas ce qu’il faut conclure pour votre produit. Aucun gain de conversion ni certification d’accessibilité n’est promis.'
+      : 'An average indicates where to investigate, not what to conclude for your product. No conversion gain or accessibility certification is promised.', '', '---', '');
+  }
 
   for (const art of ARTICLES.en) {
     chunks.push(renderArticleMarkdown('en', art));

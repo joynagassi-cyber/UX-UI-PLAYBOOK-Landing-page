@@ -1,10 +1,18 @@
 # UX/UI Playbook — Next.js statique sur Cloudflare Workers
 
-**Origine canonique cible : https://joyccelight-playbook.pages.dev**. Cette valeur de build est conservée pour les liens imprimés des kits ; elle ne prouve pas un déploiement. La cible est désormais **Workers avec Static Assets**, sans serveur Next. Le nom du Worker est **imposé à `joyccelight-playbook`** ; le rattachement distant et le domaine restent à vérifier. Aucun compte, DNS ou service Vercel n’est modifié ici.
+**Origine canonique cible : https://joyccelight-playbook.uxplay.workers.dev**. Cette origine a été choisie explicitement pour cette mise à jour. Les liens des deux kits gratuits sont régénérés ; cela ne configure pas les anciens hosts et ne prouve pas la publication de ce code. La cible est désormais **Workers avec Static Assets**, sans serveur Next. Le nom du Worker est **imposé à `joyccelight-playbook`** ; le rattachement distant et le domaine restent à vérifier. Aucun compte, DNS ou service Vercel n’est modifié ici.
 
-- **FR `/fr`** : manuel de 148 pages A4 + kit de 26 pages / 12 fiches + archive de 21 fichiers → [édition française, 29 USD](https://joyccelight.gumroad.com/l/uiuxplaybookfr).
-- **EN `/en`** : manuel de 139 pages A4 + même structure de kit et d’archive → [English edition, $29 USD](https://joyccelight.gumroad.com/l/uxuiplaybook).
+- **FR `/fr`** : manuel de 182 pages A4 + kit de 26 pages / 12 fiches + archive de 21 fichiers → [édition française, 29 USD](https://joyccelight.gumroad.com/l/uiuxplaybookfr).
+- **EN `/en`** : manuel de 171 pages A4 + même structure de kit et d’archive → [English edition, $29 USD](https://joyccelight.gumroad.com/l/uxuiplaybook).
 - Contact : **joynagassi@gmail.com**.
+
+## Édition du 9 novembre 2026
+
+Les deux livres ont **120 sections et neuf parties**, dont **22 sections de lexique et 56 entrées de vocabulaire**. Le kit reste à 26 pages et 12 fiches. Chaque achat comprend **21 fichiers dans sa langue**, pas les 42 fichiers du ZIP source bilingue. Les 24 paires comparées se répartissent en 13 thèmes et 11 cas de plateformes. Les anciens totaux globaux d’écrans ne sont pas réaffirmés, car les sources se contredisent.
+
+[Compteurs et empreintes des sources](products/playbook-2026/counts.json) · [Rapport de mise à jour](docs/EDITION_2026_UPDATE_REPORT.md) · [Description Gumroad FR prête à copier](products/playbook-2026/gumroad-description-fr.md) · [EN](products/playbook-2026/gumroad-description-en.md).
+
+Les PDF et le ZIP payants ne sont pas copiés dans `public/`. Les deux descriptions Gumroad sont préparées, pas publiées. Le rapport distingue le contrôle local des fichiers de l’ancien rapport QA de 36 contrôles, qui n’a pas été fourni.
 
 ## Interface et articles
 
@@ -21,7 +29,7 @@ Quatre articles sont disponibles **dans chaque langue** sous `/{fr|en}/articles/
 | `product-design-ai-agents` | Cadrage et revue du travail avec des agents IA | 13 |
 | `ux-ui-product-design` | Comparaison des responsabilités sur une même application mobile | 14 |
 
-Le libellé de navigation reste **« Article »**, sans nombre figé ; les index portent désormais un titre explicite **Guides UX, UI et Product Design / UX, UI and Product Design guides**. Les 120 explications FR/EN ont chacune leur visuel à proximité : côte à côte au-dessus de 760 px, dessous sur mobile. Deux synthèses supplémentaires par article sont agrandissables au clavier. Les sources figurent sous **Sources et références / Sources and references**, sans badge de classement. Les articles n’utilisent pas de scans du livre ; la galerie de dix pages réelles sur la landing est conservée.
+Le libellé de navigation reste **« Article »**, sans nombre figé ; les index portent désormais un titre explicite **Guides UX, UI et Product Design / UX, UI and Product Design guides**. Les 120 explications FR/EN ont chacune leur visuel à proximité : côte à côte au-dessus de 760 px, dessous sur mobile. Deux synthèses supplémentaires par article sont agrandissables au clavier. Les sources figurent sous **Sources et références / Sources and references**, sans badge de classement. Les articles n’utilisent pas de scans du livre ; la galerie de dix extraits du manuel et du kit est actualisée avec les PDF de cette édition.
 
 Le comparatif UX/UI/Product comprend le prototype local **Atelier** : offre, créneau et récapitulatif, trois regards qui conservent le même état, sélection, retour, confirmation simulée et reprise après un créneau refusé. L’offre de 39 € / 45 min et les horaires sont fictifs. Aucune donnée personnelle, réservation ou paiement n’est envoyé. Les six références consultées, les limites de la simulation et les essais à préparer sont indiqués dans l’article. [Choix éditoriaux](docs/EDITORIAL.md).
 
@@ -88,7 +96,7 @@ L’erreur `Missing entry-point to Worker script or to assets directory` venait 
 | Deploy command, **seulement pour une publication autorisée** | `npm run deploy:worker` |
 | Assets / point d’entrée | `./out` / `worker/index.mjs`, déclarés dans `wrangler.jsonc` ; pas de champ Pages « output directory » |
 | Node | `22` ; minimum `22.19.0`, comme les engines du dépôt |
-| Variable de build, production et preview | `NEXT_PUBLIC_SITE_URL=https://joyccelight-playbook.pages.dev` |
+| Variable de build, production et preview | `NEXT_PUBLIC_SITE_URL=https://joyccelight-playbook.uxplay.workers.dev` |
 | Nom imposé du Worker | **`joyccelight-playbook`**, sans suffixe ni renommage automatique |
 
 **Le nom d’origine est une contrainte, pas une suggestion.** `scripts/deploy_worker.cjs` impose `--name joyccelight-playbook` et le fichier Wrangler du dépôt. Il refuse un autre `wrangler.name`, une valeur contradictoire de `WRANGLER_CI_OVERRIDE_NAME`, un environnement nommé (`CLOUDFLARE_ENV`) ou une surcharge CLI. Les contrôles Cloudflare de compte/tag restent actifs : aucune variable d’identité CI n’est supprimée pour les contourner.
@@ -97,7 +105,7 @@ Le libellé historique **`Workers Builds: ux-ui-playbook`** ne doit pas remplace
 
 Pour valider le paquet **sans publier** : `npm run build && npm run check:worker`. Ce dernier utilise le même garde-fou, puis `wrangler deploy --name joyccelight-playbook --dry-run` avec la configuration verrouillée. Le [guide de configuration Workers](CLOUDFLARE_MIGRATION.md#configuration-workers) distingue les preuves locales, les réglages distants restants et l’historique Pages.
 
-**Aucun commit/push/déploiement n’est nécessaire à ces tests locaux.** Les workflows GitHub vérifient, sans publier ; l’intégration Workers Builds, elle, peut déployer à la réception d’un push. Préparer ce code ne désactive ni ne modifie cette intégration distante. L’origine canonique reste inchangée : un futur domaine différent nécessite une décision séparée sur les liens imprimés des kits et les redirections entre hosts.
+**Aucun commit/push/déploiement n’est nécessaire à ces tests locaux.** Les workflows GitHub vérifient, sans publier ; l’intégration Workers Builds, elle, peut déployer à la réception d’un push. Préparer ce code ne désactive ni ne modifie cette intégration distante. L’origine canonique choisie est celle du Worker existant. Le réglage distant `NEXT_PUBLIC_SITE_URL` doit correspondre au dépôt lors du prochain build. Les redirections HTTP depuis les anciens hosts restent une vérification distincte, sans changement DNS ici.
 
 ## Développer et prévisualiser
 
@@ -133,7 +141,7 @@ Dans un second terminal, sur le même serveur Worker 3100 :
 ```bash
 python3 scripts/site_check.py \
   --base-url http://127.0.0.1:3100 \
-  --expected-origin https://joyccelight-playbook.pages.dev
+  --expected-origin https://joyccelight-playbook.uxplay.workers.dev
 
 npx playwright install --with-deps chromium
 PLAYWRIGHT_BASE_URL=http://127.0.0.1:3100 npm run test:ui
@@ -153,7 +161,7 @@ Les preuves détaillées sont décrites dans [docs/AUDIT.md](docs/AUDIT.md). `re
 ### Origine publique du build
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://joyccelight-playbook.pages.dev
+NEXT_PUBLIC_SITE_URL=https://joyccelight-playbook.uxplay.workers.dev
 ```
 
 Cette variable est résolue **au build** et doit être identique pour les deux langues. Sa valeur doit être une origine **HTTPS publique**, sans chemin, identifiants, port personnalisé, query ni fragment ; les valeurs locales/preview connues et la valeur vide explicite sont refusées. Le défaut est défini dans `src/config/site-policy.json`, sans détection depuis un provider ou l’hôte de requête. Le fichier `.env.example` et les deux workflows emploient la même cible. Un changement de domaine impose aussi de régénérer les deux kits et de contrôler séparément les redirections publiques, dans une mission autorisée.

@@ -8,7 +8,7 @@ Un répertoire pour comparer, choisir et documenter vos ressources d’interface
 
 > Le guide et la grille sont gratuits. Les services cités peuvent proposer des fonctions payantes ou des licences conditionnelles. Les 75 liens ne correspondent pas à 75 outils distincts et n’ont pas fait l’objet d’un audit exhaustif de disponibilité. Cette édition fournit des points de départ à vérifier ; elle ne promet ni résultat commercial, ni performance, ni conformité d’accessibilité, ni absence d’erreurs d’un agent IA.
 
-Page du guide : https://joyccelight-playbook.pages.dev/fr/resources/ui-ux-directory?utm_source=repertoire-ui-ux&utm_medium=markdown&utm_campaign=ressource-gratuite
+Page du guide : https://joyccelight-playbook.uxplay.workers.dev/fr/resources/ui-ux-directory?utm_source=repertoire-ui-ux&utm_medium=markdown&utm_campaign=ressource-gratuite
 
 ## Comment l’utiliser
 
@@ -701,9 +701,9 @@ Adaptation du document fourni par le créateur : repertoire-complet-ui-ux-profil
 
 Ce guide aide à choisir des ressources. Le UX/UI Playbook payant traite la préparation et la revue d’une interface : manuel, kit de fiches A4 et archive avec tokens, gabarits et scanner. Il n’est pas inclus dans ce téléchargement gratuit.
 
-Découvrir l’édition française (29 USD) : https://joyccelight-playbook.pages.dev/fr?utm_source=repertoire-ui-ux&utm_medium=markdown&utm_campaign=ressource-gratuite#buy
+Découvrir l’édition française (29 USD) : https://joyccelight-playbook.uxplay.workers.dev/fr?utm_source=repertoire-ui-ux&utm_medium=markdown&utm_campaign=ressource-gratuite#buy
 
-Lire les articles gratuits : https://joyccelight-playbook.pages.dev/fr/articles?utm_source=repertoire-ui-ux&utm_medium=markdown&utm_campaign=ressource-gratuite
+Lire les articles gratuits : https://joyccelight-playbook.uxplay.workers.dev/fr/articles?utm_source=repertoire-ui-ux&utm_medium=markdown&utm_campaign=ressource-gratuite
 
 ## Conditions d’usage
 

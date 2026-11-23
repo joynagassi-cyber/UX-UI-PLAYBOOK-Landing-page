@@ -2613,6 +2613,9 @@ time {
     list-style: none;
     border-radius: 14px;
     cursor: pointer;
+    /* This summary is already offset by its sticky parent. The global 96px
+       control margin otherwise scrolls the article when it receives focus. */
+    scroll-margin-block-start: 0;
   }
 
   .notion-mobile-toc-chevron {

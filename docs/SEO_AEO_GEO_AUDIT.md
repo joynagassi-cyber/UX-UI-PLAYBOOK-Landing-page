@@ -108,3 +108,8 @@ Les tests automatisés utilisent axe avec les tags WCAG 2 A/AA, 2.1 AA et 2.2 AA
 Lighthouse mesure ici une navigation **de laboratoire mobile simulée**, avec LCP, CLS et TBT ; TBT n’est pas INP. Un second scénario Chromium collecte réellement Event Timing sur quelques interactions locales à CPU ralenti : il fournit un **candidat INP de laboratoire**, pas une statistique de terrain ni un percentile représentatif. Les dépassements éventuels sont conservés dans le rapport final, sans transformer un score Lighthouse en preuve de Core Web Vitals réels.
 
 Aucune instrumentation de visiteurs, aucun traceur ni SDK RUM n’a été ajouté. Les vrais LCP/INP/CLS nécessitent CrUX ou une collecte RUM décidée, documentée et respectueuse des choix des visiteurs. Leur absence est un état inconnu, pas un succès.
+
+
+## Addendum du 18 novembre 2026 : origine et édition augmentée
+
+Les résultats et l’ancienne origine cités ci-dessus décrivent la passe historique ; ils ne sont pas réécrits. Pour la mise à jour issue du Drive du 9 novembre, le propriétaire a choisi **`https://joyccelight-playbook.uxplay.workers.dev`** comme origine officielle et **21 fichiers par langue et par achat**. Les valeurs courantes sont dans le README et le runbook ; les liens des kits gratuits sont régénérés. Voir le [rapport de mise à jour](EDITION_2026_UPDATE_REPORT.md) pour le diagnostic CI, les compteurs vérifiés et les validations de cette nouvelle révision. Aucune modification DNS ni publication distante n’est impliquée.
