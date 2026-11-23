@@ -19,6 +19,7 @@ export function HeroSampleTrigger({
     <button
       type="button"
       className={className}
+      aria-haspopup="dialog"
       onClick={() => {
         window.dispatchEvent(
           new CustomEvent('open-playbook-reader', { detail: { index: pageIndex } })
@@ -38,6 +39,7 @@ export function HeroBookStack({
   spreadSrc,
   spreadAlt,
   spreadCaption,
+  previewLabel,
 }: {
   coverSrc: string;
   coverAlt: string;
@@ -45,6 +47,7 @@ export function HeroBookStack({
   spreadSrc: string;
   spreadAlt: string;
   spreadCaption: string;
+  previewLabel: string;
 }) {
   return (
     <div className="hero-stack">
@@ -54,7 +57,9 @@ export function HeroBookStack({
         onClick={() =>
           window.dispatchEvent(new CustomEvent('open-playbook-reader', { detail: { index: 0 } }))
         }
-        aria-label={coverAlt}
+        aria-label={`${previewLabel} — ${coverAlt}`}
+        title={previewLabel}
+        aria-haspopup="dialog"
       >
         <img src={coverSrc} width={960} height={1357} alt={coverAlt} fetchPriority="high" />
         <span className="page-caption">
@@ -69,7 +74,9 @@ export function HeroBookStack({
         onClick={() =>
           window.dispatchEvent(new CustomEvent('open-playbook-reader', { detail: { index: 2 } }))
         }
-        aria-label={spreadAlt}
+        aria-label={`${previewLabel} — ${spreadAlt}`}
+        title={previewLabel}
+        aria-haspopup="dialog"
       >
         <img src={spreadSrc} width={960} height={1357} alt={spreadAlt} loading="lazy" />
         <span className="page-caption">
@@ -182,6 +189,7 @@ export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
           <button
             type="button"
             className="btn ghost small"
+            aria-haspopup="dialog"
             onClick={() => setActiveIndex(0)}
           >
             <Icon name="book-open" size="sm" />
@@ -198,7 +206,9 @@ export function BookGalleryLightbox({ data, gumroadUrl }: BookGalleryProps) {
                 type="button"
                 className="shot-card"
                 onClick={() => setActiveIndex(fullIdx)}
-                aria-label={`${page.title} — ${data.clickHint}`}
+                aria-label={`${data.previewLabel} — ${page.title} — ${data.clickHint}`}
+                title={data.previewLabel}
+                aria-haspopup="dialog"
               >
                 <div className="shot-img-wrap">
                   <img

@@ -24,6 +24,14 @@ function InlineArticleText({ text, locale }: { text: string; locale: Locale }) {
   )}</>;
 }
 
+// Native details/summary keeps the contents usable before hydration and without JS.
+function handleTocEscape(event: React.KeyboardEvent<HTMLDetailsElement>) {
+  if (event.key !== 'Escape' || !event.currentTarget.open) return;
+  event.preventDefault();
+  event.currentTarget.open = false;
+  event.currentTarget.querySelector('summary')?.focus();
+}
+
 interface NotionArticleReaderProps {
   locale: Locale;
   gumroadUrl: string;
@@ -108,10 +116,12 @@ export function NotionArticleReader({
   const ui = ARTICLES_UI[locale];
   const [activeId, setActiveId] = useState<string>(article.sections[0]?.id ?? '');
   const [progress, setProgress] = useState<number>(0);
-  const [mobileTocOpen, setMobileTocOpen] = useState<boolean>(false);
+  const mobileTocRef = useRef<HTMLDetailsElement>(null);
   const [expandedDiagram, setExpandedDiagram] = useState<ArticleVisualData | null>(null);
   const lightboxRef = useRef<HTMLDivElement>(null);
   const sourcesHeading = ui.sourcesTitle;
+  const collapseTocLabel = locale === 'fr' ? 'Replier le sommaire' : 'Collapse contents';
+  const expandTocLabel = locale === 'fr' ? 'Afficher le sommaire' : 'Show contents';
   const zoomLabel = locale === 'fr' ? 'Agrandir le schéma' : 'Zoom diagram';
   const faqHeading =
     locale === 'fr'
@@ -153,7 +163,9 @@ export function NotionArticleReader({
       (entries) => {
         const visible = entries
           .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          // On short screens the previous section's tail can share the reading
+          // band with the linked heading. Prefer the later visible section.
+          .sort((a, b) => b.boundingClientRect.top - a.boundingClientRect.top);
         if (visible.length > 0) {
           setActiveId(visible[0].target.id);
         }
@@ -196,13 +208,15 @@ export function NotionArticleReader({
   const handleTocClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     setActiveId(id);
-    setMobileTocOpen(false);
+    if (mobileTocRef.current) mobileTocRef.current.open = false;
     const target = document.getElementById(id);
     if (target) {
       target.scrollIntoView({
         behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
         block: 'start',
       });
+      // Closing the mobile disclosure must not leave focus inside its hidden panel.
+      target.querySelector<HTMLElement>('h2')?.focus({ preventScroll: true });
       window.history.replaceState(null, '', `#${id}`);
     }
   };
@@ -425,121 +439,118 @@ export function NotionArticleReader({
       </nav>
 
       {/* Mobile Sticky Sommaire Drawer */}
-      <div className="notion-mobile-toc">
-        <button
-          type="button"
-          className="notion-mobile-toc-btn"
-          onClick={() => setMobileTocOpen((v) => !v)}
-          aria-expanded={mobileTocOpen}
-          aria-controls="mobile-article-toc"
-        >
+      <details className="notion-mobile-toc" ref={mobileTocRef} onKeyDown={handleTocEscape}>
+        <summary className="notion-mobile-toc-btn" aria-controls="mobile-article-toc">
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
             <Icon name="list-tree" size="md" style={{ color: 'var(--accent-ink)' }} />
             <span>{ui.tocTitle}</span>
           </span>
-          <Icon name="chevron-down" size="md"
-            style={{
-              transform: mobileTocOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-              transition: 'transform 0.2s ease',
-            }}
-          />
-        </button>
-        {mobileTocOpen && (
-          <div id="mobile-article-toc" className="notion-mobile-toc-panel">
-            <ul className="notion-toc-list">
-              {article.sections.map((sec) => (
-                <li key={sec.id}>
-                  <a
-                    href={`#${sec.id}`}
-                    onClick={(e) => handleTocClick(e, sec.id)}
-                    className={`notion-toc-link ${activeId === sec.id ? 'active' : ''}`}
-                    aria-current={activeId === sec.id ? 'location' : undefined}
-                  >
-                    <span className="notion-toc-num">{sec.num}</span>
-                    <span>{sec.tocLabel || sec.heading}</span>
-                  </a>
-                </li>
-              ))}
-              <li>
+          <Icon name="chevron-down" size="md" className="notion-mobile-toc-chevron" />
+        </summary>
+        <div id="mobile-article-toc" className="notion-mobile-toc-panel" tabIndex={0} role="region" aria-label={ui.tocTitle}>
+          <ul className="notion-toc-list">
+            {article.sections.map((sec) => (
+              <li key={sec.id}>
                 <a
-                  href="#article-faq"
-                  onClick={(e) => handleTocClick(e, 'article-faq')}
-                  className={`notion-toc-link ${activeId === 'article-faq' ? 'active' : ''}`}
-                  aria-current={activeId === 'article-faq' ? 'location' : undefined}
+                  href={`#${sec.id}`}
+                  onClick={(e) => handleTocClick(e, sec.id)}
+                  className={`notion-toc-link ${activeId === sec.id ? 'active' : ''}`}
+                  aria-current={activeId === sec.id ? 'location' : undefined}
                 >
-                  <span className="notion-toc-num">FAQ</span>
-                  <span>{faqNavTitle}</span>
+                  <span className="notion-toc-num">{sec.num}</span>
+                  <span>{sec.tocLabel || sec.heading}</span>
                 </a>
               </li>
-              <li>
-                <a href="#article-sources" onClick={(e) => handleTocClick(e, 'article-sources')}
-                  className={`notion-toc-link ${activeId === 'article-sources' ? 'active' : ''}`}
-                  aria-current={activeId === 'article-sources' ? 'location' : undefined}>
-                  <Icon name="arrow-up-right" size="sm" className="notion-toc-source-icon" /><span>{sourcesHeading}</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        )}
-      </div>
+            ))}
+            <li>
+              <a
+                href="#article-faq"
+                onClick={(e) => handleTocClick(e, 'article-faq')}
+                className={`notion-toc-link ${activeId === 'article-faq' ? 'active' : ''}`}
+                aria-current={activeId === 'article-faq' ? 'location' : undefined}
+              >
+                <span className="notion-toc-num">FAQ</span>
+                <span>{faqNavTitle}</span>
+              </a>
+            </li>
+            <li>
+              <a href="#article-sources" onClick={(e) => handleTocClick(e, 'article-sources')}
+                className={`notion-toc-link ${activeId === 'article-sources' ? 'active' : ''}`}
+                aria-current={activeId === 'article-sources' ? 'location' : undefined}>
+                <Icon name="arrow-up-right" size="sm" className="notion-toc-source-icon" /><span>{sourcesHeading}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </details>
 
       {/* Two-Column Notion Shell */}
       <div className="notion-shell">
         {/* Left Sticky Clickable Sommaire (Notion Sidebar) */}
         <aside className="notion-toc-rail" aria-label={ui.tocTitle}>
-          <div className="notion-toc-card">
-            <div className="notion-toc-label">
-              <Icon name="list-tree" size="sm" style={{ color: 'var(--accent-ink)' }} />
-              <span>{ui.tocTitle}</span>
-            </div>
-            <ul className="notion-toc-list">
-              {article.sections.map((sec) => (
-                <li key={sec.id}>
-                  <a
-                    href={`#${sec.id}`}
-                    onClick={(e) => handleTocClick(e, sec.id)}
-                    className={`notion-toc-link ${activeId === sec.id ? 'active' : ''}`}
-                    aria-current={activeId === sec.id ? 'location' : undefined}
-                  >
-                    <span className="notion-toc-num">{sec.num}</span>
-                    <span>{sec.tocLabel || sec.heading}</span>
-                  </a>
-                </li>
-              ))}
-              <li>
-                <a
-                  href="#article-faq"
-                  onClick={(e) => handleTocClick(e, 'article-faq')}
-                  className={`notion-toc-link ${activeId === 'article-faq' ? 'active' : ''}`}
-                  aria-current={activeId === 'article-faq' ? 'location' : undefined}
-                >
-                  <span className="notion-toc-num">FAQ</span>
-                  <span>{faqNavTitle}</span>
-                </a>
-              </li>
-              <li>
-                <a href="#article-sources" onClick={(e) => handleTocClick(e, 'article-sources')}
-                  className={`notion-toc-link ${activeId === 'article-sources' ? 'active' : ''}`}
-                  aria-current={activeId === 'article-sources' ? 'location' : undefined}>
-                  <Icon name="arrow-up-right" size="sm" className="notion-toc-source-icon" /><span>{sourcesHeading}</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+          <details className="notion-toc-disclosure" open onKeyDown={handleTocEscape}>
+            <summary className="notion-toc-toggle" aria-controls="desktop-article-toc">
+              <Icon name="list-tree" size="sm" />
+              <span className="notion-toc-toggle-open">{collapseTocLabel}</span>
+              <span className="notion-toc-toggle-closed">{expandTocLabel}</span>
+              <Icon name="chevron-left" size="sm" className="notion-toc-toggle-chevron" />
+            </summary>
+            <div id="desktop-article-toc" className="notion-toc-scroll" tabIndex={0} role="region" aria-label={ui.tocTitle}>
+              <div className="notion-toc-card">
+                <div className="notion-toc-label">
+                  <Icon name="list-tree" size="sm" style={{ color: 'var(--accent-ink)' }} />
+                  <span>{ui.tocTitle}</span>
+                </div>
+                <ul className="notion-toc-list">
+                  {article.sections.map((sec) => (
+                    <li key={sec.id}>
+                      <a
+                        href={`#${sec.id}`}
+                        onClick={(e) => handleTocClick(e, sec.id)}
+                        className={`notion-toc-link ${activeId === sec.id ? 'active' : ''}`}
+                        aria-current={activeId === sec.id ? 'location' : undefined}
+                      >
+                        <span className="notion-toc-num">{sec.num}</span>
+                        <span>{sec.tocLabel || sec.heading}</span>
+                      </a>
+                    </li>
+                  ))}
+                  <li>
+                    <a
+                      href="#article-faq"
+                      onClick={(e) => handleTocClick(e, 'article-faq')}
+                      className={`notion-toc-link ${activeId === 'article-faq' ? 'active' : ''}`}
+                      aria-current={activeId === 'article-faq' ? 'location' : undefined}
+                    >
+                      <span className="notion-toc-num">FAQ</span>
+                      <span>{faqNavTitle}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#article-sources" onClick={(e) => handleTocClick(e, 'article-sources')}
+                      className={`notion-toc-link ${activeId === 'article-sources' ? 'active' : ''}`}
+                      aria-current={activeId === 'article-sources' ? 'location' : undefined}>
+                      <Icon name="arrow-up-right" size="sm" className="notion-toc-source-icon" /><span>{sourcesHeading}</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-          {/* Subtle Notion Sidebar Promo Card */}
-          <div className="notion-rail-promo">
-            <div className="notion-rail-promo-tag">{ui.miniCtaTag}</div>
-            <p>{ui.miniCtaTitle}</p>
-            <GumroadButton
-              href={gumroadUrl}
-              className="btn primary small"
-              style={{ width: '100%', justifyContent: 'center' }}
-            >
-              <span>{ui.miniCtaBtn}</span>
-              <Icon name="arrow-right" size="sm" />
-            </GumroadButton>
-          </div>
+              {/* Subtle Notion Sidebar Promo Card */}
+              <div className="notion-rail-promo">
+                <div className="notion-rail-promo-tag">{ui.miniCtaTag}</div>
+                <p>{ui.miniCtaTitle}</p>
+                <GumroadButton
+                  href={gumroadUrl}
+                  className="btn primary small"
+                  style={{ width: '100%', justifyContent: 'center' }}
+                >
+                  <span>{ui.miniCtaBtn}</span>
+                  <Icon name="arrow-right" size="sm" />
+                </GumroadButton>
+              </div>
+            </div>
+          </details>
         </aside>
 
         {/* Main Notion Editorial Document */}
@@ -606,7 +617,7 @@ export function NotionArticleReader({
               id={section.id}
               className="notion-section notion-reveal is-visible"
             >
-              <h2 className="notion-h2">
+              <h2 className="notion-h2" tabIndex={-1}>
                 <span className="notion-h2-num">{section.num}</span>
                 <span>{section.heading}</span>
               </h2>
@@ -616,7 +627,7 @@ export function NotionArticleReader({
 
           {/* Article FAQ Section (AEO Schema-Backed) */}
           <section id="article-faq" className="notion-section notion-reveal is-visible">
-            <h2 className="notion-h2">
+            <h2 className="notion-h2" tabIndex={-1}>
               <span className="notion-h2-num">FAQ</span>
               <span>{faqHeading}</span>
             </h2>
@@ -632,7 +643,7 @@ export function NotionArticleReader({
 
           <section id="article-sources" className="notion-refs" aria-labelledby="article-sources-heading">
             <div className="notion-refs-head">
-              <h2 id="article-sources-heading">{sourcesHeading}</h2>
+              <h2 id="article-sources-heading" tabIndex={-1}>{sourcesHeading}</h2>
             </div>
             <ol className="notion-refs-list">
               {article.references.map((reference, referenceIndex) => (
@@ -725,8 +736,8 @@ export function NotionArticleReader({
                 </GumroadButton>
                 <p style={{ fontSize: 12, color: 'var(--fg-2)', marginTop: 10 }}>
                   {locale === 'fr'
-                    ? 'Téléchargement immédiat · Garantie 7 jours'
-                    : 'Instant download · 7-day refund guarantee'}
+                    ? 'Fichiers via Gumroad · remboursement sous 7 jours'
+                    : 'Files via Gumroad · 7-day refund policy'}
                 </p>
               </div>
             </div>

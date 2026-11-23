@@ -268,7 +268,9 @@ for (const locale of ['fr', 'en']) {
     await page.setViewportSize({ width: 320, height: 900 });
     await page.locator('.notion-mobile-toc-btn').click();
     await page.locator('.notion-mobile-toc a[href="#article-sources"]').click();
-    await expect(page.locator('.notion-mobile-toc-btn')).toHaveAttribute('aria-expanded', 'false');
+    // Native details/summary exposes expanded state without duplicating ARIA.
+    await expect(page.locator('.notion-mobile-toc')).toHaveJSProperty('open', false);
+    await expect(page.locator('.notion-mobile-toc-btn')).toHaveAccessibleName(locale === 'fr' ? 'Dans cet article' : 'In this article');
   });
 }
 

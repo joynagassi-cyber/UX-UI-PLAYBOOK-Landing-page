@@ -158,6 +158,7 @@ export interface PlaybookContent {
     filterScreens: string;
     filterBeforeAfter: string;
     filterSystem: string;
+    previewLabel: string;
     clickHint: string;
     note: string;
     readerClose: string;
@@ -269,13 +270,13 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     nav: {
       pillars: "Livre et fichiers",
       demo: "Démo du contrôle",
-      inside: 'Pages réelles',
+      inside: 'Extraits du livre',
       contents: 'Sommaire',
-      guides: 'Article',
+      guides: 'Articles',
       faq: 'FAQ',
       buy: 'Acheter — 29 $',
       themeDarkLabel: 'Passer en mode clair',
-      themeLightLabel: 'Passer en mode noir OLED',
+      themeLightLabel: 'Passer en mode sombre',
       switchLangTitle: 'Switch to the English edition (139 pages)',
     },
     hero: {
@@ -286,13 +287,13 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       lede:
         "Le UX/UI Playbook de Joy N. accompagne la conception d’une interface, depuis la définition du parcours jusqu’aux états d’erreur et à la passation. Le manuel explique les choix de typographie, de couleur et d’espacement avec des écrans annotés. Les fiches A4 servent à préparer un brief ou une revue ; les tokens et le scanner Python permettent ensuite de reprendre certaines décisions dans le code. Les points qui demandent une observation du rendu ou un essai avec des utilisateurs restent à vérifier.",
       primaryCta: 'Obtenir l’édition française · 29 $',
-      secondaryCta: 'Feuilleter 10 pages réelles',
+      secondaryCta: 'Feuilleter les 10 extraits',
       note: "29 USD, paiement unique. Téléchargement après achat : PDF français de 148 pages, kit A4 de 26 pages et archive de 21 fichiers.",
       proofs: [
         '148 pages A4 en français',
         "77 règles : contrôles auto + humains",
         '12 fiches + 21 fichiers & Skill IA',
-        'Remboursé sous 7 jours',
+        'Demande de remboursement sous 7 jours',
       ],
       coverCaption: 'Édition FR · 148 pages',
       spreadCaption: "Exemples annotés et consignes de revue",
@@ -465,6 +466,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       filterScreens: 'Écrans annotés',
       filterBeforeAfter: 'Avant / Après',
       filterSystem: 'Checklist & Kit Bonus',
+      previewLabel: 'Extrait du livre',
       clickHint: 'Cliquer pour zoomer',
       note: "L’édition française contient un PDF de 148 pages avec signets cliquables, le kit A4 séparé de 26 pages et l’archive de 21 fichiers. Les pages présentées ici sont des extraits de ces documents.",
       readerClose: 'Fermer',
@@ -541,7 +543,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           category: 'screens',
           badge: 'p. 67 · Partie 05',
           title: 'Le design comme revenu',
-          caption: 'Vendre, chiffrer, cadrer la mission et défendre ses choix sans jargon devant un client.',
+          caption: 'Cadrage de mission, estimation, proposition en une page et présentation des choix au client.',
           alt: 'Ouverture de la partie 05 : Le design comme revenu',
         },
         {
@@ -762,7 +764,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         {
           feature: 'Skill IA (SKILL.md / AGENTS.md) pour Claude Code, Cursor, Codex',
           others: "Méthode expliquée dans le livre",
-          playbook: 'Inclus — l’agent vérifie et rend un rapport',
+          playbook: 'Instructions Markdown à fournir à l’agent',
           highlight: true,
         },
         {
@@ -800,7 +802,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     author: {
       kicker: 'L’AUTEUR',
       heading: "Joy N., auteur du UX/UI Playbook.",
-      role: "Joy N. · Auteur du UX/UI Playbook et créateur de solutions numériques.",
+      role: "Joy N. · Auteur du manuel, des fiches A4 et des fichiers de travail.",
       p1: "Joy N. est l’auteur de ce manuel consacré à l’UX, à l’UI et au Product Design. Le livre suit le déroulement d’un projet : décrire le besoin, préparer les parcours, définir les composants et transmettre les décisions à la personne qui développe. Les exemples d’écrans permettent d’examiner des choix de contenu, de disposition et de comportement dans ce contexte.",
       p2: "Les documents associés reprennent ces sujets sous forme de fiches et de fichiers modifiables : brief, audit, passation, tokens et règles pour agents de code. Pour une question sur le contenu ou le téléchargement, vous pouvez écrire à joynagassi@gmail.com.",
       signature: 'Joy N. · Édition française 2026',
@@ -811,7 +813,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       items: [
         {
           q: 'Que contient exactement le téléchargement à 29 $ ?',
-          a: 'Trois éléments disponibles immédiatement après paiement : 1) le UX/UI Playbook complet en français (PDF A4 de 148 pages avec sommaire interactif), 2) le Kit Bonus de livraison (PDF A4 de 26 pages contenant 12 fiches pratiques et leurs pages de notes), et 3) l’archive ZIP des 21 fichiers de travail (design tokens CSS/JSON, 4 gabarits, les 77 règles en JSON, le script Python agent_check.py et le skill IA).',
+          a: 'Trois éléments à télécharger après l’achat : 1) le UX/UI Playbook complet en français (PDF A4 de 148 pages avec sommaire interactif), 2) le Kit Bonus de livraison (PDF A4 de 26 pages contenant 12 fiches pratiques et leurs pages de notes), et 3) l’archive ZIP des 21 fichiers de travail (design tokens CSS/JSON, 4 gabarits, les 77 règles en JSON, le script Python agent_check.py et le skill IA).',
         },
         {
           q: 'Avec quels outils IA fonctionnent la checklist et le skill ?',
@@ -840,7 +842,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       heading: "Le livre, le kit et l’archive pour 29 USD.",
       lede:
         "L’achat donne accès au manuel français de 148 pages, au kit imprimable et aux fichiers techniques présentés sur cette page. Utilisez le livre pour préparer les décisions d’un écran, puis conservez vos observations et vos corrections dans les gabarits du projet. Les dix pages d’aperçu restent consultables avant de choisir cette édition.",
-      includedTitle: 'Inclus instantanément dans l’édition française :',
+      includedTitle: 'Les fichiers de l’édition française :',
       includedList: [
         'UX/UI Playbook 2026 — PDF A4 de 148 pages (97 sections, 36 écrans annotés)',
         'Kit Bonus Imprimable — PDF A4 de 26 pages (12 fiches d’atelier & notes)',
@@ -854,7 +856,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       buyBtn: 'Obtenir l’édition française · 29 $',
       licenseNote:
         "Documents PDF consultables sur ordinateur ou tablette, imprimables en A4. Le paiement et la remise des fichiers passent par Gumroad ; les moyens de paiement disponibles sont affichés lors de la commande.",
-      guarantees: ['Téléchargement immédiat', 'Remboursé sous 7 jours', 'Paiement sécurisé Gumroad'],
+      guarantees: ['Téléchargement après achat', 'Demande de remboursement sous 7 jours', 'Paiement via Gumroad'],
       crosslinkTag: 'VOUS TRAVAILLEZ EN ANGLAIS ?',
       crosslinkText:
         "L’édition anglaise est vendue séparément : manuel de 139 pages, kit A4 et archive de 21 fichiers en anglais. Le sélecteur de langue ouvre les pages et les liens d’achat de cette édition.",
@@ -893,13 +895,13 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     nav: {
       pillars: "Book and files",
       demo: "Check demo",
-      inside: 'Inside Pages',
+      inside: 'Book excerpts',
       contents: 'Contents',
-      guides: 'Article',
+      guides: 'Articles',
       faq: 'FAQ',
       buy: 'Buy — $29',
       themeDarkLabel: 'Switch to light mode',
-      themeLightLabel: 'Switch to pure OLED dark mode',
+      themeLightLabel: 'Switch to dark mode',
       switchLangTitle: 'Voir l’édition française (148 pages)',
     },
     hero: {
@@ -910,13 +912,13 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       lede:
         "Joy N.’s UX/UI Playbook follows interface design from defining a journey to preparing error states and developer handoff. The manual explains typography, colour and spacing decisions through annotated screens. A4 worksheets support briefing and review, while tokens and a Python scanner carry some of those decisions into code. Checks requiring inspection of the rendered interface or observation with users remain open for review. The book is intended for developers and teams preparing screens alongside their implementation.",
       primaryCta: 'Get the English edition · $29',
-      secondaryCta: 'Read 10 sample pages',
+      secondaryCta: 'Read the 10 book excerpts',
       note: "One-time payment of $29 USD. After purchase: 139-page English PDF, 26-page A4 kit and 21-file archive.",
       proofs: [
         '139 A4 pages in English',
         "77 rules: automated + human checks",
         '12 sheets + 21 files & AI Skill',
-        '7-day refund guarantee',
+        'Refund requests within 7 days',
       ],
       coverCaption: 'EN Edition · 139 pages',
       spreadCaption: "Annotated examples and review guidance",
@@ -1089,6 +1091,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       filterScreens: 'Annotated screens',
       filterBeforeAfter: 'Before / After',
       filterSystem: 'Checklist & Bonus Kit',
+      previewLabel: 'Book excerpt',
       clickHint: 'Click to inspect',
       note: "The English edition contains a 139-page PDF with clickable bookmarks, a separate 26-page A4 kit and the 21-file archive. The pages shown here are extracts from those documents.",
       readerClose: 'Close',
@@ -1165,7 +1168,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
           category: 'screens',
           badge: 'p. 62 · Part 05',
           title: 'Design as revenue',
-          caption: 'Pitching, pricing, writing a one-page proposal, and defending decisions without jargon.',
+          caption: 'Project scope, estimates, a one-page proposal and presenting design decisions to a client.',
           alt: 'Opening page of Part 05: Design as revenue',
         },
         {
@@ -1386,7 +1389,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
         {
           feature: 'AI Agent Skill (SKILL.md / AGENTS.md) for Claude Code, Cursor, Codex',
           others: "Method explained in the book",
-          playbook: 'Included — agents check rules & output a report',
+          playbook: 'Markdown instructions to provide to the agent',
           highlight: true,
         },
         {
@@ -1424,7 +1427,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
     author: {
       kicker: 'THE AUTHOR',
       heading: "Joy N., author of UX/UI Playbook.",
-      role: "Joy N. · UX/UI Playbook author and digital product builder.",
+      role: "Joy N. · Author of the manual, A4 worksheets and working files.",
       p1: "Joy N. is the author of this manual on UX, UI and Product Design. The book follows a project through describing the need, preparing journeys, defining components and handing decisions to the developer. Screen examples provide material for examining content, layout and behaviour within that process.",
       p2: "The accompanying documents cover the same subjects through worksheets and editable files: briefs, audits, handoffs, tokens and coding-agent rules. For questions about the content or download, contact joynagassi@gmail.com.",
       signature: 'Joy N. · 2026 English Edition',
@@ -1434,8 +1437,8 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       heading: "Questions about the files and purchase.",
       items: [
         {
-          q: 'What exact files do I get right after paying $29?',
-          a: 'Three instant downloads: 1) the complete UX/UI Playbook 2026 in English (139-page A4 PDF with clickable contents and bookmarks), 2) the Printable Delivery Bonus Kit (26-page A4 PDF with 12 working sheets + ruled note pages), and 3) the 21-file ZIP archive (CSS/JSON design tokens, 4 markdown templates, 77 rules as JSON, the runnable Python scanner agent_check.py, and the AI agent skill).',
+          q: 'Which files are included in the $29 download?',
+          a: 'Three downloads after purchase: 1) the complete UX/UI Playbook 2026 in English (139-page A4 PDF with clickable contents and bookmarks), 2) the Printable Delivery Bonus Kit (26-page A4 PDF with 12 working sheets + ruled note pages), and 3) the 21-file ZIP archive (CSS/JSON design tokens, 4 markdown templates, 77 rules as JSON, the runnable Python scanner agent_check.py, and the AI agent skill).',
         },
         {
           q: 'Which AI coding tools work with the checklist and skill?',
@@ -1464,7 +1467,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       heading: "The book, kit and archive for $29 USD.",
       lede:
         "The purchase includes the 139-page English manual, printable kit and technical files described on this page. Use the book to prepare screen decisions, then keep observations and corrections in the project templates. The ten-page preview remains available before you choose this edition.",
-      includedTitle: 'Included immediately in the English edition:',
+      includedTitle: 'Files in the English edition:',
       includedList: [
         'UX/UI Playbook 2026 — 139-page A4 PDF (97 sections, 36 annotated screens)',
         'Printable Bonus Kit — 26-page A4 PDF (12 working sheets & note pages)',
@@ -1478,7 +1481,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       buyBtn: 'Get the English edition · $29',
       licenseNote:
         "PDF documents for reading on a computer or tablet and printing on A4. Gumroad handles payment and file delivery; available payment methods are shown at checkout.",
-      guarantees: ['Instant download', '7-day refund policy', 'Secure Gumroad checkout'],
+      guarantees: ['Download after purchase', 'Refund requests within 7 days', 'Payment via Gumroad'],
       crosslinkTag: 'WORKING IN FRENCH?',
       crosslinkText:
         "The French edition is sold separately: a 148-page manual, A4 kit and 21-file archive in French. The language selector opens that edition’s pages and purchase links.",
