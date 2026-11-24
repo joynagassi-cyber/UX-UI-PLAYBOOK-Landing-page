@@ -30,14 +30,22 @@ test('English preserves every French entry ID, category, destination and source 
   for (const [index, category] of en.categories.entries()) for (const key of ['name', 'purpose', 'question']) assert.notEqual(category[key], fr.categories[index][key]);
 });
 
-test('the website has no free-directory route, UI, catalogue import, fallback or provisional redirect', () => {
+test('the website has no free-directory route, UI, catalogue import or fallback; only the owner-supplied Gumroad redirects remain', () => {
   for (const filename of ['src/app/[locale]/resources/ui-ux-directory/page.tsx', 'src/components/FreeResourcePromo.tsx', 'src/components/FreeResourceDownload.tsx', 'src/i18n/free-resource.ts', 'src/lib/free-resource-config.ts']) assert.equal(fs.existsSync(path.join(root, filename)), false, filename);
   const walk = directory => fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? walk(path.join(directory, entry.name)) : [path.join(directory, entry.name)]);
   for (const filename of walk(path.join(root, 'src')).filter(file => /\.(?:tsx?|json|css)$/u.test(file))) {
     assert.doesNotMatch(fs.readFileSync(filename, 'utf8'), /FREE_RESOURCE|FREE_GUMROAD|FreeResource|free-resource|ui-ux-directory|data-directory-entry/u, path.relative(root, filename));
   }
   assert.equal(walk(path.join(root, 'public')).filter(file => /\.(?:pdf|zip|md)$/iu.test(file)).length, 0);
-  assert.doesNotMatch(readArtifact('public/_redirects').toString(), /resources\/ui-ux-directory|gumroad/u);
+  const redirects = readArtifact('public/_redirects').toString().trim().split('\n').map(line => line.trim().split(/\s+/u));
+  const stores = { fr: 'https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr', en: 'https://joyccelight.gumroad.com/l/free-ui-ux-directory-en' };
+  for (const [locale, store] of Object.entries(stores)) {
+    for (const suffix of ['', '.html', '/']) {
+      assert.ok(redirects.some(([from, to, status]) => from === `/${locale}/resources/ui-ux-directory${suffix}` && to === store && status === '308'), `${locale}${suffix}`);
+    }
+  }
+  assert.equal(redirects.filter(([from]) => from.includes('/resources/ui-ux-directory')).length, 6);
+  assert.ok(!redirects.some(([from]) => from.startsWith('/downloads/')), 'downloads are never redirected to a file host');
   assert.doesNotMatch(readArtifact('.env.example').toString(), /NEXT_PUBLIC_FREE_RESOURCE_GUMROAD/u);
 });
 

@@ -2,7 +2,7 @@
 
 ## Périmètre confirmé
 
-Le propriétaire demande de livrer les livres gratuits illustrés avec les captures disponibles, sans attendre les 75 destinations ni lancer une nouvelle série payante. Il confirme le retrait des pages, téléchargements et promotions du répertoire sur le site, en conservant ses seuls assets images. Les deux vraies URL Gumroad seront fournies ensuite pour ajouter les redirections. Ni teaser, ni catalogue web sans téléchargement, ni faux checkout n’est maintenu.
+Le propriétaire demande de livrer les livres gratuits illustrés avec les captures disponibles, sans attendre les 75 destinations ni lancer une nouvelle série payante. Il confirme le retrait des pages, téléchargements et promotions du répertoire sur le site, en conservant ses seuls assets images. Les deux vraies URL Gumroad seront fournies ensuite pour ajouter les redirections ; elles ont depuis été reçues et traitées, voir la section « Redirections ajoutées après réception des URL ». Ni teaser, ni catalogue web sans téléchargement, ni faux checkout n’est maintenu.
 
 La PR 12 est déjà fusionnée, commit `b383b0cc9394fabf211371fd2d94463ee457b752`. Cette préparation poursuit le travail sur la branche Arena existante ; elle ne refusionne pas cette PR et ne réalise aucun déploiement manuel ou changement distant de configuration.
 
@@ -88,12 +88,18 @@ npm run package:resource
 
 Le script Python contrôle les pixels réellement incorporés dans les PDF et leurs zones de lien, indépendamment des tests HTML et des générateurs. Les PDF ont des balises et des signets, mais aucune certification PDF/UA ou WCAG n’est annoncée.
 
+## Redirections ajoutées après réception des URL
+
+Le propriétaire a publié les deux produits et transmis leurs URL publiques :
+
+- FR : `https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr`
+- EN : `https://joyccelight.gumroad.com/l/free-ui-ux-directory-en`
+
+`public/_redirects` redirige désormais en **308** les formes nue, `.html` et slash final de `/fr/resources/ui-ux-directory` et `/en/resources/ui-ux-directory` vers le produit de leur langue. Les anciens téléchargements restent en vraie 404 sans redirection, le sitemap et les endpoints LLM ne référencent toujours pas ces adresses, et aucune page teaser n’est rétablie. Les contrôles d’export, HTTP et navigateur ont été mis à jour pour exiger ces six redirections exactes et le maintien des 404 de téléchargement.
+
 ## Actions restantes, exclusivement réelles
 
-1. Le créateur relit ses conditions d’usage et les réglages Gumroad actuels dans son compte.
-2. Il publie deux produits distincts à 0 et teste chaque ZIP réellement servi, sans contribution obligatoire.
-3. Il transmet les deux URL publiques FR/EN.
-4. Une modification ultérieure ajoute les redirections localisées, sans rétablir les anciens téléchargements publics.
-5. Le retrait du site suit le processus de déploiement autorisé. **Cette livraison locale ne prouve pas un retrait en production.**
+1. Le créateur relit ses conditions d’usage et les réglages Gumroad actuels dans son compte, et teste chaque ZIP réellement servi, sans contribution obligatoire.
+2. Le retrait du site et l’activation des redirections suivent le processus de déploiement autorisé. **Cette livraison locale ne prouve ni un retrait ni une redirection en production.**
 
-Aucune publication Gumroad, modification DNS, exposition de sources payantes ou reconfiguration distante n’a été effectuée. Les tests locaux ne constituent ni un audit des 75 destinations, ni une validation juridique des captures, ni une preuve de visibilité, de conversion ou de conformité d’accessibilité.
+Aucune publication Gumroad par cet agent, modification DNS, exposition de sources payantes ou reconfiguration distante n’a été effectuée. Les tests locaux ne constituent ni un audit des 75 destinations, ni une validation juridique des captures, ni une preuve de visibilité, de conversion ou de conformité d’accessibilité.

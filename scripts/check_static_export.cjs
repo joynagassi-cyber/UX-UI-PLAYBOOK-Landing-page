@@ -124,7 +124,11 @@ check('routing:Worker-first-only-unlocalized', JSON.stringify(workerRoutes) === 
 check('routing:no-static-overlap', allRoutes.every((route) => !workerRoutes.some((pattern) => pattern.endsWith('*') ? route.startsWith(pattern.slice(0, -1)) : route === pattern)) && !workerRoutes.some((pattern) => /images|_next|robots|sitemap|llms|og-/.test(pattern)), 'Localized pages, images, fonts and discovery files use asset-first routing.');
 check('worker:legacy-routing-file-not-uploaded', /^\/_routes\.json$/m.test(readOut('.assetsignore')), 'Workers assets ignore the obsolete Pages routing metadata.');
 const canonicalRedirects = readOut('_redirects').trim().split('\n').map(line => line.trim().split(/\s+/));
-check('routing:permanent-canonical-aliases', canonicalRedirects.length === allRoutes.length * 2 && allRoutes.every(route => canonicalRedirects.some(([from, to, status]) => from === route + '.html' && to === route && status === (['/fr', '/en'].includes(route) ? '301' : '308')) && canonicalRedirects.some(([from, to, status]) => from === route + '/' && to === route && status === '308')), 'Only the 12 retained pages have permanent HTML/trailing-slash aliases; private language negotiation stays in the Worker.');
+const freeStoreRedirects = [
+  ['/fr/resources/ui-ux-directory', 'https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr'],
+  ['/en/resources/ui-ux-directory', 'https://joyccelight.gumroad.com/l/free-ui-ux-directory-en'],
+].flatMap(([from, to]) => [[from, to, '308'], [`${from}.html`, to, '308'], [`${from}/`, to, '308']]);
+check('routing:permanent-canonical-aliases', canonicalRedirects.length === allRoutes.length * 2 + freeStoreRedirects.length && allRoutes.every(route => canonicalRedirects.some(([from, to, status]) => from === route + '.html' && to === route && status === (['/fr', '/en'].includes(route) ? '301' : '308')) && canonicalRedirects.some(([from, to, status]) => from === route + '/' && to === route && status === '308')) && freeStoreRedirects.every(rule => canonicalRedirects.some(line => JSON.stringify(line) === JSON.stringify(rule))), 'Only the 12 retained pages have permanent HTML/trailing-slash aliases; the withdrawn directory paths redirect permanently to the owner-supplied localized Gumroad products; private language negotiation stays in the Worker.');
 const robots = readOut('robots.txt');
 check('robots:production-origin', robots.includes(`Sitemap: ${SITE_URL}/sitemap.xml`) && !/^Host:/m.test(robots), SITE_URL);
 const crawlers = require('../src/config/crawler-policy.json');

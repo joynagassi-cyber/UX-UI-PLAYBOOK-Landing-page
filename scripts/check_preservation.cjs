@@ -95,10 +95,19 @@ function verifyPreservation(root = repositoryRoot) {
   // git history (exported sources, fixture roots) skips this check, never passes it.
   const gitBlobSha256 = file => {
     try {
-      const commit = execFileSync('git', ['-C', root, 'log', '-1', '--format=%H', '--', `:(literal)${file}`],
-        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
-      if (!/^[a-f0-9]{40}$/.test(commit)) return null;
-      return sha256(execFileSync('git', ['-C', root, 'show', `${commit}:${file}`], { maxBuffer: 64 * 1024 * 1024 }));
+      // Walk commits that touched the path, newest first, and hash the first tree
+      // that still contains it: the deletion commit has no blob, older ones hold
+      // the final content before removal. Works in shallow clones, where diff
+      // filters against grafted parents are unreliable.
+      const commits = execFileSync('git', ['-C', root, 'log', '--format=%H', '--', `:(literal)${file}`],
+        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim().split('\n').filter(commit => /^[a-f0-9]{40}$/.test(commit));
+      for (const commit of commits) {
+        try {
+          return sha256(execFileSync('git', ['-C', root, 'cat-file', 'blob', `${commit}:${file}`],
+            { maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] }));
+        } catch { /* path absent from this tree (deletion commit); keep walking */ }
+      }
+      return null;
     } catch { return null; }
   };
   for (const entry of retiredPageFiles) {

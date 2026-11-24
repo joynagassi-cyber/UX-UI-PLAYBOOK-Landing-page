@@ -45,6 +45,6 @@ Les fichiers clients sortent exclusivement dans `products/ui-ux-directory/releas
 
 Les pages, promotions, métadonnées de catalogue, exports LLM et téléchargements du répertoire sont retirés du site source. Seuls leurs assets images restent. Les quatre guides éditoriaux par langue et l’offre payante restent inchangés. Un retrait local n’est pas une preuve de retrait en production.
 
-**Aucune publication Gumroad effectuée. Deux vraies URL FR/EN attendues.** Aucun teaser, fallback local ou lien gratuit supposé n’est ajouté. Le propriétaire publie chaque ZIP dans son produit à 0, teste le parcours client, puis transmet les URL pour une modification ultérieure de redirection.
+**Produits Gumroad publiés par le propriétaire : [Répertoire UI/UX gratuit FR](https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr) et [Free UI/UX Directory EN](https://joyccelight.gumroad.com/l/free-ui-ux-directory-en).** Aucun teaser ni fallback local n’est ajouté. Les anciennes adresses `/fr/resources/ui-ux-directory` et `/en/resources/ui-ux-directory` (formes `.html` et slash final comprises) redirigent en 308 vers le produit de leur langue ; les anciens téléchargements restent en vraie 404.
 
 Les conditions du guide sont à relire par le créateur. Les captures sont des aperçus éditoriaux, pas des packs réutilisables. Aucun résultat commercial, de visibilité ou de conformité d’accessibilité n’est promis. Le balisage PDF n’est pas une certification PDF/UA.

@@ -506,14 +506,19 @@ test('Worker · qvalues, cookies, country, query and static exclusions', async (
   }
 });
 
-// The owner withdrew the directory until the two real Gumroad URLs are supplied.
-// Do not replace it with a teaser, an SPA fallback, or a paid-product redirect.
+// The owner withdrew the directory from the site and supplied the two real
+// Gumroad URLs: old page addresses redirect there permanently, downloads stay
+// genuinely unavailable, and no teaser or paid-product redirect is substituted.
+const freeStores = {
+  fr: 'https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr',
+  en: 'https://joyccelight.gumroad.com/l/free-ui-ux-directory-en',
+} as const;
 for (const locale of ['fr', 'en'] as const) {
-  test(`${locale} · withdrawn directory and downloads are unavailable; images remain`, async ({ page, request }) => {
+  test(`${locale} · directory redirects to its Gumroad product; downloads unavailable; images remain`, async ({ page, request }) => {
     for (const suffix of ['', '.html', '/']) {
       const response = await request.get(`/${locale}/resources/ui-ux-directory${suffix}`, { maxRedirects: 0 });
-      expect(response.status()).toBe(404);
-      expect(response.headers().location).toBeUndefined();
+      expect(response.status()).toBe(308);
+      expect(response.headers().location).toBe(freeStores[locale]);
     }
     const oldFiles = locale === 'fr'
       ? ['repertoire-ui-ux-gratuit-v1.zip', 'repertoire-ui-ux-fr-v1.pdf', 'repertoire-ui-ux-fr-v1.md']

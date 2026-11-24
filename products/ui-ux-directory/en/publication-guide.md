@@ -6,7 +6,7 @@ The files are prepared in this repository. **This agent has not published a Gumr
 
 At the owner’s request, directory pages, downloads and promotions have been removed from the website source. Image assets remain. A local change does not establish production removal: the website must still follow its normal deployment process.
 
-There is no interim teaser, web catalogue or direct-download fallback. **The two real FR/EN Gumroad URLs are awaited before adding redirects in a later change.** No build variable currently publishes or activates those redirects.
+There is no interim teaser, web catalogue or direct-download fallback. **The owner has published both products and supplied their URLs: `https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr` and `https://joyccelight.gumroad.com/l/free-ui-ux-directory-en`.** The former directory addresses (bare, `.html` and trailing-slash forms) redirect with 308 to their language's product in `public/_redirects`; no download is redirected.
 
 ## English files to use
 

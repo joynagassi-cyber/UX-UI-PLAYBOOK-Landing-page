@@ -36,6 +36,10 @@ STORES = {
     "fr": "https://joyccelight.gumroad.com/l/uiuxplaybookfr",
     "en": "https://joyccelight.gumroad.com/l/uxuiplaybook",
 }
+FREE_STORES = {
+    "fr": "https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr",
+    "en": "https://joyccelight.gumroad.com/l/free-ui-ux-directory-en",
+}
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 
 
@@ -327,11 +331,16 @@ def main():
         status, _, _ = get(path)
         record("HTTP404", path, status == 404, f"Unknown static route returns HTTP {status}; no SPA fallback")
 
-    for path in [*WITHDRAWN_DOWNLOADS, *[f"/{locale}{WITHDRAWN_DIRECTORY}{suffix}" for locale in STORES for suffix in ("", ".html", "/")]]:
+    for path in WITHDRAWN_DOWNLOADS:
         status, response_headers, body = get(path)
         doc = Document(body.decode("utf-8", errors="replace")).root
         noindex = any("noindex" in element.attrs.get("content", "") for element in doc.all("meta") if element.attrs.get("name") == "robots")
-        record("WITHDRAWN02", path, status == 404 and not response_headers.get("Location") and noindex, f"Withdrawn content returns a genuine noindex 404, not a fallback or interim redirect: HTTP {status}")
+        record("WITHDRAWN02", path, status == 404 and not response_headers.get("Location") and noindex, f"Withdrawn downloads return a genuine noindex 404, never a redirect to a file host: HTTP {status}")
+    for locale, store in FREE_STORES.items():
+        for suffix in ("", ".html", "/"):
+            path = f"/{locale}{WITHDRAWN_DIRECTORY}{suffix}"
+            status, response_headers, _ = get(path)
+            record("WITHDRAWN05", path, status == 308 and response_headers.get("Location") == store, f"Withdrawn directory page redirects permanently to the owner-supplied {locale.upper()} Gumroad product: HTTP {status} -> {response_headers.get('Location')}")
     for lang in STORES:
         path = f"/images/free-directory/cover-{lang}.jpg"
         status, response_headers, _ = get(path)
