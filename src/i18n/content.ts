@@ -59,6 +59,7 @@ export interface PlaybookContent {
     inside: string;
     contents: string;
     guides: string;
+    freeDirectory: string;
     faq: string;
     buy: string;
     themeDarkLabel: string;
@@ -275,6 +276,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       inside: 'Extraits du livre',
       contents: 'Sommaire',
       guides: 'Articles',
+      freeDirectory: 'Répertoire gratuit',
       faq: 'FAQ',
       buy: 'Acheter · 29 $',
       themeDarkLabel: 'Passer en mode clair',
@@ -935,6 +937,7 @@ export const CONTENT: Record<Locale, PlaybookContent> = {
       inside: 'Book excerpts',
       contents: 'Contents',
       guides: 'Articles',
+      freeDirectory: 'Free Directory',
       faq: 'FAQ',
       buy: 'Buy · $29',
       themeDarkLabel: 'Switch to light mode',

@@ -187,6 +187,7 @@ export default async function FreeDirectoryPage({ params }: { params: Promise<{ 
             <a href={`/${locale}#tool`}>{c.nav.demo}</a>
             <a href={`/${locale}#inside`}>{c.nav.inside}</a>
             <a href={`/${locale}/articles`}>{c.nav.guides}</a>
+            <a href={`/${locale}/resources/ui-ux-directory`} aria-current="page" style={{ color: 'var(--accent-ink)', fontWeight: 700 }}>{c.nav.freeDirectory}</a>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <ThemeAndLangControls

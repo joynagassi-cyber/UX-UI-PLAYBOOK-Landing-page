@@ -171,6 +171,7 @@ export default async function ArticlesHubPage({
             >
               {c.nav.guides}
             </a>
+            <a href={`/${locale}/resources/ui-ux-directory`}>{c.nav.freeDirectory}</a>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -218,6 +219,16 @@ export default async function ArticlesHubPage({
           <p className="notion-subtitle" style={{ marginBottom: 0 }}>
             {ui.lede}
           </p>
+          <aside className="notion-reading-link">
+            <p>
+              {locale === 'fr'
+                ? 'Livre gratuit associé : le Répertoire UI/UX, 54 pages, 51 fiches et 75 liens commentés, à 0 $ sur Gumroad. '
+                : 'Companion free book: the UI/UX Directory, 54 pages, 51 entries and 75 annotated links, $0 on Gumroad. '}
+              <a href={`/${locale}/resources/ui-ux-directory`}>
+                {locale === 'fr' ? 'Découvrir le répertoire gratuit' : 'Discover the free Directory'}
+              </a>
+            </p>
+          </aside>
           <aside className="notion-reading-link">
             <p>{ui.startLinkText}</p>
             <a href={articleHref(locale, 'ux-ui-product-design')}>

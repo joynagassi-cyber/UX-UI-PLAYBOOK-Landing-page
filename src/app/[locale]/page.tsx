@@ -211,6 +211,7 @@ export default async function LandingPage({
             <a href="#inside">{c.nav.inside}</a>
             <a href="#contents">{c.nav.contents}</a>
             <a href={`/${locale}/articles`}>{c.nav.guides}</a>
+            <a href={`/${locale}/resources/ui-ux-directory`}>{c.nav.freeDirectory}</a>
             <a href="#faq">{c.nav.faq}</a>
           </div>
 
@@ -481,6 +482,35 @@ export default async function LandingPage({
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Free Directory Section */}
+        <section id="free-directory">
+          <div className="wrap">
+            <div className="mono sec-kicker">{locale === 'fr' ? 'LIVRE GRATUIT · 0 $ SUR GUMROAD' : 'FREE BOOK · $0 ON GUMROAD'}</div>
+            <h2>{locale === 'fr' ? 'Le Répertoire UI/UX gratuit, en français et en anglais.' : 'The free UI/UX Directory, in French and English.'}</h2>
+            <p style={{ maxWidth: '65ch', marginTop: 14 }}>
+              {locale === 'fr'
+                ? 'Un livre de 54 pages : 51 fiches de ressources classées en 6 familles, 75 liens commentés, 20 aperçus de sites et une fiche de décision de 3 pages. Le site le présente ; le téléchargement se fait sur Gumroad, à 0 $.'
+                : 'A 54-page book: 51 resource entries in 6 families, 75 annotated links, 20 site previews and a 3-page decision worksheet. This site presents it; the download happens on Gumroad, at $0.'}
+            </p>
+            <a href={`/${locale}/resources/ui-ux-directory`} style={{ display: 'block', maxWidth: 560, marginTop: 20 }}>
+              <img
+                src={`/images/free-directory/cover-${locale}.jpg`}
+                width={1280}
+                height={720}
+                alt={locale === 'fr' ? 'Couverture du Répertoire UI/UX gratuit' : 'Cover of the free UI/UX Directory'}
+                style={{ width: '100%', height: 'auto', borderRadius: 16 }}
+                loading="lazy"
+              />
+            </a>
+            <p style={{ marginTop: 20 }}>
+              <a className="btn primary" href={`/${locale}/resources/ui-ux-directory`}>
+                <span>{locale === 'fr' ? 'Découvrir le répertoire gratuit' : 'Discover the free Directory'}</span>
+                <Icon name="arrow-right" size="sm" />
+              </a>
+            </p>
           </div>
         </section>
 

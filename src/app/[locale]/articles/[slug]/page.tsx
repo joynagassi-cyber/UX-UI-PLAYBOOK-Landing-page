@@ -231,6 +231,7 @@ export default async function ArticleDetailPage({
             >
               {c.nav.guides}
             </a>
+            <a href={`/${locale}/resources/ui-ux-directory`}>{c.nav.freeDirectory}</a>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
