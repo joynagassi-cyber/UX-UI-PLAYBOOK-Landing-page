@@ -39,6 +39,6 @@ The English generator writes only its customer artifacts and marketing images. A
 
 Directory pages, promotions, catalogue metadata, LLM exports and downloads are removed from the website source. Image assets remain. The four editorial guides per language and the paid offer are preserved. A local change does not establish production withdrawal.
 
-**No Gumroad publication performed. Two real FR/EN URLs are awaited.** There is no teaser, direct-download fallback or invented free checkout. The creator publishes each localized ZIP at 0, tests the customer journey, then supplies both URLs for a later redirect change.
+**Gumroad products published by the owner: [Répertoire UI/UX gratuit FR](https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr) and [Free UI/UX Directory EN](https://joyccelight.gumroad.com/l/free-ui-ux-directory-en).** There is no teaser or direct-download fallback. A presentation page is restored on the website at `/fr/resources/ui-ux-directory` and `/en/resources/ui-ux-directory`: it presents the book and links both Gumroad editions, without serving any file. The old downloads remain genuine 404s.
 
 The creator should review the proposed guide terms. Screenshots are editorial previews, not reusable asset packs. No commercial, visibility or accessibility-conformance outcome is promised. Tagged PDF output is not PDF/UA certification.

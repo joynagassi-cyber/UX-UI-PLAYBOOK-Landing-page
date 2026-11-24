@@ -58,32 +58,47 @@ export function ThemeAndLangControls({
   const frHref = swapLocaleInPath(pathname, 'fr');
   const enHref = swapLocaleInPath(pathname, 'en');
 
+  const langLabel = locale === 'fr' ? 'Langue de l’édition' : 'Language edition';
+  const closeOnEscape = (event: React.KeyboardEvent<HTMLDetailsElement>) => {
+    if (event.key !== 'Escape') return;
+    const details = event.currentTarget;
+    if (!details.open) return;
+    details.open = false;
+    details.querySelector('summary')?.focus();
+  };
+
   return (
     <div className="nav-actions">
-      <div className="lang-switch" role="group" aria-label={locale === 'fr' ? 'Langue de l’édition' : 'Language edition'}>
-        <a
-          href={frHref}
-          hrefLang="fr"
-          lang="fr"
-          onClick={() => handleLangClick('fr')}
-          className={`lang-btn ${locale === 'fr' ? 'active' : ''}`}
-          aria-current={locale === 'fr' ? 'page' : undefined}
-          title={locale === 'en' ? switchLangTitle : 'Version française'}
-        >
-          FR
-        </a>
-        <a
-          href={enHref}
-          hrefLang="en"
-          lang="en"
-          onClick={() => handleLangClick('en')}
-          className={`lang-btn ${locale === 'en' ? 'active' : ''}`}
-          aria-current={locale === 'en' ? 'page' : undefined}
-          title={locale === 'fr' ? switchLangTitle : 'English version'}
-        >
-          EN
-        </a>
-      </div>
+      <details className="lang-menu" onKeyDown={closeOnEscape}>
+        <summary className="lang-menu-btn" aria-label={langLabel} title={switchLangTitle}>
+          <Icon name="globe" size="sm" />
+          <Icon name="chevron-down" size="sm" className="lang-menu-chevron" />
+        </summary>
+        <div className="lang-menu-panel" role="group" aria-label={langLabel}>
+          <a
+            href={frHref}
+            hrefLang="fr"
+            lang="fr"
+            onClick={() => handleLangClick('fr')}
+            className={`lang-menu-link ${locale === 'fr' ? 'active' : ''}`}
+            aria-current={locale === 'fr' ? 'page' : undefined}
+          >
+            <span>Français</span>
+            {locale === 'fr' ? <Icon name="check" size="sm" /> : null}
+          </a>
+          <a
+            href={enHref}
+            hrefLang="en"
+            lang="en"
+            onClick={() => handleLangClick('en')}
+            className={`lang-menu-link ${locale === 'en' ? 'active' : ''}`}
+            aria-current={locale === 'en' ? 'page' : undefined}
+          >
+            <span>English</span>
+            {locale === 'en' ? <Icon name="check" size="sm" /> : null}
+          </a>
+        </div>
+      </details>
 
       <button
         type="button"

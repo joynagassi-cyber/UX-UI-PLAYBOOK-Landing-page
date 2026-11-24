@@ -46,9 +46,9 @@ Le répertoire est désormais fabriqué pour deux produits Gumroad distincts : *
 - [Fiche Gumroad française](products/ui-ux-directory/gumroad-listing.md), [English listing](products/ui-ux-directory/en/gumroad-listing.md), [publication et test à 0](products/ui-ux-directory/publication-guide.md).
 - [Import et revue des captures](products/ui-ux-directory/screenshots/README.md) : les **21 originaux** et le manifeste externe sont conservés inchangés, **20 dérivés approuvés** sont intégrés. La capture de chargement est écartée. Aucun appel de capture supplémentaire ; acquisition suspendue avant tout accès aux identifiants.
 
-**À la demande du propriétaire, les pages, téléchargements, promotions et contenus de découverte du répertoire sont retirés du site source ; seuls leurs assets images sont conservés.** Aucun teaser ni fallback direct n’est maintenu. Les quatre guides éditoriaux par langue et le Playbook payant sont préservés. Les anciennes URL doivent répondre en vraie 404 tant que les deux URL Gumroad réelles ne sont pas fournies. Une modification locale n’est pas une preuve de retrait en production.
+**À la demande du propriétaire, les pages, téléchargements, promotions et contenus de découverte du répertoire sont retirés du site source ; seuls leurs assets images sont conservés.** Aucun teaser ni fallback direct n’est maintenu. Les quatre guides éditoriaux par langue et le Playbook payant sont préservés. Une modification locale n’est pas une preuve de retrait en production.
 
-**Aucun produit Gumroad publié par cet agent. Deux vraies URL FR/EN attendues pour les redirections ultérieures.** Aucun slug gratuit n’est supposé et les anciennes variables de checkout gratuit ont été retirées, sans modification distante de configuration.
+**Produits gratuits publiés par le propriétaire : [FR](https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr) et [EN](https://joyccelight.gumroad.com/l/free-ui-ux-directory-en).** Une page de présentation du répertoire est rétablie sur le site et relie les deux éditions Gumroad ; les anciens téléchargements restent en vraie 404. Les anciennes variables de checkout gratuit ont été retirées, sans modification distante de configuration.
 
 ```bash
 # Fabrication hors réseau, nécessite Chromium.

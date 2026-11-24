@@ -189,3 +189,33 @@ test('only the named reviewed route may be removed; additional deletion and reap
   f.write('src/app/[locale]/directory/page.tsx', 'reappeared');
   assert.equal(verifyPreservation(f.root).pageInventoryPreserved, false);
 });
+
+test('a retired route returns only through a named restoration revision', t => {
+  const f = fixture(t);
+  f.write('src/app/[locale]/directory/page.tsx', 'directory page');
+  const baselinePath = path.join(f.root, 'docs/technical-baseline.json');
+  const baseline = JSON.parse(fs.readFileSync(baselinePath));
+  baseline.initialTrackedPaths.push('src/app/[locale]/directory/page.tsx');
+  const bytes = JSON.stringify(baseline);
+  f.write('docs/technical-baseline.json', bytes); f.ledger.baselineSha256 = sha(bytes);
+  f.ledger.revisions.push({ id: 'directory-withdrawal', reason: 'Owner withdraws a page', reviewReport: 'docs/review.md',
+    removedPageFiles: [{ path: 'src/app/[locale]/directory/page.tsx', fromSha256: sha('directory page'), reason: 'Await real store URLs' }] });
+  fs.unlinkSync(path.join(f.root, 'src/app/[locale]/directory/page.tsx')); f.save();
+  assert.equal(verifyPreservation(f.root).outcome, 'pass');
+  // Silent reappearance still fails.
+  f.write('src/app/[locale]/directory/page.tsx', 'silent return');
+  assert.equal(verifyPreservation(f.root).outcome, 'fail');
+  // Named restoration passes and clears the tombstone.
+  f.ledger.revisions.push({ id: 'directory-restoration', reason: 'Owner restores a presentation page', reviewReport: 'docs/review.md',
+    restoredPageFiles: [{ path: 'src/app/[locale]/directory/page.tsx', reason: 'Presentation page linking the published stores' }] });
+  f.save();
+  const report = verifyPreservation(f.root);
+  assert.equal(report.outcome, 'pass');
+  assert.equal(report.retiredPageFiles.length, 0);
+  // Restoring a page that was never retired is invalid.
+  const g = fixture(t);
+  g.ledger.revisions.push({ id: 'bogus-restoration', reason: 'No tombstone exists', reviewReport: 'docs/review.md',
+    restoredPageFiles: [{ path: 'src/app/[locale]/page.tsx', reason: 'Bogus' }] });
+  g.save();
+  assert.equal(verifyPreservation(g.root).outcome, 'fail');
+});

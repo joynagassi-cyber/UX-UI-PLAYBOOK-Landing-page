@@ -91,7 +91,8 @@ for (const locale of ['fr', 'en']) {
       expect(url.searchParams.has('a')).toBe(false);
     }
     const other = locale === 'fr' ? 'en' : 'fr';
-    await page.locator(`.lang-btn[lang=${other}]`).click();
+    await page.locator('.lang-menu-btn').click();
+    await page.locator(`.lang-menu-panel a[lang=${other}]`).click();
     const cookie = (await context.cookies()).find(c => c.name === 'NEXT_LOCALE');
     expect(cookie?.value).toBe(other);
     expect(cookie?.path).toBe('/');

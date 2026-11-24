@@ -42,7 +42,7 @@ const allRoutes = [];
 check('catalogue:slugs', JSON.stringify(ARTICLE_SLUGS) === JSON.stringify(Object.keys(catalogue)), ARTICLE_SLUGS);
 for (const locale of ['fr', 'en']) {
   check(`catalogue:${locale}`, JSON.stringify(ARTICLES[locale].map((article) => article.slug)) === JSON.stringify(ARTICLE_SLUGS), ARTICLES[locale].map((article) => article.slug));
-  for (const suffix of ['', '/articles', ...ARTICLE_SLUGS.map((slug) => `/articles/${slug}`)]) {
+  for (const suffix of ['', '/articles', '/resources/ui-ux-directory', ...ARTICLE_SLUGS.map((slug) => `/articles/${slug}`)]) {
     const route = `/${locale}${suffix}`;
     allRoutes.push(route);
     const file = `${route.slice(1)}.html`;
@@ -51,11 +51,16 @@ for (const locale of ['fr', 'en']) {
     const tags = meta(html);
     const title = decode(/<title>([^<]+)<\/title>/.exec(html)?.[1]);
     const article = ARTICLES[locale].find((entry) => suffix === `/articles/${entry.slug}`);
-    const expectedTitle = (article?.metaTitle) || (suffix === '/articles' ? ARTICLES_UI[locale].metaTitle : CONTENT[locale].meta.title);
-    const expectedDescription = (article?.metaDescription) || (suffix === '/articles' ? ARTICLES_UI[locale].metaDescription : CONTENT[locale].meta.description);
+    const DIRECTORY_META = {
+      fr: { title: 'Répertoire UI/UX gratuit · 54 pages (0 $ sur Gumroad)', description: 'Répertoire UI/UX gratuit de Joy N. : 54 pages, 51 fiches, 75 liens commentés, 20 aperçus et une fiche de décision. FR et EN, 0 $ sur Gumroad.' },
+      en: { title: 'Free UI/UX Directory · 54-page book ($0 on Gumroad)', description: 'Free UI/UX Directory by Joy N.: 54 pages, 51 entries, 75 annotated links, 20 previews and a decision worksheet. FR and EN editions, $0 on Gumroad.' },
+    };
+    const isDirectory = suffix === '/resources/ui-ux-directory';
+    const expectedTitle = (article?.metaTitle) || (isDirectory ? DIRECTORY_META[locale].title : suffix === '/articles' ? ARTICLES_UI[locale].metaTitle : CONTENT[locale].meta.title);
+    const expectedDescription = (article?.metaDescription) || (isDirectory ? DIRECTORY_META[locale].description : suffix === '/articles' ? ARTICLES_UI[locale].metaDescription : CONTENT[locale].meta.description);
     const expectedSocialTitle = suffix ? expectedTitle : CONTENT[locale].meta.ogTitle;
     const expectedSocialDescription = suffix ? expectedDescription : CONTENT[locale].meta.ogDescription;
-    const expectedImage = SITE_URL + (article?.ogImage || `/og-${locale}.jpg`);
+    const expectedImage = SITE_URL + (article?.ogImage || (isDirectory ? `/og-directory-${locale}.jpg` : `/og-${locale}.jpg`));
     check(`metadata:${route}`, title === expectedTitle && title.length <= 60 && tags.description === expectedDescription && tags.description.length >= 135 && tags.description.length <= 155 && !('keywords' in tags), { title, descriptionLength: tags.description?.length });
     check(`canonical:${route}`, html.includes(`rel="canonical" href="${SITE_URL}${route}"`), SITE_URL + route);
     for (const other of ['fr', 'en']) check(`hreflang:${route}:${other}`, html.includes(`hrefLang="${other}" href="${SITE_URL}/${other}${suffix}"`), `${other}${suffix}`);
@@ -88,7 +93,9 @@ for (const locale of ['fr', 'en']) {
       check(`edition:${route}:selected-previews`, PLAYBOOK_EDITION.editions[locale].previews.every(item =>
         html.includes(`src="${item.path}"`) && fs.existsSync(path.join(out, item.path))), 'Ten source-mapped preview pages including the evidence section and glossary.');
     }
-    if (!article) {
+    if (isDirectory) {
+      check(`hub-links:${route}`, html.includes(`href="/${locale}/articles"`), 'The presentation page links the articles hub instead of individual catalogue entries.');
+    } else if (!article) {
       check(`hub-links:${route}`, ARTICLE_SLUGS.every((slug) => html.includes(`href="/${locale}/articles/${slug}"`)), ARTICLE_SLUGS);
     } else {
       const structuredArticle = schemas.find((item) => item['@type'] === 'TechArticle');
@@ -124,7 +131,7 @@ check('routing:Worker-first-only-unlocalized', JSON.stringify(workerRoutes) === 
 check('routing:no-static-overlap', allRoutes.every((route) => !workerRoutes.some((pattern) => pattern.endsWith('*') ? route.startsWith(pattern.slice(0, -1)) : route === pattern)) && !workerRoutes.some((pattern) => /images|_next|robots|sitemap|llms|og-/.test(pattern)), 'Localized pages, images, fonts and discovery files use asset-first routing.');
 check('worker:legacy-routing-file-not-uploaded', /^\/_routes\.json$/m.test(readOut('.assetsignore')), 'Workers assets ignore the obsolete Pages routing metadata.');
 const canonicalRedirects = readOut('_redirects').trim().split('\n').map(line => line.trim().split(/\s+/));
-check('routing:permanent-canonical-aliases', canonicalRedirects.length === allRoutes.length * 2 && allRoutes.every(route => canonicalRedirects.some(([from, to, status]) => from === route + '.html' && to === route && status === (['/fr', '/en'].includes(route) ? '301' : '308')) && canonicalRedirects.some(([from, to, status]) => from === route + '/' && to === route && status === '308')), 'Only the 12 retained pages have permanent HTML/trailing-slash aliases; private language negotiation stays in the Worker.');
+check('routing:permanent-canonical-aliases', canonicalRedirects.length === allRoutes.length * 2 && allRoutes.every(route => canonicalRedirects.some(([from, to, status]) => from === route + '.html' && to === route && status === (['/fr', '/en'].includes(route) ? '301' : '308')) && canonicalRedirects.some(([from, to, status]) => from === route + '/' && to === route && status === '308')), 'Only the 14 retained pages have permanent HTML/trailing-slash aliases; the restored directory presentation page is canonical on the site and downloads stay off-site; private language negotiation stays in the Worker.');
 const robots = readOut('robots.txt');
 check('robots:production-origin', robots.includes(`Sitemap: ${SITE_URL}/sitemap.xml`) && !/^Host:/m.test(robots), SITE_URL);
 const crawlers = require('../src/config/crawler-policy.json');
@@ -150,12 +157,12 @@ const textFiles = walk(out).filter((file) => /\.(?:html|txt|xml|json|js|css|svg)
 const withdrawnPayloads = walk(out).filter(file => /\.(?:pdf|zip|md)$/iu.test(file)).map(file => path.relative(out, file));
 check('withdrawn-directory:no-download-payloads', withdrawnPayloads.length === 0 && !fs.existsSync(path.join(out, 'downloads')), withdrawnPayloads);
 for (const locale of ['fr', 'en']) {
-  check(`withdrawn-directory:${locale}:no-route`, !fs.existsSync(path.join(out, locale, 'resources')), 'No old page, HTML alias, RSC payload or replacement teaser is exported.');
+  check(`directory-page:${locale}:presentation-exported`, fs.existsSync(path.join(out, locale, 'resources', 'ui-ux-directory.html')), 'The restored presentation page is exported; it links Gumroad and serves no file.');
 }
 const directoryCatalogs = [require('../products/ui-ux-directory/catalogue.json'), require('../products/ui-ux-directory/en/catalogue.json')];
 const leakedDirectoryContent = textFiles.filter(file => {
   const text = fs.readFileSync(file, 'utf8');
-  return /\/resources\/ui-ux-directory|\/downloads\/|data-directory-entry|data-free-download/u.test(text)
+  return /\/downloads\/|data-directory-entry|data-free-download/u.test(text)
     || directoryCatalogs.some(catalog => catalog.entries.some(entry => text.includes(entry.description)));
 }).map(file => path.relative(out, file));
 check('withdrawn-directory:no-promotions-or-catalogue', leakedDirectoryContent.length === 0, { scanned: textFiles.length, matches: leakedDirectoryContent });

@@ -26,7 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 POLICY = json.loads((ROOT / "src/config/site-policy.json").read_text())
 BOTS = json.loads((ROOT / "src/config/crawler-policy.json").read_text())
 SLUGS = json.loads((ROOT / "src/i18n/article-catalog.json").read_text())
-SUFFIXES = ["", "/articles", *[f"/articles/{slug}" for slug in SLUGS]]
+SUFFIXES = ["", "/articles", "/resources/ui-ux-directory", *[f"/articles/{slug}" for slug in SLUGS]]
 ROUTES = [f"/{locale}{suffix}" for locale in ("fr", "en") for suffix in SUFFIXES]
 
 
@@ -103,7 +103,7 @@ def main():
                 valid = False
         check("JSONLD_PARSE", route, valid and bool(graph), {"entities": len(graph)})
         types = {item.get("@type") for item in graph}
-        required = {"Person", "TechArticle", "FAQPage", "BreadcrumbList"} if suffix.startswith("/articles/") else ({"Person", "CollectionPage", "BreadcrumbList"} if suffix == "/articles" else {"Person", "WebSite", "Organization", "Product", "Book", "FAQPage"})
+        required = {"Person", "TechArticle", "FAQPage", "BreadcrumbList"} if suffix.startswith("/articles/") else ({"Person", "CollectionPage", "BreadcrumbList"} if suffix == "/articles" else ({"Person", "WebPage", "ItemList"} if suffix == "/resources/ui-ux-directory" else {"Person", "WebSite", "Organization", "Product", "Book", "FAQPage"}))
         check("JSONLD_TYPES", route, required <= types, sorted(types))
         faqs = [item for item in graph if item.get("@type") == "FAQPage"]
         qa = [q for faq in faqs for q in faq.get("mainEntity", [])]

@@ -240,7 +240,8 @@ for (const locale of ['fr', 'en']) {
     ]);
 
     const otherLocale = locale === 'fr' ? 'en' : 'fr';
-    await page.locator(`.lang-btn[lang="${otherLocale}"]`).click();
+    await page.locator('.lang-menu-btn').click();
+    await page.locator(`.lang-menu-panel a[lang="${otherLocale}"]`).click();
     await expect(page).toHaveURL(new RegExp(`/${otherLocale}$`));
     const hrefs = await page.locator('a[href*="gumroad.com/l/"]').evaluateAll((anchors) => anchors.map((anchor) => (anchor as HTMLAnchorElement).href));
     expect(hrefs.length).toBeGreaterThan(0);
@@ -448,7 +449,8 @@ for (const locale of ['fr', 'en'] as const) {
     await expect(faq).toHaveAttribute('open', '');
     const other = locale === 'fr' ? 'en' : 'fr';
     await page.goto(`/${locale}/articles/ux-ui-product-design`);
-    await page.locator(`.lang-btn[lang="${other}"]`).click();
+    await page.locator('.lang-menu-btn').click();
+    await page.locator(`.lang-menu-panel a[lang="${other}"]`).click();
     await expect(page).toHaveURL(new RegExp(`/${other}/articles/ux-ui-product-design$`));
     await expect(page.locator('html')).toHaveAttribute('lang', other);
     expect(await context.cookies()).toEqual(expect.arrayContaining([expect.objectContaining({ name: 'NEXT_LOCALE', value: other })]));
@@ -506,15 +508,29 @@ test('Worker · qvalues, cookies, country, query and static exclusions', async (
   }
 });
 
-// The owner withdrew the directory until the two real Gumroad URLs are supplied.
-// Do not replace it with a teaser, an SPA fallback, or a paid-product redirect.
+// The owner restored a presentation page for the free directory: it presents
+// both books and links each Gumroad edition, while downloads stay genuinely
+// unavailable on the site and no catalogue or file fallback is served.
+const freeStores = {
+  fr: 'https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr',
+  en: 'https://joyccelight.gumroad.com/l/free-ui-ux-directory-en',
+} as const;
 for (const locale of ['fr', 'en'] as const) {
-  test(`${locale} · withdrawn directory and downloads are unavailable; images remain`, async ({ page, request }) => {
-    for (const suffix of ['', '.html', '/']) {
+  test(`${locale} · directory presentation page links both Gumroad editions; downloads unavailable; images remain`, async ({ page, request }) => {
+    for (const suffix of ['.html', '/']) {
       const response = await request.get(`/${locale}/resources/ui-ux-directory${suffix}`, { maxRedirects: 0 });
-      expect(response.status()).toBe(404);
-      expect(response.headers().location).toBeUndefined();
+      expect(response.status()).toBe(308);
+      expect(response.headers().location).toBe(`/${locale}/resources/ui-ux-directory`);
     }
+    await page.goto(`/${locale}/resources/ui-ux-directory`);
+    await expect(page.locator('h1')).toHaveCount(1);
+    for (const store of Object.values(freeStores)) {
+      const link = page.locator(`a[href="${store}"]`);
+      await expect(link).toHaveCount(1);
+      await expect(link).toHaveAttribute('target', '_blank');
+      await expect(link).toHaveAttribute('rel', /noopener/);
+    }
+    await expect(page.locator('a[href^="/downloads/"], [data-directory-entry], [data-free-download], .free-promo')).toHaveCount(0);
     const oldFiles = locale === 'fr'
       ? ['repertoire-ui-ux-gratuit-v1.zip', 'repertoire-ui-ux-fr-v1.pdf', 'repertoire-ui-ux-fr-v1.md']
       : ['ui-ux-directory-free-en-v1.zip', 'ui-ux-directory-en-v1.pdf', 'ui-ux-directory-en-v1.md'];
@@ -524,13 +540,26 @@ for (const locale of ['fr', 'en'] as const) {
     expect(cover.headers()['content-type']).toContain('image/jpeg');
     for (const suffix of ['', '/articles', ...slugs.map(slug => '/articles/' + slug)]) {
       await page.goto(`/${locale}${suffix}`);
-      await expect(page.locator('a[href*="resources/ui-ux-directory"], a[href^="/downloads/"], [data-directory-entry], [data-free-download], .free-promo')).toHaveCount(0);
+      await expect(page.locator('a[href^="/downloads/"], [data-directory-entry], [data-free-download], .free-promo')).toHaveCount(0);
     }
     for (const endpoint of ['/llms.txt', '/llms-full.txt', '/sitemap.xml']) {
       const text = await (await request.get(endpoint)).text();
-      expect(text).not.toContain('/resources/ui-ux-directory');
       expect(text).not.toContain('/downloads/');
       expect(text).not.toContain('Live Brand Preview');
     }
+  });
+}
+
+for (const locale of ['fr', 'en'] as const) {
+  test(`${locale} · external source links open in a new tab; internal citations stay in place`, async ({ page }) => {
+    await page.goto(`/${locale}/articles/ux-design-guide`);
+    const external = page.locator('#article-sources a[href^="http"], .notion-stat-src a[href^="http"]');
+    await expect(external.first()).toBeVisible();
+    for (const link of await external.all()) {
+      await expect(link).toHaveAttribute('target', '_blank');
+      await expect(link).toHaveAttribute('rel', /noopener/);
+    }
+    const citations = page.locator('a.notion-citation[href^="#reference-"]');
+    for (const link of await citations.all()) await expect(link).not.toHaveAttribute('target', '_blank');
   });
 }
