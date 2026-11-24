@@ -107,6 +107,15 @@ Après publication des produits, le propriétaire demande une page de référenc
 
 Dans le même changement, le sélecteur de langue FR/EN est remplacé sur tout le site par un bouton à icône globe (Lucide) ouvrant un menu « Français / English », et tous les liens externes rendus depuis le site (sources et statistiques des articles, profils, boutiques) ouvrent un nouvel onglet avec `noopener noreferrer`. Les liens internes et les citations `#reference-…` restent dans l’onglet courant. Un test unitaire balaie les ancres externes du code source et un test navigateur vérifie les sources d’un article.
 
+## Refonte mono-édition de la page (retour du propriétaire)
+
+Le propriétaire juge la première page rétablie mal conçue, mélangeant les deux éditions et fermée par un bloc « Bon à savoir » composé de réserves. Correction appliquée :
+
+- le bloc « Bon à savoir » est supprimé, dans les deux langues ;
+- chaque page ne présente plus que l’édition de sa langue : une seule carte d’édition, un seul lien Gumroad gratuit, prix et FAQ dans la langue de la page. L’autre édition reste accessible par le sélecteur de langue du site, comme partout ailleurs ;
+- la page est reconstruite en sections : héros avec couverture, prix et résumé extractible, chiffres du livre, les 6 familles détaillées, la méthode des fiches, le contenu concret du ZIP, FAQ visible doublée d’un schéma FAQPage, invitation finale. Le ton décrit et invite ; il n’ordonne rien au lecteur ;
+- schémas WebPage, BreadcrumbList, Book (offre à 0) et FAQPage ; la section d’accueil est elle aussi ramenée à la seule édition de la langue affichée.
+
 ## Actions restantes, exclusivement réelles
 
 1. Le créateur relit ses conditions d’usage et les réglages Gumroad actuels dans son compte, et teste chaque ZIP réellement servi, sans contribution obligatoire.

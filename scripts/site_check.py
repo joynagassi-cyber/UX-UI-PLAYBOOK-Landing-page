@@ -212,8 +212,8 @@ def main():
                 for pill in pills), "Guide categories render real icons, never raw icon keys")
             store_links = [element.attrs.get("href", "") for element in doc.all("a") if "gumroad.com/l/" in element.attrs.get("href", "")]
             if route.endswith(WITHDRAWN_DIRECTORY):
-                allowed_stores = {STORES[lang], *FREE_STORES.values()}
-                record("I18N03", route, all(url.split("?")[0] in allowed_stores for url in store_links) and all(store in store_links for store in FREE_STORES.values()), f"{len(store_links)} purchase/free links: paid store plus both free editions")
+                allowed_stores = {STORES[lang], FREE_STORES[lang]}
+                record("I18N03", route, all(url.split("?")[0] in allowed_stores for url in store_links) and FREE_STORES[lang] in store_links, f"{len(store_links)} purchase/free links: paid store plus the edition of this language only")
             else:
                 record("I18N03", route, bool(store_links) and all(url.split("?")[0] == STORES[lang] for url in store_links), f"{len(store_links)} localized purchase links")
             removed_links = [a.attrs.get("href", "") for a in doc.all("a") if a.attrs.get("href", "").startswith("/downloads/")]
@@ -344,7 +344,8 @@ def main():
         path = f"/{locale}{WITHDRAWN_DIRECTORY}"
         status, response_headers, body = get(path)
         text = body.decode("utf-8", errors="replace")
-        record("WITHDRAWN05", path, status == 200 and all(s in text for s in FREE_STORES.values()), f"Restored presentation page serves 200 and links both free Gumroad editions: HTTP {status}")
+        other_store = FREE_STORES['en' if locale == 'fr' else 'fr']
+        record("WITHDRAWN05", path, status == 200 and FREE_STORES[locale] in text and other_store not in text, f"Restored presentation page serves 200 and links only its own free Gumroad edition: HTTP {status}")
         for suffix in (".html", "/"):
             alias = path + suffix
             status, response_headers, _ = get(alias)

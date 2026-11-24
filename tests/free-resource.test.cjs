@@ -42,7 +42,8 @@ test('the website serves only a directory presentation page: no UI download, cat
   assert.doesNotMatch(pageSource, /catalogue\.json|freeResourceCatalog|data-directory-entry|\/downloads\//u);
   const stores = ['https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr', 'https://joyccelight.gumroad.com/l/free-ui-ux-directory-en'];
   for (const store of stores) assert.ok(pageSource.includes(store), store);
-  assert.ok((pageSource.match(/target="_blank"/gu) || []).length >= 1 && /rel="noopener noreferrer"/u.test(pageSource), 'edition links open Gumroad in a new tab');
+  assert.ok(/STORE\[locale\]/u.test(pageSource), 'the page renders only the edition of its own language');
+  assert.ok((pageSource.match(/target="_blank"/gu) || []).length >= 1 && /rel="noopener noreferrer"/u.test(pageSource), 'the download link opens Gumroad in a new tab');
   const redirects = readArtifact('public/_redirects').toString().trim().split('\n').map(line => line.trim().split(/\s+/u));
   for (const locale of ['fr', 'en']) {
     for (const suffix of ['.html', '/']) {
