@@ -524,12 +524,14 @@ for (const locale of ['fr', 'en'] as const) {
     }
     await page.goto(`/${locale}/resources/ui-ux-directory`);
     await expect(page.locator('h1')).toHaveCount(1);
-    for (const store of Object.values(freeStores)) {
-      const link = page.locator(`a[href="${store}"]`);
-      await expect(link).toHaveCount(1);
+    const ownStore = page.locator(`a[href="${freeStores[locale]}"]`);
+    await expect(ownStore.first()).toBeVisible();
+    for (const link of await ownStore.all()) {
       await expect(link).toHaveAttribute('target', '_blank');
       await expect(link).toHaveAttribute('rel', /noopener/);
     }
+    const otherLocale = locale === 'fr' ? 'en' : 'fr';
+    await expect(page.locator(`main a[href="${freeStores[otherLocale]}"]`)).toHaveCount(0);
     await expect(page.locator('a[href^="/downloads/"], [data-directory-entry], [data-free-download], .free-promo')).toHaveCount(0);
     // The resource must be discoverable: header navigation on every page, a
     // dedicated home section and a banner on the articles hub.

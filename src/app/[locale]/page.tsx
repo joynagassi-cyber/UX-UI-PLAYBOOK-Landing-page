@@ -489,7 +489,7 @@ export default async function LandingPage({
         <section id="free-directory">
           <div className="wrap">
             <div className="mono sec-kicker">{locale === 'fr' ? 'LIVRE GRATUIT · 0 $ SUR GUMROAD' : 'FREE BOOK · $0 ON GUMROAD'}</div>
-            <h2>{locale === 'fr' ? 'Le Répertoire UI/UX gratuit, en français et en anglais.' : 'The free UI/UX Directory, in French and English.'}</h2>
+            <h2>{locale === 'fr' ? 'Le Répertoire UI/UX gratuit, édition française.' : 'The free UI/UX Directory, English edition.'}</h2>
             <p style={{ maxWidth: '65ch', marginTop: 14 }}>
               {locale === 'fr'
                 ? 'Un livre de 54 pages : 51 fiches de ressources classées en 6 familles, 75 liens commentés, 20 aperçus de sites et une fiche de décision de 3 pages. Le site le présente ; le téléchargement se fait sur Gumroad, à 0 $.'

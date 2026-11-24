@@ -21,7 +21,7 @@ test('every external anchor in src opens a new tab with noopener; internal ancho
       const href = attrs.match(/href=(?:"([^"]*)"|\{([^}]*)\})/u);
       if (!href) continue;
       const target = (href[1] ?? href[2] ?? '');
-      const isExternal = /^https?:\/\//u.test(target) || /\burl\b|gumroadUrl|FREE_STORES/u.test(target);
+      const isExternal = /^https?:\/\//u.test(target) || /\burl\b|gumroadUrl|FREE_STORES|\bstore\b/u.test(target);
       if (!isExternal) continue;
       external.push({ file: path.relative(root, file), attrs });
       assert.match(attrs, /target="_blank"/u, `${path.relative(root, file)}: ${attrs.trim()}`);
