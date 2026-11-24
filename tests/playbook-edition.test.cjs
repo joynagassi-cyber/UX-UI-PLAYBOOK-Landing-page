@@ -8,7 +8,6 @@ const { loadData, root } = require('../scripts/content-data.cjs');
 const edition = require('../products/playbook-2026/counts.json');
 const { CONTENT } = loadData('src/i18n/content.ts');
 const { ARTICLES } = loadData('src/i18n/articles.ts');
-const { FREE_UI } = loadData('src/i18n/free-resource.ts');
 const { playbookPages } = loadData('src/lib/playbook-edition.ts');
 const strings = value => typeof value === 'string' ? [value]
   : value && typeof value === 'object' ? Object.values(value).flatMap(strings) : [];
@@ -103,8 +102,8 @@ for (const locale of ['fr', 'en']) {
     assert.ok(!/148|139/u.test(data.insideSection.readerBuy));
   });
 
-  test(`${locale}: visible offer, articles and free-resource CTA no longer repeat obsolete edition claims`, () => {
-    assert.doesNotMatch(strings([data, ARTICLES[locale], FREE_UI[locale]]).join('\n'), obsoleteClaims);
+  test(`${locale}: visible offer and articles no longer repeat obsolete edition claims`, () => {
+    assert.doesNotMatch(strings([data, ARTICLES[locale]]).join('\n'), obsoleteClaims);
     assert.equal(data.strip[0].num, String(measured.pages));
     assert.equal(data.strip[1].num, '120');
     assert.match(data.hero.note, new RegExp(String(measured.pages)));

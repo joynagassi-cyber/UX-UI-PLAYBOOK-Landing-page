@@ -20,22 +20,3 @@
   Content-Type: text/plain; charset=utf-8
 /llms-full.txt
   Content-Type: text/plain; charset=utf-8
-/downloads/*
-  X-Content-Type-Options: nosniff
-  X-Robots-Tag: noindex
-/downloads/repertoire-ui-ux-gratuit-v1.zip
-  Content-Type: application/zip
-  Content-Disposition: attachment; filename="repertoire-ui-ux-gratuit-v1.zip"
-/downloads/repertoire-ui-ux-fr-v1.pdf
-  Content-Type: application/pdf
-/downloads/repertoire-ui-ux-fr-v1.md
-  Content-Type: text/plain; charset=utf-8
-  Content-Disposition: attachment; filename="repertoire-ui-ux-fr-v1.md"
-/downloads/ui-ux-directory-free-en-v1.zip
-  Content-Type: application/zip
-  Content-Disposition: attachment; filename="ui-ux-directory-free-en-v1.zip"
-/downloads/ui-ux-directory-en-v1.pdf
-  Content-Type: application/pdf
-/downloads/ui-ux-directory-en-v1.md
-  Content-Type: text/plain; charset=utf-8
-  Content-Disposition: attachment; filename="ui-ux-directory-en-v1.md"

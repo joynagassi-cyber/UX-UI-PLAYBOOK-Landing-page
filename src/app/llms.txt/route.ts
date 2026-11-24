@@ -1,8 +1,6 @@
 import { ARTICLES } from '@/i18n/articles';
 import { SITE_URL } from '@/lib/structured-data';
 import { PLAYBOOK_EDITION, playbookPages } from '@/lib/playbook-edition';
-import { freeResourceManifest } from '@/i18n/free-resource';
-import { FREE_RESOURCE_PATH, FREE_GUMROAD_URLS } from '@/lib/free-resource-config';
 
 export const dynamic = 'force-static';
 
@@ -14,17 +12,6 @@ export async function GET() {
   const references = Array.from(new Map(
     ARTICLES.en.flatMap((article) => article.references).map((reference) => [reference.url, reference])
   ).values());
-
-  const directory = (locale: 'fr' | 'en') => {
-    const manifest = freeResourceManifest(locale);
-    const language = locale === 'fr' ? 'French' : 'English';
-    const checkout = FREE_GUMROAD_URLS[locale];
-    return `### ${language} directory edition
-- [${language} page and download](${SITE_URL}/${locale}${FREE_RESOURCE_PATH})
-- ${manifest.counts.entries} entries, ${manifest.counts.categories} categories, ${manifest.counts.resourceLinks} resource links; ${manifest.counts.guidePages}-page ${language} PDF, Markdown, ${manifest.counts.worksheetPages}-page printable decision worksheet and CSV. All files in this kit are in ${language}.
-- [${language} complete kit, ZIP](${SITE_URL}${manifest.files.archive.path}) · [${language} PDF](${SITE_URL}${manifest.files.pdf.path}) · [${language} Markdown](${SITE_URL}${manifest.files.markdown.path})
-- ${checkout ? `Configured free Gumroad product: ${checkout}. Enter 0 to download.` : 'Free direct download on this site, with no email requested.'}`;
-  };
 
   const body = `# UX/UI Playbook
 
@@ -43,14 +30,6 @@ export async function GET() {
 - Section X, reference 09b: What the numbers actually say / Ce que les chiffres disent vraiment. Dated sources are printed beneath the figures and in appendix A5. An average indicates where to investigate, not what to conclude for a particular product.
 ${PLAYBOOK_EDITION.researchSources.map(source => `- [${source.title}](${source.url}): ${source.publisher}, ${source.date}.`).join('\n')}
 - No conversion gain or accessibility certification is promised. File counts and website test counts describe different scopes.
-
-## Free UI/UX directory: separate English and French kits
-${directory('en')}
-
-${directory('fr')}
-
-- This is a separate free resource, not the $29 Playbook. Third-party resources have their own prices and licenses; no third-party asset packs are included. The 75 destinations have not undergone an exhaustive availability or legal audit.
-- The English catalogue translates the edited French edition dated November 18, 2026. It does not imply a fresh exhaustive review of external services.
 
 ## English articles
 - [All English articles](${SITE_URL}/en/articles)

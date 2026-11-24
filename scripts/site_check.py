@@ -11,7 +11,6 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 from html.parser import HTMLParser
-import hashlib
 import json
 import os
 from pathlib import Path
@@ -28,14 +27,11 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SITE = json.loads((ROOT / "src/config/site-policy.json").read_text())["defaultOrigin"]
 CATALOG = json.loads((ROOT / "src/i18n/article-catalog.json").read_text())
 SLUGS = tuple(CATALOG)
-FREE_FOLDERS = {"fr": ROOT / "products/ui-ux-directory", "en": ROOT / "products/ui-ux-directory/en"}
-FREE_CATALOGS = {lang: json.loads((folder / "catalogue.json").read_text()) for lang, folder in FREE_FOLDERS.items()}
-FREE_MANIFESTS = {lang: json.loads((folder / "manifest.json").read_text()) for lang, folder in FREE_FOLDERS.items()}
-FREE_PATH = "/resources/ui-ux-directory"
-FREE_STORES = {
-    "fr": os.environ.get("NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_FR", "").strip() or os.environ.get("NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL", "").strip(),
-    "en": os.environ.get("NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_EN", "").strip(),
-}
+WITHDRAWN_DIRECTORY = "/resources/ui-ux-directory"
+WITHDRAWN_DOWNLOADS = ["/downloads/" + name for name in (
+    "repertoire-ui-ux-gratuit-v1.zip", "repertoire-ui-ux-fr-v1.pdf", "repertoire-ui-ux-fr-v1.md",
+    "ui-ux-directory-free-en-v1.zip", "ui-ux-directory-en-v1.pdf", "ui-ux-directory-en-v1.md",
+)]
 STORES = {
     "fr": "https://joyccelight.gumroad.com/l/uiuxplaybookfr",
     "en": "https://joyccelight.gumroad.com/l/uxuiplaybook",
@@ -153,7 +149,7 @@ def main():
                     break
                 time.sleep(0.5)
 
-    routes = [f"/{lang}{suffix}" for lang in STORES for suffix in ("", "/articles", FREE_PATH, *(f"/articles/{slug}" for slug in SLUGS))]
+    routes = [f"/{lang}{suffix}" for lang in STORES for suffix in ("", "/articles", *(f"/articles/{slug}" for slug in SLUGS))]
     source_urls = set()
     prose_paragraphs = set()
     visual_titles = set()
@@ -167,9 +163,7 @@ def main():
         r"scope.survival|phrases de survie|the 5 exact moments|5 moments exacts", re.I)
     for route in routes:
         lang = route.split("/")[1]
-        free_catalog, free_manifest, free_store = FREE_CATALOGS[lang], FREE_MANIFESTS[lang], FREE_STORES[lang]
         is_article = any(route.endswith("/" + slug) for slug in SLUGS)
-        is_resource = route.endswith(FREE_PATH)
         try:
             status, _, raw = get(route)
             record("HTTP01", route, status == 200, f"GET {route}: HTTP {status}")
@@ -213,12 +207,9 @@ def main():
                 and pill.text().strip() not in {"compass", "palette", "settings"}
                 for pill in pills), "Guide categories render real icons, never raw icon keys")
             store_links = [element.attrs.get("href", "") for element in doc.all("a") if "gumroad.com/l/" in element.attrs.get("href", "")]
-            if is_resource:
-                record("I18N03", route, set(url.split("?")[0] for url in store_links) == ({free_store} if free_store else set()), "Free checkout is configured separately; never reuse a paid Playbook checkout")
-            else:
-                record("I18N03", route, bool(store_links) and all(url.split("?")[0] == STORES[lang] for url in store_links), f"{len(store_links)} localized purchase links")
-            resource_links = [a for a in doc.all("a") if a.attrs.get("href") == f"/{lang}{FREE_PATH}"]
-            record("FREE01", route, bool(resource_links), "Free directory is internally linked from every localized page")
+            record("I18N03", route, bool(store_links) and all(url.split("?")[0] == STORES[lang] for url in store_links), f"{len(store_links)} localized purchase links")
+            removed_links = [a.attrs.get("href", "") for a in doc.all("a") if WITHDRAWN_DIRECTORY in a.attrs.get("href", "") or a.attrs.get("href", "").startswith("/downloads/")]
+            record("WITHDRAWN01", route, not removed_links and not doc.all(cls="free-promo"), "No directory promotion, teaser or direct download remains")
             record("CONTACT01", route, any(element.attrs.get("href") == "mailto:joynagassi@gmail.com" for element in doc.all("a")), "Public contact mailto link")
             record("COPY01", route, not has_rejected_authority_copy(doc.text()), "No source-rating badges or book-authority promotional labels")
             record("COPY03", route, not removed_slogans.search(doc.text()), "Selected removed promotional phrases have not returned; this is not an AI or style detector")
@@ -250,19 +241,6 @@ def main():
             record("SCHEMA01", route, bool(graphs), f"Parsed {len(graphs)} JSON-LD entities")
             people = [item for item in graphs if item.get("@type") == "Person"]
             record("SCHEMA02", route, any(person.get("sameAs") and "https://github.com/joynagassi-cyber" in person["sameAs"] and "https://joyccelight.gumroad.com" in person["sameAs"] for person in people), "Author Person uses the two verified identity links")
-            if is_resource:
-                entries = [element for element in doc.all() if "data-directory-entry" in element.attrs]
-                record("FREE02", route, {element.attrs["data-directory-entry"] for element in entries} == {e["id"] for e in free_catalog["entries"]}, "All 51 entries are server-rendered, including closed categories")
-                hrefs = {a.attrs.get("href") for a in doc.all("a")}
-                record("FREE03", route, all(url in hrefs for e in free_catalog["entries"] for url in e["urls"]), "All 75 resource destinations are visible in the native category contents")
-                guide = next((item for item in graphs if item.get("@type") == "Book"), {})
-                record("FREE04", route, guide.get("inLanguage") == lang and guide.get("isAccessibleForFree") is True and guide.get("numberOfPages") == free_manifest["counts"]["guidePages"] and guide.get("encoding", {}).get("contentUrl") == site + free_manifest["files"]["pdf"]["path"] and guide.get("encoding", {}).get("inLanguage") == lang and guide.get("image") == site + f"/images/free-directory/cover-{lang}.jpg", "Matching-language free book, cover and PDF encoding; no fake price or review markup")
-                other_manifest = FREE_MANIFESTS["en" if lang == "fr" else "fr"]
-                pdf_links = [a for a in doc.all("a") if a.attrs.get("href") == free_manifest["files"]["pdf"]["path"]]
-                record("FREE12", route, not any(file["path"] in hrefs for file in other_manifest["files"].values()) and any(a.attrs.get("hreflang") == lang for a in pdf_links), "No cross-language download links; guide language is explicit")
-                buttons = doc.all("a", "free-download-primary")
-                expected = free_store or free_manifest["files"]["archive"]["path"]
-                record("FREE05", route, len(buttons) == 2 and all(a.attrs.get("href") == expected and (bool(free_store) or "download" in a.attrs) for a in buttons) and not doc.all("form"), "Two working free CTAs, no added email form or implicit subscription")
             if is_article:
                 articles = [item for item in graphs if item.get("@type") == "TechArticle"]
                 citations = articles[0].get("citation", []) if articles else []
@@ -338,7 +316,7 @@ def main():
     for locale in STORES:
         status, response_headers, _ = get(f"/{locale}.html")
         record("REDIRECT01", f"/{locale}.html", status == 301 and urlparse(response_headers.get("Location", "")).path == f"/{locale}", f"Legacy HTML URL -> {status} {response_headers.get('Location')}")
-        for suffix in ("/", "/articles/", FREE_PATH + "/", *(f"/articles/{slug}/" for slug in SLUGS)):
+        for suffix in ("/", "/articles/", *(f"/articles/{slug}/" for slug in SLUGS)):
             path = f"/{locale}" + suffix
             status, response_headers, _ = get(path)
             location = urlparse(response_headers.get("Location", ""))
@@ -349,15 +327,15 @@ def main():
         status, _, _ = get(path)
         record("HTTP404", path, status == 404, f"Unknown static route returns HTTP {status}; no SPA fallback")
 
-    for lang, manifest in FREE_MANIFESTS.items():
-        record("FREE06", f"{lang} download build origin", manifest["generatedForOrigin"] == site, "Printed return links match the configured public origin")
-        for kind, file in manifest["files"].items():
-            status, response_headers, body = get(file["path"])
-            expected_type = {"archive": "application/zip", "pdf": "application/pdf", "markdown": "text/plain"}[kind]
-            record("FREE07", file["path"], status == 200 and len(body) == file["bytes"] and hashlib.sha256(body).hexdigest() == file["sha256"], f"Real {lang} {kind} bytes match the manifest; HTTP {status}, {len(body)} bytes")
-            record("FREE08", file["path"], response_headers.get("Content-Type", "").startswith(expected_type) and "noindex" in response_headers.get("X-Robots-Tag", ""), "Correct file MIME type, noindex for raw duplicate files")
-            if kind in {"archive", "markdown"}:
-                record("FREE09", file["path"], response_headers.get("Content-Disposition", "").startswith("attachment;"), "File served as an actual download, not an HTML fallback")
+    for path in [*WITHDRAWN_DOWNLOADS, *[f"/{locale}{WITHDRAWN_DIRECTORY}{suffix}" for locale in STORES for suffix in ("", ".html", "/")]]:
+        status, response_headers, body = get(path)
+        doc = Document(body.decode("utf-8", errors="replace")).root
+        noindex = any("noindex" in element.attrs.get("content", "") for element in doc.all("meta") if element.attrs.get("name") == "robots")
+        record("WITHDRAWN02", path, status == 404 and not response_headers.get("Location") and noindex, f"Withdrawn content returns a genuine noindex 404, not a fallback or interim redirect: HTTP {status}")
+    for lang in STORES:
+        path = f"/images/free-directory/cover-{lang}.jpg"
+        status, response_headers, _ = get(path)
+        record("WITHDRAWN03", path, status == 200 and response_headers.get("Content-Type", "").startswith("image/jpeg"), "Requested image assets remain available")
 
     for endpoint in ("/robots.txt", "/sitemap.xml", "/llms.txt", "/llms-full.txt"):
         try:
@@ -368,12 +346,7 @@ def main():
                 record("MACHINE06", endpoint, response_headers.get("Content-Type", "").lower().startswith("text/plain"), response_headers.get("Content-Type"))
             if endpoint.startswith("/llms"):
                 text = body.decode("utf-8")
-                for lang, manifest in FREE_MANIFESTS.items():
-                    record("FREE10", f"{endpoint} {lang}", f"{site}/{lang}{FREE_PATH}" in text and all(site + file["path"] in text for file in manifest["files"].values()), "Both language editions and all their real download formats are discoverable")
-                    if endpoint == "/llms-full.txt":
-                        catalog = FREE_CATALOGS[lang]
-                        complete = all(value in text for entry in catalog["entries"] for value in (entry["description"], entry["nonDesigner"], entry["developer"], entry["agent"], entry["watch"], *entry["urls"]))
-                        record("FREE11", f"{endpoint} {lang}", complete and all(source["note"] in text for source in catalog["sources"]), "Complete 51-entry catalogue and source notes in the matching language")
+                record("WITHDRAWN04", endpoint, WITHDRAWN_DIRECTORY not in text and "/downloads/" not in text and "Live Brand Preview" not in text, "No withdrawn catalogue or download discovery remains")
             if endpoint == "/robots.txt":
                 record("MACHINE07", endpoint, f"Sitemap: {site}/sitemap.xml" in body.decode("utf-8") and not re.search(r"^Host:", body.decode("utf-8"), re.M), "robots.txt uses the configured public sitemap origin; no nonstandard Host canonicalization")
             if endpoint == "/sitemap.xml" and status == 200:

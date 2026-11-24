@@ -38,3 +38,6 @@ __pycache__/
 # local Cloudflare development state (never deploy credentials)
 /.wrangler/
 .dev.vars*
+
+# local document-review environment
+/.venv/

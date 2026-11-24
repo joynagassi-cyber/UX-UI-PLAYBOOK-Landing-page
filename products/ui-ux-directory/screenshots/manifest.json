@@ -14,17 +14,684 @@
       "isMobile": false
     }
   },
-  "captures": {},
-  "pendingExternalImport": {
+  "captures": {
+    "https://tweakcn.com/": {
+      "sourceUrl": "https://tweakcn.com/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/11-tweakcn.png",
+        "sha256": "0a3b72e7116bdecd21940e4fb33a4d431c4e931a3f41200fcd013d17e171b36a",
+        "reportedApprovedAt": "2026-11-19T22:19:56.126Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/3e66335f6a67f405c292.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 56442,
+      "sha256": "d77180fee2c02db81942daed0fca2eae7963484d315b770c664ec6731d340abd",
+      "retrievedAt": "2026-11-19T22:14:34.971Z"
+    },
+    "https://www.aibrandkits.com/live-brand-preview-tool": {
+      "sourceUrl": "https://www.aibrandkits.com/live-brand-preview-tool",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/110-ai-brand-kits-live-brand-preview.png",
+        "sha256": "c516d49a59d5ea6b531e05d77d9f683f839bb0fa0381002cf661f7b3c4aec2d1",
+        "reportedApprovedAt": "2026-11-19T22:38:44.277Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/57e4372bb35f1f1c5c35.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 47072,
+      "sha256": "11d2c549ee8ef3f283b91c17adc37a1e16d1ab79f3c244f2405d06ac3eebb62b",
+      "retrievedAt": "2026-11-19T22:15:45.005Z"
+    },
+    "https://www.realtimecolors.com/dashboard": {
+      "sourceUrl": "https://www.realtimecolors.com/dashboard",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/12-realtime-colors.png",
+        "sha256": "8e9b128c452a5e1518b6695be39efe0c5ecabb262f91abf5bfc737b07220b861",
+        "reportedApprovedAt": "2026-11-19T22:19:57.156Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/8ca0796c243fbaaaa24c.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 48160,
+      "sha256": "5d82d3b7b49c76588222d048acb9a79229644e976ec4b456fd9a14bdff93b6ef",
+      "retrievedAt": "2026-11-19T22:14:38.899Z"
+    },
+    "https://www.shadcndesign.com/theme-generator": {
+      "sourceUrl": "https://www.shadcndesign.com/theme-generator",
+      "status": "rejected",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/13-shadcn-design-theme-generator.png",
+        "sha256": "10fa922a8a5fccee6a33a46226b46e2eb072ff0262277c9d805850863a04b463",
+        "reportedApprovedAt": "2026-11-19T22:19:57.828Z"
+      },
+      "review": "rejected",
+      "reviewNote": "The theme generator area is still a loading spinner; the capture does not show the completed interface."
+    },
+    "https://huemint.com/": {
+      "sourceUrl": "https://huemint.com/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/14-huemint.png",
+        "sha256": "c7d3a67e3b06f5e600e62b27e6e1e5db7950862a4515fbf859b2bdd510273df4",
+        "reportedApprovedAt": "2026-11-19T22:19:58.340Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/39552907fdf1e623d7dd.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 120234,
+      "sha256": "558ec85192cccc2b595d6d75edfce0279bbb5a2a2e508013c6108e693cc2d5fe",
+      "retrievedAt": "2026-11-19T22:14:49.371Z"
+    },
+    "https://www.radix-ui.com/colors": {
+      "sourceUrl": "https://www.radix-ui.com/colors",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/15-radix-colors.png",
+        "sha256": "b7eda5c743793058c90473b8a8f2b8ff097fcbcb320d15a3c0b8f8fde4765ae7",
+        "reportedApprovedAt": "2026-11-19T22:19:58.915Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/08f0fbd667e0d3b66915.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 46185,
+      "sha256": "dcc587c111476fb4fde84f574e9dd3d9d6203c946847b9304f2fea1c43e3ad1d",
+      "retrievedAt": "2026-11-19T22:14:53.038Z"
+    },
+    "https://uicolors.app/": {
+      "sourceUrl": "https://uicolors.app/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/16-ui-colors.png",
+        "sha256": "9085969057bb38480ffe8cb991b02069c1d90c1f74ae2292bdc8f06d6b81de30",
+        "reportedApprovedAt": "2026-11-19T22:19:59.487Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/0b923753bde1bef9fe41.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 79657,
+      "sha256": "18d6ae0cb49878d364eb155d7710bd3ed6cf186bd913adc0405e6f9d7f298240",
+      "retrievedAt": "2026-11-19T22:15:03.829Z"
+    },
+    "https://m3.material.io/theme-builder": {
+      "sourceUrl": "https://m3.material.io/theme-builder",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/17-material-theme-builder.png",
+        "sha256": "24b174cd1488ba7283a8242649dd30a2161cce29afb7d8ff5d3cee78682028c0",
+        "reportedApprovedAt": "2026-11-19T22:23:02.718Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/92b9dc34e48205703473.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 62247,
+      "sha256": "9847225ad97c727d295e767cd66af808f85f8f49a41e523587ce9f4ee2b88aa6",
+      "retrievedAt": "2026-11-19T22:15:12.289Z"
+    },
+    "https://coolors.co/": {
+      "sourceUrl": "https://coolors.co/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/18-coolors-et-color-hunt.png",
+        "sha256": "e4f55c55ea637f19270fc0cbe5ea666b7e23de245c97edf6db0784cdcd00d43d",
+        "reportedApprovedAt": "2026-11-19T22:23:03.617Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/79b90a44f8fcb00c0fda.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 44804,
+      "sha256": "310d27ccaad801622fe2611971df899d65d9dc76002637a1223f06ab0bd28c1e",
+      "retrievedAt": "2026-11-19T22:15:21.642Z"
+    },
+    "https://colorhunt.co/": {
+      "sourceUrl": "https://colorhunt.co/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/18-coolors-et-color-hunt-2.png",
+        "sha256": "32b5e98b03c6c9e75d06b0c58eb95499dd5d629880c22c32d4d5631cea573c97",
+        "reportedApprovedAt": "2026-11-19T22:23:04.338Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/b2aeb96d5fed1ee75518.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 21522,
+      "sha256": "10dbea15919339879478fdf84e8658146be2f3a2d6836652ba868aefe24350a0",
+      "retrievedAt": "2026-11-19T22:15:25.120Z"
+    },
+    "https://www.khroma.co/": {
+      "sourceUrl": "https://www.khroma.co/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/19-khroma.png",
+        "sha256": "fd247e9bdfa831bbffc829202b855af2e2d8c24e07fc4e0f55bbf20a2ed44edb",
+        "reportedApprovedAt": "2026-11-19T22:23:05.608Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/65e459890d7cb361a020.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 23042,
+      "sha256": "3e3bc7365476ab2d03a151cf486475d40b01249787eb509dded8da13eca4c90c",
+      "retrievedAt": "2026-11-19T22:15:27.679Z"
+    },
+    "https://typehue.com/": {
+      "sourceUrl": "https://typehue.com/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/21-typehue.png",
+        "sha256": "ad4c53b7a7e43362b4eab3c8d9d4400a5204fa2b67450ef642f27c8f31874439",
+        "reportedApprovedAt": "2026-11-19T22:23:07.010Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/30e4950924c5d73b1390.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 63091,
+      "sha256": "a9a0303f73d752ab8147610d427a71eca3574aa50fd96323b52224e493e6b6df",
+      "retrievedAt": "2026-11-19T22:15:48.943Z"
+    },
+    "https://sitepeel.dev/font-preview/": {
+      "sourceUrl": "https://sitepeel.dev/font-preview/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/210-sitepeel-font-changer.png",
+        "sha256": "295a8ec0df0595f86212dcc542b1ce6c4407614ffa71d697baf85d6ca29ee5da",
+        "reportedApprovedAt": "2026-11-19T22:23:06.383Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/84e8ba4a4181981a739b.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 72125,
+      "sha256": "c0e81211bf14601f18c29da34730124fe86916abb32d21a4dcce9f0656c02e0c",
+      "retrievedAt": "2026-11-19T22:16:31.895Z"
+    },
+    "https://www.webfontpreview.com/": {
+      "sourceUrl": "https://www.webfontpreview.com/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/22-web-font-preview.png",
+        "sha256": "13cc8c270df3562ee854fa77bb5ef0711289b98544547147ef7590bfdb1c707f",
+        "reportedApprovedAt": "2026-11-19T22:27:49.164Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/371889d2235531377ada.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 29821,
+      "sha256": "1a88e6345742156b7111137f8c923e992dd9cde639854facf29b75bc4c1f2cdb",
+      "retrievedAt": "2026-11-19T22:15:50.932Z"
+    },
+    "https://www.uifonts.app/": {
+      "sourceUrl": "https://www.uifonts.app/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/23-ui-fonts.png",
+        "sha256": "437f02c193b49e577ab01a78b81b7b99f11a7208984b1fe00fe8905ffbf5b7fd",
+        "reportedApprovedAt": "2026-11-19T22:27:50.700Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/38a39a7978174a88bc5b.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 35585,
+      "sha256": "01735241c3c2165b953b091eed15b909fb3e2ee422eec829a85c4d418231aaef",
+      "retrievedAt": "2026-11-19T22:15:54.526Z"
+    },
+    "https://fontpair.co/": {
+      "sourceUrl": "https://fontpair.co/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/24-fontpair.png",
+        "sha256": "b440bc7d734123929b4b31bb99214a0321099bcdc189b46c5a85ad6400997e56",
+        "reportedApprovedAt": "2026-11-19T22:27:51.123Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/f007476be391447718ec.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 56392,
+      "sha256": "e4545b816630acef713122e2122f7d4d1597ed2459ebf84049246ebacfc67ba0",
+      "retrievedAt": "2026-11-19T22:15:59.890Z"
+    },
+    "https://fontjoy.com/": {
+      "sourceUrl": "https://fontjoy.com/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/25-fontjoy.png",
+        "sha256": "6682792269ac77db2ccbfb54bcfd74a67274c8206d4dfea54ba6c47a02875371",
+        "reportedApprovedAt": "2026-11-19T22:27:51.735Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/6a1e435a1bde8e6ff0d6.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 47461,
+      "sha256": "cc8f606fec89eb2cd63847895e44b4ce723273696341bd1832d39ab7215b39de",
+      "retrievedAt": "2026-11-19T22:16:03.845Z"
+    },
+    "https://fonts.google.com/": {
+      "sourceUrl": "https://fonts.google.com/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/26-google-fonts.png",
+        "sha256": "1f9f141fcc46955bad47c2917b463e39f4350d698d402d186bee1eefcade884c",
+        "reportedApprovedAt": "2026-11-19T22:27:52.677Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/4a22810a8447185e1278.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 53349,
+      "sha256": "af192607adc5931fe1ddfb5acdd2710984b4889415743e3159e2834bc880740b",
+      "retrievedAt": "2026-11-19T22:16:09.323Z"
+    },
+    "https://www.fontshare.com/": {
+      "sourceUrl": "https://www.fontshare.com/",
+      "status": "rejected",
+      "externalStatus": "rejected"
+    },
+    "https://uncut.wtf/": {
+      "sourceUrl": "https://uncut.wtf/",
+      "status": "rejected",
+      "externalStatus": "rejected"
+    },
+    "https://fontesk.com/": {
+      "sourceUrl": "https://fontesk.com/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/28-uncut-wtf-et-fontesk-2.png",
+        "sha256": "b3bf8342dd181a580e2a85319beb714fac09f34b5f343c156dbdeee83d3a9f3c",
+        "reportedApprovedAt": "2026-11-19T22:31:29.979Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/07a11a0db695eb15640e.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 69246,
+      "sha256": "dc3842857f34a7d43e7beaf02dd0baaefe8043e1124d1d03a220bf283f55fd5f",
+      "retrievedAt": "2026-11-19T22:16:22.494Z"
+    },
+    "https://typescale.com/": {
+      "sourceUrl": "https://typescale.com/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/29-typescale.png",
+        "sha256": "37246bf18b98eb3c8c6975720424a1e4bd4297f5411e6dffbb926730ec29876b",
+        "reportedApprovedAt": "2026-11-19T22:33:37.869Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/4ede8a73c3457e20066e.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 76380,
+      "sha256": "2b74f03952a3241b9dd79bc77623ef2c8a94165e23bb8c9e3f1163dfc61868af",
+      "retrievedAt": "2026-11-19T22:16:28.099Z"
+    },
+    "https://phosphoricons.com/": {
+      "sourceUrl": "https://phosphoricons.com/",
+      "status": "captured",
+      "externalStatus": "approved",
+      "source": {
+        "manifest": "manifest.external-ddf2bcc.json",
+        "image": "images/31-phosphor-icons.png",
+        "sha256": "1e82c7936440315b829fa5ab4881d93835c08c4559d5131c9e45eeaa588f17d7",
+        "reportedApprovedAt": "2026-11-19T22:35:26.964Z"
+      },
+      "review": "approved",
+      "reviewNote": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "image": "images/0fb48f2f7b7bc49c1aa9.png",
+      "width": 960,
+      "height": 600,
+      "bytes": 53354,
+      "sha256": "50959908080634cf7ffc0c40bb882818d8b88766ed12fbb0fe8a0905ea5427d9",
+      "retrievedAt": "2026-11-19T22:16:39.615Z"
+    },
+    "https://icon-sets.iconify.design/": {
+      "sourceUrl": "https://icon-sets.iconify.design/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.svgrepo.com/": {
+      "sourceUrl": "https://www.svgrepo.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.figma.com/community/file/1166831539721848736": {
+      "sourceUrl": "https://www.figma.com/community/file/1166831539721848736",
+      "status": "rejected",
+      "externalStatus": "rejected"
+    },
+    "https://lucide.dev/": {
+      "sourceUrl": "https://lucide.dev/",
+      "status": "failed",
+      "externalStatus": "failed",
+      "error": {
+        "code": "ERATE"
+      }
+    },
+    "https://tabler.io/icons": {
+      "sourceUrl": "https://tabler.io/icons",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://heroicons.com/": {
+      "sourceUrl": "https://heroicons.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://hugeicons.com/": {
+      "sourceUrl": "https://hugeicons.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://remixicon.com/": {
+      "sourceUrl": "https://remixicon.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://iconoir.com/": {
+      "sourceUrl": "https://iconoir.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.mingcute.com/": {
+      "sourceUrl": "https://www.mingcute.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://fonts.google.com/icons": {
+      "sourceUrl": "https://fonts.google.com/icons",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://ionic.io/ionicons": {
+      "sourceUrl": "https://ionic.io/ionicons",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://ui.shadcn.com/": {
+      "sourceUrl": "https://ui.shadcn.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://originui.com/": {
+      "sourceUrl": "https://originui.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://21st.dev/": {
+      "sourceUrl": "https://21st.dev/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://magicui.design/": {
+      "sourceUrl": "https://magicui.design/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://ui.aceternity.com/": {
+      "sourceUrl": "https://ui.aceternity.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://ant.design/": {
+      "sourceUrl": "https://ant.design/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://mantine.dev/": {
+      "sourceUrl": "https://mantine.dev/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.heroui.com/": {
+      "sourceUrl": "https://www.heroui.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://daisyui.com/": {
+      "sourceUrl": "https://daisyui.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://flowbite.com/": {
+      "sourceUrl": "https://flowbite.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://ionicframework.com/docs/components": {
+      "sourceUrl": "https://ionicframework.com/docs/components",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://konstaui.com/": {
+      "sourceUrl": "https://konstaui.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://reactnativereusables.com/": {
+      "sourceUrl": "https://reactnativereusables.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://github.com/satnaing/shadcn-admin": {
+      "sourceUrl": "https://github.com/satnaing/shadcn-admin",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.tremor.so/": {
+      "sourceUrl": "https://www.tremor.so/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.untitledui.com/free-figma-ui-kit": {
+      "sourceUrl": "https://www.untitledui.com/free-figma-ui-kit",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.tremor.so/docs/visualizations/area-chart": {
+      "sourceUrl": "https://www.tremor.so/docs/visualizations/area-chart",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://ui.shadcn.com/charts": {
+      "sourceUrl": "https://ui.shadcn.com/charts",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://recharts.github.io/": {
+      "sourceUrl": "https://recharts.github.io/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://apexcharts.com/": {
+      "sourceUrl": "https://apexcharts.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://echarts.apache.org/": {
+      "sourceUrl": "https://echarts.apache.org/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.chartjs.org/": {
+      "sourceUrl": "https://www.chartjs.org/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.tradingview.com/lightweight-charts/": {
+      "sourceUrl": "https://www.tradingview.com/lightweight-charts/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://chartist.dev/": {
+      "sourceUrl": "https://chartist.dev/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://github.com/leeoniya/uPlot": {
+      "sourceUrl": "https://github.com/leeoniya/uPlot",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://airbnb.io/visx/": {
+      "sourceUrl": "https://airbnb.io/visx/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://undraw.co/illustrations": {
+      "sourceUrl": "https://undraw.co/illustrations",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://storyset.com/": {
+      "sourceUrl": "https://storyset.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.drawkit.com/": {
+      "sourceUrl": "https://www.drawkit.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.manypixels.co/gallery": {
+      "sourceUrl": "https://www.manypixels.co/gallery",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.humaaans.com/": {
+      "sourceUrl": "https://www.humaaans.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.openpeeps.com/": {
+      "sourceUrl": "https://www.openpeeps.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://blush.design/": {
+      "sourceUrl": "https://blush.design/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://icons8.com/illustrations": {
+      "sourceUrl": "https://icons8.com/illustrations",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://iradesign.io/": {
+      "sourceUrl": "https://iradesign.io/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://3dicons.co/": {
+      "sourceUrl": "https://3dicons.co/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.shapefest.com/": {
+      "sourceUrl": "https://www.shapefest.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://www.toyfaces.com/": {
+      "sourceUrl": "https://www.toyfaces.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://3d.khagwal.com/": {
+      "sourceUrl": "https://3d.khagwal.com/",
+      "status": "pending",
+      "externalStatus": "pending"
+    },
+    "https://app.spline.design/community": {
+      "sourceUrl": "https://app.spline.design/community",
+      "status": "pending",
+      "externalStatus": "pending"
+    }
+  },
+  "externalImport": {
     "manifest": "manifest.external-ddf2bcc.json",
     "sha256": "011e4bf6271acf95696e23204e2db2388e26e8445f6b9aa650ba7c63ff88661a",
     "sourceCommit": "ddf2bccc6864d4f23b15e0da043df7189d869c76",
-    "reportedCounts": {
-      "approved": 21,
-      "rejected": 3,
-      "failed": 1,
-      "pending": 50
-    },
-    "reason": "Reconcile manifest schema, filenames, 2560x1600 images and size limits offline before capture or PDF use."
+    "originalImages": 21,
+    "includedImages": 20,
+    "reviewFile": "visual-review.json",
+    "method": "Offline resize, no crop, 256-color PNG. Original files are unchanged."
+  },
+  "acquisitionPaused": {
+    "reason": "Owner requested a partial illustrated release from existing images only. No new capture budget or retry authorized."
   }
 }

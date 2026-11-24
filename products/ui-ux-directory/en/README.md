@@ -1,57 +1,44 @@
-# Free UI/UX Directory — English production files
+# Free UI/UX Directory: English production and Gumroad delivery
 
-The complete English equivalent of the edited French directory: **51 entries, 6 categories and 75 resource links**. Some entries group multiple websites; do not describe the count as “75 audited tools.” All 51 entries include a description, uses for three profiles and a caveat.
+Separate from the paid Playbook: **51 entries, 6 categories, 75 links and 20 website screenshots**. Some entries group several destinations; do not call the count 75 audited tools. Editorial text is in English; captured interfaces retain their original language.
 
-## Owner deliverables
+## English deliverables
 
-- [Customer ZIP](../../../public/downloads/ui-ux-directory-free-en-v1.zip): 7 English files, approximately 504 KiB.
-- [Guide PDF](../../../public/downloads/ui-ux-directory-en-v1.pdf): 34 A4 pages.
-- [Guide Markdown](../../../public/downloads/ui-ux-directory-en-v1.md): the complete editorial guide.
-- [Ready-to-copy English Gumroad listing](gumroad-listing.md): title, summary, description, delivery message and launch post.
-- [Publication guide](publication-guide.md): free pricing, uploads, public-path test and independent English website checkout configuration.
-- [Landscape cover](marketing/cover-1280x720.png): 1280 × 720 PNG.
-- [Square thumbnail](marketing/thumbnail-1080x1080.png): 1080 × 1080 PNG.
-- `catalogue.json`: complete English catalogue, translated from `../catalogue.json`, with matching entry IDs, resource URLs and source references.
-- `manifest.json`: version, language, edition date, generation origin, counts, sizes and SHA-256 hashes.
+- [English customer ZIP](../releases/en/Free-UI-UX-Directory-EN.zip): **7 files**, approximately **2.35 MiB**.
+- [English book PDF](../releases/en/Free-UI-UX-Directory-EN.pdf): **54 A4 pages**, including **20 preview pages**, before the final English Playbook promotion.
+- [Markdown guide](../releases/en/Free-UI-UX-Directory-EN.md): complete entries, links and AI brief; screenshots appear only in the PDF.
+- [Gumroad listing](gumroad-listing.md), [publication guide](publication-guide.md), [$0 cover](marketing/cover-1280x720.png) and [$0 thumbnail](marketing/thumbnail-1080x1080.png).
+- [French edition](../README.md): separate customer files, copy and artwork.
+- [Overall FR/EN publication kit](../releases/Livres-UI-UX-Gratuits-FR-EN-Kit-Gumroad.zip): both customer ZIPs, both book PDFs, marketing artwork and publication documents in separate folders. Do not upload it as one product’s customer download.
 
-The original source document remains in the parent folder for traceability only; neither it nor these publication instructions belong in the customer ZIP.
+The customer ZIP contains `README-EN.md`, `Free-UI-UX-Directory-EN.pdf`, `Free-UI-UX-Directory-EN.md`, `UI-UX-Decision-Worksheet-EN.pdf`, `UI-UX-Decision-Worksheet-EN.md`, `UI-UX-Selection-Grid-EN.csv` and `LICENSES-EN.txt`. The worksheet has **3 printable pages**, not an interactive PDF form. The CSV uses UTF-8 with BOM, commas, **6 category rows and 11 columns**, plus the header.
 
-## Regenerate
+## Sources and captures
+
+`catalogue.json` translates the edited French catalogue with the same entry IDs, destinations and source URLs. None of the 51 entries was altered during screenshot integration. `manifest.json` records pages, off-site artifact paths, byte lengths, SHA-256 hashes and the 20 illustrated destinations.
+
+The [shared capture notes](../screenshots/README.md) document the original external batch and offline review. All **21 original PNGs** and the external manifest remain unchanged. The canonical set contains **20 approved optimized previews**. One loading-state capture is excluded; other external rejections, failures and pending entries are not relabeled as successes. No new capture request was made.
+
+Coverage is partial. Retrieval timestamps are reported by the supplier and not independently verified. Visual review is not a functional or legal audit of all 75 destinations.
+
+## Regenerate offline
 
 ```bash
-# Install project dependencies first. Chromium must be available locally.
-# CHROMIUM_EXECUTABLE_PATH may point to an existing browser.
+# Install Node dependencies and make Chromium available locally.
+# CHROMIUM_EXECUTABLE_PATH can point to an existing browser.
 npm run generate:resource:en
 npm run check:resource
+npm run package:resource
 ```
 
-The English generator uses local Domine fonts and Lucide icons, with the shared print/artwork layout in `scripts/free_resource_layout.cjs`. It checks page overflow before printing; writes the English guide, worksheets, CSV, README and notices; packages an explicit seven-file allowlist; copies the standalone English PDF/Markdown; and updates the English manifest and images. Unrelated files in the working directory are not included. Temporary HTML, extracted files and review screenshots stay in ignored `.cache/free-resource/en/`.
+The npm command explicitly selects `--with-available-screenshots`. Partial mode still rejects corrupt or substituted approved files and symlinks. It does not fabricate missing screenshots. The historical strict mode remains available with `node scripts/generate_free_resource_en.cjs --with-screenshots`; it requires all 75 approved images before touching deliverables. It is not permission to acquire more captures.
 
-English output paths:
+The English generator writes only its customer artifacts and marketing images. Artifacts go to `products/ui-ux-directory/releases/en/`, never `public/downloads`. Work files stay in ignored `.cache/free-resource/en/`. Only image artwork is copied into `public`. Regenerate both languages after a canonical-origin change so printed return links remain correct, then review counts, listings and archives.
 
-- `public/downloads/ui-ux-directory-free-en-v1.zip`
-- `public/downloads/ui-ux-directory-en-v1.pdf`
-- `public/downloads/ui-ux-directory-en-v1.md`
-- `public/images/free-directory/cover-en.jpg`
-- `public/og-directory-en.jpg`
-- `products/ui-ux-directory/en/marketing/`
+## Website withdrawal and publication
 
-`npm run generate:resource` remains the French generator. Neither language generator writes the other edition’s downloads or marketing images. When the canonical `NEXT_PUBLIC_SITE_URL` changes, regenerate **both** editions and rerun checks so the printed return links match. Do not edit binary files manually.
+Directory pages, promotions, catalogue metadata, LLM exports and downloads are removed from the website source. Image assets remain. The four editorial guides per language and the paid offer are preserved. A local change does not establish production withdrawal.
 
-## Customer ZIP
+**No Gumroad publication performed. Two real FR/EN URLs are awaited.** There is no teaser, direct-download fallback or invented free checkout. The creator publishes each localized ZIP at 0, tests the customer journey, then supplies both URLs for a later redirect change.
 
-The top-level `ui-ux-directory/` folder contains `README.md`, `ui-ux-directory-en.pdf`, `ui-ux-directory-en.md`, `decision-worksheet.pdf`, `decision-worksheet.md`, `selection-grid.csv` and `LICENSES.txt`. The worksheet PDF has 3 printable A4 pages and is not an interactive form. The CSV uses UTF-8 with BOM and commas, with 6 category rows and 11 columns to complete.
-
-## Editorial scope
-
-This translation preserves the French edition’s targeted corrections, cautions and source notes, dated **November 18, 2026**. It preserves the corrected React Native Reusables, Recharts and Chartist destinations; qualified ApexCharts, unDraw, Storyset, Fontshare and Lucide licensing descriptions; and the distinction between Radix Colors roles and actual contrast checks. It does not imply a new exhaustive availability or legal audit of all 75 destinations.
-
-No third-party fonts, libraries, icons, illustrations or 3D packs from the directory are redistributed. The included Domine/Lucide notices concern the typeface and icons used to manufacture the documents. No accessibility, performance, AI-correctness, traffic or commercial outcome is guaranteed. Tagged PDFs are not a claim of PDF/UA or screen-reader certification. The proposed guide terms should be reviewed by the creator before publication.
-
-## Publication
-
-**No English Gumroad product was published and no website deployment was performed for this task.** The site offers the matching direct download while `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_EN` is empty. The French checkout setting—including its legacy fallback—never controls the English CTA. Publish a separate English product, test a customer purchase at 0, then supply its real URL at build time. See the [publication guide](publication-guide.md).
-
-## Follow-up request: clickable Microlink website previews
-
-The [capture workflow](../screenshots/README.md) explains the isolated Node 24+ SDK tool, secure local login/key import, one GitHub smoke test, explicit batch budget and reviewed PNG requirements. **No Microlink API calls were made from this environment.** The existing remote commit `ddf2bcc` supplied 21 PNGs marked approved in its own manifest; both images and that original manifest are preserved unchanged. Their schema, filenames, dimensions and size limits still need offline reconciliation, so `pendingExternalImport` blocks further capture requests with `EIMPORTPENDING`. Hash/dimension checks do not constitute a new visual approval here. The current English PDF/ZIP remain the 34-page edition without website images. The optional `--with-screenshots` mode refuses to overwrite outputs until all 75 images are present, hash-checked and approved. French and English reuse one shared image set. Publication page counts and sizes must be updated after that later illustrated generation, not before.
+The creator should review the proposed guide terms. Screenshots are editorial previews, not reusable asset packs. No commercial, visibility or accessibility-conformance outcome is promised. Tagged PDF output is not PDF/UA certification.

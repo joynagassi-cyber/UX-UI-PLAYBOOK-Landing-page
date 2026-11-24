@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import catalog from '../src/i18n/article-catalog.json';
 import { SITE_URL } from '../src/lib/site-config';
 
-const suffixes = ['', '/articles', '/resources/ui-ux-directory', ...Object.keys(catalog).map(slug => `/articles/${slug}`)];
+const suffixes = ['', '/articles', ...Object.keys(catalog).map(slug => `/articles/${slug}`)];
 
 for (const locale of ['fr', 'en']) {
   for (const suffix of suffixes) {
@@ -37,7 +37,7 @@ for (const locale of ['fr', 'en']) {
   }
 
   for (const theme of ['dark', 'light']) {
-    test(`${locale} · ${theme} · keyboard skip/focus across all seven pages`, async ({ page }, testInfo) => {
+    test(`${locale} · ${theme} · keyboard skip/focus across all six pages`, async ({ page }, testInfo) => {
       const observations = [];
       await page.setViewportSize({ width: 320, height: 800 });
       await page.addInitScript(value => localStorage.setItem('playbook-theme', value), theme);
@@ -102,12 +102,15 @@ for (const locale of ['fr', 'en']) {
 
   test(`${locale} · forced colors, named controls and no submitted form`, async ({ page }, testInfo) => {
     await page.emulateMedia({ forcedColors: 'active' });
-    await page.goto(`/${locale}/resources/ui-ux-directory`);
+    await page.goto(`/${locale}/articles/ux-design-guide`);
     await expect(page.locator('form, input, select, textarea')).toHaveCount(0);
-    await page.locator('.resource-family').last().locator('summary').focus();
+    const disclosure = page.locator('#article-faq details').last();
+    const summary = disclosure.locator('summary');
+    await expect(disclosure).not.toHaveAttribute('open', '');
+    await summary.focus();
     await page.keyboard.press('Enter');
-    await expect(page.locator('.resource-family').last()).toHaveAttribute('open', '');
-    await expect(page.locator('.resource-family').last().locator('summary')).toHaveCSS('outline-style', 'solid');
+    await expect(disclosure).toHaveAttribute('open', '');
+    await expect(summary).toHaveCSS('outline-style', 'solid');
     const result = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
     await testInfo.attach('axe-forced-colors', { body: JSON.stringify({ violations: result.violations, incomplete: result.incomplete }, null, 2), contentType: 'application/json' });
     expect(result.violations).toEqual([]);

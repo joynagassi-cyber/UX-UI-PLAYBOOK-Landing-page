@@ -1,4 +1,35 @@
 {
+  "distribution": "gumroad-only",
+  "screenshots": {
+    "provider": "microlink",
+    "count": 20,
+    "resourceLinks": 75,
+    "complete": false,
+    "mode": "partial",
+    "galleryPages": 20,
+    "urls": [
+      "https://tweakcn.com/",
+      "https://www.realtimecolors.com/dashboard",
+      "https://huemint.com/",
+      "https://www.radix-ui.com/colors",
+      "https://uicolors.app/",
+      "https://m3.material.io/theme-builder",
+      "https://coolors.co/",
+      "https://colorhunt.co/",
+      "https://www.khroma.co/",
+      "https://www.aibrandkits.com/live-brand-preview-tool",
+      "https://typehue.com/",
+      "https://www.webfontpreview.com/",
+      "https://www.uifonts.app/",
+      "https://fontpair.co/",
+      "https://fontjoy.com/",
+      "https://fonts.google.com/",
+      "https://fontesk.com/",
+      "https://typescale.com/",
+      "https://sitepeel.dev/font-preview/",
+      "https://phosphoricons.com/"
+    ]
+  },
   "version": "1.0",
   "language": "en",
   "editionDate": "2026-11-18",
@@ -7,28 +38,28 @@
     "entries": 51,
     "categories": 6,
     "resourceLinks": 75,
-    "guidePages": 34,
+    "guidePages": 54,
     "worksheetPages": 3,
     "archiveFiles": 7
   },
   "files": {
     "archive": {
       "role": "Complete English kit",
-      "path": "/downloads/ui-ux-directory-free-en-v1.zip",
-      "bytes": 615434,
-      "sha256": "fe9a38135f83f0f79a26d756be9eeded0be183d9ab61d436deb0f21bcafa5fd8"
+      "path": "products/ui-ux-directory/releases/en/Free-UI-UX-Directory-EN.zip",
+      "bytes": 2462030,
+      "sha256": "c4275f961c7e435a48d952f14d2e474d942b78d506b892e51e8bb47a3dc9e1a6"
     },
     "pdf": {
       "role": "English guide PDF",
-      "path": "/downloads/ui-ux-directory-en-v1.pdf",
-      "bytes": 960321,
-      "sha256": "2788b121329469f11399c925a3fa6153b38b2bf5e99e3bf0d7bb7a6f9995c489"
+      "path": "products/ui-ux-directory/releases/en/Free-UI-UX-Directory-EN.pdf",
+      "bytes": 2889349,
+      "sha256": "7fea9e759b93c97f23ec7fc8e89d8efdd266c3283b4101f62cc8d54bc2368248"
     },
     "markdown": {
       "role": "English guide Markdown",
-      "path": "/downloads/ui-ux-directory-en-v1.md",
-      "bytes": 53271,
-      "sha256": "c733a6bf62741bc5e4df5ce09edbe76005882fe2324e9b2af230c00f3974ca0b"
+      "path": "products/ui-ux-directory/releases/en/Free-UI-UX-Directory-EN.md",
+      "bytes": 53451,
+      "sha256": "27097d026e4291b485fbc0886fc7c307dc54a1fc37f0725b127cb15593fbba68"
     }
   }
 }

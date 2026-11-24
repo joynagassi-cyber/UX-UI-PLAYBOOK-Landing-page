@@ -37,38 +37,28 @@ Le comparatif UX/UI/Product comprend le prototype local **Atelier** : offre, cr�
 
 Le [rapport concurrentiel FR/EN](docs/COMPETITIVE_CONTENT_STRATEGY.md) distingue les observations de pages, les hypothèses éditoriales et la visibilité non mesurée. Les guides existants accueillent une matrice de choix de méthode UX, un consommateur HTML des tokens, une fiche de revue IA explicitement non exécutée et des liens de lecture contextuels dans chaque langue, sans nouvelle URL publique. Le [protocole de test complet](docs/drafts/USABILITY_TEST_PROTOCOL_FR.md) reste un brouillon interne non importé dans le site. Aucune étude utilisateur ni citation par un moteur IA n’est revendiquée.
 
-## Nouveau : répertoire UI/UX gratuit
+## Livres gratuits FR/EN : livraison Gumroad hors du site
 
-Une ressource distincte de l’offre à 29 USD, issue du document fourni par le créateur : **51 fiches, 6 familles et 75 liens de ressources**. Deux kits complets sont disponibles : chaque page fournit les fichiers de sa langue (français ou anglais).
+Le répertoire est désormais fabriqué pour deux produits Gumroad distincts : **51 fiches, 6 familles, 75 liens, 20 captures et 54 pages par livre**, plus une fiche de décision de **3 pages**. Chaque ZIP client contient **7 fichiers dans sa langue**. Les captures restent dans la langue de leur interface ; leur couverture est partielle, sans aperçu inventé.
 
-- Pages statiques : `/fr/resources/ui-ux-directory` et `/en/resources/ui-ux-directory` ; promotion sur l’accueil, le hub Article et les huit articles localisés, avec liens de navigation et pied de page.
-- Téléchargements réels : `public/downloads/repertoire-ui-ux-gratuit-v1.zip` (FR, environ 540 Kio) et `public/downloads/ui-ux-directory-free-en-v1.zip` (EN, environ 504 Kio), **7 fichiers chacun** ; guide PDF de **34 pages**, Markdown, fiche de décision PDF de **3 pages**, fiche Markdown, grille CSV, mode d’emploi et notices. PDF/Markdown également disponibles séparément.
-- Sommaire serveur des 51 fiches et 75 destinations, six accordéons natifs utilisables sans JavaScript, trois extraits éditoriaux, FAQ et distinction explicite entre gratuité du guide et licences/tarifs tiers.
-- Canonical/hreflang, images de partage 1200 × 630, schéma du livre et encodage PDF dans la langue de chaque page, sitemap et endpoints LLM mis à jour. Les fichiers bruts ont `noindex` pour privilégier la page de présentation et de vraies réponses MIME/téléchargement.
-- **Publication Gumroad non effectuée.** Le connecteur n’est pas pris en charge ici. Sans URL publiée, le CTA livre directement le ZIP sans collecte d’email ni traceur ajouté. Aucun slug gratuit n’est inventé.
+- [Dossier et livrables français](products/ui-ux-directory/README.md), [version anglaise](products/ui-ux-directory/en/README.md).
+- [Kit global FR/EN avec textes et visuels 0 $](products/ui-ux-directory/releases/Livres-UI-UX-Gratuits-FR-EN-Kit-Gumroad.zip). Les deux ZIP clients et les documents marketing y sont séparés.
+- [Fiche Gumroad française](products/ui-ux-directory/gumroad-listing.md), [English listing](products/ui-ux-directory/en/gumroad-listing.md), [publication et test à 0](products/ui-ux-directory/publication-guide.md).
+- [Import et revue des captures](products/ui-ux-directory/screenshots/README.md) : les **21 originaux** et le manifeste externe sont conservés inchangés, **20 dérivés approuvés** sont intégrés. La capture de chargement est écartée. Aucun appel de capture supplémentaire ; acquisition suspendue avant tout accès aux identifiants.
 
-Pour raccorder le produit **après publication et test à 0**, renseigner `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_FR` et/ou `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_EN` au build avec les URLs de deux produits distincts. Une variable vide conserve le ZIP direct de sa langue ; l’ancien `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL` reste un repli français uniquement. La validation n’accepte que le magasin du créateur et rejette les deux URLs payantes du Playbook. Voir le [guide de publication](products/ui-ux-directory/publication-guide.md), la [fiche Gumroad prête à copier](products/ui-ux-directory/gumroad-listing.md) et le [dossier de fabrication](products/ui-ux-directory/README.md). Équivalents anglais : [guide de publication](products/ui-ux-directory/en/publication-guide.md), [fiche Gumroad](products/ui-ux-directory/en/gumroad-listing.md) et [livrables](products/ui-ux-directory/en/README.md).
+**À la demande du propriétaire, les pages, téléchargements, promotions et contenus de découverte du répertoire sont retirés du site source ; seuls leurs assets images sont conservés.** Aucun teaser ni fallback direct n’est maintenu. Les quatre guides éditoriaux par langue et le Playbook payant sont préservés. Les anciennes URL doivent répondre en vraie 404 tant que les deux URL Gumroad réelles ne sont pas fournies. Une modification locale n’est pas une preuve de retrait en production.
+
+**Aucun produit Gumroad publié par cet agent. Deux vraies URL FR/EN attendues pour les redirections ultérieures.** Aucun slug gratuit n’est supposé et les anciennes variables de checkout gratuit ont été retirées, sans modification distante de configuration.
 
 ```bash
-# À lancer après une modification du catalogue ou de l’origine imprimée :
-# nécessite Chromium, utilise les fontes et pictogrammes locaux
-npm run generate:resource       # Français
-npm run generate:resource:en    # Anglais
-# Contrôles du ZIP, des PDF, des liens, du CSV, des notices et de la configuration
+# Fabrication hors réseau, nécessite Chromium.
+npm run generate:resource       # FR, mode partiel explicite
+npm run generate:resource:en    # EN, mode partiel explicite
 npm run check:resource
+npm run package:resource       # archive propriétaire, pas une publication
 ```
 
-`products/ui-ux-directory/catalogue.json` est la source française éditée ; `products/ui-ux-directory/en/catalogue.json` en est la traduction anglaise intégrale, avec les mêmes IDs et destinations. Le document fourni est archivé séparément et non distribué. Chaque manifeste contrôle tailles, SHA-256 et origine des liens imprimés ; changer `NEXT_PUBLIC_SITE_URL` impose de régénérer les deux kits. La mise en page est contrôlée avant impression, mais les PDF ne revendiquent pas de certification PDF/UA. Aucun audit exhaustif des 75 destinations ni garantie d’accessibilité des outils n’est annoncé.
-
-## Aperçus Microlink — préparation, pas de captures publiées
-
-Le [mode d’emploi des captures](products/ui-ux-directory/screenshots/README.md) décrit l’outil SDK **isolé sous Node 24+** (`tools/microlink/`), sans migrer le site Node 22. `npm run microlink:plan` prépare hors réseau les **75 URLs uniques**, communes aux deux langues. `npm run microlink:github` est un essai unique ; une série demande un budget et une confirmation explicites. Les erreurs arrêtent la série, les reçus/images sont réutilisés et aucun secret n’est envoyé au navigateur ou au CDN.
-
-**Aucun appel API ni téléchargement CDN n’a été effectué ici** ; l’essai GitHub local s’est arrêté sur `ENOKEY`. Le commit distant `ddf2bcc`, découvert lors de l’ouverture de la PR, contient cependant **21 PNG marqués approuvés par leur soumission** : ils sont conservés inchangés avec le manifeste original `manifest.external-ddf2bcc.json` (21 approuvées, 3 rejetées, 1 échec, 50 en attente). Leurs hashes/dimensions sont vérifiés, sans nouvelle approbation visuelle ici. Leur format, leurs noms et leurs dimensions diffèrent du pipeline local ; 14 images dépassent sa limite de poids. `pendingExternalImport` bloque les captures sur **`EIMPORTPENDING`** jusqu’à réconciliation hors réseau, pour éviter des appels payants en double. Le plan ne donne pas de budget estimé tant que cet import est ouvert. Voir le mode d’emploi avant toute reprise ; ne pas supprimer ce garde-fou pour relancer la série.
-
-La connectivité API/CDN n’a pas été mesurée ici. Le login doit se faire sur la machine du propriétaire. La clé exposée dans le chat n’a pas été recopiée : la révoquer et utiliser une remplaçante dans `.env.local`, jamais dans le chat ou Git.
-
-Les générateurs acceptent `--with-screenshots` seulement avec un ensemble complet de PNG relus et vérifiés par SHA-256. Ils ajoutent alors des pages avec **image et URL cliquables** ; sans les 75 images approuvées, ils refusent d’écraser les kits. **Les PDF/ZIP actuels restent sans captures.** Les dépendances Microlink ne sont pas nécessaires au build ou aux tests hors ligne du site.
+Les PDF/ZIP/Markdown restent dans `products/ui-ux-directory/releases/`, jamais dans `public/downloads/`. Les manifestes indiquent les comptes, tailles et empreintes exacts. Un changement de `NEXT_PUBLIC_SITE_URL` impose de régénérer les deux langues pour actualiser les liens imprimés, puis de revoir les textes de publication. Le balisage PDF ne vaut pas certification PDF/UA ; aucune validation exhaustive des sites, de leurs droits ou de leur disponibilité n’est revendiquée.
 
 ## Architecture et langue
 
@@ -77,8 +67,8 @@ Les générateurs acceptent `--with-screenshots` seulement avec un ensemble comp
 - **`worker/index.mjs`** reprend les trois routes `/`, `/articles` et `/articles/*` avec le helper à logique conservée `lib/locale-routing.mjs` : cookie `NEXT_LOCALE` > `Accept-Language` pondéré par `q` > `request.cf.country` / `CF-IPCountry` > anglais. Le pays reste un repli heuristique, pas la langue réelle de la personne.
 - Redirections **307**, même origine et query string intacte, `Cache-Control: private, no-store`, `Vary: Cookie, Accept-Language, CF-IPCountry`, sans `Set-Cookie`. Les pages explicitement `/fr/...` ou `/en/...` ne sont jamais renégociées.
 - **`wrangler.jsonc`** déclare le vrai point d’entrée, le binding `ASSETS` sur `./out`, `html_handling: "drop-trailing-slash"` et `not_found_handling: "404-page"` (pas de fallback SPA). `assets.run_worker_first` réserve la priorité Worker aux trois motifs non localisés. Les pages localisées, images, polices et fichiers de découverte sont servis en priorité par les assets ; un chemin sans asset passe au Worker, qui le délègue tel quel à `ASSETS.fetch` pour une vraie 404.
-- **`public/_redirects`** définit les 28 alias permanents des 14 pages : `/fr.html` et `/en.html` en **301**, les autres `.html` et tous les slashs finaux en **308**. Aucun alias ne négocie la langue. Des règles explicites conservent les statuts permanents, car la normalisation Workers par défaut peut répondre 307.
-- **`public/_headers`** est conservé : sécurité, Content-Language FR/EN, cache immutable des assets hashés, MIME des endpoints et téléchargements/noindex. Les réponses personnalisées du Worker fixent leurs propres en-têtes de sécurité/confidentialité.
+- **`public/_redirects`** définit les 24 alias permanents des 12 pages conservées : `/fr.html` et `/en.html` en **301**, les autres `.html` et tous les slashs finaux en **308**. Aucun alias ne négocie la langue. Des règles explicites conservent les statuts permanents, car la normalisation Workers par défaut peut répondre 307.
+- **`public/_headers`** est conservé : sécurité, Content-Language FR/EN, cache immutable des assets hashés, MIME des endpoints, sans anciennes règles de téléchargement. Les réponses personnalisées du Worker fixent leurs propres en-têtes de sécurité/confidentialité.
 - Les anciens wrappers `functions/` et `public/_routes.json` sont conservés comme historique, **pas exécutés par Workers**. `.assetsignore` exclut `_routes.json` de l’upload ; le routage actif se trouve uniquement dans `wrangler.jsonc` et le Worker.
 - `src/lib/site-config.ts` centralise l’origine publique. Canonical, hreflang, OG/Twitter, `Person`, JSON-LD/citations, robots, sitemap et endpoints LLM s’appuient sur cette origine. Les interactions client, achats localisés, galerie, copie et sommaires restent disponibles.
 
@@ -156,7 +146,7 @@ Sans `PLAYWRIGHT_BASE_URL`, Playwright lance lui-même `preview:worker` ; le bui
 - **`test:content`** : catalogue inchangé, liens contextuels et ancres FR/EN, export textuel, références numérotées, explications et limites existantes, modèle de revue non exécuté et protocole conservé hors publication. Ces contrôles de cohérence ne notent pas automatiquement la qualité éditoriale.
 - **`check:export`** : toutes les pages du catalogue, titres/descriptions, canonical/hreflang, OG/Twitter et JPEG 1200 × 630, Person/citations, couvertures, liens/ressources/polices locales, sitemap/robots/LLM, configuration Worker/aliases/headers et absence de l’ancienne origine dans tout `out`.
 - **Python, stdlib uniquement** : contrôle HTML/SEO/éditions/Gumroad, bibliographies, paragraphes et illustrations, corpus LLM complet, licences et contrastes des tokens ; matrice HTTP de redirections, cache, chemins explicites, slash, 404. `--expected-origin` (alias `--site-url`) ou `NEXT_PUBLIC_SITE_URL` définit l’origine attendue, **distincte** de `--base-url`.
-- **Playwright + axe** : quatorze routes × deux thèmes aux largeurs 1280, 390 et 320 px ; axe à 1280/320, commandes, police effective, nombres, icônes/vecteurs, débordements et erreurs JavaScript. Les parcours couvrent aussi galerie, thèmes sauvegardés, clavier/focus, copie/checklist/FAQ, langue de l’article et achats ; le prototype est essayé dans ses neuf annotations, avec succès simulé et refus/récupération.
+- **Playwright + axe** : douze routes × deux thèmes aux largeurs 1280, 390 et 320 px ; axe à 1280/320, commandes, police effective, nombres, icônes/vecteurs, débordements et erreurs JavaScript. Les parcours couvrent aussi galerie, thèmes sauvegardés, clavier/focus, copie/checklist/FAQ, langue de l’article et achats ; le prototype est essayé dans ses neuf annotations, avec succès simulé et refus/récupération.
 - **Workflows Actions** : `cloudflare-static-export.yml` et `ui-check.yml`, Node 22, installation verrouillée, build puis contrôles. Le workflow UI partage le même serveur Worker entre Python et Playwright. Rapports, captures et traces d’échec sont conservés 14 jours en artefact. **Aucun workflow GitHub ne publie le site** ; `check:worker` est un dry-run, distinct de l’intégration externe Workers Builds.
 
 Les preuves détaillées sont décrites dans [docs/AUDIT.md](docs/AUDIT.md). `reports/`, `test-results/`, `playwright-report/`, `out/` et `.wrangler/` sont ignorés par Git. Les statuts `automated / to verify / not applicable`, la sévérité et le résultat restent distincts ; un échec bloquant automatisé produit un code de sortie 1.

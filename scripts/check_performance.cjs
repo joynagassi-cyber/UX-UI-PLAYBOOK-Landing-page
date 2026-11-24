@@ -6,7 +6,7 @@ const { parseArgs } = require('node:util');
 const { chromium } = require('@playwright/test');
 const { root } = require('./content-data.cjs');
 const catalogue = require('../src/i18n/article-catalog.json');
-const allRoutes = ['fr', 'en'].flatMap(locale => ['', '/articles', '/resources/ui-ux-directory', ...Object.keys(catalogue).map(slug => `/articles/${slug}`)].map(suffix => `/${locale}${suffix}`));
+const allRoutes = ['fr', 'en'].flatMap(locale => ['', '/articles', ...Object.keys(catalogue).map(slug => `/articles/${slug}`)].map(suffix => `/${locale}${suffix}`));
 const median = numbers => [...numbers].sort((a, b) => a - b)[Math.floor(numbers.length / 2)];
 
 async function interactions(browser, baseURL, route) {

@@ -6,26 +6,28 @@ Version 1.0 · English edition · November 18, 2026 · Joy N. / Joyccelight
 
 A directory for comparing, choosing and documenting interface resources. It is for non-designers, developers and people working with AI agents. This is not a collection of reusable components or illustrations: the resources remain on their authors’ websites.
 
+The PDF contains 20 supplied, reviewed screenshots for 75 links. Coverage is partial; no preview is invented for other destinations. Images are not supplied as a reusable asset pack.
+
 > The guide and worksheet are free. Listed services may offer paid features or conditional licenses. The 75 links are not 75 distinct tools and have not undergone an exhaustive availability audit. This edition offers starting points to verify; it does not promise business results, performance, accessibility conformance or error-free AI output.
 
-Guide page: https://joyccelight-playbook.uxplay.workers.dev/en/resources/ui-ux-directory?utm_source=ui-ux-directory&utm_medium=markdown&utm_campaign=free-resource
+Free guides: https://joyccelight-playbook.uxplay.workers.dev/en/articles?utm_source=ui-ux-directory&utm_medium=markdown&utm_campaign=free-resource
 
 ## How to use it
 
-1. **Frame the need** — Choose one screen, platform and important constraint. For example: a mobile form with readable errors and locally hosted fonts.
-2. **Compare** — Keep at most two options per category, using the same text, states and data. Keeping a resource you already know is also a valid choice.
-3. **Check** — Record the official URL, version, rights, attribution and costs. Do not send personal data or client files to a service without approval.
-4. **Try it** — Test empty, loading, error and success states; keyboard access, zoom, contrast and the narrowest screen. Measure loading in your project.
-5. **Record** — Complete the decision worksheet: choice, reason, limitation, responsible person, remaining check and review date. An unverified candidate can stay excluded.
+1. **Frame the need**: Choose one screen, platform and important constraint. For example: a mobile form with readable errors and locally hosted fonts.
+2. **Compare**: Keep at most two options per category, using the same text, states and data. Keeping a resource you already know is also a valid choice.
+3. **Check**: Record the official URL, version, rights, attribution and costs. Do not send personal data or client files to a service without approval.
+4. **Try it**: Test empty, loading, error and success states; keyboard access, zoom, contrast and the narrowest screen. Measure loading in your project.
+5. **Record**: Complete the decision worksheet: choice, reason, limitation, responsible person, remaining check and review date. An unverified candidate can stay excluded.
 
 ## Start with a need
 
-- **Colors and themes** — Compare a palette on real text, surfaces and states. Decision question: Which text/background pairs remain readable in both themes?
-- **Typography** — Examine families, weights and sizes using your own content. Decision question: Do accents, numbers, long labels and hosting conditions fit?
-- **Icons** — Choose a coherent family and understandable symbols. Decision question: Do the names exist, and do important actions keep their text labels?
-- **Components and kits** — Choose a base compatible with your platform and maintenance needs. Decision question: Which behaviors and updates will become your responsibility?
-- **Data charts** — Explain a question and its data without hiding units or limits. Decision question: Does the chart have units, a legend and a text alternative?
-- **Illustrations and 3D** — Find a useful visual without forgetting rights, loading or alternatives. Decision question: Does the illustration convey information rather than obstruct loading?
+- **Colors and themes**: Compare a palette on real text, surfaces and states. Decision question: Which text/background pairs remain readable in both themes?
+- **Typography**: Examine families, weights and sizes using your own content. Decision question: Do accents, numbers, long labels and hosting conditions fit?
+- **Icons**: Choose a coherent family and understandable symbols. Decision question: Do the names exist, and do important actions keep their text labels?
+- **Components and kits**: Choose a base compatible with your platform and maintenance needs. Decision question: Which behaviors and updates will become your responsibility?
+- **Data charts**: Explain a question and its data without hiding units or limits. Decision question: Does the chart have units, a legend and a text alternative?
+- **Illustrations and 3D**: Find a useful visual without forgetting rights, loading or alternatives. Decision question: Does the illustration convey information rather than obstruct loading?
 
 ## Brief for an AI agent
 
@@ -666,35 +668,35 @@ These resources do not all deliver the same kind of material: a rendered image, 
 
 ## Three licenses to examine before downloading
 
-- **ApexCharts: conditional free use** — The current license distinguishes conditional Community, Commercial and OEM/redistribution regimes. Confirm the organization’s circumstances and the intended use before integrating it. Do not rely on an older blanket description of the library as open source. https://apexcharts.com/license/
-- **unDraw: no asset packs or AI training** — Its specific license permits certain free uses, but restricts asset-pack redistribution and uses related to AI training or development. This guide includes no unDraw files. Read the full current terms before downloading or using a visual. https://undraw.co/license
-- **Storyset: attribution in the free offering** — The reviewed terms require credit for free use and limit redistribution. Check the exact intended use, delivery to a client and any additional restrictions. This kit does not include any Storyset illustrations. https://storyset.com/terms
+- **ApexCharts: conditional free use**: The current license distinguishes conditional Community, Commercial and OEM/redistribution regimes. Confirm the organization’s circumstances and the intended use before integrating it. Do not rely on an older blanket description of the library as open source. https://apexcharts.com/license/
+- **unDraw: no asset packs or AI training**: Its specific license permits certain free uses, but restricts asset-pack redistribution and uses related to AI training or development. This guide includes no unDraw files. Read the full current terms before downloading or using a visual. https://undraw.co/license
+- **Storyset: attribution in the free offering**: The reviewed terms require credit for free use and limit redistribution. Check the exact intended use, delivery to a client and any additional restrictions. This kit does not include any Storyset illustrations. https://storyset.com/terms
 
 ## Sources and editorial limitations
 
 English translation of the edited directory adapted from repertoire-complet-ui-ux-profils.md, supplied by the creator. References informed targeted corrections in the French source edition dated November 18, 2026, not a legal or availability audit of all 75 destinations. The translation does not imply a fresh exhaustive review. Terms may change; candidates whose features were not tested are identified in their entries.
 
-- **Radix Colors — Understanding the scale** — https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale
+- **Radix Colors — Understanding the scale**: https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale
   Twelve steps and their typical uses, with explicit exceptions; no general contrast guarantee.
-- **Google Fonts — FAQ** — https://fonts.google.com/faq
+- **Google Fonts — FAQ**: https://fonts.google.com/faq
   Free access and commercial use under each license; files, languages and hosting still require a choice.
-- **Lucide — package notice 0.511.0** — https://github.com/lucide-icons/lucide/blob/main/LICENSE
+- **Lucide — package notice 0.511.0**: https://github.com/lucide-icons/lucide/blob/main/LICENSE
   ISC notice reviewed in the local lucide-react package, including inherited Feather notices. Copy included in LICENSES.txt.
-- **shadcn/ui — Introduction** — https://ui.shadcn.com/docs
+- **shadcn/ui — Introduction**: https://ui.shadcn.com/docs
   Open-code distribution, composition and responsibility for adaptations and updates.
-- **Recharts** — https://recharts.github.io/
+- **Recharts**: https://recharts.github.io/
   React component composition, SVG and D3 submodules. The supplied domain redirected to this site during the French editorial review.
-- **ApexCharts — License Options** — https://apexcharts.com/license/
+- **ApexCharts — License Options**: https://apexcharts.com/license/
   Current model distinguishes conditional Community, Commercial and OEM/redistribution regimes; avoid blanket claims of free use.
-- **unDraw — License** — https://undraw.co/license
+- **unDraw — License**: https://undraw.co/license
   Specific license with restrictions on asset-pack redistribution and AI training/development uses.
-- **Storyset — Terms of Use, section 6** — https://storyset.com/terms
+- **Storyset — Terms of Use, section 6**: https://storyset.com/terms
   Free use is conditional on attribution; read redistribution restrictions and other applicable terms.
-- **Fontshare** — https://www.fontshare.com/
+- **Fontshare**: https://www.fontshare.com/
   The catalog includes closed-source families; free access does not establish a universal license.
-- **React Native Reusables** — https://reactnativereusables.com/
+- **React Native Reusables**: https://reactnativereusables.com/
   Address consulted for the French editorial corrections, replacing the former documentation host.
-- **Chartist** — https://chartist.dev/
+- **Chartist**: https://chartist.dev/
   Documentation address consulted for the French editorial corrections, replacing the supplied older URL.
 
 ## What comes after the directory?
@@ -707,4 +709,4 @@ Read the free articles: https://joyccelight-playbook.uxplay.workers.dev/en/artic
 
 ## Terms of use
 
-Text and layout: Joy N. / Joyccelight, 2026. You may read this guide, use it in personal or professional projects and adapt the decision worksheets for your team or clients. Do not resell the guide or republish it unchanged under your own name; share its download page instead. These terms apply only to this guide and grant no rights to the referenced websites, brands, fonts, icons, components or visuals. Their authors and licenses remain the authorities. No partnership or paid affiliation with the listed services is claimed. This guide is not legal advice.
+Text and layout: Joy N. / Joyccelight, 2026. You may read this guide, use it in personal or professional projects and adapt the decision worksheets for your team or clients. Website screenshots serve an editorial purpose and are not assets to extract or reuse. Do not resell the guide or republish it unchanged under your own name; share its download page instead. These terms apply only to this guide and grant no rights to the referenced websites, brands, fonts, icons, components or visuals. Their authors and licenses remain the authorities. No partnership or paid affiliation with the listed services is claimed. This guide is not legal advice.

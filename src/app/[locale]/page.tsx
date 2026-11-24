@@ -16,9 +16,6 @@ import {
 } from '@/components/BookGalleryLightbox';
 import { ContentsExplorer } from '@/components/ContentsExplorer';
 import { playbookPages } from '@/lib/playbook-edition';
-import { FreeResourcePromo } from '@/components/FreeResourcePromo';
-import { FREE_UI } from '@/i18n/free-resource';
-import { FREE_RESOURCE_PATH } from '@/lib/free-resource-config';
 import { authorJsonLd, serializeJsonLd } from '@/lib/structured-data';
 
 export const dynamicParams = false;
@@ -215,7 +212,6 @@ export default async function LandingPage({
             <a href="#contents">{c.nav.contents}</a>
             <a href={`/${locale}/articles`}>{c.nav.guides}</a>
             <a href="#faq">{c.nav.faq}</a>
-            <a className="nav-free" href={`/${locale}${FREE_RESOURCE_PATH}`}>{FREE_UI[locale].nav}</a>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -253,7 +249,6 @@ export default async function LandingPage({
             </div>
 
             <p className="hero-note">{c.hero.note}</p>
-            <a className="hero-free-link" href={`/${locale}${FREE_RESOURCE_PATH}`}><Icon name="book-open" size="sm" /><span>{FREE_UI[locale].promoLink}</span></a>
 
             <div className="hero-proof">
               {c.hero.proofs.map((proof, idx) => (
@@ -287,9 +282,6 @@ export default async function LandingPage({
       </div>
 
       <main tabIndex={-1} id="content">
-        <section id="free-resource" className="free-promo-section">
-          <div className="wrap"><FreeResourcePromo locale={locale} /></div>
-        </section>
         {/* 3 Pillars Section */}
         <section id="pillars">
           <div className="wrap">
@@ -597,7 +589,6 @@ export default async function LandingPage({
           </div>
 
           <div className="footer-links">
-            <a href={`/${locale}${FREE_RESOURCE_PATH}`}>{FREE_UI[locale].promoLink}</a>
             <a href={`/${locale}/articles`}>{c.nav.guides}</a>
             <GumroadButton href={c.gumroadUrl}>
               {c.footer.gumroadLinkLabel}

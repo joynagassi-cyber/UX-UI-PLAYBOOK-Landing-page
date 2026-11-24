@@ -129,3 +129,63 @@ test('preservation rejects edits to the historical prefix of append-only reports
   assert.equal(report.outcome, 'fail');
   assert.equal(report.appendOnly[0].preserved, false);
 });
+
+
+test('a documented hash-bound removal requires continued absence, never a whole-file waiver', t => {
+  const f = fixture(t);
+  f.ledger.revisions.push({ id: 'owner-withdrawal', reason: 'Owner withdraws the old public download', reviewReport: 'docs/review.md',
+    removedFiles: [{ path: 'public/asset.txt', fromSha256: sha(f.original), reason: 'Withdraw public bytes' }] });
+  f.save();
+  fs.unlinkSync(path.join(f.root, 'public/asset.txt'));
+  let report = verifyPreservation(f.root);
+  assert.equal(report.outcome, 'pass');
+  assert.equal(report.reviewedRemovals.length, 1);
+  f.write('public/asset.txt', f.original);
+  report = verifyPreservation(f.root);
+  assert.ok(report.changed.some(item => item.includes('retired file reappeared')));
+});
+
+test('removals reject stale hashes, unknown paths and a missing review document', t => {
+  for (const entry of [
+    { path: 'public/asset.txt', fromSha256: sha('wrong predecessor') },
+    { path: 'public/*.txt', fromSha256: sha('unit fixture only') },
+  ]) {
+    const f = fixture(t);
+    f.ledger.revisions.push({ id: 'invalid-removal', reason: 'Scoped removal', reviewReport: 'docs/review.md', removedFiles: [{ ...entry, reason: 'Withdraw' }] });
+    f.save();
+    assert.ok(verifyPreservation(f.root).changed.some(item => item.includes('Invalid reviewed removal')));
+  }
+  const f = fixture(t);
+  f.ledger.revisions.push({ id: 'unreviewed-removal', reason: 'Scoped removal', reviewReport: 'docs/missing.md', removedFiles: [{ path: 'public/asset.txt', fromSha256: sha(f.original), reason: 'Withdraw' }] });
+  f.save();
+  assert.equal(verifyPreservation(f.root).outcome, 'fail');
+});
+
+test('a retired path cannot be silently reintroduced as a newly protected file', t => {
+  const f = fixture(t);
+  f.ledger.revisions.push(
+    { id: 'withdraw', reason: 'Requested withdrawal', reviewReport: 'docs/review.md', removedFiles: [{ path: 'public/asset.txt', fromSha256: sha(f.original), reason: 'Withdraw' }] },
+    { id: 'revive', reason: 'Invalid reuse', reviewReport: 'docs/review.md', introducedFiles: [{ path: 'public/asset.txt', sha256: sha('replacement'), reason: 'Invalid' }] },
+  );
+  fs.unlinkSync(path.join(f.root, 'public/asset.txt')); f.save();
+  assert.ok(verifyPreservation(f.root).changed.some(item => item.includes('Invalid new protected file')));
+});
+
+test('only the named reviewed route may be removed; additional deletion and reappearance fail', t => {
+  const f = fixture(t);
+  f.write('src/app/[locale]/directory/page.tsx', 'directory page');
+  const baselinePath = path.join(f.root, 'docs/technical-baseline.json');
+  const baseline = JSON.parse(fs.readFileSync(baselinePath));
+  baseline.initialTrackedPaths.push('src/app/[locale]/directory/page.tsx');
+  const bytes = JSON.stringify(baseline);
+  f.write('docs/technical-baseline.json', bytes); f.ledger.baselineSha256 = sha(bytes);
+  f.ledger.revisions.push({ id: 'directory-withdrawal', reason: 'Owner withdraws a page', reviewReport: 'docs/review.md',
+    removedPageFiles: [{ path: 'src/app/[locale]/directory/page.tsx', fromSha256: sha('directory page'), reason: 'Await real store URLs' }] });
+  fs.unlinkSync(path.join(f.root, 'src/app/[locale]/directory/page.tsx')); f.save();
+  assert.equal(verifyPreservation(f.root).outcome, 'pass');
+  fs.unlinkSync(path.join(f.root, 'src/app/[locale]/page.tsx'));
+  assert.equal(verifyPreservation(f.root).pageInventoryPreserved, false);
+  f.write('src/app/[locale]/page.tsx', 'page');
+  f.write('src/app/[locale]/directory/page.tsx', 'reappeared');
+  assert.equal(verifyPreservation(f.root).pageInventoryPreserved, false);
+});

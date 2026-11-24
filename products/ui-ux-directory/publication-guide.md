@@ -1,95 +1,70 @@
-# Publier le Répertoire UI/UX sur Gumroad
+# Publier le répertoire français à 0 $
 
-## Situation actuelle
+## Statut et séparation des livraisons
 
-Le produit téléchargeable et son intégration au site sont préparés dans ce dépôt. **Aucun produit Gumroad n’a été créé ou publié et aucun déploiement du site n’a été effectué pour cette tâche.** Le connecteur Gumroad n’est pas pris en charge dans cette session. Aucune demande de mot de passe ou de jeton n’est nécessaire : le propriétaire effectue les actions dans son compte.
+Les fichiers sont préparés dans ce dépôt. **Aucun produit Gumroad n’a été publié par cet agent.** Le propriétaire effectue la publication dans son compte, sans communiquer de mot de passe ou de jeton dans le chat.
 
-En attendant, le site exporté sert un téléchargement direct réel, sans email ni lien Gumroad inventé. L’aperçu local n’est pas une mise en production.
+Les pages du répertoire, ses téléchargements et sa promotion ont été retirés des sources du site à la demande du propriétaire. Les images sont conservées. Ce changement local ne prouve pas un retrait en production : le site doit encore suivre son processus de déploiement habituel.
 
-**Demande d’illustration ultérieure :** le [workflow Microlink](screenshots/README.md) est préparé, mais aucune vraie capture n’a encore été obtenue. Les fichiers et chiffres ci-dessous décrivent le kit actuel **sans captures**. Actualiser cette fiche après la génération illustrée réelle ; ne pas annoncer les aperçus avant leur présence dans le PDF.
+Il n’y a ni page d’attente, ni catalogue web maintenu, ni téléchargement direct de repli. **Les deux vraies URL Gumroad FR/EN sont attendues pour ajouter les redirections lors d’une modification ultérieure.** Aucun paramètre de build ne publie ou n’active ces redirections actuellement.
 
-## 1. Fichiers à utiliser
+## Fichiers français à utiliser
 
-| Usage | Fichier dans le dépôt |
+| Usage | Fichier |
 | --- | --- |
-| Contenu à livrer au client | [repertoire-ui-ux-gratuit-v1.zip](../../public/downloads/repertoire-ui-ux-gratuit-v1.zip) |
-| Couverture marketing | [cover-1280x720.png](marketing/cover-1280x720.png) |
-| Vignette carrée | [thumbnail-1080x1080.png](marketing/thumbnail-1080x1080.png) |
-| Texte à copier | [gumroad-listing.md](gumroad-listing.md) |
-| PDF pour relecture | [repertoire-ui-ux-fr-v1.pdf](../../public/downloads/repertoire-ui-ux-fr-v1.pdf) |
+| Contenu client à charger dans Gumroad | [Repertoire-UI-UX-Gratuit-FR.zip](releases/fr/Repertoire-UI-UX-Gratuit-FR.zip) |
+| PDF à relire | [Repertoire-UI-UX-Gratuit-FR.pdf](releases/fr/Repertoire-UI-UX-Gratuit-FR.pdf) |
+| Couverture 0 $, 1280 × 720 | [cover-1280x720.png](marketing/cover-1280x720.png) |
+| Vignette 0 $, 1080 × 1080 | [thumbnail-1080x1080.png](marketing/thumbnail-1080x1080.png) |
+| Nom, résumé, description et messages | [gumroad-listing.md](gumroad-listing.md) |
 
-Le ZIP inclut sept fichiers : guide PDF de 34 pages, même contenu en Markdown, fiche PDF de 3 pages, fiche Markdown, CSV, mode d’emploi et notices. Il pèse environ **540 Kio**. Ne pas charger le dossier source, le document original ni ce guide de publication comme contenu client.
+**Le ZIP français contient 7 fichiers**, dont un guide illustré de **54 pages**, une fiche imprimable de **3 pages**, deux fichiers Markdown, une grille CSV, un mode d’emploi et les notices. Taille indicative : **2,38 Mio** ; le manifeste donne les octets et SHA-256 exacts.
 
-La [version anglaise](en/README.md) possède son propre ZIP, ses visuels, sa [fiche Gumroad](en/gumroad-listing.md) et son [guide de publication](en/publication-guide.md). Ne pas remplacer les fichiers français par les fichiers anglais dans ce produit.
+Ne pas charger l’archive générale FR/EN comme fichier client d’un seul produit. Elle contient aussi les documents du créateur et les visuels marketing. Ne pas charger les sources, les captures séparées ou le manifeste externe.
 
-Avant publication, le créateur doit relire les textes, les conditions d’usage proposées dans `LICENCES.txt` et les références, et confirmer le régime applicable à son activité. Ne pas ajouter de fichiers tiers au ZIP sans permission.
+## Créer et tester le produit gratuit
 
-## 2. Créer le produit gratuit
+1. Créer un produit numérique dans le compte Joyccelight.
+2. Copier les champs de la fiche française. Retirer les consignes internes du texte public.
+3. Régler le montant à **0 $** et le montant suggéré à **0** si le champ existe. Toute contribution doit rester facultative. Ne pas ajouter d’abonnement ni de version payante.
+4. Charger uniquement le ZIP client français. Vérifier les limites et exigences affichées dans le compte ; les règles actuelles de Gumroad n’ont pas été revalidées ici.
+5. Ajouter la couverture paysage et la vignette carrée dans leurs emplacements marketing respectifs. Les deux portent 0 $.
+6. Confirmer la langue française. Les captures de sites restent dans leur langue d’origine. Le Playbook payant n’est pas inclus.
+7. Relire les droits proposés dans `LICENCES-FR.txt` et confirmer les obligations applicables à l’activité du créateur. Les captures n’accordent aucun droit de réutilisation des contenus tiers.
+8. Publier vous-même, puis tester dans une fenêtre privée, hors du compte vendeur.
 
-1. Dans le compte du créateur, aller à **Products → New product** et choisir un produit numérique adapté au ZIP (l’intitulé exact peut évoluer).
-2. Copier le nom, le résumé et la description de `gumroad-listing.md`.
-3. Régler **Amount / montant à 0**. La documentation Gumroad décrit alors un prix libre permettant la gratuité. Régler le montant suggéré à **0** si le champ est présent.
-4. Ne pas ajouter de version payante ou d’abonnement à ce produit. Vérifier l’aperçu : le client doit pouvoir saisir **0** et obtenir le kit sans carte bancaire. Une éventuelle contribution doit rester facultative.
-5. Ajouter le ZIP comme contenu livré. La limite documentée pour les produits gratuits est de **250 MB cumulés** ; ce kit est très en dessous.
-6. Ajouter la couverture **1280 × 720** et la vignette **1080 × 1080**. Ces visuels sont du marketing, pas les fichiers livrés.
-7. Confirmer langue française, formats et absence du Playbook payant. Le texte de bouton disponible dépend de Gumroad ; ne pas promettre un bouton personnalisé.
-8. Vérifier les obligations du compte (identité, paramètres de vente et autres exigences affichées) puis publier vous-même.
+### Contrôle du parcours client
 
-## 3. Tester avant de partager
+- Saisir **0** et confirmer que la contribution est facultative et qu’aucun paiement par carte n’est exigé pour obtenir le kit gratuit. Si ce n’est pas le cas, corriger les réglages avant de partager le lien.
+- Télécharger le ZIP réellement servi par Gumroad et vérifier ses **7 fichiers**.
+- Ouvrir les PDF : **54 pages / 3 pages**, **20 captures** dans le guide, texte lisible et liens cliquables.
+- Vérifier une image et son lien, puis le lien vers le Playbook français en dernière page : `https://joyccelight.gumroad.com/l/uiuxplaybookfr`.
+- Ouvrir le CSV en UTF-8, séparateur point-virgule : **6 lignes de familles**, **11 colonnes**, plus l’en-tête.
+- Vérifier la fiche produit sur téléphone et l’absence de promesse d’audit exhaustif des 75 destinations.
+- Traiter séparément tout consentement à des communications marketing. Le téléchargement n’autorise pas à inscrire implicitement une personne à une newsletter.
 
-- Ouvrir le lien public dans une fenêtre privée, hors du compte vendeur.
-- Saisir **0**, suivre le parcours gratuit et confirmer qu’aucune contribution n’est obligatoire.
-- Télécharger le ZIP livré par Gumroad, le décompresser et ouvrir les deux PDF.
-- Vérifier **34 pages / 3 pages**, accents, liens cliquables et présence des sept fichiers.
-- Vérifier le CSV dans un tableur (UTF-8, point-virgule).
-- Relire la fiche produit sur téléphone ; ce produit livre uniquement les fichiers français. L’édition anglaise possède un téléchargement et un produit distincts.
-- Si Gumroad propose des communications marketing, traiter le consentement séparément de la remise du fichier. Ne pas inscrire implicitement tous les destinataires à une newsletter.
-- Copier **l’URL publique réellement publiée**.
+## Transmettre les deux URL réelles
 
-## 4. Brancher cette URL au site
+Après les tests, transmettre les **deux URL publiques complètes**, française et anglaise. Elles doivent correspondre à deux produits gratuits distincts. Ne pas fournir d’URL d’administration ni réutiliser les deux boutiques payantes.
 
-Définir la variable de build suivante avec la vraie URL obtenue :
+Le prochain changement ajoutera des redirections vers les bonnes éditions, avec contrôle des anciennes variantes d’URL. Ne pas recréer de PDF/ZIP public, de teaser ou de fallback en attendant. Partager directement le vrai lien Gumroad seulement après son test, pas l’ancienne page du site.
 
-```env
-NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_FR=
-```
+Les guides éditoriaux existants et le Playbook payant restent disponibles :
 
-La valeur doit être une URL HTTPS de produit du magasin `joyccelight.gumroad.com`, avec un chemin `/l/` suivi du slug réellement attribué. **Laisser la valeur vide tant que le produit n’existe pas.** La configuration rejette les deux URLs payantes existantes du Playbook, les autres domaines, les paramètres de suivi et les identifiants dans l’URL. Les paramètres UTM entrants sont ensuite transmis par le bouton existant. L’ancien `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL` reste un repli français si la nouvelle variable française est vide. La page anglaise ne lit que `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_EN` et conserve son ZIP direct si cette valeur est vide. Les deux langues ne peuvent pas réutiliser la même URL de checkout. La validation ne vérifie ni le contenu ni le prix du produit distant : le test manuel à 0 reste obligatoire.
+- https://joyccelight-playbook.uxplay.workers.dev/fr/articles
+- https://joyccelight-playbook.uxplay.workers.dev/fr#buy
 
-```bash
-npm run check:resource
-npm run typecheck
-npm run test:routing
-npm run build
-npm run check:export
-npm run preview:pages
-# Dans un autre terminal :
-python3 scripts/site_check.py --base-url http://127.0.0.1:3100
-PLAYWRIGHT_BASE_URL=http://127.0.0.1:3100 npm run test:ui
-```
+## Limites et provenance
 
-Le CTA principal de la page gratuite devient alors **« Obtenir gratuitement sur Gumroad »**. Les liens vers le PDF et le Markdown restent de vrais fichiers locaux ; aucun formulaire de collecte n’est ajouté au site. Déployer ensuite la révision via le processus Cloudflare du propriétaire. Un changement de variable exige un nouveau build statique, pas uniquement une sauvegarde dans un tableau de bord.
+Le PDF contient **20 aperçus pour 75 liens**. Les 21 originaux reçus sont conservés ; celui qui affiche un générateur encore en chargement est exclu de la livraison. Les images ont été optimisées et relues hors réseau. Aucun appel de capture supplémentaire n’a été effectué.
 
-Pages du site à partager **après déploiement** :
+Les dates d’obtention sont celles déclarées dans le lot externe, non vérifiées indépendamment. Une capture ne valide pas les prix, licences, performances ou fonctions actuelles d’un site. Le PDF est balisé, mais aucune conformité PDF/UA ou certification d’accessibilité n’est revendiquée.
 
-- FR : `/fr/resources/ui-ux-directory`.
-- EN : `/en/resources/ui-ux-directory` (guide, fiche et grille en anglais, dans un ZIP distinct).
+## Références à consulter dans le compte avant publication
 
-L’origine canonique de build actuelle est `https://joyccelight-playbook.uxplay.workers.dev`. Sa présence dans les documents n’établit pas que la page est publiée. Si l’origine publique définitive change, régénérer les deux kits avec `NEXT_PUBLIC_SITE_URL` avant publication puis relancer les contrôles : les liens imprimés ne changent pas tout seuls.
+Ces pages sont des points de vérification, pas une validation des règles Gumroad actuelles dans cette tâche :
 
-## 5. Une promotion simple, sans promesse de trafic
-
-1. Publier Gumroad et déployer la page, puis tester les deux liens publics.
-2. Utiliser le texte de lancement proposé dans la fiche et la couverture jointe.
-3. Garder la page gratuite accessible depuis l’accueil, le hub Article et chaque article.
-4. Les liens du kit reviennent vers les articles et l’offre du Playbook avec des paramètres UTM ; ils ne collectent rien seuls. Le site n’a pas reçu d’outil de mesure supplémentaire.
-5. Observer d’abord les téléchargements et les retours, si vos outils et consentements le permettent. Aucune hausse de trafic, inscription ou vente n’est garantie.
-
-## Références de configuration consultées
-
-- Création d’un produit : https://gumroad.com/help/article/149-adding-a-product
-- Prix libre et montant 0 : https://gumroad.com/help/article/133-pay-what-you-want-pricing
-- Limite des fichiers gratuits : https://gumroad.com/help/article/289-file-size-limits-on-gumroad
-- Couverture et vignette : https://gumroad.com/help/article/60-adding-a-cover-image
-
-Ces liens documentent les réglages au moment de la préparation française ; ils n’ont pas été revalidés lors de la traduction anglaise. L’interface et les règles peuvent évoluer ; les vérifier dans le compte avant publication.
+- https://gumroad.com/help/article/149-adding-a-product
+- https://gumroad.com/help/article/133-pay-what-you-want-pricing
+- https://gumroad.com/help/article/289-file-size-limits-on-gumroad
+- https://gumroad.com/help/article/60-adding-a-cover-image

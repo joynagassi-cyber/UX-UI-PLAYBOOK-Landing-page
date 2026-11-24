@@ -1,4 +1,35 @@
 {
+  "distribution": "gumroad-only",
+  "screenshots": {
+    "provider": "microlink",
+    "count": 20,
+    "resourceLinks": 75,
+    "complete": false,
+    "mode": "partial",
+    "galleryPages": 20,
+    "urls": [
+      "https://tweakcn.com/",
+      "https://www.realtimecolors.com/dashboard",
+      "https://huemint.com/",
+      "https://www.radix-ui.com/colors",
+      "https://uicolors.app/",
+      "https://m3.material.io/theme-builder",
+      "https://coolors.co/",
+      "https://colorhunt.co/",
+      "https://www.khroma.co/",
+      "https://www.aibrandkits.com/live-brand-preview-tool",
+      "https://typehue.com/",
+      "https://www.webfontpreview.com/",
+      "https://www.uifonts.app/",
+      "https://fontpair.co/",
+      "https://fontjoy.com/",
+      "https://fonts.google.com/",
+      "https://fontesk.com/",
+      "https://typescale.com/",
+      "https://sitepeel.dev/font-preview/",
+      "https://phosphoricons.com/"
+    ]
+  },
   "version": "1.0",
   "language": "fr",
   "editionDate": "2026-11-18",
@@ -7,28 +38,28 @@
     "entries": 51,
     "categories": 6,
     "resourceLinks": 75,
-    "guidePages": 34,
+    "guidePages": 54,
     "worksheetPages": 3,
     "archiveFiles": 7
   },
   "files": {
     "archive": {
       "role": "Complete French kit",
-      "path": "/downloads/repertoire-ui-ux-gratuit-v1.zip",
-      "bytes": 701279,
-      "sha256": "0069860f5ef94d6d1a272309ce07302cf57a3ea59cf8fb0ca812e826ef792aae"
+      "path": "products/ui-ux-directory/releases/fr/Repertoire-UI-UX-Gratuit-FR.zip",
+      "bytes": 2498956,
+      "sha256": "b74850c2428f284bcc36295877a20b25e853eced18f7b478fed1bebee749faac"
     },
     "pdf": {
       "role": "French guide PDF",
-      "path": "/downloads/repertoire-ui-ux-fr-v1.pdf",
-      "bytes": 1016874,
-      "sha256": "47e86075652ec6283cf5a0f123c37f022ff1a4dadf0aec638f7a46adf5f372b5"
+      "path": "products/ui-ux-directory/releases/fr/Repertoire-UI-UX-Gratuit-FR.pdf",
+      "bytes": 2929178,
+      "sha256": "e7eb7e58a7179bfc90c7bdd6fe39f506b2ae871c90a91174b44a5307799b69c3"
     },
     "markdown": {
       "role": "French guide Markdown",
-      "path": "/downloads/repertoire-ui-ux-fr-v1.md",
-      "bytes": 58388,
-      "sha256": "60e9802e282c99568e6489ccaf60eecffcdb4f6158a75be4207914d929a47586"
+      "path": "products/ui-ux-directory/releases/fr/Repertoire-UI-UX-Gratuit-FR.md",
+      "bytes": 58646,
+      "sha256": "bccadaded908eaa001a3e486b6e1bb69448dfb2b4a2de3138ae560da91025100"
     }
   }
 }

@@ -280,6 +280,312 @@
           "reason": "Remove the dedicated editionUpdates data and novelty labels in FR/EN metadata, preview descriptions and contents. Retain verified page/section/glossary counts, price, deliverables and purchase links."
         }
       ]
+    },
+    {
+      "id": "owner-free-books-gumroad-only-partial-captures",
+      "reason": "Owner-confirmed withdrawal of the free directory from the website while awaiting real FR/EN Gumroad URLs; publishable off-site localized books use only the reviewed available captures, without new capture requests.",
+      "reviewReport": "docs/FREE_RESOURCE_GUMROAD_RELEASE.md",
+      "files": [
+        {
+          "path": "products/ui-ux-directory/README.md",
+          "fromSha256": "853d49f110c9e870b46a844ccf5393eafad3f8b26e6f23a8e440a4e01925f71c",
+          "toSha256": "9e8a13f45cb898380c3ef38e1a2a104a6cdf9882458ca43c41373acd7c66685c",
+          "reason": "Owner publication copy matches the illustrated localized files and zero price, explains partial coverage and off-site delivery, and waits for real Gumroad URLs without an invented checkout or direct-download fallback."
+        },
+        {
+          "path": "products/ui-ux-directory/en/README.md",
+          "fromSha256": "21c4bb6105c1d776a2cf6de15762d7f3eeaeb82197a6767ffdf1a6098ff3f01f",
+          "toSha256": "d8b8768602fb22e3fec0438fb1b528a0d4e136f1c5e90016808a47658357e2a9",
+          "reason": "Owner publication copy matches the illustrated localized files and zero price, explains partial coverage and off-site delivery, and waits for real Gumroad URLs without an invented checkout or direct-download fallback."
+        },
+        {
+          "path": "products/ui-ux-directory/gumroad-listing.md",
+          "fromSha256": "01ffce0b6eab2ea502ed9cebb95d3a446982856d057283aac88c04d68cbaa4f9",
+          "toSha256": "259fa5e206200f1a95ea474579ecd9c23238a5542ad5be5dfeae3ec79232395f",
+          "reason": "Owner publication copy matches the illustrated localized files and zero price, explains partial coverage and off-site delivery, and waits for real Gumroad URLs without an invented checkout or direct-download fallback."
+        },
+        {
+          "path": "products/ui-ux-directory/en/gumroad-listing.md",
+          "fromSha256": "c10b38338dd6ce55c9e3657948e6734ebb89a8196fb02d6d14569abb0e0ba156",
+          "toSha256": "5699d6b61896262600ec695e9e6c6c14632c3ebe1cbc6d8ca52ce8113d653cd9",
+          "reason": "Owner publication copy matches the illustrated localized files and zero price, explains partial coverage and off-site delivery, and waits for real Gumroad URLs without an invented checkout or direct-download fallback."
+        },
+        {
+          "path": "products/ui-ux-directory/publication-guide.md",
+          "fromSha256": "79cc50d9db7e6603dc29f47174506aec4ed68c137122b873188301d0b38a23cd",
+          "toSha256": "ad5a754c71f31e16d60ba8277d33abca8bd27fb60bbc3b08563d98aabdda789f",
+          "reason": "Owner publication copy matches the illustrated localized files and zero price, explains partial coverage and off-site delivery, and waits for real Gumroad URLs without an invented checkout or direct-download fallback."
+        },
+        {
+          "path": "products/ui-ux-directory/en/publication-guide.md",
+          "fromSha256": "57ebe85cf9c844082709c0da2561bdbe17e6e6c2601924ddff4332555eb9a665",
+          "toSha256": "804349bdc65417ed827da698ac4d39e40a063fb3d81addc32118c56d863817aa",
+          "reason": "Owner publication copy matches the illustrated localized files and zero price, explains partial coverage and off-site delivery, and waits for real Gumroad URLs without an invented checkout or direct-download fallback."
+        },
+        {
+          "path": "products/ui-ux-directory/manifest.json",
+          "fromSha256": "428d1084d3b576a1a858c7210ce5e1fe0695a823dd1d7aaa9394fd5207d4888f",
+          "toSha256": "2a6964b90a123330bfe915fe8233fae37eb9ad450b47fa90b625a19a0b337d48",
+          "reason": "Localized off-site release manifest: actual 54-page guide, 20 previews, 3-page worksheet and seven-file customer ZIP, with real hashes and no public download paths."
+        },
+        {
+          "path": "products/ui-ux-directory/en/manifest.json",
+          "fromSha256": "d23884c98f862cafd0bba206c1ced5d3f470ac6732f0ef67047194d9dcf0f41e",
+          "toSha256": "f4ebbaab1b6a9bed6168656a5e99f4a11f522545c0626ad2ae2518dd6d139163",
+          "reason": "Localized off-site release manifest: actual 54-page guide, 20 previews, 3-page worksheet and seven-file customer ZIP, with real hashes and no public download paths."
+        },
+        {
+          "path": "products/ui-ux-directory/marketing/cover-1280x720.png",
+          "fromSha256": "e4fdbca034753002977ea05fde6d0f78b5b80518debccbe56fce560be6f708bf",
+          "toSha256": "cbdfb61e8b40834ab0fd1b351745657b2f7d6071a3f4059c7ae697c25ebeae12",
+          "reason": "Retain this image asset and render explicit zero pricing with the actual 20 available previews; no free route is retained."
+        },
+        {
+          "path": "products/ui-ux-directory/marketing/thumbnail-1080x1080.png",
+          "fromSha256": "70069d4018bf0f717a7210d963f501a2665a2aa79b419a752eca0911e499709d",
+          "toSha256": "05a08895563f961f84e77d365daac645f356991bd52a7bb3558c6605a8120d49",
+          "reason": "Retain this image asset and render explicit zero pricing with the actual 20 available previews; no free route is retained."
+        },
+        {
+          "path": "products/ui-ux-directory/en/marketing/cover-1280x720.png",
+          "fromSha256": "3f2aa83932042f65d4a8a6c35df0dac8441cdb30eed2256949bd9ba71b45ecf7",
+          "toSha256": "651a8f9e8e6d2f96797fb1575aea4cd4eb5ab05acce5748066e282295926bbfb",
+          "reason": "Retain this image asset and render explicit zero pricing with the actual 20 available previews; no free route is retained."
+        },
+        {
+          "path": "products/ui-ux-directory/en/marketing/thumbnail-1080x1080.png",
+          "fromSha256": "255dd19b84798f8ee10de648f491d73b0638ff9bc10f3bb6ce64bb77d7f927e8",
+          "toSha256": "9be1066e989e81f90dfe1d96810acfb05542c41a50f5972ee974c81f8139f8f2",
+          "reason": "Retain this image asset and render explicit zero pricing with the actual 20 available previews; no free route is retained."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/README.md",
+          "fromSha256": "c192756543944901eebf5dbb64e9e6e6b874f706af7dcb9a02aa3793176e0bf4",
+          "toSha256": "5cb912abc689cd6d9850219796225ac8ec078f33d78da820d653b402c2770818",
+          "reason": "Document the completed offline visual review and explicit partial generation; no new capture budget or network acquisition."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/manifest.json",
+          "fromSha256": "cced22871744821853caff9783c40cfdb26bf8340198837ee1f8586dfd730058",
+          "toSha256": "c057a24996ab52cc7615b4728373d998d875229f85727f8b7716a6557ef6b9f4",
+          "reason": "Local offline import and provenance of 20 approved optimized captures; all originals and the external manifest remain unchanged; acquisition paused."
+        },
+        {
+          "path": "public/images/free-directory/cover-fr.jpg",
+          "fromSha256": "e0e1414a285b6cbfd0718253061452d43fdeacc48dfb67d657b645f71ed56d75",
+          "toSha256": "698053098251305a039e1f7e454e54fc21543454e48d8701f397c85799668685",
+          "reason": "Retain this image asset and render explicit zero pricing with the actual 20 available previews; no free route is retained."
+        },
+        {
+          "path": "public/images/free-directory/cover-en.jpg",
+          "fromSha256": "757750517b3f293e0162a22435b8713f7e5bb3b476200de2c463b364af7ac016",
+          "toSha256": "cea8f81e4dced4ddedc14ac7358fbfbd58e7a6dcaca0bab07de2136ac2998935",
+          "reason": "Retain this image asset and render explicit zero pricing with the actual 20 available previews; no free route is retained."
+        },
+        {
+          "path": "public/og-directory-fr.jpg",
+          "fromSha256": "9128814de2f35e4dde9fe51493300d955df2cfb5e910ed599d6ea46cde05b0cf",
+          "toSha256": "4c4ed4f818fbc5ff6f1e360c5cffe173aae7875b0466a71776652641cec83cd4",
+          "reason": "Retain this image asset and render explicit zero pricing with the actual 20 available previews; no free route is retained."
+        },
+        {
+          "path": "public/og-directory-en.jpg",
+          "fromSha256": "2aac53ae94049ad36b552deb002f0b14e08f00d464deed51c1345821baee184e",
+          "toSha256": "bcbcc85e2cb8205f5d7e87ec3f386fb58b9b6d0f950c607d0417f0f3eb664a71",
+          "reason": "Retain this image asset and render explicit zero pricing with the actual 20 available previews; no free route is retained."
+        }
+      ],
+      "removedFiles": [
+        {
+          "path": "public/downloads/repertoire-ui-ux-fr-v1.md",
+          "fromSha256": "60e9802e282c99568e6489ccaf60eecffcdb4f6158a75be4207914d929a47586",
+          "reason": "Owner explicitly withdraws all free-directory pages and downloads from the website; no fallback distribution or catalogue UI is retained. Continued absence is enforced."
+        },
+        {
+          "path": "public/downloads/repertoire-ui-ux-fr-v1.pdf",
+          "fromSha256": "47e86075652ec6283cf5a0f123c37f022ff1a4dadf0aec638f7a46adf5f372b5",
+          "reason": "Owner explicitly withdraws all free-directory pages and downloads from the website; no fallback distribution or catalogue UI is retained. Continued absence is enforced."
+        },
+        {
+          "path": "public/downloads/repertoire-ui-ux-gratuit-v1.zip",
+          "fromSha256": "0069860f5ef94d6d1a272309ce07302cf57a3ea59cf8fb0ca812e826ef792aae",
+          "reason": "Owner explicitly withdraws all free-directory pages and downloads from the website; no fallback distribution or catalogue UI is retained. Continued absence is enforced."
+        },
+        {
+          "path": "public/downloads/ui-ux-directory-en-v1.md",
+          "fromSha256": "c733a6bf62741bc5e4df5ce09edbe76005882fe2324e9b2af230c00f3974ca0b",
+          "reason": "Owner explicitly withdraws all free-directory pages and downloads from the website; no fallback distribution or catalogue UI is retained. Continued absence is enforced."
+        },
+        {
+          "path": "public/downloads/ui-ux-directory-en-v1.pdf",
+          "fromSha256": "2788b121329469f11399c925a3fa6153b38b2bf5e99e3bf0d7bb7a6f9995c489",
+          "reason": "Owner explicitly withdraws all free-directory pages and downloads from the website; no fallback distribution or catalogue UI is retained. Continued absence is enforced."
+        },
+        {
+          "path": "public/downloads/ui-ux-directory-free-en-v1.zip",
+          "fromSha256": "fe9a38135f83f0f79a26d756be9eeded0be183d9ab61d436deb0f21bcafa5fd8",
+          "reason": "Owner explicitly withdraws all free-directory pages and downloads from the website; no fallback distribution or catalogue UI is retained. Continued absence is enforced."
+        },
+        {
+          "path": "src/i18n/free-resource.ts",
+          "fromSha256": "0ccb15ed4a974004e88af2bd7e8614ce190123bb52e91ff5911ddfeb999a1169",
+          "reason": "Owner explicitly withdraws all free-directory pages and downloads from the website; no fallback distribution or catalogue UI is retained. Continued absence is enforced."
+        }
+      ],
+      "removedPageFiles": [
+        {
+          "path": "src/app/[locale]/resources/ui-ux-directory/page.tsx",
+          "fromSha256": "7774379fc19afc865edb53b78c4f487fd7b4553e974aace821961e0021267bcc",
+          "reason": "Remove the shared FR/EN directory page rather than replace it with a teaser. Both localized URLs and aliases must return real 404 until the owner supplies the two actual free Gumroad URLs."
+        }
+      ],
+      "introducedFiles": [
+        {
+          "path": "products/ui-ux-directory/screenshots/images/3e66335f6a67f405c292.png",
+          "sha256": "d77180fee2c02db81942daed0fca2eae7963484d315b770c664ec6731d340abd",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/57e4372bb35f1f1c5c35.png",
+          "sha256": "11d2c549ee8ef3f283b91c17adc37a1e16d1ab79f3c244f2405d06ac3eebb62b",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/8ca0796c243fbaaaa24c.png",
+          "sha256": "5d82d3b7b49c76588222d048acb9a79229644e976ec4b456fd9a14bdff93b6ef",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/39552907fdf1e623d7dd.png",
+          "sha256": "558ec85192cccc2b595d6d75edfce0279bbb5a2a2e508013c6108e693cc2d5fe",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/08f0fbd667e0d3b66915.png",
+          "sha256": "dcc587c111476fb4fde84f574e9dd3d9d6203c946847b9304f2fea1c43e3ad1d",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/0b923753bde1bef9fe41.png",
+          "sha256": "18d6ae0cb49878d364eb155d7710bd3ed6cf186bd913adc0405e6f9d7f298240",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/92b9dc34e48205703473.png",
+          "sha256": "9847225ad97c727d295e767cd66af808f85f8f49a41e523587ce9f4ee2b88aa6",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/79b90a44f8fcb00c0fda.png",
+          "sha256": "310d27ccaad801622fe2611971df899d65d9dc76002637a1223f06ab0bd28c1e",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/b2aeb96d5fed1ee75518.png",
+          "sha256": "10dbea15919339879478fdf84e8658146be2f3a2d6836652ba868aefe24350a0",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/65e459890d7cb361a020.png",
+          "sha256": "3e3bc7365476ab2d03a151cf486475d40b01249787eb509dded8da13eca4c90c",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/30e4950924c5d73b1390.png",
+          "sha256": "a9a0303f73d752ab8147610d427a71eca3574aa50fd96323b52224e493e6b6df",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/84e8ba4a4181981a739b.png",
+          "sha256": "c0e81211bf14601f18c29da34730124fe86916abb32d21a4dcce9f0656c02e0c",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/371889d2235531377ada.png",
+          "sha256": "1a88e6345742156b7111137f8c923e992dd9cde639854facf29b75bc4c1f2cdb",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/38a39a7978174a88bc5b.png",
+          "sha256": "01735241c3c2165b953b091eed15b909fb3e2ee422eec829a85c4d418231aaef",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/f007476be391447718ec.png",
+          "sha256": "e4545b816630acef713122e2122f7d4d1597ed2459ebf84049246ebacfc67ba0",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/6a1e435a1bde8e6ff0d6.png",
+          "sha256": "cc8f606fec89eb2cd63847895e44b4ce723273696341bd1832d39ab7215b39de",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/4a22810a8447185e1278.png",
+          "sha256": "af192607adc5931fe1ddfb5acdd2710984b4889415743e3159e2834bc880740b",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/07a11a0db695eb15640e.png",
+          "sha256": "dc3842857f34a7d43e7beaf02dd0baaefe8043e1124d1d03a220bf283f55fd5f",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/4ede8a73c3457e20066e.png",
+          "sha256": "2b74f03952a3241b9dd79bc77623ef2c8a94165e23bb8c9e3f1163dfc61868af",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/images/0fb48f2f7b7bc49c1aa9.png",
+          "sha256": "50959908080634cf7ffc0c40bb882818d8b88766ed12fbb0fe8a0905ea5427d9",
+          "reason": "Reviewed canonical PNG derived locally from a preserved original. Exact hash approval; no network capture or fabricated screenshot."
+        },
+        {
+          "path": "products/ui-ux-directory/screenshots/visual-review.json",
+          "sha256": "acbcce76f8e4e5f4baa8455ce9cf741596989ff36226b537985b82eeff7d2f26",
+          "reason": "Decisions bind 21 preserved originals and the 20 exact optimized derivatives to the offline visual review."
+        },
+        {
+          "path": "products/ui-ux-directory/releases/fr/Repertoire-UI-UX-Gratuit-FR.zip",
+          "sha256": "b74850c2428f284bcc36295877a20b25e853eced18f7b478fed1bebee749faac",
+          "reason": "Reviewed FR customer artifact, outside public assets. Exact content and archive integrity checked independently."
+        },
+        {
+          "path": "products/ui-ux-directory/releases/fr/Repertoire-UI-UX-Gratuit-FR.pdf",
+          "sha256": "e7eb7e58a7179bfc90c7bdd6fe39f506b2ae871c90a91174b44a5307799b69c3",
+          "reason": "Reviewed FR customer artifact, outside public assets. Exact content and archive integrity checked independently."
+        },
+        {
+          "path": "products/ui-ux-directory/releases/fr/Repertoire-UI-UX-Gratuit-FR.md",
+          "sha256": "bccadaded908eaa001a3e486b6e1bb69448dfb2b4a2de3138ae560da91025100",
+          "reason": "Reviewed FR customer artifact, outside public assets. Exact content and archive integrity checked independently."
+        },
+        {
+          "path": "products/ui-ux-directory/releases/en/Free-UI-UX-Directory-EN.zip",
+          "sha256": "c4275f961c7e435a48d952f14d2e474d942b78d506b892e51e8bb47a3dc9e1a6",
+          "reason": "Reviewed EN customer artifact, outside public assets. Exact content and archive integrity checked independently."
+        },
+        {
+          "path": "products/ui-ux-directory/releases/en/Free-UI-UX-Directory-EN.pdf",
+          "sha256": "7fea9e759b93c97f23ec7fc8e89d8efdd266c3283b4101f62cc8d54bc2368248",
+          "reason": "Reviewed EN customer artifact, outside public assets. Exact content and archive integrity checked independently."
+        },
+        {
+          "path": "products/ui-ux-directory/releases/en/Free-UI-UX-Directory-EN.md",
+          "sha256": "27097d026e4291b485fbc0886fc7c307dc54a1fc37f0725b127cb15593fbba68",
+          "reason": "Reviewed EN customer artifact, outside public assets. Exact content and archive integrity checked independently."
+        },
+        {
+          "path": "products/ui-ux-directory/releases/Livres-UI-UX-Gratuits-FR-EN-Kit-Gumroad.zip",
+          "sha256": "8907f18b70cf472763f792a684f9a95289eabc8789996533a3f15d20a5e61618",
+          "reason": "Owner-requested overall kit; localized customer archives, book PDFs and publication assets separated, with checksums."
+        },
+        {
+          "path": "products/ui-ux-directory/releases/publication-manifest.json",
+          "sha256": "00db10d57f06de7d55ce5a5758de6a5fa5e32c46fd6dac7712322493a8a69e73",
+          "reason": "Exact integrity record for the overall kit, never a public download route."
+        }
+      ]
     }
   ]
 }

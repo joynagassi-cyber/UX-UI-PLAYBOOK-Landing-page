@@ -8,7 +8,7 @@ const { root } = require('../scripts/content-data.cjs');
 const catalog = require('../products/ui-ux-directory/catalogue.json');
 const enCatalog = require('../products/ui-ux-directory/en/catalogue.json');
 const helpers = require('../scripts/free_resource_screenshots.cjs');
-const { capturePlan, imageName, sha256, requestOptions, emptyManifest, readManifest, validateCapture, pngDimensions, loadGallery, screenshotSheets, safeError } = helpers;
+const { capturePlan, imageName, sha256, requestOptions, emptyManifest, readManifest, validateCapture, pngDimensions, loadGallery, screenshotSheets, selectGalleryMode, safeError } = helpers;
 const moduleUrl = pathToFileURL(path.join(root, 'tools/microlink/capture.mjs')).href;
 // Deliberately synthetic 1px fixture, used only in ignored local test directories.
 // It is never installed as a website screenshot or included in customer downloads.
@@ -256,4 +256,86 @@ test('secrets and isolated SDK dependencies are Git-ignored and never imported i
   function walk(directory) { return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? walk(path.join(directory, entry.name)) : [path.join(directory, entry.name)]); }
   const code = walk(path.join(root, 'src')).filter(file => /\.(?:ts|tsx|js|jsx)$/u.test(file));
   assert.ok(code.every(file => !/MICROLINK_API_KEY|from ['"]microlink\.io|require\(['"]microlink\.io/u.test(fs.readFileSync(file, 'utf8'))));
+});
+
+
+test('partial screenshot mode requires an explicit flag and cannot be mixed with complete mode', () => {
+  assert.equal(selectGalleryMode([]), 'none');
+  assert.equal(selectGalleryMode(['--without-screenshots']), 'none');
+  assert.equal(selectGalleryMode(['--with-available-screenshots']), 'partial');
+  assert.equal(selectGalleryMode(['--with-screenshots']), 'complete');
+  assert.throws(() => selectGalleryMode(['--with-screenshots', '--with-available-screenshots']), error => error.code === 'EUSAGE');
+});
+
+test('partial mode includes only approved real files and preserves correct image-to-URL links in both languages', t => {
+  const directory = temporary(t), manifest = emptyManifest(), plan = capturePlan(catalog);
+  addCapture(directory, manifest, plan[0].url);
+  const pending = addCapture(directory, manifest, plan[1].url); pending.review = 'pending';
+  manifest.captures[plan[2].url] = { sourceUrl: plan[2].url, status: 'rejected', review: 'rejected' };
+  manifest.captures[plan[3].url] = { sourceUrl: plan[3].url, status: 'failed' };
+  save(directory, manifest);
+  assert.equal(loadGallery(catalog, directory, { partial: true }).length, 1);
+  for (const [locale, source] of [['fr', catalog], ['en', enCatalog]]) {
+    const pages = screenshotSheets(source, locale, directory, { partial: true });
+    assert.equal(pages.length, 1);
+    const html = pages[0].body;
+    assert.equal((html.match(/<img /g) || []).length, 1);
+    assert.equal(html.split(`href="${plan[0].url}"`).length - 1, 2);
+    assert.ok(!html.includes(`href="${plan[1].url}"`));
+    assert.ok(html.includes(locale === 'fr' ? '1 aperçus disponibles pour 75 liens' : '1 available previews for 75 links'));
+  }
+});
+
+test('partial mode does not silently drop a corrupt approved preview or publish an empty gallery', t => {
+  const directory = temporary(t), manifest = emptyManifest(), url = capturePlan(catalog)[0].url;
+  save(directory, manifest);
+  assert.throws(() => loadGallery(catalog, directory, { partial: true }), error => error.code === 'EINCOMPLETE');
+  const capture = addCapture(directory, manifest, url); capture.sha256 = '0'.repeat(64);save(directory, manifest);
+  assert.throws(() => loadGallery(catalog, directory, { partial: true }), error => error.code === 'EINCOMPLETE' && error.message.includes('EINTEGRITY'));
+});
+
+test('the reconciled batch binds all 20 optimized previews to their original and reviewed derivative hashes', () => {
+  const canonical = readManifest();
+  const review = JSON.parse(fs.readFileSync(path.join(helpers.directory, 'visual-review.json'), 'utf8'));
+  assert.equal(canonical.pendingExternalImport, undefined);
+  assert.equal(canonical.externalImport.sha256, '011e4bf6271acf95696e23204e2db2388e26e8445f6b9aa650ba7c63ff88661a');
+  assert.equal(review.images.length, 21);
+  const approved = review.images.filter(image => image.decision === 'approved');
+  assert.equal(approved.length, 20);
+  for (const item of approved) {
+    const capture = canonical.captures[item.url];
+    validateCapture(item.url, capture);
+    assert.equal(capture.source.sha256, item.originalSha256);
+    assert.equal(capture.sha256, item.optimizedSha256);
+    assert.deepEqual([capture.width, capture.height], [960, 600]);
+    assert.ok(capture.bytes <= 200000);
+  }
+  const excluded = review.images.find(image => image.decision === 'rejected');
+  assert.equal(excluded.url, 'https://www.shadcndesign.com/theme-generator');
+  assert.equal(canonical.captures[excluded.url].externalStatus, 'approved');
+  assert.equal(canonical.captures[excluded.url].status, 'rejected');
+  assert.match(excluded.reason, /loading spinner/u);
+  const states = Object.values(canonical.captures).reduce((counts, capture) => ({ ...counts, [capture.status]: (counts[capture.status] || 0) + 1 }), {});
+  assert.deepEqual(states, { captured: 20, rejected: 4, failed: 1, pending: 50 });
+  assert.equal(loadGallery(catalog, undefined, { partial: true }).length, 20);
+});
+
+test('owner-paused acquisition blocks every new capture request before credentials, SDK or network I/O', async () => {
+  const { main } = await import(moduleUrl);
+  const originalFetch = globalThis.fetch;
+  let calls = 0;
+  globalThis.fetch = async () => { calls++;throw new Error('Network must not be used.'); };
+  try {
+    for (const args of [['--url', 'https://github.com/'], ['--url', 'https://www.shadcndesign.com/theme-generator', '--retry-failed'], ['--all', '--max-calls', '75', '--confirm-billable']]) {
+      await assert.rejects(main(args), error => error.code === 'EACQUISITIONPAUSED');
+    }
+  } finally { globalThis.fetch = originalFetch; }
+  assert.equal(calls, 0);
+  const plan = JSON.parse(execFileSync(process.execPath, ['tools/microlink/capture.mjs', '--plan'], { cwd: root, encoding: 'utf8' }));
+  assert.equal(plan.validLocalImages, 20);
+  assert.equal(plan.approvedImages, 20);
+  assert.ok(plan.previousFailures.some(item => item.url === 'https://lucide.dev/' && item.code === 'ERATE'));
+  assert.equal(plan.captureBlocked, true);
+  assert.equal(plan.apiCallsNeeded, null);
+  assert.equal(plan.networkCallsMadeByThisPlan, 0);
 });

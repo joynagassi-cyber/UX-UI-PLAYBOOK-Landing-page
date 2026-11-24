@@ -1,0 +1,192 @@
+{
+  "scope": "Visual editorial review of the 21 supplied images, not a functional test or rights audit.",
+  "reviewer": "Arena assistant",
+  "images": [
+    {
+      "url": "https://tweakcn.com/",
+      "originalSha256": "0a3b72e7116bdecd21940e4fb33a4d431c4e931a3f41200fcd013d17e171b36a",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "d77180fee2c02db81942daed0fca2eae7963484d315b770c664ec6731d340abd",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://www.aibrandkits.com/live-brand-preview-tool",
+      "originalSha256": "c516d49a59d5ea6b531e05d77d9f683f839bb0fa0381002cf661f7b3c4aec2d1",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "11d2c549ee8ef3f283b91c17adc37a1e16d1ab79f3c244f2405d06ac3eebb62b",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://www.realtimecolors.com/dashboard",
+      "originalSha256": "8e9b128c452a5e1518b6695be39efe0c5ecabb262f91abf5bfc737b07220b861",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "5d82d3b7b49c76588222d048acb9a79229644e976ec4b456fd9a14bdff93b6ef",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://www.shadcndesign.com/theme-generator",
+      "originalSha256": "10fa922a8a5fccee6a33a46226b46e2eb072ff0262277c9d805850863a04b463",
+      "decision": "rejected",
+      "reason": "The theme generator area is still a loading spinner; the capture does not show the completed interface."
+    },
+    {
+      "url": "https://huemint.com/",
+      "originalSha256": "c7d3a67e3b06f5e600e62b27e6e1e5db7950862a4515fbf859b2bdd510273df4",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "558ec85192cccc2b595d6d75edfce0279bbb5a2a2e508013c6108e693cc2d5fe",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://www.radix-ui.com/colors",
+      "originalSha256": "b7eda5c743793058c90473b8a8f2b8ff097fcbcb320d15a3c0b8f8fde4765ae7",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "dcc587c111476fb4fde84f574e9dd3d9d6203c946847b9304f2fea1c43e3ad1d",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://uicolors.app/",
+      "originalSha256": "9085969057bb38480ffe8cb991b02069c1d90c1f74ae2292bdc8f06d6b81de30",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "18d6ae0cb49878d364eb155d7710bd3ed6cf186bd913adc0405e6f9d7f298240",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://m3.material.io/theme-builder",
+      "originalSha256": "24b174cd1488ba7283a8242649dd30a2161cce29afb7d8ff5d3cee78682028c0",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "9847225ad97c727d295e767cd66af808f85f8f49a41e523587ce9f4ee2b88aa6",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://coolors.co/",
+      "originalSha256": "e4f55c55ea637f19270fc0cbe5ea666b7e23de245c97edf6db0784cdcd00d43d",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "310d27ccaad801622fe2611971df899d65d9dc76002637a1223f06ab0bd28c1e",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://colorhunt.co/",
+      "originalSha256": "32b5e98b03c6c9e75d06b0c58eb95499dd5d629880c22c32d4d5631cea573c97",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "10dbea15919339879478fdf84e8658146be2f3a2d6836652ba868aefe24350a0",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://www.khroma.co/",
+      "originalSha256": "fd247e9bdfa831bbffc829202b855af2e2d8c24e07fc4e0f55bbf20a2ed44edb",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "3e3bc7365476ab2d03a151cf486475d40b01249787eb509dded8da13eca4c90c",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://typehue.com/",
+      "originalSha256": "ad4c53b7a7e43362b4eab3c8d9d4400a5204fa2b67450ef642f27c8f31874439",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "a9a0303f73d752ab8147610d427a71eca3574aa50fd96323b52224e493e6b6df",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://sitepeel.dev/font-preview/",
+      "originalSha256": "295a8ec0df0595f86212dcc542b1ce6c4407614ffa71d697baf85d6ca29ee5da",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "c0e81211bf14601f18c29da34730124fe86916abb32d21a4dcce9f0656c02e0c",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://www.webfontpreview.com/",
+      "originalSha256": "13cc8c270df3562ee854fa77bb5ef0711289b98544547147ef7590bfdb1c707f",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "1a88e6345742156b7111137f8c923e992dd9cde639854facf29b75bc4c1f2cdb",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://www.uifonts.app/",
+      "originalSha256": "437f02c193b49e577ab01a78b81b7b99f11a7208984b1fe00fe8905ffbf5b7fd",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "01735241c3c2165b953b091eed15b909fb3e2ee422eec829a85c4d418231aaef",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://fontpair.co/",
+      "originalSha256": "b440bc7d734123929b4b31bb99214a0321099bcdc189b46c5a85ad6400997e56",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "e4545b816630acef713122e2122f7d4d1597ed2459ebf84049246ebacfc67ba0",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://fontjoy.com/",
+      "originalSha256": "6682792269ac77db2ccbfb54bcfd74a67274c8206d4dfea54ba6c47a02875371",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "cc8f606fec89eb2cd63847895e44b4ce723273696341bd1832d39ab7215b39de",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://fonts.google.com/",
+      "originalSha256": "1f9f141fcc46955bad47c2917b463e39f4350d698d402d186bee1eefcade884c",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "af192607adc5931fe1ddfb5acdd2710984b4889415743e3159e2834bc880740b",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://fontesk.com/",
+      "originalSha256": "b3bf8342dd181a580e2a85319beb714fac09f34b5f343c156dbdeee83d3a9f3c",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "dc3842857f34a7d43e7beaf02dd0baaefe8043e1124d1d03a220bf283f55fd5f",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://typescale.com/",
+      "originalSha256": "37246bf18b98eb3c8c6975720424a1e4bd4297f5411e6dffbb926730ec29876b",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "2b74f03952a3241b9dd79bc77623ef2c8a94165e23bb8c9e3f1163dfc61868af",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    },
+    {
+      "url": "https://phosphoricons.com/",
+      "originalSha256": "1e82c7936440315b829fa5ab4881d93835c08c4559d5131c9e45eeaa588f17d7",
+      "decision": "approved",
+      "reason": "Website identity and useful interface or landing content are visible. No login, CAPTCHA or blocking error shown. Original and optimized preview inspected.",
+      "optimizedSha256": "50959908080634cf7ffc0c40bb882818d8b88766ed12fbb0fe8a0905ea5427d9",
+      "optimizedWidth": 960,
+      "optimizedHeight": 600
+    }
+  ]
+}
