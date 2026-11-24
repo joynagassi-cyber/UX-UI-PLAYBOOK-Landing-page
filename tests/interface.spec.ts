@@ -2,7 +2,7 @@ import { expect, test, type Locator, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import catalogue from '../src/i18n/article-catalog.json';
 
-const suffixes = ['', '/articles', '/resources/ui-ux-directory', ...Object.keys(catalogue).map(slug => `/articles/${slug}`)];
+const suffixes = ['', '/articles', ...Object.keys(catalogue).map(slug => `/articles/${slug}`)];
 const articlePath = (locale: string) => `/${locale}/articles/ux-design-guide`;
 const scrollbarChrome = (locator: Locator) => locator.evaluate(element => ({
   standard: getComputedStyle(element).getPropertyValue('scrollbar-width'),

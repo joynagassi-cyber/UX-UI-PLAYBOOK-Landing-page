@@ -26,7 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 POLICY = json.loads((ROOT / "src/config/site-policy.json").read_text())
 BOTS = json.loads((ROOT / "src/config/crawler-policy.json").read_text())
 SLUGS = json.loads((ROOT / "src/i18n/article-catalog.json").read_text())
-SUFFIXES = ["", "/articles", "/resources/ui-ux-directory", *[f"/articles/{slug}" for slug in SLUGS]]
+SUFFIXES = ["", "/articles", *[f"/articles/{slug}" for slug in SLUGS]]
 ROUTES = [f"/{locale}{suffix}" for locale in ("fr", "en") for suffix in SUFFIXES]
 
 
@@ -103,7 +103,7 @@ def main():
                 valid = False
         check("JSONLD_PARSE", route, valid and bool(graph), {"entities": len(graph)})
         types = {item.get("@type") for item in graph}
-        required = {"Person", "TechArticle", "FAQPage", "BreadcrumbList"} if suffix.startswith("/articles/") else ({"Person", "Book", "WebPage", "FAQPage", "BreadcrumbList"} if suffix.startswith("/resources/") else ({"Person", "CollectionPage", "BreadcrumbList"} if suffix == "/articles" else {"Person", "WebSite", "Organization", "Product", "Book", "FAQPage"}))
+        required = {"Person", "TechArticle", "FAQPage", "BreadcrumbList"} if suffix.startswith("/articles/") else ({"Person", "CollectionPage", "BreadcrumbList"} if suffix == "/articles" else {"Person", "WebSite", "Organization", "Product", "Book", "FAQPage"})
         check("JSONLD_TYPES", route, required <= types, sorted(types))
         faqs = [item for item in graph if item.get("@type") == "FAQPage"]
         qa = [q for faq in faqs for q in faq.get("mainEntity", [])]
@@ -125,7 +125,7 @@ def main():
         check("HEAD", route, hstatus == 200 and not hbody and unblocked(hheaders), {"status": hstatus})
 
     titles = [d.all("title")[0].text() for d in documents.values() if d.all("title")]
-    check("UNIQUE_TITLES", "all localized pages", len(titles) == 14 and len(set(titles)) == 14, {"unique": len(set(titles))})
+    check("UNIQUE_TITLES", "all localized pages", len(titles) == len(ROUTES) and len(set(titles)) == len(ROUTES), {"unique": len(set(titles))})
     edge_graph = {route: set() for route in ROUTES}
     issues, checked_links, external = [], 0, set()
     for route, doc in documents.items():
@@ -148,7 +148,7 @@ def main():
                 ids = {n.attrs.get("id") for n in documents[target_path].all()}
                 if unquote(target.fragment) not in ids:
                     issues.append({"from": route, "href": href, "missingAnchor": target.fragment})
-    check("INTERNAL_LINKS_AND_ANCHORS", "14 pages", not issues, {"checked": checked_links, "issues": issues, "externalUrlsNotHTTPVerified": len(external)})
+    check("INTERNAL_LINKS_AND_ANCHORS", f"{len(ROUTES)} pages", not issues, {"checked": checked_links, "issues": issues, "externalUrlsNotHTTPVerified": len(external)})
     reachable, pending = set(), ["/fr", "/en"]
     while pending:
         route = pending.pop()
@@ -165,7 +165,7 @@ def main():
         ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9", "h": "http://www.w3.org/1999/xhtml"}
         entries = tree.findall("s:url", ns)
         locs = [e.findtext("s:loc", namespaces=ns) for e in entries]
-        check("SITEMAP_URLS", "/sitemap.xml", len(locs) == len(set(locs)) == 14 and set(locs) == {site + r for r in ROUTES}, locs)
+        check("SITEMAP_URLS", "/sitemap.xml", len(locs) == len(set(locs)) == len(ROUTES) and set(locs) == {site + r for r in ROUTES}, locs)
         check("SITEMAP_LASTMOD", "/sitemap.xml", not tree.findall(".//s:lastmod", ns), "No unverified lastmod, build-time freshness or fabricated time")
         for entry in entries:
             loc = entry.findtext("s:loc", namespaces=ns)

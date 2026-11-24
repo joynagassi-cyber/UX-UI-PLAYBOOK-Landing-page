@@ -7,8 +7,6 @@ const { SITE_URL } = loadData('src/lib/site-config.ts');
 const { ARTICLES, ARTICLE_SLUGS, ARTICLES_UI } = loadData('src/i18n/articles.ts');
 const { CONTENT } = loadData('src/i18n/content.ts');
 const { PLAYBOOK_EDITION, playbookPages } = loadData('src/lib/playbook-edition.ts');
-const { FREE_UI, freeResourceManifest, freeResourceCatalog } = loadData('src/i18n/free-resource.ts');
-const { FREE_RESOURCE_PATH, FREE_GUMROAD_URLS } = loadData('src/lib/free-resource-config.ts');
 const { designLabTranscript } = loadData('src/i18n/design-lab.ts');
 const catalogue = loadData('src/i18n/article-catalog.json');
 const out = path.join(root, 'out');
@@ -43,11 +41,8 @@ function jpegSize(file) {
 const allRoutes = [];
 check('catalogue:slugs', JSON.stringify(ARTICLE_SLUGS) === JSON.stringify(Object.keys(catalogue)), ARTICLE_SLUGS);
 for (const locale of ['fr', 'en']) {
-  const manifest = freeResourceManifest(locale);
-  const catalog = freeResourceCatalog(locale);
-  const gumroadUrl = FREE_GUMROAD_URLS[locale];
   check(`catalogue:${locale}`, JSON.stringify(ARTICLES[locale].map((article) => article.slug)) === JSON.stringify(ARTICLE_SLUGS), ARTICLES[locale].map((article) => article.slug));
-  for (const suffix of ['', '/articles', FREE_RESOURCE_PATH, ...ARTICLE_SLUGS.map((slug) => `/articles/${slug}`)]) {
+  for (const suffix of ['', '/articles', ...ARTICLE_SLUGS.map((slug) => `/articles/${slug}`)]) {
     const route = `/${locale}${suffix}`;
     allRoutes.push(route);
     const file = `${route.slice(1)}.html`;
@@ -56,12 +51,11 @@ for (const locale of ['fr', 'en']) {
     const tags = meta(html);
     const title = decode(/<title>([^<]+)<\/title>/.exec(html)?.[1]);
     const article = ARTICLES[locale].find((entry) => suffix === `/articles/${entry.slug}`);
-    const isResource = suffix === FREE_RESOURCE_PATH;
-    const expectedTitle = (isResource ? FREE_UI[locale].metaTitle : article?.metaTitle) || (suffix === '/articles' ? ARTICLES_UI[locale].metaTitle : CONTENT[locale].meta.title);
-    const expectedDescription = (isResource ? FREE_UI[locale].metaDescription : article?.metaDescription) || (suffix === '/articles' ? ARTICLES_UI[locale].metaDescription : CONTENT[locale].meta.description);
+    const expectedTitle = (article?.metaTitle) || (suffix === '/articles' ? ARTICLES_UI[locale].metaTitle : CONTENT[locale].meta.title);
+    const expectedDescription = (article?.metaDescription) || (suffix === '/articles' ? ARTICLES_UI[locale].metaDescription : CONTENT[locale].meta.description);
     const expectedSocialTitle = suffix ? expectedTitle : CONTENT[locale].meta.ogTitle;
     const expectedSocialDescription = suffix ? expectedDescription : CONTENT[locale].meta.ogDescription;
-    const expectedImage = SITE_URL + (isResource ? `/og-directory-${locale}.jpg` : article?.ogImage || `/og-${locale}.jpg`);
+    const expectedImage = SITE_URL + (article?.ogImage || `/og-${locale}.jpg`);
     check(`metadata:${route}`, title === expectedTitle && title.length <= 60 && tags.description === expectedDescription && tags.description.length >= 135 && tags.description.length <= 155 && !('keywords' in tags), { title, descriptionLength: tags.description?.length });
     check(`canonical:${route}`, html.includes(`rel="canonical" href="${SITE_URL}${route}"`), SITE_URL + route);
     for (const other of ['fr', 'en']) check(`hreflang:${route}:${other}`, html.includes(`hrefLang="${other}" href="${SITE_URL}/${other}${suffix}"`), `${other}${suffix}`);
@@ -94,14 +88,6 @@ for (const locale of ['fr', 'en']) {
       check(`edition:${route}:selected-previews`, PLAYBOOK_EDITION.editions[locale].previews.every(item =>
         html.includes(`src="${item.path}"`) && fs.existsSync(path.join(out, item.path))), 'Ten source-mapped preview pages including the evidence section and glossary.');
     }
-    if (isResource) {
-      const book = schemas.find((item) => item['@type'] === 'Book');
-      check(`resource-schema:${route}`, book?.inLanguage === locale && book.name === `${catalog.title} — ${catalog.subtitle}` && book.isAccessibleForFree === true && book.numberOfPages === manifest.counts.guidePages && book.encoding?.inLanguage === locale && book.encoding?.contentUrl === SITE_URL + manifest.files.pdf.path && book.image === `${SITE_URL}/images/free-directory/cover-${locale}.jpg`, book);
-      check(`resource-catalogue:${route}`, catalog.entries.every((entry) => html.includes(`data-directory-entry="${entry.id}"`) && entry.urls.every((url) => html.includes(`href="${url.replaceAll('&', '&amp;')}"`))), '51 entries and all 75 resource destinations server-rendered.');
-      check(`resource-download:${route}`, html.includes(`data-free-download="${gumroadUrl ? 'gumroad' : 'direct'}"`) && html.includes(`href="${gumroadUrl || manifest.files.archive.path}"`) && html.includes(`href="${manifest.files.pdf.path}"`) && html.includes(`href="${manifest.files.markdown.path}"`), 'Matching-language files and optional independent checkout.');
-      const other = freeResourceManifest(locale === 'fr' ? 'en' : 'fr');
-      check(`resource-language:${route}`, html.includes(FREE_UI[locale].language) && Object.values(other.files).every(file => !html.includes(`href="${file.path}"`)), 'No cross-language guide or archive downloads.');
-    }
     if (!article) {
       check(`hub-links:${route}`, ARTICLE_SLUGS.every((slug) => html.includes(`href="/${locale}/articles/${slug}"`)), ARTICLE_SLUGS);
     } else {
@@ -124,11 +110,6 @@ for (const locale of ['fr', 'en']) {
   requireFile(cover);
   check(`resource:cover-size:${locale}`, JSON.stringify(jpegSize(cover)) === JSON.stringify({ width: 1280, height: 720 }), jpegSize(cover));
 }
-for (const locale of ['fr', 'en']) {
-  const manifest = freeResourceManifest(locale);
-  for (const file of Object.values(manifest.files).map(file => file.path.slice(1))) requireFile(file);
-  check(`resource:generated-origin:${locale}`, manifest.generatedForOrigin === SITE_URL, 'Regenerate both downloadable kits if the public origin changes.');
-}
 for (const file of ['404.html', 'robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', '_redirects', '_routes.json', '_headers', '.assetsignore', 'icon.svg']) requireFile(file);
 for (const file of ['_routes.json', '_redirects', '_headers', '.assetsignore']) {
   check(`routing-file:${file}`, readOut(file) === fs.readFileSync(path.join(root, 'public', file), 'utf8'), 'Public routing configuration copied unchanged.');
@@ -143,7 +124,7 @@ check('routing:Worker-first-only-unlocalized', JSON.stringify(workerRoutes) === 
 check('routing:no-static-overlap', allRoutes.every((route) => !workerRoutes.some((pattern) => pattern.endsWith('*') ? route.startsWith(pattern.slice(0, -1)) : route === pattern)) && !workerRoutes.some((pattern) => /images|_next|robots|sitemap|llms|og-/.test(pattern)), 'Localized pages, images, fonts and discovery files use asset-first routing.');
 check('worker:legacy-routing-file-not-uploaded', /^\/_routes\.json$/m.test(readOut('.assetsignore')), 'Workers assets ignore the obsolete Pages routing metadata.');
 const canonicalRedirects = readOut('_redirects').trim().split('\n').map(line => line.trim().split(/\s+/));
-check('routing:permanent-canonical-aliases', canonicalRedirects.length === allRoutes.length * 2 && allRoutes.every(route => canonicalRedirects.some(([from, to, status]) => from === route + '.html' && to === route && status === (['/fr', '/en'].includes(route) ? '301' : '308')) && canonicalRedirects.some(([from, to, status]) => from === route + '/' && to === route && status === '308')), 'Only the 14 known pages have permanent HTML/trailing-slash aliases; private language negotiation stays in the Worker.');
+check('routing:permanent-canonical-aliases', canonicalRedirects.length === allRoutes.length * 2 && allRoutes.every(route => canonicalRedirects.some(([from, to, status]) => from === route + '.html' && to === route && status === (['/fr', '/en'].includes(route) ? '301' : '308')) && canonicalRedirects.some(([from, to, status]) => from === route + '/' && to === route && status === '308')), 'Only the 12 retained pages have permanent HTML/trailing-slash aliases; private language negotiation stays in the Worker.');
 const robots = readOut('robots.txt');
 check('robots:production-origin', robots.includes(`Sitemap: ${SITE_URL}/sitemap.xml`) && !/^Host:/m.test(robots), SITE_URL);
 const crawlers = require('../src/config/crawler-policy.json');
@@ -156,9 +137,6 @@ check('sitemap:all-localized-pages', JSON.stringify(sitemapUrls) === JSON.string
 const discovery = readOut('llms.txt');
 const full = readOut('llms-full.txt');
 for (const locale of ['fr', 'en']) {
-  const manifest = freeResourceManifest(locale);
-  const catalog = freeResourceCatalog(locale);
-  check(`llms:${locale}:free-directory`, discovery.includes(`${SITE_URL}/${locale}${FREE_RESOURCE_PATH}`) && full.includes(`${SITE_URL}/${locale}${FREE_RESOURCE_PATH}`) && discovery.includes(SITE_URL + manifest.files.archive.path) && full.includes(SITE_URL + manifest.files.archive.path) && catalog.entries.every((entry) => [entry.description, entry.nonDesigner, entry.developer, entry.agent, entry.watch, ...entry.urls].every(value => full.includes(value))) && catalog.sources.every(source => full.includes(source.note)), 'Matching-language free kit and complete editorial content discoverable.');
   check(`llms:${locale}:catalogue-and-references`, ARTICLES[locale].every((article) => discovery.includes(`${SITE_URL}/${locale}/articles/${article.slug}`) && full.includes(article.title) && article.references.every((reference) => discovery.includes(reference.url) && full.includes(reference.url))), `${ARTICLES[locale].length} articles and every bibliography URL`);
   check(`llms:${locale}:book-facts`, full.includes(CONTENT[locale].hero.note)
     && CONTENT[locale].contentsSection.parts.every(item => full.includes(item.title))
@@ -169,6 +147,19 @@ for (const locale of ['fr', 'en']) {
 function walk(dir) { return fs.existsSync(dir) ? fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => entry.isDirectory() ? walk(path.join(dir, entry.name)) : [path.join(dir, entry.name)]) : []; }
 const forbidden = /vercel\.app|VERCEL_URL|x-vercel-ip-country|@vercel\//i;
 const textFiles = walk(out).filter((file) => /\.(?:html|txt|xml|json|js|css|svg)$/.test(file));
+const withdrawnPayloads = walk(out).filter(file => /\.(?:pdf|zip|md)$/iu.test(file)).map(file => path.relative(out, file));
+check('withdrawn-directory:no-download-payloads', withdrawnPayloads.length === 0 && !fs.existsSync(path.join(out, 'downloads')), withdrawnPayloads);
+for (const locale of ['fr', 'en']) {
+  check(`withdrawn-directory:${locale}:no-route`, !fs.existsSync(path.join(out, locale, 'resources')), 'No old page, HTML alias, RSC payload or replacement teaser is exported.');
+}
+const directoryCatalogs = [require('../products/ui-ux-directory/catalogue.json'), require('../products/ui-ux-directory/en/catalogue.json')];
+const leakedDirectoryContent = textFiles.filter(file => {
+  const text = fs.readFileSync(file, 'utf8');
+  return /\/resources\/ui-ux-directory|\/downloads\/|data-directory-entry|data-free-download/u.test(text)
+    || directoryCatalogs.some(catalog => catalog.entries.some(entry => text.includes(entry.description)));
+}).map(file => path.relative(out, file));
+check('withdrawn-directory:no-promotions-or-catalogue', leakedDirectoryContent.length === 0, { scanned: textFiles.length, matches: leakedDirectoryContent });
+
 const obsolete = textFiles.filter((file) => forbidden.test(fs.readFileSync(file, 'utf8'))).map((file) => path.relative(out, file));
 const staleOrigin = textFiles.filter(file => fs.readFileSync(file, 'utf8').includes('https://joyccelight-playbook.pages.dev')).map(file => path.relative(out, file));
 check('all-generated-files:no-retired-canonical-origin', staleOrigin.length === 0, { scanned: textFiles.length, matches: staleOrigin });

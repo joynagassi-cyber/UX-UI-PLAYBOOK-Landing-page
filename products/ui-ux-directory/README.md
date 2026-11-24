@@ -1,40 +1,50 @@
-# Répertoire UI/UX gratuit — dossier de fabrication
+# Répertoire UI/UX gratuit : fabrication et livraison Gumroad
 
-Produit issu du fichier Markdown fourni par Joy N. : **51 fiches, 6 familles, 75 liens de ressources**. Les fiches qui regroupent plusieurs sites restent une fiche : ne pas annoncer « 75 outils vérifiés ».
+Livre gratuit distinct du Playbook à 29 USD : **51 fiches, 6 familles, 75 liens et 20 captures de sites**. Certaines fiches regroupent plusieurs destinations ; ne pas annoncer 75 outils audités. Le texte est en français ; les captures conservent la langue des interfaces.
 
-- `catalogue.json` : version éditée, source unique des fiches, catégories et références. Mise à jour éditoriale : **18 novembre 2026**.
-- `source-original.md` : document fourni, archivé pour traçabilité ; il n’est ni distribué ni affiché sur le site et contient des affirmations remplacées dans l’édition.
-- `manifest.json` : pages, noms, tailles et SHA-256 des livrables français générés.
-- [`en/`](en/README.md) : traduction anglaise complète, manifeste, ZIP, visuels et documents de publication distincts.
-- `gumroad-listing.md` : textes de la fiche produit, prêts à copier.
-- `publication-guide.md` : réglage gratuit, fichiers à charger, test à 0 et raccordement du vrai lien au site.
-- `marketing/cover-1280x720.png` et `marketing/thumbnail-1080x1080.png` : visuels originaux pour Gumroad, distincts des fichiers à télécharger.
+## Livrables français
 
-## Régénérer
+- [ZIP client français](releases/fr/Repertoire-UI-UX-Gratuit-FR.zip) : **7 fichiers**, environ **2,38 Mio**.
+- [Livre PDF français](releases/fr/Repertoire-UI-UX-Gratuit-FR.pdf) : **54 pages A4**, dont **20 pages d’aperçus**, avant la promotion finale du Playbook français.
+- [Texte Markdown](releases/fr/Repertoire-UI-UX-Gratuit-FR.md) : fiches complètes, liens et brief IA ; captures uniquement dans le PDF.
+- [Fiche Gumroad](gumroad-listing.md), [guide de publication](publication-guide.md), [couverture 0 $](marketing/cover-1280x720.png) et [vignette 0 $](marketing/thumbnail-1080x1080.png).
+- [Édition anglaise](en/README.md) : fichiers clients, textes et visuels distincts.
+- [Kit global FR/EN](releases/Livres-UI-UX-Gratuits-FR-EN-Kit-Gumroad.zip) : les deux ZIP clients, les deux livres PDF, les visuels et les documents de publication, dans des dossiers séparés. Ce n’est pas le fichier à charger dans un seul produit Gumroad.
+
+Le ZIP client contient `LIRE-MOI-FR.md`, `Repertoire-UI-UX-Gratuit-FR.pdf`, `Repertoire-UI-UX-Gratuit-FR.md`, `Fiche-decision-UI-UX-FR.pdf`, `Fiche-decision-UI-UX-FR.md`, `Grille-selection-UI-UX-FR.csv` et `LICENCES-FR.txt`. La fiche PDF a **3 pages imprimables**, sans formulaire interactif. Le CSV utilise UTF-8 avec BOM, le point-virgule, **6 lignes de familles et 11 colonnes**, plus l’en-tête.
+
+## Sources et captures
+
+- `catalogue.json` : source française éditée, sans modification des 51 fiches pendant l’intégration illustrée.
+- `source-original.md` : document fourni, conservé pour traçabilité, non distribué.
+- `manifest.json` : pages, chemins hors site, tailles, SHA-256 et liste des 20 destinations illustrées.
+- `screenshots/manifest.external-ddf2bcc.json` et les **21 originaux PNG** : conservés octet pour octet.
+- `screenshots/visual-review.json` : décision et empreinte de chaque original, ainsi que l’empreinte exacte du dérivé approuvé.
+- `screenshots/manifest.json` : **20 captures optimisées approuvées**, une capture de chargement écartée, autres rejets/échecs/attentes conservés. Aucune image inventée ni nouvel appel de capture.
+
+La couverture illustrée est partielle. Les dates sont celles déclarées par le lot externe, non vérifiées indépendamment. La revue visuelle n’est ni un audit fonctionnel ni une validation juridique des 75 destinations.
+
+## Régénérer hors réseau
 
 ```bash
-# Chromium doit être installé : npx playwright install chromium
-npm run generate:resource       # Français
-npm run generate:resource:en    # Anglais
+# Dépendances Node installées, Chromium disponible.
+# CHROMIUM_EXECUTABLE_PATH peut désigner un navigateur existant.
+npm run generate:resource
+npm run generate:resource:en
 npm run check:resource
+npm run package:resource
 ```
 
-`CHROMIUM_EXECUTABLE_PATH` peut pointer sur un navigateur déjà disponible. Le générateur lit Domine et les icônes Lucide locales, vérifie les débordements des pages avant impression, produit deux PDF en français, le Markdown, une grille CSV et un ZIP aux entrées horodatées à la date de l’édition. Les copies de travail sont dans `.cache/free-resource/`, ignoré ; seuls les livrables utilisés sont dans `public/downloads/`. Le générateur français ne modifie que les fichiers et visuels français ; le générateur anglais produit les livrables de `en/` et les téléchargements anglais. La mise en page commune est dans `scripts/free_resource_layout.cjs`. Chaque page du site fournit le kit de sa langue.
+Les commandes npm sélectionnent explicitement `--with-available-screenshots`. Ce mode accepte une sélection partielle, mais refuse un fichier approuvé corrompu, remplacé ou lié symboliquement. Les captures absentes ou non approuvées ne sont pas présentées comme réussies.
 
-Changer `NEXT_PUBLIC_SITE_URL` impose de régénérer les deux éditions pour actualiser les liens imprimés. L’origine de génération figure dans le manifeste et est contrôlée avant le déploiement. Ne pas modifier les fichiers binaires à la main.
+Le contrôle strict historique reste disponible avec `node scripts/generate_free_resource.cjs --with-screenshots` : il exige les **75 images** et échoue avant d’écraser les livrables si le lot est incomplet. Ne pas l’utiliser comme consigne de recapture. Le mode `--without-screenshots` est réservé à une fabrication texte explicite et ne décrit pas la livraison illustrée actuelle.
 
-## Périmètre éditorial
+Les fichiers clients sortent exclusivement dans `products/ui-ux-directory/releases/`, jamais dans `public/downloads`. Les fichiers de travail restent dans `.cache/free-resource/`. Seuls les visuels images sont copiés dans `public`. Modifier l’origine canonique impose de régénérer les deux langues pour actualiser les liens imprimés, puis de revoir les comptes, textes et archives.
 
-Réécriture des descriptions et des usages pour trois profils ; retrait des garanties de rendu, performance, accessibilité ou absence d’erreurs IA. Distinction entre gratuité du guide et tarification/licences de chaque service. Corrections documentées dans les références, en particulier ApexCharts, unDraw, Storyset, Fontshare et les usages de Radix Colors. Mise à jour des adresses de React Native Reusables, Recharts et Chartist. Aucune illustration, police, bibliothèque ou autre ressource tierce du répertoire n’est redistribuée ; seules les notices de Domine/Lucide utilisés pour fabriquer les documents sont incluses.
+## Retrait du site et publication
 
-Les 75 destinations n’ont pas subi d’audit exhaustif de disponibilité ou de licence. Des pistes du document fourni sont expressément signalées comme non testées. Cette édition n’est pas un conseil juridique ni une certification. Le site n’ajoute ni formulaire de collecte, ni traceur ni abonnement implicite. Le texte des conditions d’usage du guide est une proposition à valider par son créateur avant publication.
+Les pages, promotions, métadonnées de catalogue, exports LLM et téléchargements du répertoire sont retirés du site source. Seuls leurs assets images restent. Les quatre guides éditoriaux par langue et l’offre payante restent inchangés. Un retrait local n’est pas une preuve de retrait en production.
 
-## Publication
+**Aucune publication Gumroad effectuée. Deux vraies URL FR/EN attendues.** Aucun teaser, fallback local ou lien gratuit supposé n’est ajouté. Le propriétaire publie chaque ZIP dans son produit à 0, teste le parcours client, puis transmet les URL pour une modification ultérieure de redirection.
 
-**Aucun produit Gumroad n’a été créé ni publié par cet agent.** Le connecteur Gumroad n’est pas disponible dans cette session. Le site propose donc un vrai téléchargement direct sans email. Le propriétaire publie le ZIP dans son compte puis renseigne `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_FR` ou `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_EN` avec l’URL réellement obtenue pour chaque langue. L’ancien `NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL` reste un repli français uniquement ; il ne contrôle jamais le CTA anglais. Les deux produits doivent avoir des URLs distinctes. La configuration refuse les URLs payantes du Playbook et n’invente jamais d’URL de produit gratuit. Voir le guide de publication.
-
-## Demande suivante : aperçus cliquables Microlink
-
-[Workflow, sécurité de la clé, essai GitHub, quota et intégration PDF](screenshots/README.md). Aucun appel API n’a été effectué ici. Un commit distant déjà présent sur cette branche a fourni **21 PNG marqués approuvés dans son manifeste**, conservés sans modification avec `screenshots/manifest.external-ddf2bcc.json`. Leur import reste à réconcilier (schéma, chemins, dimensions et poids) ; le manifeste canonique bloque toute nouvelle capture sur `EIMPORTPENDING` pour éviter des appels payants en double. Les hashes, tailles et dimensions ont été contrôlés, pas une nouvelle approbation visuelle.
-
-Les kits actuels restent sans galerie. Le drapeau `--with-screenshots` exige les 75 PNG présents, compatibles, intègres et relus avant de modifier un livrable. Les images seront communes aux deux langues ; il faudra ensuite actualiser les pages/tailles des textes de publication d’après les nouveaux manifestes.
+Les conditions du guide sont à relire par le créateur. Les captures sont des aperçus éditoriaux, pas des packs réutilisables. Aucun résultat commercial, de visibilité ou de conformité d’accessibilité n’est promis. Le balisage PDF n’est pas une certification PDF/UA.

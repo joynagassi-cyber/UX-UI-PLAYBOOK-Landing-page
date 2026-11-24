@@ -47,20 +47,37 @@ function validateCapture(url, capture, base = directory, requireReview = true) {
   if (bytes.length > 200_000 || bytes.length !== capture.bytes || sha256(bytes) !== capture.sha256 || size.width !== capture.width || size.height !== capture.height) throw failure('EINTEGRITY', `Screenshot size or hash mismatch: ${url}`);
   return { bytes, ...size, retrievedAt: capture.retrievedAt };
 }
-function loadGallery(catalog, base = directory) {
+function selectGalleryMode(argv) {
+  const modes = ['--with-screenshots', '--with-available-screenshots', '--without-screenshots'].filter(flag => argv.includes(flag));
+  if (modes.length > 1) throw failure('EUSAGE', 'Choose exactly one screenshot mode. No deliverable was changed.');
+  return modes[0] === '--with-screenshots' ? 'complete' : modes[0] === '--with-available-screenshots' ? 'partial' : 'none';
+}
+function loadGallery(catalog, base = directory, { partial = false } = {}) {
   const manifest = readManifest(base), plan = capturePlan(catalog);
   const problems = [];
   const images = plan.flatMap(item => {
+    const capture = manifest.captures[item.url];
+    if (partial && (!capture || capture.status !== 'captured' || capture.review !== 'approved')) return [];
     try { return [{ ...item, ...validateCapture(item.url, manifest.captures[item.url], base) }]; }
     catch (error) { problems.push(`${error.code}: ${item.url}`); return []; }
   });
-  if (problems.length) throw failure('EINCOMPLETE', `${problems.length}/${plan.length} screenshots are missing, invalid or unreviewed. No PDF was changed. Run the capture plan and review the images first.\n${problems.join('\n')}`);
+  if (problems.length || !images.length) throw failure('EINCOMPLETE', `${problems.length}/${plan.length} screenshots are missing, invalid or unreviewed. No PDF was changed. Run the capture plan and review the images first.\n${problems.join('\n')}`);
   return images;
 }
-function screenshotSheets(catalog, locale, base = directory) {
+function screenshotSheets(catalog, locale, base = directory, options = {}) {
   const { escape, heading, sheet } = require('./free_resource_layout.cjs');
-  const images = loadGallery(catalog, base), pages = [];
+  const images = loadGallery(catalog, base, options), pages = [];
   const fr = locale === 'fr';
+  if (options.partial) {
+    for (const [index, image] of images.entries()) {
+      const entry = catalog.entries.find(item => item.id === image.entryId);
+      const coverage = fr
+        ? `${images.length} aperçus disponibles pour ${capturePlan(catalog).length} liens. Les autres destinations restent dans le répertoire, sans image ajoutée.`
+        : `${images.length} available previews for ${capturePlan(catalog).length} links. Other destinations remain in the directory without an added image.`;
+      pages.push(sheet(`${heading(fr ? 'Aperçu de ressource' : 'Resource preview', image.name, `${index + 1} / ${images.length}`)}<p class="small">${escape(coverage)}</p><article class="screen-card single-screen" data-resource-screenshot="${escape(image.url)}"><a class="screen-capture-link" href="${escape(image.url)}" aria-label="${escape((fr ? 'Visiter ' : 'Visit ') + image.name)}"><img src="data:image/png;base64,${image.bytes.toString('base64')}" width="${image.width}" height="${image.height}" alt="${escape((fr ? 'Capture du site ' : 'Website screenshot: ') + new URL(image.url).hostname)}"></a><a class="screen-url" href="${escape(image.url)}">${escape(image.url)}</a><p>${escape(entry.description)}</p><p class="watch"><strong>${fr ? 'À vérifier.' : 'Check first.'}</strong> ${escape(entry.watch)}</p><p class="screen-date">${fr ? 'Fiche' : 'Entry'} ${escape(image.entryId)} · ${fr ? 'Date déclarée dans le lot fourni :' : 'Date reported in the supplied batch:'} ${escape(image.retrievedAt.slice(0, 10))}. ${fr ? 'Horodatage non vérifié ici. Interface dans sa langue d’origine.' : 'Timestamp not independently verified. Interface in its original language.'}</p></article><p class="small">${fr ? 'Aperçu éditorial, pas un fichier à réutiliser. Marques et contenus appartiennent à leurs auteurs. La capture ne vérifie ni les droits, ni les tarifs, ni le fonctionnement actuel.' : 'Editorial preview, not a reusable asset. Brands and content belong to their authors. A screenshot does not verify rights, prices or current functionality.'}</p>`, 'directory-preview-sheet'));
+    }
+    return pages;
+  }
   for (let offset = 0; offset < images.length; offset += 4) {
     const cards = images.slice(offset, offset + 4).map(image => `<article class="screen-card" data-resource-screenshot="${escape(image.url)}"><h3>${escape(image.entryId)}. ${escape(image.name)}</h3><a class="screen-capture-link" href="${escape(image.url)}" aria-label="${escape((fr ? 'Visiter ' : 'Visit ') + image.name + ' — ' + new URL(image.url).hostname)}"><img src="data:image/png;base64,${image.bytes.toString('base64')}" width="${image.width}" height="${image.height}" alt="${escape((fr ? 'Aperçu du site ' : 'Website preview: ') + new URL(image.url).hostname)}"></a><a class="screen-url" href="${escape(image.url)}">${escape(image.url)}</a><p class="screen-date">${fr ? 'Aperçu Microlink obtenu le' : 'Microlink preview retrieved:'} ${escape(image.retrievedAt.slice(0, 10))}</p></article>`).join('');
     pages.push(sheet(`${heading(fr ? 'Aperçus des ressources' : 'Resource previews', fr ? 'Cliquez sur une image ou son lien.' : 'Click an image or its link.', `${pages.length + 1} / ${Math.ceil(images.length / 4)}`)}<p class="small">${fr ? 'Aperçus éditoriaux datés, pas des fichiers à réutiliser. Marques et contenus appartiennent à leurs auteurs. Une capture ne valide ni les droits, ni les tarifs, ni le fonctionnement actuel du service.' : 'Dated editorial previews, not reusable assets. Brands and content belong to their authors. A screenshot does not validate rights, prices or the service’s current behavior.'}</p><div class="screen-grid">${cards}</div>`, 'directory-preview-sheet'));
@@ -82,10 +99,11 @@ function safeError(error) {
     ENOTFOUND: 'The API/CDN hostname could not be reached. Check network access.',
     ECONNREFUSED: 'The API/CDN connection was refused. Check network access.',
     EPREVIOUS: 'A previous attempt failed. Read its saved code before explicitly retrying one URL.',
-    EINCOMPLETE: 'Obtain and review all 75 real captures before generating illustrated PDFs.',
+    EINCOMPLETE: 'Complete mode requires every capture. Partial mode includes only approved images and still rejects damaged files.',
+    EACQUISITIONPAUSED: 'Use the existing approved previews. No additional capture request or retry is authorized.',
     EIMPORTPENDING: 'Reconcile the preserved external manifest, image paths and size limits offline. Do not recapture existing URLs or automatically retry quota errors.',
   };
   return { code, ...(Number.isInteger(error?.statusCode) ? { statusCode: error.statusCode } : {}), hint: hints[code] || 'Stopped without automatic retry. Review the saved code and local configuration.' };
 }
 
-module.exports = { directory, sha256, imageName, requestOptions, failure, capturePlan, emptyManifest, readManifest, pngDimensions, validateCapture, loadGallery, screenshotSheets, safeError };
+module.exports = { directory, sha256, imageName, requestOptions, failure, capturePlan, emptyManifest, readManifest, pngDimensions, validateCapture, loadGallery, screenshotSheets, selectGalleryMode, safeError };

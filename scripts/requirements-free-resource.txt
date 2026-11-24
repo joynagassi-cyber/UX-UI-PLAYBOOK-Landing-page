@@ -1,0 +1,4 @@
+# Optional offline capture import and independent PDF verification.
+# Not needed for the website build or Node unit tests.
+Pillow==13.0.0
+PyMuPDF==2.1

@@ -26,7 +26,7 @@ parsed = urlparse(origin)
 if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password or parsed.path or parsed.query or parsed.fragment:
     parser.error("Use the deliberate public HTTPS origin, not credentials or a URL path")
 slugs = json.loads((ROOT / "src/i18n/article-catalog.json").read_text())
-paths = ["/robots.txt", "/sitemap.xml", "/llms.txt", "/llms-full.txt", *[f"/{locale}{suffix}" for locale in ("fr", "en") for suffix in ("", "/articles", "/resources/ui-ux-directory", *[f"/articles/{s}" for s in slugs])]]
+paths = ["/robots.txt", "/sitemap.xml", "/llms.txt", "/llms-full.txt", *[f"/{locale}{suffix}" for locale in ("fr", "en") for suffix in ("", "/articles", *[f"/articles/{s}" for s in slugs])]]
 report = {"attemptedAt": datetime.now(timezone.utc).isoformat(), "origin": origin, "scope": "Unauthenticated client HTTP only, not real crawler access", "cloudflareAccountChecked": False, "dnsChanged": False, "deployment": False, "authenticCrawlerAccessVerified": False, "observedCrawlsOrCitations": None, "responses": []}
 opener = build_opener(NoRedirect)
 for path in paths:

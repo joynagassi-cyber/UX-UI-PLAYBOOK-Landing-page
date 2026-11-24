@@ -6,26 +6,28 @@ Version 1.0 · Français · Édition du 18 novembre 2026 · Joy N. / Joyccelight
 
 Un répertoire pour comparer, choisir et documenter vos ressources d’interface. Il s’adresse aux non-designers, aux développeurs et aux personnes qui travaillent avec un agent IA. Ce n’est pas une collection de composants ou d’illustrations à réutiliser : les ressources restent sur les sites de leurs auteurs.
 
+Le PDF contient 20 captures fournies et relues pour 75 liens. La sélection est partielle ; aucun aperçu n’est inventé pour les autres destinations. Les images ne sont pas fournies comme pack réutilisable.
+
 > Le guide et la grille sont gratuits. Les services cités peuvent proposer des fonctions payantes ou des licences conditionnelles. Les 75 liens ne correspondent pas à 75 outils distincts et n’ont pas fait l’objet d’un audit exhaustif de disponibilité. Cette édition fournit des points de départ à vérifier ; elle ne promet ni résultat commercial, ni performance, ni conformité d’accessibilité, ni absence d’erreurs d’un agent IA.
 
-Page du guide : https://joyccelight-playbook.uxplay.workers.dev/fr/resources/ui-ux-directory?utm_source=repertoire-ui-ux&utm_medium=markdown&utm_campaign=ressource-gratuite
+Guides gratuits : https://joyccelight-playbook.uxplay.workers.dev/fr/articles?utm_source=repertoire-ui-ux&utm_medium=markdown&utm_campaign=ressource-gratuite
 
 ## Comment l’utiliser
 
-1. **Cadrer** — Choisissez un écran, une plateforme et une contrainte importante. Exemple : un formulaire mobile avec des erreurs lisibles et des polices hébergées localement.
-2. **Comparer** — Retenez deux options au maximum par famille, avec les mêmes textes, états et données. Vous pouvez aussi conserver une ressource déjà maîtrisée.
-3. **Vérifier** — Notez l’URL officielle, la version, les droits, l’attribution et les coûts. Ne transmettez ni données personnelles ni fichier client à un service sans autorisation.
-4. **Essayer** — Testez les états vide, chargement, erreur et succès ; le clavier, le zoom, les contrastes et l’écran le plus étroit. Mesurez le chargement sur le projet.
-5. **Consigner** — Remplissez la fiche de décision : choix, raison, limite, personne responsable, test restant et date de relecture. Une piste non vérifiée peut rester écartée.
+1. **Cadrer** : Choisissez un écran, une plateforme et une contrainte importante. Exemple : un formulaire mobile avec des erreurs lisibles et des polices hébergées localement.
+2. **Comparer** : Retenez deux options au maximum par famille, avec les mêmes textes, états et données. Vous pouvez aussi conserver une ressource déjà maîtrisée.
+3. **Vérifier** : Notez l’URL officielle, la version, les droits, l’attribution et les coûts. Ne transmettez ni données personnelles ni fichier client à un service sans autorisation.
+4. **Essayer** : Testez les états vide, chargement, erreur et succès ; le clavier, le zoom, les contrastes et l’écran le plus étroit. Mesurez le chargement sur le projet.
+5. **Consigner** : Remplissez la fiche de décision : choix, raison, limite, personne responsable, test restant et date de relecture. Une piste non vérifiée peut rester écartée.
 
 ## Commencer par un besoin
 
-- **Couleurs et thèmes** — Comparer une palette sur des textes, surfaces et états réels. Question : Quelles paires texte/fond restent lisibles dans les deux thèmes ?
-- **Typographie** — Examiner les familles, les graisses et les tailles sur vos contenus. Question : Les accents, chiffres, libellés longs et conditions d’hébergement conviennent-ils ?
-- **Icônes** — Choisir une famille cohérente et des symboles compréhensibles. Question : Les noms existent-ils et les actions importantes gardent-elles leur libellé ?
-- **Composants et kits** — Sélectionner une base compatible avec votre plateforme et votre maintenance. Question : Quels comportements et quelles mises à jour devrez-vous prendre en charge ?
-- **Graphiques de données** — Présenter une question et des données sans masquer les unités ni les limites. Question : Le graphique possède-t-il une légende, des unités et une alternative textuelle ?
-- **Illustrations et 3D** — Trouver un visuel utile sans oublier droits, poids et alternative. Question : L’illustration apporte-t-elle une information plutôt qu’un obstacle au chargement ?
+- **Couleurs et thèmes** : Comparer une palette sur des textes, surfaces et états réels. Question : Quelles paires texte/fond restent lisibles dans les deux thèmes ?
+- **Typographie** : Examiner les familles, les graisses et les tailles sur vos contenus. Question : Les accents, chiffres, libellés longs et conditions d’hébergement conviennent-ils ?
+- **Icônes** : Choisir une famille cohérente et des symboles compréhensibles. Question : Les noms existent-ils et les actions importantes gardent-elles leur libellé ?
+- **Composants et kits** : Sélectionner une base compatible avec votre plateforme et votre maintenance. Question : Quels comportements et quelles mises à jour devrez-vous prendre en charge ?
+- **Graphiques de données** : Présenter une question et des données sans masquer les unités ni les limites. Question : Le graphique possède-t-il une légende, des unités et une alternative textuelle ?
+- **Illustrations et 3D** : Trouver un visuel utile sans oublier droits, poids et alternative. Question : L’illustration apporte-t-elle une information plutôt qu’un obstacle au chargement ?
 
 ## Brief à transmettre à un agent IA
 
@@ -674,27 +676,27 @@ Ces ressources ne livrent pas toutes la même chose : image rendue, avatar, obje
 
 Adaptation du document fourni par le créateur : repertoire-complet-ui-ux-profils.md. Les références ci-dessous ont servi aux corrections ciblées, pas à un audit juridique des 75 liens. Les conditions peuvent évoluer. Les fonctions actuelles de certaines pistes sont expressément signalées comme non testées dans leurs fiches.
 
-- **Radix Colors — Understanding the scale** — https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale
+- **Radix Colors — Understanding the scale** : https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale
   Douze étapes et usages, avec exceptions explicites ; aucune garantie générale de contraste.
-- **Google Fonts — FAQ** — https://fonts.google.com/faq
+- **Google Fonts — FAQ** : https://fonts.google.com/faq
   Gratuité et usage commercial sous conditions de chaque licence ; fichiers, langues et hébergement à choisir.
-- **Lucide — notice du paquet 0.511.0** — https://github.com/lucide-icons/lucide/blob/main/LICENSE
+- **Lucide — notice du paquet 0.511.0** : https://github.com/lucide-icons/lucide/blob/main/LICENSE
   Notice ISC lue dans le paquet local lucide-react ; mentions héritées de Feather. Copie incluse dans LICENCES.txt.
-- **shadcn/ui — Introduction** — https://ui.shadcn.com/docs
+- **shadcn/ui — Introduction** : https://ui.shadcn.com/docs
   Distribution de code ouvert, composition et prise en charge des adaptations et mises à jour.
-- **Recharts** — https://recharts.github.io/
+- **Recharts** : https://recharts.github.io/
   Composition de composants React, SVG et sous-modules D3. Redirection du domaine fourni constatée.
-- **ApexCharts — License Options** — https://apexcharts.com/license/
+- **ApexCharts — License Options** : https://apexcharts.com/license/
   Modèle actuel Community sous conditions, Commercial et OEM/redistribution ; ne pas reprendre une qualification générale de gratuité.
-- **unDraw — License** — https://undraw.co/license
+- **unDraw — License** : https://undraw.co/license
   Licence spécifique ; restrictions de redistribution en packs et d’usage pour entraînement/développement IA.
-- **Storyset — Terms of Use, section 6** — https://storyset.com/terms
+- **Storyset — Terms of Use, section 6** : https://storyset.com/terms
   Usage gratuit conditionné à l’attribution ; restrictions de redistribution et autres conditions à lire.
-- **Fontshare** — https://www.fontshare.com/
+- **Fontshare** : https://www.fontshare.com/
   Le catalogue présente notamment des familles closed source ; la gratuité ne vaut pas licence universelle.
-- **React Native Reusables** — https://reactnativereusables.com/
+- **React Native Reusables** : https://reactnativereusables.com/
   Adresse actuelle consultée, remplaçant l’ancienne documentation hébergée ailleurs.
-- **Chartist** — https://chartist.dev/
+- **Chartist** : https://chartist.dev/
   Documentation actuelle consultée, remplaçant l’ancienne adresse du document fourni.
 
 ## Et après le répertoire ?
@@ -707,4 +709,4 @@ Lire les articles gratuits : https://joyccelight-playbook.uxplay.workers.dev/fr/
 
 ## Conditions d’usage
 
-Texte et mise en page : Joy N. / Joyccelight, 2026. Vous pouvez consulter ce guide, l’utiliser dans vos projets personnels ou professionnels et adapter les fiches de décision pour votre équipe ou vos clients. Ne revendez pas ce guide et ne le republiez pas à l’identique sous votre nom ; partagez plutôt sa page de téléchargement. Ces conditions concernent uniquement ce guide : elles ne concèdent aucun droit sur les sites, marques, polices, icônes, composants ou visuels cités. Les auteurs et leurs licences restent les références. Aucun partenariat ni affiliation rémunérée avec les services cités n’est revendiqué. Ce guide n’est pas un conseil juridique.
+Texte et mise en page : Joy N. / Joyccelight, 2026. Vous pouvez consulter ce guide, l’utiliser dans vos projets personnels ou professionnels et adapter les fiches de décision pour votre équipe ou vos clients. Les captures de sites ont une fonction éditoriale et ne sont pas des actifs à extraire ou réutiliser. Ne revendez pas ce guide et ne le republiez pas à l’identique sous votre nom ; partagez plutôt sa page de téléchargement. Ces conditions concernent uniquement ce guide : elles ne concèdent aucun droit sur les sites, marques, polices, icônes, composants ou visuels cités. Les auteurs et leurs licences restent les références. Aucun partenariat ni affiliation rémunérée avec les services cités n’est revendiqué. Ce guide n’est pas un conseil juridique.

@@ -1,111 +1,104 @@
-# Fiche Gumroad — prête à copier
+# Fiche Gumroad française
 
-**Statut : à créer et publier dans le compte Joyccelight. Aucun produit n’a été publié par cet agent.**
+**Document de publication pour le créateur. Produit non publié par cet agent.** Copier les champs utiles, pas cette consigne. Aucun lien Gumroad gratuit n’est encore fourni.
 
 ## Nom du produit
 
-Répertoire UI/UX gratuit — 51 fiches pour choisir vos ressources
+Répertoire UI/UX gratuit : 51 fiches et 20 aperçus
 
 ## Résumé court
 
-51 fiches, 6 familles et 75 liens pour comparer vos ressources UI/UX. Guide PDF de 34 pages, Markdown, fiche de décision et grille CSV. En français.
+51 fiches, 75 liens et 20 captures pour comparer vos ressources UI/UX. PDF illustré de 54 pages, Markdown, fiche de décision et CSV. En français. 0 $.
 
 ## Prix à configurer
 
-**0 — prix libre avec gratuité effective.** Montant suggéré : 0. Le client doit pouvoir saisir 0 et recevoir le kit sans carte bancaire. Ne pas créer de version payante ou d’abonnement pour ce kit. Si la configuration Gumroad permet une contribution volontaire, ne pas la présenter comme obligatoire.
+**0 $**, avec un montant suggéré de 0 si le champ existe. Une éventuelle contribution doit rester facultative. Tester le parcours à 0 hors du compte vendeur avant de partager le produit. Ne pas ajouter d’abonnement ou de version payante à ce kit.
 
-## Description
+## Description à copier
 
-Vous cherchez une palette, une police, une famille d’icônes ou une base de composants, mais les onglets s’accumulent ?
+Comparez des ressources UI/UX et gardez la raison de vos choix.
 
-Ce répertoire rassemble **51 fiches en français**, classées en **6 familles**, pour vous aider à comparer les options et garder une trace de vos décisions.
+Ce répertoire réunit **51 fiches en français**, classées en **6 familles** : couleurs et thèmes, typographie, icônes, composants et kits, graphiques de données, illustrations et 3D.
 
-### Ce que vous recevez
+Chaque fiche présente la ressource, ses liens, un usage pour les non-designers, un usage pour les développeurs, une consigne pour travailler avec un agent IA et un point à vérifier avant de l’intégrer.
 
-- **Un guide PDF de 34 pages A4**, avec 51 fiches et des liens cliquables.
-- **La version Markdown** du contenu éditorial, à consulter dans un éditeur texte ou Markdown.
-- **Une fiche de décision de 3 pages A4**, à imprimer, plus sa version Markdown modifiable. Le PDF n’est pas un formulaire interactif.
-- **Une grille CSV** avec 6 familles à compléter dans un tableur.
-- Un mode d’emploi et les notices d’utilisation, réunis dans **un seul ZIP de 7 fichiers**.
+### Dans le téléchargement
 
-### Les six familles
+- **Un PDF illustré de 54 pages A4**, avec les 51 fiches, 75 liens et 20 captures de sites cliquables.
+- **Le répertoire en Markdown**, avec les fiches et les liens en texte modifiable. Les captures figurent uniquement dans le PDF.
+- **Une fiche de décision de 3 pages A4 à imprimer**, plus sa version Markdown modifiable. Ce n’est pas un formulaire PDF interactif.
+- **Une grille CSV** avec 6 lignes de familles à compléter dans un tableur.
+- Un mode d’emploi et les notices d’utilisation.
 
-1. Couleurs et thèmes.
-2. Typographie.
-3. Icônes.
-4. Composants et kits.
-5. Graphiques de données.
-6. Illustrations et 3D.
+Le tout est livré dans **un ZIP de 7 fichiers en français**. Les interfaces capturées restent dans leur langue d’origine.
 
-### Trois regards sur chaque fiche
+### Une sélection partiellement illustrée
 
-- **Non-designer :** quoi comparer dans une interface réelle.
-- **Développeur :** quoi examiner avant l’intégration et la maintenance.
-- **Avec un agent IA :** quel contexte fournir et quoi vérifier dans sa proposition.
+Les **20 captures fournies et relues** correspondent à 20 des 75 destinations. Les autres liens restent présents, sans image inventée. Une capture aide à reconnaître une ressource ; elle ne prouve ni son fonctionnement actuel, ni son prix, ni sa licence.
 
-Chaque fiche inclut aussi **un point de vigilance**. Un outil ne garantit pas à lui seul un beau rendu, une interface accessible ou un code sans erreur.
+Certaines fiches regroupent plusieurs sites : **75 liens ne signifie pas 75 outils distincts**.
 
-### Comment commencer
+### Comment l’utiliser
 
-Choisissez un écran, retenez au maximum deux options par famille, vérifiez les droits et les contraintes, puis remplissez la fiche de décision. Vous pouvez aussi décider de conserver vos outils existants.
+Choisissez un écran et une contrainte. Comparez au maximum deux options par famille, vérifiez les droits et les coûts, puis consignez votre choix et les tests restants. Conserver les ressources déjà utilisées dans votre projet est aussi une décision possible.
 
-### Ce qui est gratuit — et ce qui ne l’est pas nécessairement
+### Gratuité et droits
 
-**Ce guide est gratuit.** Les sites, services, polices ou packs qu’il présente ont leurs propres tarifs et licences. Certaines fiches regroupent plusieurs sites : **75 liens ne signifie pas 75 outils distincts**.
+**Le guide est à 0 $.** Les services et ressources cités conservent leurs propres tarifs et licences. Le téléchargement ne contient aucun pack tiers de polices, d’icônes, de composants, d’illustrations ou de scènes 3D. Les captures ont une fonction éditoriale ; elles ne sont pas des actifs à extraire et réutiliser.
 
-Aucune police, bibliothèque, collection d’icônes, illustration ou scène 3D tierce n’est incluse dans ce téléchargement. Les licences de chaque auteur restent applicables. Les points sensibles d’ApexCharts, unDraw et Storyset sont signalés ; les 75 destinations n’ont pas fait l’objet d’un audit exhaustif de disponibilité ou de licence.
+Les points sensibles d’ApexCharts, unDraw et Storyset sont signalés. Les 75 destinations n’ont pas fait l’objet d’un audit exhaustif de disponibilité ou de licence. Aucun résultat de trafic, de conversion, de performance ou de conformité d’accessibilité n’est garanti.
 
-### Et le Playbook ?
+### Pour poursuivre avec le Playbook
 
-Le répertoire est une ressource autonome, distincte du Playbook. Le **UX/UI Playbook payant** traite la préparation et la revue d’une interface avec un manuel, des fiches A4 et une archive de fichiers. Il n’est pas inclus et son achat n’est pas nécessaire pour utiliser ce guide gratuit.
+Ce répertoire est autonome. Il ne contient pas le **UX/UI Playbook payant**, et son utilisation ne nécessite pas de l’acheter.
 
-Pour continuer avec les articles gratuits :
-https://joyccelight-playbook.uxplay.workers.dev/fr/articles?utm_source=gumroad&utm_medium=product-description&utm_campaign=repertoire-gratuit
+Le Playbook français comprend un manuel de **182 pages**, **120 sections**, **77 règles**, un kit de **26 pages et 12 fiches A4**, et une archive de **21 fichiers en français**. Prix : **29 USD, paiement unique**. Les éditions française et anglaise sont vendues séparément.
 
-Pour découvrir le Playbook et ses fichiers :
-https://joyccelight-playbook.uxplay.workers.dev/fr?utm_source=gumroad&utm_medium=product-description&utm_campaign=repertoire-gratuit#buy
+Boutique du Playbook français :
+https://joyccelight.gumroad.com/l/uiuxplaybookfr
 
-**Langue : français. Version 1.0, édition du 18 novembre 2026. Création : Joy N. / Joyccelight.**
+Détail du Playbook :
+https://joyccelight-playbook.uxplay.workers.dev/fr#buy
 
-Usage du guide dans vos projets personnels ou professionnels et adaptation des fiches pour votre équipe autorisés ; ne pas revendre le guide ou le republier à l’identique sous votre nom. Les conditions complètes figurent dans `LICENCES.txt`. Aucun droit sur les ressources tierces n’est concédé. Aucun résultat de trafic, de conversion ou de conformité n’est garanti.
+Guides UX/UI gratuits :
+https://joyccelight-playbook.uxplay.workers.dev/fr/articles
 
-## Informations complémentaires à saisir si l’interface les propose
+**Français. Version 1.0. Texte éditorial daté du 18 novembre 2026. Joy N. / Joyccelight.**
 
-- Langue : Français.
-- Format : ZIP contenant PDF, Markdown, CSV et notices.
-- Taille du ZIP : environ 540 Kio, inférieure à 1 Mio.
-- Pages du guide : 34.
-- Fiche de décision : 3 pages A4 imprimables.
-- Fiches / familles / liens : 51 / 6 / 75.
-- Public : non-designers, développeurs, créateurs travaillant avec des agents IA.
-- Mots-clés suggérés : UI, UX, design resources, frontend, français.
+Vous pouvez utiliser le guide dans vos projets personnels ou professionnels et adapter les fiches de décision pour votre équipe ou vos clients. Ne le revendez pas et ne le republiez pas à l’identique sous votre nom. Les conditions complètes sont dans `LICENCES-FR.txt` et ne concèdent aucun droit sur les ressources tierces.
 
-L’URL finale doit être celle attribuée après publication. **Ne pas utiliser de slug supposé dans le site.**
+## Informations complémentaires pour le créateur
 
-## Message de livraison suggéré
+- Fichier client : `Repertoire-UI-UX-Gratuit-FR.zip`.
+- Taille : environ **2,38 Mio**. Les octets et SHA-256 exacts figurent dans `manifest.json`.
+- Guide : **54 pages**, **20 captures** ; fiche de décision : **3 pages**.
+- Fiches / familles / liens : **51 / 6 / 75**.
+- Formats : PDF, Markdown, CSV et notices, **7 fichiers**.
+- Couverture : `cover-1280x720.png` ; vignette : `thumbnail-1080x1080.png`, toutes deux marquées **0 $**.
+- Aucun URL ni slug de produit gratuit ne doit être supposé.
+
+## Message de livraison à copier
 
 Merci d’avoir téléchargé le Répertoire UI/UX !
 
-Décompressez le ZIP et ouvrez `LIRE-MOI.md`. Commencez par un écran, comparez peu d’options, puis notez votre choix et les vérifications restantes dans la fiche de décision.
+Décompressez `Repertoire-UI-UX-Gratuit-FR.zip`, puis ouvrez `LIRE-MOI-FR.md` et `Repertoire-UI-UX-Gratuit-FR.pdf`.
 
-Les fichiers sont en français. Le guide est gratuit ; les ressources tierces conservent leurs tarifs et licences.
+Choisissez un écran, comparez peu d’options et notez votre décision avec les vérifications restantes. Les fichiers sont en français ; les interfaces capturées conservent leur langue d’origine. Le guide est gratuit, pas nécessairement chaque service cité.
 
-Pour les articles et les mises à jour de cette ressource :
-https://joyccelight-playbook.uxplay.workers.dev/fr/resources/ui-ux-directory?utm_source=gumroad&utm_medium=delivery&utm_campaign=repertoire-gratuit
+Les guides gratuits de Joy N. :
+https://joyccelight-playbook.uxplay.workers.dev/fr/articles
 
 Une question ou un lien à signaler ? joynagassi@gmail.com
 
-## Proposition de publication de lancement
+## Texte de lancement
 
-J’ai préparé un répertoire UI/UX gratuit pour les personnes qui construisent des interfaces :
+J’ai préparé un répertoire UI/UX gratuit en français :
 
-— 51 fiches, classées en 6 familles ;
-— palettes, polices, icônes, composants, graphiques et visuels ;
-— un usage pour les non-designers, les développeurs et le travail avec un agent IA ;
-— PDF + Markdown + fiche de décision + grille CSV.
+- 51 fiches dans 6 familles ;
+- 75 liens et 20 captures cliquables ;
+- un usage pour les non-designers, les développeurs et le travail avec un agent IA ;
+- un PDF de 54 pages, le Markdown, une fiche de décision et une grille CSV.
 
-L’objectif : comparer moins d’options et garder une trace des choix, pas ajouter une nouvelle collection d’onglets.
+Pour comparer quelques options et garder la raison de vos choix. Le guide est à 0 $ ; les ressources citées conservent leurs propres prix et licences.
 
-Les fichiers sont en français. Le guide est gratuit ; chaque ressource conserve ses propres prix et droits.
-
-Ajoutez ici **le vrai lien Gumroad après publication**, ou le lien de la page du site une fois celle-ci déployée. Retirez cette consigne avant de publier le message.
+**Consigne interne, à retirer avant publication : ajouter ici le vrai lien Gumroad français après son test à 0. Ne pas partager l’ancienne page de téléchargement du site.**

@@ -1,138 +1,70 @@
-# Publish the English UI/UX Directory on Gumroad
+# Publish the English directory at $0
 
-## Current status
+## Status and delivery boundaries
 
-The English downloadable product and its website integration are prepared in this repository. **No English Gumroad product has been created or published, and no website deployment was performed for this task.** The creator completes publication in their own account; no passwords or tokens need to be shared in chat.
+The files are prepared in this repository. **This agent has not published a Gumroad product.** The creator publishes through their own account without sharing passwords or tokens in chat.
 
-Until a real English checkout is published and tested, the English website export serves the English ZIP directly, without an email form or an invented Gumroad link. A local preview is not a production deployment.
+At the owner’s request, directory pages, downloads and promotions have been removed from the website source. Image assets remain. A local change does not establish production removal: the website must still follow its normal deployment process.
 
-**Later illustration request:** the [Microlink workflow](../screenshots/README.md) preserves 21 externally supplied PNGs and their original manifest. Offline reconciliation is still required; new capture calls are blocked to prevent duplicate paid requests. No illustrated kit has been generated here. The files and counts below describe the current kit **without screenshots**. Update the listing and these counts after real illustrated generation; do not advertise previews before they are in the delivered PDF.
+There is no interim teaser, web catalogue or direct-download fallback. **The two real FR/EN Gumroad URLs are awaited before adding redirects in a later change.** No build variable currently publishes or activates those redirects.
 
-## 1. Files to use
+## English files to use
 
 | Purpose | File |
 | --- | --- |
-| Customer delivery | [ui-ux-directory-free-en-v1.zip](../../../public/downloads/ui-ux-directory-free-en-v1.zip) |
-| Landscape marketing cover | [cover-1280x720.png](marketing/cover-1280x720.png) |
-| Square thumbnail | [thumbnail-1080x1080.png](marketing/thumbnail-1080x1080.png) |
-| Product title, summary, description and messages | [gumroad-listing.md](gumroad-listing.md) |
-| Guide PDF for review | [ui-ux-directory-en-v1.pdf](../../../public/downloads/ui-ux-directory-en-v1.pdf) |
-| Guide Markdown for review | [ui-ux-directory-en-v1.md](../../../public/downloads/ui-ux-directory-en-v1.md) |
-| Exact sizes, hashes and page counts | [manifest.json](manifest.json) |
+| Customer content to upload to Gumroad | [Free-UI-UX-Directory-EN.zip](../releases/en/Free-UI-UX-Directory-EN.zip) |
+| PDF to review | [Free-UI-UX-Directory-EN.pdf](../releases/en/Free-UI-UX-Directory-EN.pdf) |
+| $0 cover, 1280 × 720 | [cover-1280x720.png](marketing/cover-1280x720.png) |
+| $0 thumbnail, 1080 × 1080 | [thumbnail-1080x1080.png](marketing/thumbnail-1080x1080.png) |
+| Name, summary, description and messages | [gumroad-listing.md](gumroad-listing.md) |
 
-Upload **only the customer ZIP** as the product’s content. It is approximately **504 KiB**, well under 1 MiB. Do not upload the source catalogue, the original supplied document, marketing artwork, this publication guide or the listing instructions as customer files.
+**The English ZIP contains 7 files**, including a **54-page illustrated guide**, a **3-page printable worksheet**, two Markdown files, a CSV grid, a README and notices. Approximate size: **2.35 MiB**; exact byte lengths and SHA-256 hashes are in the manifest.
 
-The ZIP contains exactly these seven files under `ui-ux-directory/`:
+Do not upload the overall FR/EN publication archive as the customer file for one product. It also contains owner instructions and marketing images. Do not upload sources, separate website captures or the external manifest.
 
-1. `README.md` — how to begin and what is included.
-2. `ui-ux-directory-en.pdf` — 34 A4 pages, clickable links.
-3. `ui-ux-directory-en.md` — the same editorial guide as editable text.
-4. `decision-worksheet.pdf` — 3 printable A4 pages; not an interactive PDF form.
-5. `decision-worksheet.md` — the editable decision worksheet.
-6. `selection-grid.csv` — 6 blank category rows, 11 columns, UTF-8 with BOM, **comma-separated**.
-7. `LICENSES.txt` — guide terms and Domine/Lucide notices.
+## Create and test the free product
 
-Before publishing, review the English text, the proposed terms in `LICENSES.txt` and the references. Confirm the obligations that apply to your activity. No third-party resource packs are included; do not add any without permission.
+1. Create a digital product in the Joyccelight account.
+2. Copy the English listing fields. Remove internal instructions from public copy.
+3. Set the amount to **$0**, with a suggested amount of **0** if that field exists. Any contribution must remain optional. Do not add a subscription or paid version.
+4. Upload only the English customer ZIP. Check limits and requirements displayed in the account; current Gumroad rules were not revalidated here.
+5. Add the landscape cover and square thumbnail to their respective marketing fields. Both show $0.
+6. Confirm the English file language. Captured interfaces remain in their original language. The paid Playbook is not included.
+7. Review the proposed terms in `LICENSES-EN.txt` and confirm the creator’s applicable business obligations. Screenshots grant no reuse rights to third-party content.
+8. Publish yourself, then test in a private window while signed out of the seller account.
 
-The English catalogue translates the edited French directory dated November 18, 2026. It preserves 51 entries, 6 categories, 75 resource links and 11 reference notes; it does not represent a new exhaustive review of those external services.
+### Customer journey checklist
 
-## 2. Create a separate free English product
+- Enter **0** and confirm that contributions are optional and no payment card is required to receive the free kit. If not, fix the settings before sharing the link.
+- Download the ZIP actually served by Gumroad and confirm its **7 files**.
+- Open both PDFs: **54 pages / 3 pages**, **20 screenshots** in the guide, readable text and clickable links.
+- Test an image and its matching destination, then the English Playbook link on the final page: `https://joyccelight.gumroad.com/l/uxuiplaybook`.
+- Open the CSV as UTF-8, comma-separated: **6 category rows**, **11 columns**, plus the header.
+- Review the listing on a phone. Do not describe all 75 destinations as exhaustively audited.
+- Handle any marketing consent separately. A download does not authorize silently subscribing a person to a newsletter.
 
-1. In the creator’s account, go to **Products → New product** and choose a digital product suitable for a ZIP. Exact interface labels may change.
-2. Create a **separate English product**, rather than replacing the French content or reusing the paid Playbook checkout.
-3. Copy the English name, summary and description from `gumroad-listing.md`. Leave internal instructions out of the public page.
-4. Set **Amount to 0**. The referenced Gumroad help describes this as pay-what-you-want pricing with a free option. Set the suggested amount to **0** if that field is available.
-5. Do not add paid versions or a subscription. Check that the buyer can enter **0** and receive the kit without a payment card. Any contribution must remain optional.
-6. Upload `ui-ux-directory-free-en-v1.zip` as the customer content. The referenced free-product limit is **250 MB of total content**; this kit is far smaller. Recheck current account limits before publishing.
-7. Add the **1280 × 720** cover and **1080 × 1080** thumbnail from this English folder. They are marketing images, not customer-delivery content.
-8. Confirm that the title and description say **English**, **34 guide pages**, **3 worksheet pages** and **7 files**. The paid Playbook is not included. Available button text is controlled by Gumroad; do not promise a custom CTA label.
-9. Complete any identity, sales or account requirements shown in the account, then publish yourself.
+## Supply both real URLs
 
-## 3. Test the public free path before sharing
+After testing, supply the **two complete public URLs**, French and English. They must identify two separate free products. Do not provide administration URLs or reuse the paid Playbook checkouts.
 
-- Open the published product in a private window, outside the seller account.
-- Enter **0** and complete the free download path. Confirm no contribution is required.
-- Download the ZIP delivered by Gumroad, extract it and verify all seven English files.
-- Open both PDFs and check **34 / 3 pages**, readable text and clickable links.
-- Confirm that the guide contains English entries across all six categories, not just an English cover.
-- Open the CSV in a spreadsheet using UTF-8 and a **comma** delimiter; confirm 11 columns and 6 category rows.
-- Check the product page on a phone, including language and the distinction from the paid Playbook.
-- If marketing communications are offered, handle consent separately from file delivery. Do not silently subscribe everyone who downloads.
-- Copy **the actual public English product URL**.
+The next change will add redirects to the correct editions and check old URL variants. Do not restore public PDF/ZIP files, teasers or fallbacks while waiting. Share the real Gumroad link only after testing it, not the withdrawn website page.
 
-## 4. Connect that English URL to the website
+The existing editorial guides and paid Playbook remain available:
 
-Set this build-time variable only after the preceding test succeeds:
+- https://joyccelight-playbook.uxplay.workers.dev/en/articles
+- https://joyccelight-playbook.uxplay.workers.dev/en#buy
 
-```env
-NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_EN=
-```
+## Limitations and provenance
 
-Put the real HTTPS product URL from the `joyccelight.gumroad.com` store in that field, with `/l/` followed by its assigned slug. **Leave it empty while the product is unpublished or untested.** Do not invent a slug, use the French kit’s URL or use either paid Playbook URL.
+The PDF contains **20 previews for 75 links**. All 21 supplied originals are preserved; the image showing a generator still loading is excluded from the delivery. Images were optimized and visually reviewed offline. No additional screenshot API call was made.
 
-The editions are configured independently:
+Retrieval dates are reported by the external submission and were not independently verified. A screenshot does not validate a site’s current prices, licenses, performance or behavior. The PDF is tagged, but no PDF/UA conformance or accessibility certification is claimed.
 
-```env
-# Real French product URL, once published and tested:
-NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_FR=
-# Real English product URL, once published and tested:
-NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL_EN=
-# Legacy French-only fallback; never read by the English CTA:
-NEXT_PUBLIC_FREE_RESOURCE_GUMROAD_URL=
-```
+## References to check before publication
 
-The explicit French setting takes priority over the legacy French-only setting. An empty English setting always keeps the English direct download—even if a French Gumroad URL is configured. Identical FR and EN checkout URLs are rejected to help prevent language mix-ups. Validation checks URL syntax and separation from the paid products, **not the remote product’s existence, contents or price**; the owner’s free-path test remains necessary.
+These are verification starting points, not confirmation of current Gumroad rules in this task:
 
-Rebuild and check the static site:
-
-```bash
-npm run check:resource
-npm run typecheck
-npm run test:routing
-npm run build
-npm run check:export
-npm run preview:pages
-# In another terminal:
-python3 scripts/site_check.py --base-url http://127.0.0.1:3100
-PLAYWRIGHT_BASE_URL=http://127.0.0.1:3100 npm run test:ui
-```
-
-The English primary CTA then becomes **“Get it free on Gumroad”**. English PDF and Markdown links remain real local files. The French page retains its own files and independent checkout setting. No website email form is added. Incoming UTM parameters use the existing button behavior; no new analytics service is installed.
-
-Deploy the revision using the owner’s **Cloudflare** process only after validation. A build-time variable requires a new static build; changing a dashboard value alone cannot update existing HTML. No deployment is performed by these instructions.
-
-Website pages to share **after their deployment is confirmed**:
-
-- English files: `/en/resources/ui-ux-directory`.
-- French files: `/fr/resources/ui-ux-directory`.
-
-The current canonical build origin is `https://joyccelight-playbook.uxplay.workers.dev`. Its appearance in the guide does not establish that these pages are live. If the final origin changes, regenerate **both editions** with the correct `NEXT_PUBLIC_SITE_URL` before publication. Printed links do not change by themselves.
-
-## 5. Regenerate the English edition when needed
-
-The edited English source is `products/ui-ux-directory/en/catalogue.json`.
-
-```bash
-# Requires a local Chromium installation; alternatively set CHROMIUM_EXECUTABLE_PATH.
-npm run generate:resource:en
-npm run check:resource
-```
-
-The generator writes English downloads, their manifest, English marketing images and English website artwork. It does not overwrite the French downloads. Working files stay under ignored `.cache/free-resource/en/`. See [README.md](README.md) for the build scope.
-
-## 6. A simple launch, without traffic promises
-
-1. Publish and test the English Gumroad product; deploy and test the English website page.
-2. Use the English launch post from the listing document and the supplied cover.
-3. Keep the free directory reachable from the English home page, article hub and articles.
-4. The guide’s return links lead to English articles and the separate paid Playbook, with UTM parameters. Those parameters do not collect data on their own.
-5. Review downloads and feedback only with suitable tools and consent. No traffic, email signup, sales or compliance outcome is guaranteed.
-
-## Configuration references
-
-These are the Gumroad help references used for the French publication workflow and retained for this English equivalent. They were **not freshly revalidated during the translation**. Check the current help and account interface before publishing.
-
-- Create a product: https://gumroad.com/help/article/149-adding-a-product
-- Pay-what-you-want and a 0 amount: https://gumroad.com/help/article/133-pay-what-you-want-pricing
-- File limits for free products: https://gumroad.com/help/article/289-file-size-limits-on-gumroad
-- Cover and thumbnail: https://gumroad.com/help/article/60-adding-a-cover-image
+- https://gumroad.com/help/article/149-adding-a-product
+- https://gumroad.com/help/article/133-pay-what-you-want-pricing
+- https://gumroad.com/help/article/289-file-size-limits-on-gumroad
+- https://gumroad.com/help/article/60-adding-a-cover-image
