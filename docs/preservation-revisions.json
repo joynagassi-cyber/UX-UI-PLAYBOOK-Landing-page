@@ -620,6 +620,56 @@
       "removedFiles": [],
       "removedPageFiles": [],
       "introducedFiles": []
+    },
+    {
+      "id": "owner-directory-presentation-restored-globe-switcher",
+      "reason": "Owner asked for an on-site presentation page linking both published free Gumroad editions (SEO reference page), a globe-icon language menu replacing the FR/EN segmented switcher, and external links opening in a new tab.",
+      "reviewReport": "docs/FREE_RESOURCE_GUMROAD_RELEASE.md",
+      "files": [],
+      "removedFiles": [],
+      "removedPageFiles": [],
+      "restoredPageFiles": [
+        {
+          "path": "src/app/[locale]/resources/ui-ux-directory/page.tsx",
+          "reason": "Restore the localized presentation pages at their original canonical URLs. The pages present both free books and link the two published Gumroad products; they serve no download, catalogue or entry data, and the old downloads remain genuine 404s."
+        }
+      ],
+      "introducedFiles": []
+    },
+    {
+      "id": "owner-directory-presentation-docs",
+      "reason": "Owner restored an on-site presentation page for the free directory; the publication documents describe the page instead of the superseded Gumroad redirects.",
+      "reviewReport": "docs/FREE_RESOURCE_GUMROAD_RELEASE.md",
+      "files": [
+        {
+          "path": "products/ui-ux-directory/README.md",
+          "fromSha256": "62aa0f1b1f3d445b42c90d798e76ba7cee8cc72449f0cdf63a67396d2b70f953",
+          "toSha256": "14302b4862a6fe15f97af7e1705ed5e836793c6eeff4ada721693ea70f4594c8",
+          "reason": "State that the restored presentation page links both published Gumroad editions and serves no file; downloads remain genuine 404s."
+        },
+        {
+          "path": "products/ui-ux-directory/en/README.md",
+          "fromSha256": "1f220853809f159bc8011a3a00686c5746acbe5af832ebe681306384c3b4e90a",
+          "toSha256": "ac5192e2d03175b329f914a36d3e87e474f8e13baf61f8aefeb5cefdd08a7d04",
+          "reason": "State that the restored presentation page links both published Gumroad editions and serves no file; downloads remain genuine 404s."
+        },
+        {
+          "path": "products/ui-ux-directory/publication-guide.md",
+          "fromSha256": "540e931c68069d271d589a5f60e61cc4dd57ef3ae764cc6c2098182617921cda",
+          "toSha256": "257fa0006183b1b071b342def2995fc36a07f4ebf93b4dfc2e274b8d17ecb49e",
+          "reason": "State that the restored presentation page links both published Gumroad editions and serves no file; downloads remain genuine 404s."
+        },
+        {
+          "path": "products/ui-ux-directory/en/publication-guide.md",
+          "fromSha256": "f1787b801ae5a93f1d6846271034b351e9b54bf085a8af306592c1a5a76d7a71",
+          "toSha256": "b6c8982b35ec95ba709dd7e1b2ec1e66728b4beaf9bdeb6782ea3595344c57c3",
+          "reason": "State that the restored presentation page links both published Gumroad editions and serves no file; downloads remain genuine 404s."
+        }
+      ],
+      "removedFiles": [],
+      "removedPageFiles": [],
+      "restoredPageFiles": [],
+      "introducedFiles": []
     }
   ]
 }

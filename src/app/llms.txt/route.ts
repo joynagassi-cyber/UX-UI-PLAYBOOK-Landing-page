@@ -21,6 +21,8 @@ export async function GET() {
 - [English edition: ${playbookPages('en')} A4 pages + 26-page kit + 21-file archive, $29 USD](${SITE_URL}/en) — Store: https://joyccelight.gumroad.com/l/uxuiplaybook
 - [Édition française : ${playbookPages('fr')} pages A4 + kit de 26 pages + archive de 21 fichiers, 29 USD](${SITE_URL}/fr) — Boutique : https://joyccelight.gumroad.com/l/uiuxplaybookfr
 - [Full text of the bilingual articles](${SITE_URL}/llms-full.txt)
+- Free 54-page UI/UX Directory, French edition presented at ${SITE_URL}/fr/resources/ui-ux-directory — Download ($0): https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr
+- Free 54-page UI/UX Directory, English edition presented at ${SITE_URL}/en/resources/ui-ux-directory — Download ($0): https://joyccelight.gumroad.com/l/free-ui-ux-directory-en
 - Author: [Joy N.](${SITE_URL}/en#author) · [GitHub](https://github.com/joynagassi-cyber) · [Gumroad](https://joyccelight.gumroad.com)
 - Contact: mailto:joynagassi@gmail.com
 

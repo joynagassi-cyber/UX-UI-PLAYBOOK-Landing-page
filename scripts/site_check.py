@@ -153,7 +153,7 @@ def main():
                     break
                 time.sleep(0.5)
 
-    routes = [f"/{lang}{suffix}" for lang in STORES for suffix in ("", "/articles", *(f"/articles/{slug}" for slug in SLUGS))]
+    routes = [f"/{lang}{suffix}" for lang in STORES for suffix in ("", "/articles", "/resources/ui-ux-directory", *(f"/articles/{slug}" for slug in SLUGS))]
     source_urls = set()
     prose_paragraphs = set()
     visual_titles = set()
@@ -206,14 +206,18 @@ def main():
             invalid_vectors = [svg.attrs for svg in vectors if "design-vector" not in svg.attrs.get("class", "").split() or svg.attrs.get("data-vector-illustration") not in {"discipline-map", "decision-loop", "bicycle"} or not svg.attrs.get("viewbox") or svg.attrs.get("stroke-width") != "3" or svg.attrs.get("aria-hidden") != "true" or svg.attrs.get("focusable") != "false"]
             record("VECTOR01", route, not invalid_vectors, f"{len(vectors)} original scalable vector illustrations with adjacent HTML equivalents; invalid={invalid_vectors}")
             pills = doc.all(cls="guide-cat-pill")
-            record("ICON02", route, bool(pills) and all(
+            record("ICON02", route, (bool(pills) if route.endswith("/articles") else True) and all(
                 len(pill.all("svg")) == 1 and pill.all("svg")[0].attrs.get("data-icon") in {"compass", "palette", "settings"}
                 and pill.text().strip() not in {"compass", "palette", "settings"}
                 for pill in pills), "Guide categories render real icons, never raw icon keys")
             store_links = [element.attrs.get("href", "") for element in doc.all("a") if "gumroad.com/l/" in element.attrs.get("href", "")]
-            record("I18N03", route, bool(store_links) and all(url.split("?")[0] == STORES[lang] for url in store_links), f"{len(store_links)} localized purchase links")
-            removed_links = [a.attrs.get("href", "") for a in doc.all("a") if WITHDRAWN_DIRECTORY in a.attrs.get("href", "") or a.attrs.get("href", "").startswith("/downloads/")]
-            record("WITHDRAWN01", route, not removed_links and not doc.all(cls="free-promo"), "No directory promotion, teaser or direct download remains")
+            if route.endswith(WITHDRAWN_DIRECTORY):
+                allowed_stores = {STORES[lang], *FREE_STORES.values()}
+                record("I18N03", route, all(url.split("?")[0] in allowed_stores for url in store_links) and all(store in store_links for store in FREE_STORES.values()), f"{len(store_links)} purchase/free links: paid store plus both free editions")
+            else:
+                record("I18N03", route, bool(store_links) and all(url.split("?")[0] == STORES[lang] for url in store_links), f"{len(store_links)} localized purchase links")
+            removed_links = [a.attrs.get("href", "") for a in doc.all("a") if a.attrs.get("href", "").startswith("/downloads/")]
+            record("WITHDRAWN01", route, not removed_links and not doc.all(cls="free-promo"), "No direct download or catalogue promotion remains; only the presentation page may be linked")
             record("CONTACT01", route, any(element.attrs.get("href") == "mailto:joynagassi@gmail.com" for element in doc.all("a")), "Public contact mailto link")
             record("COPY01", route, not has_rejected_authority_copy(doc.text()), "No source-rating badges or book-authority promotional labels")
             record("COPY03", route, not removed_slogans.search(doc.text()), "Selected removed promotional phrases have not returned; this is not an AI or style detector")
@@ -337,10 +341,14 @@ def main():
         noindex = any("noindex" in element.attrs.get("content", "") for element in doc.all("meta") if element.attrs.get("name") == "robots")
         record("WITHDRAWN02", path, status == 404 and not response_headers.get("Location") and noindex, f"Withdrawn downloads return a genuine noindex 404, never a redirect to a file host: HTTP {status}")
     for locale, store in FREE_STORES.items():
-        for suffix in ("", ".html", "/"):
-            path = f"/{locale}{WITHDRAWN_DIRECTORY}{suffix}"
-            status, response_headers, _ = get(path)
-            record("WITHDRAWN05", path, status == 308 and response_headers.get("Location") == store, f"Withdrawn directory page redirects permanently to the owner-supplied {locale.upper()} Gumroad product: HTTP {status} -> {response_headers.get('Location')}")
+        path = f"/{locale}{WITHDRAWN_DIRECTORY}"
+        status, response_headers, body = get(path)
+        text = body.decode("utf-8", errors="replace")
+        record("WITHDRAWN05", path, status == 200 and all(s in text for s in FREE_STORES.values()), f"Restored presentation page serves 200 and links both free Gumroad editions: HTTP {status}")
+        for suffix in (".html", "/"):
+            alias = path + suffix
+            status, response_headers, _ = get(alias)
+            record("WITHDRAWN06", alias, status == 308 and response_headers.get("Location") == path, f"Directory alias redirects permanently to the canonical presentation page: HTTP {status} -> {response_headers.get('Location')}")
     for lang in STORES:
         path = f"/images/free-directory/cover-{lang}.jpg"
         status, response_headers, _ = get(path)
@@ -355,7 +363,7 @@ def main():
                 record("MACHINE06", endpoint, response_headers.get("Content-Type", "").lower().startswith("text/plain"), response_headers.get("Content-Type"))
             if endpoint.startswith("/llms"):
                 text = body.decode("utf-8")
-                record("WITHDRAWN04", endpoint, WITHDRAWN_DIRECTORY not in text and "/downloads/" not in text and "Live Brand Preview" not in text, "No withdrawn catalogue or download discovery remains")
+                record("WITHDRAWN04", endpoint, "/downloads/" not in text and "Live Brand Preview" not in text, "No catalogue or download discovery remains; the presentation page itself may be referenced")
             if endpoint == "/robots.txt":
                 record("MACHINE07", endpoint, f"Sitemap: {site}/sitemap.xml" in body.decode("utf-8") and not re.search(r"^Host:", body.decode("utf-8"), re.M), "robots.txt uses the configured public sitemap origin; no nonstandard Host canonicalization")
             if endpoint == "/sitemap.xml" and status == 200:

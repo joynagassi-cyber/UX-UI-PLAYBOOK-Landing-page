@@ -6,7 +6,7 @@ Les fichiers sont préparés dans ce dépôt. **Aucun produit Gumroad n’a ét�
 
 Les pages du répertoire, ses téléchargements et sa promotion ont été retirés des sources du site à la demande du propriétaire. Les images sont conservées. Ce changement local ne prouve pas un retrait en production : le site doit encore suivre son processus de déploiement habituel.
 
-Il n’y a ni page d’attente, ni catalogue web maintenu, ni téléchargement direct de repli. **Le propriétaire a publié les deux produits et transmis leurs URL : `https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr` et `https://joyccelight.gumroad.com/l/free-ui-ux-directory-en`.** Les anciennes adresses du répertoire (formes nue, `.html` et slash final) redirigent en 308 vers le produit de leur langue dans `public/_redirects` ; aucun téléchargement n’est redirigé.
+Il n’y a ni page d’attente, ni catalogue web maintenu, ni téléchargement direct de repli. **Le propriétaire a publié les deux produits et transmis leurs URL : `https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr` et `https://joyccelight.gumroad.com/l/free-ui-ux-directory-en`.** Une page de présentation est rétablie sur le site aux anciennes adresses du répertoire : elle relie les deux éditions Gumroad et ne sert aucun fichier ; les téléchargements ne sont ni rétablis ni redirigés.
 
 ## Fichiers français à utiliser
 

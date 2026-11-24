@@ -604,7 +604,7 @@ export function NotionArticleReader({
                   <div className="notion-stat-val"><TabularText>{st.value}</TabularText></div>
                   <div className="notion-stat-label">{st.label}</div>
                   <div className="notion-stat-src">
-                    {st.url ? <a href={st.url}>{st.source}</a> : st.source}
+                    {st.url ? <a href={st.url} target="_blank" rel="noopener noreferrer">{st.source}</a> : st.source}
                   </div>
                 </div>
               ))}
@@ -650,7 +650,7 @@ export function NotionArticleReader({
               {article.references.map((reference, referenceIndex) => (
                 <li key={reference.url} id={`reference-${referenceIndex + 1}`} className="notion-refs-item">
                   <div className="notion-refs-main">
-                    <a href={reference.url}>{reference.title}</a>
+                    <a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.title}</a>
                     <div className="notion-refs-sub">{reference.publisher} · {reference.date}</div>
                     <p>{reference.note}</p>
                   </div>

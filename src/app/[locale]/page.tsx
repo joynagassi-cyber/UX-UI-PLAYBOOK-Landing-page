@@ -476,8 +476,8 @@ export default async function LandingPage({
                 <p style={{ marginTop: '12px' }}>{c.author.p2}</p>
                 <div className="author-sig">{c.author.signature}</div>
                 <div className="author-links">
-                  <a href="https://github.com/joynagassi-cyber">GitHub · Joy N.</a>
-                  <a href="https://joyccelight.gumroad.com">Gumroad · Joyccelight</a>
+                  <a href="https://github.com/joynagassi-cyber" target="_blank" rel="noopener noreferrer">GitHub · Joy N.</a>
+                  <a href="https://joyccelight.gumroad.com" target="_blank" rel="noopener noreferrer">Gumroad · Joyccelight</a>
                 </div>
               </div>
             </div>
@@ -590,6 +590,7 @@ export default async function LandingPage({
 
           <div className="footer-links">
             <a href={`/${locale}/articles`}>{c.nav.guides}</a>
+            <a href={`/${locale}/resources/ui-ux-directory`}>{locale === 'fr' ? 'Répertoire UI/UX gratuit' : 'Free UI/UX Directory'}</a>
             <GumroadButton href={c.gumroadUrl}>
               {c.footer.gumroadLinkLabel}
             </GumroadButton>

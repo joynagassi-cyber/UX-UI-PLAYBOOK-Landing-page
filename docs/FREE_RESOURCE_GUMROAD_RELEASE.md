@@ -97,6 +97,16 @@ Le propriétaire a publié les deux produits et transmis leurs URL publiques :
 
 `public/_redirects` redirige désormais en **308** les formes nue, `.html` et slash final de `/fr/resources/ui-ux-directory` et `/en/resources/ui-ux-directory` vers le produit de leur langue. Les anciens téléchargements restent en vraie 404 sans redirection, le sitemap et les endpoints LLM ne référencent toujours pas ces adresses, et aucune page teaser n’est rétablie. Les contrôles d’export, HTTP et navigateur ont été mis à jour pour exiger ces six redirections exactes et le maintien des 404 de téléchargement.
 
+## Page de présentation rétablie, menu langue et liens externes
+
+Après publication des produits, le propriétaire demande une page de référence sur son propre domaine plutôt que la seule dépendance aux fiches Gumroad. Les redirections 308 vers Gumroad (jamais fusionnées) sont remplacées avant mise en production par le rétablissement des pages `/fr/resources/ui-ux-directory` et `/en/resources/ui-ux-directory` :
+
+- chaque page présente le livre (54 pages, 51 fiches, 75 liens, 20 aperçus, fiche de décision de 3 pages) et relie **les deux éditions** Gumroad, chacune dans un nouvel onglet (`target="_blank"`, `rel="noopener noreferrer"`) ;
+- aucun fichier, catalogue ou fiche du répertoire n’est servi par le site ; les anciens téléchargements restent en vraie 404 ;
+- les pages rejoignent le sitemap (14 URL canoniques), les alias `.html` et slash final, et les liens internes depuis le pied de page de l’accueil ; les URL à inspecter dans Search Console sont `https://joyccelight-playbook.uxplay.workers.dev/fr/resources/ui-ux-directory` et `https://joyccelight-playbook.uxplay.workers.dev/en/resources/ui-ux-directory`, une fois le déploiement effectif. L’inspection et la demande d’indexation se font dans le compte Search Console du propriétaire ; aucun accès à ce compte n’est disponible ici.
+
+Dans le même changement, le sélecteur de langue FR/EN est remplacé sur tout le site par un bouton à icône globe (Lucide) ouvrant un menu « Français / English », et tous les liens externes rendus depuis le site (sources et statistiques des articles, profils, boutiques) ouvrent un nouvel onglet avec `noopener noreferrer`. Les liens internes et les citations `#reference-…` restent dans l’onglet courant. Un test unitaire balaie les ancres externes du code source et un test navigateur vérifie les sources d’un article.
+
 ## Actions restantes, exclusivement réelles
 
 1. Le créateur relit ses conditions d’usage et les réglages Gumroad actuels dans son compte, et teste chaque ZIP réellement servi, sans contribution obligatoire.

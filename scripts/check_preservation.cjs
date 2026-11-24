@@ -72,9 +72,21 @@ function verifyPreservation(root = repositoryRoot) {
       expectedPageFiles.delete(entry.path);
       retiredPageFiles.push(entry);
     }
+    // A retired page may only return through a named restoration in a later
+    // revision; silently recreating the file still fails the inventory check.
+    for (const entry of revision.restoredPageFiles || []) {
+      const retiredIndex = retiredPageFiles.findIndex(item => item.path === entry.path);
+      if (!safePath(entry.path) || expectedPageFiles.has(entry.path) || retiredIndex < 0 || !entry.reason?.trim()) {
+        changed.push(`Invalid page inventory restoration: ${revision.id}: ${entry.path}`);
+        continue;
+      }
+      retiredPageFiles.splice(retiredIndex, 1);
+      expectedPageFiles.add(entry.path);
+    }
     revisions.push({ id: revision.id, reason: revision.reason, reviewReport: revision.reviewReport,
       files: (revision.files || []).length, introducedFiles: (revision.introducedFiles || []).length,
-      removedFiles: (revision.removedFiles || []).length, removedPageFiles: (revision.removedPageFiles || []).length });
+      removedFiles: (revision.removedFiles || []).length, removedPageFiles: (revision.removedPageFiles || []).length,
+      restoredPageFiles: (revision.restoredPageFiles || []).length });
   }
   const protectedFiles = [...expected].map(([file, hash]) => {
     const filename = path.join(root, file);

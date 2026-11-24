@@ -48,7 +48,7 @@ Le répertoire est désormais fabriqué pour deux produits Gumroad distincts : *
 
 **À la demande du propriétaire, les pages, téléchargements, promotions et contenus de découverte du répertoire sont retirés du site source ; seuls leurs assets images sont conservés.** Aucun teaser ni fallback direct n’est maintenu. Les quatre guides éditoriaux par langue et le Playbook payant sont préservés. Une modification locale n’est pas une preuve de retrait en production.
 
-**Produits gratuits publiés par le propriétaire : [FR](https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr) et [EN](https://joyccelight.gumroad.com/l/free-ui-ux-directory-en).** Les anciennes adresses du répertoire redirigent en 308 vers le produit de leur langue ; les anciens téléchargements restent en vraie 404. Les anciennes variables de checkout gratuit ont été retirées, sans modification distante de configuration.
+**Produits gratuits publiés par le propriétaire : [FR](https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr) et [EN](https://joyccelight.gumroad.com/l/free-ui-ux-directory-en).** Une page de présentation du répertoire est rétablie sur le site et relie les deux éditions Gumroad ; les anciens téléchargements restent en vraie 404. Les anciennes variables de checkout gratuit ont été retirées, sans modification distante de configuration.
 
 ```bash
 # Fabrication hors réseau, nécessite Chromium.

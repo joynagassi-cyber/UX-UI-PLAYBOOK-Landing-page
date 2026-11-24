@@ -34,12 +34,12 @@ test('an explicit empty canonical origin fails rather than silently falling back
   const result = spawnSync(process.execPath, ['-e', 'require("./scripts/content-data.cjs").loadData("src/lib/site-config.ts")'], { cwd: root, env: { ...process.env, NEXT_PUBLIC_SITE_URL: '' }, encoding: 'utf8' });
   assert.equal(result.status, 1);
 });
-test('sitemap has exactly the 12 existing canonical pages, reciprocal alternates and no unjustified dates', () => {
+test('sitemap has exactly the 14 existing canonical pages, reciprocal alternates and no unjustified dates', () => {
   const entries = loadData('src/app/sitemap.ts').default();
-  const suffixes = ['', '/articles', ...ARTICLE_SLUGS.map(slug => `/articles/${slug}`)];
+  const suffixes = ['', '/articles', '/resources/ui-ux-directory', ...ARTICLE_SLUGS.map(slug => `/articles/${slug}`)];
   const urls = ['fr', 'en'].flatMap(locale => suffixes.map(suffix => `${SITE_URL}/${locale}${suffix}`)).sort();
-  assert.equal(entries.length, 12);
-  assert.equal(new Set(entries.map(e => e.url)).size, 12);
+  assert.equal(entries.length, 14);
+  assert.equal(new Set(entries.map(e => e.url)).size, 14);
   assert.deepEqual(entries.map(e => e.url).sort(), urls);
   for (const entry of entries) {
     assert.ok(!('lastModified' in entry), 'Dates require a page-specific provenance ledger, not updatedAt/build time');

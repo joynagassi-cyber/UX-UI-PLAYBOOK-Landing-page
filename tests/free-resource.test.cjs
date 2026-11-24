@@ -30,21 +30,26 @@ test('English preserves every French entry ID, category, destination and source 
   for (const [index, category] of en.categories.entries()) for (const key of ['name', 'purpose', 'question']) assert.notEqual(category[key], fr.categories[index][key]);
 });
 
-test('the website has no free-directory route, UI, catalogue import or fallback; only the owner-supplied Gumroad redirects remain', () => {
-  for (const filename of ['src/app/[locale]/resources/ui-ux-directory/page.tsx', 'src/components/FreeResourcePromo.tsx', 'src/components/FreeResourceDownload.tsx', 'src/i18n/free-resource.ts', 'src/lib/free-resource-config.ts']) assert.equal(fs.existsSync(path.join(root, filename)), false, filename);
+test('the website serves only a directory presentation page: no UI download, catalogue import or file fallback', () => {
+  const pageFile = 'src/app/[locale]/resources/ui-ux-directory/page.tsx';
+  assert.equal(fs.existsSync(path.join(root, pageFile)), true, pageFile);
+  for (const filename of ['src/components/FreeResourcePromo.tsx', 'src/components/FreeResourceDownload.tsx', 'src/i18n/free-resource.ts', 'src/lib/free-resource-config.ts']) assert.equal(fs.existsSync(path.join(root, filename)), false, filename);
   const walk = directory => fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? walk(path.join(directory, entry.name)) : [path.join(directory, entry.name)]);
-  for (const filename of walk(path.join(root, 'src')).filter(file => /\.(?:tsx?|json|css)$/u.test(file))) {
-    assert.doesNotMatch(fs.readFileSync(filename, 'utf8'), /FREE_RESOURCE|FREE_GUMROAD|FreeResource|free-resource|ui-ux-directory|data-directory-entry/u, path.relative(root, filename));
-  }
   assert.equal(walk(path.join(root, 'public')).filter(file => /\.(?:pdf|zip|md)$/iu.test(file)).length, 0);
+  const pageSource = fs.readFileSync(path.join(root, pageFile), 'utf8');
+  // The page presents the books and links Gumroad; it must not resurrect the
+  // withdrawn catalogue, entry data or any local download path.
+  assert.doesNotMatch(pageSource, /catalogue\.json|freeResourceCatalog|data-directory-entry|\/downloads\//u);
+  const stores = ['https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr', 'https://joyccelight.gumroad.com/l/free-ui-ux-directory-en'];
+  for (const store of stores) assert.ok(pageSource.includes(store), store);
+  assert.ok((pageSource.match(/target="_blank"/gu) || []).length >= 1 && /rel="noopener noreferrer"/u.test(pageSource), 'edition links open Gumroad in a new tab');
   const redirects = readArtifact('public/_redirects').toString().trim().split('\n').map(line => line.trim().split(/\s+/u));
-  const stores = { fr: 'https://joyccelight.gumroad.com/l/repertoire-ui-ux-gratuit-fr', en: 'https://joyccelight.gumroad.com/l/free-ui-ux-directory-en' };
-  for (const [locale, store] of Object.entries(stores)) {
-    for (const suffix of ['', '.html', '/']) {
-      assert.ok(redirects.some(([from, to, status]) => from === `/${locale}/resources/ui-ux-directory${suffix}` && to === store && status === '308'), `${locale}${suffix}`);
+  for (const locale of ['fr', 'en']) {
+    for (const suffix of ['.html', '/']) {
+      assert.ok(redirects.some(([from, to, status]) => from === `/${locale}/resources/ui-ux-directory${suffix}` && to === `/${locale}/resources/ui-ux-directory` && status === '308'), `${locale}${suffix}`);
     }
   }
-  assert.equal(redirects.filter(([from]) => from.includes('/resources/ui-ux-directory')).length, 6);
+  assert.ok(!redirects.some(([, to]) => /gumroad\.com/u.test(to)), 'no server redirect to Gumroad remains');
   assert.ok(!redirects.some(([from]) => from.startsWith('/downloads/')), 'downloads are never redirected to a file host');
   assert.doesNotMatch(readArtifact('.env.example').toString(), /NEXT_PUBLIC_FREE_RESOURCE_GUMROAD/u);
 });
