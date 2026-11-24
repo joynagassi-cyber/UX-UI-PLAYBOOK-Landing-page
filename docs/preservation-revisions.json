@@ -670,6 +670,23 @@
       "removedPageFiles": [],
       "restoredPageFiles": [],
       "introducedFiles": []
+    },
+    {
+      "id": "owner-free-directory-visible-navigation",
+      "reason": "Owner reports the free resource has effectively disappeared from the site: the restored presentation page was only linked from the home footer. Add a localized navigation label so every page links it visibly.",
+      "reviewReport": "docs/FREE_RESOURCE_GUMROAD_RELEASE.md",
+      "files": [
+        {
+          "path": "src/i18n/content.ts",
+          "fromSha256": "3c13ef6735b33f63c6df4e7daef740eba91b88621867d884703938e21da08cf5",
+          "toSha256": "3b7ca4a8cfe2fc99e57a3d9c9b6cae806bbd3f84a5135c34646672b9f5575330",
+          "reason": "Add nav.freeDirectory labels (Répertoire gratuit / Free Directory) used by the header of every localized page."
+        }
+      ],
+      "removedFiles": [],
+      "removedPageFiles": [],
+      "restoredPageFiles": [],
+      "introducedFiles": []
     }
   ]
 }

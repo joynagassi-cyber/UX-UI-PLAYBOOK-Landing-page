@@ -531,6 +531,14 @@ for (const locale of ['fr', 'en'] as const) {
       await expect(link).toHaveAttribute('rel', /noopener/);
     }
     await expect(page.locator('a[href^="/downloads/"], [data-directory-entry], [data-free-download], .free-promo')).toHaveCount(0);
+    // The resource must be discoverable: header navigation on every page, a
+    // dedicated home section and a banner on the articles hub.
+    await page.goto(`/${locale}`);
+    await expect(page.locator(`.site-nav a[href="/${locale}/resources/ui-ux-directory"]`)).toBeVisible();
+    await expect(page.locator('#free-directory a.btn')).toBeVisible();
+    await page.goto(`/${locale}/articles`);
+    await expect(page.locator(`.site-nav a[href="/${locale}/resources/ui-ux-directory"]`)).toBeVisible();
+    await expect(page.locator(`main a[href="/${locale}/resources/ui-ux-directory"]`).last()).toBeVisible();
     const oldFiles = locale === 'fr'
       ? ['repertoire-ui-ux-gratuit-v1.zip', 'repertoire-ui-ux-fr-v1.pdf', 'repertoire-ui-ux-fr-v1.md']
       : ['ui-ux-directory-free-en-v1.zip', 'ui-ux-directory-en-v1.pdf', 'ui-ux-directory-en-v1.md'];
