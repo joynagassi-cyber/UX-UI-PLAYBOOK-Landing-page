@@ -39,3 +39,28 @@ Les checks externes du Worker `joyccelight-playbook` échouent pour `98c81d9` (b
 Cela ne permet pas d’attribuer l’échec à Node, au domaine, à un token, au nom ou à une commande de déploiement. Le succès du build/dry-run GitHub n’est pas une preuve de publication Cloudflare. Les garde-fous de nom et de compte/tag du Worker sont conservés, sans appel direct de publication pour contourner l’intégration.
 
 Si ce check reste rouge après le correctif, il faut le passage d’erreur du journal Workers Builds, ou un accès autorisé à ces journaux, pour le diagnostiquer précisément. La PR ne sera pas fusionnée en présentant cet échec externe comme résolu.
+
+
+## Journal fourni après la fusion : cause désormais établie
+
+Le propriétaire a ensuite demandé explicitement la fusion. La PR 11 est fusionnée dans `main` au commit `d76e373a7a18f74272716a9767534c663dfc781e`, sans présenter le check externe comme résolu. Le journal fourni après cette opération permet enfin d’identifier son erreur :
+
+```text
+23:06:19.962 Success: Build command completed
+23:06:20.152 Executing user deploy command: npx wrangler preview
+23:06:22.293 Your Wrangler configuration is missing a `previews` block to run this command.
+```
+
+Il s’agit du journal de l’aperçu de branche déjà signalé, pas d’une preuve d’échec de compilation Next.js, de TypeScript ou de Node. L’installation indique Node 22.23.5 et zéro vulnérabilité ; le build exporte les 21 pages avant l’échec de la commande d’aperçu.
+
+### Correction de configuration
+
+Ajout de **`"previews": {}` au niveau racine** de `wrangler.jsonc`. La [documentation officielle](https://developers.cloudflare.com/workers/previews/configuration/#wrangler-configuration-file) et l’implémentation de Wrangler **4.165.0**, épinglée dans le dépôt, précisent que ce bloc est requis et peut rester vide. Les assets, y compris le binding `ASSETS`, et les paramètres de compatibilité restent au niveau racine. Aucun stockage, secret ni service de production n’est ajouté à la configuration Preview.
+
+Le nom `joyccelight-playbook`, le point d’entrée, la date de compatibilité, les assets, les règles de langue/404 et les garde-fous de production restent inchangés. La commande distante d’aperçu n’est pas remplacée par un déploiement de production. Le README distingue maintenant production, aperçu distant et serveur local.
+
+Deux tests supplémentaires contrôlent l’opt-in vide et sa lecture par le parseur de Wrangler installé, sans accès réseau ni authentification. Le vérificateur d’export refuse désormais une suppression du bloc. Ce contrôle ne crée pas d’aperçu distant et ne prétend pas valider des permissions Cloudflare. `wrangler preview` ne proposant pas de dry-run dans cette version, la commande authentifiée n’est pas exécutée manuellement comme test.
+
+Validation locale du correctif : **216/216 tests unitaires**, **283/283 vérifications d’export**, lint, types, build et préservation réussis ; dry-run du Worker réussi avec 194 assets. Les 112 tests navigateur réussis sur `df06b21` restent la validation du correctif mobile précédent, pas une nouvelle exécution pour ce changement de configuration. Le nouveau résultat externe doit être vérifié sur le commit qui contient ce bloc.
+
+Ce correctif est préparé sur la même branche active pour une PR de suivi, puisque la PR 11 est déjà fusionnée. Aucun changement manuel du compte Cloudflare, du DNS ou des fiches Gumroad. Un push peut déclencher l’intégration Workers Builds existante.

@@ -93,7 +93,8 @@ L’erreur `Missing entry-point to Worker script or to assets directory` venait 
 | Dépôt / racine | ce dépôt, racine sans sous-dossier |
 | Branche de production | `main`, à confirmer dans le compte ; aucun déploiement manuel depuis cette branche de travail |
 | Build command | `npm run build` |
-| Deploy command, **seulement pour une publication autorisée** | `npm run deploy:worker` |
+| Deploy command de production, **seulement pour une publication autorisée** | `npm run deploy:worker` |
+| Commande distante d’aperçu de branche, observée dans Workers Builds | `npx wrangler preview` ; nécessite le bloc racine `"previews": {}` |
 | Assets / point d’entrée | `./out` / `worker/index.mjs`, déclarés dans `wrangler.jsonc` ; pas de champ Pages « output directory » |
 | Node | `22` ; minimum `22.19.0`, comme les engines du dépôt |
 | Variable de build, production et preview | `NEXT_PUBLIC_SITE_URL=https://joyccelight-playbook.uxplay.workers.dev` |
@@ -103,7 +104,9 @@ L’erreur `Missing entry-point to Worker script or to assets directory` venait 
 
 Le libellé historique **`Workers Builds: ux-ui-playbook`** ne doit pas remplacer ce nom. Si le pipeline cible une autre ressource, **la commande s’arrête** : il faut rattacher Workers Builds au Worker `joyccelight-playbook` dans une intervention distante autorisée, pas adapter le nom du dépôt à celui injecté. Configurer **`npm run deploy:worker`**, et non `npx wrangler deploy` directement, dans la Deploy command ; ce réglage du compte n’a pas été modifié ici. Compte, droits et domaine restent à vérifier, sans création/renommage implicite ni adresse `workers.dev` inventée.
 
-Pour valider le paquet **sans publier** : `npm run build && npm run check:worker`. Ce dernier utilise le même garde-fou, puis `wrangler deploy --name joyccelight-playbook --dry-run` avec la configuration verrouillée. Le [guide de configuration Workers](CLOUDFLARE_MIGRATION.md#configuration-workers) distingue les preuves locales, les réglages distants restants et l’historique Pages.
+Les aperçus **distants** de branche sont distincts de la publication de production et du serveur local `npm run preview:worker`. La commande `npx wrangler preview`, observée dans le journal Workers Builds fourni par le propriétaire, exige `"previews": {}` dans `wrangler.jsonc`. Ce bloc vide active les Previews sans recopier ni remplacer `name`, `main`, `assets` ou la date de compatibilité. Pour ce site statique, le binding `ASSETS` reste au niveau racine, comme le prescrit la [documentation Previews](https://developers.cloudflare.com/workers/previews/configuration/#wrangler-configuration-file). Ne pas remplacer la commande de production par cette commande d’aperçu, ni utiliser une publication de production pour tester une branche.
+
+Pour valider le paquet **sans publier** : `npm run build && npm run check:worker`. Ce dernier utilise le même garde-fou, puis `wrangler deploy --name joyccelight-playbook --dry-run` avec la configuration verrouillée. Les tests lisent aussi le bloc Preview avec le parseur de la version Wrangler épinglée, sans authentification ni upload. Cela ne simule pas une création d’aperçu distante : `wrangler preview` ne propose pas de dry-run dans cette version. Le [guide de configuration Workers](CLOUDFLARE_MIGRATION.md#configuration-workers) distingue les preuves locales, les réglages distants restants et l’historique Pages.
 
 **Aucun commit/push/déploiement n’est nécessaire à ces tests locaux.** Les workflows GitHub vérifient, sans publier ; l’intégration Workers Builds, elle, peut déployer à la réception d’un push. Préparer ce code ne désactive ni ne modifie cette intégration distante. L’origine canonique choisie est celle du Worker existant. Le réglage distant `NEXT_PUBLIC_SITE_URL` doit correspondre au dépôt lors du prochain build. Les redirections HTTP depuis les anciens hosts restent une vérification distincte, sans changement DNS ici.
 
